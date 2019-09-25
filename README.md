@@ -1,3 +1,11 @@
+# Resources
+
+1) SOA Predictive Analytics Exam Materials:https://www.soa.org/education/exam-req/edu-exam-pa-detail/
+
+2) SOA Online Modules.  These are copywrighted and cannot be reproduced:`SOA Modules 768x640.zip`
+
+3) My own notes: https://github.com/sdcastillo/SOA-PA-Exam
+
 # Market
 
 Students studying for the CAS Modern Actuarial Statistics (MAS) exams and SOA students studying for the Predictive Analytics (PA) exam.
@@ -18,10 +26,12 @@ You mentioned Actex.
 
 I started using their MAS-I study manual.  They include a few (poorly coded) .rmd files already.  Video lectures and formula sheets, with practice problems online is their product.
 
-# Resources
+# Writing Style
 
-1) SOA Predictive Analytics Exam Materials:https://www.soa.org/education/exam-req/edu-exam-pa-detail/
+I’m inspired by this book, which is already enormously successful and is an Amazon best seller.  
 
-2) SOA Online Modules.  These are copywrighted and cannot be reproduced:`SOA Modules 768x640.zip`
+http://themlbook.com/wiki/doku.php
 
-3) My own notes: https://github.com/sdcastillo/SOA-PA-Exam
+I like your idea of using R bookdown.  As you know, Hadley Wickham’s style of writing is great for learning code, which is what a lot of the current Actuarial Study manuals are missing.
+
+https://r4ds.had.co.nz/
