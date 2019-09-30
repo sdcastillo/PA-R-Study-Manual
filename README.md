@@ -28,7 +28,11 @@ I started using their MAS-I study manual.  They include a few (poorly coded) .rm
 
 # Writing Style	
 
-I’m inspired by this book, which is already enormously successful and is an Amazon best seller.  	
+Bookdown:
+
+https://bookdown.org/yihui/bookdown/
+
+I’m inspired by this book, which is already enormously successful and is an Amazon best seller.  
 
 http://themlbook.com/wiki/doku.php	
 
