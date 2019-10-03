@@ -1,0 +1,189 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={A Minimal Book Example},
+            pdfauthor={Yihui Xie},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{A Minimal Book Example}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Yihui Xie}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2019-10-03}
+
+\usepackage{booktabs}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{who-is-this-book-for}{%
+\chapter{Who is this book for}\label{who-is-this-book-for}}
+
+This book will help you to pass the SOA's Predictive Analytics Exam and give you insights and useful code snippets that will translate into your every day work flow. Additionally, material is also covered which is on the CAS exams MAS-I and MAS-II.
+
+\hypertarget{how-to-use-this-book}{%
+\chapter{How to Use this book}\label{how-to-use-this-book}}
+
+This is like any of the other actuarial exam that you have taken. The format is a 5-hr and 15 minute project that uses RStudio, Excel, and Word. There are three essential skills needed to pass. These are
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  R competency;
+\item
+  Business writing ability;
+\item
+  Statistics, predictive analytics, and machine learning knowledge.
+\end{enumerate}
+
+If you already have some of these skills, then a good strategy is to focus on your weak areas. If you are relatively new to all three, great! This means that you will be able to learn a lot of useful skills by reading this manual.
+
+\hypertarget{about-the-authors}{%
+\chapter{About the authors}\label{about-the-authors}}
+
+\textbf{Sam Castillo} has 4+ years of R programming experience while working as an actuarial predictive modeler for the past 3 years. He passed the predictive analytics exam in June of 2019 with about 80 study hours.
+
+\textbf{Brian Fannin} etc, etc
+
+\hypertarget{intro}{%
+\chapter{Installing R and RStudio}\label{intro}}
+
+\hypertarget{computer-set-up}{%
+\chapter{Computer Set Up}\label{computer-set-up}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Installing R and Rstudio
+\item
+  Using the R version of packages from the SOA (include helper script)
+\item
+  R basic syntax
+\item
+  Rmd file overview
+\item
+  Read in a data file from local computer in csv format
+\end{enumerate}
+
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
+\hypertarget{what-is-machine-learning}{%
+\section{What is machine learning}\label{what-is-machine-learning}}
+
+\hypertarget{what-is-predictive-modeling}{%
+\section{What is predictive modeling}\label{what-is-predictive-modeling}}
+
+\hypertarget{why-models-work-on-new-data}{%
+\section{Why models work on new data}\label{why-models-work-on-new-data}}
+
+\hypertarget{terminology-and-notation}{%
+\chapter{Terminology and Notation}\label{terminology-and-notation}}
+
+X = data
+y = target
+
+X = {[}x1,x2,x3{]}
+y-hat = f(X)
+
+error = y - y\_hat
+
+R2, RMSE, MSE, MAE, accuracy, log loss, etc
+
+\hypertarget{final-words}{%
+\chapter{Final Words}\label{final-words}}
+
+We have finished a nice book.
+
+\bibliography{book.bib,packages.bib}
+
+
+\end{document}

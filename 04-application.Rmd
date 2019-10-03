@@ -1,7 +1,11 @@
-# Applications
+# Terminology and Notation
 
-Some _significant_ applications are demonstrated in this chapter.
+X = data
+y = target
 
-## Example one
+X = [x1,x2,x3]
+y-hat = f(X)
 
-## Example two
+error = y - y_hat
+
+R2, RMSE, MSE, MAE, accuracy, log loss, etc
