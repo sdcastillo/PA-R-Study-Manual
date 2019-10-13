@@ -1,4 +1,4 @@
-# Terminology and Notation
+# Modeling
 
 X = data
 y = target

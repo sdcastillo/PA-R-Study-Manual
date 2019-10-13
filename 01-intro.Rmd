@@ -1,3 +1,0 @@
-# Installing R and RStudio {#intro}
-
-

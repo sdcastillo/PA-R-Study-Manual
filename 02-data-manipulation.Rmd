@@ -1,0 +1,99 @@
+# Data Manipulation
+
+About 2 hours in this exam will be spent just on data manipulation.  A common complaint from exam takers who are new to R programming is that this takes too long.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.
+
+Each time that you want to "do something" to the data, most of the time there is a function that will do this.  
+
+** Look at the data:**
+
+The `head()` or `glimpse()` functions both suffice.
+
+```{r}
+library(tidyverse)
+iris %>% head()
+```
+
+```{r}
+iris %>% glimpse()
+```
+
+** Look at summary statistics:**
+
+The `summary()` function is best.
+
+```{r}
+iris %>% summary()
+```
+
+** Find the dimensions of the data:**
+
+```{r}
+iris %>% dim()
+```
+
+Queries are very similar to SQL.  They begin with a "SELECT", use "GROUP BY" to aggregate, and have a "WHERE" to remove records.  Unlike SQL, the ordering of these does not matter.  "SELECT" can come after a "WHERE".
+
+**dplyr to SQL translation**
+
+```
+select() -> SELECT
+mutate() -> user-defined columns
+summarize() -> aggregated columns
+left_join() -> LEFT JOIN
+filter() -> WHERE
+group_by() -> GROUP BY
+filter() -> HAVING
+arrange() -> ORDER BY
+
+```
+
+```{r}
+iris %>% select(Sepal.Length, Sepal.Width) %>% head()
+```
+
+```{r}
+iris %>% 
+  select(Sepal.Length, Species) %>% 
+  group_by(Species) %>% 
+  summarise(TotalLength = sum(Sepal.Length))
+```
+
+Just like in SQL, many different aggregate functions can be used such as "SUM", "MEAN", "MIN", "MAX", and so forth.
+
+```{r}
+iris %>% 
+  select(Sepal.Length, Species) %>% 
+  group_by(Species) %>% 
+  summarise(TotalLength = sum(Sepal.Length),
+            MaxLength = max(Sepal.Length),
+            MeanLength = mean(Sepal.Length))
+```
+
+## Data Types
+
+Each object in R has a different type.  
+
+- numeric 
+- character 
+- factors
+- booleans
+
+As well as classes
+
+- matrix
+- data frame
+- tibble (just another name for a data frame)
+- list (most important)
+
+## Advanced Tricks:
+
+** Look at a complete R data set:**
+
+```{r}
+iris %>% View()
+```
+
+
+
+
+

@@ -29,7 +29,7 @@ If you already have some of these skills, then a good strategy is to focus on yo
 
 # About the authors
 
-**Sam Castillo** has 4+ years of R programming experience while working as an actuarial predictive modeler for the past 3 years.  He passed the predictive analytics exam in June of 2019 with about 80 study hours.
+**Sam Castillo** has 4+ years of R programming experience while working as an actuarial predictive modeler for the past 3 years.  He passed the predictive analytics exam in June of 2019.
 
 **Brian Fannin** etc, etc
 

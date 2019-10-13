@@ -1,4 +1,4 @@
-# Computer Set Up
+# Getting Started {#intro}
 
 1. Installing R and Rstudio
 2. Using the R version of packages from the SOA (include helper script)
