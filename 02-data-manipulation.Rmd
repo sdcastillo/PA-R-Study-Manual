@@ -8,13 +8,29 @@ Each time that you want to "do something" to the data, most of the time there is
 
 The `head()` or `glimpse()` functions both suffice.
 
+The `diamonds` data set has one record for each type of diamond.
+
 ```{r message = F}
 library(tidyverse)
-iris %>% head()
+mtcars %>% head()
 ```
 
 ```{r}
-iris %>% glimpse()
+mtcars %>% glimpse()
+```
+
+### Count the data
+
+One of the most useful data science tools is counting things.  The function `count()` gives the number of records by a categorical feature.   
+
+```{r}
+mtcars %>% count(cyl)
+```
+
+Two categories can be counted at once.  This creates a table with all combinations of `cut` and `color` and shows the number of records in each category.
+
+```{r}
+mtcars %>% count(cyl, vs)
 ```
 
 ### Look at summary statistics
@@ -22,13 +38,15 @@ iris %>% glimpse()
 The `summary()` function is best.
 
 ```{r}
-iris %>% summary()
+mtcars %>% summary()
 ```
 
 ### Find the dimensions of the data
 
+The `dim` function tell us that there are 32 rows and 11 columns.
+
 ```{r}
-iris %>% dim()
+mtcars %>% dim()
 ```
 
 ### Queries 
@@ -50,7 +68,7 @@ arrange() -> ORDER BY
 ```
 
 ```{r}
-iris %>% select(Sepal.Length, Sepal.Width) %>% head()
+mtcars %>% select(mpg, cyl)
 ```
 
 ```{r}
@@ -70,22 +88,6 @@ iris %>%
             MaxLength = max(Sepal.Length),
             MeanLength = mean(Sepal.Length))
 ```
-
-## Data Types
-
-Each object in R has a different type.  
-
-- numeric 
-- character 
-- factors
-- booleans
-
-As well as classes
-
-- matrix
-- data frame
-- tibble (just another name for a data frame)
-- list (most important)
 
 ## Exercises
 
