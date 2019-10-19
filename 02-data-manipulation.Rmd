@@ -1,14 +1,14 @@
 # Data Manipulation
 
-About 2 hours in this exam will be spent just on data manipulation.  A common complaint from exam takers who are new to R programming is that this takes too long.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.
+About two hours in this exam will be spent just on data manipulation.  A common complaint from exam takers who are new to R programming is that this takes too long.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.
 
 Each time that you want to "do something" to the data, most of the time there is a function that will do this.  
 
-** Look at the data:**
+### Look at the data
 
 The `head()` or `glimpse()` functions both suffice.
 
-```{r}
+```{r message = F}
 library(tidyverse)
 iris %>% head()
 ```
@@ -17,7 +17,7 @@ iris %>% head()
 iris %>% glimpse()
 ```
 
-** Look at summary statistics:**
+### Look at summary statistics
 
 The `summary()` function is best.
 
@@ -25,15 +25,17 @@ The `summary()` function is best.
 iris %>% summary()
 ```
 
-** Find the dimensions of the data:**
+### Find the dimensions of the data
 
 ```{r}
 iris %>% dim()
 ```
 
+### Queries 
+
 Queries are very similar to SQL.  They begin with a "SELECT", use "GROUP BY" to aggregate, and have a "WHERE" to remove records.  Unlike SQL, the ordering of these does not matter.  "SELECT" can come after a "WHERE".
 
-**dplyr to SQL translation**
+dplyr to SQL translation**
 
 ```
 select() -> SELECT
@@ -85,14 +87,19 @@ As well as classes
 - tibble (just another name for a data frame)
 - list (most important)
 
-## Advanced Tricks:
+## Exercises
 
-** Look at a complete R data set:**
+Get the DWSimpson actuarial salary data and run queries on it.
 
-```{r}
-iris %>% View()
-```
+1.  How many FSAs are represented?
 
+2.  What is the average salary for a Life/Health Actuarial Analyst with 3-5 exams passed?
+
+3.  What is the average difference in salary between an ASA and an ACAS?
+
+4.  Create a new column, called `social_life`, which is equal to `n_exams`/`years_experience`.  What is the median `social_life` by industry?
+
+5.  Create a new column using `case_when` which is equal to 0 when `n_exams` is less than 3 and `n_exams`^2 otherwise.
 
 
 

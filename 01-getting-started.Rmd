@@ -1,7 +1,7 @@
 # Getting Started {#intro}
 
-1. Installing R and Rstudio
-2. Using the R version of packages from the SOA (include helper script)
-3. R basic syntax
-4. Rmd file overview
-5. Read in a data file from local computer in csv format
+## Installing R and Rstudio
+## Using the R version of packages from the SOA (include helper script)
+## R basic syntax
+## Rmd file overview
+## Read in a data file from local computer in csv format

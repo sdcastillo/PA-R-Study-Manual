@@ -1,7 +1,36 @@
 # Modeling
 
-X = data
-y = target
+## What is machine learning
+
+All of use are already familiar with how to learn - by learning from our mistakes.  By repeating what is successful and avoiding what results in failure, we "learn" by doing, by experience, or trial-and-error.  Some methods work well for learning, but other methods do not.  We all know that memorizing answers without understanding concepts is an ineffective method, and that doing many practice problems is better than doing only a few.  These ideas apply to how computers learn as much as they do to how humans learn.
+
+Take the example of preparing for an actuarial exam.  We can clearly state our objective: get as many correct answers as possible! 
+We want to correctly predict the solution to every problem.  
+
+$$Y = \text{Problem Solution}, \hat{Y} = \text{Your Answer}$$
+
+Said another way, we are trying to minimize the error, the percentage of incorrect problems.  When $Y = \hat{Y}$, we answer the question correctly.  When $Y \neq \hat{Y}$, we answer incorrectly.
+
+$$\text{Exam Score} = \sum{(Y = \hat{Y})}$$
+
+
+
+The "data" are the exam questions.  We want to learn the patterns from the data to create a "model" for answering new questions.
+ 
+$$X = \text{Exam Questions}$$
+
+The "training data" are the practice problems.  The SOA suggests 100 hours per hour of exam, which means that actuaries prepare hundreds of problems before the real exam.  Often we see the same problems multiple times, and can then peak by looking at the solution.  This can result in us "overfitting" our model if we are not careful.  
+
+The more practice problems that we do, the larger the training data set, and the better the model becomes.  As we see more examples, our mental "model" improves.  When we see new problems, ones which have not appeared in the practice exams, we often have a difficult time.  Problems which we have seen before are easier, and we have more confidence in our answers.
+
+To speed up the training time, we can "downsample" the data by skipping problems randomly.  For example, we can only do odd-numbered problems.  This insured that we still get the same proportion of each type of question while doing fewer problems.  
+
+One way to be extra-confident in our answers to to do the problem multiple ways.  In modeling, using the averages of different models produces the best results.
+
+If we use the wrong loss function our model will fail.  If instead of looking at "Correct Answers" when practicing, we do not bother to look at the answer but instead only look at "Number of Study Hours", the model will not perform well on the real exam.  The brain will "learn" to maximize study time, by taking longer time to relax and waste time, rather than aiming to get the correct answer.
+
+
+
 
 X = [x1,x2,x3]
 y-hat = f(X)
