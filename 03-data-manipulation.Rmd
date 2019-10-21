@@ -1,8 +1,39 @@
 # Data Manipulation
 
-About two hours in this exam will be spent just on data manipulation.  A common complaint from exam takers who are new to R programming is that this takes too long.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.
+```{r echo = F, message = F}
+library(kableExtra)
+format_table <- function(data){data %>% kableExtra::kable("html") %>% kable_styling(bootstrap_options = "striped", full_width = F)}
+```
 
-Each time that you want to "do something" to the data, most of the time there is a function that will do this.  
+
+About two hours in this exam will be spent just on data manipulation.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.
+
+Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
+
+
+| Chapter | Topic           |
+|---------|-----------------|
+| 9       | Introduction    |
+| 10      | Tibbles         |
+| 12      | Tidy data       |
+| 15      | Factors         |
+| 16      | Dates and times |
+| 17      | Introduction    |
+| 18      | Pipes           |
+| 19      | Functions       |
+| 20      | Vectors         |
+
+
+### Import the data
+
+All data for this book can be accessed from the package `ExamPAData`.  In the real exam, you will read the file from the Prometric computer.  To read files into R, the [readr](https://readr.tidyverse.org/articles/readr.html) package has several tools, one for each data format.  For instance, the most common format, comma separated values (csv) are read with the `read_csv()` function.
+
+Because the data is already loaded, simply use the below code to access the data.
+
+```{r}
+library(ExamPAData)
+```
+
 
 ### Look at the data
 
@@ -10,10 +41,12 @@ The `head()` or `glimpse()` functions both suffice.
 
 The `diamonds` data set has one record for each type of diamond.
 
+
 ```{r message = F}
 library(tidyverse)
-mtcars %>% head()
+health_insurance %>% head()
 ```
+
 
 ```{r}
 mtcars %>% glimpse()
