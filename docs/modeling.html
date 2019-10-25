@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Modeling | Predictive-Analytics-MAS-R-Study-Manual</title>
+  <title>Chapter 5 Modeling | The Predictive Analytics R Study Manual</title>
   <meta name="description" content="This will help you pass these exams" />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Modeling | Predictive-Analytics-MAS-R-Study-Manual" />
+  <meta property="og:title" content="Chapter 5 Modeling | The Predictive Analytics R Study Manual" />
   <meta property="og:type" content="book" />
   
   
@@ -16,24 +16,23 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Modeling | Predictive-Analytics-MAS-R-Study-Manual" />
+  <meta name="twitter:title" content="Chapter 5 Modeling | The Predictive Analytics R Study Manual" />
   
   <meta name="twitter:description" content="This will help you pass these exams" />
   
 
 <meta name="author" content="Sam Castillo" />
-<meta name="author" content="Brian Fannin" />
 
 
-<meta name="date" content="2019-10-19" />
+<meta name="date" content="2019-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="visualization.html"/>
-<link rel="next" href="a-mini-exam-example.html"/>
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="r-programming.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -129,59 +128,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Who is this book for</a></li>
-<li class="chapter" data-level="2" data-path="how-to-use-this-book.html"><a href="how-to-use-this-book.html"><i class="fa fa-check"></i><b>2</b> How to Use this book</a></li>
-<li class="chapter" data-level="3" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i><b>3</b> About the authors</a></li>
-<li class="chapter" data-level="4" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>4</b> Getting Started</a><ul>
-<li class="chapter" data-level="4.1" data-path="intro.html"><a href="intro.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>4.1</b> Installing R and Rstudio</a></li>
-<li class="chapter" data-level="4.2" data-path="intro.html"><a href="intro.html#setting-up"><i class="fa fa-check"></i><b>4.2</b> Setting Up</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="intro.html"><a href="intro.html#using-the-r-version-of-packages-from-the-soa-include-helper-script"><i class="fa fa-check"></i><b>4.2.1</b> Using the R version of packages from the SOA (include helper script)</a></li>
-<li class="chapter" data-level="4.2.2" data-path="intro.html"><a href="intro.html#setting-the-r-version"><i class="fa fa-check"></i><b>4.2.2</b> Setting the R Version</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
+<li class="chapter" data-level="2" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>2</b> The Exam</a></li>
+<li class="chapter" data-level="3" data-path="preface-what-is-machine-learning.html"><a href="preface-what-is-machine-learning.html"><i class="fa fa-check"></i><b>3</b> Preface - What is Machine Learning?</a></li>
+<li class="chapter" data-level="4" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>4</b> Getting started</a><ul>
+<li class="chapter" data-level="4.1" data-path="intro.html"><a href="intro.html#download-islr"><i class="fa fa-check"></i><b>4.1</b> Download ISLR</a></li>
+<li class="chapter" data-level="4.2" data-path="intro.html"><a href="intro.html#installing-r"><i class="fa fa-check"></i><b>4.2</b> Installing R</a></li>
+<li class="chapter" data-level="4.3" data-path="intro.html"><a href="intro.html#installing-rstudio"><i class="fa fa-check"></i><b>4.3</b> Installing RStudio</a></li>
+<li class="chapter" data-level="4.4" data-path="intro.html"><a href="intro.html#set-the-r-library"><i class="fa fa-check"></i><b>4.4</b> Set the R library</a></li>
+<li class="chapter" data-level="4.5" data-path="intro.html"><a href="intro.html#download-the-data"><i class="fa fa-check"></i><b>4.5</b> Download the data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="intro.html"><a href="intro.html#r-basic-syntax"><i class="fa fa-check"></i><b>4.3</b> R basic syntax</a></li>
-<li class="chapter" data-level="4.4" data-path="intro.html"><a href="intro.html#data-types"><i class="fa fa-check"></i><b>4.4</b> Data Types</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="intro.html"><a href="intro.html#objects"><i class="fa fa-check"></i><b>4.4.1</b> Objects</a></li>
-<li class="chapter" data-level="4.4.2" data-path="intro.html"><a href="intro.html#functions"><i class="fa fa-check"></i><b>4.4.2</b> Functions</a></li>
-<li class="chapter" data-level="4.4.3" data-path="intro.html"><a href="intro.html#just-copy-someone-eleses-tutorials"><i class="fa fa-check"></i><b>4.4.3</b> Just Copy Someone Elese’s Tutorials</a></li>
+<li class="chapter" data-level="5" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>5</b> Modeling</a><ul>
+<li class="chapter" data-level="5.1" data-path="modeling.html"><a href="modeling.html#notation"><i class="fa fa-check"></i><b>5.1</b> Notation</a></li>
+<li class="chapter" data-level="5.2" data-path="modeling.html"><a href="modeling.html#linear-models"><i class="fa fa-check"></i><b>5.2</b> Linear Models</a></li>
+<li class="chapter" data-level="5.3" data-path="modeling.html"><a href="modeling.html#tree-based-models"><i class="fa fa-check"></i><b>5.3</b> Tree-based models</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="intro.html"><a href="intro.html#rmd-file-overview"><i class="fa fa-check"></i><b>4.5</b> Rmd file overview</a></li>
-<li class="chapter" data-level="4.6" data-path="intro.html"><a href="intro.html#read-in-a-data-file-from-local-computer-in-csv-format"><i class="fa fa-check"></i><b>4.6</b> Read in a data file from local computer in csv format</a></li>
+<li class="chapter" data-level="6" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>6</b> R programming</a><ul>
+<li class="chapter" data-level="6.1" data-path="r-programming.html"><a href="r-programming.html#notebook-chunks"><i class="fa fa-check"></i><b>6.1</b> Notebook chunks</a></li>
+<li class="chapter" data-level="6.2" data-path="r-programming.html"><a href="r-programming.html#basic-operations"><i class="fa fa-check"></i><b>6.2</b> Basic operations</a></li>
+<li class="chapter" data-level="6.3" data-path="r-programming.html"><a href="r-programming.html#lists"><i class="fa fa-check"></i><b>6.3</b> Lists</a></li>
+<li class="chapter" data-level="6.4" data-path="r-programming.html"><a href="r-programming.html#functions"><i class="fa fa-check"></i><b>6.4</b> Functions</a></li>
+<li class="chapter" data-level="6.5" data-path="r-programming.html"><a href="r-programming.html#data-frames"><i class="fa fa-check"></i><b>6.5</b> Data frames</a></li>
+<li class="chapter" data-level="6.6" data-path="r-programming.html"><a href="r-programming.html#pipes"><i class="fa fa-check"></i><b>6.6</b> Pipes</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>5</b> Data Manipulation</a><ul>
-<li class="chapter" data-level="5.0.1" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>5.0.1</b> Look at the data</a></li>
-<li class="chapter" data-level="5.0.2" data-path="data-manipulation.html"><a href="data-manipulation.html#count-the-data"><i class="fa fa-check"></i><b>5.0.2</b> Count the data</a></li>
-<li class="chapter" data-level="5.0.3" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-summary-statistics"><i class="fa fa-check"></i><b>5.0.3</b> Look at summary statistics</a></li>
-<li class="chapter" data-level="5.0.4" data-path="data-manipulation.html"><a href="data-manipulation.html#find-the-dimensions-of-the-data"><i class="fa fa-check"></i><b>5.0.4</b> Find the dimensions of the data</a></li>
-<li class="chapter" data-level="5.0.5" data-path="data-manipulation.html"><a href="data-manipulation.html#queries"><i class="fa fa-check"></i><b>5.0.5</b> Queries</a></li>
-<li class="chapter" data-level="5.1" data-path="data-manipulation.html"><a href="data-manipulation.html#exercises"><i class="fa fa-check"></i><b>5.1</b> Exercises</a></li>
+<li class="chapter" data-level="7" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>7</b> Data manipulation</a><ul>
+<li class="chapter" data-level="7.1" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>7.1</b> Look at the data</a></li>
+<li class="chapter" data-level="7.2" data-path="data-manipulation.html"><a href="data-manipulation.html#transform-the-data"><i class="fa fa-check"></i><b>7.2</b> Transform the data</a></li>
+<li class="chapter" data-level="7.3" data-path="data-manipulation.html"><a href="data-manipulation.html#exercises"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+<li class="chapter" data-level="7.4" data-path="data-manipulation.html"><a href="data-manipulation.html#answers-to-exercises"><i class="fa fa-check"></i><b>7.4</b> Answers to exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>6</b> Visualization</a><ul>
-<li class="chapter" data-level="6.1" data-path="visualization.html"><a href="visualization.html#step-1.-put-the-data-in-a-pivotable-format"><i class="fa fa-check"></i><b>6.1</b> Step 1. Put the data in a pivotable format</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="visualization.html"><a href="visualization.html#example-of-wide-or-matrix-format"><i class="fa fa-check"></i><b>6.1.1</b> Example of “wide” or “matrix” format</a></li>
-<li class="chapter" data-level="6.1.2" data-path="visualization.html"><a href="visualization.html#example-of-pivotable-long-or-tidy-format"><i class="fa fa-check"></i><b>6.1.2</b> Example of “pivotable”, “long”, or “tidy” format</a></li>
+<li class="chapter" data-level="8" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>8</b> Visualization</a><ul>
+<li class="chapter" data-level="8.1" data-path="visualization.html"><a href="visualization.html#step-1.-put-the-data-in-a-pivotable-format"><i class="fa fa-check"></i><b>8.1</b> Step 1. Put the data in a pivotable format</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="visualization.html"><a href="visualization.html#example-of-wide-or-matrix-format"><i class="fa fa-check"></i><b>8.1.1</b> Example of “wide” or “matrix” format</a></li>
+<li class="chapter" data-level="8.1.2" data-path="visualization.html"><a href="visualization.html#example-of-pivotable-long-or-tidy-format"><i class="fa fa-check"></i><b>8.1.2</b> Example of “pivotable”, “long”, or “tidy” format</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="visualization.html"><a href="visualization.html#step-2.-create-a-plot-object-ggplot"><i class="fa fa-check"></i><b>6.2</b> Step 2. Create a plot object (ggplot)</a></li>
-<li class="chapter" data-level="6.3" data-path="visualization.html"><a href="visualization.html#step-3-add-a-plot"><i class="fa fa-check"></i><b>6.3</b> Step 3: Add a plot</a></li>
+<li class="chapter" data-level="8.2" data-path="visualization.html"><a href="visualization.html#step-2.-create-a-plot-object-ggplot"><i class="fa fa-check"></i><b>8.2</b> Step 2. Create a plot object (ggplot)</a></li>
+<li class="chapter" data-level="8.3" data-path="visualization.html"><a href="visualization.html#step-3-add-a-plot"><i class="fa fa-check"></i><b>8.3</b> Step 3: Add a plot</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>7</b> Modeling</a><ul>
-<li class="chapter" data-level="7.1" data-path="modeling.html"><a href="modeling.html#what-is-machine-learning"><i class="fa fa-check"></i><b>7.1</b> What is machine learning</a></li>
-<li class="chapter" data-level="7.2" data-path="modeling.html"><a href="modeling.html#statistical-definitions"><i class="fa fa-check"></i><b>7.2</b> Statistical Definitions</a></li>
-<li class="chapter" data-level="7.3" data-path="modeling.html"><a href="modeling.html#linear-models"><i class="fa fa-check"></i><b>7.3</b> Linear Models</a></li>
-<li class="chapter" data-level="7.4" data-path="modeling.html"><a href="modeling.html#tree-based-models"><i class="fa fa-check"></i><b>7.4</b> Tree-based models</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html"><i class="fa fa-check"></i><b>8</b> A Mini-Exam Example</a><ul>
-<li class="chapter" data-level="8.1" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#project-statement"><i class="fa fa-check"></i><b>8.1</b> Project Statement</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#describe-the-data-1-point"><i class="fa fa-check"></i><b>8.1.1</b> #1 - Describe the data (1 point)</a></li>
-<li class="chapter" data-level="8.1.2" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#create-a-histogram-of-the-claims-and-comment-on-the-shape-1-point"><i class="fa fa-check"></i><b>8.1.2</b> #2 - Create a histogram of the claims and comment on the shape (1 point)</a></li>
-<li class="chapter" data-level="8.1.3" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#fit-a-linear-model-1-point"><i class="fa fa-check"></i><b>8.1.3</b> #3 - Fit a linear model (1 point)</a></li>
-<li class="chapter" data-level="8.1.4" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#describe-the-relationship-between-age-sex-and-claim-costs-1-point"><i class="fa fa-check"></i><b>8.1.4</b> #4 - Describe the relationship between age, sex, and claim costs (1 point)</a></li>
-<li class="chapter" data-level="8.1.5" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#write-a-summary-of-steps-1-4-in-non-technical-language-1-point"><i class="fa fa-check"></i><b>8.1.5</b> #5 - Write a summary of steps 1-4 in non-technical language (1 point)</a></li>
+<li class="chapter" data-level="9" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html"><i class="fa fa-check"></i><b>9</b> A Mini-Exam Example</a><ul>
+<li class="chapter" data-level="9.1" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#project-statement"><i class="fa fa-check"></i><b>9.1</b> Project Statement</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#describe-the-data-1-point"><i class="fa fa-check"></i><b>9.1.1</b> Describe the data (1 point)</a></li>
+<li class="chapter" data-level="9.1.2" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#create-a-histogram-of-the-claims-and-comment-on-the-shape-1-point"><i class="fa fa-check"></i><b>9.1.2</b> Create a histogram of the claims and comment on the shape (1 point)</a></li>
+<li class="chapter" data-level="9.1.3" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#fit-a-linear-model-1-point"><i class="fa fa-check"></i><b>9.1.3</b> Fit a linear model (1 point)</a></li>
+<li class="chapter" data-level="9.1.4" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#describe-the-relationship-between-age-sex-and-claim-costs-1-point"><i class="fa fa-check"></i><b>9.1.4</b> Describe the relationship between age, sex, and claim costs (1 point)</a></li>
+<li class="chapter" data-level="9.1.5" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#write-a-summary-of-steps-1-4-in-non-technical-language-1-point"><i class="fa fa-check"></i><b>9.1.5</b> Write a summary of steps 1-4 in non-technical language (1 point)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="9" data-path="practice-exam.html"><a href="practice-exam.html"><i class="fa fa-check"></i><b>9</b> Practice Exam</a></li>
-<li class="chapter" data-level="10" data-path="prior-exams.html"><a href="prior-exams.html"><i class="fa fa-check"></i><b>10</b> Prior Exams</a></li>
+<li class="chapter" data-level="10" data-path="practice-exam.html"><a href="practice-exam.html"><i class="fa fa-check"></i><b>10</b> Practice Exam</a></li>
+<li class="chapter" data-level="11" data-path="prior-exams.html"><a href="prior-exams.html"><i class="fa fa-check"></i><b>11</b> Prior Exams</a></li>
 <li class="chapter" data-level="" data-path="references-2.html"><a href="references-2.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -195,7 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Predictive-Analytics-MAS-R-Study-Manual</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Predictive Analytics R Study Manual</a>
           </h1>
         </div>
 
@@ -204,222 +200,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="modeling" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> Modeling</h1>
-<div id="what-is-machine-learning" class="section level2">
-<h2><span class="header-section-number">7.1</span> What is machine learning</h2>
-<p>All of use are already familiar with how to learn - by learning from our mistakes. By repeating what is successful and avoiding what results in failure, we “learn” by doing, by experience, or trial-and-error. Some methods work well for learning, but other methods do not. We all know that memorizing answers without understanding concepts is an ineffective method, and that doing many practice problems is better than doing only a few. These ideas apply to how computers learn as much as they do to how humans learn.</p>
-<p>Take the example of preparing for an actuarial exam. We can clearly state our objective: get as many correct answers as possible!</p>
-<p>Imagine a table with one row per question.</p>
+<h1><span class="header-section-number">Chapter 5</span> Modeling</h1>
+<div id="notation" class="section level2">
+<h2><span class="header-section-number">5.1</span> Notation</h2>
+<p>The number of observations will be denoted by <span class="math inline">\(n\)</span>. When we refer to the size of a data set, we are referring to <span class="math inline">\(n\)</span>. We use <span class="math inline">\(p\)</span> to refer the number of input variables used. The word “variables” is synonymous with “features”. For example, in the <code>health_insurance</code> data, the variables are <code>age</code>, <code>sex</code>, <code>bmi</code>, <code>children</code>, <code>smoker</code> and <code>region</code>. These 7 variables mean that <span class="math inline">\(p = 7\)</span>. The data is collected from 1,338 patients, which means that <span class="math inline">\(n = 1,338\)</span>.</p>
+<p>Scalar numbers are denoted by ordinary variables (i.e., <span class="math inline">\(x = 2\)</span>, <span class="math inline">\(z = 4\)</span>), and vectors are denoted by bold-faced letters</p>
+<p><span class="math display">\[\mathbf{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}\]</span></p>
+<p>We use <span class="math inline">\(\mathbf{y}\)</span> to denote the target variable. This is the variable which we are trying to predict. This can be either a whole number, in which case we are performing <em>regression</em>, or a category, in which case we are performing <em>classification</em>. In the health insurance example, <code>y = charges</code>, which are the annual health care costs for a patient.</p>
+<p>Both <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> are important because they tell us what types of models are likely to work well, and which methods are likely to fail. For the PA exam, we will be dealing with small <span class="math inline">\(n\)</span> (&lt;100,000) due to the limitations of the Prometric computers. We will use a small <span class="math inline">\(p\)</span> (&lt; 20) in order to make the data sets easier to interpret.</p>
+<p>We organize these variables into matrices. Take an example with <span class="math inline">\(p\)</span> = 2 columns and 3 observations. The matrix is said to be <span class="math inline">\(3 \times 2\)</span> (read as “2-by-3”) matrix.</p>
+<p><span class="math display">\[
+\mathbf{X} = \begin{pmatrix}x_{11} &amp; x_{21}\\
+x_{21} &amp; x_{22}\\
+x_{31} &amp; x_{32}
+\end{pmatrix}
+\]</span></p>
+<p>The target is</p>
+<p><span class="math display">\[\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}\]</span>
+This represents the <em>unknown</em> quantity that we want to be able to predict. In the health care costs example, <span class="math inline">\(y_1\)</span> would be the costs of the first patient, <span class="math inline">\(y_2\)</span> the costs of the second patient, and so forth. The variables <span class="math inline">\(x_{11}\)</span> and <span class="math inline">\(x_{12}\)</span> might represent the first patient’s age and sex respectively, where <span class="math inline">\(x_{i1}\)</span> is the patient’s age, and <span class="math inline">\(x_{i2} = 1\)</span> if the ith patient is male and 0 if female.</p>
+<p>Machine learning is about using <span class="math inline">\(\mathbf{X}\)</span> to predict <span class="math inline">\(\mathbf{y}\)</span>. We call this “y-hat”, or simply the prediction. This is based on a function of the data <span class="math inline">\(X\)</span>.</p>
+<p><span class="math display">\[\mathbf{\hat{y}} = f(\mathbf{X}) = \begin{pmatrix} \hat{y_1} \\ \hat{y_2} \\ \hat{y_3} \end{pmatrix}\]</span></p>
+<p>This is almost never going to happen perfectly, and so there is always an error term, <span class="math inline">\(\mathbf{\epsilon}\)</span>. This can be made smaller, but is never exactly zero.</p>
+<p><span class="math display">\[\mathbf{\hat{y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}\]</span></p>
+<p>In other words, <span class="math inline">\(\epsilon = y - \hat{y}\)</span>. We call this the <em>residual</em>. When we predict a person’s health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Question
-</th>
+<tr class="header">
+<th>Readings</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-A = 2; B = 3; A + B = ?
-</td>
+<tr class="odd">
+<td>ISLR 2.1 What is statistical learning?</td>
+<td></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-A = 2; B = 10; A*B = ?
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-What is the meaning of life?
-</td>
+<tr class="even">
+<td>ISLR 2.2 Assessing model accuracy</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p>We want to correctly predict the solution to every problem.</p>
-<p><span class="math display">\[Y = \text{Problem Solution}, \hat{Y} = \text{Your Answer}\]</span></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-Question
-</th>
-<th style="text-align:right;">
-Solution
-</th>
-<th style="text-align:right;">
-YourAnswer
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-A = 2; B = 3; A + B = ?
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-A = 2; B = 10; A*B = ?
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-What is the meaning of life?
-</td>
-<td style="text-align:right;">
-42
-</td>
-<td style="text-align:right;">
-69
-</td>
-</tr>
-</tbody>
-</table>
-<p>Said another way, we are trying to minimize the error, the percentage of incorrect problems. When <span class="math inline">\(Y = \hat{Y}\)</span>, we answer the question correctly. When <span class="math inline">\(Y \neq \hat{Y}\)</span>, we answer incorrectly.</p>
-<p><span class="math display">\[\text{Exam Score} = \sum{(Y = \hat{Y})}\]</span></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Correct =</span> (YourAnswer <span class="op">==</span><span class="st"> </span>Solution)<span class="op">*</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>kableExtra<span class="op">::</span><span class="kw">kable</span>(<span class="st">&quot;html&quot;</span>)</a></code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-Question
-</th>
-<th style="text-align:right;">
-Solution
-</th>
-<th style="text-align:right;">
-YourAnswer
-</th>
-<th style="text-align:right;">
-Correct
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-A = 2; B = 3; A + B = ?
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-A = 2; B = 10; A*B = ?
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-What is the meaning of life?
-</td>
-<td style="text-align:right;">
-42
-</td>
-<td style="text-align:right;">
-69
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-</tbody>
-</table>
-<p>The “data” are the exam questions. We want to learn the patterns from the data to create a “model” for answering new questions.</p>
-<p><span class="math display">\[X = \text{Exam Questions}\]</span></p>
-<p>The “training data” are the practice problems. The SOA suggests 100 hours per hour of exam, which means that actuaries prepare hundreds of problems before the real exam. Often we see the same problems multiple times, and can then peak by looking at the solution. This can result in us “overfitting” our model if we are not careful.</p>
-<p>The more practice problems that we do, the larger the training data set, and the better the model becomes. As we see more examples, our mental “model” improves. When we see new problems, ones which have not appeared in the practice exams, we often have a difficult time. Problems which we have seen before are easier, and we have more confidence in our answers.</p>
-<p>To speed up the training time, we can “downsample” the data by skipping problems randomly. For example, we can only do odd-numbered problems. This insured that we still get the same proportion of each type of question while doing fewer problems.</p>
-<p>One way to be extra-confident in our answers to to do the problem multiple ways. In modeling, using the averages of different models produces the best results.</p>
-<p>If we use the wrong loss function our model will fail. If instead of looking at “Correct Answers” when practicing, we do not bother to look at the answer but instead only look at “Number of Study Hours”, the model will not perform well on the real exam. The brain will “learn” to maximize study time, by taking longer time to relax and waste time, rather than aiming to get the correct answer.</p>
-</div>
-<div id="statistical-definitions" class="section level2">
-<h2><span class="header-section-number">7.2</span> Statistical Definitions</h2>
-<p>The input columns are in a matrix format called <span class="math inline">\(X\)</span>. The target variable is a vector <span class="math inline">\(y\)</span>. By convenction, <span class="math inline">\(n\)</span> is the number of rows (aka observations) of <span class="math inline">\(X\)</span> and <span class="math inline">\(p\)</span> is the number of columns (aka variables).</p>
-<p>Take an example with <span class="math inline">\(p\)</span> = 2 columns and 3 observations. The matrix <span class="math inline">\(X\)</span> looks like</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-x1
-</th>
-<th style="text-align:left;">
-x2
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-x11
-</td>
-<td style="text-align:left;">
-x21
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-x12
-</td>
-<td style="text-align:left;">
-x22
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-x13
-</td>
-<td style="text-align:left;">
-x23
-</td>
-</tr>
-</tbody>
-</table>
-<p>In matrix notation, you can say that <span class="math inline">\(X\)</span> is a matrix that has columns <span class="math inline">\(x_1 = (x_{11}, x_{12}, x_{13}), x_3 = (x_{21}, x_{22}, x_{23})\)</span></p>
-<p><span class="math display">\[X = [x1,x2,x3] \]</span></p>
-<p>The target is <span class="math inline">\(y = (y_1, y_2, y_3)\)</span>. Machine learning is about using <span class="math inline">\(X\)</span> to predict <span class="math inline">\(y\)</span>. We call this “y-hat”, or simply the prediction.</p>
-<p><span class="math display">\[\hat{y} = f(X)\]</span></p>
-<p>This is almost never going to happen perfectly, and so there is always an error term, <span class="math inline">\(\epsilon\)</span>. This can be made smaller, but is never exactly zero.</p>
-<p><span class="math display">\[\hat{y} + \epsilon = f(X) + \epsilon\]</span></p>
-<p>In other words, <span class="math inline">\(\epsilon = y - \hat{y}\)</span>.</p>
-<p>** Quiz:**</p>
-<p>The accuracy of a model is a metric used in classification problems (where the outcome is descrete). In the above example, what is the accuracy of the data set?</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co">#ncorrect / total = 1/3  = 33%</span></a></code></pre></div>
-<p>The goal is choose a model <span class="math inline">\(f(.)\)</span> which approximates <span class="math inline">\(y\)</span>. The simplest way of doing this is with a linear model. Choose four numbers <span class="math inline">\(\beta = (\beta_0, \beta_1, \beta_2\)</span> and say that <span class="math inline">\(\hat{y}\)</span> is a linear combination of <span class="math inline">\(x_1, x_2\)</span> using <span class="math inline">\(\beta\)</span> as the weights.</p>
-<p><span class="math display">\[f(X) = X\beta = (\beta_0 + \beta_1 x_{11} + \beta_2 x_22, \beta_0 + \beta_2 x_{21} + \beta_3 x_32, \beta_0 + \beta_1 x_{31} + \beta_3 x_32)\]</span></p>
-<p>– bias variance decomposition
-– flexibility vs interpretability</p>
 </div>
 <div id="linear-models" class="section level2">
-<h2><span class="header-section-number">7.3</span> Linear Models</h2>
+<h2><span class="header-section-number">5.2</span> Linear Models</h2>
+<p>Chapter 2 of CAS Monograph 5</p>
+<p><a href="https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf" class="uri">https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf</a></p>
 <p>– glms
 - assumptions
 - penalization (ridge vs. lasso)</p>
@@ -433,7 +259,7 @@ x23
 - ungrouped data w/penalization</p>
 </div>
 <div id="tree-based-models" class="section level2">
-<h2><span class="header-section-number">7.4</span> Tree-based models</h2>
+<h2><span class="header-section-number">5.3</span> Tree-based models</h2>
 <ul>
 <li>Niemerg’s “Forest from the trees” + 100 page ML book</li>
 </ul>
@@ -445,8 +271,8 @@ x23
           </div>
         </div>
       </div>
-<a href="visualization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-mini-exam-example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-programming.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -476,7 +302,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-modeling.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-machine-learning.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -1,6 +1,12 @@
-# Getting Started {#intro}
+# Getting started {#intro}
 
 This book is designed to get you set up within an hour.  If this is your first time using R, then you will need to install two pieces of software, R and RStudio.  Once these four steps have been done you should not need to download anything else needed for this book.  You will be able to work offline.
+
+## Download ISLR
+
+This book references the publically-avialable textbook "An Introduction to Statistical Learning", which can be downloaded for free
+
+http://faculty.marshall.usc.edu/gareth-james/ISL/
 
 ## Installing R
 
@@ -24,7 +30,7 @@ R code is organized into libraries.  You want to use the exact same code that wi
 
 For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called `ExamPAData` by the author.  To access, simplly run the below lines of code to download this data.
 
-```{r}
+```{r eval = F}
 #check if devtools is installed and then install ExamPAData from github
 if("devtools" %in% installed.packages()){
   library(devtools)
