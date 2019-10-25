@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # Modeling
 
@@ -42,13 +42,9 @@ $$\mathbf{\hat{y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}$$
 
 In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict a person's health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
 
-| Readings |  | 
-|-------|---------|
-| ISLR 2.1 What is statistical learning?|  |
-| ISLR 2.2 Assessing model accuracy|  |
-
-
 ## Linear Models
+
+### Model Form
 
 The type of model used refers to the class of function of $f$.  If $f$ is linear, then we are using a linear model.  If $f$ is non-parametric (does not have input parameters), then it is non-parametric modeling.  Linear models are the simplest type of model.
 
@@ -56,7 +52,7 @@ We have the data $\mathb{X}$ and the target $\mathbf{y}$, where all of the y's a
 
 We want to find a $\mathb{\beta}$ so that 
 
-$$\mathbf{y} \approx \mathbf{X} \mathbf{\beta}$$
+$$\mathbf{\hat{y}} = \mathbf{X} \mathbf{\beta}$$
 
 Which means that each $y_i$ is a linear combination of the variables $x_1, ..., x_p$, plus a constant $\beta_0$ which is called the *intercept* term.  
 
@@ -64,19 +60,20 @@ $$y_i = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
 
 In the one-dimensional case, this creates a line connecting the points.  In higher dimensions, this creates a hyperplane.
 
-```{r caption = "Linear Regression for 1-dimensional model"}
+```{r message = F, echo = F,caption = "Linear Regression for 1-dimensional model"}
+library(tidyverse)
 tibble(y = rnorm(10, 0, 1),
        x = y + 0.4*rnorm(10,0, 1)) %>% 
   ggplot(aes(x,y)) + 
-  geom_point(aes(fill = "training data")) + 
-  geom_smooth(method = "lm", se = F, aes(fill = "linear regression"), color = "red") + 
+  geom_point( show.legend = F) + 
+  geom_smooth(method = "lm", se = F, aes(fill = "linear regression"), color = "red", show.legend = T) + 
   theme_minimal() + 
   scale_fill_manual(name="legend", values=c("blue", "red")) + 
   theme(legend.position = "top")
 ```
 
 
-The question then is **how can we choose the best values of \beta?**  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
+The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
 
 To solve for $\mathbf{\beta}$, we first need to define a *loss function*.  This allows us to compare how well a model is fitting the data.  The most commonly used loss function is the Mean Squared Error (MSE), also called the *squared error loss* or the L2 norm.  When MSE is small, then the predictions are close to the actual values and the model is a good fit.  When MSE is large, the model is a poor fit.
 
@@ -84,33 +81,103 @@ $$\text{MSE} = \frac{1}{n}\sum_i(y_i - \hat{y})^2$$
 
 When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 + ... + \beta_p x_p$, take the derivative with respect to $\beta$, set equal to zero, and solve, we can find the optimal values.  This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.
 
-In our example, we can create a linear model using `bmi` as an input.  For $x_i$ the `bmi` of the ith patient, the model is 
+You might be asking: why does this need to be the squared error?  Why not the absolute error, or the cubed error?  Technically, these could be used as well.  In fact, the absolute error (L1 norm) is useful in other models.  Taking the square has a number of advantages.  
 
-$$\hat{y_i} = 1192.9 + 393.9 x_i$$
+- It provides the same solution if we assume that the distribution of $\mathbf{Y}|\mathbf{X}$ is guassian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
+- Empirically it has been shown to be less likely to overfit as compared to other loss functions
 
-```{r message = F, echo = F}
+### Example
+
+In our example, we can create a linear model using `bmi`, `age`, and `sex` as an inputs.  The fitted model is 
+
+$$\hat{y_i} = -6,986 + 327\space\text{bmi} + 243\space \text{age} + 1,344 \space \text{sex_male}$$
+
+For example, if a patient has `bmi = 27.9`, `age = 19`, `sex_male = 0`, then predicted value is 
+
+$$\hat{y_1} = -6,986 + (327)(27.9) + (243)(19) + (1,344)(0) = 6,754.3$$
+
+```{r message = F, echo = F, eval = F}
 library(ExamPAData)
 library(tidyverse)
 
-model <- lm(data = health_insurance, charges ~ bmi)
-
-health_insurance %>%
-  ggplot(aes(bmi, charges)) + 
-  geom_point() + 
-  geom_smooth(method = "lm", se = F)
+model <- lm(data = health_insurance, charges ~ bmi + age + sex)
+pred = predict(model, health_insurance)
+coefficients(model)
 ```
 
-The interpretation is that for each one-unit increase in `bmi`, the average prediction increases by 393.9 dollars.  
+This model structure implies that each of the variables $\mathbf{x_1}, ..., \mathbf{x_p}$ each change the predicted $\mathbf{\hat{y}}$.  If $x_{ij}$ increases by one unit, then $y_i$ increases by $\beta_j$ units, regardless of what happens to all of the other variables.  This is one of the main assumptions of linear models: *variable indepdendence*.  If the variables are correlated, say, then this assumption will be violated.  
+
+There are several other key assumptions to linear models, which are listed at the end of this chapter for brevity. 
+
+| Readings |  | 
+|-------|---------|
+| ISLR 2.1 What is statistical learning?|  |
+| ISLR 2.2 Assessing model accuracy|  |
 
 
-Chapter 2 of CAS Monograph 5
+## Generalized linear models (GLMs)
 
-https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf
+Instead of the model being a direct linear combination of the variables, there is an intermediate step called a *link function* $g$.
 
--- glms
-  - assumptions
-  - penalization (ridge vs. lasso)
+$$g(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta}$$
 
+For example, if $g$ is the natural logarithm (aka, the "log-link"), then
+
+$$log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}$$
+This is useful when the distribution of $Y$ is skewed, as taking the log corrects skewness.
+
+```{r echo = F,message = F, fig.cap="Taking the log corrects for skewness"}
+tibble(y = exp(rnorm(1000))) %>% 
+  mutate(log_y = log(y)) %>% 
+  gather(stat, value) %>% 
+  mutate(stat = ifelse(stat == "y", "Before Log Transform", "After Log Transform") %>% 
+           fct_relevel(c("Before Log Transform", "After Log Transform"))) %>% 
+  ggplot(aes(value)) + 
+  geom_histogram() + 
+  facet_wrap(vars(stat), scales = "free") + 
+  theme_minimal()
+```
+
+In addition, we can also change the distribution that we expect $Y$ to be from.  In the above example, after taking the log it looks as though a normal distribution may be a good fit; however, the GLM can also allow for other distribution.  These are
+
+The [Wikipedia page](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function) summarizes the possible combinations of link function and distribution family.
+
+```{r echo = F, fig.cap = "Distribution-Link Function Combinations"}
+knitr::include_graphics("images/glm_links.png")
+```
+
+
+| Readings |  | 
+|-------|---------|
+| [CAS Monograph 5 Chapter 2](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf) |  |
+| ISLR 2.2 Assessing model accuracy|  |
+
+## Advantages and disadvantages to linear models
+
+There is usually at least one question on the PA exam which asks you to "list some of the advantages and disadvantages of using this particular model", and so here is one such list. 
+
+**GLM Advantages**
+
+- Easy to interpret
+- Handles skewed data through different response distributions
+- Models the average response which leads to stable predictions on new data
+- Handles continuous and categorical data
+- Works well on small data sets
+
+**GLM Disadvantages**
+
+- Strict assumptions (see “what to include” below)
+- Unable to detect non-linearity directly (although this can manually be addressed through feature engineering)
+- Sensitive to outliers
+- Low predictive power
+
+**Elastic Net/Lasso/Ridge Advantages**
+- All benefits from GLMS
+- Automatic variable selection
+- Better predictive power than GLM (usually)
+
+**Elastic Net/Lasso/Ridge Disadvantages**
+- All cons of GLMs
 
 -- training/testing data sets
 -- cross validation
@@ -121,8 +188,3 @@ https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf
 - ungrouped data with binary /log link
 - grouped data w/gausian log link...
 - ungrouped data w/penalization
-
-## Tree-based models
-
-- Niemerg's "Forest from the trees" + 100 page ML book
-
