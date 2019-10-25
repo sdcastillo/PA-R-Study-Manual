@@ -1,0 +1,128 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Modeling
+
+## Notation
+
+The number of observations will be denoted by $n$.  When we refer to the size of a data set, we are referring to $n$.  We use $p$ to refer the number of input variables used.  The word "variables" is synonymous with "features".  For example, in the `health_insurance` data, the variables are `age`, `sex`, `bmi`, `children`, `smoker` and `region`.  These 7 variables mean that $p = 7$.  The data is collected from 1,338 patients, which means that $n = 1,338$.
+
+Scalar numbers are denoted by ordinary variables (i.e., $x = 2$, $z = 4$), and vectors are denoted by bold-faced letters 
+
+$$\mathbf{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}$$
+
+We use $\mathbf{y}$ to denote the target variable.  This is the variable which we are trying to predict.  This can be either a whole number, in which case we are performing *regression*, or a category, in which case we are performing *classification*.  In the health insurance example, `y = charges`, which are the annual health care costs for a patient.
+
+Both $n$ and $p$ are important because they tell us what types of models are likely to work well, and which methods are likely to fail.  For the PA exam, we will be dealing with small $n$ (<100,000) due to the limitations of the Prometric computers.  We will use a small $p$ (< 20) in order to make the data sets easier to interpret.
+
+We organize these variables into matrices.  Take an example with $p$ = 2 columns and 3 observations.  The matrix is said to be $3 \times 2$ (read as "2-by-3") matrix.
+
+$$
+\mathbf{X} = \begin{pmatrix}x_{11} & x_{21}\\
+x_{21} & x_{22}\\
+x_{31} & x_{32}
+\end{pmatrix}
+$$
+
+The target is 
+
+$$\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}$$
+This represents the *unknown* quantity that we want to be able to predict.  In the health care costs example, $y_1$ would be the costs of the first patient, $y_2$ the costs of the second patient, and so forth.  The variables $x_{11}$ and $x_{12}$ might represent the first patient's age and sex respectively, where $x_{i1}$ is the patient's age, and $x_{i2} = 1$ if the ith patient is male and 0 if female.
+
+Machine learning is about using $\mathbf{X}$ to predict $\mathbf{y}$. We call this "y-hat", or simply the prediction.  This is based on a function of the data $X$.
+
+$$\mathbf{\hat{y}} = f(\mathbf{X}) = \begin{pmatrix} \hat{y_1} \\ \hat{y_2} \\ \hat{y_3} \end{pmatrix}$$
+
+
+This is almost never going to happen perfectly, and so there is always an error term, $\mathbf{\epsilon}$.  This can be made smaller, but is never exactly zero.  
+
+$$\mathbf{\hat{y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}$$
+
+In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict a person's health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
+
+| Readings |  | 
+|-------|---------|
+| ISLR 2.1 What is statistical learning?|  |
+| ISLR 2.2 Assessing model accuracy|  |
+
+
+## Linear Models
+
+The type of model used refers to the class of function of $f$.  If $f$ is linear, then we are using a linear model.  If $f$ is non-parametric (does not have input parameters), then it is non-parametric modeling.  Linear models are the simplest type of model.
+
+We have the data $\mathb{X}$ and the target $\mathbf{y}$, where all of the y's are real numbers, or $y_i \in \mathbb{R}$.
+
+We want to find a $\mathb{\beta}$ so that 
+
+$$\mathbf{y} \approx \mathbf{X} \mathbf{\beta}$$
+
+Which means that each $y_i$ is a linear combination of the variables $x_1, ..., x_p$, plus a constant $\beta_0$ which is called the *intercept* term.  
+
+$$y_i = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
+
+In the one-dimensional case, this creates a line connecting the points.  In higher dimensions, this creates a hyperplane.
+
+```{r caption = "Linear Regression for 1-dimensional model"}
+tibble(y = rnorm(10, 0, 1),
+       x = y + 0.4*rnorm(10,0, 1)) %>% 
+  ggplot(aes(x,y)) + 
+  geom_point(aes(fill = "training data")) + 
+  geom_smooth(method = "lm", se = F, aes(fill = "linear regression"), color = "red") + 
+  theme_minimal() + 
+  scale_fill_manual(name="legend", values=c("blue", "red")) + 
+  theme(legend.position = "top")
+```
+
+
+The question then is **how can we choose the best values of \beta?**  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
+
+To solve for $\mathbf{\beta}$, we first need to define a *loss function*.  This allows us to compare how well a model is fitting the data.  The most commonly used loss function is the Mean Squared Error (MSE), also called the *squared error loss* or the L2 norm.  When MSE is small, then the predictions are close to the actual values and the model is a good fit.  When MSE is large, the model is a poor fit.
+
+$$\text{MSE} = \frac{1}{n}\sum_i(y_i - \hat{y})^2$$
+
+When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 + ... + \beta_p x_p$, take the derivative with respect to $\beta$, set equal to zero, and solve, we can find the optimal values.  This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.
+
+In our example, we can create a linear model using `bmi` as an input.  For $x_i$ the `bmi` of the ith patient, the model is 
+
+$$\hat{y_i} = 1192.9 + 393.9 x_i$$
+
+```{r message = F, echo = F}
+library(ExamPAData)
+library(tidyverse)
+
+model <- lm(data = health_insurance, charges ~ bmi)
+
+health_insurance %>%
+  ggplot(aes(bmi, charges)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = F)
+```
+
+The interpretation is that for each one-unit increase in `bmi`, the average prediction increases by 393.9 dollars.  
+
+
+Chapter 2 of CAS Monograph 5
+
+https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf
+
+-- glms
+  - assumptions
+  - penalization (ridge vs. lasso)
+
+
+-- training/testing data sets
+-- cross validation
+
+-- glm examples using
+- ungrouped data w/gaussian log link
+- ungrouped data w/gamma log link
+- ungrouped data with binary /log link
+- grouped data w/gausian log link...
+- ungrouped data w/penalization
+
+## Tree-based models
+
+- Niemerg's "Forest from the trees" + 100 page ML book
+
