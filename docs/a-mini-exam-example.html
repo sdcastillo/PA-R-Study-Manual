@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2019-10-27" />
+<meta name="date" content="2019-10-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,12 +162,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>8</b> Modeling</a><ul>
 <li class="chapter" data-level="8.1" data-path="modeling.html"><a href="modeling.html#notation"><i class="fa fa-check"></i><b>8.1</b> Notation</a></li>
-<li class="chapter" data-level="8.2" data-path="modeling.html"><a href="modeling.html#linear-models"><i class="fa fa-check"></i><b>8.2</b> Linear Models</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="modeling.html"><a href="modeling.html#model-form"><i class="fa fa-check"></i><b>8.2.1</b> Model Form</a></li>
-<li class="chapter" data-level="8.2.2" data-path="modeling.html"><a href="modeling.html#example"><i class="fa fa-check"></i><b>8.2.2</b> Example</a></li>
+<li class="chapter" data-level="8.2" data-path="modeling.html"><a href="modeling.html#ordinary-least-squares-ols"><i class="fa fa-check"></i><b>8.2</b> Ordinary least squares (OLS)</a></li>
+<li class="chapter" data-level="8.3" data-path="modeling.html"><a href="modeling.html#generalized-linear-models-glms"><i class="fa fa-check"></i><b>8.3</b> Generalized linear models (GLMS)</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="modeling.html"><a href="modeling.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>8.3.1</b> Advantages and disadvantages</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="modeling.html"><a href="modeling.html#generalized-linear-models-glms"><i class="fa fa-check"></i><b>8.3</b> Generalized linear models (GLMs)</a></li>
-<li class="chapter" data-level="8.4" data-path="modeling.html"><a href="modeling.html#advantages-and-disadvantages-to-linear-models"><i class="fa fa-check"></i><b>8.4</b> Advantages and disadvantages to linear models</a></li>
+<li class="chapter" data-level="8.4" data-path="modeling.html"><a href="modeling.html#penalized-linear-models"><i class="fa fa-check"></i><b>8.4</b> Penalized Linear Models</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="modeling.html"><a href="modeling.html#ridge-regression"><i class="fa fa-check"></i><b>8.4.1</b> Ridge Regression</a></li>
+<li class="chapter" data-level="8.4.2" data-path="modeling.html"><a href="modeling.html#lasso"><i class="fa fa-check"></i><b>8.4.2</b> Lasso</a></li>
+<li class="chapter" data-level="8.4.3" data-path="modeling.html"><a href="modeling.html#advantages-and-disadvantages-1"><i class="fa fa-check"></i><b>8.4.3</b> Advantages and disadvantages</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="modeling.html"><a href="modeling.html#decision-trees"><i class="fa fa-check"></i><b>8.5</b> Decision Trees</a></li>
+<li class="chapter" data-level="8.6" data-path="modeling.html"><a href="modeling.html#advantages-and-disadvantages-2"><i class="fa fa-check"></i><b>8.6</b> Advantages and disadvantages</a></li>
+<li class="chapter" data-level="8.7" data-path="modeling.html"><a href="modeling.html#random-forests"><i class="fa fa-check"></i><b>8.7</b> Random Forests</a></li>
+<li class="chapter" data-level="8.8" data-path="modeling.html"><a href="modeling.html#gradient-boosted-trees"><i class="fa fa-check"></i><b>8.8</b> Gradient Boosted Trees</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html"><i class="fa fa-check"></i><b>9</b> A Mini-Exam Example</a><ul>
 <li class="chapter" data-level="9.1" data-path="a-mini-exam-example.html"><a href="a-mini-exam-example.html#project-statement"><i class="fa fa-check"></i><b>9.1</b> Project Statement</a><ul>
@@ -235,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The distribution of claims is strictly positive and right skewed.</p>
 <div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1">data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(claims)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
 </div>
 <div id="fit-a-linear-model-1-point" class="section level3">
 <h3><span class="header-section-number">9.1.3</span> Fit a linear model (1 point)</h3>
