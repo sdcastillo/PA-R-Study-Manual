@@ -38,25 +38,31 @@ $$\mathbf{\hat{y}} = f(\mathbf{X}) = \begin{pmatrix} \hat{y_1} \\ \hat{y_2} \\ \
 
 This is almost never going to happen perfectly, and so there is always an error term, $\mathbf{\epsilon}$.  This can be made smaller, but is never exactly zero.  
 
-$$\mathbf{\hat{y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}$$
+$$
+\mathbf{\hat{y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}
+$$
 
 In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict a person's health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
 
-## Linear Models
-
-### Model Form
+## Ordinary least squares (OLS)
 
 The type of model used refers to the class of function of $f$.  If $f$ is linear, then we are using a linear model.  If $f$ is non-parametric (does not have input parameters), then it is non-parametric modeling.  Linear models are the simplest type of model.
 
-We have the data $\mathb{X}$ and the target $\mathbf{y}$, where all of the y's are real numbers, or $y_i \in \mathbb{R}$.
+We have the data $\mathbf{X}$ and the target $\mathbf{y}$, where all of the y's are real numbers, or $y_i \in \mathbb{R}$.
 
-We want to find a $\mathb{\beta}$ so that 
+We want to find a $\mathbf{\beta}$ so that 
 
-$$\mathbf{\hat{y}} = \mathbf{X} \mathbf{\beta}$$
+$$
+\mathbf{\hat{y}} = \mathbf{X} \mathbf{\beta}
+$$
 
 Which means that each $y_i$ is a linear combination of the variables $x_1, ..., x_p$, plus a constant $\beta_0$ which is called the *intercept* term.  
 
-$$y_i = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
+$$
+\begin{equation}
+y_i = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p
+\end{equation}
+$$
 
 In the one-dimensional case, this creates a line connecting the points.  In higher dimensions, this creates a hyperplane.
 
@@ -75,9 +81,11 @@ tibble(y = rnorm(10, 0, 1),
 
 The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
 
-To solve for $\mathbf{\beta}$, we first need to define a *loss function*.  This allows us to compare how well a model is fitting the data.  The most commonly used loss function is the Mean Squared Error (MSE), also called the *squared error loss* or the L2 norm.  When MSE is small, then the predictions are close to the actual values and the model is a good fit.  When MSE is large, the model is a poor fit.
+To solve for $\mathbf{\beta}$, we first need to define a *loss function*.  This allows us to compare how well a model is fitting the data.  The most commonly used loss function is the residual sum of squares (RSS), also called the *squared error loss* or the L2 norm.  When RSS is small, then the predictions are close to the actual values and the model is a good fit.  When RSS is large, the model is a poor fit.
 
-$$\text{MSE} = \frac{1}{n}\sum_i(y_i - \hat{y})^2$$
+$$
+\text{RSS} = \sum_i(y_i - \hat{y})^2
+$$
 
 When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 + ... + \beta_p x_p$, take the derivative with respect to $\beta$, set equal to zero, and solve, we can find the optimal values.  This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.
 
@@ -85,8 +93,6 @@ You might be asking: why does this need to be the squared error?  Why not the ab
 
 - It provides the same solution if we assume that the distribution of $\mathbf{Y}|\mathbf{X}$ is guassian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
 - Empirically it has been shown to be less likely to overfit as compared to other loss functions
-
-### Example
 
 In our example, we can create a linear model using `bmi`, `age`, and `sex` as an inputs.  The fitted model is 
 
@@ -115,15 +121,24 @@ There are several other key assumptions to linear models, which are listed at th
 | ISLR 2.2 Assessing model accuracy|  |
 
 
-## Generalized linear models (GLMs)
+## Generalized linear models (GLMS)
 
 Instead of the model being a direct linear combination of the variables, there is an intermediate step called a *link function* $g$.
 
-$$g(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta}$$
+$$
+g(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta}
+$$
+This implies that the response $\mathbf{y}$ is related to the linear predictor $\mathbf{X} \mathbf{\beta}$ through the *inverse* link function.
 
-For example, if $g$ is the natural logarithm (aka, the "log-link"), then
+$$
+\mathbf{\hat{y}} = g^-1(\mathbf{X} \mathbf{\beta})
+$$
+This means that $g(.)$ must be an invertable.  For example, if $g$ is the natural logarithm (aka, the "log-link"), then
 
-$$log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}$$
+$$
+log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
+$$
+
 This is useful when the distribution of $Y$ is skewed, as taking the log corrects skewness.
 
 ```{r echo = F,message = F, fig.cap="Taking the log corrects for skewness"}
@@ -138,21 +153,50 @@ tibble(y = exp(rnorm(1000))) %>%
   theme_minimal()
 ```
 
-In addition, we can also change the distribution that we expect $Y$ to be from.  In the above example, after taking the log it looks as though a normal distribution may be a good fit; however, the GLM can also allow for other distribution.  These are
+You might be asking, what if the distribution of $Y$ is not normal, no matter what choice we have for $g$?  The short answer is that we can change our assumption of the distribution of $Y$, and use this to change the parameters.  If you have taken exam STAM then you are familiar with *maximum likelihood estimation*.  
 
-The [Wikipedia page](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function) summarizes the possible combinations of link function and distribution family.
+We have a response $\mathbf{Y}$, and we fit a distribution to $\mathbf{Y} | \mathbf{X}$.  This is the target variable conditioned on the data.  For each $y_i$, each observation, we assign a probability $f_Y(y_i)$
+
+$$
+f_y(y_i | X_1 = x_1, X_2 = x_2, ..., X_p = x_p) = Pr(Y = y_i | \mathbf{X})
+$$
+
+Now, when we choose the response family, we are simply changing $f$.  If we say that the response family is Gaussian, then $f$ has a Gaussian PDF.  If we are modeling counts, then $f$ is a Poisson PDF.  This only works if $f$ is in the *exponential family* of distributions, which consists of the common names such as Gaussian, Binomial, Gamma, Inverse Gamma, and so forth.  Reading the CAS Monograph 5 will provide more detail into this.
+
+The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
 
 ```{r echo = F, fig.cap = "Distribution-Link Function Combinations"}
 knitr::include_graphics("images/glm_links.png")
 ```
 
+For this exam, a common question is to ask candiates to choose the best distribution and link function.  There is no all-encompasing answer, but a few suggestions are
+
+- If $Y$ is counting something, such as the number of claims, number of accidents, or some other discrete and positive counting sequence, use the Poisson;
+- If $Y$ contains negative values, then do not use the Exponential, Gamma, or Inverse Gaussian as these are strictly positive.  Conversely, if $Y$ is only positive, such as the price of a policy (price is always > 0), or the claim costs, then these are good choices;
+- If $Y$ is categorical (either binary or with more than two outcomes), only the Logic or Probit 
+
+The exam will always ask you to interpret the GLM.  These questions can usually be answered by inverting the link function and interpreting the coefficients.  In the case of the log link, simply take the exponent of the coefficients and each of these represents a "relativity" factor.
+
+$$
+log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
+$$
+For a single observation $y_i$, this is
+
+$$
+\text{exp}(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + ... + \beta_p x_{ip}) = \\
+e^{\beta_0} e^{\beta_1 x_{i1}}e^{\beta_2 x_{i2}} ...  e^{\beta_p x_{ip}} = 
+R_o R_2 R_3 ... R_{p}
+$$
+Where $R_k$ is the *relativity* of the kth variable.  This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance.  The data science community does not use this language. 
+
+For binary outcomes with logit or probit link, there is no easy interpretation.  This has come up in at least one past sample exam, and the solution was to create "psuedo" observations and observe how changing each $x_k$ would change the predicted value.  Due to the time requirements, this is unlikely to come up on an exam.  So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.
 
 | Readings |  | 
 |-------|---------|
 | [CAS Monograph 5 Chapter 2](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf) |  |
 | ISLR 2.2 Assessing model accuracy|  |
 
-## Advantages and disadvantages to linear models
+### Advantages and disadvantages
 
 There is usually at least one question on the PA exam which asks you to "list some of the advantages and disadvantages of using this particular model", and so here is one such list. 
 
@@ -166,25 +210,167 @@ There is usually at least one question on the PA exam which asks you to "list so
 
 **GLM Disadvantages**
 
-- Strict assumptions (see “what to include” below)
+- Does not select features
+- Strict assumptions around distribution shape, randomness of error terms, and others
 - Unable to detect non-linearity directly (although this can manually be addressed through feature engineering)
 - Sensitive to outliers
 - Low predictive power
 
+## Penalized Linear Models
+
+One of the main weaknesses of the GLM is that the features need to be selected by hand.  For large $p$, this means that the modeler needs to test every combination of variables.  This is time consuming.  
+
+Earlier on we said that the linear model minimizes the sum of square terms, known as the residual sum of squares (RSS)
+
+$$
+\text{RSS} = \sum_i(y_i - \hat{y})^2 = \sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2
+$$
+
+This loss function can be modified so that models which include more (and larger) coefficients are considered as worse.  In other words, when there are more $\beta$'s, or $\beta$'s which are larger, the RSS is higher.
+
+### Ridge Regression
+
+Ridge regression adds a penalty term which is proportional to the square of the sum of the coefficients.  This is known as the "L2" norm.
+
+$$
+\sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2 + \lambda \sum_{j = 1}^p\beta_j^2
+$$
+This $\lambda$ controls how much of a penalty is imposed on the size of the coefficients.  When $\lambda$ is high, simpler models are treated more favorably because the $\sum_{j = 1}^p\beta_j^2$ carries more weight.  Conversely, then $\lambda$ is low, complex models are more favored.  When $\lambda = 0$, we have an ordinary GLM.
+
+### Lasso
+
+The official name is the Least Absolute Shrinkage and Selection Operator, but the common name is just "the lasso".  Just as with Ridge regression, we want to favor simpler models; however, we also want to *select* variables.  This is the same as forcing some coefficients to be equal to 0.
+
+Instead of taking the square of the coefficients (L2 norm), we take the absolute value (L1 norm).  
+
+$$
+\sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2 + \lambda \sum_{j = 1}^p|\beta_j|
+$$
+In ISLR, Hastie et al show that this results in coefficients being forced to be exactly 0.  This is extremely useful because it means that by changing $\lambda$, we can select how many variables to use in the model.
+
+**Note**: While any response family is possible with penalized regression, in R, only the Gaussian family is possible in the library `glmnet`, and so this is the only type of question that the SOA can ask.
+
+### Advantages and disadvantages
+
 **Elastic Net/Lasso/Ridge Advantages**
+
 - All benefits from GLMS
 - Automatic variable selection
 - Better predictive power than GLM (usually)
 
 **Elastic Net/Lasso/Ridge Disadvantages**
+
 - All cons of GLMs
 
--- training/testing data sets
--- cross validation
+| Readings |  | 
+|-------|---------|
+| ISLR 6.1 Subset Selection  | |
+| ISLR 6.2 Shrinkage Methods|  |
 
--- glm examples using
-- ungrouped data w/gaussian log link
-- ungrouped data w/gamma log link
-- ungrouped data with binary /log link
-- grouped data w/gausian log link...
-- ungrouped data w/penalization
+## Decision Trees
+
+Decision trees can be used for either classification or regression problems.  The model structure is a series of yes/no questions.  Depending on how each observation answers these questions, a prediction is made.
+
+The below example shows how a single tree can predict health claims.
+
+- For non-smokers, the predicted annual claims are 8,434.  This represents 80% of the observations
+- For smokers with a `bmi` of less than 30, the predicted annual claims are 21,000.  10% of patients fall into this bucket.
+- For smokers with a `bmi` of more than 30, the prediction is 42,000.  This bucket accounts for 11% of patients.
+
+```{r fig.cap="Decision tree of health costs", message = F, echo= F}
+library(rpart)
+library(rpart.plot)
+library(tidyverse)
+tree <- rpart(charges ~ smoker + bmi, data = health_insurance)
+rpart.plot(tree, type = 3)
+```
+
+We can cut the data set up into these groups and look at the claim costs.  From this grouping, we can see that `smoker` is the most important variable as the difference in average claims is about 20,000.
+
+```{r message = F, echo = F}
+library(scales)
+library(kableExtra)
+
+health_insurance %>% 
+  mutate(bmi_30 = ifelse(bmi < 30, "bmi < 30", "bmi >= 30")) %>% 
+  group_by(smoker,bmi_30) %>% 
+  summarise(mean_claims = dollar(mean(charges)),
+            n = n()) %>% 
+  ungroup() %>% 
+  mutate(percent = round(n/sum(n),2)) %>% 
+  select(-n) %>% 
+  kable("html")
+```
+
+ISLR describes the algorithm used to create trees on page 309.  In simple language, this process is
+
+1.  Choose a variable at random.  Then find the split point which best seperates observations out based on the value of $y$.  A good split is one where the $y$'s are very different.  Continue doing this until a very deep tree is made.
+
+2.  Apply cost complexity pruning to the large tree in order to obtain a sequence of best subtrees.  This complexity is based on a parameter $\alpha$, which is similar to the $\lambda$ from the Lasso in that a higher value imposes greater penalization (remove more splits).  For each value of $\alpha$, there is a different subtree (different brances are removed).
+
+3. Use cross validation to choose the best $\alpha$.  For each value of $\alpha$, we have an esimate of the squared prediction error.  This is similar to how the Lasso uses CV to choose $\lambda$.
+
+## Advantages and disadvantages
+
+**Advantages**
+
+- Easy to interpret
+- Captures interaction effects
+- Captures non-linearities
+- Handles continuous and categorical data
+- Handles missing values
+
+**Disadvantages**
+
+- Is a “weak learner” because of low predictive power
+- Does not work on small data sets
+- Is often a simplification of the underlying process because all observations at terminal nodes have equal predicted values
+- Is biased towards selecting high-cardinality features because more possible split points for these features tend to lead to overfitting
+- High variance (which can be alleviated with stricter parameters) leads the “easy to interpret results” to change upon retraining
+Unable to predict beyond the range of the training data for regression (because each predicted value is an average of training samples)
+
+| Readings |  | 
+|-------|---------|
+| ISLR 8.1.1 Basics of Decision Trees  | |
+| ISLR 8.1.2 Classification Trees|  |
+
+## Random Forests
+
+**Advantages**
+
+- Resilient to overfitting due to bagging 
+- Only one parameter to tune (mtry, the number of features considered at each split)
+- Very good a multi-class prediction
+- Nonlinearities
+- Interaction effects
+- Deal with unbalanced and missing data*Usually requires over/undersamplin
+
+**Disadvantages**
+
+- Does not work on small data sets
+- Weaker performance than other methods (GBM, NN)
+- Unable to predict beyond training data for regression
+
+| Readings |  | 
+|-------|---------|
+| ISLR 8.1.1 Basics of Decision Trees  | |
+| ISLR 8.1.2 Classification Trees|  |
+
+## Gradient Boosted Trees
+
+- High prediction accuracy
+- Closest model to a “silver bullet” that exists
+- Nonlinearities, interaction effects, resilient to outliers, corrects for missing values
+- Deals with class imbalance directly through by weighting observations
+
+**Disadvantages**
+
+- Requires large sample size
+- Longer training time
+- Does not detect linear combinations of features.  These must be engineered
+Can overfit if not tuned correctly
+
+| Readings |  | 
+|-------|---------|
+| ISLR 8.1.1 Basics of Decision Trees  | |
+| ISLR 8.1.2 Classification Trees|  |
