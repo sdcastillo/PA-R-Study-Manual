@@ -12,12 +12,23 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 description: "This will help you pass these exams"
 ---
+
 # Welcome
+***
 
-This book will help you to pass the SOA's Predictive Analytics (PA) Exam.  The structure is like a buffet in that you can eat whatever you choose: if you are in a rush, you can skip to the practice exams at the end; if you are looking to learn R programming, you can read the chapters on R; if you want to learn machine learning, you can read the chapters on ML.
+This book prepares you for the SOA's Predictive Analytics (PA) Exam.  
 
-After passing this exam with about 80 study hours, I realized that much of the material I had already learned from work experience in predictive modeling, kaggle, stats courses, from already reading the textbook "An Introduction to Statistical Learning", and from knowledge of R programming.  **This book allows you to skip the redundant sections and just focus on the new material.**  If you are new to this whole business of machine learning and R programming, great!  Every page will be useful.  
+**Note:** This book is still being written and this is only a preview.
 
+Many candidates start with prior knowledge about parts of this exam.  Very few are learning all of these topics for the first time. **This book allows you to skip the redundant sections and just focus on the new material.**  If you are new to this whole business of machine learning and R programming, great!  Every page will be useful.  
+
+**Features**
+
+- All data sets used are packaged in a single R library
+- Clean, easy-to-read, efficient R code
+- Explanations of the statistical concepts
+- Tips on taking the exam
+- Two **original** practice exams
 
 # The Exam
 
@@ -43,14 +54,12 @@ A non-technical translation is as follows:
 - Understand several algorithms from a high level and be able to interpret and explain results in english
 - Read R documentation about models and use this to make decisions
 
-# Preface - What is Machine Learning?
+# What is machine learning? 
 
-All of use are already familiar with how to learn - by learning from our mistakes.  By repeating what is successful and avoiding what results in failure, we learn by doing, by experience, or trial-and-error.  Some study methods work well, but other methods do not.  We all know that memorizing answers without understanding concepts is an ineffective method, and that doing many practice problems is better than doing only a few.  These ideas apply to how computers learn as much as they do to how humans learn.
+All of use are already familiar with how to learn - by improving from our mistakes.  By repeating what is successful and avoiding what results in failure, we learn by doing, by experience, or trial-and-error.  Machines learn in a similar way.
 
-Take the example of preparing for an actuarial exam.  We can clearly state our objective: get as many correct answers as possible! We want to correctly predict the solution to every problem.  Said another way, we are trying to minimize the error, the percentage of incorrect problems.  Later on, we will see how choosing the objective function changes how models are fit.
+Take for example the process of studying for an exam.  Some study methods work well, but other methods do not.  We all know that memorizing answers without understanding concepts is an ineffective method, and that by quizing ourselves on realistic questions we can learn fastest.  Later, when we walk about cross-validation, we will see that computers do just this.
 
-The "data" are the practice problems, and the “label” is the answer (A,B,C,D,E).  We want to build a “mental model” that reads the question and predicts the answer.  The SOA suggests 100 hours per hour of exam, which means that actuaries train on hundreds of problems before the real exam.  We don’t have access to the questions that will be on the exam ahead of time, and so this represents “validation” or “holdout” data.  In the chapter on cross-validation, we will see how computers use hold-out sets to test model performance.
+We can clearly state our objective: get as many correct answers as possible! We want to correctly predict the solution to every problem.  Said another way, we are trying to minimize the error, the percentage of incorrect problems.  If instead we measure progress based on a different metric, say hours studied for instance, we will be incentivized to waste time instead of doing work.  We will see that choosing a model's loss function performs the same action.
 
-The more practice problems that we do, the larger the training data set, and the better our "mental model" becomes.  When we see new problems, ones which have not appeared in the practice exams, we often have a difficult time.  Problems which we have seen before are easier, and we have more confidence in our answers.  Statistics tells us that as the sample size increases, model performance tends to increase.  More difficult concepts tend to require more practice, and more complex machine learning problems require more data.
-
-We typically save time by only doing odd-numbered problems.  This insures that we still get the same proportion of each type of question while doing fewer problems.  If we are unsure of a question, we will often seek a second opinion, or ask an online forum for help.  Later on, we will see how “down-sampling”, “bagging”, and “boosting” are all similar concepts.
+The "data" are the practice problems, and the “label” is the answer (A,B,C,D,E).  We want to build a “mental model” that reads the question and predicts the answer.  The SOA suggests 100 hours per hour of exam, which means that actuaries train on hundreds of problems before the real exam.  The more practice problems that we do, the larger the training data set, and the better our "mental model" becomes.  When we see new problems, ones which have not appeared in the practice exams, we often have a difficult time. But unlike computers, we don't have the ability to use parallel cores, to run continuously for hours on end, and have limited memory.  This means that we also need to study *strategically*, which is what this book will help with.

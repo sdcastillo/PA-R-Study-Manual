@@ -1,11 +1,12 @@
 ---
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
-# Modeling
 
-## Notation
+# Linear Models
+
+## Model Notation
 
 The number of observations will be denoted by $n$.  When we refer to the size of a data set, we are referring to $n$.  We use $p$ to refer the number of input variables used.  The word "variables" is synonymous with "features".  For example, in the `health_insurance` data, the variables are `age`, `sex`, `bmi`, `children`, `smoker` and `region`.  These 7 variables mean that $p = 7$.  The data is collected from 1,338 patients, which means that $n = 1,338$.
 
@@ -66,17 +67,7 @@ $$
 
 In the one-dimensional case, this creates a line connecting the points.  In higher dimensions, this creates a hyperplane.
 
-```{r message = F, echo = F,caption = "Linear Regression for 1-dimensional model"}
-library(tidyverse)
-tibble(y = rnorm(10, 0, 1),
-       x = y + 0.4*rnorm(10,0, 1)) %>% 
-  ggplot(aes(x,y)) + 
-  geom_point( show.legend = F) + 
-  geom_smooth(method = "lm", se = F, aes(fill = "linear regression"), color = "red", show.legend = T) + 
-  theme_minimal() + 
-  scale_fill_manual(name="legend", values=c("blue", "red")) + 
-  theme(legend.position = "top")
-```
+<img src="05-linear-models_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
 
 The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
@@ -94,26 +85,202 @@ You might be asking: why does this need to be the squared error?  Why not the ab
 - It provides the same solution if we assume that the distribution of $\mathbf{Y}|\mathbf{X}$ is guassian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
 - Empirically it has been shown to be less likely to overfit as compared to other loss functions
 
-In our example, we can create a linear model using `bmi`, `age`, and `sex` as an inputs.  The fitted model is 
+### Example
 
-$$\hat{y_i} = -6,986 + 327\space\text{bmi} + 243\space \text{age} + 1,344 \space \text{sex_male}$$
+In our health, we can create a linear model using `bmi`, `age`, and `sex` as an inputs.  
 
-For example, if a patient has `bmi = 27.9`, `age = 19`, `sex_male = 0`, then predicted value is 
+The `formula` controls which variables are included.  There are a few shortcuts for using R formulas.  
 
-$$\hat{y_1} = -6,986 + (327)(27.9) + (243)(19) + (1,344)(0) = 6,754.3$$
+| Formula | Meaning  | 
+|-------|---------|
+| `charges` ~ `bmi` + `age` | Use `age` and `bmi` to predict `charges` |
+| `charges` ~ `bmi` + `age` + `bmi`*`age` | Use `age`,`bmi` as well as an interaction to predict `charges` |
+| `charges` ~ (`bmi > 20`) + `age` | Use an indicator variable for `bmi > 20` `age` to predict `charges` |
+| log(`charges`) ~ log(`bmi`) + log(`age`) | Use the logs of `age` and `bmi` to predict  log(`charges`) |
 
-```{r message = F, echo = F, eval = F}
+You can use formulas to create new variables (aka feature engineering).  This can save you from needing to re-run code to create data.  
+
+Below we fit a simple linear model to predict charges.
+
+
+```r
 library(ExamPAData)
 library(tidyverse)
 
-model <- lm(data = health_insurance, charges ~ bmi + age + sex)
-pred = predict(model, health_insurance)
-coefficients(model)
+model <- lm(data = health_insurance, formula = charges ~ bmi + age)
 ```
+
+The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `t value` tells you how "big" this error really is based on standard deviations.  A larger `t value` implies a low probability of the null hypothesis being rejected saying that the coefficient is zero.  This is the same as having a p-value (`Pr (>|t|))`) being close to zero.
+
+The little `*`, `**`, `***` indicate that the variable is either somewhat significant, significant, or highly significant.  "significance" here means that there is a low probability of the coefficient being that size if there were *no actual casual relationship*, or if the data was random noise.
+
+
+```r
+summary(model)
+```
+
+```
+## 
+## Call:
+## lm(formula = charges ~ bmi + age, data = health_insurance)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -14457  -7045  -5136   7211  48022 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -6424.80    1744.09  -3.684 0.000239 ***
+## bmi           332.97      51.37   6.481 1.28e-10 ***
+## age           241.93      22.30  10.850  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 11390 on 1335 degrees of freedom
+## Multiple R-squared:  0.1172,	Adjusted R-squared:  0.1159 
+## F-statistic:  88.6 on 2 and 1335 DF,  p-value: < 2.2e-16
+```
+
+When evaluating model performance, you should not rely on the `summary` alone as this is based on the training data.  To look at performance, test the model on validation data.  This can be done by a) using a hold out set, or b) using cross-validation, which is even better.
+
+Let's create an 80% training set and 20% testing set.  You don't need to worry about understanding this code as the exam will always give this to you.
+
+
+```r
+library(caret)
+#create a train/test split
+index <- createDataPartition(y = health_insurance$charges, p = 0.8, list = F) %>% as.numeric()
+health_insurance_train <-  health_insurance %>% slice(index)
+health_insurance_test <- health_insurance %>% slice(-index)
+```
+
+Train the model on the `health_insurance_train` and test on `health_insurance_test`.  
+
+
+```r
+model <- lm(data = health_insurance_train, formula = charges ~ bmi + age)
+pred = predict(model, health_insurance_test)
+```
+
+Let's look at the Root Mean Squared Error (RMSE).  
+
+
+```r
+get_rmse <- function(y, y_hat){
+  mean((y - y_hat)^2)
+}
+
+get_rmse(pred, health_insurance_test$charges)
+```
+
+```
+## [1] 129080408
+```
+
+The above number does not tell us if this is a good model or not by itself.  We need a comparison.  The fastest check is to compare against a prediction of the mean.  In other words, all values of the `y_hat` are the average of `charges`
+
+
+```r
+get_rmse(mean(health_insurance_test$charges), health_insurance_test$charges)
+```
+
+```
+## [1] 144725527
+```
+
+The RMSE is **higher** (worse) when predicting the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
+
+The next test is to see if any assumptions have been violated.  
+
+First, is there a pattern in the residuals?  If there is, this means that the model is missing key information.  For the model below, this is a **yes**, which means that this is a bad model.  Because this is just for illustration, I'm going to continue using it, however.  
+
+
+```r
+plot(model, which = 1)
+```
+
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-8-1.png" alt="Residuals vs. Fitted" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-8)Residuals vs. Fitted</p>
+</div>
+
+The normal QQ shows how well the quantiles of the predictions fit to a theoretical normal distribution.  If this is true, then the graph is a straight 45-degree line.  In this model, you can definitely see that this is not the case.  If this were a good model, this distribution would be closer to normal.
+
+
+```r
+plot(model, which = 2)
+```
+
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-9-1.png" alt="Normal Q-Q" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-9)Normal Q-Q</p>
+</div>
+
+**Caution: This test only applies to linear models which have a gaussian response distribution.**
+
+The below is from an excellent post of Stack Exchange.
+
+>R does not have a distinct plot.glm() method. When you fit a model with glm() and run plot(), it calls ?plot.lm, which is appropriate for linear models (i.e., with a normally distributed error term).
+
+>More specifically, the plots will often 'look funny' and lead people to believe that there is something wrong with the model when it is perfectly fine. We can see this by looking at those plots with a couple of simple simulations where we know the model is correct:
+
+Once you have chosen your model, you should re-train over the entire data set.  This is to make the coefficients more stable because `n` is larger.  Below you can see that the standard error is lower after training over the entire data set.
+
+
+```r
+model_full_data <- lm(data = health_insurance, formula = charges ~ bmi + age)
+model_test_data <-  lm(data = health_insurance_train, formula = charges ~ bmi + age)
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> full_data_std_error </th>
+   <th style="text-align:right;"> test_data_std_error </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> 1744.1 </td>
+   <td style="text-align:right;"> 1943.6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> bmi </td>
+   <td style="text-align:right;"> 51.4 </td>
+   <td style="text-align:right;"> 57.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> age </td>
+   <td style="text-align:right;"> 22.3 </td>
+   <td style="text-align:right;"> 25.0 </td>
+  </tr>
+</tbody>
+</table>
+
+All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
+
+
+```r
+coefficients(model_full_data)
+```
+
+```
+## (Intercept)         bmi         age 
+##  -6424.8046    332.9651    241.9308
+```
+
+Translating the above into an equation we have
+
+$$\hat{y_i} = -6,424.80 + 332.97 \space\text{bmi} + 241.93\space \text{age}$$
+
+For example, if a patient has `bmi = 27.9` and `age = 19` then predicted value is 
+
+$$\hat{y_1} = -6,424.80 + (332.97)(27.9) + (241.93)(19) = 7,461.73$$
 
 This model structure implies that each of the variables $\mathbf{x_1}, ..., \mathbf{x_p}$ each change the predicted $\mathbf{\hat{y}}$.  If $x_{ij}$ increases by one unit, then $y_i$ increases by $\beta_j$ units, regardless of what happens to all of the other variables.  This is one of the main assumptions of linear models: *variable indepdendence*.  If the variables are correlated, say, then this assumption will be violated.  
 
-There are several other key assumptions to linear models, which are listed at the end of this chapter for brevity. 
 
 | Readings |  | 
 |-------|---------|
@@ -121,7 +288,7 @@ There are several other key assumptions to linear models, which are listed at th
 | ISLR 2.2 Assessing model accuracy|  |
 
 
-## Generalized linear models (GLMS)
+## Generalized linear models (GLMs)
 
 Instead of the model being a direct linear combination of the variables, there is an intermediate step called a *link function* $g$.
 
@@ -141,17 +308,10 @@ $$
 
 This is useful when the distribution of $Y$ is skewed, as taking the log corrects skewness.
 
-```{r echo = F,message = F, fig.cap="Taking the log corrects for skewness"}
-tibble(y = exp(rnorm(1000))) %>% 
-  mutate(log_y = log(y)) %>% 
-  gather(stat, value) %>% 
-  mutate(stat = ifelse(stat == "y", "Before Log Transform", "After Log Transform") %>% 
-           fct_relevel(c("Before Log Transform", "After Log Transform"))) %>% 
-  ggplot(aes(value)) + 
-  geom_histogram() + 
-  facet_wrap(vars(stat), scales = "free") + 
-  theme_minimal()
-```
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-13-1.png" alt="Taking the log corrects for skewness" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-13)Taking the log corrects for skewness</p>
+</div>
 
 You might be asking, what if the distribution of $Y$ is not normal, no matter what choice we have for $g$?  The short answer is that we can change our assumption of the distribution of $Y$, and use this to change the parameters.  If you have taken exam STAM then you are familiar with *maximum likelihood estimation*.  
 
@@ -161,19 +321,21 @@ $$
 f_y(y_i | X_1 = x_1, X_2 = x_2, ..., X_p = x_p) = Pr(Y = y_i | \mathbf{X})
 $$
 
-Now, when we choose the response family, we are simply changing $f$.  If we say that the response family is Gaussian, then $f$ has a Gaussian PDF.  If we are modeling counts, then $f$ is a Poisson PDF.  This only works if $f$ is in the *exponential family* of distributions, which consists of the common names such as Gaussian, Binomial, Gamma, Inverse Gamma, and so forth.  Reading the CAS Monograph 5 will provide more detail into this.
+Now, when we choose the response family, we are simply changing $f_Y$.  If we say that the response family is Gaussian, then $f$ has a Gaussian PDF.  If we are modeling counts, then $f$ is a Poisson PDF.  This only works if $f$ is in the *exponential family* of distributions, which consists of the common names such as Gaussian, Binomial, Gamma, Inverse Gamma, and so forth.  Reading the CAS Monograph 5 will provide more detail into this.
 
 The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
 
-```{r echo = F, fig.cap = "Distribution-Link Function Combinations"}
-knitr::include_graphics("images/glm_links.png")
-```
+<div class="figure">
+<img src="images/glm_links.png" alt="Distribution-Link Function Combinations" width="804" />
+<p class="caption">(\#fig:unnamed-chunk-14)Distribution-Link Function Combinations</p>
+</div>
 
 For this exam, a common question is to ask candiates to choose the best distribution and link function.  There is no all-encompasing answer, but a few suggestions are
 
 - If $Y$ is counting something, such as the number of claims, number of accidents, or some other discrete and positive counting sequence, use the Poisson;
 - If $Y$ contains negative values, then do not use the Exponential, Gamma, or Inverse Gaussian as these are strictly positive.  Conversely, if $Y$ is only positive, such as the price of a policy (price is always > 0), or the claim costs, then these are good choices;
-- If $Y$ is categorical (either binary or with more than two outcomes), only the Logic or Probit 
+- If $Y$ is binary, the the binomial response with either a Probit or Logit link.  The Logit is more common.
+- If $Y$ has more than two categories, the multinomial distribution with either the Probit or Logic link.
 
 The exam will always ask you to interpret the GLM.  These questions can usually be answered by inverting the link function and interpreting the coefficients.  In the case of the log link, simply take the exponent of the coefficients and each of these represents a "relativity" factor.
 
@@ -190,6 +352,92 @@ $$
 Where $R_k$ is the *relativity* of the kth variable.  This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance.  The data science community does not use this language. 
 
 For binary outcomes with logit or probit link, there is no easy interpretation.  This has come up in at least one past sample exam, and the solution was to create "psuedo" observations and observe how changing each $x_k$ would change the predicted value.  Due to the time requirements, this is unlikely to come up on an exam.  So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.
+
+### Interactions
+
+An interaction occurs when the effect of a variable on the response is different depending on the level of other variables in the model.
+
+Consider this model:
+
+Let $x_2$ be an indicator variable, which is 1 for some records and 0 otherwise.  
+
+$$\hat{y_i} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 x_2$$
+
+There are now two different linear models dependong on whether `x_1` is 0 or 1.
+
+$$
+x_1 = 0 \Rightarrow \hat{y_i} = \beta_0  + \beta_2 x_2 \\
+
+x_1 = 1 \Rightarrow \hat{y_i} = \beta_0 + \beta_1 + \beta_2 x_2 + \beta_3 x_2 \\
+
+ = (\beta_0 + \beta_1) + (\beta_2 + \beta_3 ) x_2 \\
+ = \beta_0^* + \beta_1^* x_2
+$$
+
+Notice how the intercept changes from $\beta_0$ to $\beta_0^*$ and the slope changes from $\beta_1$ to $\beta_1^*$.
+
+The SOA's modules give an example with the using age and gender as below.  This is not a very strong interaction, as the slopes are almost identical across `gender`.
+
+
+```r
+interactions %>% 
+  ggplot(aes(age, actual, color = gender)) + 
+  geom_line() + 
+  theme_minimal() +
+  labs(title = "Age vs. Actual by Gender", 
+       subtitle = "Interactions imply different slopes",
+       caption= "data: interactions")
+```
+
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-15-1.png" alt="Example of weak interaction" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-15)Example of weak interaction</p>
+</div>
+
+Here is a clearer example from the `auto_claim` data. The lines show the slope of a linear model, assuming that only `BLUEBOOK` and `CAR_TYPE` were predictors in the model.  You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.  
+
+
+```r
+auto_claim %>% 
+  ggplot(aes(log(CLM_AMT), log(BLUEBOOK), color = CAR_TYPE)) + 
+  geom_point(alpha = 0.3) + 
+  geom_smooth(method = "lm", se = F) + 
+  theme_minimal()  + 
+  labs(title = "Kelly Bluebook Value vs Claim Amount")
+```
+
+```
+## Warning: Removed 7556 rows containing non-finite values (stat_smooth).
+```
+
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-16-1.png" alt="Example of strong interaction" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-16)Example of strong interaction</p>
+</div>
+
+Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction.  We can also use an hypothesis test with a GLM to check this.  Simply include an interaction term and see if the coefficient is zero at the desired significance level.
+
+### Poisson Regression
+
+When the dependent variable is a count, such as the number of claims per month, Poisson regression is appropriate.  This requires that each claim is independent in that one claim will not make another claim more or less likely.  This means that the target variable is actually a rate, $\frac{\text{claims}}{\text{months}}$.  More generally, we call the months the *exposure*.
+
+Let $m_i$ by the units of exposure and $y_i$ the target.  We use a log-link function to correct for skewness.
+
+$$
+log(\frac{\hat{y_i}}{m_i}) = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p \\
+
+\Rightarrow log(\hat{y_i}) = log(m_i) + \beta_0 + \beta_1 x_1 + ... + \beta_p x_p
+$$
+
+We call the $log(m_i)$ the `offset` term.  Notice that there is no coefficient (beta) on this value, because we already know what the impact will be.  
+
+In R, the code for this equation would be
+
+
+```r
+glm(y ~ offset(log(m)) + x, family=poisson(link=log) )
+```
+
 
 | Readings |  | 
 |-------|---------|
@@ -235,6 +483,7 @@ Ridge regression adds a penalty term which is proportional to the square of the 
 $$
 \sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2 + \lambda \sum_{j = 1}^p\beta_j^2
 $$
+
 This $\lambda$ controls how much of a penalty is imposed on the size of the coefficients.  When $\lambda$ is high, simpler models are treated more favorably because the $\sum_{j = 1}^p\beta_j^2$ carries more weight.  Conversely, then $\lambda$ is low, complex models are more favored.  When $\lambda = 0$, we have an ordinary GLM.
 
 ### Lasso
@@ -246,6 +495,7 @@ Instead of taking the square of the coefficients (L2 norm), we take the absolute
 $$
 \sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2 + \lambda \sum_{j = 1}^p|\beta_j|
 $$
+
 In ISLR, Hastie et al show that this results in coefficients being forced to be exactly 0.  This is extremely useful because it means that by changing $\lambda$, we can select how many variables to use in the model.
 
 **Note**: While any response family is possible with penalized regression, in R, only the Gaussian family is possible in the library `glmnet`, and so this is the only type of question that the SOA can ask.
@@ -267,110 +517,3 @@ In ISLR, Hastie et al show that this results in coefficients being forced to be 
 | ISLR 6.1 Subset Selection  | |
 | ISLR 6.2 Shrinkage Methods|  |
 
-## Decision Trees
-
-Decision trees can be used for either classification or regression problems.  The model structure is a series of yes/no questions.  Depending on how each observation answers these questions, a prediction is made.
-
-The below example shows how a single tree can predict health claims.
-
-- For non-smokers, the predicted annual claims are 8,434.  This represents 80% of the observations
-- For smokers with a `bmi` of less than 30, the predicted annual claims are 21,000.  10% of patients fall into this bucket.
-- For smokers with a `bmi` of more than 30, the prediction is 42,000.  This bucket accounts for 11% of patients.
-
-```{r fig.cap="Decision tree of health costs", message = F, echo= F}
-library(rpart)
-library(rpart.plot)
-library(tidyverse)
-tree <- rpart(charges ~ smoker + bmi, data = health_insurance)
-rpart.plot(tree, type = 3)
-```
-
-We can cut the data set up into these groups and look at the claim costs.  From this grouping, we can see that `smoker` is the most important variable as the difference in average claims is about 20,000.
-
-```{r message = F, echo = F}
-library(scales)
-library(kableExtra)
-
-health_insurance %>% 
-  mutate(bmi_30 = ifelse(bmi < 30, "bmi < 30", "bmi >= 30")) %>% 
-  group_by(smoker,bmi_30) %>% 
-  summarise(mean_claims = dollar(mean(charges)),
-            n = n()) %>% 
-  ungroup() %>% 
-  mutate(percent = round(n/sum(n),2)) %>% 
-  select(-n) %>% 
-  kable("html")
-```
-
-ISLR describes the algorithm used to create trees on page 309.  In simple language, this process is
-
-1.  Choose a variable at random.  Then find the split point which best seperates observations out based on the value of $y$.  A good split is one where the $y$'s are very different.  Continue doing this until a very deep tree is made.
-
-2.  Apply cost complexity pruning to the large tree in order to obtain a sequence of best subtrees.  This complexity is based on a parameter $\alpha$, which is similar to the $\lambda$ from the Lasso in that a higher value imposes greater penalization (remove more splits).  For each value of $\alpha$, there is a different subtree (different brances are removed).
-
-3. Use cross validation to choose the best $\alpha$.  For each value of $\alpha$, we have an esimate of the squared prediction error.  This is similar to how the Lasso uses CV to choose $\lambda$.
-
-## Advantages and disadvantages
-
-**Advantages**
-
-- Easy to interpret
-- Captures interaction effects
-- Captures non-linearities
-- Handles continuous and categorical data
-- Handles missing values
-
-**Disadvantages**
-
-- Is a “weak learner” because of low predictive power
-- Does not work on small data sets
-- Is often a simplification of the underlying process because all observations at terminal nodes have equal predicted values
-- Is biased towards selecting high-cardinality features because more possible split points for these features tend to lead to overfitting
-- High variance (which can be alleviated with stricter parameters) leads the “easy to interpret results” to change upon retraining
-Unable to predict beyond the range of the training data for regression (because each predicted value is an average of training samples)
-
-| Readings |  | 
-|-------|---------|
-| ISLR 8.1.1 Basics of Decision Trees  | |
-| ISLR 8.1.2 Classification Trees|  |
-
-## Random Forests
-
-**Advantages**
-
-- Resilient to overfitting due to bagging 
-- Only one parameter to tune (mtry, the number of features considered at each split)
-- Very good a multi-class prediction
-- Nonlinearities
-- Interaction effects
-- Deal with unbalanced and missing data*Usually requires over/undersamplin
-
-**Disadvantages**
-
-- Does not work on small data sets
-- Weaker performance than other methods (GBM, NN)
-- Unable to predict beyond training data for regression
-
-| Readings |  | 
-|-------|---------|
-| ISLR 8.1.1 Basics of Decision Trees  | |
-| ISLR 8.1.2 Classification Trees|  |
-
-## Gradient Boosted Trees
-
-- High prediction accuracy
-- Closest model to a “silver bullet” that exists
-- Nonlinearities, interaction effects, resilient to outliers, corrects for missing values
-- Deals with class imbalance directly through by weighting observations
-
-**Disadvantages**
-
-- Requires large sample size
-- Longer training time
-- Does not detect linear combinations of features.  These must be engineered
-Can overfit if not tuned correctly
-
-| Readings |  | 
-|-------|---------|
-| ISLR 8.1.1 Basics of Decision Trees  | |
-| ISLR 8.1.2 Classification Trees|  |

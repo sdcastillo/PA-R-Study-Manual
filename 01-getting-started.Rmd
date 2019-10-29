@@ -1,4 +1,4 @@
-# Getting started {#intro}
+# Getting started 
 
 This book is designed to get you set up within an hour.  If this is your first time using R, then you will need to install two pieces of software, R and RStudio.  Once these four steps have been done you should not need to download anything else needed for this book.  You will be able to work offline.
 

@@ -162,7 +162,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>8</b> Modeling</a><ul>
 <li class="chapter" data-level="8.1" data-path="modeling.html"><a href="modeling.html#notation"><i class="fa fa-check"></i><b>8.1</b> Notation</a></li>
-<li class="chapter" data-level="8.2" data-path="modeling.html"><a href="modeling.html#ordinary-least-squares-ols"><i class="fa fa-check"></i><b>8.2</b> Ordinary least squares (OLS)</a></li>
+<li class="chapter" data-level="8.2" data-path="modeling.html"><a href="modeling.html#ordinary-least-squares-ols"><i class="fa fa-check"></i><b>8.2</b> Ordinary least squares (OLS)</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="modeling.html"><a href="modeling.html#example"><i class="fa fa-check"></i><b>8.2.1</b> Example</a></li>
+</ul></li>
 <li class="chapter" data-level="8.3" data-path="modeling.html"><a href="modeling.html#generalized-linear-models-glms"><i class="fa fa-check"></i><b>8.3</b> Generalized linear models (GLMS)</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="modeling.html"><a href="modeling.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>8.3.1</b> Advantages and disadvantages</a></li>
 </ul></li>
@@ -264,12 +266,179 @@ y_i = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p
 <li>It provides the same solution if we assume that the distribution of <span class="math inline">\(\mathbf{Y}|\mathbf{X}\)</span> is guassian and maximize the likelihood function. This method is used for GLMs, in the next chapter.</li>
 <li>Empirically it has been shown to be less likely to overfit as compared to other loss functions</li>
 </ul>
-<p>In our example, we can create a linear model using <code>bmi</code>, <code>age</code>, and <code>sex</code> as an inputs. The fitted model is</p>
-<p><span class="math display">\[\hat{y_i} = -6,986 + 327\space\text{bmi} + 243\space \text{age} + 1,344 \space \text{sex_male}\]</span></p>
-<p>For example, if a patient has <code>bmi = 27.9</code>, <code>age = 19</code>, <code>sex_male = 0</code>, then predicted value is</p>
-<p><span class="math display">\[\hat{y_1} = -6,986 + (327)(27.9) + (243)(19) + (1,344)(0) = 6,754.3\]</span></p>
+<div id="example" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> Example</h3>
+<p>In our health, we can create a linear model using <code>bmi</code>, <code>age</code>, and <code>sex</code> as an inputs.</p>
+<p>The <code>formula</code> controls which variables are included. There are a few shortcuts for using R formulas.</p>
+<table>
+<colgroup>
+<col width="43%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Formula</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>charges</code> ~ <code>bmi</code> + <code>age</code></td>
+<td>Use <code>age</code> and <code>bmi</code> to predict <code>charges</code></td>
+</tr>
+<tr class="even">
+<td><code>charges</code> ~ <code>bmi</code> + <code>age</code> + <code>bmi</code>*<code>age</code></td>
+<td>Use <code>age</code>,<code>bmi</code> as well as an interaction to predict <code>charges</code></td>
+</tr>
+<tr class="odd">
+<td><code>charges</code> ~ (<code>bmi &gt; 20</code>) + <code>age</code></td>
+<td>Use an indicator variable for <code>bmi &gt; 20</code> <code>age</code> to predict <code>charges</code></td>
+</tr>
+<tr class="even">
+<td>log(<code>charges</code>) ~ log(<code>bmi</code>) + log(<code>age</code>)</td>
+<td>Use the logs of <code>age</code> and <code>bmi</code> to predict log(<code>charges</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>You can use formulas to create new variables (aka feature engineering). This can save you from needing to re-run code to create data.</p>
+<p>Below we fit a simple linear model to predict charges.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
+<a class="sourceLine" id="cb173-2" title="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb173-3" title="3"></a>
+<a class="sourceLine" id="cb173-4" title="4">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> health_insurance, <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a></code></pre></div>
+<p>The <code>summary</code> function gives details about the model. First, the <code>Estimate</code>, gives you the coefficients. The <code>Std. Error</code> is the error of the estimate for the coefficient. Higher standard error means greater uncertainty. This is relative to the average value of that variable. The <code>t value</code> tells you how “big” this error really is based on standard deviations. A larger <code>t value</code> implies a low probability of the null hypothesis being rejected saying that the coefficient is zero. This is the same as having a p-value (<code>Pr (&gt;|t|))</code>) being close to zero.</p>
+<p>The little <code>*</code>, <code>**</code>, <code>***</code> indicate that the variable is either somewhat significant, significant, or highly significant. “significance” here means that there is a low probability of the coefficient being that size if there were <em>no actual casual relationship</em>, or if the data was random noise.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="kw">summary</span>(model)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = charges ~ bmi + age, data = health_insurance)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -14457  -7045  -5136   7211  48022 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -6424.80    1744.09  -3.684 0.000239 ***
+## bmi           332.97      51.37   6.481 1.28e-10 ***
+## age           241.93      22.30  10.850  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 11390 on 1335 degrees of freedom
+## Multiple R-squared:  0.1172, Adjusted R-squared:  0.1159 
+## F-statistic:  88.6 on 2 and 1335 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>When evaluating model performance, you should not rely on the <code>summary</code> alone as this is based on the training data. To look at performance, test the model on validation data. This can be done by a) using a hold out set, or b) using cross-validation, which is even better.</p>
+<p>Let’s create an 80% training set and 20% testing set. You don’t need to worry about understanding this code as the exam will always give this to you.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb176-2" title="2"><span class="co">#create a train/test split</span></a>
+<a class="sourceLine" id="cb176-3" title="3">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> health_insurance<span class="op">$</span>charges, <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()</a>
+<a class="sourceLine" id="cb176-4" title="4">health_insurance_train &lt;-<span class="st">  </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
+<a class="sourceLine" id="cb176-5" title="5">health_insurance_test &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a></code></pre></div>
+<p>Train the model on the <code>health_insurance_train</code> and test on <code>health_insurance_test</code>.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> health_insurance_train, <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a>
+<a class="sourceLine" id="cb177-2" title="2">pred =<span class="st"> </span><span class="kw">predict</span>(model, health_insurance_test)</a></code></pre></div>
+<p>Let’s look at the Root Mean Squared Error (RMSE).</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1">get_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
+<a class="sourceLine" id="cb178-2" title="2">  <span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span>y_hat)<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb178-3" title="3">}</a>
+<a class="sourceLine" id="cb178-4" title="4"></a>
+<a class="sourceLine" id="cb178-5" title="5"><span class="kw">get_rmse</span>(pred, health_insurance_test<span class="op">$</span>charges)</a></code></pre></div>
+<pre><code>## [1] 126923024</code></pre>
+<p>The above number does not tell us if this is a good model or not by itself. We need a comparison. The fastest check is to compare against a prediction of the mean. In other words, all values of the <code>y_hat</code> are the average of <code>charges</code></p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="kw">get_rmse</span>(<span class="kw">mean</span>(health_insurance_test<span class="op">$</span>charges), health_insurance_test<span class="op">$</span>charges)</a></code></pre></div>
+<pre><code>## [1] 145661765</code></pre>
+<p>The RMSE is <strong>higher</strong> (worse) when predicting the mean, which is what we expect. <strong>If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.</strong></p>
+<p>The next test is to see if any assumptions have been violated.</p>
+<p>First, is there a pattern in the residuals? If there is, this means that the model is missing key information. For the model below, this is a <strong>yes</strong>, which means that this is a bad model. Because this is just for illustration, I’m going to continue using it, however.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-81"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-81-1.png" alt="Residuals vs. Fitted" width="672" />
+<p class="caption">
+Figure 8.1: Residuals vs. Fitted
+</p>
+</div>
+<p>The noraml QQ shows how well the quantiles of the predictions fit to a theoretical normal distribution. If this is true, then the graph is a straight 45-degree line. In this model, you can definitely see that this is not the case. If this were a good model, this distribution would be closer to normal.</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-82"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-82-1.png" alt="Normal Q-Q" width="672" />
+<p class="caption">
+Figure 8.2: Normal Q-Q
+</p>
+</div>
+<p><strong>Caution: This test only applies to linear models which have a gaussian response distribution.</strong></p>
+<p>The below is from an excellent post of Stack Exchange.</p>
+<blockquote>
+<p>R does not have a distinct plot.glm() method. When you fit a model with glm() and run plot(), it calls ?plot.lm, which is appropriate for linear models (i.e., with a normally distributed error term).</p>
+</blockquote>
+<blockquote>
+<p>In general, the meaning of these plots (at least for linear models) can be learned in various existing threads on CV (e.g.: Residuals vs. Fitted; qq-plots in several places: 1, 2, 3; Scale-Location; Residuals vs Leverage). However, those interpretations are not generally valid when the model in question is a logistic regression.</p>
+</blockquote>
+<blockquote>
+<p>More specifically, the plots will often ‘look funny’ and lead people to believe that there is something wrong with the model when it is perfectly fine. We can see this by looking at those plots with a couple of simple simulations where we know the model is correct:</p>
+</blockquote>
+<p>Once you have chosen your model, you should re-train over the entire data set. This is to make the coefficients more stable because <code>n</code> is larger. Below you can see that the standard error is lower after training over the entire data set.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1">model_full_data &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> health_insurance, <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a>
+<a class="sourceLine" id="cb184-2" title="2">model_test_data &lt;-<span class="st">  </span><span class="kw">lm</span>(<span class="dt">data =</span> health_insurance_train, <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+full_data_std_error
+</th>
+<th style="text-align:right;">
+test_data_std_error
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+1744.1
+</td>
+<td style="text-align:right;">
+1942.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bmi
+</td>
+<td style="text-align:right;">
+51.4
+</td>
+<td style="text-align:right;">
+57.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+age
+</td>
+<td style="text-align:right;">
+22.3
+</td>
+<td style="text-align:right;">
+25.0
+</td>
+</tr>
+</tbody>
+</table>
+<p>All interpretations should be based on the model which was trained on the entire data set. Obviously, this only makes a difference if you are interpreting the precise values of the coefficients. If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="kw">coefficients</span>(model_full_data)</a></code></pre></div>
+<pre><code>## (Intercept)         bmi         age 
+##  -6424.8046    332.9651    241.9308</code></pre>
+<p>Translating the above into an equation we have</p>
+<p><span class="math display">\[\hat{y_i} = -6,424.80 + 332.97 \space\text{bmi} + 241.93\space \text{age}\]</span></p>
+<p>For example, if a patient has <code>bmi = 27.9</code> and <code>age = 19</code> then predicted value is</p>
+<p><span class="math display">\[\hat{y_1} = -6,424.80 + (332.97)(27.9) + (241.93)(19) = 7,461.73\]</span></p>
 <p>This model structure implies that each of the variables <span class="math inline">\(\mathbf{x_1}, ..., \mathbf{x_p}\)</span> each change the predicted <span class="math inline">\(\mathbf{\hat{y}}\)</span>. If <span class="math inline">\(x_{ij}\)</span> increases by one unit, then <span class="math inline">\(y_i\)</span> increases by <span class="math inline">\(\beta_j\)</span> units, regardless of what happens to all of the other variables. This is one of the main assumptions of linear models: <em>variable indepdendence</em>. If the variables are correlated, say, then this assumption will be violated.</p>
-<p>There are several other key assumptions to linear models, which are listed at the end of this chapter for brevity.</p>
 <table>
 <thead>
 <tr class="header">
@@ -289,6 +458,7 @@ y_i = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p
 </tbody>
 </table>
 </div>
+</div>
 <div id="generalized-linear-models-glms" class="section level2">
 <h2><span class="header-section-number">8.3</span> Generalized linear models (GLMS)</h2>
 <p>Instead of the model being a direct linear combination of the variables, there is an intermediate step called a <em>link function</em> <span class="math inline">\(g\)</span>.</p>
@@ -304,10 +474,10 @@ This means that <span class="math inline">\(g(.)\)</span> must be an invertable.
 log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
 \]</span></p>
 <p>This is useful when the distribution of <span class="math inline">\(Y\)</span> is skewed, as taking the log corrects skewness.</p>
-<div class="figure"><span id="fig:unnamed-chunk-76"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-76-1.png" alt="Taking the log corrects for skewness" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-86"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-86-1.png" alt="Taking the log corrects for skewness" width="672" />
 <p class="caption">
-Figure 8.1: Taking the log corrects for skewness
+Figure 8.3: Taking the log corrects for skewness
 </p>
 </div>
 <p>You might be asking, what if the distribution of <span class="math inline">\(Y\)</span> is not normal, no matter what choice we have for <span class="math inline">\(g\)</span>? The short answer is that we can change our assumption of the distribution of <span class="math inline">\(Y\)</span>, and use this to change the parameters. If you have taken exam STAM then you are familiar with <em>maximum likelihood estimation</em>.</p>
@@ -317,10 +487,10 @@ f_y(y_i | X_1 = x_1, X_2 = x_2, ..., X_p = x_p) = Pr(Y = y_i | \mathbf{X})
 \]</span></p>
 <p>Now, when we choose the response family, we are simply changing <span class="math inline">\(f\)</span>. If we say that the response family is Gaussian, then <span class="math inline">\(f\)</span> has a Gaussian PDF. If we are modeling counts, then <span class="math inline">\(f\)</span> is a Poisson PDF. This only works if <span class="math inline">\(f\)</span> is in the <em>exponential family</em> of distributions, which consists of the common names such as Gaussian, Binomial, Gamma, Inverse Gamma, and so forth. Reading the CAS Monograph 5 will provide more detail into this.</p>
 <p>The possible combinations of link functions and distribution families are summarized nicely on <a href="https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function">Wikipedia</a>.</p>
-<div class="figure"><span id="fig:unnamed-chunk-77"></span>
+<div class="figure"><span id="fig:unnamed-chunk-87"></span>
 <img src="images/glm_links.png" alt="Distribution-Link Function Combinations" width="804" />
 <p class="caption">
-Figure 8.2: Distribution-Link Function Combinations
+Figure 8.4: Distribution-Link Function Combinations
 </p>
 </div>
 <p>For this exam, a common question is to ask candiates to choose the best distribution and link function. There is no all-encompasing answer, but a few suggestions are</p>
@@ -447,10 +617,10 @@ In ISLR, Hastie et al show that this results in coefficients being forced to be 
 <li>For smokers with a <code>bmi</code> of less than 30, the predicted annual claims are 21,000. 10% of patients fall into this bucket.</li>
 <li>For smokers with a <code>bmi</code> of more than 30, the prediction is 42,000. This bucket accounts for 11% of patients.</li>
 </ul>
-<div class="figure"><span id="fig:unnamed-chunk-78"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-78-1.png" alt="Decision tree of health costs" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-88"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-88-1.png" alt="Decision tree of health costs" width="672" />
 <p class="caption">
-Figure 8.3: Decision tree of health costs
+Figure 8.5: Decision tree of health costs
 </p>
 </div>
 <p>We can cut the data set up into these groups and look at the claim costs. From this grouping, we can see that <code>smoker</code> is the most important variable as the difference in average claims is about 20,000.</p>

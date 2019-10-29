@@ -19,6 +19,11 @@ The data below contains counts on a survey which asked people about their religi
 
 This is difficult to work with because there are a lot of columns. 
 
+```{r include = F}
+library(tidyverse)
+```
+
+
 ```{r echo = F}
 relig_income %>% head()
 ```
