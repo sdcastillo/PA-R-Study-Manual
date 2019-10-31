@@ -6,9 +6,15 @@ https://r4ds.had.co.nz/
 
 ## Notebook chunks
 
-On the Exam, you will start with an .Rmd (R Markdown) template.  The way that this book writes code is in the [R Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html). Learning markdown is useful for other web development and documentation tasks as well.
+On the Exam, you will start with an .Rmd (R Markdown) template, which organize code into [R Notebooks](https://bookdown.org/yihui/rmarkdown/notebook.html). Within each notebook, code is organized into chunks.  
 
-Code is organized into chunks.  To run everything in a chunk quickly, press `CTRL + SHIFT + ENTER`.  To create a new chunk, use `CTRL + ALT + I`.
+```{r}
+#this is a chunk
+```
+
+Your time is valuable.  Throughout this book, I will include useful keyboard shortcuts.
+
+>**Shortcut:** To run everything in a chunk quickly, press `CTRL + SHIFT + ENTER`.  To create a new chunk, use `CTRL + ALT + I`.
 
 ## Basic operations
 
@@ -29,7 +35,9 @@ The usual math operations apply.
 2^3
 ```
 
-There are two assignment operators: `=` and `<-`.  The latter is preferred because it is specific to assigning a variable to a value.  The "=" operator is also used for assigning values in functions (see the functions section).  In R, the shortcut `ALT + -` creates a `<-`.
+There are two assignment operators: `=` and `<-`.  The latter is preferred because it is specific to assigning a variable to a value.  The "=" operator is also used for assigning values in functions (see the functions section).  
+
+>**Shortcut:** `ALT + -` creates a `<-`..
 
 ```{r}
 #variable assignment
@@ -62,7 +70,16 @@ Lists are like vectors but can take any type of object type.  I already mentione
 ```{r}
 character <- "The"
 character_vector <- c("The", "Quick")
+```
 
+Characters are combined with the `paste` function.
+
+```{r}
+a = "The"
+b = "Quick"
+c = "Brown"
+d = "Fox"
+paste(a,b,c,d)
 ```
 
 Factors are characters that expect only specific values.  A character can take on any value.  A factor is only allowed a finite number of values.  This reduces the memory size.
@@ -81,12 +98,20 @@ factor_vector <- as.factor(character_vector)
 levels(factor_vector)
 ```
 
+**In building linear models, the order of the factors matters.**  In GLMs, the "reference level" or "base level" should always be the level which has the most observations.  This will be covered in the section on linear models.
+
 Booleans are just True and False values.  R understands `T` or `TRUE` in the same way.  When doing math, bools are converted to 0/1 values where 1 is equivalent to TRUE and 0 FALSE.
 
 ```{r}
 bool_true <- T
 bool_false <- F
 bool_true*bool_false
+```
+
+Booleans are automatically converted into 0/1 values when there is a math operation.
+
+```{r}
+bool_true + 1
 ```
 
 Vectors work in the same way.
@@ -202,6 +227,27 @@ y_vector <- c(4,5,6)
 add_together(x_vector, y_vector)
 ```
 
+Many functions in R actually return lists!  This is why R objects can be indexed with dollar sign.
+
+```{r}
+model <- lm(charges ~ age, data = health_insurance)
+model$coefficients
+```
+
+Here's a function that returns a list.
+
+```{r}
+sum_multiply <- function(x,y){
+  sum <- x + y
+  product <- x*y
+  list("Sum" = sum, "Product" = product)
+}
+
+result <- sum_multiply(2,3)
+result$Sum
+result$Product
+```
+
 ## Data frames
 
 R is an old programming language.  The original `data.frame` object has been updated with the newer and better `tibble` (like the word "table").  **Tibbles are really lists of vectors, where each column is a vector**.  
@@ -209,7 +255,6 @@ R is an old programming language.  The original `data.frame` object has been upd
 ```{r}
 library(tibble) #the tibble library has functions for making tibbles
 data <- tibble(age = c(25, 35), has_fsa = c(F, T))
-
 data
 ```
 
@@ -311,3 +356,5 @@ max(c(3, 4, 16)) %>%
 ```
 
 Those familiar with Python's Pandas will be see that `%>%` is quite similar to ".".
+
+

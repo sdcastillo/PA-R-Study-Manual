@@ -22,8 +22,8 @@ https://rstudio.com/products/rstudio/download/
 
 R code is organized into libraries.  You want to use the exact same code that will be on the Prometric Computers.  This requires installing older versions of libraries.  Change your R library to the one which was included within the SOA's modules.
 
-```{r}
-#.libPaths("PATH_TO_SOAS_LIBRARY/PAlibrary")
+```{r eval = F}
+.libPaths("PATH_TO_SOAS_LIBRARY/PAlibrary")
 ```
 
 ## Download the data

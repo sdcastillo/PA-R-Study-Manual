@@ -74,7 +74,7 @@ tibble(y = rnorm(10, 0, 1),
   ggplot(aes(x,y)) + 
   geom_point( show.legend = F) + 
   geom_smooth(method = "lm", se = F, aes(fill = "linear regression"), color = "red", show.legend = T) + 
-  theme_minimal() + 
+  theme_bw() + 
   scale_fill_manual(name="legend", values=c("blue", "red")) + 
   theme(legend.position = "top")
 ```
@@ -107,6 +107,7 @@ The `formula` controls which variables are included.  There are a few shortcuts 
 | `charges` ~ `bmi` + `age` + `bmi`*`age` | Use `age`,`bmi` as well as an interaction to predict `charges` |
 | `charges` ~ (`bmi > 20`) + `age` | Use an indicator variable for `bmi > 20` `age` to predict `charges` |
 | log(`charges`) ~ log(`bmi`) + log(`age`) | Use the logs of `age` and `bmi` to predict  log(`charges`) |
+| `charges` ~ . | Use all variables to predict `charges`|
 
 You can use formulas to create new variables (aka feature engineering).  This can save you from needing to re-run code to create data.  
 
@@ -150,7 +151,7 @@ Let's look at the Root Mean Squared Error (RMSE).
 
 ```{r}
 get_rmse <- function(y, y_hat){
-  mean((y - y_hat)^2)
+  sqrt(mean((y - y_hat)^2))
 }
 
 get_rmse(pred, health_insurance_test$charges)
@@ -162,7 +163,7 @@ The above number does not tell us if this is a good model or not by itself.  We 
 get_rmse(mean(health_insurance_test$charges), health_insurance_test$charges)
 ```
 
-The RMSE is **higher** (worse) when predicting the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
+The RMSE is **higher** (worse) when using just the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
 
 The next test is to see if any assumptions have been violated.  
 
@@ -234,11 +235,13 @@ Instead of the model being a direct linear combination of the variables, there i
 $$
 g(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta}
 $$
+
 This implies that the response $\mathbf{y}$ is related to the linear predictor $\mathbf{X} \mathbf{\beta}$ through the *inverse* link function.
 
 $$
 \mathbf{\hat{y}} = g^-1(\mathbf{X} \mathbf{\beta})
 $$
+
 This means that $g(.)$ must be an invertable.  For example, if $g$ is the natural logarithm (aka, the "log-link"), then
 
 $$
@@ -256,7 +259,7 @@ tibble(y = exp(rnorm(1000))) %>%
   ggplot(aes(value)) + 
   geom_histogram() + 
   facet_wrap(vars(stat), scales = "free") + 
-  theme_minimal()
+  theme_bw()
 ```
 
 You might be asking, what if the distribution of $Y$ is not normal, no matter what choice we have for $g$?  The short answer is that we can change our assumption of the distribution of $Y$, and use this to change the parameters.  If you have taken exam STAM then you are familiar with *maximum likelihood estimation*.  
@@ -287,6 +290,7 @@ The exam will always ask you to interpret the GLM.  These questions can usually 
 $$
 log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
 $$
+
 For a single observation $y_i$, this is
 
 $$
@@ -294,9 +298,57 @@ $$
 e^{\beta_0} e^{\beta_1 x_{i1}}e^{\beta_2 x_{i2}} ...  e^{\beta_p x_{ip}} = 
 R_o R_2 R_3 ... R_{p}
 $$
+
 Where $R_k$ is the *relativity* of the kth variable.  This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance.  The data science community does not use this language. 
 
 For binary outcomes with logit or probit link, there is no easy interpretation.  This has come up in at least one past sample exam, and the solution was to create "psuedo" observations and observe how changing each $x_k$ would change the predicted value.  Due to the time requirements, this is unlikely to come up on an exam.  So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.
+
+### Example
+
+Just as with OLS, there is a `formula` and `data argument`.  In addition, we need to specify the response distribution and link function.
+
+```{r}
+model = glm(formula = charges ~ age + sex + children, 
+            family = gaussian(link = "log"),
+            data = health_insurance)
+```
+
+We see that `age`, `sex`, and `children` are all significant (p <0.01).  Reading off the coefficient signs, we see that claims
+
+- Increase as age increases
+- Are higher for men
+- Are slightly higher for patients wich children
+
+```{r}
+model %>% tidy()
+```
+
+### Reference levels
+
+When a categorical variable is used in a GLM, the model actually uses indicator variables for each level.  The default reference level is the order of the R factors.  For the `sex` variable, the order is `female` and then `male`.  This means that the base level is `female` by default.
+
+```{r}
+health_insurance$sex %>% as.factor() %>% levels()
+```
+
+Why does this matter?  Statistically, the coefficients are most stable when there are more observations.
+
+```{r}
+health_insurance$sex %>% as.factor() %>% summary()
+```
+
+There is already a function to do this in the `tidyverse` called `fct_infreq`.  Let's quickly fix the `sex` column so that these factor levels are in order of frequency.
+
+```{r}
+health_insurance <- health_insurance %>% 
+  mutate(sex = fct_infreq(sex))
+```
+
+Now `male` is the base level.
+
+```{r}
+health_insurance$sex %>% as.factor() %>% levels()
+```
 
 ### Interactions
 
@@ -310,16 +362,18 @@ $$\hat{y_i} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 x_2$$
 
 There are now two different linear models dependong on whether `x_1` is 0 or 1.
 
+When $x_1 = 0$,
+
+$$\hat{y_i} = \beta_0  + \beta_2 x_2$$
+
+and when $x_1 = 1$
+
+$$\hat{y_i} = \beta_0 + \beta_1 + \beta_2 x_2 + \beta_3 x_2$$
+By rewriting this we can see that the intercept changes from $\beta_0$ to $\beta_0^*$ and the slope changes from $\beta_1$ to $\beta_1^*$
 $$
-x_1 = 0 \Rightarrow \hat{y_i} = \beta_0  + \beta_2 x_2 \\
-
-x_1 = 1 \Rightarrow \hat{y_i} = \beta_0 + \beta_1 + \beta_2 x_2 + \beta_3 x_2 \\
-
- = (\beta_0 + \beta_1) + (\beta_2 + \beta_3 ) x_2 \\
+(\beta_0 + \beta_1) + (\beta_2 + \beta_3 ) x_2 \\
  = \beta_0^* + \beta_1^* x_2
 $$
-
-Notice how the intercept changes from $\beta_0$ to $\beta_0^*$ and the slope changes from $\beta_1$ to $\beta_1^*$.
 
 The SOA's modules give an example with the using age and gender as below.  This is not a very strong interaction, as the slopes are almost identical across `gender`.
 
@@ -327,7 +381,7 @@ The SOA's modules give an example with the using age and gender as below.  This 
 interactions %>% 
   ggplot(aes(age, actual, color = gender)) + 
   geom_line() + 
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Age vs. Actual by Gender", 
        subtitle = "Interactions imply different slopes",
        caption= "data: interactions")
@@ -340,7 +394,7 @@ auto_claim %>%
   ggplot(aes(log(CLM_AMT), log(BLUEBOOK), color = CAR_TYPE)) + 
   geom_point(alpha = 0.3) + 
   geom_smooth(method = "lm", se = F) + 
-  theme_minimal()  + 
+  theme_bw()  + 
   labs(title = "Kelly Bluebook Value vs Claim Amount")
 ```
 
@@ -352,11 +406,11 @@ When the dependent variable is a count, such as the number of claims per month, 
 
 Let $m_i$ by the units of exposure and $y_i$ the target.  We use a log-link function to correct for skewness.
 
-$$
-log(\frac{\hat{y_i}}{m_i}) = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p \\
+$$ log(\frac{\hat{y_i}}{m_i}) = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
 
-\Rightarrow log(\hat{y_i}) = log(m_i) + \beta_0 + \beta_1 x_1 + ... + \beta_p x_p
-$$
+By using the fact that $log(\frac{a}{b}) = log(a) - log(b)$ this turns into
+
+$$log(\hat{y_i}) = log(m_i) + \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
 
 We call the $log(m_i)$ the `offset` term.  Notice that there is no coefficient (beta) on this value, because we already know what the impact will be.  
 
@@ -366,6 +420,9 @@ In R, the code for this equation would be
 glm(y ~ offset(log(m)) + x, family=poisson(link=log) )
 ```
 
+### Tweedie regression
+
+### Stepwise subset selection
 
 | Readings |  | 
 |-------|---------|
@@ -428,13 +485,24 @@ In ISLR, Hastie et al show that this results in coefficients being forced to be 
 
 **Note**: While any response family is possible with penalized regression, in R, only the Gaussian family is possible in the library `glmnet`, and so this is the only type of question that the SOA can ask.
 
+### Elastic Net
+
+The Elastic Net uses a penalty term which is between the L1 and L2 norms. The penalty term is a weighted average using the mixing parameter $ 0 \leq \alpha \leq 1$. The loss fucntion is then
+
+$$\text{RSS} + (1 - \alpha)/2 \sum_{j = 1}^{p}\beta_j^2 + \alpha \sum_{j = 1}^p |\beta_j|$$
+When $\alph = 1$ is turns into a Lasso; when $\alpha = 1$ this is the Ridge model. 
+
+Luckily, none of this needs to be memorized.  On the exam, read the documentation in R to refresh your memory.  For the Elastic Net, the function is `glmnet`, and so running `?glmnet` will give you this info.
+
+>**Tip**: When using complicated functions on the exam, use `?function_name` to get the documentation.
+
 ### Advantages and disadvantages
 
 **Elastic Net/Lasso/Ridge Advantages**
 
 - All benefits from GLMS
-- Automatic variable selection
-- Better predictive power than GLM (usually)
+- Automatic variable selection for Lasso; smaller coefficients for Ridge
+- Better predictive power than GLM
 
 **Elastic Net/Lasso/Ridge Disadvantages**
 
@@ -444,4 +512,6 @@ In ISLR, Hastie et al show that this results in coefficients being forced to be 
 |-------|---------|
 | ISLR 6.1 Subset Selection  | |
 | ISLR 6.2 Shrinkage Methods|  |
+
+
 

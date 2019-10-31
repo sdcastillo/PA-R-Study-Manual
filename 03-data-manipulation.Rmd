@@ -60,6 +60,8 @@ Using a pipe is an alternative way of doing this. Because this is more time-effi
 health_insurance %>% head()
 ```
 
+>**Shortcut**: Use `CTRL` + `SHFT` + `M` to create pipes `%>%`
+
 The `glimpse` function is a transpose of the `head()` function, which can be more spatially efficient.  This also gives you the dimension (1,338 rows, 7 columns).
 
 ```{r}
@@ -222,9 +224,11 @@ FROM health_insurance
 
 ## Exercises
 
+Run this code on your computer to answer these exercises.
+
 The data `actuary_salaries` contains the salaries of actuaries collected from the DW Simpson survey.  Use this data to answer the exercises below.
 
-```{r}
+```{r }
 actuary_salaries %>% glimpse()
 ```
 
@@ -344,5 +348,4 @@ actuary_salaries %>%
 
 #this is not REALLY an average as the number of people, or number of actuaries, are not taken into consideration.  To correctly take the average, we would need use a weighted average like sum(number_actuaries*social_life)/sum(number_actuaries)
 ```
-
 
