@@ -130,7 +130,7 @@ You will typically be given the below code, which does this automatically.  To g
 
 Once we have selected $\alpha$, the tree is pruned to be shorter.
 
-```{r eval = F}
+```{r }
 pruned_tree <- prune(tree,cp = tree$cptable[which.min(tree$cptable[, "xerror"]), "CP"])
 rpart.plot(pruned_tree, type=3)
 ```
@@ -186,7 +186,7 @@ When using only a single tree, there can only be as many predictions as there ar
 
 The below graph illustrates this.  A single tree (left) has stair-like, step-wise predictions whereas a random forest is free to predict any value.  The color represents the predicted value (yellow = highest, black = lowest).
 
-```{r message = F, echo = F}
+```{r message = F}
 library(randomForest)
 tree <- rpart(charges ~ age + bmi, data = health_insurance)
 df <- health_insurance %>% mutate(
@@ -220,7 +220,7 @@ In most applications, only the `mtry` parameter needs to be tuned.  Tuning the `
 
 Using the basic `randomForest` package we fit a model with 500 trees. 
 
-```{r fig.height=3}
+```{r fig.height=4}
 rf <- randomForest(charges ~ age + bmi, data = health_insurance, ntree = 500)
 plot(rf)
 ```
@@ -326,7 +326,7 @@ The below code is set up to fit a random forest to the `soa_mortality` data set 
 
 There is a problem: all of the predictions are coming out to be 1.  Find out why this is happening and fix it.
 
-```{r eval = F}
+```{r}
 set.seed(42)
 #For the sake of this example, only take 20% of the records
 df <- soa_mortality %>% 

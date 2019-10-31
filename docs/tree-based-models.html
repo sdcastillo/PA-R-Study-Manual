@@ -317,10 +317,10 @@ Figure 9.1: Decision tree of health costs
 ##   nsplit      CP xerror
 ##    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
 ## 1      0 0.620    1.00 
-## 2      1 0.144    0.382
-## 3      2 0.0637   0.240
+## 2      1 0.144    0.381
+## 3      2 0.0637   0.239
 ## 4      3 0.00967  0.178
-## 5      4 0.00784  0.171
+## 5      4 0.00784  0.173
 ## 6      5 0.00712  0.169</code></pre>
 <p>As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.</p>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-105-1.png" width="480" /></p>
@@ -329,6 +329,7 @@ Figure 9.1: Decision tree of health costs
 <p>Once we have selected <span class="math inline">\(\alpha\)</span>, the tree is pruned to be shorter.</p>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1">pruned_tree &lt;-<span class="st"> </span><span class="kw">prune</span>(tree,<span class="dt">cp =</span> tree<span class="op">$</span>cptable[<span class="kw">which.min</span>(tree<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]), <span class="st">&quot;CP&quot;</span>])</a>
 <a class="sourceLine" id="cb214-2" title="2"><span class="kw">rpart.plot</span>(pruned_tree, <span class="dt">type=</span><span class="dv">3</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
 </div>
 <div id="advantages-and-disadvantages-2" class="section level2">
 <h2><span class="header-section-number">9.2</span> Advantages and disadvantages</h2>
@@ -395,11 +396,38 @@ Unable to predict beyond the range of the training data for regression (because 
 </ol>
 <p>When using only a single tree, there can only be as many predictions as there are terminal nodes. In a random forest, predictions can be more granular due to the contribution of each of the trees.</p>
 <p>The below graph illustrates this. A single tree (left) has stair-like, step-wise predictions whereas a random forest is free to predict any value. The color represents the predicted value (yellow = highest, black = lowest).</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1"><span class="kw">library</span>(randomForest)</a>
+<a class="sourceLine" id="cb215-2" title="2">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(charges <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>bmi, <span class="dt">data =</span> health_insurance)</a>
+<a class="sourceLine" id="cb215-3" title="3">df &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb215-4" title="4">  <span class="dt">prediction =</span> <span class="kw">predict</span>(tree, health_insurance))</a>
+<a class="sourceLine" id="cb215-5" title="5"></a>
+<a class="sourceLine" id="cb215-6" title="6">p1 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(bmi, age, <span class="dt">color =</span> prediction)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-9" title="9"><span class="st">  </span><span class="kw">scale_color_viridis_c</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-10" title="10"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span><span class="st">&quot;Decision Tree&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-12" title="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a>
+<a class="sourceLine" id="cb215-13" title="13"></a>
+<a class="sourceLine" id="cb215-14" title="14">rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(charges <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>bmi, <span class="dt">data =</span> health_insurance, <span class="dt">ntree =</span> <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb215-15" title="15">df &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb215-16" title="16">  <span class="dt">prediction =</span> <span class="kw">predict</span>(rf, health_insurance))</a>
+<a class="sourceLine" id="cb215-17" title="17"></a>
+<a class="sourceLine" id="cb215-18" title="18">p2 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-19" title="19"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(bmi, age, <span class="dt">color =</span> prediction)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-20" title="20"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-21" title="21"><span class="st">  </span><span class="kw">scale_color_viridis_c</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-22" title="22"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-23" title="23"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span><span class="st">&quot;Random Forest&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-24" title="24"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a>
+<a class="sourceLine" id="cb215-25" title="25"></a>
+<a class="sourceLine" id="cb215-26" title="26"><span class="kw">library</span>(ggpubr)</a>
+<a class="sourceLine" id="cb215-27" title="27"><span class="kw">ggarrange</span>(p1,p2)</a></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 <p>In most applications, only the <code>mtry</code> parameter needs to be tuned. Tuning the <code>ntrees</code> parameter is not required; however, the soa may still ask you to.</p>
 <p>Using the basic <code>randomForest</code> package we fit a model with 500 trees.</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(charges <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>bmi, <span class="dt">data =</span> health_insurance, <span class="dt">ntree =</span> <span class="dv">500</span>)</a>
-<a class="sourceLine" id="cb215-2" title="2"><span class="kw">plot</span>(rf)</a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1">rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(charges <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>bmi, <span class="dt">data =</span> health_insurance, <span class="dt">ntree =</span> <span class="dv">500</span>)</a>
+<a class="sourceLine" id="cb216-2" title="2"><span class="kw">plot</span>(rf)</a></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
 <p><strong>Advantages</strong></p>
 <ul>
@@ -506,122 +534,127 @@ Can overfit if not tuned correctly</li>
 <p>(Part 1 of 2)</p>
 <p>The below code is set up to fit a random forest to the <code>soa_mortality</code> data set to predict <code>actual_cnt</code>.</p>
 <p>There is a problem: all of the predictions are coming out to be 1. Find out why this is happening and fix it.</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb216-2" title="2"><span class="co">#For the sake of this example, only take 20% of the records</span></a>
-<a class="sourceLine" id="cb216-3" title="3">df &lt;-<span class="st"> </span>soa_mortality <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb216-4" title="4"><span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb216-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">target =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(actual_cnt <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb216-6" title="6"><span class="st">  </span><span class="kw">select</span>(target, prodcat, distchan, smoker, sex, issage, uwkey) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb216-7" title="7"><span class="st">  </span><span class="kw">mutate_if</span>(is.character, <span class="op">~</span><span class="kw">as.factor</span>(.x))</a>
-<a class="sourceLine" id="cb216-8" title="8"></a>
-<a class="sourceLine" id="cb216-9" title="9"><span class="co">#check that the target has 0&#39;s and 1&#39;s</span></a>
-<a class="sourceLine" id="cb216-10" title="10">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(target)</a></code></pre></div>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> df<span class="op">$</span>target, <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F)</a>
-<a class="sourceLine" id="cb217-2" title="2"></a>
-<a class="sourceLine" id="cb217-3" title="3">train &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
-<a class="sourceLine" id="cb217-4" title="4">test &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
-<a class="sourceLine" id="cb217-5" title="5"></a>
-<a class="sourceLine" id="cb217-6" title="6">k =<span class="st"> </span><span class="fl">0.1</span></a>
-<a class="sourceLine" id="cb217-7" title="7">cutoff=<span class="kw">c</span>(k,<span class="dv">1</span><span class="op">-</span>k) </a>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb217-2" title="2"><span class="co">#For the sake of this example, only take 20% of the records</span></a>
+<a class="sourceLine" id="cb217-3" title="3">df &lt;-<span class="st"> </span>soa_mortality <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb217-4" title="4"><span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb217-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">target =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(actual_cnt <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb217-6" title="6"><span class="st">  </span><span class="kw">select</span>(target, prodcat, distchan, smoker, sex, issage, uwkey) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb217-7" title="7"><span class="st">  </span><span class="kw">mutate_if</span>(is.character, <span class="op">~</span><span class="kw">as.factor</span>(.x))</a>
 <a class="sourceLine" id="cb217-8" title="8"></a>
-<a class="sourceLine" id="cb217-9" title="9">model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(</a>
-<a class="sourceLine" id="cb217-10" title="10">  <span class="dt">formula =</span> target <span class="op">~</span><span class="st"> </span>., </a>
-<a class="sourceLine" id="cb217-11" title="11">  <span class="dt">data =</span> train,</a>
-<a class="sourceLine" id="cb217-12" title="12">  <span class="dt">ntree =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb217-13" title="13">  <span class="dt">cutoff =</span> cutoff</a>
-<a class="sourceLine" id="cb217-14" title="14">  )</a>
-<a class="sourceLine" id="cb217-15" title="15"></a>
-<a class="sourceLine" id="cb217-16" title="16">pred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, test)</a>
-<a class="sourceLine" id="cb217-17" title="17"><span class="kw">confusionMatrix</span>(pred, test<span class="op">$</span>target)</a></code></pre></div>
+<a class="sourceLine" id="cb217-9" title="9"><span class="co">#check that the target has 0&#39;s and 1&#39;s</span></a>
+<a class="sourceLine" id="cb217-10" title="10">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(target)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   target     n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 0       1811
+## 2 1      98189</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> df<span class="op">$</span>target, <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F)</a>
+<a class="sourceLine" id="cb219-2" title="2"></a>
+<a class="sourceLine" id="cb219-3" title="3">train &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
+<a class="sourceLine" id="cb219-4" title="4">test &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
+<a class="sourceLine" id="cb219-5" title="5"></a>
+<a class="sourceLine" id="cb219-6" title="6">k =<span class="st"> </span><span class="fl">0.1</span></a>
+<a class="sourceLine" id="cb219-7" title="7">cutoff=<span class="kw">c</span>(k,<span class="dv">1</span><span class="op">-</span>k) </a>
+<a class="sourceLine" id="cb219-8" title="8"></a>
+<a class="sourceLine" id="cb219-9" title="9">model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(</a>
+<a class="sourceLine" id="cb219-10" title="10">  <span class="dt">formula =</span> target <span class="op">~</span><span class="st"> </span>., </a>
+<a class="sourceLine" id="cb219-11" title="11">  <span class="dt">data =</span> train,</a>
+<a class="sourceLine" id="cb219-12" title="12">  <span class="dt">ntree =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb219-13" title="13">  <span class="dt">cutoff =</span> cutoff</a>
+<a class="sourceLine" id="cb219-14" title="14">  )</a>
+<a class="sourceLine" id="cb219-15" title="15"></a>
+<a class="sourceLine" id="cb219-16" title="16">pred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, test)</a>
+<a class="sourceLine" id="cb219-17" title="17"><span class="kw">confusionMatrix</span>(pred, test<span class="op">$</span>target)</a></code></pre></div>
 <p>(Part 2 of 2)</p>
 <p>Downsample the majority class and refit the model, and then choose between the original data and the downsampled data based on the model performance. Use your own judgement when choosing how to evaluate the model based on accuracy, sensitivity, specificity, and Kappa.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1">down_train &lt;-<span class="st"> </span><span class="kw">downSample</span>(<span class="dt">x =</span> train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>target),</a>
-<a class="sourceLine" id="cb218-2" title="2">                         <span class="dt">y =</span> train<span class="op">$</span>target)</a>
-<a class="sourceLine" id="cb218-3" title="3"></a>
-<a class="sourceLine" id="cb218-4" title="4">down_test &lt;-<span class="st"> </span><span class="kw">downSample</span>(<span class="dt">x =</span> test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>target),</a>
-<a class="sourceLine" id="cb218-5" title="5">                         <span class="dt">y =</span> test<span class="op">$</span>target)</a>
-<a class="sourceLine" id="cb218-6" title="6"></a>
-<a class="sourceLine" id="cb218-7" title="7">down_train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Class)</a></code></pre></div>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1">model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(</a>
-<a class="sourceLine" id="cb219-2" title="2">  <span class="dt">formula =</span> Class <span class="op">~</span><span class="st"> </span>., </a>
-<a class="sourceLine" id="cb219-3" title="3">  <span class="dt">data =</span> down_train,</a>
-<a class="sourceLine" id="cb219-4" title="4">  <span class="dt">ntree =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb219-5" title="5">  <span class="dt">cutoff =</span> cutoff</a>
-<a class="sourceLine" id="cb219-6" title="6">  )</a>
-<a class="sourceLine" id="cb219-7" title="7"></a>
-<a class="sourceLine" id="cb219-8" title="8">down_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, down_test)</a>
-<a class="sourceLine" id="cb219-9" title="9"><span class="kw">confusionMatrix</span>(down_pred, down_test<span class="op">$</span>Class)</a></code></pre></div>
-<p>Now up-sample the minority class and repeat the same procedure.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1">up_train &lt;-<span class="st"> </span><span class="kw">upSample</span>(<span class="dt">x =</span> train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>target),</a>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1">down_train &lt;-<span class="st"> </span><span class="kw">downSample</span>(<span class="dt">x =</span> train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>target),</a>
 <a class="sourceLine" id="cb220-2" title="2">                         <span class="dt">y =</span> train<span class="op">$</span>target)</a>
 <a class="sourceLine" id="cb220-3" title="3"></a>
-<a class="sourceLine" id="cb220-4" title="4">up_test &lt;-<span class="st"> </span><span class="kw">upSample</span>(<span class="dt">x =</span> test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>target),</a>
+<a class="sourceLine" id="cb220-4" title="4">down_test &lt;-<span class="st"> </span><span class="kw">downSample</span>(<span class="dt">x =</span> test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>target),</a>
 <a class="sourceLine" id="cb220-5" title="5">                         <span class="dt">y =</span> test<span class="op">$</span>target)</a>
 <a class="sourceLine" id="cb220-6" title="6"></a>
-<a class="sourceLine" id="cb220-7" title="7">up_train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Class)</a></code></pre></div>
+<a class="sourceLine" id="cb220-7" title="7">down_train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Class)</a></code></pre></div>
 <div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1">model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(</a>
 <a class="sourceLine" id="cb221-2" title="2">  <span class="dt">formula =</span> Class <span class="op">~</span><span class="st"> </span>., </a>
-<a class="sourceLine" id="cb221-3" title="3">  <span class="dt">data =</span> up_train,</a>
+<a class="sourceLine" id="cb221-3" title="3">  <span class="dt">data =</span> down_train,</a>
 <a class="sourceLine" id="cb221-4" title="4">  <span class="dt">ntree =</span> <span class="dv">100</span>,</a>
 <a class="sourceLine" id="cb221-5" title="5">  <span class="dt">cutoff =</span> cutoff</a>
 <a class="sourceLine" id="cb221-6" title="6">  )</a>
 <a class="sourceLine" id="cb221-7" title="7"></a>
-<a class="sourceLine" id="cb221-8" title="8">up_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, up_test)</a>
-<a class="sourceLine" id="cb221-9" title="9"><span class="kw">confusionMatrix</span>(up_pred, up_test<span class="op">$</span>Class)</a></code></pre></div>
+<a class="sourceLine" id="cb221-8" title="8">down_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, down_test)</a>
+<a class="sourceLine" id="cb221-9" title="9"><span class="kw">confusionMatrix</span>(down_pred, down_test<span class="op">$</span>Class)</a></code></pre></div>
+<p>Now up-sample the minority class and repeat the same procedure.</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1">up_train &lt;-<span class="st"> </span><span class="kw">upSample</span>(<span class="dt">x =</span> train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>target),</a>
+<a class="sourceLine" id="cb222-2" title="2">                         <span class="dt">y =</span> train<span class="op">$</span>target)</a>
+<a class="sourceLine" id="cb222-3" title="3"></a>
+<a class="sourceLine" id="cb222-4" title="4">up_test &lt;-<span class="st"> </span><span class="kw">upSample</span>(<span class="dt">x =</span> test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>target),</a>
+<a class="sourceLine" id="cb222-5" title="5">                         <span class="dt">y =</span> test<span class="op">$</span>target)</a>
+<a class="sourceLine" id="cb222-6" title="6"></a>
+<a class="sourceLine" id="cb222-7" title="7">up_train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Class)</a></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1">model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(</a>
+<a class="sourceLine" id="cb223-2" title="2">  <span class="dt">formula =</span> Class <span class="op">~</span><span class="st"> </span>., </a>
+<a class="sourceLine" id="cb223-3" title="3">  <span class="dt">data =</span> up_train,</a>
+<a class="sourceLine" id="cb223-4" title="4">  <span class="dt">ntree =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb223-5" title="5">  <span class="dt">cutoff =</span> cutoff</a>
+<a class="sourceLine" id="cb223-6" title="6">  )</a>
+<a class="sourceLine" id="cb223-7" title="7"></a>
+<a class="sourceLine" id="cb223-8" title="8">up_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, up_test)</a>
+<a class="sourceLine" id="cb223-9" title="9"><span class="kw">confusionMatrix</span>(up_pred, up_test<span class="op">$</span>Class)</a></code></pre></div>
 <p><strong>2. RF tuning with <code>caret</code></strong></p>
 <p>The best practice of tuning a model is with cross-validation. This can only be done in the <code>caret</code> library. If the SOA asks you to use <code>caret</code>, they will likely ask you a question related to cross validation as below.</p>
 <p>An actuary has trained a predictive model and chosen the best hyperparameters, cleaned the data, and performed feature engineering. They have one problem, however: the error on the training data is far lower than on new, unseen test data. Read the code below and determine their problem. Find a way to lower the error on the test data <em>without changing the model or the data.</em> Explain the rational behind your method.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb222-2" title="2">data &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_n</span>(<span class="dv">1000</span>) <span class="co">#Uncomment this when completing this exercise</span></a>
-<a class="sourceLine" id="cb222-3" title="3"></a>
-<a class="sourceLine" id="cb222-4" title="4">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> data<span class="op">$</span>charges, <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()</a>
-<a class="sourceLine" id="cb222-5" title="5">train &lt;-<span class="st">  </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
-<a class="sourceLine" id="cb222-6" title="6">test &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
-<a class="sourceLine" id="cb222-7" title="7"></a>
-<a class="sourceLine" id="cb222-8" title="8">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
-<a class="sourceLine" id="cb222-9" title="9">  <span class="dt">method=</span><span class="st">&#39;boot&#39;</span>, </a>
-<a class="sourceLine" id="cb222-10" title="10">  <span class="dt">number=</span><span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb222-11" title="11">  <span class="dt">p =</span> <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb222-12" title="12"></a>
-<a class="sourceLine" id="cb222-13" title="13">tunegrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.mtry=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb222-14" title="14">rf &lt;-<span class="st"> </span><span class="kw">train</span>(charges <span class="op">~</span><span class="st"> </span>.,</a>
-<a class="sourceLine" id="cb222-15" title="15">            <span class="dt">data =</span> train,</a>
-<a class="sourceLine" id="cb222-16" title="16">            <span class="dt">method=</span><span class="st">&#39;rf&#39;</span>, </a>
-<a class="sourceLine" id="cb222-17" title="17">            <span class="dt">tuneGrid=</span>tunegrid, </a>
-<a class="sourceLine" id="cb222-18" title="18">            <span class="dt">trControl=</span>control)</a>
-<a class="sourceLine" id="cb222-19" title="19"></a>
-<a class="sourceLine" id="cb222-20" title="20">pred_train &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, train)</a>
-<a class="sourceLine" id="cb222-21" title="21">pred_test &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, test)</a>
-<a class="sourceLine" id="cb222-22" title="22"></a>
-<a class="sourceLine" id="cb222-23" title="23">get_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
-<a class="sourceLine" id="cb222-24" title="24">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span>y_hat)<span class="op">^</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb222-25" title="25">}</a>
-<a class="sourceLine" id="cb222-26" title="26"></a>
-<a class="sourceLine" id="cb222-27" title="27"><span class="kw">get_rmse</span>(pred_train, train<span class="op">$</span>charges)</a>
-<a class="sourceLine" id="cb222-28" title="28"><span class="kw">get_rmse</span>(pred_test, test<span class="op">$</span>charges)</a></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb224-2" title="2">data &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_n</span>(<span class="dv">1000</span>) <span class="co">#Uncomment this when completing this exercise</span></a>
+<a class="sourceLine" id="cb224-3" title="3"></a>
+<a class="sourceLine" id="cb224-4" title="4">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> data<span class="op">$</span>charges, <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()</a>
+<a class="sourceLine" id="cb224-5" title="5">train &lt;-<span class="st">  </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
+<a class="sourceLine" id="cb224-6" title="6">test &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
+<a class="sourceLine" id="cb224-7" title="7"></a>
+<a class="sourceLine" id="cb224-8" title="8">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
+<a class="sourceLine" id="cb224-9" title="9">  <span class="dt">method=</span><span class="st">&#39;boot&#39;</span>, </a>
+<a class="sourceLine" id="cb224-10" title="10">  <span class="dt">number=</span><span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb224-11" title="11">  <span class="dt">p =</span> <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb224-12" title="12"></a>
+<a class="sourceLine" id="cb224-13" title="13">tunegrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.mtry=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb224-14" title="14">rf &lt;-<span class="st"> </span><span class="kw">train</span>(charges <span class="op">~</span><span class="st"> </span>.,</a>
+<a class="sourceLine" id="cb224-15" title="15">            <span class="dt">data =</span> train,</a>
+<a class="sourceLine" id="cb224-16" title="16">            <span class="dt">method=</span><span class="st">&#39;rf&#39;</span>, </a>
+<a class="sourceLine" id="cb224-17" title="17">            <span class="dt">tuneGrid=</span>tunegrid, </a>
+<a class="sourceLine" id="cb224-18" title="18">            <span class="dt">trControl=</span>control)</a>
+<a class="sourceLine" id="cb224-19" title="19"></a>
+<a class="sourceLine" id="cb224-20" title="20">pred_train &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, train)</a>
+<a class="sourceLine" id="cb224-21" title="21">pred_test &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, test)</a>
+<a class="sourceLine" id="cb224-22" title="22"></a>
+<a class="sourceLine" id="cb224-23" title="23">get_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
+<a class="sourceLine" id="cb224-24" title="24">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span>y_hat)<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb224-25" title="25">}</a>
+<a class="sourceLine" id="cb224-26" title="26"></a>
+<a class="sourceLine" id="cb224-27" title="27"><span class="kw">get_rmse</span>(pred_train, train<span class="op">$</span>charges)</a>
+<a class="sourceLine" id="cb224-28" title="28"><span class="kw">get_rmse</span>(pred_test, test<span class="op">$</span>charges)</a></code></pre></div>
 <div id="tuning-a-gbm-with-caret" class="section level4">
 <h4><span class="header-section-number">9.5.3.1</span> Tuning a GBM with <code>caret</code></h4>
 <p><a href="https://rpubs.com/phamdinhkhanh/389752" class="uri">https://rpubs.com/phamdinhkhanh/389752</a></p>
 <p>If the SOA asks you to tune a GBM, they will need to give you starting hyperparameters which are close to the “best” values due to how slow the Prometric computers are. Another possibility is that they pre-train a GBM model object and ask that you use it.</p>
 <p>This example looks at 27 combinations of hyper parameters.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1">tunegrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</a>
-<a class="sourceLine" id="cb223-2" title="2">    <span class="dt">interaction.depth =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb223-3" title="3">                    <span class="dt">n.trees =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">100</span>), </a>
-<a class="sourceLine" id="cb223-4" title="4">                    <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="fl">0.001</span>, <span class="fl">0.0001</span>),</a>
-<a class="sourceLine" id="cb223-5" title="5">                    <span class="dt">n.minobsinnode =</span> <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb223-6" title="6"><span class="kw">nrow</span>(tunegrid)</a></code></pre></div>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1">gbm &lt;-<span class="st"> </span><span class="kw">train</span>(charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>region,</a>
-<a class="sourceLine" id="cb224-2" title="2">            <span class="dt">data =</span> health_insurance_train,</a>
-<a class="sourceLine" id="cb224-3" title="3">            <span class="dt">method=</span><span class="st">&#39;gbm&#39;</span>, </a>
-<a class="sourceLine" id="cb224-4" title="4">            <span class="dt">tuneGrid=</span>tunegrid, </a>
-<a class="sourceLine" id="cb224-5" title="5">            <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb224-6" title="6">            <span class="dt">verbose =</span> FALSE<span class="co">#Switch this to TRUE to see useful output</span></a>
-<a class="sourceLine" id="cb224-7" title="7">            )</a></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1">tunegrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</a>
+<a class="sourceLine" id="cb225-2" title="2">    <span class="dt">interaction.depth =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb225-3" title="3">                    <span class="dt">n.trees =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">100</span>), </a>
+<a class="sourceLine" id="cb225-4" title="4">                    <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="fl">0.001</span>, <span class="fl">0.0001</span>),</a>
+<a class="sourceLine" id="cb225-5" title="5">                    <span class="dt">n.minobsinnode =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb225-6" title="6"><span class="kw">nrow</span>(tunegrid)</a></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1">gbm &lt;-<span class="st"> </span><span class="kw">train</span>(charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>region,</a>
+<a class="sourceLine" id="cb226-2" title="2">            <span class="dt">data =</span> health_insurance_train,</a>
+<a class="sourceLine" id="cb226-3" title="3">            <span class="dt">method=</span><span class="st">&#39;gbm&#39;</span>, </a>
+<a class="sourceLine" id="cb226-4" title="4">            <span class="dt">tuneGrid=</span>tunegrid, </a>
+<a class="sourceLine" id="cb226-5" title="5">            <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb226-6" title="6">            <span class="dt">verbose =</span> FALSE<span class="co">#Switch this to TRUE to see useful output</span></a>
+<a class="sourceLine" id="cb226-7" title="7">            )</a></code></pre></div>
 <p>The output shows the RMSE for each of the 27 models tested.</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1"><span class="kw">trellis.par.set</span>(<span class="kw">caretTheme</span>())</a>
-<a class="sourceLine" id="cb225-2" title="2"><span class="kw">plot</span>(gbm)</a></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1"><span class="kw">trellis.par.set</span>(<span class="kw">caretTheme</span>())</a>
+<a class="sourceLine" id="cb227-2" title="2"><span class="kw">plot</span>(gbm)</a></code></pre></div>
 <p>The <code>summary.gbm</code> function, which R understands from the <code>summary</code> function, shows the variable importance. The most predictive feature is <code>age</code>, followed by <code>bmi</code>.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1"><span class="kw">summary</span>(gbm, <span class="dt">plotit =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tibble</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1"><span class="kw">summary</span>(gbm, <span class="dt">plotit =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tibble</span>()</a></code></pre></div>
 </div>
 <div id="solutions" class="section level4">
 <h4><span class="header-section-number">9.5.3.2</span> Solutions</h4>
@@ -631,25 +664,25 @@ Can overfit if not tuned correctly</li>
 <li><p>(Hint) Look at <code>?trainControl</code></p></li>
 </ol>
 <p>A bootstrap sample is when samples are taken of the observations with replacement. The default code was using <code>method = boot</code>, which is using a boot strap. It is strange that this only repeated twice, and each time the data is only train on <code>p = 0.2</code> percent (twenty percent!) of the training data. Because the training data is small, <code>n</code> is effectively smaller, which makes the model worse. Additionally, because there are only two bootstrap replications, there is high variance in this estimate.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
-<a class="sourceLine" id="cb227-2" title="2">  <span class="dt">method=</span><span class="st">&#39;boot&#39;</span>, </a>
-<a class="sourceLine" id="cb227-3" title="3">  <span class="dt">number=</span><span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb227-4" title="4">  <span class="dt">p =</span> <span class="fl">0.2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
+<a class="sourceLine" id="cb229-2" title="2">  <span class="dt">method=</span><span class="st">&#39;boot&#39;</span>, </a>
+<a class="sourceLine" id="cb229-3" title="3">  <span class="dt">number=</span><span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb229-4" title="4">  <span class="dt">p =</span> <span class="fl">0.2</span>)</a></code></pre></div>
 <p>This is what the default error is</p>
 <p>TRAIN 2581.203
 TEST 5284.176</p>
 <p>A good though is to increase the number of bootstrap samples to 10 and to increase the training percentage size to the default of 0.75. This, however, results in <strong>worse</strong> performance on the test set.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
-<a class="sourceLine" id="cb228-2" title="2">  <span class="dt">method=</span><span class="st">&#39;boot&#39;</span>, </a>
-<a class="sourceLine" id="cb228-3" title="3">  <span class="dt">number=</span><span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb228-4" title="4">  <span class="dt">p =</span> <span class="fl">0.75</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
+<a class="sourceLine" id="cb230-2" title="2">  <span class="dt">method=</span><span class="st">&#39;boot&#39;</span>, </a>
+<a class="sourceLine" id="cb230-3" title="3">  <span class="dt">number=</span><span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb230-4" title="4">  <span class="dt">p =</span> <span class="fl">0.75</span>)</a></code></pre></div>
 <p>TRAIN 2580.682
 TEST 5286.089</p>
 <p>The <strong>best</strong> method is to use repeated cross-validation. This makes the most use of the data by training over 9-10ths of the observations and evaluating the error on the remaining 1/10th. <strong>This estimate of the error is important because it’s how <code>caret</code> selects the optimal number of trees to use in the random forest.</strong></p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
-<a class="sourceLine" id="cb229-2" title="2">  <span class="dt">method=</span><span class="st">&#39;repeatedcv&#39;</span>, </a>
-<a class="sourceLine" id="cb229-3" title="3">  <span class="dt">number=</span><span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb229-4" title="4">  <span class="dt">p =</span> <span class="fl">0.8</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
+<a class="sourceLine" id="cb231-2" title="2">  <span class="dt">method=</span><span class="st">&#39;repeatedcv&#39;</span>, </a>
+<a class="sourceLine" id="cb231-3" title="3">  <span class="dt">number=</span><span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb231-4" title="4">  <span class="dt">p =</span> <span class="fl">0.8</span>)</a></code></pre></div>
 <p>TRAIN 2600.809
 TEST 5280.758</p>
 
