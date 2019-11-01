@@ -22,7 +22,7 @@ The below example shows how a single tree can predict health claims.
 - For smokers with a `bmi` of less than 30, the predicted annual claims are 21,000.  10% of patients fall into this bucket.
 - For smokers with a `bmi` of more than 30, the prediction is 42,000.  This bucket accounts for 11% of patients.
 
-```{r fig.cap="Decision tree of health costs", message = F, echo= F}
+```{r message = F, echo= F, eval = T}
 library(rpart)
 library(rpart.plot)
 tree <- rpart(charges ~ smoker + bmi, data = health_insurance)
@@ -31,7 +31,7 @@ rpart.plot(tree, type = 3)
 
 We can cut the data set up into these groups and look at the claim costs.  From this grouping, we can see that `smoker` is the most important variable as the difference in average claims is about 20,000.
 
-```{r message = F, echo = F}
+```{r message = F, echo = F, eval = T}
 library(scales)
 library(kableExtra)
 
@@ -72,7 +72,7 @@ Of these, only the first two are commonly used.  The exam is not going to ask yo
 
 As you can see, this results in a very deep tree.
 
-```{r}
+```{r eval = T}
 tree <- rpart(formula = charges ~  ., data = health_insurance,
               control = rpart.control(cp = 0.003))
 rpart.plot(tree, type = 3)
@@ -99,7 +99,7 @@ The cost is controlled by the `CP` parameter.  In the above example, did you not
 
 This is stored in the `cptable` 
 
-```{r message = F}
+```{r message = F , eval = T}
 tree <- rpart(formula = charges ~  ., data = health_insurance,
               control = rpart.control(cp = 0.0001))
 cost <- tree$cptable %>% 
@@ -111,7 +111,7 @@ cost %>% head()
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.  
 
-```{r fig.height=3, fig.width=5, echo = F}
+```{r echo = F, eval = T}
 cost %>% 
   filter(nsplit > 1) %>% 
   mutate(min = ifelse(xerror == min(cost$xerror),"y", "n")) %>% 
@@ -130,7 +130,7 @@ You will typically be given the below code, which does this automatically.  To g
 
 Once we have selected $\alpha$, the tree is pruned to be shorter.
 
-```{r }
+```{r include = T}
 pruned_tree <- prune(tree,cp = tree$cptable[which.min(tree$cptable[, "xerror"]), "CP"])
 rpart.plot(pruned_tree, type=3)
 ```
@@ -186,7 +186,7 @@ When using only a single tree, there can only be as many predictions as there ar
 
 The below graph illustrates this.  A single tree (left) has stair-like, step-wise predictions whereas a random forest is free to predict any value.  The color represents the predicted value (yellow = highest, black = lowest).
 
-```{r message = F}
+```{r message = F, eval = T}
 library(randomForest)
 tree <- rpart(charges ~ age + bmi, data = health_insurance)
 df <- health_insurance %>% mutate(
@@ -220,7 +220,7 @@ In most applications, only the `mtry` parameter needs to be tuned.  Tuning the `
 
 Using the basic `randomForest` package we fit a model with 500 trees. 
 
-```{r fig.height=4}
+```{r fig.height=4, include = T}
 rf <- randomForest(charges ~ age + bmi, data = health_insurance, ntree = 500)
 plot(rf)
 ```
@@ -489,11 +489,11 @@ summary(gbm, plotit = F) %>% as_tibble()
 
 #### Solutions
 
-1. Part 1 of 2: Set the cutoff to be lower (i.e., 0.1)
+Q1. Part 1 of 2: Set the cutoff to be lower (i.e., 0.1)
 
-1. Part 2 of 2: The Accuracy and Kappa are higher (better) for the undersampled vs. the original data.The up-sampled model is best.  With a cutoff of 0.1, accuracy is 0.66 and Kapp 0.32
+Q1. Part 2 of 2: The Accuracy and Kappa are higher (better) for the undersampled vs. the original data.The up-sampled model is best.  With a cutoff of 0.1, accuracy is 0.66 and Kapp 0.32
 
-2. (Hint) Look at `?trainControl`
+Q2. (Hint) Look at `?trainControl`
 
 A bootstrap sample is when samples are taken of the observations with replacement.  The default code was using `method = boot`, which is using a boot strap.  It is strange that this only repeated twice, and each time the data is only train on `p = 0.2` percent (twenty percent!) of the training data.  Because the training data is small, `n` is effectively smaller, which makes the model worse.  Additionally, because there are only two bootstrap replications, there is high variance in this estimate.
 
@@ -506,8 +506,8 @@ control <- trainControl(
 
 This is what the default error is
 
-TRAIN 2581.203
-TEST 5284.176
+- TRAIN 2581.203
+- TEST 5284.176
 
 A good though is to increase the number of bootstrap samples to 10 and to increase the training percentage size to the default of 0.75.  This, however, results in **worse** performance on the test set.
 
@@ -519,10 +519,10 @@ control <- trainControl(
 
 ```
 
-TRAIN 2580.682
-TEST 5286.089
+- TRAIN 2580.682
+- TEST 5286.089
 
-The **best** method is to use repeated cross-validation.  This makes the most use of the data by training over 9-10ths of the observations and evaluating the error on the remaining 1/10th.  **This estimate of the error is important because it's how `caret` selects the optimal number of trees to use in the random forest.**
+The **best** method is to use repeated cross-validation.  This makes the most use of the data by training over 9-10ths of the observations and evaluating the error on the remaining 1/10th.  This estimate of the error is important because it's how `caret` selects the optimal number of trees to use in the random forest.
 
 ```{r eval = F}
 control <- trainControl(
@@ -531,8 +531,8 @@ control <- trainControl(
   p = 0.8)
 ```
 
-TRAIN 2600.809
-TEST 5280.758
+- TRAIN 2600.809
+- TEST 5280.758
 
 
 

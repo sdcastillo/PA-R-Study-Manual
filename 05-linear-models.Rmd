@@ -1,12 +1,12 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 # Linear Models
 
-## Model Notation
+## Introduction
 
 The number of observations will be denoted by $n$.  When we refer to the size of a data set, we are referring to $n$.  We use $p$ to refer the number of input variables used.  The word "variables" is synonymous with "features".  For example, in the `health_insurance` data, the variables are `age`, `sex`, `bmi`, `children`, `smoker` and `region`.  These 7 variables mean that $p = 7$.  The data is collected from 1,338 patients, which means that $n = 1,338$.
 
@@ -136,15 +136,15 @@ Let's create an 80% training set and 20% testing set.  You don't need to worry a
 library(caret)
 #create a train/test split
 index <- createDataPartition(y = health_insurance$charges, p = 0.8, list = F) %>% as.numeric()
-health_insurance_train <-  health_insurance %>% slice(index)
-health_insurance_test <- health_insurance %>% slice(-index)
+train <-  health_insurance %>% slice(index)
+test <- health_insurance %>% slice(-index)
 ```
 
-Train the model on the `health_insurance_train` and test on `health_insurance_test`.  
+Train the model on the `train` and test on `test`.  
 
 ```{r}
-model <- lm(data = health_insurance_train, formula = charges ~ bmi + age)
-pred = predict(model, health_insurance_test)
+model <- lm(data = train, formula = charges ~ bmi + age)
+pred = predict(model, test)
 ```
 
 Let's look at the Root Mean Squared Error (RMSE).  
@@ -154,13 +154,13 @@ get_rmse <- function(y, y_hat){
   sqrt(mean((y - y_hat)^2))
 }
 
-get_rmse(pred, health_insurance_test$charges)
+get_rmse(pred, test$charges)
 ```
 
 The above number does not tell us if this is a good model or not by itself.  We need a comparison.  The fastest check is to compare against a prediction of the mean.  In other words, all values of the `y_hat` are the average of `charges`
 
 ```{r}
-get_rmse(mean(health_insurance_test$charges), health_insurance_test$charges)
+get_rmse(mean(test$charges), test$charges)
 ```
 
 The RMSE is **higher** (worse) when using just the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
@@ -191,7 +191,7 @@ Once you have chosen your model, you should re-train over the entire data set.  
 
 ```{r }
 model_full_data <- lm(data = health_insurance, formula = charges ~ bmi + age)
-model_test_data <-  lm(data = health_insurance_train, formula = charges ~ bmi + age)
+model_test_data <-  lm(data = train, formula = charges ~ bmi + age)
 ```
 
 ```{r fig.cap="Coefficient Standard Error on Test vs. All Data", echo = F, message=F}
@@ -370,6 +370,7 @@ and when $x_1 = 1$
 
 $$\hat{y_i} = \beta_0 + \beta_1 + \beta_2 x_2 + \beta_3 x_2$$
 By rewriting this we can see that the intercept changes from $\beta_0$ to $\beta_0^*$ and the slope changes from $\beta_1$ to $\beta_1^*$
+
 $$
 (\beta_0 + \beta_1) + (\beta_2 + \beta_3 ) x_2 \\
  = \beta_0^* + \beta_1^* x_2
@@ -400,6 +401,194 @@ auto_claim %>%
 
 Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction.  We can also use an hypothesis test with a GLM to check this.  Simply include an interaction term and see if the coefficient is zero at the desired significance level.
 
+### Logistic Regression
+
+The name "logistic regression" is confusing because the objective is *classification* and not regression.  While most examples focus on binary classification, logistic regression also works for multiclass classification.
+
+The GLM model form is as before
+
+$$g(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta}$$
+
+However, now the target $y_i$ is a category.  Our objective is to predict a probability of being in each category.  For regression, $\hat{y_i}$ can be any number, but now we need $0 \leq \hat{y_i} \leq 1$.
+
+We can use a special link function, known as the *standard logistic function*, *sigmoid*, or *logit*, to force the output to be in this range of $\{0,1\}$.
+
+$$\mathbf{\hat{y}} = g^{-1}(\mathbf{X} \mathbf{\beta}) = \frac{1}{1 + e^{-\mathbf{X} \mathbf{\beta}}}$$
+
+```{r fig.cap="Standard Logistic Function", fig.height=4, fig.width=4, echo = F}
+tibble(x = -6:6,y = 1/(1 + exp(6:-6))) %>% 
+  ggplot(aes(x,y)) + 
+  geom_line(color = "red") + 
+  theme_bw() + 
+  xlab("x") + 
+  ylab("g^-1(x)") 
+```
+
+### Example
+
+Using the `auto_claim` data, we predict whether or not a policy has a claim.  This is also known as the *frequency*.
+
+```{r}
+auto_claim %>% count(CLM_FLAG)
+```
+
+
+About 40% do not have a claim while 60% have at least one claim.
+
+```{r}
+set.seed(42)
+index <- createDataPartition(y = auto_claim$CLM_FLAG, p = 0.8, list = F) %>% as.numeric()
+auto_claim <- auto_claim %>% mutate(target = as.factor(ifelse(CLM_FLAG == "Yes", 1,0)))
+train <-  auto_claim %>% slice(index)
+test <- auto_claim %>% slice(-index)
+
+frequency <- glm(target ~ AGE + GENDER + MARRIED + CAR_USE + BLUEBOOK + CAR_TYPE + AREA
+             , data=train, 
+             family = binomial(link="logit"))
+```
+
+All of the variables except for the `CAR_TYPE` are highly significant.  The car types `SPORTS CAR` and `SUV` appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for `CAR_TYPE == SPORTS CAR` and `CAR_TYPE == SUV`.
+
+```{r}
+frequency %>% summary()
+```
+
+There is no easy way of interpreting the coefficients when using a logit link function. The most inference that we can make is to note which variables are significant. 
+
+- `CAR_USE`, `MARRIED`, `BLUEBOOK` are highly significant
+- Certain values of `CAR_TYPE` are significant but others are not.
+
+The output is a predicted probability.  We can see that this is centered around a probability of about 0.5.  
+
+```{r fig.cap="Distribution of Predicted Probability", fig.width=5, fig.height=3, message = F}
+preds <- predict(frequency, newdat=test,type="response")
+qplot(preds) + theme_bw()
+```
+
+In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 othersise.  The default cutoff is 0.5.  We change this to 0.3 and see that there are 763 policies predicted to have claims.
+
+```{r}
+test <- test %>% mutate(pred_zero_one = as.factor(1*(preds>.3)))
+summary(test$pred_zero_one)
+```
+
+How do we decide on this cutoff value?  We need to compare cutoff values based on some evaluation metric.  For example, we can use *accuracy*.
+
+$$\text{Accuracy} = \frac{\text{Correct Guesses}}{\text{Total Guesses}}$$
+This results in an accuracy of 70%.  But is this good?
+
+```{r}
+test %>% summarise(accuracy = mean(pred_zero_one == target))
+```
+
+Consider what would happen if we just predicted all 0's.  The accuracy is 74%.
+
+```{r}
+test %>% summarise(accuracy = mean(0 == target))
+```
+
+For policies which experience claims the accuracy is 63%.
+
+```{r}
+test %>% 
+  filter(target == 1) %>% 
+  summarise(accuracy = mean(pred_zero_one == target))
+```
+
+But for policies that don't actually experience claims this is 72%.  
+
+```{r}
+test %>% 
+  filter(target == 0) %>% 
+  summarise(accuracy = mean(pred_zero_one == target))
+```
+
+How do we know if this is a good model?  We can repeat this process with a different cutoff value and get different accuracy metrics for these groups.  Let's use a cutoff of 0.6.
+
+75%
+
+```{r}
+test <- test %>% mutate(pred_zero_one = as.factor(1*(preds>.6)))
+test %>% summarise(accuracy = mean(pred_zero_one == target))
+```
+
+10% for policies with claims and 98% for policies without claims.  
+
+```{r}
+test %>% 
+  filter(target == 1) %>% 
+  summarise(accuracy = mean(pred_zero_one == target))
+
+test %>% 
+  filter(target == 0) %>% 
+  summarise(accuracy = mean(pred_zero_one == target))
+```
+
+The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accuracy for the positive classes (policies with actual claims) vs. the negative classes (policies without claims).
+
+A *confusion matrix* shows is a table that summarises how the model classifies each group.
+
+- 1,489 policies which had no claims were predicted to not have claims - **True Negatives (TN) = 1,489**
+- 330 policies which had claims were accurately predicted to have claims - **True Positives (TP) = 59**
+- 22 policies which had no claims were predited to have claims - **False Negatives (FN) = 22**
+- 489 policies which had claims but were predicted not to - **False Positives (FP) = 489**
+
+```{r}
+confusionMatrix(test$pred_zero_one,factor(test$target))$table
+```
+
+> **Memory Tip:** Ask these two questions: Prediction Correct -> "TRUE" and Class == 1 -> "Positive"
+
+These definitions allow us to measure performance on the different groups.
+
+*Precision* answers the question "out of all of the positive predictions, what percentage were correct?"
+
+$$\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}$$
+
+*Recall* answers the question "out of all of positive examples in the data set, what percentage were correct?"
+
+$$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}$$
+
+The choice of using precision or recall depends on the relative cost of making a FP or a FN error.  If FP errors are expensive, then use precision; if FN errors are expensive, then use recall.
+
+**Example A:** the model trying to detect a deadly disease, which only 1 out of every 1000 patient's survive without early detection.  Then the goal should be to optimize *recall*, because we would want every patient that has the disease to get detected.  
+
+**Example B:** the model is detecting which emails are spam or not.  If an important email is flagged as spam incorrectly, the cost is 5 hours of lost productivity.  In this case, *precision* is the main concern.
+
+In some cases we can compare this "cost" in actual values.  For example, if a federal court is predicting if a criminal will recommit or not, they can agree that "1 out of every 20 guilty individuals going free" in exchange for "90% of those who are guilty being convicted".  When money is involed, this a dollar amount can be used: flagging non-spam as spam may cost \$100 whereas missing a spam email may cost \$2.  Then the cost-weighted accuracy is
+
+$$\text{Cost} = (100)(\text{FN}) + (2)(\text{FP})$$
+
+Then the cutoff value can be tuned in order to find the minimum cost.
+
+Fortunately, all of this is handled in a single function called `confusionMatrix`.
+
+```{r}
+confusionMatrix(test$pred_zero_one,factor(test$target))
+```
+
+
+### Area under the ROC Curv (AUC)
+
+What if we look at both the true-positive rate (TPR) and false positive rate (FPR) simultaneously?  That is, for each value of the cutoff, we can calculate the TPR and TNR.  
+
+For example, say that we have 10 cutoff values, $\{k_1, k_2, ..., k_{10}\}$.  Then for each value of $k$ we calculate both the true positive rates
+
+$$\text{TPR} = \{\text{TPR}(k_1), \text{TPR}(k_2), .., \text{TPR}(k_{10})\} $$ 
+
+and the true negative rates
+
+$$\{\text{FNR} = \{\text{FNR}(k_1), \text{FNR}(k_2), .., \text{FNR}(k_{10})\}$$
+
+Then we set `x = TPR` and `y = FNR` and graph x against y.  The plot below shows the ROC for the `auto_claims` data.  The Area Under the Curv of 0.6795 is what we would get if we integrated under the curve.
+
+```{r message=F, fig.cap="AUC for auto_claim"}
+library(pROC)
+roc(test$target, preds, plot = T)
+```
+
+If we just randomly guess, the AUC would be 0.5, which is represented by the 45-degree line.  A perfect model would maximize the curve to the upper-left corner.
+
 ### Poisson Regression
 
 When the dependent variable is a count, such as the number of claims per month, Poisson regression is appropriate.  This requires that each claim is independent in that one claim will not make another claim more or less likely.  This means that the target variable is actually a rate, $\frac{\text{claims}}{\text{months}}$.  More generally, we call the months the *exposure*.
@@ -422,12 +611,61 @@ glm(y ~ offset(log(m)) + x, family=poisson(link=log) )
 
 ### Tweedie regression
 
+While this topic is briefly mentioned on the modules, the only R libraries which support Tweedie Regression (`statmod` and `tweedie`) are not on the syllabus. 
+
 ### Stepwise subset selection
+
+In theory, we could test any possible combination of variables and interaction terms.  This includes all $p$ models with one predictor, all p-choose-2 models with two predictors, all p-choose-3 models with three predictors, and so forth.  Then we take whichever model has the best performance as the final model.
+
+This "brute force" approach is statistically ineffective: the more variables which are searched, the higher the chance of finding models that overfit.
+
+A subtler method, known as *stepwise selection*, reduces the chances of overfitting by only looking at the most promising models.  
+
+**Forward Stepwise Selection:**
+
+1. Start with no predictors in the model;
+2. Evaluate all $p$ models which use only one predictor and choose the one with the best performance (highest $R^2$ or lowest $\text{RSS}$);
+3. Repeat the process when adding one additional predictor, and continue until there is a model with one predictor, a model with two predictors, a model with three predictors, and so forth until there are $p$ models;
+4. Select the single best model which has the best $\text{AIC}$,$\text{BIC}$, or adjusted $R^2$.
+
+**Backward Stepwise Selection:**
+
+1. Start with a model that contains all predictors;
+2. Create a model which removes all predictors;
+3. Choose the best model which removes all-but-one predictor;
+4. Choose the best model which removes all-but-two predictors;
+5. Continue until there are $p$ models;
+6. Select the single best model which has the best $\text{AIC}$,$\text{BIC}$, or adjusted $R^2$.
+
+**Both Forward & Backward Selection:**
+
+ISLR does not mention this directly, however, a GLM using this method appeared on the 2019 June exam.  The following is from a stackoverflow post.
+
+https://stats.stackexchange.com/questions/97250/stepwise-regression-in-r-with-both-direction
+
+`MASS::step()` with the option `direction = 'both'` works by comparing the AIC improvements from 
+dropping each candidate variable, and adding each candidate variable between the upper and lower bound regressor sets supplied,
+from the current model, and by dropping or adding the one variable that leads to the best AIC improvement (smallest AIC).
+
+For example, assume that you are fitting a linear regression model with the upper set of variables $U = \{X_1, X_2, X_3, X_4, X_5, X_6, X_7\}$, and lower set $L = \{X_1\}$, and the starting object $S_0 = \{X_1, X_3\}$, then the potential sets of retained regressors might be something like
+
+$$
+\begin{align}
+S_1 &= \{X_1, X_3, X_6\} &\text{  (add $X_6$)  }\\
+S_2 &= \{X_1, X_3, X_6, X_4\} &\text{  (add $X_4$)  }\\
+S_3 &= \{X_3, X_6, X_4\} &\text{  (drop $X_1$)  }\\
+S_4 &= \{X_3, X_6, X_4, X_7\} &\text{  (add $X_7$)  }\\
+S_5 &= \{X_3, X_4, X_7\} &\text{  (drop $X_6$)  }
+\end{align}
+$$
+
+and so on, till no AIC improvements can be made.
+
+>**Tip**: Always load the `MASS` library before `dplyr` or `tidyverse`.  Otherwise there will be conflicts as there are functions named `select()` and `filter()` in both.  Alternatively, specify the library in the function call with `dplyr::select()`.
 
 | Readings |  | 
 |-------|---------|
 | [CAS Monograph 5 Chapter 2](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf) |  |
-| ISLR 2.2 Assessing model accuracy|  |
 
 ### Advantages and disadvantages
 
@@ -490,7 +728,7 @@ In ISLR, Hastie et al show that this results in coefficients being forced to be 
 The Elastic Net uses a penalty term which is between the L1 and L2 norms. The penalty term is a weighted average using the mixing parameter $ 0 \leq \alpha \leq 1$. The loss fucntion is then
 
 $$\text{RSS} + (1 - \alpha)/2 \sum_{j = 1}^{p}\beta_j^2 + \alpha \sum_{j = 1}^p |\beta_j|$$
-When $\alph = 1$ is turns into a Lasso; when $\alpha = 1$ this is the Ridge model. 
+When $\alpha = 1$ is turns into a Lasso; when $\alpha = 1$ this is the Ridge model. 
 
 Luckily, none of this needs to be memorized.  On the exam, read the documentation in R to refresh your memory.  For the Elastic Net, the function is `glmnet`, and so running `?glmnet` will give you this info.
 

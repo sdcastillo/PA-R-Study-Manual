@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2019-10-30" />
+<meta name="date" content="2019-11-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -232,12 +232,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>For smokers with a <code>bmi</code> of less than 30, the predicted annual claims are 21,000. 10% of patients fall into this bucket.</li>
 <li>For smokers with a <code>bmi</code> of more than 30, the prediction is 42,000. This bucket accounts for 11% of patients.</li>
 </ul>
-<div class="figure"><span id="fig:unnamed-chunk-101"></span>
-<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-101-1.png" alt="Decision tree of health costs" width="672" />
-<p class="caption">
-Figure 9.1: Decision tree of health costs
-</p>
-</div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
 <p>We can cut the data set up into these groups and look at the claim costs. From this grouping, we can see that <code>smoker</code> is the most important variable as the difference in average claims is about 20,000.</p>
 <table>
 <thead>
@@ -317,13 +312,13 @@ Figure 9.1: Decision tree of health costs
 ##   nsplit      CP xerror
 ##    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
 ## 1      0 0.620    1.00 
-## 2      1 0.144    0.381
+## 2      1 0.144    0.382
 ## 3      2 0.0637   0.239
-## 4      3 0.00967  0.178
+## 4      3 0.00967  0.179
 ## 5      4 0.00784  0.173
-## 6      5 0.00712  0.169</code></pre>
+## 6      5 0.00712  0.168</code></pre>
 <p>As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.</p>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-105-1.png" width="480" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
 <p>To optimize performance, choose the number of splits which has the lowest error. Often, though, the goal of using a decision tree is to create a simple model. In this case, we can err or the side of a lower <code>nsplit</code> so that the tree is shorter and more interpretable. All of the questions on so far have only used decision trees for interpretability, and a different model method has been used when predictive power is needed.</p>
 <p>You will typically be given the below code, which does this automatically. To get full credit on decision tree questions, mention that you used cross-validation to select the number of splits.</p>
 <p>Once we have selected <span class="math inline">\(\alpha\)</span>, the tree is pruned to be shorter.</p>
@@ -658,33 +653,37 @@ Can overfit if not tuned correctly</li>
 </div>
 <div id="solutions" class="section level4">
 <h4><span class="header-section-number">9.5.3.2</span> Solutions</h4>
-<ol style="list-style-type: decimal">
-<li><p>Part 1 of 2: Set the cutoff to be lower (i.e., 0.1)</p></li>
-<li><p>Part 2 of 2: The Accuracy and Kappa are higher (better) for the undersampled vs. the original data.The up-sampled model is best. With a cutoff of 0.1, accuracy is 0.66 and Kapp 0.32</p></li>
-<li><p>(Hint) Look at <code>?trainControl</code></p></li>
-</ol>
+<p>Q1. Part 1 of 2: Set the cutoff to be lower (i.e., 0.1)</p>
+<p>Q1. Part 2 of 2: The Accuracy and Kappa are higher (better) for the undersampled vs. the original data.The up-sampled model is best. With a cutoff of 0.1, accuracy is 0.66 and Kapp 0.32</p>
+<p>Q2. (Hint) Look at <code>?trainControl</code></p>
 <p>A bootstrap sample is when samples are taken of the observations with replacement. The default code was using <code>method = boot</code>, which is using a boot strap. It is strange that this only repeated twice, and each time the data is only train on <code>p = 0.2</code> percent (twenty percent!) of the training data. Because the training data is small, <code>n</code> is effectively smaller, which makes the model worse. Additionally, because there are only two bootstrap replications, there is high variance in this estimate.</p>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
 <a class="sourceLine" id="cb229-2" title="2">  <span class="dt">method=</span><span class="st">&#39;boot&#39;</span>, </a>
 <a class="sourceLine" id="cb229-3" title="3">  <span class="dt">number=</span><span class="dv">2</span>, </a>
 <a class="sourceLine" id="cb229-4" title="4">  <span class="dt">p =</span> <span class="fl">0.2</span>)</a></code></pre></div>
 <p>This is what the default error is</p>
-<p>TRAIN 2581.203
-TEST 5284.176</p>
+<ul>
+<li>TRAIN 2581.203</li>
+<li>TEST 5284.176</li>
+</ul>
 <p>A good though is to increase the number of bootstrap samples to 10 and to increase the training percentage size to the default of 0.75. This, however, results in <strong>worse</strong> performance on the test set.</p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
 <a class="sourceLine" id="cb230-2" title="2">  <span class="dt">method=</span><span class="st">&#39;boot&#39;</span>, </a>
 <a class="sourceLine" id="cb230-3" title="3">  <span class="dt">number=</span><span class="dv">10</span>, </a>
 <a class="sourceLine" id="cb230-4" title="4">  <span class="dt">p =</span> <span class="fl">0.75</span>)</a></code></pre></div>
-<p>TRAIN 2580.682
-TEST 5286.089</p>
-<p>The <strong>best</strong> method is to use repeated cross-validation. This makes the most use of the data by training over 9-10ths of the observations and evaluating the error on the remaining 1/10th. <strong>This estimate of the error is important because it’s how <code>caret</code> selects the optimal number of trees to use in the random forest.</strong></p>
+<ul>
+<li>TRAIN 2580.682</li>
+<li>TEST 5286.089</li>
+</ul>
+<p>The <strong>best</strong> method is to use repeated cross-validation. This makes the most use of the data by training over 9-10ths of the observations and evaluating the error on the remaining 1/10th. This estimate of the error is important because it’s how <code>caret</code> selects the optimal number of trees to use in the random forest.</p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
 <a class="sourceLine" id="cb231-2" title="2">  <span class="dt">method=</span><span class="st">&#39;repeatedcv&#39;</span>, </a>
 <a class="sourceLine" id="cb231-3" title="3">  <span class="dt">number=</span><span class="dv">10</span>, </a>
 <a class="sourceLine" id="cb231-4" title="4">  <span class="dt">p =</span> <span class="fl">0.8</span>)</a></code></pre></div>
-<p>TRAIN 2600.809
-TEST 5280.758</p>
+<ul>
+<li>TRAIN 2600.809</li>
+<li>TEST 5280.758</li>
+</ul>
 
 </div>
 </div>
