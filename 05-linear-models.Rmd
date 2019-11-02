@@ -4,9 +4,9 @@ output:
   pdf_document: default
 ---
 
-# Linear Models
+# Introduction to Modeling
 
-## Introduction
+## Model Notation
 
 The number of observations will be denoted by $n$.  When we refer to the size of a data set, we are referring to $n$.  We use $p$ to refer the number of input variables used.  The word "variables" is synonymous with "features".  For example, in the `health_insurance` data, the variables are `age`, `sex`, `bmi`, `children`, `smoker` and `region`.  These 7 variables mean that $p = 7$.  The data is collected from 1,338 patients, which means that $n = 1,338$.
 
@@ -47,7 +47,7 @@ In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we
 
 ## Ordinary least squares (OLS)
 
-The type of model used refers to the class of function of $f$.  If $f$ is linear, then we are using a linear model.  If $f$ is non-parametric (does not have input parameters), then it is non-parametric modeling.  Linear models are the simplest type of model.
+The type of model used refers to the class of function of $f$.  If $f$ is linear, then we are using a linear model.  If $f$ is non-parametric (does not have input parameters), then it is non-parametric modeling.  Linear models are linear in the parameters, $\beta$.
 
 We have the data $\mathbf{X}$ and the target $\mathbf{y}$, where all of the y's are real numbers, or $y_i \in \mathbb{R}$.
 
@@ -81,7 +81,6 @@ tibble(y = rnorm(10, 0, 1),
 
 
 The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
-
 To solve for $\mathbf{\beta}$, we first need to define a *loss function*.  This allows us to compare how well a model is fitting the data.  The most commonly used loss function is the residual sum of squares (RSS), also called the *squared error loss* or the L2 norm.  When RSS is small, then the predictions are close to the actual values and the model is a good fit.  When RSS is large, the model is a poor fit.
 
 $$
@@ -95,7 +94,7 @@ You might be asking: why does this need to be the squared error?  Why not the ab
 - It provides the same solution if we assume that the distribution of $\mathbf{Y}|\mathbf{X}$ is guassian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
 - Empirically it has been shown to be less likely to overfit as compared to other loss functions
 
-### Example
+## Example
 
 In our health, we can create a linear model using `bmi`, `age`, and `sex` as an inputs.  
 
@@ -228,7 +227,9 @@ This model structure implies that each of the variables $\mathbf{x_1}, ..., \mat
 | ISLR 2.2 Assessing model accuracy|  |
 
 
-## Generalized linear models (GLMs)
+# Generalized linear models (GLMs)
+
+## Model form
 
 Instead of the model being a direct linear combination of the variables, there is an intermediate step called a *link function* $g$.
 
@@ -283,7 +284,7 @@ For this exam, a common question is to ask candiates to choose the best distribu
 - If $Y$ is counting something, such as the number of claims, number of accidents, or some other discrete and positive counting sequence, use the Poisson;
 - If $Y$ contains negative values, then do not use the Exponential, Gamma, or Inverse Gaussian as these are strictly positive.  Conversely, if $Y$ is only positive, such as the price of a policy (price is always > 0), or the claim costs, then these are good choices;
 - If $Y$ is binary, the the binomial response with either a Probit or Logit link.  The Logit is more common.
-- If $Y$ has more than two categories, the multinomial distribution with either the Probit or Logic link.
+- If $Y$ has more than two categories, the multinomial distribution with either the Probit or Logic link (See Logistic Regression)
 
 The exam will always ask you to interpret the GLM.  These questions can usually be answered by inverting the link function and interpreting the coefficients.  In the case of the log link, simply take the exponent of the coefficients and each of these represents a "relativity" factor.
 
@@ -303,7 +304,7 @@ Where $R_k$ is the *relativity* of the kth variable.  This terminology is from i
 
 For binary outcomes with logit or probit link, there is no easy interpretation.  This has come up in at least one past sample exam, and the solution was to create "psuedo" observations and observe how changing each $x_k$ would change the predicted value.  Due to the time requirements, this is unlikely to come up on an exam.  So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.
 
-### Example
+## Example
 
 Just as with OLS, there is a `formula` and `data argument`.  In addition, we need to specify the response distribution and link function.
 
@@ -323,7 +324,7 @@ We see that `age`, `sex`, and `children` are all significant (p <0.01).  Reading
 model %>% tidy()
 ```
 
-### Reference levels
+## Reference levels
 
 When a categorical variable is used in a GLM, the model actually uses indicator variables for each level.  The default reference level is the order of the R factors.  For the `sex` variable, the order is `female` and then `male`.  This means that the base level is `female` by default.
 
@@ -350,7 +351,7 @@ Now `male` is the base level.
 health_insurance$sex %>% as.factor() %>% levels()
 ```
 
-### Interactions
+## Interactions
 
 An interaction occurs when the effect of a variable on the response is different depending on the level of other variables in the model.
 
@@ -401,11 +402,111 @@ auto_claim %>%
 
 Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction.  We can also use an hypothesis test with a GLM to check this.  Simply include an interaction term and see if the coefficient is zero at the desired significance level.
 
-### Logistic Regression
+### Poisson Regression
 
-The name "logistic regression" is confusing because the objective is *classification* and not regression.  While most examples focus on binary classification, logistic regression also works for multiclass classification.
+When the dependent variable is a count, such as the number of claims per month, Poisson regression is appropriate.  This requires that each claim is independent in that one claim will not make another claim more or less likely.  This means that the target variable is actually a rate, $\frac{\text{claims}}{\text{months}}$.  More generally, we call the months the *exposure*.
 
-The GLM model form is as before
+Let $m_i$ by the units of exposure and $y_i$ the target.  We use a log-link function to correct for skewness.
+
+$$ log(\frac{\hat{y_i}}{m_i}) = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
+
+By using the fact that $log(\frac{a}{b}) = log(a) - log(b)$ this turns into
+
+$$log(\hat{y_i}) = log(m_i) + \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
+
+We call the $log(m_i)$ the `offset` term.  Notice that there is no coefficient (beta) on this value, because we already know what the impact will be.  
+
+In R, the code for this equation would be
+
+```{r eval = F}
+glm(y ~ offset(log(m)) + x, family=poisson(link=log) )
+```
+
+### Tweedie regression
+
+While this topic is briefly mentioned on the modules, the only R libraries which support Tweedie Regression (`statmod` and `tweedie`) are not on the syllabus, and so there is no way that the SOA could ask you to build a tweedie model. This means that you can be safely skip this section.
+
+### Stepwise subset selection
+
+In theory, we could test all possible combinations of variables and interaction terms.  This includes all $p$ models with one predictor, all p-choose-2 models with two predictors, all p-choose-3 models with three predictors, and so forth.  Then we take whichever model has the best performance as the final model.
+
+This "brute force" approach is statistically ineffective: the more variables which are searched, the higher the chance of finding models that overfit.
+
+A subtler method, known as *stepwise selection*, reduces the chances of overfitting by only looking at the most promising models.  
+
+**Forward Stepwise Selection:**
+
+1. Start with no predictors in the model;
+2. Evaluate all $p$ models which use only one predictor and choose the one with the best performance (highest $R^2$ or lowest $\text{RSS}$);
+3. Repeat the process when adding one additional predictor, and continue until there is a model with one predictor, a model with two predictors, a model with three predictors, and so forth until there are $p$ models;
+4. Select the single best model which has the best $\text{AIC}$,$\text{BIC}$, or adjusted $R^2$.
+
+**Backward Stepwise Selection:**
+
+1. Start with a model that contains all predictors;
+2. Create a model which removes all predictors;
+3. Choose the best model which removes all-but-one predictor;
+4. Choose the best model which removes all-but-two predictors;
+5. Continue until there are $p$ models;
+6. Select the single best model which has the best $\text{AIC}$,$\text{BIC}$, or adjusted $R^2$.
+
+**Both Forward & Backward Selection:**
+
+ISLR does not mention this directly, however, a GLM using this method appeared on the 2019 June exam.  A post of Stack Overflow provides a good description:
+
+`MASS::step()` with the option `direction = 'both'` works by comparing the AIC improvements from 
+dropping each candidate variable, and adding each candidate variable between the upper and lower bound regressor sets supplied,
+from the current model, and by dropping or adding the one variable that leads to the best AIC improvement (smallest AIC).
+
+For example, assume that you are fitting a linear regression model with the upper set of variables $U = \{X_1, X_2, X_3, X_4, X_5, X_6, X_7\}$, and lower set $L = \{X_1\}$, and the starting object $S_0 = \{X_1, X_3\}$, then the potential sets of retained regressors might be something like
+
+$$
+\begin{align}
+S_1 &= \{X_1, X_3, X_6\} &\text{  (add $X_6$)  }\\
+S_2 &= \{X_1, X_3, X_6, X_4\} &\text{  (add $X_4$)  }\\
+S_3 &= \{X_3, X_6, X_4\} &\text{  (drop $X_1$)  }\\
+S_4 &= \{X_3, X_6, X_4, X_7\} &\text{  (add $X_7$)  }\\
+S_5 &= \{X_3, X_4, X_7\} &\text{  (drop $X_6$)  }
+\end{align}
+$$
+
+and so on, till no AIC improvements can be made.
+
+>**Tip**: Always load the `MASS` library before `dplyr` or `tidyverse`.  Otherwise there will be conflicts as there are functions named `select()` and `filter()` in both.  Alternatively, specify the library in the function call with `dplyr::select()`.
+
+| Readings |  | 
+|-------|---------|
+| [CAS Monograph 5 Chapter 2](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf) |  |
+
+### Advantages and disadvantages
+
+There is usually at least one question on the PA exam which asks you to "list some of the advantages and disadvantages of using this particular model", and so here is one such list. 
+
+**GLM Advantages**
+
+- Easy to interpret
+- Can easily be deployed in spreadsheet format
+- Handles skewed data through different response distributions
+- Models the average response which leads to stable predictions on new data
+- Handles continuous and categorical data
+- Works well on small data sets
+
+**GLM Disadvantages**
+
+- Does not select features (without stepwise selection)
+- Strict assumptions around distribution shape, randomness of error terms, and variable correlations 
+- Unable to detect non-linearity directly (although this can manually be addressed through feature engineering)
+- Sensitive to outliers
+- Low predictive power
+
+
+# Logistic Regression
+
+## Model form
+
+Logistic regression is a special type of GLM.  The name is confusing because the objective is *classification* and not regression.  While most examples focus on binary classification, logistic regression also works for multiclass classification.
+
+The model form is as before
 
 $$g(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta}$$
 
@@ -424,14 +525,15 @@ tibble(x = -6:6,y = 1/(1 + exp(6:-6))) %>%
   ylab("g^-1(x)") 
 ```
 
-### Example
+Other link functions for classification problems are possible as well, although the logistic function is the most common.  If a problem asks for an alternative link, such as the *probit*, fit both models and compare the performance.
 
-Using the `auto_claim` data, we predict whether or not a policy has a claim.  This is also known as the *frequency*.
+## Example
+
+Using the `auto_claim` data, we predict whether or not a policy has a claim.  This is also known as the *claim frequency*.
 
 ```{r}
 auto_claim %>% count(CLM_FLAG)
 ```
-
 
 About 40% do not have a claim while 60% have at least one claim.
 
@@ -526,6 +628,10 @@ test %>%
 
 The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accuracy for the positive classes (policies with actual claims) vs. the negative classes (policies without claims).
 
+## Classification metrics
+
+For regression problems, when the output is a whole number, we can use the sum of squares $\text{RSS}$, the r-squared $R^2$, the mean absolute error $\text{MAE}$, and the likelihood.  For classification problems where the output is in $\{0,1\}$, we need to a new set of metrics.
+
 A *confusion matrix* shows is a table that summarises how the model classifies each group.
 
 - 1,489 policies which had no claims were predicted to not have claims - **True Negatives (TN) = 1,489**
@@ -589,107 +695,11 @@ roc(test$target, preds, plot = T)
 
 If we just randomly guess, the AUC would be 0.5, which is represented by the 45-degree line.  A perfect model would maximize the curve to the upper-left corner.
 
-### Poisson Regression
+# Penalized Linear Models
 
-When the dependent variable is a count, such as the number of claims per month, Poisson regression is appropriate.  This requires that each claim is independent in that one claim will not make another claim more or less likely.  This means that the target variable is actually a rate, $\frac{\text{claims}}{\text{months}}$.  More generally, we call the months the *exposure*.
+One of the main weaknesses of the GLM, including all linear models in this chapter, is that the features need to be selected by hand.  Stepwise selection helps to improve this process, but fails when the inputs are correlated and often has a strong dependence on seemingly arbitrary choices of evaluation metrics such as using AIC or BIC and forward or backwise directions.  
 
-Let $m_i$ by the units of exposure and $y_i$ the target.  We use a log-link function to correct for skewness.
-
-$$ log(\frac{\hat{y_i}}{m_i}) = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
-
-By using the fact that $log(\frac{a}{b}) = log(a) - log(b)$ this turns into
-
-$$log(\hat{y_i}) = log(m_i) + \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
-
-We call the $log(m_i)$ the `offset` term.  Notice that there is no coefficient (beta) on this value, because we already know what the impact will be.  
-
-In R, the code for this equation would be
-
-```{r eval = F}
-glm(y ~ offset(log(m)) + x, family=poisson(link=log) )
-```
-
-### Tweedie regression
-
-While this topic is briefly mentioned on the modules, the only R libraries which support Tweedie Regression (`statmod` and `tweedie`) are not on the syllabus. 
-
-### Stepwise subset selection
-
-In theory, we could test any possible combination of variables and interaction terms.  This includes all $p$ models with one predictor, all p-choose-2 models with two predictors, all p-choose-3 models with three predictors, and so forth.  Then we take whichever model has the best performance as the final model.
-
-This "brute force" approach is statistically ineffective: the more variables which are searched, the higher the chance of finding models that overfit.
-
-A subtler method, known as *stepwise selection*, reduces the chances of overfitting by only looking at the most promising models.  
-
-**Forward Stepwise Selection:**
-
-1. Start with no predictors in the model;
-2. Evaluate all $p$ models which use only one predictor and choose the one with the best performance (highest $R^2$ or lowest $\text{RSS}$);
-3. Repeat the process when adding one additional predictor, and continue until there is a model with one predictor, a model with two predictors, a model with three predictors, and so forth until there are $p$ models;
-4. Select the single best model which has the best $\text{AIC}$,$\text{BIC}$, or adjusted $R^2$.
-
-**Backward Stepwise Selection:**
-
-1. Start with a model that contains all predictors;
-2. Create a model which removes all predictors;
-3. Choose the best model which removes all-but-one predictor;
-4. Choose the best model which removes all-but-two predictors;
-5. Continue until there are $p$ models;
-6. Select the single best model which has the best $\text{AIC}$,$\text{BIC}$, or adjusted $R^2$.
-
-**Both Forward & Backward Selection:**
-
-ISLR does not mention this directly, however, a GLM using this method appeared on the 2019 June exam.  The following is from a stackoverflow post.
-
-https://stats.stackexchange.com/questions/97250/stepwise-regression-in-r-with-both-direction
-
-`MASS::step()` with the option `direction = 'both'` works by comparing the AIC improvements from 
-dropping each candidate variable, and adding each candidate variable between the upper and lower bound regressor sets supplied,
-from the current model, and by dropping or adding the one variable that leads to the best AIC improvement (smallest AIC).
-
-For example, assume that you are fitting a linear regression model with the upper set of variables $U = \{X_1, X_2, X_3, X_4, X_5, X_6, X_7\}$, and lower set $L = \{X_1\}$, and the starting object $S_0 = \{X_1, X_3\}$, then the potential sets of retained regressors might be something like
-
-$$
-\begin{align}
-S_1 &= \{X_1, X_3, X_6\} &\text{  (add $X_6$)  }\\
-S_2 &= \{X_1, X_3, X_6, X_4\} &\text{  (add $X_4$)  }\\
-S_3 &= \{X_3, X_6, X_4\} &\text{  (drop $X_1$)  }\\
-S_4 &= \{X_3, X_6, X_4, X_7\} &\text{  (add $X_7$)  }\\
-S_5 &= \{X_3, X_4, X_7\} &\text{  (drop $X_6$)  }
-\end{align}
-$$
-
-and so on, till no AIC improvements can be made.
-
->**Tip**: Always load the `MASS` library before `dplyr` or `tidyverse`.  Otherwise there will be conflicts as there are functions named `select()` and `filter()` in both.  Alternatively, specify the library in the function call with `dplyr::select()`.
-
-| Readings |  | 
-|-------|---------|
-| [CAS Monograph 5 Chapter 2](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf) |  |
-
-### Advantages and disadvantages
-
-There is usually at least one question on the PA exam which asks you to "list some of the advantages and disadvantages of using this particular model", and so here is one such list. 
-
-**GLM Advantages**
-
-- Easy to interpret
-- Handles skewed data through different response distributions
-- Models the average response which leads to stable predictions on new data
-- Handles continuous and categorical data
-- Works well on small data sets
-
-**GLM Disadvantages**
-
-- Does not select features
-- Strict assumptions around distribution shape, randomness of error terms, and others
-- Unable to detect non-linearity directly (although this can manually be addressed through feature engineering)
-- Sensitive to outliers
-- Low predictive power
-
-## Penalized Linear Models
-
-One of the main weaknesses of the GLM is that the features need to be selected by hand.  For large $p$, this means that the modeler needs to test every combination of variables.  This is time consuming.  
+The Bias Variance Tradoff is about finding the lowest error by changing the flexibility of the model. Penalization methods use a parameter to control for this flexibility directly.  
 
 Earlier on we said that the linear model minimizes the sum of square terms, known as the residual sum of squares (RSS)
 
@@ -699,7 +709,7 @@ $$
 
 This loss function can be modified so that models which include more (and larger) coefficients are considered as worse.  In other words, when there are more $\beta$'s, or $\beta$'s which are larger, the RSS is higher.
 
-### Ridge Regression
+## Ridge Regression
 
 Ridge regression adds a penalty term which is proportional to the square of the sum of the coefficients.  This is known as the "L2" norm.
 
@@ -709,7 +719,7 @@ $$
 
 This $\lambda$ controls how much of a penalty is imposed on the size of the coefficients.  When $\lambda$ is high, simpler models are treated more favorably because the $\sum_{j = 1}^p\beta_j^2$ carries more weight.  Conversely, then $\lambda$ is low, complex models are more favored.  When $\lambda = 0$, we have an ordinary GLM.
 
-### Lasso
+## Lasso
 
 The official name is the Least Absolute Shrinkage and Selection Operator, but the common name is just "the lasso".  Just as with Ridge regression, we want to favor simpler models; however, we also want to *select* variables.  This is the same as forcing some coefficients to be equal to 0.
 
@@ -723,7 +733,7 @@ In ISLR, Hastie et al show that this results in coefficients being forced to be 
 
 **Note**: While any response family is possible with penalized regression, in R, only the Gaussian family is possible in the library `glmnet`, and so this is the only type of question that the SOA can ask.
 
-### Elastic Net
+## Elastic Net
 
 The Elastic Net uses a penalty term which is between the L1 and L2 norms. The penalty term is a weighted average using the mixing parameter $ 0 \leq \alpha \leq 1$. The loss fucntion is then
 
@@ -734,7 +744,7 @@ Luckily, none of this needs to be memorized.  On the exam, read the documentatio
 
 >**Tip**: When using complicated functions on the exam, use `?function_name` to get the documentation.
 
-### Advantages and disadvantages
+## Advantages and disadvantages
 
 **Elastic Net/Lasso/Ridge Advantages**
 

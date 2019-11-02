@@ -232,7 +232,8 @@ plot(rf)
 - Very good a multi-class prediction
 - Nonlinearities
 - Interaction effects
-- Deal with unbalanced and missing data*Usually requires over/undersamplin
+- Handles missing data
+- Deals with unbalanced after over/undersampling
 
 **Disadvantages**
 
