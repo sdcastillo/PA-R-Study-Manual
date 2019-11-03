@@ -4,7 +4,15 @@ output:
   pdf_document: default
 ---
 
+```{r message = F}
+library(ggplot2)
+theme_set(theme_bw())
+```
+
+
 # Introduction to Modeling
+
+About 40-50% of the exam grade is based on modeling.  
 
 ## Model Notation
 
@@ -60,9 +68,7 @@ $$
 Which means that each $y_i$ is a linear combination of the variables $x_1, ..., x_p$, plus a constant $\beta_0$ which is called the *intercept* term.  
 
 $$
-\begin{equation}
 y_i = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p
-\end{equation}
 $$
 
 In the one-dimensional case, this creates a line connecting the points.  In higher dimensions, this creates a hyperplane.
@@ -74,7 +80,6 @@ tibble(y = rnorm(10, 0, 1),
   ggplot(aes(x,y)) + 
   geom_point( show.legend = F) + 
   geom_smooth(method = "lm", se = F, aes(fill = "linear regression"), color = "red", show.legend = T) + 
-  theme_bw() + 
   scale_fill_manual(name="legend", values=c("blue", "red")) + 
   theme(legend.position = "top")
 ```
@@ -189,25 +194,25 @@ The below is from an excellent post of Stack Exchange.
 Once you have chosen your model, you should re-train over the entire data set.  This is to make the coefficients more stable because `n` is larger.  Below you can see that the standard error is lower after training over the entire data set.
 
 ```{r }
-model_full_data <- lm(data = health_insurance, formula = charges ~ bmi + age)
-model_test_data <-  lm(data = train, formula = charges ~ bmi + age)
+all_data <- lm(data = health_insurance, formula = charges ~ bmi + age)
+testing <- lm(data = test, formula = charges ~ bmi + age)
 ```
 
 ```{r fig.cap="Coefficient Standard Error on Test vs. All Data", echo = F, message=F}
 library(broom)
 library(kableExtra)
-model_full_data %>% tidy() %>% 
+all_data %>% tidy() %>% 
   select(term, std.error) %>% 
-  left_join(model_test_data %>% tidy() %>% select(term, std.error), by = "term") %>% 
+  left_join(testing %>% tidy() %>% select(term, std.error), by = "term") %>% 
   rename(full_data_std_error = std.error.x, test_data_std_error = std.error.y) %>% 
   mutate_if(is.numeric, ~round(.x, 1)) %>% 
-  kableExtra::kable("html")
+  kableExtra::kable("markdown")
 ```
 
 All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
 
 ```{r}
-coefficients(model_full_data)
+coefficients(model)
 ```
 
 Translating the above into an equation we have
@@ -259,8 +264,7 @@ tibble(y = exp(rnorm(1000))) %>%
            fct_relevel(c("Before Log Transform", "After Log Transform"))) %>% 
   ggplot(aes(value)) + 
   geom_histogram() + 
-  facet_wrap(vars(stat), scales = "free") + 
-  theme_bw()
+  facet_wrap(vars(stat), scales = "free")
 ```
 
 You might be asking, what if the distribution of $Y$ is not normal, no matter what choice we have for $g$?  The short answer is that we can change our assumption of the distribution of $Y$, and use this to change the parameters.  If you have taken exam STAM then you are familiar with *maximum likelihood estimation*.  
@@ -297,7 +301,7 @@ For a single observation $y_i$, this is
 $$
 \text{exp}(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + ... + \beta_p x_{ip}) = \\
 e^{\beta_0} e^{\beta_1 x_{i1}}e^{\beta_2 x_{i2}} ...  e^{\beta_p x_{ip}} = 
-R_o R_2 R_3 ... R_{p}
+R_0 R_2 R_3 ... R_{p}
 $$
 
 Where $R_k$ is the *relativity* of the kth variable.  This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance.  The data science community does not use this language. 
@@ -383,7 +387,6 @@ The SOA's modules give an example with the using age and gender as below.  This 
 interactions %>% 
   ggplot(aes(age, actual, color = gender)) + 
   geom_line() + 
-  theme_bw() +
   labs(title = "Age vs. Actual by Gender", 
        subtitle = "Interactions imply different slopes",
        caption= "data: interactions")
@@ -391,12 +394,11 @@ interactions %>%
 
 Here is a clearer example from the `auto_claim` data. The lines show the slope of a linear model, assuming that only `BLUEBOOK` and `CAR_TYPE` were predictors in the model.  You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.  
 
-```{r fig.cap="Example of strong interaction"}
+```{r fig.cap="Example of strong interaction" ,warning = F}
 auto_claim %>% 
   ggplot(aes(log(CLM_AMT), log(BLUEBOOK), color = CAR_TYPE)) + 
   geom_point(alpha = 0.3) + 
   geom_smooth(method = "lm", se = F) + 
-  theme_bw()  + 
   labs(title = "Kelly Bluebook Value vs Claim Amount")
 ```
 
@@ -452,25 +454,7 @@ A subtler method, known as *stepwise selection*, reduces the chances of overfitt
 
 **Both Forward & Backward Selection:**
 
-ISLR does not mention this directly, however, a GLM using this method appeared on the 2019 June exam.  A post of Stack Overflow provides a good description:
-
-`MASS::step()` with the option `direction = 'both'` works by comparing the AIC improvements from 
-dropping each candidate variable, and adding each candidate variable between the upper and lower bound regressor sets supplied,
-from the current model, and by dropping or adding the one variable that leads to the best AIC improvement (smallest AIC).
-
-For example, assume that you are fitting a linear regression model with the upper set of variables $U = \{X_1, X_2, X_3, X_4, X_5, X_6, X_7\}$, and lower set $L = \{X_1\}$, and the starting object $S_0 = \{X_1, X_3\}$, then the potential sets of retained regressors might be something like
-
-$$
-\begin{align}
-S_1 &= \{X_1, X_3, X_6\} &\text{  (add $X_6$)  }\\
-S_2 &= \{X_1, X_3, X_6, X_4\} &\text{  (add $X_4$)  }\\
-S_3 &= \{X_3, X_6, X_4\} &\text{  (drop $X_1$)  }\\
-S_4 &= \{X_3, X_6, X_4, X_7\} &\text{  (add $X_7$)  }\\
-S_5 &= \{X_3, X_4, X_7\} &\text{  (drop $X_6$)  }
-\end{align}
-$$
-
-and so on, till no AIC improvements can be made.
+A hybrid approach is to consider use both forward and backward selection.  This is done by creating two lists of variables at each step, one from forward and one from backward selection.  Then variables from *both* lists are tested to see if adding or subtracting from the current model would improve the fit or not.  ISLR does not mention this directly, however, by default the `stepAIC` function uses a default of `both`.
 
 >**Tip**: Always load the `MASS` library before `dplyr` or `tidyverse`.  Otherwise there will be conflicts as there are functions named `select()` and `filter()` in both.  Alternatively, specify the library in the function call with `dplyr::select()`.
 
@@ -480,7 +464,7 @@ and so on, till no AIC improvements can be made.
 
 ### Advantages and disadvantages
 
-There is usually at least one question on the PA exam which asks you to "list some of the advantages and disadvantages of using this particular model", and so here is one such list. 
+There is usually at least one question on the PA exam which asks you to "list some of the advantages and disadvantages of using this particular model", and so here is one such list.  It is unlikely that the grader will take off points for including too many comments and so a good strategy is to include everything that comes to mind.
 
 **GLM Advantages**
 
@@ -520,7 +504,6 @@ $$\mathbf{\hat{y}} = g^{-1}(\mathbf{X} \mathbf{\beta}) = \frac{1}{1 + e^{-\mathb
 tibble(x = -6:6,y = 1/(1 + exp(6:-6))) %>% 
   ggplot(aes(x,y)) + 
   geom_line(color = "red") + 
-  theme_bw() + 
   xlab("x") + 
   ylab("g^-1(x)") 
 ```
@@ -564,7 +547,7 @@ The output is a predicted probability.  We can see that this is centered around 
 
 ```{r fig.cap="Distribution of Predicted Probability", fig.width=5, fig.height=3, message = F}
 preds <- predict(frequency, newdat=test,type="response")
-qplot(preds) + theme_bw()
+qplot(preds) 
 ```
 
 In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 othersise.  The default cutoff is 0.5.  We change this to 0.3 and see that there are 763 policies predicted to have claims.
@@ -577,6 +560,7 @@ summary(test$pred_zero_one)
 How do we decide on this cutoff value?  We need to compare cutoff values based on some evaluation metric.  For example, we can use *accuracy*.
 
 $$\text{Accuracy} = \frac{\text{Correct Guesses}}{\text{Total Guesses}}$$
+
 This results in an accuracy of 70%.  But is this good?
 
 ```{r}
@@ -634,16 +618,14 @@ For regression problems, when the output is a whole number, we can use the sum o
 
 A *confusion matrix* shows is a table that summarises how the model classifies each group.
 
-- 1,489 policies which had no claims were predicted to not have claims - **True Negatives (TN) = 1,489**
-- 330 policies which had claims were accurately predicted to have claims - **True Positives (TP) = 59**
-- 22 policies which had no claims were predited to have claims - **False Negatives (FN) = 22**
-- 489 policies which had claims but were predicted not to - **False Positives (FP) = 489**
+- No claims and predicted to not have claims - **True Negatives (TN) = 1,489**
+- Had claims and predicted to have claims - **True Positives (TP) = 59**
+- No claims but predited to have claims - **False Negatives (FN) = 22**
+- Had claims but predicted not to - **False Positives (FP) = 489**
 
 ```{r}
 confusionMatrix(test$pred_zero_one,factor(test$target))$table
 ```
-
-> **Memory Tip:** Ask these two questions: Prediction Correct -> "TRUE" and Class == 1 -> "Positive"
 
 These definitions allow us to measure performance on the different groups.
 
@@ -674,7 +656,7 @@ confusionMatrix(test$pred_zero_one,factor(test$target))
 ```
 
 
-### Area under the ROC Curv (AUC)
+### Area Under the ROC Curv (AUC)
 
 What if we look at both the true-positive rate (TPR) and false positive rate (FPR) simultaneously?  That is, for each value of the cutoff, we can calculate the TPR and TNR.  
 
@@ -742,7 +724,7 @@ When $\alpha = 1$ is turns into a Lasso; when $\alpha = 1$ this is the Ridge mod
 
 Luckily, none of this needs to be memorized.  On the exam, read the documentation in R to refresh your memory.  For the Elastic Net, the function is `glmnet`, and so running `?glmnet` will give you this info.
 
->**Tip**: When using complicated functions on the exam, use `?function_name` to get the documentation.
+>**Shortcut**: When using complicated functions on the exam, use `?function_name` to get the documentation.
 
 ## Advantages and disadvantages
 

@@ -1,6 +1,6 @@
 # Visualization
 
-The creator's of the exam do not expect candidates to be expert data scientists.  You will not be graded based on aesthetics; however, in order to interpret results it is necessary to understand the basics of how graphs are made.  
+This sections shows how to create and interpret simple graphs. In past exams, the SOA has provided code for any technical visualizations which are needed. 
 
 ## Create a plot object (ggplot)
 
@@ -8,8 +8,16 @@ The first step is to create a blank canvas that holds the columns that are neede
 
 The `aesthetic` argument, `aes`, means that the x-axis will have `income` and the y-axis will have `count`.
 
-```{r}
-p <- insurance %>% ggplot(aes(x = holders, y = claims))
+```{r message = F}
+library(Cairo)
+```
+
+
+```{r message=F}
+library(tidyverse)
+library(ExamPAData)
+theme_set(theme_bw())
+p <- insurance %>% ggplot(aes(claims))
 ```
 
 If we look at `p`, we see that it is nothing but white space with axis for `count` and `income`.
@@ -20,36 +28,36 @@ p
 
 ## Add a plot
 
-We add an xy plot.
+We add a histogram
 
-```{r}
-p + geom_point()
-```
-
-We can also create a bar plot.
-
-```{r}
-p <- insurance %>% ggplot(aes(x = district, y = claims))
-p + geom_bar(stat = "identity")
-```
-
-Creating histograms is even easier.  Just specify the column that you want to graph as the x column.  No y is needed because a histogram is one-dimensional.  
-
-Take a x to be a random variable from a gamma distribution.
-
-```{r}
-gamma = tibble(x = rgamma(1000, shape = 1, rate = 2))
-```
-
-
-```{r}
-p <- gamma %>% ggplot(aes(x))
+```{r warning = F}
 p + geom_histogram()
 ```
 
-We can graph a density instead of a histogram by using `geom_density` instead of `geom_hist`.
+Different plots are called "geoms" for "geometric objects".  Geometry = Geo (space) + metre (measure), and graphs measure data.  For instance, instead of creating a histogram, we can draw a gamma distribution with `stat_density`.
 
 ```{r}
-p + geom_density(fill = "grey")
+p + stat_density()
+```
+
+Create an xy plot by adding and `x` and a `y` argument to `aesthetic`.
+
+```{r}
+insurance %>% 
+  ggplot(aes(x = holders, y = claims)) + 
+  geom_point()
+```
+
+## Data manipulation chaining
+
+Pipes allow for data manipulations to be chained with visualizations.
+
+```{r}
+termlife %>% 
+  filter(FACE > 0) %>% 
+  mutate(INCOME_AGE_RATIO = INCOME/AGE) %>% 
+  ggplot(aes(INCOME_AGE_RATIO, FACE)) + 
+  geom_point() + 
+  theme_bw()
 ```
 

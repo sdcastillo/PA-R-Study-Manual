@@ -10,7 +10,8 @@ ABC Health Insurance company is building a model to predict medical claims.  Usi
 
 ```{r message = F}
 library(tidyverse)
-data <- read_csv("C:/Users/sam.castillo/Desktop/R Manual Data/health_insurance.csv") %>% 
+library(ExamPAData)
+data <- health_insurance %>% 
   select(age, sex, charges) %>%  #put this into an r library
   rename(claims = charges)
 

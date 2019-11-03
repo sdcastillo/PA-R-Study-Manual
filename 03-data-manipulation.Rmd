@@ -6,7 +6,7 @@ format_table <- function(data){data %>% kableExtra::kable("html") %>% kable_styl
 ```
 
 
-About two hours in this exam will be spent just on data manipulation.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.
+About two hours in this exam will be spent just on data manipulation.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.  In addition, a common saying when building models is "garbage in means garbage out", on this exam, mistakes on the data manipulation can lead to lost points on the modeling sections.
 
 Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
 
@@ -37,7 +37,7 @@ library(ExamPAData)
 
 The data that we are using is `health_insurance`, which has information on patients and their health care costs.
 
-The descriptions of the columns are below.  The technical name for this is a "data dictionary", and one will be provided to you on the real exam.
+The descriptions of the columns are below.  
 
 - `age`: Age of the individual
 - `sex`: Sex
@@ -54,7 +54,7 @@ library(tidyverse)
 head(health_insurance)
 ```
 
-Using a pipe is an alternative way of doing this. Because this is more time-efficient, this will be the preferred method in this manual.  
+Using a pipe is an alternative way of doing this. 
 
 ```{r eval = F}
 health_insurance %>% head()
@@ -74,7 +74,7 @@ One of the most useful data science tools is counting things.  The function `cou
 health_insurance %>% count(children)
 ```
 
-Two categories can be counted at once.  This creates a table with all combinations of `cut` and `color` and shows the number of records in each category.
+Two categories can be counted at once.  This creates a table with all combinations of `region` and `sex` and shows the number of records in each category.
 
 ```{r}
 health_insurance %>% count(region, sex)
@@ -102,7 +102,7 @@ health_insurance %>%
 
 ## Transform the data
 
-Transforming, manipulating, querying, and wrangling are all words for the task of changing the values in a data frame. For those Excel users out there, this can be interpreted as "what Pivot tables, VLOOKUP, INDEX/MATCH, and SUMIFF do". 
+Transforming, manipulating, querying, and wrangling are synonyms in data terminology.
 
 R syntax is designed to be similar to SQL.  They begin with a `SELECT`, use `GROUP BY` to aggregate, and have a `WHERE` to remove records.  Unlike SQL, the ordering of these does not matter.  `SELECT` can come after a `WHERE`.
 

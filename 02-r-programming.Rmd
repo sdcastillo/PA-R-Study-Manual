@@ -1,6 +1,6 @@
 # R programming
 
-There are already many great R tutorials available.  To save time, this book will cover the absolute essentials.  The book "R for Data Science" provides one such introduction.
+This book covers the bare minimum of R programming needed for Exam PA.  The book "R for Data Science" provides more detail.
 
 https://r4ds.had.co.nz/
 
@@ -230,6 +230,7 @@ add_together(x_vector, y_vector)
 Many functions in R actually return lists!  This is why R objects can be indexed with dollar sign.
 
 ```{r}
+library(ExamPAData)
 model <- lm(charges ~ age, data = health_insurance)
 model$coefficients
 ```
@@ -278,7 +279,7 @@ summary(data)
 
 ## Pipes
 
-The pipe operator `%>%` is a way of making code more readable and easier to edit. The way that we are taught to do functional composition is by nesting, which is slow to read and write.
+The pipe operator `%>%` is a way of making code *modular*, meaning that it can be written and executed in incremental steps.  Those familiar with Python's Pandas will be see that `%>%` is quite similar to ".".  This also makes code easier to read.
 
 In five seconds, tell me what the below code is doing.
 
@@ -286,7 +287,7 @@ In five seconds, tell me what the below code is doing.
 log(sqrt(exp(log2(sqrt((max(c(3, 4, 16))))))))
 ```
 
-Did you get the answer of 1?  If so, you are good at reading parenthesis.  This requires starting from the inner-most nested brackets and moving outwards from right to left.
+Getting to the answer of 1 requires starting from the inner-most nested brackets and moving outwards from right to left.
 
 The math notation would be slightly easier to read, but still painful.
 
@@ -312,9 +313,11 @@ max(c(3, 4, 16)) %>%
 
 ```
 
-You may not be convinced by this simple example using numbers; however, once we get to data manipulations in the next section the advantage of piping will become obvious.
+Pipes are exceptionally useful for data manipulations, which is covered in the next chapter.
 
-To quickly produce pipes, use `CTRL + SHIFT + M`.  By highlighting only certain sections, we can run the code in steps as if we were using a debugger.  This makes testing out code much faster.
+>**Tip:** To quickly produce pipes, use `CTRL + SHIFT + M`.  
+
+By highlighting only certain sections, we can run the code in steps as if we were using a debugger.  This makes testing out code much faster.
 
 ```{r}
 max(c(3, 4, 16))
@@ -355,6 +358,6 @@ max(c(3, 4, 16)) %>%
   log()
 ```
 
-Those familiar with Python's Pandas will be see that `%>%` is quite similar to ".".
+
 
 
