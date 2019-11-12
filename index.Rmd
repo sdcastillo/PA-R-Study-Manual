@@ -25,9 +25,12 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.net/pricing) for 
 
-- Practice Exams + Video solutions
+- Two **original** practice exams
 - Solutions to prior exams
-- An online discussion forum
+  - Hospital Readmissions (Completed)
+  - Student Success (Later this week)
+  - June 2019 Exam (Coming next week)
+- An online discussion forum **where I will answer your questions**
 
 **Video Example:**
 
