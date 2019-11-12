@@ -21,14 +21,17 @@ favicon: images/artificial_actuary_logo_favicon.png
 - `R code` examples
 - Tips on taking the exam
 
-## Purchase full access
+## Get full access
 
-While this book is viewable online, a PDF download, practice exams, and answers to exercises are available by signin up at [ExamPA.net](https://www.exampa.net/pricing)
+While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.net/pricing) for 
 
 - Practice Exams + Video solutions
 - Solutions to prior exams
 - An online discussion forum
 
+**Video Example:**
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/63HB7v3ZanU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## About the author
 

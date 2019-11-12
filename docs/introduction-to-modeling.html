@@ -128,7 +128,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What’s in this book</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#purchase-full-access"><i class="fa fa-check"></i><b>1.1</b> Purchase full access</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#get-full-access"><i class="fa fa-check"></i><b>1.1</b> Get full access</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i><b>1.2</b> About the author</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#help-to-make-this-book-even-better"><i class="fa fa-check"></i><b>1.3</b> Help to make this book even better</a></li>
 </ul></li>
@@ -368,10 +368,10 @@ To solve for <span class="math inline">\(\mathbf{\beta}\)</span>, we first need 
 <a class="sourceLine" id="cb188-3" title="3">}</a>
 <a class="sourceLine" id="cb188-4" title="4"></a>
 <a class="sourceLine" id="cb188-5" title="5"><span class="kw">get_rmse</span>(pred, test<span class="op">$</span>charges)</a></code></pre></div>
-<pre><code>## [1] 11985.74</code></pre>
+<pre><code>## [1] 12013.19</code></pre>
 <p>The above number does not tell us if this is a good model or not by itself. We need a comparison. The fastest check is to compare against a prediction of the mean. In other words, all values of the <code>y_hat</code> are the average of <code>charges</code></p>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1"><span class="kw">get_rmse</span>(<span class="kw">mean</span>(test<span class="op">$</span>charges), test<span class="op">$</span>charges)</a></code></pre></div>
-<pre><code>## [1] 12470.48</code></pre>
+<pre><code>## [1] 12742.66</code></pre>
 <p>The RMSE is <strong>higher</strong> (worse) when using just the mean, which is what we expect. <strong>If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.</strong></p>
 <p>The next test is to see if any assumptions have been violated.</p>
 <p>First, is there a pattern in the residuals? If there is, this means that the model is missing key information. For the model below, this is a <strong>yes</strong>, which means that this is a bad model. Because this is just for illustration, I’m going to continue using it, however.</p>
@@ -415,24 +415,24 @@ Figure 8.2: Normal Q-Q
 <tr class="odd">
 <td align="left">(Intercept)</td>
 <td align="right">1744.1</td>
-<td align="right">4393.2</td>
+<td align="right">4083.6</td>
 </tr>
 <tr class="even">
 <td align="left">bmi</td>
 <td align="right">51.4</td>
-<td align="right">124.0</td>
+<td align="right">125.2</td>
 </tr>
 <tr class="odd">
 <td align="left">age</td>
 <td align="right">22.3</td>
-<td align="right">51.7</td>
+<td align="right">54.0</td>
 </tr>
 </tbody>
 </table>
 <p>All interpretations should be based on the model which was trained on the entire data set. Obviously, this only makes a difference if you are interpreting the precise values of the coefficients. If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.</p>
 <div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1"><span class="kw">coefficients</span>(model)</a></code></pre></div>
 <pre><code>## (Intercept)         bmi         age 
-##  -6018.2263    294.3822    259.7529</code></pre>
+##  -6196.8728    318.4574    245.7664</code></pre>
 <p>Translating the above into an equation we have</p>
 <p><span class="math display">\[\hat{y_i} = -6,424.80 + 332.97 \space\text{bmi} + 241.93\space \text{age}\]</span></p>
 <p>For example, if a patient has <code>bmi = 27.9</code> and <code>age = 19</code> then predicted value is</p>
