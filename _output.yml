@@ -1,4 +1,5 @@
 bookdown::gitbook:
+  theme: united
   css: style.css
   highlight: tango
   config:
