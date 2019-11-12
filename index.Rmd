@@ -3,37 +3,58 @@ title: "Exam PA Study Manual"
 author: 
 - "Sam Castillo"
 date: "`r Sys.Date()`"
+github-repo: sdcastillo/PA-R-Study-Manual
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
+classoption: openany
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: rstudio/bookdown-demo
-description: "This will help you pass these exams"
+favicon: images/artificial_actuary_logo_favicon.png
 ---
 
-# Welcome
+# What's in this book
 
-\noindent\rule{\textwidth}{1pt}
-
-This book covers the source material for the SOA's Predictive Analytics Exam.
-
-<br>
-
-**Features**
-
-- All data sets used are packaged in a single R library
-- Reproducible R code
-- Explanations of the statistical concepts
+- Explanations of the statistical concepts (Clustering & PCA Sections Pending)
+- All data sets needed packaged in an R library
+- `R code` examples
 - Tips on taking the exam
-- Two **original** practice exams (coming soon)
 
-# The Exam
+## Purchase full access
 
-You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on a Prometric computer.  The syllabus uses fancy language to describe the topics covered on the exam, making it sound more difficult than it should be.  A good analogy is a job description that has many complex-sounding tasks, when in reality the day-to-day operations of the employee are far simpler.
+While this book is viewable online, a PDF download, practice exams, and answers to exercises are available by signin up at [ExamPA.net](https://www.exampa.net/pricing)
 
-https://www.soa.org/globalassets/assets/files/edu/2019/2019-12-exam-pa-syllabus.pdf
+- Practice Exams + Video solutions
+- Solutions to prior exams
+- An online discussion forum
+
+
+## About the author
+
+Sam Castillo is a predictive modeler at Milliman in Chicago, maintains a [blog](http://artificialactuary.com/) about the future of risk, and won the 2019 SOA Predictive Analytics and Fururism's [Jupyter contest](https://nbviewer.jupyter.org/github/SOASections/SOA-Predictive-Modeling-Innovation-and-Industry-Contest-2019-First-Place/blob/master/Predicting%20Uncertainty%20Prediction%20Intervals%20from%20Gradient%20Boosted%20Quantile%20Regression.ipynb).
+
+## Help to make this book even better
+
+**Your suggested improvements can be added to this book immediatelly.**  A special thanks to the following people who have helped to improve this book and or study package: Erlan Wheeler, David Hill, and Caden Collier.
+
+To submit suggestions, see the 20:00 mark of https://www.youtube.com/watch?v=dVqVscgwSpw
+
+![](images/gitbook_pull_request.png)
+
+1.  Clicking the "edit" button at the top of this page
+2.  Signing in (or signing up) for github
+3.  Forking the repository
+4.  Submitting a pull request with the improvements.
+
+
+
+
+# The exam
+
+The main challenge  of this exam is in communication: both understanding what they want you to do as well as telling the grader what it is that you did.
+
+You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on a Prometric toaster-oven computer.  The syllabus uses fancy language to describe the topics covered on the exam, making it sound more difficult than it should be.  A good analogy is a job description that has many complex-sounding tasks, when in reality the day-to-day operations of the employee are far simpler.
 
 A non-technical translation is as follows:
 
@@ -50,10 +71,12 @@ A non-technical translation is as follows:
 
 **Machine learning and statistics (40-50%)**
 
-- Build models
 - Interpret results within a business context
+- Change model parameters
 
-# Learning
+
+
+# You already know what learning is
 
 All of use are already familiar with how to learn - by improving from our mistakes.  By repeating what is successful and avoiding what results in failure, we learn by doing, by experience, or trial-and-error.  Machines learn in a similar way.
 
@@ -66,6 +89,3 @@ The more practice problems that we do, the larger the training data set, and the
 We can clearly state our objective: get as many correct answers as possible! We want to correctly predict the solution to every problem.  Said another way, we are trying to minimize the error, known as the "loss function".  
 
 Different study methods work well for different people.  Some cover material quickly and others slowly absorb every detail.  A model has many "parameters" such as the "learning rate".  The only way to know which parameters are best is to test them on real data, known as "training".
-
-
-

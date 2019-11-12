@@ -239,6 +239,8 @@ actuary_salaries %>% glimpse()
 5.  When grouping by industry, what is the highest `salary_mid`?  What about `salary_high`?  What is the lowest `salary_low`?
 6.  There is a mistake when `salary_low == 11`.  Find and fix this mistake, and then rerun the code from the previous task.
 7.  Create a new column, called `n_exams`, which is an integer.  Use 7 for ASA/ACAS and 10 for FSA/FCAS.  Use the code below as a starting point and fill in the `_` spaces
+8. Create a column called `social_life`, which is equal to `n_exams`/`experience`.  What is the average (mean) `social_life` by industry?  Bonus question: what is wrong with using this as a statistical measure?
+
 
 ```{r eval = F, echo = T}
 actuary_salaries <- actuary_salaries %>% 
@@ -264,10 +266,12 @@ actuary_salaries %>% count(industry)
 
 ```{r}
 #method 1
-actuary_salaries <- actuary_salaries %>% mutate(salary_high = as.numeric(salary_high))
+actuary_salaries <- actuary_salaries %>% 
+  mutate(salary_high = as.numeric(salary_high))
 
 #method 2
-actuary_salaries <- actuary_salaries %>% modify_at("salary_high", as.numeric)
+actuary_salaries <- actuary_salaries %>% 
+  modify_at("salary_high", as.numeric)
 ```
 
 3.  What are the highest and lowest salaries for an actuary in Health with 5 exams passed?
@@ -302,8 +306,10 @@ actuary_salaries %>%
 
 ```{r }
 actuary_salaries <- actuary_salaries %>% 
-  mutate(salary_low = ifelse(salary_low == 11, yes = 114, no = salary_low),
-         salary_high = ifelse(salary_high == 66, yes = 166, no = salary_high))
+  mutate(salary_low = ifelse(salary_low == 11, 
+                             yes = 114, no = salary_low),
+         salary_high = ifelse(salary_high == 66, 
+                              yes = 166, no = salary_high))
 
 #the minimum salary low is now 48
 actuary_salaries %>% 
@@ -345,7 +351,7 @@ actuary_salaries %>%
   mutate(social_life = n_exams/experience) %>% 
   group_by(industry) %>% 
   summarise(avg_social_life = mean(social_life))
-
-#this is not REALLY an average as the number of people, or number of actuaries, are not taken into consideration.  To correctly take the average, we would need use a weighted average like sum(number_actuaries*social_life)/sum(number_actuaries)
 ```
+
+This is not REALLY an average as the number of people, or number of actuaries, are not taken into consideration.  To correctly take the average, we would need use a weighted average like sum(number_actuaries*social_life)/sum(number_actuaries)
 

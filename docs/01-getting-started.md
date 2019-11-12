@@ -1,31 +1,9 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Getting started 
-
-This book is designed to get you set up within an hour.  If this is your first time using R, then you will need to install two pieces of software, R and RStudio.  Once these four steps have been done you should not need to download anything else needed for this book.  You will be able to work offline.
-
-## Download ISLR
-
-This book references the publically-avialable textbook "An Introduction to Statistical Learning", which can be downloaded for free
-
-http://faculty.marshall.usc.edu/gareth-james/ISL/
-
-## Installing R
-
-This is the engine that *runs* the code.  https://cran.r-project.org/mirrors.html
-
-## Installing RStudio
-
-This is the tool that helps you to *write* the code.  Just as MS Word creates documents, RStudio creates R scripts and other documents.  Download RStudio Desktop (the free edition) and choose a place on your computer to install it.
-
-https://rstudio.com/products/rstudio/download/
-
-## Set the R library
-
-R code is organized into libraries.  You want to use the exact same code that will be on the Prometric Computers.  This requires installing older versions of libraries.  Change your R library to the one which was included within the SOA's modules.
-
-
-```r
-#.libPaths("PATH_TO_SOAS_LIBRARY/PAlibrary")
-```
 
 ## Download the data
 
@@ -33,7 +11,8 @@ For your convenience, all data in this book, including data from prior exams and
 
 
 ```r
-#check if devtools is installed and then install ExamPAData from github
+#check if devtools is installed
+#then install ExamPAData from github
 if("devtools" %in% installed.packages()){
   library(devtools)
   install_github("https://github.com/sdcastillo/ExamPAData")
@@ -69,3 +48,31 @@ summary(insurance)
 ##  Max.   :400.00
 ```
 
+## Download ISLR
+
+This book references the publically-avialable textbook "An Introduction to Statistical Learning", which can be downloaded for free
+
+http://faculty.marshall.usc.edu/gareth-james/ISL/
+
+If you already have R and Rstudio installed then skip to "Download the data". 
+
+## New users
+
+Install R:
+
+This is the engine that *runs* the code.  https://cran.r-project.org/mirrors.html
+
+Install RStudio
+
+This is the tool that helps you to *write* the code.  Just as MS Word creates documents, RStudio creates R scripts and other documents.  Download RStudio Desktop (the free edition) and choose a place on your computer to install it.
+
+https://rstudio.com/products/rstudio/download/
+
+Set the R library
+
+R code is organized into libraries.  You want to use the exact same code that will be on the Prometric Computers.  This requires installing older versions of libraries.  Change your R library to the one which was included within the SOA's modules.
+
+
+```r
+.libPaths("PATH_TO_SOAS_LIBRARY/PAlibrary")
+```

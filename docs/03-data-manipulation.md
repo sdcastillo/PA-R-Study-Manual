@@ -3,7 +3,7 @@
 
 
 
-About two hours in this exam will be spent just on data manipulation.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.
+About two hours in this exam will be spent just on data manipulation.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.  In addition, a common saying when building models is "garbage in means garbage out", on this exam, mistakes on the data manipulation can lead to lost points on the modeling sections.
 
 Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
 
@@ -35,7 +35,7 @@ library(ExamPAData)
 
 The data that we are using is `health_insurance`, which has information on patients and their health care costs.
 
-The descriptions of the columns are below.  The technical name for this is a "data dictionary", and one will be provided to you on the real exam.
+The descriptions of the columns are below.  
 
 - `age`: Age of the individual
 - `sex`: Sex
@@ -65,12 +65,14 @@ head(health_insurance)
 ## 6    31 female  25.7        0 no     southeast   3757.
 ```
 
-Using a pipe is an alternative way of doing this. Because this is more time-efficient, this will be the preferred method in this manual.  
+Using a pipe is an alternative way of doing this. 
 
 
 ```r
 health_insurance %>% head()
 ```
+
+>**Shortcut**: Use `CTRL` + `SHFT` + `M` to create pipes `%>%`
 
 The `glimpse` function is a transpose of the `head()` function, which can be more spatially efficient.  This also gives you the dimension (1,338 rows, 7 columns).
 
@@ -110,7 +112,7 @@ health_insurance %>% count(children)
 ## 6        5    18
 ```
 
-Two categories can be counted at once.  This creates a table with all combinations of `cut` and `color` and shows the number of records in each category.
+Two categories can be counted at once.  This creates a table with all combinations of `region` and `sex` and shows the number of records in each category.
 
 
 ```r
@@ -189,7 +191,7 @@ health_insurance %>%
 
 ## Transform the data
 
-Transforming, manipulating, querying, and wrangling are all words for the task of changing the values in a data frame. For those Excel users out there, this can be interpreted as "what Pivot tables, VLOOKUP, INDEX/MATCH, and SUMIFF do". 
+Transforming, manipulating, querying, and wrangling are synonyms in data terminology.
 
 R syntax is designed to be similar to SQL.  They begin with a `SELECT`, use `GROUP BY` to aggregate, and have a `WHERE` to remove records.  Unlike SQL, the ordering of these does not matter.  `SELECT` can come after a `WHERE`.
 
@@ -418,6 +420,8 @@ FROM health_insurance
 
 ## Exercises
 
+Run this code on your computer to answer these exercises.
+
 The data `actuary_salaries` contains the salaries of actuaries collected from the DW Simpson survey.  Use this data to answer the exercises below.
 
 
@@ -443,6 +447,8 @@ actuary_salaries %>% glimpse()
 5.  When grouping by industry, what is the highest `salary_mid`?  What about `salary_high`?  What is the lowest `salary_low`?
 6.  There is a mistake when `salary_low == 11`.  Find and fix this mistake, and then rerun the code from the previous task.
 7.  Create a new column, called `n_exams`, which is an integer.  Use 7 for ASA/ACAS and 10 for FSA/FCAS.  Use the code below as a starting point and fill in the `_` spaces
+8. Create a column called `social_life`, which is equal to `n_exams`/`experience`.  What is the average (mean) `social_life` by industry?  Bonus question: what is wrong with using this as a statistical measure?
+
 
 
 ```r
@@ -481,10 +487,12 @@ actuary_salaries %>% count(industry)
 
 ```r
 #method 1
-actuary_salaries <- actuary_salaries %>% mutate(salary_high = as.numeric(salary_high))
+actuary_salaries <- actuary_salaries %>% 
+  mutate(salary_high = as.numeric(salary_high))
 
 #method 2
-actuary_salaries <- actuary_salaries %>% modify_at("salary_high", as.numeric)
+actuary_salaries <- actuary_salaries %>% 
+  modify_at("salary_high", as.numeric)
 ```
 
 3.  What are the highest and lowest salaries for an actuary in Health with 5 exams passed?
@@ -540,8 +548,10 @@ actuary_salaries %>%
 
 ```r
 actuary_salaries <- actuary_salaries %>% 
-  mutate(salary_low = ifelse(salary_low == 11, yes = 114, no = salary_low),
-         salary_high = ifelse(salary_high == 66, yes = 166, no = salary_high))
+  mutate(salary_low = ifelse(salary_low == 11, 
+                             yes = 114, no = salary_low),
+         salary_high = ifelse(salary_high == 66, 
+                              yes = 166, no = salary_high))
 
 #the minimum salary low is now 48
 actuary_salaries %>% 
@@ -629,8 +639,5 @@ actuary_salaries %>%
 ## 4 Pension            1.00
 ```
 
-```r
-#this is not REALLY an average as the number of people, or number of actuaries, are not taken into consideration.  To correctly take the average, we would need use a weighted average like sum(number_actuaries*social_life)/sum(number_actuaries)
-```
-
+This is not REALLY an average as the number of people, or number of actuaries, are not taken into consideration.  To correctly take the average, we would need use a weighted average like sum(number_actuaries*social_life)/sum(number_actuaries)
 

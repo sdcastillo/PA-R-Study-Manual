@@ -169,7 +169,9 @@ ls[2]
 Lists can contain vectors, other lists, and any other object.
 
 ```{r}
-everything <- list(vector = c(1,2,3), character = c("a", "b", "c"), list = ls)
+everything <- list(vector = c(1,2,3), 
+                   character = c("a", "b", "c"), 
+                   list = ls)
 everything
 ```
 
@@ -254,7 +256,8 @@ result$Product
 R is an old programming language.  The original `data.frame` object has been updated with the newer and better `tibble` (like the word "table").  **Tibbles are really lists of vectors, where each column is a vector**.  
 
 ```{r}
-library(tibble) #the tibble library has functions for making tibbles
+#the tibble library has functions for making tibbles
+library(tibble) 
 data <- tibble(age = c(25, 35), has_fsa = c(F, T))
 data
 ```
@@ -296,7 +299,8 @@ $$log(\sqrt{e^{log_2(\sqrt{max(3,4,16)})}})$$
 Here is the same algebra using the pipe.  To read this, replace the `%>%` with the word `THEN`.
 
 ```{r message = F, warning = F}
-library(dplyr) #the pipe is from the dplyr library
+#the pipe is from the dplyr library
+library(dplyr) 
 max(c(3, 4, 16)) %>% 
   sqrt() %>% 
   log2() %>% 

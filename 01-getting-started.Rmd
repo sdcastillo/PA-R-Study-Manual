@@ -10,7 +10,8 @@ output:
 For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called `ExamPAData` by the author.  To access, simplly run the below lines of code to download this data.
 
 ```{r eval = F}
-#check if devtools is installed and then install ExamPAData from github
+#check if devtools is installed
+#then install ExamPAData from github
 if("devtools" %in% installed.packages()){
   library(devtools)
   install_github("https://github.com/sdcastillo/ExamPAData")

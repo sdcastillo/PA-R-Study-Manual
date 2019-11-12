@@ -139,7 +139,8 @@ Let's create an 80% training set and 20% testing set.  You don't need to worry a
 ```{r message = F}
 library(caret)
 #create a train/test split
-index <- createDataPartition(y = health_insurance$charges, p = 0.8, list = F) %>% as.numeric()
+index <- createDataPartition(y = health_insurance$charges, 
+                             p = 0.8, list = F) %>% as.numeric()
 train <-  health_insurance %>% slice(index)
 test <- health_insurance %>% slice(-index)
 ```
@@ -194,8 +195,10 @@ The below is from an excellent post of Stack Exchange.
 Once you have chosen your model, you should re-train over the entire data set.  This is to make the coefficients more stable because `n` is larger.  Below you can see that the standard error is lower after training over the entire data set.
 
 ```{r }
-all_data <- lm(data = health_insurance, formula = charges ~ bmi + age)
-testing <- lm(data = test, formula = charges ~ bmi + age)
+all_data <- lm(data = health_insurance, 
+               formula = charges ~ bmi + age)
+testing <- lm(data = test, 
+              formula = charges ~ bmi + age)
 ```
 
 ```{r fig.cap="Coefficient Standard Error on Test vs. All Data", echo = F, message=F}
@@ -522,14 +525,17 @@ About 40% do not have a claim while 60% have at least one claim.
 
 ```{r}
 set.seed(42)
-index <- createDataPartition(y = auto_claim$CLM_FLAG, p = 0.8, list = F) %>% as.numeric()
-auto_claim <- auto_claim %>% mutate(target = as.factor(ifelse(CLM_FLAG == "Yes", 1,0)))
+index <- createDataPartition(y = auto_claim$CLM_FLAG, 
+                             p = 0.8, list = F) %>% as.numeric()
+auto_claim <- auto_claim %>% 
+  mutate(target = as.factor(ifelse(CLM_FLAG == "Yes", 1,0)))
 train <-  auto_claim %>% slice(index)
 test <- auto_claim %>% slice(-index)
 
-frequency <- glm(target ~ AGE + GENDER + MARRIED + CAR_USE + BLUEBOOK + CAR_TYPE + AREA
-             , data=train, 
-             family = binomial(link="logit"))
+frequency <- glm(target ~ AGE + GENDER + MARRIED + CAR_USE + 
+                   BLUEBOOK + CAR_TYPE + AREA, 
+                 data=train, 
+                 family = binomial(link="logit"))
 ```
 
 All of the variables except for the `CAR_TYPE` are highly significant.  The car types `SPORTS CAR` and `SUV` appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for `CAR_TYPE == SPORTS CAR` and `CAR_TYPE == SUV`.
@@ -717,7 +723,7 @@ In ISLR, Hastie et al show that this results in coefficients being forced to be 
 
 ## Elastic Net
 
-The Elastic Net uses a penalty term which is between the L1 and L2 norms. The penalty term is a weighted average using the mixing parameter $ 0 \leq \alpha \leq 1$. The loss fucntion is then
+The Elastic Net uses a penalty term which is between the L1 and L2 norms. The penalty term is a weighted average using the mixing parameter $0 \leq \alpha \leq 1$. The loss fucntion is then
 
 $$\text{RSS} + (1 - \alpha)/2 \sum_{j = 1}^{p}\beta_j^2 + \alpha \sum_{j = 1}^p |\beta_j|$$
 When $\alpha = 1$ is turns into a Lasso; when $\alpha = 1$ this is the Ridge model. 

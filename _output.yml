@@ -11,9 +11,12 @@ bookdown::gitbook:
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   dev: "cairo_pdf"
+  toc_unnumbered: yes
+  toc_depth: 2
   includes:
     in_header: preamble.tex
   latex_engine: xelatex
   citation_package: natbib
   keep_tex: yes
 bookdown::epub_book: default
+output_dir: "docs"

@@ -141,7 +141,8 @@ tree$cptable %>%
 The SOA will give you code to find the lowest CP value such as below.  This may or may not be useful depending on if they are asking for predictive performance or interpretability.
 
 ```{r}
-pruned_tree <- prune(tree,cp = tree$cptable[which.min(tree$cptable[, "xerror"]), "CP"])
+pruned_tree <- prune(tree,
+                     cp = tree$cptable[which.min(tree$cptable[, "xerror"]), "CP"])
 ```
 
 To make a simple tree, there are a few options
@@ -156,7 +157,8 @@ For instance, using these suggestions allows for a simpler tree to be fit.
 ```{r message = F}
 library(caret)
 set.seed(42)
-index <- createDataPartition(y = health_insurance$charges, p = 0.8, list = F)
+index <- createDataPartition(y = health_insurance$charges, 
+                             p = 0.8, list = F)
 train <- health_insurance %>% slice(index)
 test <- health_insurance %>% slice(-index)
 
@@ -246,19 +248,18 @@ df <- health_insurance %>% mutate(
 p1 <- df %>% 
   ggplot(aes(bmi, age, color = prediction)) + 
   geom_point() + 
-  scale_color_viridis_c() + 
   theme_bw() + 
   labs(title ="Decision Tree") + 
   theme(legend.position = "none")
 
-rf <- randomForest(charges ~ age + bmi, data = health_insurance, ntree = 50)
+rf <- randomForest(charges ~ age + bmi, 
+                   data = health_insurance, ntree = 50)
 df <- health_insurance %>% mutate(
   prediction = predict(rf, health_insurance))
 
 p2 <- df %>% 
   ggplot(aes(bmi, age, color = prediction)) + 
   geom_point() + 
-  scale_color_viridis_c() + 
   theme_bw() + 
   labs(title ="Random Forest") + 
   theme(legend.position = "none")
@@ -293,7 +294,8 @@ rf_data %>% glimpse(50)
 ```{r message = F}
 library(caret)
 set.seed(42)
-index <- createDataPartition(y = rf_data$charges, p = 0.8, list = F)
+index <- createDataPartition(y = rf_data$charges, 
+                             p = 0.8, list = F)
 train <- rf_data %>% slice(index)
 test <- rf_data %>% slice(-index)
 ```
@@ -357,8 +359,12 @@ For the RandomForest, this is done with `pdp::partial()`.
 
 ```{r message = F,fig.cap="Partial Dependence", fig.height=4}
 library(pdp)
-bmi <- pdp::partial(rf, pred.var = "bmi", grid.resolution = 20) %>% autoplot() + theme_bw()
-age <- pdp::partial(rf, pred.var = "age", grid.resolution = 20) %>% autoplot() + theme_bw()
+bmi <- pdp::partial(rf, pred.var = "bmi", 
+                    grid.resolution = 20) %>% 
+  autoplot() + theme_bw()
+age <- pdp::partial(rf, pred.var = "age", 
+                    grid.resolution = 20) %>% 
+  autoplot() + theme_bw()
 
 ggarrange(bmi, age)
 ```
@@ -582,9 +588,13 @@ An actuary has trained a predictive model and chosen the best hyperparameters, c
 ```{r, message = F, eval = F}
 library(caret)
 set.seed(42)
-data <- health_insurance %>% sample_n(1000) #Uncomment this when completing this exercise
+#Take only 1000 records 
+#Uncomment this when completing this exercise
+data <- health_insurance %>% sample_n(1000) 
 
-index <- createDataPartition(y = data$charges, p = 0.8, list = F) %>% as.numeric()
+index <- createDataPartition(
+  y = data$charges, p = 0.8, list = F) %>% 
+  as.numeric()
 train <-  health_insurance %>% slice(index)
 test <- health_insurance %>% slice(-index)
 
@@ -621,9 +631,9 @@ This example looks at 27 combinations of hyper parameters.
 ```{r, message = F, eval = F}
 tunegrid <- expand.grid(
     interaction.depth = c(1,3,5),
-                    n.trees = c(20, 40, 100), 
-                    shrinkage = c(0.01, 0.001, 0.0001),
-                    n.minobsinnode = 20)
+    n.trees = c(20, 40, 100), 
+    shrinkage = c(0.01, 0.001, 0.0001),
+    n.minobsinnode = 20)
 nrow(tunegrid)
 ```
 
@@ -633,7 +643,8 @@ gbm <- train(charges ~ bmi + age + sex + region,
             method='gbm', 
             tuneGrid=tunegrid, 
             trControl=control,
-            verbose = FALSE#Switch this to TRUE to see useful output
+            #Show detailed output
+            verbose = FALSE
             )
 ```
 

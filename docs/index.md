@@ -1,39 +1,60 @@
 --- 
-title: "The Predictive Analytics R Study Manual"
+title: "Exam PA Study Manual"
 author: 
 - "Sam Castillo"
-date: "2019-10-29"
+date: "2019-11-12"
+github-repo: sdcastillo/PA-R-Study-Manual
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
+classoption: openany
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: rstudio/bookdown-demo
-description: "This will help you pass these exams"
----
-# Welcome {#intro}
+favicon: images/artificial_actuary_logo_favicon.png
 ---
 
-This book prepares you for the SOA's Predictive Analytics (PA) Exam.  
+# What's in this book
 
-**Note:** This book is still being written and this is only a preview.
-
-Many candidates start with prior knowledge about parts of this exam.  Very few are learning all of these topics for the first time. **This book allows you to skip the redundant sections and just focus on the new material.**  If you are new to this whole business of machine learning and R programming, great!  Every page will be useful.  
-
-**Features**
-
-- All data sets used are packaged in a single R library
-- Clean, easy-to-read, efficient R code
-- Explanations of the statistical concepts
+- Explanations of the statistical concepts (Clustering & PCA Sections Pending)
+- All data sets needed packaged in an R library
+- `R code` examples
 - Tips on taking the exam
-- Two **original** practice exams
 
-# The Exam
+## Purchase full access
 
-You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on a Prometric computer.  The syllabus uses fancy language to describe the topics covered on the exam, making it sound more difficult than it should be.  A good analogy is a job description that has many complex-sounding tasks, when in reality the day-to-day operations of the employee are far simpler.
+While this book is viewable online, a PDF download, practice exams, and answers to exercises are available by signin up at [ExamPA.net](https://www.exampa.net/pricing)
 
-https://www.soa.org/globalassets/assets/files/edu/2019/2019-12-exam-pa-syllabus.pdf
+- Practice Exams + Video solutions
+- Solutions to prior exams
+- An online discussion forum
+
+
+## About the author
+
+Sam Castillo is a predictive modeler at Milliman in Chicago, maintains a [blog](http://artificialactuary.com/) about the future of risk, and won the 2019 SOA Predictive Analytics and Fururism's [Jupyter contest](https://nbviewer.jupyter.org/github/SOASections/SOA-Predictive-Modeling-Innovation-and-Industry-Contest-2019-First-Place/blob/master/Predicting%20Uncertainty%20Prediction%20Intervals%20from%20Gradient%20Boosted%20Quantile%20Regression.ipynb).
+
+## Help to make this book even better
+
+**Your suggested improvements can be added to this book immediatelly.**  A special thanks to the following people who have helped to improve this book and or study package: Erlan Wheeler, David Hill, and Caden Collier.
+
+To submit suggestions, see the 20:00 mark of https://www.youtube.com/watch?v=dVqVscgwSpw
+
+![](images/gitbook_pull_request.png)
+
+1.  Clicking the "edit" button at the top of this page
+2.  Signing in (or signing up) for github
+3.  Forking the repository
+4.  Submitting a pull request with the improvements.
+
+
+
+
+# The exam
+
+The main challenge  of this exam is in communication: both understanding what they want you to do as well as telling the grader what it is that you did.
+
+You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on a Prometric toaster-oven computer.  The syllabus uses fancy language to describe the topics covered on the exam, making it sound more difficult than it should be.  A good analogy is a job description that has many complex-sounding tasks, when in reality the day-to-day operations of the employee are far simpler.
 
 A non-technical translation is as follows:
 
@@ -48,19 +69,23 @@ A non-technical translation is as follows:
 - Find data errors planted by the SOA
 - Perform queries (aggregations, summaries, transformations)
 
-**Making decisions based on machine learning and statistics knowledge (40-50%)**
+**Machine learning and statistics (40-50%)**
 
-- Understand several algorithms from a high level and be able to interpret and explain results in english
-- Read R documentation about models and use this to make decisions
+- Interpret results within a business context
+- Change model parameters
 
-# Preface - What is Machine Learning?
 
-All of use are already familiar with how to learn - by learning from our mistakes.  By repeating what is successful and avoiding what results in failure, we learn by doing, by experience, or trial-and-error.  Some study methods work well, but other methods do not.  We all know that memorizing answers without understanding concepts is an ineffective method, and that doing many practice problems is better than doing only a few.  These ideas apply to how computers learn as much as they do to how humans learn.
 
-Take the example of preparing for an actuarial exam.  We can clearly state our objective: get as many correct answers as possible! We want to correctly predict the solution to every problem.  Said another way, we are trying to minimize the error, the percentage of incorrect problems.  Later on, we will see how choosing the objective function changes how models are fit.
+# You already know what learning is
 
-The "data" are the practice problems, and the “label” is the answer (A,B,C,D,E).  We want to build a “mental model” that reads the question and predicts the answer.  The SOA suggests 100 hours per hour of exam, which means that actuaries train on hundreds of problems before the real exam.  We don’t have access to the questions that will be on the exam ahead of time, and so this represents “validation” or “holdout” data.  In the chapter on cross-validation, we will see how computers use hold-out sets to test model performance.
+All of use are already familiar with how to learn - by improving from our mistakes.  By repeating what is successful and avoiding what results in failure, we learn by doing, by experience, or trial-and-error.  Machines learn in a similar way.
 
-The more practice problems that we do, the larger the training data set, and the better our "mental model" becomes.  When we see new problems, ones which have not appeared in the practice exams, we often have a difficult time.  Problems which we have seen before are easier, and we have more confidence in our answers.  Statistics tells us that as the sample size increases, model performance tends to increase.  More difficult concepts tend to require more practice, and more complex machine learning problems require more data.
+Take for example the process of studying for an exam.  Some study methods work well, but other methods do not.  The "data" are the practice problems, and the “label” is the answer (A,B,C,D,E).  We want to build a mental "model” that reads the question and predicts the answer.
 
-We typically save time by only doing odd-numbered problems.  This insures that we still get the same proportion of each type of question while doing fewer problems.  If we are unsure of a question, we will often seek a second opinion, or ask an online forum for help.  Later on, we will see how “down-sampling”, “bagging”, and “boosting” are all similar concepts.
+We all know that memorizing answers without understanding concepts is ineffective, and statistics calls this "overfitting".  Conversely, not learning enough of the details and only learning the high-level concepts is "underfitting".
+
+The more practice problems that we do, the larger the training data set, and the better the prediction.  When we see new problems, ones which have not appeared in the practice exams, we often have a difficult time. Quizing ourselves on realistic questions estimates our preparedness, and this is identical to a process known as "holdout testing" or "cross-validation". 
+
+We can clearly state our objective: get as many correct answers as possible! We want to correctly predict the solution to every problem.  Said another way, we are trying to minimize the error, known as the "loss function".  
+
+Different study methods work well for different people.  Some cover material quickly and others slowly absorb every detail.  A model has many "parameters" such as the "learning rate".  The only way to know which parameters are best is to test them on real data, known as "training".

@@ -1,14 +1,21 @@
 # R programming
 
-There are already many great R tutorials available.  To save time, this book will cover the absolute essentials.  The book "R for Data Science" provides one such introduction.
+This book covers the bare minimum of R programming needed for Exam PA.  The book "R for Data Science" provides more detail.
 
 https://r4ds.had.co.nz/
 
 ## Notebook chunks
 
-On the Exam, you will start with an .Rmd (R Markdown) template.  The way that this book writes code is in the [R Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html). Learning markdown is useful for other web development and documentation tasks as well.
+On the Exam, you will start with an .Rmd (R Markdown) template, which organize code into [R Notebooks](https://bookdown.org/yihui/rmarkdown/notebook.html). Within each notebook, code is organized into chunks.  
 
-Code is organized into chunks.  To run everything in a chunk quickly, press `CTRL + SHIFT + ENTER`.  To create a new chunk, use `CTRL + ALT + I`.
+
+```r
+#this is a chunk
+```
+
+Your time is valuable.  Throughout this book, I will include useful keyboard shortcuts.
+
+>**Shortcut:** To run everything in a chunk quickly, press `CTRL + SHIFT + ENTER`.  To create a new chunk, use `CTRL + ALT + I`.
 
 ## Basic operations
 
@@ -59,7 +66,9 @@ The usual math operations apply.
 ## [1] 8
 ```
 
-There are two assignment operators: `=` and `<-`.  The latter is preferred because it is specific to assigning a variable to a value.  The "=" operator is also used for assigning values in functions (see the functions section).  In R, the shortcut `ALT + -` creates a `<-`.
+There are two assignment operators: `=` and `<-`.  The latter is preferred because it is specific to assigning a variable to a value.  The "=" operator is also used for assigning values in functions (see the functions section).  
+
+>**Shortcut:** `ALT + -` creates a `<-`..
 
 
 ```r
@@ -153,6 +162,21 @@ character <- "The"
 character_vector <- c("The", "Quick")
 ```
 
+Characters are combined with the `paste` function.
+
+
+```r
+a = "The"
+b = "Quick"
+c = "Brown"
+d = "Fox"
+paste(a,b,c,d)
+```
+
+```
+## [1] "The Quick Brown Fox"
+```
+
 Factors are characters that expect only specific values.  A character can take on any value.  A factor is only allowed a finite number of values.  This reduces the memory size.
 
 The below factor has only one "level", which is the list of assigned values.
@@ -179,6 +203,8 @@ levels(factor_vector)
 ## [1] "Quick" "The"
 ```
 
+**In building linear models, the order of the factors matters.**  In GLMs, the "reference level" or "base level" should always be the level which has the most observations.  This will be covered in the section on linear models.
+
 Booleans are just True and False values.  R understands `T` or `TRUE` in the same way.  When doing math, bools are converted to 0/1 values where 1 is equivalent to TRUE and 0 FALSE.
 
 
@@ -190,6 +216,17 @@ bool_true*bool_false
 
 ```
 ## [1] 0
+```
+
+Booleans are automatically converted into 0/1 values when there is a math operation.
+
+
+```r
+bool_true + 1
+```
+
+```
+## [1] 2
 ```
 
 Vectors work in the same way.
@@ -342,7 +379,9 @@ Lists can contain vectors, other lists, and any other object.
 
 
 ```r
-everything <- list(vector = c(1,2,3), character = c("a", "b", "c"), list = ls)
+everything <- list(vector = c(1,2,3), 
+                   character = c("a", "b", "c"), 
+                   list = ls)
 everything
 ```
 
@@ -474,15 +513,55 @@ add_together(x_vector, y_vector)
 ## [1] 5 7 9
 ```
 
+Many functions in R actually return lists!  This is why R objects can be indexed with dollar sign.
+
+
+```r
+library(ExamPAData)
+model <- lm(charges ~ age, data = health_insurance)
+model$coefficients
+```
+
+```
+## (Intercept)         age 
+##   3165.8850    257.7226
+```
+
+Here's a function that returns a list.
+
+
+```r
+sum_multiply <- function(x,y){
+  sum <- x + y
+  product <- x*y
+  list("Sum" = sum, "Product" = product)
+}
+
+result <- sum_multiply(2,3)
+result$Sum
+```
+
+```
+## [1] 5
+```
+
+```r
+result$Product
+```
+
+```
+## [1] 6
+```
+
 ## Data frames
 
 R is an old programming language.  The original `data.frame` object has been updated with the newer and better `tibble` (like the word "table").  **Tibbles are really lists of vectors, where each column is a vector**.  
 
 
 ```r
-library(tibble) #the tibble library has functions for making tibbles
+#the tibble library has functions for making tibbles
+library(tibble) 
 data <- tibble(age = c(25, 35), has_fsa = c(F, T))
-
 data
 ```
 
@@ -535,7 +614,7 @@ summary(data)
 
 ## Pipes
 
-The pipe operator `%>%` is a way of making code more readable and easier to edit. The way that we are taught to do functional composition is by nesting, which is slow to read and write.
+The pipe operator `%>%` is a way of making code *modular*, meaning that it can be written and executed in incremental steps.  Those familiar with Python's Pandas will be see that `%>%` is quite similar to ".".  This also makes code easier to read.
 
 In five seconds, tell me what the below code is doing.
 
@@ -548,7 +627,7 @@ log(sqrt(exp(log2(sqrt((max(c(3, 4, 16))))))))
 ## [1] 1
 ```
 
-Did you get the answer of 1?  If so, you are good at reading parenthesis.  This requires starting from the inner-most nested brackets and moving outwards from right to left.
+Getting to the answer of 1 requires starting from the inner-most nested brackets and moving outwards from right to left.
 
 The math notation would be slightly easier to read, but still painful.
 
@@ -558,7 +637,8 @@ Here is the same algebra using the pipe.  To read this, replace the `%>%` with t
 
 
 ```r
-library(dplyr) #the pipe is from the dplyr library
+#the pipe is from the dplyr library
+library(dplyr) 
 max(c(3, 4, 16)) %>% 
   sqrt() %>% 
   log2() %>% 
@@ -580,9 +660,11 @@ max(c(3, 4, 16)) %>%
 #  log()                #the natural logarithm of e is 1
 ```
 
-You may not be convinced by this simple example using numbers; however, once we get to data manipulations in the next section the advantage of piping will become obvious.
+Pipes are exceptionally useful for data manipulations, which is covered in the next chapter.
 
-To quickly produce pipes, use `CTRL + SHIFT + M`.  By highlighting only certain sections, we can run the code in steps as if we were using a debugger.  This makes testing out code much faster.
+>**Tip:** To quickly produce pipes, use `CTRL + SHIFT + M`.  
+
+By highlighting only certain sections, we can run the code in steps as if we were using a debugger.  This makes testing out code much faster.
 
 
 ```r
@@ -653,4 +735,6 @@ max(c(3, 4, 16)) %>%
 ## [1] 1
 ```
 
-Those familiar with Python's Pandas will be see that `%>%` is quite similar to ".".
+
+
+
