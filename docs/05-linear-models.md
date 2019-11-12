@@ -182,7 +182,7 @@ get_rmse(pred, test$charges)
 ```
 
 ```
-## [1] 12013.19
+## [1] 12084.27
 ```
 
 The above number does not tell us if this is a good model or not by itself.  We need a comparison.  The fastest check is to compare against a prediction of the mean.  In other words, all values of the `y_hat` are the average of `charges`
@@ -193,7 +193,7 @@ get_rmse(mean(test$charges), test$charges)
 ```
 
 ```
-## [1] 12742.66
+## [1] 12832.98
 ```
 
 The RMSE is **higher** (worse) when using just the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
@@ -245,9 +245,9 @@ testing <- lm(data = test,
 
 |term        | full_data_std_error| test_data_std_error|
 |:-----------|-------------------:|-------------------:|
-|(Intercept) |              1744.1|              4083.6|
-|bmi         |                51.4|               125.2|
-|age         |                22.3|                54.0|
+|(Intercept) |              1744.1|              4121.1|
+|bmi         |                51.4|               118.3|
+|age         |                22.3|                52.4|
 
 All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
 
@@ -258,7 +258,7 @@ coefficients(model)
 
 ```
 ## (Intercept)         bmi         age 
-##  -6196.8728    318.4574    245.7664
+##  -5482.9295    290.7664    248.1731
 ```
 
 Translating the above into an equation we have

@@ -207,8 +207,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.4.1" data-path="tree-based-models.html"><a href="tree-based-models.html#parameters"><i class="fa fa-check"></i><b>12.4.1</b> Parameters</a></li>
 <li class="chapter" data-level="12.4.2" data-path="tree-based-models.html"><a href="tree-based-models.html#example-4"><i class="fa fa-check"></i><b>12.4.2</b> Example</a></li>
 <li class="chapter" data-level="12.4.3" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-and-disadvantages-4"><i class="fa fa-check"></i><b>12.4.3</b> Advantages and disadvantages</a></li>
-<li class="chapter" data-level="12.4.4" data-path="tree-based-models.html"><a href="tree-based-models.html#exercises-1"><i class="fa fa-check"></i><b>12.4.4</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="12.5" data-path="tree-based-models.html"><a href="tree-based-models.html#exercises-1"><i class="fa fa-check"></i><b>12.5</b> Exercises</a></li>
+<li class="chapter" data-level="12.6" data-path="tree-based-models.html"><a href="tree-based-models.html#answers-to-exercises-1"><i class="fa fa-check"></i><b>12.6</b> Answers to Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="practice-exams.html"><a href="practice-exams.html"><i class="fa fa-check"></i><b>13</b> Practice Exams</a></li>
 <li class="divider"></li>
@@ -566,125 +567,7 @@ arrange() -&gt; ORDER BY
 </div>
 <div id="answers-to-exercises" class="section level2">
 <h2><span class="header-section-number">6.4</span> Answers to exercises</h2>
-<ol style="list-style-type: decimal">
-<li>How many industries are represented?</li>
-</ol>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1">actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(industry)</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 2
-##   industry     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 Casualty    45
-## 2 Health      31
-## 3 Life        31
-## 4 Pension     31</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>The <code>salary_high</code> column is a character type when it should be numeric. Change this column to numeric.</li>
-</ol>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1"><span class="co">#method 1</span></a>
-<a class="sourceLine" id="cb159-2" title="2">actuary_salaries &lt;-<span class="st"> </span>actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb159-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">salary_high =</span> <span class="kw">as.numeric</span>(salary_high))</a>
-<a class="sourceLine" id="cb159-4" title="4"></a>
-<a class="sourceLine" id="cb159-5" title="5"><span class="co">#method 2</span></a>
-<a class="sourceLine" id="cb159-6" title="6">actuary_salaries &lt;-<span class="st"> </span>actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb159-7" title="7"><span class="st">  </span><span class="kw">modify_at</span>(<span class="st">&quot;salary_high&quot;</span>, as.numeric)</a></code></pre></div>
-<ol start="3" style="list-style-type: decimal">
-<li>What are the highest and lowest salaries for an actuary in Health with 5 exams passed?</li>
-</ol>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1">actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb160-2" title="2"><span class="st">  </span><span class="kw">filter</span>(industry <span class="op">==</span><span class="st"> &quot;Health&quot;</span>, exams <span class="op">==</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb160-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">highest =</span> <span class="kw">max</span>(salary_high),</a>
-<a class="sourceLine" id="cb160-4" title="4">            <span class="dt">lowest =</span> <span class="kw">min</span>(salary_low))</a></code></pre></div>
-<pre><code>## # A tibble: 1 x 2
-##   highest lowest
-##     &lt;dbl&gt;  &lt;dbl&gt;
-## 1     126     68</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Create a new column called <code>salary_mid</code> which has the middle of the <code>salary_low</code> and <code>salary_high</code> columns.</li>
-</ol>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1">actuary_salaries &lt;-<span class="st"> </span>actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb162-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">salary_mid =</span> (salary_low <span class="op">+</span><span class="st"> </span>salary_high)<span class="op">/</span><span class="dv">2</span>)</a></code></pre></div>
-<ol start="5" style="list-style-type: decimal">
-<li>When grouping by industry, what is the highest <code>salary_mid</code>? What about <code>salary_high</code>? What is the lowest <code>salary_low</code>?</li>
-</ol>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1">actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb163-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(industry) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb163-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">max_salary_mid =</span> <span class="kw">max</span>(salary_mid),</a>
-<a class="sourceLine" id="cb163-4" title="4">            <span class="dt">max_salary_high =</span> <span class="kw">max</span>(salary_high),</a>
-<a class="sourceLine" id="cb163-5" title="5">            <span class="dt">low_salary_low =</span> <span class="kw">min</span>(salary_low))</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
-##   industry max_salary_mid max_salary_high low_salary_low
-##   &lt;chr&gt;             &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
-## 1 Casualty           302.             447             11
-## 2 Health             272.             390             49
-## 3 Life               244              364             51
-## 4 Pension            224.             329             44</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>There is a mistake when <code>salary_low == 11</code>. Find and fix this mistake, and then rerun the code from the previous task.</li>
-</ol>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1">actuary_salaries &lt;-<span class="st"> </span>actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb165-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">salary_low =</span> <span class="kw">ifelse</span>(salary_low <span class="op">==</span><span class="st"> </span><span class="dv">11</span>, </a>
-<a class="sourceLine" id="cb165-3" title="3">                             <span class="dt">yes =</span> <span class="dv">114</span>, <span class="dt">no =</span> salary_low),</a>
-<a class="sourceLine" id="cb165-4" title="4">         <span class="dt">salary_high =</span> <span class="kw">ifelse</span>(salary_high <span class="op">==</span><span class="st"> </span><span class="dv">66</span>, </a>
-<a class="sourceLine" id="cb165-5" title="5">                              <span class="dt">yes =</span> <span class="dv">166</span>, <span class="dt">no =</span> salary_high))</a>
-<a class="sourceLine" id="cb165-6" title="6"></a>
-<a class="sourceLine" id="cb165-7" title="7"><span class="co">#the minimum salary low is now 48</span></a>
-<a class="sourceLine" id="cb165-8" title="8">actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb165-9" title="9"><span class="st">  </span><span class="kw">group_by</span>(industry) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb165-10" title="10"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">max_salary_mid =</span> <span class="kw">max</span>(salary_mid),</a>
-<a class="sourceLine" id="cb165-11" title="11">            <span class="dt">max_salary_high =</span> <span class="kw">max</span>(salary_high),</a>
-<a class="sourceLine" id="cb165-12" title="12">            <span class="dt">low_salary_low =</span> <span class="kw">min</span>(salary_low))</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
-##   industry max_salary_mid max_salary_high low_salary_low
-##   &lt;chr&gt;             &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
-## 1 Casualty           302.             447             48
-## 2 Health             272.             390             49
-## 3 Life               244              364             51
-## 4 Pension            224.             329             44</code></pre>
-<ol start="7" style="list-style-type: decimal">
-<li>Create a new column, called <code>n_exams</code>, which is an integer. Use 7 for ASA/ACAS and 10 for FSA/FCAS.</li>
-</ol>
-<p>Use the code below as a starting point and fill in the <code>_</code> spaces</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1">actuary_salaries &lt;-<span class="st"> </span>actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb167-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n_exams =</span> <span class="kw">case_when</span>(exams <span class="op">==</span><span class="st"> &quot;FSA&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb167-3" title="3">                             exams <span class="op">==</span><span class="st"> &quot;ASA&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb167-4" title="4">                             exams <span class="op">==</span><span class="st"> &quot;FCAS&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb167-5" title="5">                             exams <span class="op">==</span><span class="st"> &quot;ACAS&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb167-6" title="6">                             <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">substr</span>(exams,_,_)))) </a></code></pre></div>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">actuary_salaries &lt;-<span class="st"> </span>actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n_exams =</span> <span class="kw">case_when</span>(exams <span class="op">==</span><span class="st"> &quot;FSA&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb168-3" title="3">                             exams <span class="op">==</span><span class="st"> &quot;ASA&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">7</span>,</a>
-<a class="sourceLine" id="cb168-4" title="4">                             exams <span class="op">==</span><span class="st"> &quot;FCAS&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb168-5" title="5">                             exams <span class="op">==</span><span class="st"> &quot;ACAS&quot;</span> <span class="op">~</span><span class="st"> </span><span class="dv">7</span>,</a>
-<a class="sourceLine" id="cb168-6" title="6">                             <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">substr</span>(exams,<span class="dv">1</span>,<span class="dv">2</span>)))) </a></code></pre></div>
-<pre><code>## Warning in eval_tidy(pair$rhs, env = default_env): NAs introduced by
-## coercion</code></pre>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1">actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(n_exams)</a></code></pre></div>
-<pre><code>## # A tibble: 8 x 2
-##   n_exams     n
-##     &lt;dbl&gt; &lt;int&gt;
-## 1       1    12
-## 2       2    17
-## 3       3    19
-## 4       4    21
-## 5       5    17
-## 6       6     5
-## 7       7    29
-## 8      10    18</code></pre>
-<ol start="8" style="list-style-type: decimal">
-<li>Create a column called <code>social_life</code>, which is equal to <code>n_exams</code>/<code>experience</code>. What is the average (mean) <code>social_life</code> by industry? Bonus question: what is wrong with using this as a statistical measure?</li>
-</ol>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1">actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb172-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">social_life =</span> n_exams<span class="op">/</span>experience) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb172-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(industry) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb172-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_social_life =</span> <span class="kw">mean</span>(social_life))</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 2
-##   industry avg_social_life
-##   &lt;chr&gt;              &lt;dbl&gt;
-## 1 Casualty           0.985
-## 2 Health             1.06 
-## 3 Life               1.06 
-## 4 Pension            1.00</code></pre>
-<p>This is not REALLY an average as the number of people, or number of actuaries, are not taken into consideration. To correctly take the average, we would need use a weighted average like sum(number_actuaries*social_life)/sum(number_actuaries)</p>
+<p>Answers to these exercises, along with a video tutorial, are available at <a href="https://www.exampa.net/pricing">ExamPA.net</a>.</p>
 
 </div>
 </div>
