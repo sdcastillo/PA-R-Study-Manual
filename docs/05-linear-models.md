@@ -182,7 +182,7 @@ get_rmse(pred, test$charges)
 ```
 
 ```
-## [1] 12084.27
+## [1] 11588.8
 ```
 
 The above number does not tell us if this is a good model or not by itself.  We need a comparison.  The fastest check is to compare against a prediction of the mean.  In other words, all values of the `y_hat` are the average of `charges`
@@ -193,7 +193,7 @@ get_rmse(mean(test$charges), test$charges)
 ```
 
 ```
-## [1] 12832.98
+## [1] 12356.33
 ```
 
 The RMSE is **higher** (worse) when using just the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
@@ -224,7 +224,7 @@ plot(model, which = 2)
 <p class="caption">(\#fig:unnamed-chunk-10)Normal Q-Q</p>
 </div>
 
-**Caution: This test only applies to linear models which have a gaussian response distribution.**
+**Caution: The normal-QQ plot is useless when the target is count data (Poisson Regression) or binary (Logistic Regression or other model with a binomial response family.**
 
 The below is from an excellent post of Stack Exchange.
 
@@ -245,9 +245,9 @@ testing <- lm(data = test,
 
 |term        | full_data_std_error| test_data_std_error|
 |:-----------|-------------------:|-------------------:|
-|(Intercept) |              1744.1|              4121.1|
-|bmi         |                51.4|               118.3|
-|age         |                22.3|                52.4|
+|(Intercept) |              1744.1|              4093.9|
+|bmi         |                51.4|               119.7|
+|age         |                22.3|                50.2|
 
 All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
 
@@ -258,7 +258,7 @@ coefficients(model)
 
 ```
 ## (Intercept)         bmi         age 
-##  -5482.9295    290.7664    248.1731
+##  -5867.2087    308.7116    243.8286
 ```
 
 Translating the above into an equation we have
