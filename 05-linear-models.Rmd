@@ -184,7 +184,7 @@ The normal QQ shows how well the quantiles of the predictions fit to a theoretic
 plot(model, which = 2)
 ```
 
-**Caution: This test only applies to linear models which have a gaussian response distribution.**
+**Caution: The normal-QQ plot is useless when the target is count data (Poisson Regression) or binary (Logistic Regression or other model with a binomial response family.**
 
 The below is from an excellent post of Stack Exchange.
 
