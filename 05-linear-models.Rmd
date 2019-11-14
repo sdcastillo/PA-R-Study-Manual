@@ -184,7 +184,7 @@ The normal QQ shows how well the quantiles of the predictions fit to a theoretic
 plot(model, which = 2)
 ```
 
-**Caution: The normal-QQ plot is useless when the target is count data (Poisson Regression) or binary (Logistic Regression or other model with a binomial response family.**
+**Caution: The normal-QQ plot is useless when the response family is not normal.  This includes Gamma, Inverse Gaussian, etc, as well as count data (Poisson Regression) or binary (Logistic Regression or other model with a binomial response family.  There was a mistake in the June PA Exam which said that the QQ-plot always applies.  See https://www.reddit.com/r/actuary/comments/dvtb85/mistake_in_the_june_exam_pa/**
 
 The below is from an excellent post of Stack Exchange.
 

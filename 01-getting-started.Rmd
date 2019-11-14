@@ -14,11 +14,11 @@ For your convenience, all data in this book, including data from prior exams and
 #then install ExamPAData from github
 if("devtools" %in% installed.packages()){
   library(devtools)
-  install_github("https://github.com/sdcastillo/ExamPAData")
+  install_github("sdcastillo/ExamPAData")
 } else{
   install.packages("devtools")
   library(devtools)
-  install_github("https://github.com/sdcastillo/ExamPAData")
+  install_github("sdcastillo/ExamPAData")
 }
 ```
 
