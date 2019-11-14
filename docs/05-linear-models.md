@@ -182,7 +182,7 @@ get_rmse(pred, test$charges)
 ```
 
 ```
-## [1] 11588.8
+## [1] 10642.78
 ```
 
 The above number does not tell us if this is a good model or not by itself.  We need a comparison.  The fastest check is to compare against a prediction of the mean.  In other words, all values of the `y_hat` are the average of `charges`
@@ -193,7 +193,7 @@ get_rmse(mean(test$charges), test$charges)
 ```
 
 ```
-## [1] 12356.33
+## [1] 11136.87
 ```
 
 The RMSE is **higher** (worse) when using just the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
@@ -224,7 +224,7 @@ plot(model, which = 2)
 <p class="caption">(\#fig:unnamed-chunk-10)Normal Q-Q</p>
 </div>
 
-**Caution: The normal-QQ plot is useless when the target is count data (Poisson Regression) or binary (Logistic Regression or other model with a binomial response family.**
+**Caution: The normal-QQ plot is useless when the response family is not normal.  This includes Gamma, Inverse Gaussian, etc, as well as count data (Poisson Regression) or binary (Logistic Regression or other model with a binomial response family.  There was a mistake in the June PA Exam which said that the QQ-plot always applies.  See https://www.reddit.com/r/actuary/comments/dvtb85/mistake_in_the_june_exam_pa/**
 
 The below is from an excellent post of Stack Exchange.
 
@@ -245,9 +245,9 @@ testing <- lm(data = test,
 
 |term        | full_data_std_error| test_data_std_error|
 |:-----------|-------------------:|-------------------:|
-|(Intercept) |              1744.1|              4093.9|
-|bmi         |                51.4|               119.7|
-|age         |                22.3|                50.2|
+|(Intercept) |              1744.1|              3845.1|
+|bmi         |                51.4|               112.2|
+|age         |                22.3|                46.5|
 
 All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
 
@@ -258,7 +258,7 @@ coefficients(model)
 
 ```
 ## (Intercept)         bmi         age 
-##  -5867.2087    308.7116    243.8286
+##  -6471.5710    318.0462    257.3905
 ```
 
 Translating the above into an equation we have
