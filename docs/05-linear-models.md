@@ -182,7 +182,7 @@ get_rmse(pred, test$charges)
 ```
 
 ```
-## [1] 10642.78
+## [1] 11516.26
 ```
 
 The above number does not tell us if this is a good model or not by itself.  We need a comparison.  The fastest check is to compare against a prediction of the mean.  In other words, all values of the `y_hat` are the average of `charges`
@@ -193,7 +193,7 @@ get_rmse(mean(test$charges), test$charges)
 ```
 
 ```
-## [1] 11136.87
+## [1] 12497.05
 ```
 
 The RMSE is **higher** (worse) when using just the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
@@ -224,14 +224,6 @@ plot(model, which = 2)
 <p class="caption">(\#fig:unnamed-chunk-10)Normal Q-Q</p>
 </div>
 
-**Caution: The normal-QQ plot is useless when the response family is not normal.  This includes Gamma, Inverse Gaussian, etc, as well as count data (Poisson Regression) or binary (Logistic Regression or other model with a binomial response family.  There was a mistake in the June PA Exam which said that the QQ-plot always applies.  See https://www.reddit.com/r/actuary/comments/dvtb85/mistake_in_the_june_exam_pa/**
-
-The below is from an excellent post of Stack Exchange.
-
->R does not have a distinct plot.glm() method. When you fit a model with glm() and run plot(), it calls ?plot.lm, which is appropriate for linear models (i.e., with a normally distributed error term).
-
->More specifically, the plots will often 'look funny' and lead people to believe that there is something wrong with the model when it is perfectly fine. We can see this by looking at those plots with a couple of simple simulations where we know the model is correct:
-
 Once you have chosen your model, you should re-train over the entire data set.  This is to make the coefficients more stable because `n` is larger.  Below you can see that the standard error is lower after training over the entire data set.
 
 
@@ -245,9 +237,9 @@ testing <- lm(data = test,
 
 |term        | full_data_std_error| test_data_std_error|
 |:-----------|-------------------:|-------------------:|
-|(Intercept) |              1744.1|              3845.1|
-|bmi         |                51.4|               112.2|
-|age         |                22.3|                46.5|
+|(Intercept) |              1744.1|              3817.2|
+|bmi         |                51.4|               110.2|
+|age         |                22.3|                49.7|
 
 All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
 
@@ -258,7 +250,7 @@ coefficients(model)
 
 ```
 ## (Intercept)         bmi         age 
-##  -6471.5710    318.0462    257.3905
+##  -4687.9170    276.9352    239.1849
 ```
 
 Translating the above into an equation we have
@@ -331,6 +323,8 @@ For this exam, a common question is to ask candiates to choose the best distribu
 - If $Y$ is binary, the the binomial response with either a Probit or Logit link.  The Logit is more common.
 - If $Y$ has more than two categories, the multinomial distribution with either the Probit or Logic link (See Logistic Regression)
 
+## Interpretation
+
 The exam will always ask you to interpret the GLM.  These questions can usually be answered by inverting the link function and interpreting the coefficients.  In the case of the log link, simply take the exponent of the coefficients and each of these represents a "relativity" factor.
 
 $$
@@ -349,6 +343,30 @@ Where $R_k$ is the *relativity* of the kth variable.  This terminology is from i
 
 For binary outcomes with logit or probit link, there is no easy interpretation.  This has come up in at least one past sample exam, and the solution was to create "psuedo" observations and observe how changing each $x_k$ would change the predicted value.  Due to the time requirements, this is unlikely to come up on an exam.  So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.
 
+## Residuals
+
+The word "residual" by itself actually means the "raw residual" in GLM language.  This is the difference in actual vs. predicted values.
+
+$$\text{Raw Residual} = y_i - \hat{y_i}$$
+
+This are not meaningful for GLMs with non-Gaussian response families because the distribution changes depending on the response family chosen.  To adjust for this, we need the concept of *deviance residual*.
+
+To paraphrase from [this paper](www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf)
+
+Deviance is a way of assessing the adequacy of a model by comparing it with a more general
+model with the maximum number of parameters that can be estimated. It is referred to
+as the saturated model. In the saturated model there is basically one parameter per
+observation. The deviance assesses the goodness of fit for the model by looking at the
+difference between the log-likelihood functions of the saturated model and the model
+under investigation, i.e. $l(b_{sat},y) - l(b,y)$. Here sat $b_{sat}$ denotes the maximum likelihood
+estimator of the parameter vector of the saturated model, $\beta_{sat}$ , and $b$ is the maximum
+likelihood estimator of the parameters of the model under investigation, $\beta$. The maximum likelihood estimator is the estimator that maximises the likelihood function.  **The deviance is defined as**
+
+$$D = 2[l(b_{sat},y) - l(b,y)]$$
+The deviance residual uses the deviance of the ith observation $d_i$ and then takes the square root and applies the same sign (aka, the + or - part) of the raw residual.
+
+$$\text{Deviance Residual} = \text{sign}(y_i - \hat{y_i})\sqrt{d_i}$$
+
 ## Example
 
 Just as with OLS, there is a `formula` and `data argument`.  In addition, we need to specify the response distribution and link function.
@@ -356,7 +374,7 @@ Just as with OLS, there is a `formula` and `data argument`.  In addition, we nee
 
 ```r
 model = glm(formula = charges ~ age + sex + children, 
-            family = gaussian(link = "log"),
+            family = Gamma(link = "log"),
             data = health_insurance)
 ```
 
@@ -375,11 +393,42 @@ model %>% tidy()
 ## # A tibble: 4 x 5
 ##   term        estimate std.error statistic  p.value
 ##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)   8.55     0.0953      89.7  0.      
-## 2 age           0.0201   0.00179     11.3  3.12e-28
-## 3 sexmale       0.112    0.0459       2.44 1.49e- 2
-## 4 children      0.0489   0.0182       2.69 7.29e- 3
+## 1 (Intercept)   8.57     0.0864      99.1  0.      
+## 2 age           0.0196   0.00190     10.3  4.08e-24
+## 3 sexmale       0.119    0.0533       2.23 2.58e- 2
+## 4 children      0.0512   0.0221       2.31 2.08e- 2
 ```
+
+Below you can see graph of deviance residuals vs. the predicted values. 
+
+**If this were a perfect model, all of these below assumptions would be met:**
+
+- Scattered around zero? 
+- Constant variance? 
+- No obvious pattern? 
+
+
+```r
+plot(model, which = 3)
+```
+
+<img src="05-linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+
+The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.  
+
+**In a perfect model, all of these assumptions would be met:**
+
+- Points lie on a straight line?  
+- Tails are not significantly above or below line?  Some tail deviation is ok.
+- No sudden "jumps"?  This indicates many $Y$'s which have the same value, such as insurance claims which all have the exact value of \$100.00 or $0.00.
+
+
+```r
+plot(model, which = 2)
+```
+
+<img src="05-linear-models_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+
 
 ## Reference levels
 
@@ -464,8 +513,8 @@ interactions %>%
 ```
 
 <div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-22-1.png" alt="Example of weak interaction" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-22)Example of weak interaction</p>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-24-1.png" alt="Example of weak interaction" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-24)Example of weak interaction</p>
 </div>
 
 Here is a clearer example from the `auto_claim` data. The lines show the slope of a linear model, assuming that only `BLUEBOOK` and `CAR_TYPE` were predictors in the model.  You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.  
@@ -480,8 +529,8 @@ auto_claim %>%
 ```
 
 <div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-23-1.png" alt="Example of strong interaction" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-23)Example of strong interaction</p>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-25-1.png" alt="Example of strong interaction" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-25)Example of strong interaction</p>
 </div>
 
 Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction.  We can also use an hypothesis test with a GLM to check this.  Simply include an interaction term and see if the coefficient is zero at the desired significance level.
@@ -584,8 +633,8 @@ We can use a special link function, known as the *standard logistic function*, *
 $$\mathbf{\hat{y}} = g^{-1}(\mathbf{X} \mathbf{\beta}) = \frac{1}{1 + e^{-\mathbf{X} \mathbf{\beta}}}$$
 
 <div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-25-1.png" alt="Standard Logistic Function" width="384" />
-<p class="caption">(\#fig:unnamed-chunk-25)Standard Logistic Function</p>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-27-1.png" alt="Standard Logistic Function" width="384" />
+<p class="caption">(\#fig:unnamed-chunk-27)Standard Logistic Function</p>
 </div>
 
 Other link functions for classification problems are possible as well, although the logistic function is the most common.  If a problem asks for an alternative link, such as the *probit*, fit both models and compare the performance.
@@ -682,8 +731,8 @@ qplot(preds)
 ```
 
 <div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-29-1.png" alt="Distribution of Predicted Probability" width="480" />
-<p class="caption">(\#fig:unnamed-chunk-29)Distribution of Predicted Probability</p>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-31-1.png" alt="Distribution of Predicted Probability" width="480" />
+<p class="caption">(\#fig:unnamed-chunk-31)Distribution of Predicted Probability</p>
 </div>
 
 In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 othersise.  The default cutoff is 0.5.  We change this to 0.3 and see that there are 763 policies predicted to have claims.
@@ -915,8 +964,8 @@ roc(test$target, preds, plot = T)
 ```
 
 <div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-39-1.png" alt="AUC for auto_claim" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-39)AUC for auto_claim</p>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-41-1.png" alt="AUC for auto_claim" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-41)AUC for auto_claim</p>
 </div>
 
 ```

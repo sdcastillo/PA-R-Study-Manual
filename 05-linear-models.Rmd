@@ -184,14 +184,6 @@ The normal QQ shows how well the quantiles of the predictions fit to a theoretic
 plot(model, which = 2)
 ```
 
-**Caution: The normal-QQ plot is useless when the response family is not normal.  This includes Gamma, Inverse Gaussian, etc, as well as count data (Poisson Regression) or binary (Logistic Regression or other model with a binomial response family.  There was a mistake in the June PA Exam which said that the QQ-plot always applies.  See https://www.reddit.com/r/actuary/comments/dvtb85/mistake_in_the_june_exam_pa/**
-
-The below is from an excellent post of Stack Exchange.
-
->R does not have a distinct plot.glm() method. When you fit a model with glm() and run plot(), it calls ?plot.lm, which is appropriate for linear models (i.e., with a normally distributed error term).
-
->More specifically, the plots will often 'look funny' and lead people to believe that there is something wrong with the model when it is perfectly fine. We can see this by looking at those plots with a couple of simple simulations where we know the model is correct:
-
 Once you have chosen your model, you should re-train over the entire data set.  This is to make the coefficients more stable because `n` is larger.  Below you can see that the standard error is lower after training over the entire data set.
 
 ```{r }
@@ -293,6 +285,8 @@ For this exam, a common question is to ask candiates to choose the best distribu
 - If $Y$ is binary, the the binomial response with either a Probit or Logit link.  The Logit is more common.
 - If $Y$ has more than two categories, the multinomial distribution with either the Probit or Logic link (See Logistic Regression)
 
+## Interpretation
+
 The exam will always ask you to interpret the GLM.  These questions can usually be answered by inverting the link function and interpreting the coefficients.  In the case of the log link, simply take the exponent of the coefficients and each of these represents a "relativity" factor.
 
 $$
@@ -311,13 +305,37 @@ Where $R_k$ is the *relativity* of the kth variable.  This terminology is from i
 
 For binary outcomes with logit or probit link, there is no easy interpretation.  This has come up in at least one past sample exam, and the solution was to create "psuedo" observations and observe how changing each $x_k$ would change the predicted value.  Due to the time requirements, this is unlikely to come up on an exam.  So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.
 
+## Residuals
+
+The word "residual" by itself actually means the "raw residual" in GLM language.  This is the difference in actual vs. predicted values.
+
+$$\text{Raw Residual} = y_i - \hat{y_i}$$
+
+This are not meaningful for GLMs with non-Gaussian response families because the distribution changes depending on the response family chosen.  To adjust for this, we need the concept of *deviance residual*.
+
+To paraphrase from [this paper](www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf)
+
+Deviance is a way of assessing the adequacy of a model by comparing it with a more general
+model with the maximum number of parameters that can be estimated. It is referred to
+as the saturated model. In the saturated model there is basically one parameter per
+observation. The deviance assesses the goodness of fit for the model by looking at the
+difference between the log-likelihood functions of the saturated model and the model
+under investigation, i.e. $l(b_{sat},y) - l(b,y)$. Here sat $b_{sat}$ denotes the maximum likelihood
+estimator of the parameter vector of the saturated model, $\beta_{sat}$ , and $b$ is the maximum
+likelihood estimator of the parameters of the model under investigation, $\beta$. The maximum likelihood estimator is the estimator that maximises the likelihood function.  **The deviance is defined as**
+
+$$D = 2[l(b_{sat},y) - l(b,y)]$$
+The deviance residual uses the deviance of the ith observation $d_i$ and then takes the square root and applies the same sign (aka, the + or - part) of the raw residual.
+
+$$\text{Deviance Residual} = \text{sign}(y_i - \hat{y_i})\sqrt{d_i}$$
+
 ## Example
 
 Just as with OLS, there is a `formula` and `data argument`.  In addition, we need to specify the response distribution and link function.
 
 ```{r}
 model = glm(formula = charges ~ age + sex + children, 
-            family = gaussian(link = "log"),
+            family = Gamma(link = "log"),
             data = health_insurance)
 ```
 
@@ -330,6 +348,31 @@ We see that `age`, `sex`, and `children` are all significant (p <0.01).  Reading
 ```{r}
 model %>% tidy()
 ```
+
+Below you can see graph of deviance residuals vs. the predicted values. 
+
+**If this were a perfect model, all of these below assumptions would be met:**
+
+- Scattered around zero? 
+- Constant variance? 
+- No obvious pattern? 
+
+```{r}
+plot(model, which = 3)
+```
+
+The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.  
+
+**In a perfect model, all of these assumptions would be met:**
+
+- Points lie on a straight line?  
+- Tails are not significantly above or below line?  Some tail deviation is ok.
+- No sudden "jumps"?  This indicates many $Y$'s which have the same value, such as insurance claims which all have the exact value of \$100.00 or $0.00.
+
+```{r}
+plot(model, which = 2)
+```
+
 
 ## Reference levels
 

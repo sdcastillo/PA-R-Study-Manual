@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2019-11-14" />
+<meta name="date" content="2019-11-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -165,13 +165,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models (GLMs)</a><ul>
 <li class="chapter" data-level="9.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#model-form"><i class="fa fa-check"></i><b>9.1</b> Model form</a></li>
-<li class="chapter" data-level="9.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#example-1"><i class="fa fa-check"></i><b>9.2</b> Example</a></li>
-<li class="chapter" data-level="9.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#reference-levels"><i class="fa fa-check"></i><b>9.3</b> Reference levels</a></li>
-<li class="chapter" data-level="9.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interactions"><i class="fa fa-check"></i><b>9.4</b> Interactions</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#poisson-regression"><i class="fa fa-check"></i><b>9.4.1</b> Poisson Regression</a></li>
-<li class="chapter" data-level="9.4.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#tweedie-regression"><i class="fa fa-check"></i><b>9.4.2</b> Tweedie regression</a></li>
-<li class="chapter" data-level="9.4.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#stepwise-subset-selection"><i class="fa fa-check"></i><b>9.4.3</b> Stepwise subset selection</a></li>
-<li class="chapter" data-level="9.4.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>9.4.4</b> Advantages and disadvantages</a></li>
+<li class="chapter" data-level="9.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation"><i class="fa fa-check"></i><b>9.2</b> Interpretation</a></li>
+<li class="chapter" data-level="9.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#residuals"><i class="fa fa-check"></i><b>9.3</b> Residuals</a></li>
+<li class="chapter" data-level="9.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#example-1"><i class="fa fa-check"></i><b>9.4</b> Example</a></li>
+<li class="chapter" data-level="9.5" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#reference-levels"><i class="fa fa-check"></i><b>9.5</b> Reference levels</a></li>
+<li class="chapter" data-level="9.6" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interactions"><i class="fa fa-check"></i><b>9.6</b> Interactions</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#poisson-regression"><i class="fa fa-check"></i><b>9.6.1</b> Poisson Regression</a></li>
+<li class="chapter" data-level="9.6.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#tweedie-regression"><i class="fa fa-check"></i><b>9.6.2</b> Tweedie regression</a></li>
+<li class="chapter" data-level="9.6.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#stepwise-subset-selection"><i class="fa fa-check"></i><b>9.6.3</b> Stepwise subset selection</a></li>
+<li class="chapter" data-level="9.6.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>9.6.4</b> Advantages and disadvantages</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>10</b> Logistic Regression</a><ul>
@@ -275,6 +277,9 @@ Figure 9.2: Distribution-Link Function Combinations
 <li>If <span class="math inline">\(Y\)</span> is binary, the the binomial response with either a Probit or Logit link. The Logit is more common.</li>
 <li>If <span class="math inline">\(Y\)</span> has more than two categories, the multinomial distribution with either the Probit or Logic link (See Logistic Regression)</li>
 </ul>
+</div>
+<div id="interpretation" class="section level2">
+<h2><span class="header-section-number">9.2</span> Interpretation</h2>
 <p>The exam will always ask you to interpret the GLM. These questions can usually be answered by inverting the link function and interpreting the coefficients. In the case of the log link, simply take the exponent of the coefficients and each of these represents a “relativity” factor.</p>
 <p><span class="math display">\[
 log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
@@ -288,11 +293,29 @@ R_0 R_2 R_3 ... R_{p}
 <p>Where <span class="math inline">\(R_k\)</span> is the <em>relativity</em> of the kth variable. This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance. The data science community does not use this language.</p>
 <p>For binary outcomes with logit or probit link, there is no easy interpretation. This has come up in at least one past sample exam, and the solution was to create “psuedo” observations and observe how changing each <span class="math inline">\(x_k\)</span> would change the predicted value. Due to the time requirements, this is unlikely to come up on an exam. So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.</p>
 </div>
+<div id="residuals" class="section level2">
+<h2><span class="header-section-number">9.3</span> Residuals</h2>
+<p>The word “residual” by itself actually means the “raw residual” in GLM language. This is the difference in actual vs. predicted values.</p>
+<p><span class="math display">\[\text{Raw Residual} = y_i - \hat{y_i}\]</span></p>
+<p>This are not meaningful for GLMs with non-Gaussian response families because the distribution changes depending on the response family chosen. To adjust for this, we need the concept of <em>deviance residual</em>.</p>
+<p>To paraphrase from <a href="www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf">this paper</a></p>
+<p>Deviance is a way of assessing the adequacy of a model by comparing it with a more general
+model with the maximum number of parameters that can be estimated. It is referred to
+as the saturated model. In the saturated model there is basically one parameter per
+observation. The deviance assesses the goodness of fit for the model by looking at the
+difference between the log-likelihood functions of the saturated model and the model
+under investigation, i.e. <span class="math inline">\(l(b_{sat},y) - l(b,y)\)</span>. Here sat <span class="math inline">\(b_{sat}\)</span> denotes the maximum likelihood
+estimator of the parameter vector of the saturated model, <span class="math inline">\(\beta_{sat}\)</span> , and <span class="math inline">\(b\)</span> is the maximum
+likelihood estimator of the parameters of the model under investigation, <span class="math inline">\(\beta\)</span>. The maximum likelihood estimator is the estimator that maximises the likelihood function. <strong>The deviance is defined as</strong></p>
+<p><span class="math display">\[D = 2[l(b_{sat},y) - l(b,y)]\]</span>
+The deviance residual uses the deviance of the ith observation <span class="math inline">\(d_i\)</span> and then takes the square root and applies the same sign (aka, the + or - part) of the raw residual.</p>
+<p><span class="math display">\[\text{Deviance Residual} = \text{sign}(y_i - \hat{y_i})\sqrt{d_i}\]</span></p>
+</div>
 <div id="example-1" class="section level2">
-<h2><span class="header-section-number">9.2</span> Example</h2>
+<h2><span class="header-section-number">9.4</span> Example</h2>
 <p>Just as with OLS, there is a <code>formula</code> and <code>data argument</code>. In addition, we need to specify the response distribution and link function.</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1">model =<span class="st"> </span><span class="kw">glm</span>(<span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>children, </a>
-<a class="sourceLine" id="cb180-2" title="2">            <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>),</a>
+<a class="sourceLine" id="cb180-2" title="2">            <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>),</a>
 <a class="sourceLine" id="cb180-3" title="3">            <span class="dt">data =</span> health_insurance)</a></code></pre></div>
 <p>We see that <code>age</code>, <code>sex</code>, and <code>children</code> are all significant (p &lt;0.01). Reading off the coefficient signs, we see that claims</p>
 <ul>
@@ -304,29 +327,48 @@ R_0 R_2 R_3 ... R_{p}
 <pre><code>## # A tibble: 4 x 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   8.55     0.0953      89.7  0.      
-## 2 age           0.0201   0.00179     11.3  3.12e-28
-## 3 sexmale       0.112    0.0459       2.44 1.49e- 2
-## 4 children      0.0489   0.0182       2.69 7.29e- 3</code></pre>
+## 1 (Intercept)   8.57     0.0864      99.1  0.      
+## 2 age           0.0196   0.00190     10.3  4.08e-24
+## 3 sexmale       0.119    0.0533       2.23 2.58e- 2
+## 4 children      0.0512   0.0221       2.31 2.08e- 2</code></pre>
+<p>Below you can see graph of deviance residuals vs. the predicted values.</p>
+<p><strong>If this were a perfect model, all of these below assumptions would be met:</strong></p>
+<ul>
+<li>Scattered around zero?</li>
+<li>Constant variance?</li>
+<li>No obvious pattern?</li>
+</ul>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.</p>
+<p><strong>In a perfect model, all of these assumptions would be met:</strong></p>
+<ul>
+<li>Points lie on a straight line?<br />
+</li>
+<li>Tails are not significantly above or below line? Some tail deviation is ok.</li>
+<li>No sudden “jumps”? This indicates many <span class="math inline">\(Y\)</span>’s which have the same value, such as insurance claims which all have the exact value of $100.00 or $0.00.</li>
+</ul>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 </div>
 <div id="reference-levels" class="section level2">
-<h2><span class="header-section-number">9.3</span> Reference levels</h2>
+<h2><span class="header-section-number">9.5</span> Reference levels</h2>
 <p>When a categorical variable is used in a GLM, the model actually uses indicator variables for each level. The default reference level is the order of the R factors. For the <code>sex</code> variable, the order is <code>female</code> and then <code>male</code>. This means that the base level is <code>female</code> by default.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;female&quot; &quot;male&quot;</code></pre>
 <p>Why does this matter? Statistically, the coefficients are most stable when there are more observations.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
 <pre><code>## female   male 
 ##    662    676</code></pre>
 <p>There is already a function to do this in the <code>tidyverse</code> called <code>fct_infreq</code>. Let’s quickly fix the <code>sex</code> column so that these factor levels are in order of frequency.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">health_insurance &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb187-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">fct_infreq</span>(sex))</a></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">health_insurance &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb189-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">fct_infreq</span>(sex))</a></code></pre></div>
 <p>Now <code>male</code> is the base level.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;male&quot;   &quot;female&quot;</code></pre>
 </div>
 <div id="interactions" class="section level2">
-<h2><span class="header-section-number">9.4</span> Interactions</h2>
+<h2><span class="header-section-number">9.6</span> Interactions</h2>
 <p>An interaction occurs when the effect of a variable on the response is different depending on the level of other variables in the model.</p>
 <p>Consider this model:</p>
 <p>Let <span class="math inline">\(x_2\)</span> be an indicator variable, which is 1 for some records and 0 otherwise.</p>
@@ -342,33 +384,33 @@ By rewriting this we can see that the intercept changes from <span class="math i
  = \beta_0^* + \beta_1^* x_2
 \]</span></p>
 <p>The SOA’s modules give an example with the using age and gender as below. This is not a very strong interaction, as the slopes are almost identical across <code>gender</code>.</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1">interactions <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb190-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, actual, <span class="dt">color =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb190-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb190-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Age vs. Actual by Gender&quot;</span>, </a>
-<a class="sourceLine" id="cb190-5" title="5">       <span class="dt">subtitle =</span> <span class="st">&quot;Interactions imply different slopes&quot;</span>,</a>
-<a class="sourceLine" id="cb190-6" title="6">       <span class="dt">caption=</span> <span class="st">&quot;data: interactions&quot;</span>)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-22"></span>
-<img src="05-linear-models_files/figure-html/unnamed-chunk-22-1.png" alt="Example of weak interaction" width="672" />
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1">interactions <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb192-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, actual, <span class="dt">color =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb192-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb192-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Age vs. Actual by Gender&quot;</span>, </a>
+<a class="sourceLine" id="cb192-5" title="5">       <span class="dt">subtitle =</span> <span class="st">&quot;Interactions imply different slopes&quot;</span>,</a>
+<a class="sourceLine" id="cb192-6" title="6">       <span class="dt">caption=</span> <span class="st">&quot;data: interactions&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-24"></span>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-24-1.png" alt="Example of weak interaction" width="672" />
 <p class="caption">
 Figure 9.3: Example of weak interaction
 </p>
 </div>
 <p>Here is a clearer example from the <code>auto_claim</code> data. The lines show the slope of a linear model, assuming that only <code>BLUEBOOK</code> and <code>CAR_TYPE</code> were predictors in the model. You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb191-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log</span>(CLM_AMT), <span class="kw">log</span>(BLUEBOOK), <span class="dt">color =</span> CAR_TYPE)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb191-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb191-4" title="4"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb191-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kelly Bluebook Value vs Claim Amount&quot;</span>)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-23"></span>
-<img src="05-linear-models_files/figure-html/unnamed-chunk-23-1.png" alt="Example of strong interaction" width="672" />
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb193-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log</span>(CLM_AMT), <span class="kw">log</span>(BLUEBOOK), <span class="dt">color =</span> CAR_TYPE)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb193-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb193-4" title="4"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb193-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kelly Bluebook Value vs Claim Amount&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-25"></span>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-25-1.png" alt="Example of strong interaction" width="672" />
 <p class="caption">
 Figure 9.4: Example of strong interaction
 </p>
 </div>
 <p>Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction. We can also use an hypothesis test with a GLM to check this. Simply include an interaction term and see if the coefficient is zero at the desired significance level.</p>
 <div id="poisson-regression" class="section level3">
-<h3><span class="header-section-number">9.4.1</span> Poisson Regression</h3>
+<h3><span class="header-section-number">9.6.1</span> Poisson Regression</h3>
 <p>When the dependent variable is a count, such as the number of claims per month, Poisson regression is appropriate. This requires that each claim is independent in that one claim will not make another claim more or less likely. This means that the target variable is actually a rate, <span class="math inline">\(\frac{\text{claims}}{\text{months}}\)</span>. More generally, we call the months the <em>exposure</em>.</p>
 <p>Let <span class="math inline">\(m_i\)</span> by the units of exposure and <span class="math inline">\(y_i\)</span> the target. We use a log-link function to correct for skewness.</p>
 <p><span class="math display">\[ log(\frac{\hat{y_i}}{m_i}) = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p\]</span></p>
@@ -376,14 +418,14 @@ Figure 9.4: Example of strong interaction
 <p><span class="math display">\[log(\hat{y_i}) = log(m_i) + \beta_0 + \beta_1 x_1 + ... + \beta_p x_p\]</span></p>
 <p>We call the <span class="math inline">\(log(m_i)\)</span> the <code>offset</code> term. Notice that there is no coefficient (beta) on this value, because we already know what the impact will be.</p>
 <p>In R, the code for this equation would be</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(m)) <span class="op">+</span><span class="st"> </span>x, <span class="dt">family=</span><span class="kw">poisson</span>(<span class="dt">link=</span>log) )</a></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(m)) <span class="op">+</span><span class="st"> </span>x, <span class="dt">family=</span><span class="kw">poisson</span>(<span class="dt">link=</span>log) )</a></code></pre></div>
 </div>
 <div id="tweedie-regression" class="section level3">
-<h3><span class="header-section-number">9.4.2</span> Tweedie regression</h3>
+<h3><span class="header-section-number">9.6.2</span> Tweedie regression</h3>
 <p>While this topic is briefly mentioned on the modules, the only R libraries which support Tweedie Regression (<code>statmod</code> and <code>tweedie</code>) are not on the syllabus, and so there is no way that the SOA could ask you to build a tweedie model. This means that you can be safely skip this section.</p>
 </div>
 <div id="stepwise-subset-selection" class="section level3">
-<h3><span class="header-section-number">9.4.3</span> Stepwise subset selection</h3>
+<h3><span class="header-section-number">9.6.3</span> Stepwise subset selection</h3>
 <p>In theory, we could test all possible combinations of variables and interaction terms. This includes all <span class="math inline">\(p\)</span> models with one predictor, all p-choose-2 models with two predictors, all p-choose-3 models with three predictors, and so forth. Then we take whichever model has the best performance as the final model.</p>
 <p>This “brute force” approach is statistically ineffective: the more variables which are searched, the higher the chance of finding models that overfit.</p>
 <p>A subtler method, known as <em>stepwise selection</em>, reduces the chances of overfitting by only looking at the most promising models.</p>
@@ -424,7 +466,7 @@ Figure 9.4: Example of strong interaction
 </table>
 </div>
 <div id="advantages-and-disadvantages" class="section level3">
-<h3><span class="header-section-number">9.4.4</span> Advantages and disadvantages</h3>
+<h3><span class="header-section-number">9.6.4</span> Advantages and disadvantages</h3>
 <p>There is usually at least one question on the PA exam which asks you to “list some of the advantages and disadvantages of using this particular model”, and so here is one such list. It is unlikely that the grader will take off points for including too many comments and so a good strategy is to include everything that comes to mind.</p>
 <p><strong>GLM Advantages</strong></p>
 <ul>

@@ -16,7 +16,7 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 # What's in this book
 
-- Explanations of the statistical concepts (Clustering & PCA Sections Pending)
+- Explanations of the statistical concepts
 - All data sets needed packaged in an R library
 - `R code` examples
 - Tips on taking the exam
@@ -25,12 +25,14 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.net/pricing) for 
 
-- Two **original** practice exams
-- Solutions to prior exams
-  - Hospital Readmissions (Completed)
-  - Student Success (Later this week)
-  - June 2019 Exam (Coming next week)
-- An online discussion forum **where I will answer your questions**
+- Videos and custom solutions
+  - **June Exam PA**
+  - **Hospital Readmissions**
+  - Two **original** practice exams
+  - More coming soon!
+- An online discussion forum
+- Time-saving techniques
+- An RStudio/Data Manipulation tutorial
 
 **Video Example:**
 
