@@ -106,10 +106,10 @@ cost %>% head()
 ##    <dbl>   <dbl>  <dbl>
 ## 1      0 0.620    1.00 
 ## 2      1 0.144    0.382
-## 3      2 0.0637   0.237
-## 4      3 0.00967  0.177
+## 3      2 0.0637   0.240
+## 4      3 0.00967  0.180
 ## 5      4 0.00784  0.174
-## 6      5 0.00712  0.165
+## 6      5 0.00712  0.168
 ```
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.  
@@ -133,12 +133,12 @@ tree$cptable %>%
 ## # A tibble: 6 x 3
 ##   nsplit       CP xerror
 ##    <dbl>    <dbl>  <dbl>
-## 1     17 0.000913  0.150
-## 2     22 0.000759  0.150
-## 3     16 0.00105   0.150
-## 4     25 0.000681  0.150
-## 5     18 0.000910  0.150
-## 6     19 0.000837  0.150
+## 1     15 0.00116   0.151
+## 2     14 0.00119   0.151
+## 3     16 0.00105   0.151
+## 4     13 0.00134   0.152
+## 5     19 0.000837  0.152
+## 6     22 0.000759  0.152
 ```
 
 The SOA will give you code to find the lowest CP value such as below.  This may or may not be useful depending on if they are asking for predictive performance or interpretability.
@@ -563,9 +563,16 @@ Can overfit if not tuned correctly
 
 ## Exercises
 
+
+```r
+library(ExamPAData)
+library(tidyverse)
+```
+
+
 Run this code on your computer to answer these exercises.
 
-**1. RF with `randomForest`**
+### 1. RF with `randomForest`
 
 (Part 1 of 2)
 
@@ -598,12 +605,13 @@ df %>% count(target)
 
 ```r
 library(caret)
+library(randomForest)
 index <- createDataPartition(y = df$target, p = 0.8, list = F)
 
 train <- df %>% slice(index)
 test <- df %>% slice(-index)
 
-k = 0.1
+k = 0.5
 cutoff=c(k,1-k) 
 
 model <- randomForest(
@@ -615,6 +623,36 @@ model <- randomForest(
 
 pred <- predict(model, test)
 confusionMatrix(pred, test$target)
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction     0     1
+##          0     0     0
+##          1   362 19637
+##                                         
+##                Accuracy : 0.9819        
+##                  95% CI : (0.98, 0.9837)
+##     No Information Rate : 0.9819        
+##     P-Value [Acc > NIR] : 0.514         
+##                                         
+##                   Kappa : 0             
+##                                         
+##  Mcnemar's Test P-Value : <2e-16        
+##                                         
+##             Sensitivity : 0.0000        
+##             Specificity : 1.0000        
+##          Pos Pred Value :    NaN        
+##          Neg Pred Value : 0.9819        
+##              Prevalence : 0.0181        
+##          Detection Rate : 0.0000        
+##    Detection Prevalence : 0.0000        
+##       Balanced Accuracy : 0.5000        
+##                                         
+##        'Positive' Class : 0             
+## 
 ```
 
 (Part 2 of 2)
@@ -632,6 +670,14 @@ down_test <- downSample(x = test %>% select(-target),
 down_train %>% count(Class)
 ```
 
+```
+## # A tibble: 2 x 2
+##   Class     n
+##   <fct> <int>
+## 1 0      1449
+## 2 1      1449
+```
+
 
 ```r
 model <- randomForest(
@@ -643,6 +689,36 @@ model <- randomForest(
 
 down_pred <- predict(model, down_test)
 confusionMatrix(down_pred, down_test$Class)
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   0   1
+##          0 279 142
+##          1  83 220
+##                                           
+##                Accuracy : 0.6892          
+##                  95% CI : (0.6541, 0.7228)
+##     No Information Rate : 0.5             
+##     P-Value [Acc > NIR] : < 2.2e-16       
+##                                           
+##                   Kappa : 0.3785          
+##                                           
+##  Mcnemar's Test P-Value : 0.0001103       
+##                                           
+##             Sensitivity : 0.7707          
+##             Specificity : 0.6077          
+##          Pos Pred Value : 0.6627          
+##          Neg Pred Value : 0.7261          
+##              Prevalence : 0.5000          
+##          Detection Rate : 0.3854          
+##    Detection Prevalence : 0.5815          
+##       Balanced Accuracy : 0.6892          
+##                                           
+##        'Positive' Class : 0               
+## 
 ```
 
 Now up-sample the minority class and repeat the same procedure.
@@ -658,6 +734,14 @@ up_test <- upSample(x = test %>% select(-target),
 up_train %>% count(Class)
 ```
 
+```
+## # A tibble: 2 x 2
+##   Class     n
+##   <fct> <int>
+## 1 0     78552
+## 2 1     78552
+```
+
 
 ```r
 model <- randomForest(
@@ -671,7 +755,37 @@ up_pred <- predict(model, up_test)
 confusionMatrix(up_pred, up_test$Class)
 ```
 
-**2. RF tuning with `caret`**
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction     0     1
+##          0 14217  6869
+##          1  5420 12768
+##                                           
+##                Accuracy : 0.6871          
+##                  95% CI : (0.6825, 0.6917)
+##     No Information Rate : 0.5             
+##     P-Value [Acc > NIR] : < 2.2e-16       
+##                                           
+##                   Kappa : 0.3742          
+##                                           
+##  Mcnemar's Test P-Value : < 2.2e-16       
+##                                           
+##             Sensitivity : 0.7240          
+##             Specificity : 0.6502          
+##          Pos Pred Value : 0.6742          
+##          Neg Pred Value : 0.7020          
+##              Prevalence : 0.5000          
+##          Detection Rate : 0.3620          
+##    Detection Prevalence : 0.5369          
+##       Balanced Accuracy : 0.6871          
+##                                           
+##        'Positive' Class : 0               
+## 
+```
+
+### 2. RF tuning with `caret`
 
 The best practice of tuning a model is with cross-validation.  This can only be done in the `caret` library.  If the SOA asks you to use `caret`, they will likely ask you a question related to cross validation as below.
 
@@ -679,7 +793,6 @@ An actuary has trained a predictive model and chosen the best hyperparameters, c
 
 
 ```r
-library(caret)
 set.seed(42)
 #Take only 1000 records 
 #Uncomment this when completing this exercise
@@ -711,30 +824,52 @@ get_rmse <- function(y, y_hat){
 }
 
 get_rmse(pred_train, train$charges)
+```
+
+```
+## [1] 2845.893
+```
+
+```r
 get_rmse(pred_test, test$charges)
 ```
 
+```
+## [1] 5014.881
+```
 
-#### Tuning a GBM with `caret`
+### 3. Tuning a GBM with `caret`
 
 If the SOA asks you to tune a GBM, they will need to give you starting hyperparameters which are close to the "best" values due to how slow the Prometric computers are.  Another possibility is that they pre-train a GBM model object and ask that you use it.
 
-This example looks at 27 combinations of hyper parameters.
+This example looks at 135 combinations of hyper parameters.
 
 
 ```r
 tunegrid <- expand.grid(
-    interaction.depth = c(1,3,5),
-    n.trees = c(20, 40, 100), 
-    shrinkage = c(0.01, 0.001, 0.0001),
-    n.minobsinnode = 20)
+    interaction.depth = c(1,5, 10),
+    n.trees = c(100, 200, 300, 400, 500), 
+    shrinkage = c(0.5, 0.1, 0.0001),
+    n.minobsinnode = c(5, 30, 100)
+    )
 nrow(tunegrid)
+```
+
+```
+## [1] 135
+```
+
+```r
+control <- trainControl(
+  method='repeatedcv', 
+  number=5, 
+  p = 0.8)
 ```
 
 
 ```r
-gbm <- train(charges ~ bmi + age + sex + region,
-            data = health_insurance_train,
+gbm <- train(charges ~ .,
+            data = train,
             method='gbm', 
             tuneGrid=tunegrid, 
             trControl=control,
@@ -743,20 +878,52 @@ gbm <- train(charges ~ bmi + age + sex + region,
             )
 ```
 
-The output shows the RMSE for each of the 27 models tested.
+The output shows the RMSE for each of the 135 models tested.
+
+(Part 1 of 3)
+
+Identify the hyperpameter combination that has the lowest training error.
+
+(Part 2 of 3)
+
+2. Suppose that the optimization measure was RMSE.  The below table shows the results from three models.  Explain why some sets of parameters have better RMSE than the others.  
 
 
 ```r
-trellis.par.set(caretTheme())
-plot(gbm)
+results <- gbm$results %>% arrange(RMSE)
+top_result <- results %>% slice(1)%>% mutate(param_rank = 1)
+tenth_result <- results %>% slice(10)%>% mutate(param_rank = 10)
+twenty_seventh_result <- results %>% slice(135)%>% mutate(param_rank = 135)
+
+rbind(top_result, tenth_result, twenty_seventh_result) %>% 
+  select(param_rank, 1:5)
 ```
 
-The `summary.gbm` function, which R understands from the `summary` function, shows the variable importance. The most predictive feature is `age`, followed by `bmi`.
+```
+##   param_rank shrinkage interaction.depth n.minobsinnode n.trees      RMSE
+## 1          1     1e-01                10             30     100  4585.017
+## 2         10     1e-01                 5             30     500  4809.024
+## 3        135     1e-04                 1            100     100 12065.765
+```
+
+3. The partial dependence of `bmi` onto `charges` makes it appear as if `charges` increases monotonically as `bmi` increases.
 
 
 ```r
-summary(gbm, plotit = F) %>% as_tibble()
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 20, plot = T)
 ```
+
+<img src="06-tree-based-models_files/figure-html/unnamed-chunk-32-1.png" width="480" />
+
+However, when we add in the `ice` curves, we see that there is something else going on.  Explain this graph.  Why are there two groups of lines?
+
+
+```r
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 20, plot = T, ice = T, alpha = 0.1)
+```
+
+<img src="06-tree-based-models_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+
 
 ## Answers to Exercises
 

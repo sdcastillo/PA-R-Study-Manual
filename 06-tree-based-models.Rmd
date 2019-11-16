@@ -485,9 +485,15 @@ Can overfit if not tuned correctly
 
 ## Exercises
 
+```{r message = F}
+library(ExamPAData)
+library(tidyverse)
+```
+
+
 Run this code on your computer to answer these exercises.
 
-**1. RF with `randomForest`**
+### 1. RF with `randomForest`
 
 (Part 1 of 2)
 
@@ -495,7 +501,7 @@ The below code is set up to fit a random forest to the `soa_mortality` data set 
 
 There is a problem: all of the predictions are coming out to be 1.  Find out why this is happening and fix it.
 
-```{r}
+```{r eval = F}
 set.seed(42)
 #For the sake of this example, only take 20% of the records
 df <- soa_mortality %>% 
@@ -508,14 +514,15 @@ df <- soa_mortality %>%
 df %>% count(target)
 ```
 
-```{r eval = F, message=F}
+```{r  eval = F,message=F}
 library(caret)
+library(randomForest)
 index <- createDataPartition(y = df$target, p = 0.8, list = F)
 
 train <- df %>% slice(index)
 test <- df %>% slice(-index)
 
-k = 0.1
+k = 0.5
 cutoff=c(k,1-k) 
 
 model <- randomForest(
@@ -533,7 +540,7 @@ confusionMatrix(pred, test$target)
 
 Downsample the majority class and refit the model, and then choose between the original data and the downsampled data based on the model performance.  Use your own judgement when choosing how to evaluate the model based on accuracy, sensitivity, specificity, and Kappa.
 
-```{r eval = F}
+```{r  eval = F}
 down_train <- downSample(x = train %>% select(-target),
                          y = train$target)
 
@@ -543,7 +550,7 @@ down_test <- downSample(x = test %>% select(-target),
 down_train %>% count(Class)
 ```
 
-```{r eval = F}
+```{r  eval = F}
 model <- randomForest(
   formula = Class ~ ., 
   data = down_train,
@@ -557,7 +564,7 @@ confusionMatrix(down_pred, down_test$Class)
 
 Now up-sample the minority class and repeat the same procedure.
 
-```{r eval = F}
+```{r  eval = F}
 up_train <- upSample(x = train %>% select(-target),
                          y = train$target)
 
@@ -579,14 +586,13 @@ up_pred <- predict(model, up_test)
 confusionMatrix(up_pred, up_test$Class)
 ```
 
-**2. RF tuning with `caret`**
+### 2. RF tuning with `caret`
 
 The best practice of tuning a model is with cross-validation.  This can only be done in the `caret` library.  If the SOA asks you to use `caret`, they will likely ask you a question related to cross validation as below.
 
 An actuary has trained a predictive model and chosen the best hyperparameters, cleaned the data, and performed feature engineering.  They have one problem, however: the error on the training data is far lower than on new, unseen test data.  Read the code below and determine their problem.  Find a way to lower the error on the test data *without changing the model or the data.*  Explain the rational behind your method.
 
-```{r, message = F, eval = F}
-library(caret)
+```{r eval = F}
 set.seed(42)
 #Take only 1000 records 
 #Uncomment this when completing this exercise
@@ -621,25 +627,36 @@ get_rmse(pred_train, train$charges)
 get_rmse(pred_test, test$charges)
 ```
 
-
-#### Tuning a GBM with `caret`
+### 3. Tuning a GBM with `caret`
 
 If the SOA asks you to tune a GBM, they will need to give you starting hyperparameters which are close to the "best" values due to how slow the Prometric computers are.  Another possibility is that they pre-train a GBM model object and ask that you use it.
 
-This example looks at 27 combinations of hyper parameters.
+This example looks at 135 combinations of hyper parameters.
 
-```{r, message = F, eval = F}
+```{r}
+set.seed(42)
+index <- createDataPartition(y = health_insurance$charges, 
+                             p = 0.8, list = F)
+train <- health_insurance %>% slice(index)
+test <- health_insurance %>% slice(-index)
+
 tunegrid <- expand.grid(
-    interaction.depth = c(1,3,5),
-    n.trees = c(20, 40, 100), 
-    shrinkage = c(0.01, 0.001, 0.0001),
-    n.minobsinnode = 20)
+    interaction.depth = c(1,5, 10),
+    n.trees = c(100, 200, 300, 400, 500), 
+    shrinkage = c(0.5, 0.1, 0.0001),
+    n.minobsinnode = c(5, 30, 100)
+    )
 nrow(tunegrid)
+
+control <- trainControl(
+  method='repeatedcv', 
+  number=5, 
+  p = 0.8)
 ```
 
-```{r, eval = F}
-gbm <- train(charges ~ bmi + age + sex + region,
-            data = health_insurance_train,
+```{r}
+gbm <- train(charges ~ .,
+            data = train,
             method='gbm', 
             tuneGrid=tunegrid, 
             trControl=control,
@@ -648,18 +665,38 @@ gbm <- train(charges ~ bmi + age + sex + region,
             )
 ```
 
-The output shows the RMSE for each of the 27 models tested.
+The output shows the RMSE for each of the 135 models tested.
 
-```{r eval = F}
-trellis.par.set(caretTheme())
-plot(gbm)
+(Part 1 of 3)
+
+Identify the hyperpameter combination that has the lowest training error.
+
+(Part 2 of 3)
+
+2. Suppose that the optimization measure was RMSE.  The below table shows the results from three models.  Explain why some sets of parameters have better RMSE than the others.  
+
+```{r}
+results <- gbm$results %>% arrange(RMSE)
+top_result <- results %>% slice(1)%>% mutate(param_rank = 1)
+tenth_result <- results %>% slice(10)%>% mutate(param_rank = 10)
+twenty_seventh_result <- results %>% slice(135)%>% mutate(param_rank = 135)
+
+rbind(top_result, tenth_result, twenty_seventh_result) %>% 
+  select(param_rank, 1:5)
 ```
 
-The `summary.gbm` function, which R understands from the `summary` function, shows the variable importance. The most predictive feature is `age`, followed by `bmi`.
+3. The partial dependence of `bmi` onto `charges` makes it appear as if `charges` increases monotonically as `bmi` increases.
 
-```{r fig.height=10, eval = F}
-summary(gbm, plotit = F) %>% as_tibble()
+```{r fig.width=5, fig.height=5}
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 20, plot = T)
 ```
+
+However, when we add in the `ice` curves, we see that there is something else going on.  Explain this graph.  Why are there two groups of lines?
+
+```{r}
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 30, plot = T, ice = T, alpha = 0.1, palette = "viridis")
+```
+
 
 ## Answers to Exercises
 
