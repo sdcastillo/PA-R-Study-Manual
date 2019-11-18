@@ -334,12 +334,12 @@ $$\text{Deviance Residual} = \text{sign}(y_i - \hat{y_i})\sqrt{d_i}$$
 Just as with OLS, there is a `formula` and `data argument`.  In addition, we need to specify the response distribution and link function.
 
 ```{r}
-model = glm(formula = charges ~ age + sex + children, 
+model = glm(formula = charges ~ age + sex + smoker, 
             family = Gamma(link = "log"),
             data = health_insurance)
 ```
 
-We see that `age`, `sex`, and `children` are all significant (p <0.01).  Reading off the coefficient signs, we see that claims
+We see that `age`, `sex`, and `smoker` are all significant (p <0.01).  Reading off the coefficient signs, we see that claims
 
 - Increase as age increases
 - Are higher for men
@@ -659,7 +659,7 @@ test %>%
   summarise(accuracy = mean(pred_zero_one == target))
 ```
 
-The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accuracy for the positive classes (policies with actual claims) vs. the negative classes (policies without claims).
+The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accuracy for the "true = 1" classes (policies with actual claims) vs. the "false = 0" classes (policies without claims).
 
 ## Classification metrics
 
@@ -669,8 +669,8 @@ A *confusion matrix* shows is a table that summarises how the model classifies e
 
 - No claims and predicted to not have claims - **True Negatives (TN) = 1,489**
 - Had claims and predicted to have claims - **True Positives (TP) = 59**
-- No claims but predited to have claims - **False Negatives (FN) = 22**
-- Had claims but predicted not to - **False Positives (FP) = 489**
+- No claims but predited to have claims - **False Negatives (FP) = 22**
+- Had claims but predicted not to - **False Positives (FN) = 489**
 
 ```{r}
 confusionMatrix(test$pred_zero_one,factor(test$target))$table
@@ -725,6 +725,8 @@ roc(test$target, preds, plot = T)
 ```
 
 If we just randomly guess, the AUC would be 0.5, which is represented by the 45-degree line.  A perfect model would maximize the curve to the upper-left corner.
+
+AUC is preferred over Accuracy when there are a lot more "true" classes than "false" classes, which is known as having **class imbalance*.  An example is bank fraud detection: 99.99% of bank transactions are "false" or "0" classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
 
 # Penalized Linear Models
 
