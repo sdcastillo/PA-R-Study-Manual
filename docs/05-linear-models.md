@@ -182,7 +182,7 @@ get_rmse(pred, test$charges)
 ```
 
 ```
-## [1] 11706.96
+## [1] 11542.73
 ```
 
 The above number does not tell us if this is a good model or not by itself.  We need a comparison.  The fastest check is to compare against a prediction of the mean.  In other words, all values of the `y_hat` are the average of `charges`
@@ -193,7 +193,7 @@ get_rmse(mean(test$charges), test$charges)
 ```
 
 ```
-## [1] 12308.32
+## [1] 12162.98
 ```
 
 The RMSE is **higher** (worse) when using just the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
@@ -237,9 +237,9 @@ testing <- lm(data = test,
 
 |term        | full_data_std_error| test_data_std_error|
 |:-----------|-------------------:|-------------------:|
-|(Intercept) |              1744.1|              4029.6|
-|bmi         |                51.4|               115.0|
-|age         |                22.3|                51.5|
+|(Intercept) |              1744.1|              4117.9|
+|bmi         |                51.4|               120.5|
+|age         |                22.3|                50.1|
 
 All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
 
@@ -250,7 +250,7 @@ coefficients(model)
 
 ```
 ## (Intercept)         bmi         age 
-##  -6696.1762    332.6658    246.5680
+##  -6087.9627    307.2049    253.4490
 ```
 
 Translating the above into an equation we have
@@ -297,9 +297,7 @@ We relax these two assumptions by saying that the model is defined by
 
 1. A random component: $\mathbf{Y|X} \sim \text{some exponential family distribution}$
 
-2. A *link function*: between the random component and $X$:
-
-  $$g(\mu(\mathbf{X})) = \mathbf{X\beta}$$
+2. A *link function*: between the random component and $X$: $g(\mu(\mathbf{X})) = \mathbf{X\beta}$
 
 The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
 
