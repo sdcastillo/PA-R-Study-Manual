@@ -23,6 +23,8 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 ## Get full access
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7-d85_h2QJ0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.net/pricing) for 
 
 - **Three** original** practice exams and more coming soon
@@ -31,10 +33,6 @@ While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.
 - An online discussion forum
 - Time-saving techniques
 - An RStudio/Data Manipulation tutorial
-
-**Video Example:**
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7-d85_h2QJ0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## About the author
 
