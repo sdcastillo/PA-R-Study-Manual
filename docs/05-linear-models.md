@@ -38,18 +38,18 @@ $$
 
 The target is 
 
-$$\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}$$
+$$\mathbf{Y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}$$
 This represents the *unknown* quantity that we want to be able to predict.  In the health care costs example, $y_1$ would be the costs of the first patient, $y_2$ the costs of the second patient, and so forth.  The variables $x_{11}$ and $x_{12}$ might represent the first patient's age and sex respectively, where $x_{i1}$ is the patient's age, and $x_{i2} = 1$ if the ith patient is male and 0 if female.
 
 Machine learning is about using $\mathbf{X}$ to predict $\mathbf{y}$. We call this "y-hat", or simply the prediction.  This is based on a function of the data $X$.
 
-$$\mathbf{\hat{y}} = f(\mathbf{X}) = \begin{pmatrix} \hat{y_1} \\ \hat{y_2} \\ \hat{y_3} \end{pmatrix}$$
+$$\mathbf{\hat{Y}} = f(\mathbf{X}) = \begin{pmatrix} \hat{y_1} \\ \hat{y_2} \\ \hat{y_3} \end{pmatrix}$$
 
 
 This is almost never going to happen perfectly, and so there is always an error term, $\mathbf{\epsilon}$.  This can be made smaller, but is never exactly zero.  
 
 $$
-\mathbf{\hat{y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}
+\mathbf{\hat{Y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}
 $$
 
 In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict a person's health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
@@ -63,7 +63,7 @@ We have the data $\mathbf{X}$ and the target $\mathbf{y}$, where all of the y's 
 We want to find a $\mathbf{\beta}$ so that 
 
 $$
-\mathbf{\hat{y}} = \mathbf{X} \mathbf{\beta}
+\mathbf{\hat{Y}} = \mathbf{X} \mathbf{\beta}
 $$
 
 Which means that each $y_i$ is a linear combination of the variables $x_1, ..., x_p$, plus a constant $\beta_0$ which is called the *intercept* term.  
@@ -182,7 +182,7 @@ get_rmse(pred, test$charges)
 ```
 
 ```
-## [1] 11376.73
+## [1] 11706.96
 ```
 
 The above number does not tell us if this is a good model or not by itself.  We need a comparison.  The fastest check is to compare against a prediction of the mean.  In other words, all values of the `y_hat` are the average of `charges`
@@ -193,7 +193,7 @@ get_rmse(mean(test$charges), test$charges)
 ```
 
 ```
-## [1] 12319.4
+## [1] 12308.32
 ```
 
 The RMSE is **higher** (worse) when using just the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
@@ -237,9 +237,9 @@ testing <- lm(data = test,
 
 |term        | full_data_std_error| test_data_std_error|
 |:-----------|-------------------:|-------------------:|
-|(Intercept) |              1744.1|              3772.0|
-|bmi         |                51.4|               112.1|
-|age         |                22.3|                48.5|
+|(Intercept) |              1744.1|              4029.6|
+|bmi         |                51.4|               115.0|
+|age         |                22.3|                51.5|
 
 All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
 
@@ -250,7 +250,7 @@ coefficients(model)
 
 ```
 ## (Intercept)         bmi         age 
-##  -6119.8836    336.2512    231.3447
+##  -6696.1762    332.6658    246.5680
 ```
 
 Translating the above into an equation we have
@@ -272,48 +272,41 @@ This model structure implies that each of the variables $\mathbf{x_1}, ..., \mat
 
 # Generalized linear models (GLMs)
 
-## Model form
-
-Instead of the model being a direct linear combination of the variables, there is an intermediate step called a *link function* $g$.
+The linear model that we have considered up to this point, what we called "OLS", assumes that the response is a linear combination of the predictor variables.  For an error term $\epsilon_i \sim N(0,\sigma^2)$, this is assumes that
 
 $$
-g(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta}
+\mathbf{Y} = \mathbf{X} =  \mathbf{\beta} + \mathbf{\epsilon}
 $$
 
-This implies that the response $\mathbf{y}$ is related to the linear predictor $\mathbf{X} \mathbf{\beta}$ through the *inverse* link function.
+Another way of saying this is that "after we adjust for the data, the error is normally distributed and the variance is constant."  If $\sigma^2 \mathbf{I}$ is covariance matrix, then
 
 $$
-\mathbf{\hat{y}} = g^-1(\mathbf{X} \mathbf{\beta})
+\mathbf{Y}|\mathbf{X} \sim N( \mathbf{X} \mathbf{\beta}, \sigma^2 \mathbf{I})
 $$
 
-This means that $g(.)$ must be an invertable.  For example, if $g$ is the natural logarithm (aka, the "log-link"), then
+These assumptions can be expressed in two parts:
 
-$$
-log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
-$$
+1. A *random component*: The response variable $\mathbf{Y|X}$ is normally distributed with mean $\mu = \mu(\mathbf{X}) = E(\mathbf{Y|X})$
 
-This is useful when the distribution of $Y$ is skewed, as taking the log corrects skewness.
+2. A link between the response and the covariates $\mu(\mathbf{X}) = \mathbf{X\beta}$
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-14-1.png" alt="Taking the log corrects for skewness" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-14)Taking the log corrects for skewness</p>
-</div>
 
-You might be asking, what if the distribution of $Y$ is not normal, no matter what choice we have for $g$?  The short answer is that we can change our assumption of the distribution of $Y$, and use this to change the parameters.  If you have taken exam STAM then you are familiar with *maximum likelihood estimation*.  
+## The *generalized* linear model
 
-We have a response $\mathbf{Y}$, and we fit a distribution to $\mathbf{Y} | \mathbf{X}$.  This is the target variable conditioned on the data.  For each $y_i$, each observation, we assign a probability $f_Y(y_i)$
+We relax these two assumptions by saying that the model is defined by 
 
-$$
-f_y(y_i | X_1 = x_1, X_2 = x_2, ..., X_p = x_p) = Pr(Y = y_i | \mathbf{X})
-$$
+1. A random component: $\mathbf{Y|X} \sim \text{some exponential family distribution}$
 
-Now, when we choose the response family, we are simply changing $f_Y$.  If we say that the response family is Gaussian, then $f$ has a Gaussian PDF.  If we are modeling counts, then $f$ is a Poisson PDF.  This only works if $f$ is in the *exponential family* of distributions, which consists of the common names such as Gaussian, Binomial, Gamma, Inverse Gamma, and so forth.  Reading the CAS Monograph 5 will provide more detail into this.
+2. A *link function*: between the random component and $X$:
+
+  $$g(\mu(\mathbf{X})) = \mathbf{X\beta}$$
 
 The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
 
+
 <div class="figure">
 <img src="images/glm_links.png" alt="Distribution-Link Function Combinations" width="804" />
-<p class="caption">(\#fig:unnamed-chunk-15)Distribution-Link Function Combinations</p>
+<p class="caption">(\#fig:unnamed-chunk-14)Distribution-Link Function Combinations</p>
 </div>
 
 For this exam, a common question is to ask candiates to choose the best distribution and link function.  There is no all-encompasing answer, but a few suggestions are
@@ -373,12 +366,12 @@ Just as with OLS, there is a `formula` and `data argument`.  In addition, we nee
 
 
 ```r
-model = glm(formula = charges ~ age + sex + children, 
+model = glm(formula = charges ~ age + sex + smoker, 
             family = Gamma(link = "log"),
             data = health_insurance)
 ```
 
-We see that `age`, `sex`, and `children` are all significant (p <0.01).  Reading off the coefficient signs, we see that claims
+We see that `age`, `sex`, and `smoker` are all significant (p <0.01).  Reading off the coefficient signs, we see that claims
 
 - Increase as age increases
 - Are higher for men
@@ -391,12 +384,12 @@ model %>% tidy()
 
 ```
 ## # A tibble: 4 x 5
-##   term        estimate std.error statistic  p.value
-##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)   8.57     0.0864      99.1  0.      
-## 2 age           0.0196   0.00190     10.3  4.08e-24
-## 3 sexmale       0.119    0.0533       2.23 2.58e- 2
-## 4 children      0.0512   0.0221       2.31 2.08e- 2
+##   term        estimate std.error statistic   p.value
+##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
+## 1 (Intercept)   7.82     0.0600     130.   0.       
+## 2 age           0.0290   0.00134     21.6  3.40e- 89
+## 3 sexmale      -0.0468   0.0377      -1.24 2.15e-  1
+## 4 smokeryes     1.50     0.0467      32.1  3.25e-168
 ```
 
 Below you can see graph of deviance residuals vs. the predicted values. 
@@ -412,7 +405,7 @@ Below you can see graph of deviance residuals vs. the predicted values.
 plot(model, which = 3)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="05-linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.  
 
@@ -427,7 +420,7 @@ The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i
 plot(model, which = 2)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="05-linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 
 ## Reference levels
@@ -513,8 +506,8 @@ interactions %>%
 ```
 
 <div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-24-1.png" alt="Example of weak interaction" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-24)Example of weak interaction</p>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-23-1.png" alt="Example of weak interaction" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-23)Example of weak interaction</p>
 </div>
 
 Here is a clearer example from the `auto_claim` data. The lines show the slope of a linear model, assuming that only `BLUEBOOK` and `CAR_TYPE` were predictors in the model.  You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.  
@@ -529,8 +522,8 @@ auto_claim %>%
 ```
 
 <div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-25-1.png" alt="Example of strong interaction" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-25)Example of strong interaction</p>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-24-1.png" alt="Example of strong interaction" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-24)Example of strong interaction</p>
 </div>
 
 Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction.  We can also use an hypothesis test with a GLM to check this.  Simply include an interaction term and see if the coefficient is zero at the desired significance level.
@@ -633,8 +626,8 @@ We can use a special link function, known as the *standard logistic function*, *
 $$\mathbf{\hat{y}} = g^{-1}(\mathbf{X} \mathbf{\beta}) = \frac{1}{1 + e^{-\mathbf{X} \mathbf{\beta}}}$$
 
 <div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-27-1.png" alt="Standard Logistic Function" width="384" />
-<p class="caption">(\#fig:unnamed-chunk-27)Standard Logistic Function</p>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-26-1.png" alt="Standard Logistic Function" width="384" />
+<p class="caption">(\#fig:unnamed-chunk-26)Standard Logistic Function</p>
 </div>
 
 Other link functions for classification problems are possible as well, although the logistic function is the most common.  If a problem asks for an alternative link, such as the *probit*, fit both models and compare the performance.
@@ -731,8 +724,8 @@ qplot(preds)
 ```
 
 <div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-31-1.png" alt="Distribution of Predicted Probability" width="480" />
-<p class="caption">(\#fig:unnamed-chunk-31)Distribution of Predicted Probability</p>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-30-1.png" alt="Distribution of Predicted Probability" width="480" />
+<p class="caption">(\#fig:unnamed-chunk-30)Distribution of Predicted Probability</p>
 </div>
 
 In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 othersise.  The default cutoff is 0.5.  We change this to 0.3 and see that there are 763 policies predicted to have claims.
@@ -858,7 +851,7 @@ test %>%
 ## 1    0.985
 ```
 
-The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accuracy for the positive classes (policies with actual claims) vs. the negative classes (policies without claims).
+The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accuracy for the "true = 1" classes (policies with actual claims) vs. the "false = 0" classes (policies without claims).
 
 ## Classification metrics
 
@@ -868,8 +861,8 @@ A *confusion matrix* shows is a table that summarises how the model classifies e
 
 - No claims and predicted to not have claims - **True Negatives (TN) = 1,489**
 - Had claims and predicted to have claims - **True Positives (TP) = 59**
-- No claims but predited to have claims - **False Negatives (FN) = 22**
-- Had claims but predicted not to - **False Positives (FP) = 489**
+- No claims but predited to have claims - **False Negatives (FP) = 22**
+- Had claims but predicted not to - **False Positives (FN) = 489**
 
 
 ```r
@@ -964,8 +957,8 @@ roc(test$target, preds, plot = T)
 ```
 
 <div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-41-1.png" alt="AUC for auto_claim" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-41)AUC for auto_claim</p>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-40-1.png" alt="AUC for auto_claim" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-40)AUC for auto_claim</p>
 </div>
 
 ```
@@ -978,6 +971,8 @@ roc(test$target, preds, plot = T)
 ```
 
 If we just randomly guess, the AUC would be 0.5, which is represented by the 45-degree line.  A perfect model would maximize the curve to the upper-left corner.
+
+AUC is preferred over Accuracy when there are a lot more "true" classes than "false" classes, which is known as having **class imbalance*.  An example is bank fraud detection: 99.99% of bank transactions are "false" or "0" classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
 
 # Penalized Linear Models
 

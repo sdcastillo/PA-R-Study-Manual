@@ -107,7 +107,7 @@ cost %>% head()
 ## 1      0 0.620    1.00 
 ## 2      1 0.144    0.382
 ## 3      2 0.0637   0.240
-## 4      3 0.00967  0.180
+## 4      3 0.00967  0.179
 ## 5      4 0.00784  0.174
 ## 6      5 0.00712  0.168
 ```
@@ -133,12 +133,12 @@ tree$cptable %>%
 ## # A tibble: 6 x 3
 ##   nsplit       CP xerror
 ##    <dbl>    <dbl>  <dbl>
-## 1     15 0.00116   0.151
-## 2     14 0.00119   0.151
-## 3     16 0.00105   0.151
-## 4     13 0.00134   0.152
-## 5     19 0.000837  0.152
-## 6     22 0.000759  0.152
+## 1     22 0.000759  0.148
+## 2     18 0.000910  0.149
+## 3     24 0.000695  0.149
+## 4     25 0.000681  0.149
+## 5     19 0.000837  0.149
+## 6     16 0.00105   0.149
 ```
 
 The SOA will give you code to find the lowest CP value such as below.  This may or may not be useful depending on if they are asking for predictive performance or interpretability.
@@ -594,14 +594,6 @@ df <- soa_mortality %>%
 df %>% count(target)
 ```
 
-```
-## # A tibble: 2 x 2
-##   target     n
-##   <fct>  <int>
-## 1 0       1811
-## 2 1      98189
-```
-
 
 ```r
 library(caret)
@@ -625,36 +617,6 @@ pred <- predict(model, test)
 confusionMatrix(pred, test$target)
 ```
 
-```
-## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction     0     1
-##          0     0     0
-##          1   362 19637
-##                                         
-##                Accuracy : 0.9819        
-##                  95% CI : (0.98, 0.9837)
-##     No Information Rate : 0.9819        
-##     P-Value [Acc > NIR] : 0.514         
-##                                         
-##                   Kappa : 0             
-##                                         
-##  Mcnemar's Test P-Value : <2e-16        
-##                                         
-##             Sensitivity : 0.0000        
-##             Specificity : 1.0000        
-##          Pos Pred Value :    NaN        
-##          Neg Pred Value : 0.9819        
-##              Prevalence : 0.0181        
-##          Detection Rate : 0.0000        
-##    Detection Prevalence : 0.0000        
-##       Balanced Accuracy : 0.5000        
-##                                         
-##        'Positive' Class : 0             
-## 
-```
-
 (Part 2 of 2)
 
 Downsample the majority class and refit the model, and then choose between the original data and the downsampled data based on the model performance.  Use your own judgement when choosing how to evaluate the model based on accuracy, sensitivity, specificity, and Kappa.
@@ -670,14 +632,6 @@ down_test <- downSample(x = test %>% select(-target),
 down_train %>% count(Class)
 ```
 
-```
-## # A tibble: 2 x 2
-##   Class     n
-##   <fct> <int>
-## 1 0      1449
-## 2 1      1449
-```
-
 
 ```r
 model <- randomForest(
@@ -689,36 +643,6 @@ model <- randomForest(
 
 down_pred <- predict(model, down_test)
 confusionMatrix(down_pred, down_test$Class)
-```
-
-```
-## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction   0   1
-##          0 279 142
-##          1  83 220
-##                                           
-##                Accuracy : 0.6892          
-##                  95% CI : (0.6541, 0.7228)
-##     No Information Rate : 0.5             
-##     P-Value [Acc > NIR] : < 2.2e-16       
-##                                           
-##                   Kappa : 0.3785          
-##                                           
-##  Mcnemar's Test P-Value : 0.0001103       
-##                                           
-##             Sensitivity : 0.7707          
-##             Specificity : 0.6077          
-##          Pos Pred Value : 0.6627          
-##          Neg Pred Value : 0.7261          
-##              Prevalence : 0.5000          
-##          Detection Rate : 0.3854          
-##    Detection Prevalence : 0.5815          
-##       Balanced Accuracy : 0.6892          
-##                                           
-##        'Positive' Class : 0               
-## 
 ```
 
 Now up-sample the minority class and repeat the same procedure.
@@ -734,14 +658,6 @@ up_test <- upSample(x = test %>% select(-target),
 up_train %>% count(Class)
 ```
 
-```
-## # A tibble: 2 x 2
-##   Class     n
-##   <fct> <int>
-## 1 0     78552
-## 2 1     78552
-```
-
 
 ```r
 model <- randomForest(
@@ -753,36 +669,6 @@ model <- randomForest(
 
 up_pred <- predict(model, up_test)
 confusionMatrix(up_pred, up_test$Class)
-```
-
-```
-## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction     0     1
-##          0 14217  6869
-##          1  5420 12768
-##                                           
-##                Accuracy : 0.6871          
-##                  95% CI : (0.6825, 0.6917)
-##     No Information Rate : 0.5             
-##     P-Value [Acc > NIR] : < 2.2e-16       
-##                                           
-##                   Kappa : 0.3742          
-##                                           
-##  Mcnemar's Test P-Value : < 2.2e-16       
-##                                           
-##             Sensitivity : 0.7240          
-##             Specificity : 0.6502          
-##          Pos Pred Value : 0.6742          
-##          Neg Pred Value : 0.7020          
-##              Prevalence : 0.5000          
-##          Detection Rate : 0.3620          
-##    Detection Prevalence : 0.5369          
-##       Balanced Accuracy : 0.6871          
-##                                           
-##        'Positive' Class : 0               
-## 
 ```
 
 ### 2. RF tuning with `caret`
@@ -824,18 +710,7 @@ get_rmse <- function(y, y_hat){
 }
 
 get_rmse(pred_train, train$charges)
-```
-
-```
-## [1] 2845.893
-```
-
-```r
 get_rmse(pred_test, test$charges)
-```
-
-```
-## [1] 5014.881
 ```
 
 ### 3. Tuning a GBM with `caret`
@@ -846,6 +721,12 @@ This example looks at 135 combinations of hyper parameters.
 
 
 ```r
+set.seed(42)
+index <- createDataPartition(y = health_insurance$charges, 
+                             p = 0.8, list = F)
+train <- health_insurance %>% slice(index)
+test <- health_insurance %>% slice(-index)
+
 tunegrid <- expand.grid(
     interaction.depth = c(1,5, 10),
     n.trees = c(100, 200, 300, 400, 500), 
@@ -901,9 +782,9 @@ rbind(top_result, tenth_result, twenty_seventh_result) %>%
 
 ```
 ##   param_rank shrinkage interaction.depth n.minobsinnode n.trees      RMSE
-## 1          1     1e-01                10             30     100  4585.017
-## 2         10     1e-01                 5             30     500  4809.024
-## 3        135     1e-04                 1            100     100 12065.765
+## 1          1     1e-01                 5             30     100  4396.814
+## 2         10     1e-01                10             30     300  4630.433
+## 3        135     1e-04                 1            100     100 12108.185
 ```
 
 3. The partial dependence of `bmi` onto `charges` makes it appear as if `charges` increases monotonically as `bmi` increases.
@@ -919,7 +800,7 @@ However, when we add in the `ice` curves, we see that there is something else go
 
 
 ```r
-pdp::partial(gbm, pred.var = "bmi", grid.resolution = 20, plot = T, ice = T, alpha = 0.1)
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 30, plot = T, ice = T, alpha = 0.1, palette = "viridis")
 ```
 
 <img src="06-tree-based-models_files/figure-html/unnamed-chunk-33-1.png" width="672" />

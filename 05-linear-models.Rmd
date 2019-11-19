@@ -37,18 +37,18 @@ $$
 
 The target is 
 
-$$\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}$$
+$$\mathbf{Y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}$$
 This represents the *unknown* quantity that we want to be able to predict.  In the health care costs example, $y_1$ would be the costs of the first patient, $y_2$ the costs of the second patient, and so forth.  The variables $x_{11}$ and $x_{12}$ might represent the first patient's age and sex respectively, where $x_{i1}$ is the patient's age, and $x_{i2} = 1$ if the ith patient is male and 0 if female.
 
 Machine learning is about using $\mathbf{X}$ to predict $\mathbf{y}$. We call this "y-hat", or simply the prediction.  This is based on a function of the data $X$.
 
-$$\mathbf{\hat{y}} = f(\mathbf{X}) = \begin{pmatrix} \hat{y_1} \\ \hat{y_2} \\ \hat{y_3} \end{pmatrix}$$
+$$\mathbf{\hat{Y}} = f(\mathbf{X}) = \begin{pmatrix} \hat{y_1} \\ \hat{y_2} \\ \hat{y_3} \end{pmatrix}$$
 
 
 This is almost never going to happen perfectly, and so there is always an error term, $\mathbf{\epsilon}$.  This can be made smaller, but is never exactly zero.  
 
 $$
-\mathbf{\hat{y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}
+\mathbf{\hat{Y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}
 $$
 
 In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict a person's health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
@@ -62,7 +62,7 @@ We have the data $\mathbf{X}$ and the target $\mathbf{y}$, where all of the y's 
 We want to find a $\mathbf{\beta}$ so that 
 
 $$
-\mathbf{\hat{y}} = \mathbf{X} \mathbf{\beta}
+\mathbf{\hat{Y}} = \mathbf{X} \mathbf{\beta}
 $$
 
 Which means that each $y_i$ is a linear combination of the variables $x_1, ..., x_p$, plus a constant $\beta_0$ which is called the *intercept* term.  
@@ -229,50 +229,35 @@ This model structure implies that each of the variables $\mathbf{x_1}, ..., \mat
 
 # Generalized linear models (GLMs)
 
-## Model form
-
-Instead of the model being a direct linear combination of the variables, there is an intermediate step called a *link function* $g$.
+The linear model that we have considered up to this point, what we called "OLS", assumes that the response is a linear combination of the predictor variables.  For an error term $\epsilon_i \sim N(0,\sigma^2)$, this is assumes that
 
 $$
-g(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta}
+\mathbf{Y} = \mathbf{X} =  \mathbf{\beta} + \mathbf{\epsilon}
 $$
 
-This implies that the response $\mathbf{y}$ is related to the linear predictor $\mathbf{X} \mathbf{\beta}$ through the *inverse* link function.
+Another way of saying this is that "after we adjust for the data, the error is normally distributed and the variance is constant."  If $\sigma^2 \mathbf{I}$ is covariance matrix, then
 
 $$
-\mathbf{\hat{y}} = g^-1(\mathbf{X} \mathbf{\beta})
+\mathbf{Y}|\mathbf{X} \sim N( \mathbf{X} \mathbf{\beta}, \sigma^2 \mathbf{I})
 $$
 
-This means that $g(.)$ must be an invertable.  For example, if $g$ is the natural logarithm (aka, the "log-link"), then
+These assumptions can be expressed in two parts:
 
-$$
-log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
-$$
+1. A *random component*: The response variable $\mathbf{Y|X}$ is normally distributed with mean $\mu = \mu(\mathbf{X}) = E(\mathbf{Y|X})$
 
-This is useful when the distribution of $Y$ is skewed, as taking the log corrects skewness.
+2. A link between the response and the covariates $\mu(\mathbf{X}) = \mathbf{X\beta}$
 
-```{r echo = F,message = F, fig.cap="Taking the log corrects for skewness"}
-tibble(y = exp(rnorm(1000))) %>% 
-  mutate(log_y = log(y)) %>% 
-  gather(stat, value) %>% 
-  mutate(stat = ifelse(stat == "y", "Before Log Transform", "After Log Transform") %>% 
-           fct_relevel(c("Before Log Transform", "After Log Transform"))) %>% 
-  ggplot(aes(value)) + 
-  geom_histogram() + 
-  facet_wrap(vars(stat), scales = "free")
-```
 
-You might be asking, what if the distribution of $Y$ is not normal, no matter what choice we have for $g$?  The short answer is that we can change our assumption of the distribution of $Y$, and use this to change the parameters.  If you have taken exam STAM then you are familiar with *maximum likelihood estimation*.  
+## The *generalized* linear model
 
-We have a response $\mathbf{Y}$, and we fit a distribution to $\mathbf{Y} | \mathbf{X}$.  This is the target variable conditioned on the data.  For each $y_i$, each observation, we assign a probability $f_Y(y_i)$
+We relax these two assumptions by saying that the model is defined by 
 
-$$
-f_y(y_i | X_1 = x_1, X_2 = x_2, ..., X_p = x_p) = Pr(Y = y_i | \mathbf{X})
-$$
+1. A random component: $\mathbf{Y|X} \sim \text{some exponential family distribution}$
 
-Now, when we choose the response family, we are simply changing $f_Y$.  If we say that the response family is Gaussian, then $f$ has a Gaussian PDF.  If we are modeling counts, then $f$ is a Poisson PDF.  This only works if $f$ is in the *exponential family* of distributions, which consists of the common names such as Gaussian, Binomial, Gamma, Inverse Gamma, and so forth.  Reading the CAS Monograph 5 will provide more detail into this.
+2. A *link function*: between the random component and $X$: $g(\mu(\mathbf{X})) = \mathbf{X\beta}$
 
 The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
+
 
 ```{r echo = F, fig.cap = "Distribution-Link Function Combinations"}
 knitr::include_graphics("images/glm_links.png")
