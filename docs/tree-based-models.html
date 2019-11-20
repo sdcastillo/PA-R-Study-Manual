@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2019-11-19" />
+<meta name="date" content="2019-11-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -130,7 +130,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What’s in this book</a><ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#get-full-access"><i class="fa fa-check"></i><b>1.1</b> Get full access</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i><b>1.2</b> About the author</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#help-to-make-this-book-even-better"><i class="fa fa-check"></i><b>1.3</b> Help to make this book even better</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#contribute"><i class="fa fa-check"></i><b>1.3</b> Contribute</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>2</b> The exam</a></li>
 <li class="chapter" data-level="3" data-path="you-already-know-what-learning-is.html"><a href="you-already-know-what-learning-is.html"><i class="fa fa-check"></i><b>3</b> You already know what learning is</a></li>
@@ -332,10 +332,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
 ## 1      0 0.620    1.00 
 ## 2      1 0.144    0.382
-## 3      2 0.0637   0.239
+## 3      2 0.0637   0.240
 ## 4      3 0.00967  0.178
-## 5      4 0.00784  0.175
-## 6      5 0.00712  0.171</code></pre>
+## 5      4 0.00784  0.173
+## 6      5 0.00712  0.165</code></pre>
 <p>As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.</p>
 <p><img src="06-tree-based-models_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>To optimize performance, choose the number of splits which has the lowest error. Often, though, the goal of using a decision tree is to create a simple model. In this case, we can err or the side of a lower <code>nsplit</code> so that the tree is shorter and more interpretable. All of the questions on so far have only used decision trees for interpretability, and a different model method has been used when predictive power is needed.</p>
@@ -348,12 +348,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 6 x 3
 ##   nsplit       CP xerror
 ##    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-## 1     24 0.000695  0.149
-## 2     25 0.000681  0.149
-## 3     26 0.000610  0.150
-## 4     33 0.000549  0.150
-## 5     15 0.00116   0.150
-## 6     29 0.000575  0.151</code></pre>
+## 1     17 0.000913  0.149
+## 2     16 0.00105   0.149
+## 3     19 0.000837  0.149
+## 4     18 0.000910  0.149
+## 5     15 0.00116   0.151
+## 6     22 0.000759  0.151</code></pre>
 <p>The SOA will give you code to find the lowest CP value such as below. This may or may not be useful depending on if they are asking for predictive performance or interpretability.</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1">pruned_tree &lt;-<span class="st"> </span><span class="kw">prune</span>(tree,</a>
 <a class="sourceLine" id="cb228-2" title="2">                     <span class="dt">cp =</span> tree<span class="op">$</span>cptable[<span class="kw">which.min</span>(tree<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]), <span class="st">&quot;CP&quot;</span>])</a></code></pre></div>

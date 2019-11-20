@@ -27,12 +27,14 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.net/pricing) for 
 
-- **Three** original** practice exams and more coming soon
+- Three **original** practice exams and more coming soon
 - **June Exam PA Video**
 - **Hospital Readmissions Video**
 - An online discussion forum
 - Time-saving techniques
 - An RStudio/Data Manipulation tutorial
+- Cloud access to content with your Google Chrome browser (beta)
+ 
 
 ## About the author
 
@@ -40,10 +42,10 @@ Sam Castillo is a predictive modeler at Milliman in Chicago, maintains a [blog](
 
 **Contact:**
 
-Support: ExamPATutor@gmail.com
+Support: sam@exampa.net
 
 
-## Help to make this book even better
+## Contribute
 
 **Your suggested improvements can be added to this book immediatelly.**  A special thanks to the following people who have helped to improve this book and or study package: Erlan Wheeler, David Hill, and Caden Collier.
 
