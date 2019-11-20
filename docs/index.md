@@ -19,7 +19,6 @@ favicon: images/artificial_actuary_logo_favicon.png
 - Explanations of the statistical concepts
 - All data sets needed packaged in an R library
 - `R code` examples
-- Tips on taking the exam
 
 ## Get full access
 
@@ -35,6 +34,19 @@ While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.
 - An RStudio/Data Manipulation tutorial
 - Cloud access to content with your Google Chrome browser (beta)
  
+## Content Samples
+
+### A Response to a Subscriber's Question
+
+An individual on our forum at ExamPA.net just asked this excellent question.  
+
+<iframe src="https://player.vimeo.com/video/374497585" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+>Note: At 3:09, I say "The L1 norm is lambda", which is mispeaking.  The L1 norm is the sum of the absolute value of the beta coefficients.
+
+### An Original Practice Exam Project Statement
+
+[Here](https://github.com/sdcastillo/JunePAFiles/blob/master/Practice%20Exam%20Sample.pdf) you can see the project statement for a practice exam which is in the format of a real exam.  
 
 ## About the author
 
@@ -47,9 +59,9 @@ Support: sam@exampa.net
 
 ## Contribute
 
-**Your suggested improvements can be added to this book immediatelly.**  A special thanks to the following people who have helped to improve this book and or study package: Erlan Wheeler, David Hill, and Caden Collier.
+This book was written in [RMarkdown](https://rmarkdown.rstudio.com/) using [bookdown](https://bookdown.org/).  It is built from a github page, where updates can be sent to this page in minutes.  A big shout out to those who have made suggestions already: Erlan Wheeler, David Hill, Caden Collier, Jon Lai, and Peter Schelble.
 
-To submit suggestions, see the 20:00 mark of https://www.youtube.com/watch?v=dVqVscgwSpw
+To submit suggestions, see the 20:00 mark of [this video](https://www.youtube.com/watch?v=dVqVscgwSpw).
 
 ![](images/gitbook_pull_request.png)
 
