@@ -2,7 +2,7 @@
 title: "Exam PA Study Manual"
 author: 
 - "Sam Castillo"
-date: "2019-11-20"
+date: "2019-11-21"
 github-repo: sdcastillo/PA-R-Study-Manual
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -26,6 +26,7 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.net/pricing) for 
 
+- <span style="color:darkblue">**Pass Guarantee**: Pass in December or get the next 7 months free!</span>
 - Three **original** practice exams and more coming soon
 - **June Exam PA Video**
 - **Hospital Readmissions Video**
@@ -34,6 +35,7 @@ While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.
 - An RStudio/Data Manipulation tutorial
 - Cloud access to content with your Google Chrome browser (beta)
  
+
 ## Content Samples
 
 ### A Response to a Subscriber's Question
