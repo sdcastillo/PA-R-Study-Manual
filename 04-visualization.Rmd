@@ -4,19 +4,17 @@ This sections shows how to create and interpret simple graphs. In past exams, th
 
 ## Create a plot object (ggplot)
 
-The first step is to create a blank canvas that holds the columns that are needed.  Let's say that the goal is to graph `income` and `count`.  We put these into a ggplot object called `p`.
-
-The `aesthetic` argument, `aes`, means that the x-axis will have `income` and the y-axis will have `count`.
+Let's create a histogram of the claims.  The first step is to create a blank canvas that holds the columns that are needed.  The `aesthetic` argument, `aes`, means that the variable shown will the the claims.
 
 ```{r message = F}
 library(Cairo)
+theme_set(theme_bw())
 ```
 
 
 ```{r message=F}
 library(tidyverse)
 library(ExamPAData)
-theme_set(theme_bw())
 p <- insurance %>% ggplot(aes(claims))
 ```
 

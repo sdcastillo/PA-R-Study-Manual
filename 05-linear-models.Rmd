@@ -124,7 +124,7 @@ library(tidyverse)
 model <- lm(data = health_insurance, formula = charges ~ bmi + age)
 ```
 
-The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `t value` tells you how "big" this error really is based on standard deviations.  A larger `t value` implies a low probability of the null hypothesis being rejected saying that the coefficient is zero.  This is the same as having a p-value (`Pr (>|t|))`) being close to zero.
+The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `t value` tells you how "big" this error really is based on standard deviations.  A larger `t value` implies a low probability of the null hypothesis being accepted saying that the coefficient is zero.  This is the same as having a p-value (`Pr (>|t|))`) being close to zero.
 
 The little `*`, `**`, `***` indicate that the variable is either somewhat significant, significant, or highly significant.  "significance" here means that there is a low probability of the coefficient being that size if there were *no actual casual relationship*, or if the data was random noise.
 
