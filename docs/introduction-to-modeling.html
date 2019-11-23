@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2019-11-21" />
+<meta name="date" content="2019-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -337,13 +337,13 @@ To solve for <span class="math inline">\(\mathbf{\beta}\)</span>, we first need 
 </table>
 <p>You can use formulas to create new variables (aka feature engineering). This can save you from needing to re-run code to create data.</p>
 <p>Below we fit a simple linear model to predict charges.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
-<a class="sourceLine" id="cb166-2" title="2"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb166-3" title="3"></a>
-<a class="sourceLine" id="cb166-4" title="4">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> health_insurance, <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a></code></pre></div>
-<p>The <code>summary</code> function gives details about the model. First, the <code>Estimate</code>, gives you the coefficients. The <code>Std. Error</code> is the error of the estimate for the coefficient. Higher standard error means greater uncertainty. This is relative to the average value of that variable. The <code>t value</code> tells you how “big” this error really is based on standard deviations. A larger <code>t value</code> implies a low probability of the null hypothesis being rejected saying that the coefficient is zero. This is the same as having a p-value (<code>Pr (&gt;|t|))</code>) being close to zero.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
+<a class="sourceLine" id="cb164-2" title="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb164-3" title="3"></a>
+<a class="sourceLine" id="cb164-4" title="4">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> health_insurance, <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a></code></pre></div>
+<p>The <code>summary</code> function gives details about the model. First, the <code>Estimate</code>, gives you the coefficients. The <code>Std. Error</code> is the error of the estimate for the coefficient. Higher standard error means greater uncertainty. This is relative to the average value of that variable. The <code>t value</code> tells you how “big” this error really is based on standard deviations. A larger <code>t value</code> implies a low probability of the null hypothesis being accepted saying that the coefficient is zero. This is the same as having a p-value (<code>Pr (&gt;|t|))</code>) being close to zero.</p>
 <p>The little <code>*</code>, <code>**</code>, <code>***</code> indicate that the variable is either somewhat significant, significant, or highly significant. “significance” here means that there is a low probability of the coefficient being that size if there were <em>no actual casual relationship</em>, or if the data was random noise.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1"><span class="kw">summary</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1"><span class="kw">summary</span>(model)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = charges ~ bmi + age, data = health_insurance)
@@ -365,29 +365,29 @@ To solve for <span class="math inline">\(\mathbf{\beta}\)</span>, we first need 
 ## F-statistic:  88.6 on 2 and 1335 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>When evaluating model performance, you should not rely on the <code>summary</code> alone as this is based on the training data. To look at performance, test the model on validation data. This can be done by a) using a hold out set, or b) using cross-validation, which is even better.</p>
 <p>Let’s create an 80% training set and 20% testing set. You don’t need to worry about understanding this code as the exam will always give this to you.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb169-2" title="2"><span class="co">#create a train/test split</span></a>
-<a class="sourceLine" id="cb169-3" title="3">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> health_insurance<span class="op">$</span>charges, </a>
-<a class="sourceLine" id="cb169-4" title="4">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()</a>
-<a class="sourceLine" id="cb169-5" title="5">train &lt;-<span class="st">  </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
-<a class="sourceLine" id="cb169-6" title="6">test &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb167-2" title="2"><span class="co">#create a train/test split</span></a>
+<a class="sourceLine" id="cb167-3" title="3">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> health_insurance<span class="op">$</span>charges, </a>
+<a class="sourceLine" id="cb167-4" title="4">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()</a>
+<a class="sourceLine" id="cb167-5" title="5">train &lt;-<span class="st">  </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
+<a class="sourceLine" id="cb167-6" title="6">test &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a></code></pre></div>
 <p>Train the model on the <code>train</code> and test on <code>test</code>.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> train, <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a>
-<a class="sourceLine" id="cb170-2" title="2">pred =<span class="st"> </span><span class="kw">predict</span>(model, test)</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> train, <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a>
+<a class="sourceLine" id="cb168-2" title="2">pred =<span class="st"> </span><span class="kw">predict</span>(model, test)</a></code></pre></div>
 <p>Let’s look at the Root Mean Squared Error (RMSE).</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1">get_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
-<a class="sourceLine" id="cb171-2" title="2">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span>y_hat)<span class="op">^</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb171-3" title="3">}</a>
-<a class="sourceLine" id="cb171-4" title="4"></a>
-<a class="sourceLine" id="cb171-5" title="5"><span class="kw">get_rmse</span>(pred, test<span class="op">$</span>charges)</a></code></pre></div>
-<pre><code>## [1] 10718.59</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1">get_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
+<a class="sourceLine" id="cb169-2" title="2">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span>y_hat)<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb169-3" title="3">}</a>
+<a class="sourceLine" id="cb169-4" title="4"></a>
+<a class="sourceLine" id="cb169-5" title="5"><span class="kw">get_rmse</span>(pred, test<span class="op">$</span>charges)</a></code></pre></div>
+<pre><code>## [1] 12394.78</code></pre>
 <p>The above number does not tell us if this is a good model or not by itself. We need a comparison. The fastest check is to compare against a prediction of the mean. In other words, all values of the <code>y_hat</code> are the average of <code>charges</code></p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1"><span class="kw">get_rmse</span>(<span class="kw">mean</span>(test<span class="op">$</span>charges), test<span class="op">$</span>charges)</a></code></pre></div>
-<pre><code>## [1] 11124.57</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="kw">get_rmse</span>(<span class="kw">mean</span>(test<span class="op">$</span>charges), test<span class="op">$</span>charges)</a></code></pre></div>
+<pre><code>## [1] 13076.09</code></pre>
 <p>The RMSE is <strong>higher</strong> (worse) when using just the mean, which is what we expect. <strong>If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.</strong></p>
 <p>The next test is to see if any assumptions have been violated.</p>
 <p>First, is there a pattern in the residuals? If there is, this means that the model is missing key information. For the model below, this is a <strong>yes</strong>, which means that this is a bad model. Because this is just for illustration, I’m going to continue using it, however.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">1</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-9"></span>
 <img src="05-linear-models_files/figure-html/unnamed-chunk-9-1.png" alt="Residuals vs. Fitted" width="672" />
 <p class="caption">
@@ -395,7 +395,7 @@ Figure 8.1: Residuals vs. Fitted
 </p>
 </div>
 <p>The normal QQ shows how well the quantiles of the predictions fit to a theoretical normal distribution. If this is true, then the graph is a straight 45-degree line. In this model, you can definitely see that this is not the case. If this were a good model, this distribution would be closer to normal.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">2</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-10"></span>
 <img src="05-linear-models_files/figure-html/unnamed-chunk-10-1.png" alt="Normal Q-Q" width="672" />
 <p class="caption">
@@ -403,10 +403,10 @@ Figure 8.2: Normal Q-Q
 </p>
 </div>
 <p>Once you have chosen your model, you should re-train over the entire data set. This is to make the coefficients more stable because <code>n</code> is larger. Below you can see that the standard error is lower after training over the entire data set.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1">all_data &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> health_insurance, </a>
-<a class="sourceLine" id="cb177-2" title="2">               <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a>
-<a class="sourceLine" id="cb177-3" title="3">testing &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> test, </a>
-<a class="sourceLine" id="cb177-4" title="4">              <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1">all_data &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> health_insurance, </a>
+<a class="sourceLine" id="cb175-2" title="2">               <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a>
+<a class="sourceLine" id="cb175-3" title="3">testing &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> test, </a>
+<a class="sourceLine" id="cb175-4" title="4">              <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -419,24 +419,24 @@ Figure 8.2: Normal Q-Q
 <tr class="odd">
 <td align="left">(Intercept)</td>
 <td align="right">1744.1</td>
-<td align="right">3555.1</td>
+<td align="right">4402.3</td>
 </tr>
 <tr class="even">
 <td align="left">bmi</td>
 <td align="right">51.4</td>
-<td align="right">100.4</td>
+<td align="right">127.8</td>
 </tr>
 <tr class="odd">
 <td align="left">age</td>
 <td align="right">22.3</td>
-<td align="right">46.2</td>
+<td align="right">53.4</td>
 </tr>
 </tbody>
 </table>
 <p>All interpretations should be based on the model which was trained on the entire data set. Obviously, this only makes a difference if you are interpreting the precise values of the coefficients. If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="kw">coefficients</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1"><span class="kw">coefficients</span>(model)</a></code></pre></div>
 <pre><code>## (Intercept)         bmi         age 
-##  -8045.2315    390.6197    241.8331</code></pre>
+##  -5606.0531    291.2827    249.3031</code></pre>
 <p>Translating the above into an equation we have</p>
 <p><span class="math display">\[\hat{y_i} = -6,424.80 + 332.97 \space\text{bmi} + 241.93\space \text{age}\]</span></p>
 <p>For example, if a patient has <code>bmi = 27.9</code> and <code>age = 19</code> then predicted value is</p>

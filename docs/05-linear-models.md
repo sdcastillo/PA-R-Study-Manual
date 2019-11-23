@@ -117,7 +117,7 @@ library(tidyverse)
 model <- lm(data = health_insurance, formula = charges ~ bmi + age)
 ```
 
-The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `t value` tells you how "big" this error really is based on standard deviations.  A larger `t value` implies a low probability of the null hypothesis being rejected saying that the coefficient is zero.  This is the same as having a p-value (`Pr (>|t|))`) being close to zero.
+The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `t value` tells you how "big" this error really is based on standard deviations.  A larger `t value` implies a low probability of the null hypothesis being accepted saying that the coefficient is zero.  This is the same as having a p-value (`Pr (>|t|))`) being close to zero.
 
 The little `*`, `**`, `***` indicate that the variable is either somewhat significant, significant, or highly significant.  "significance" here means that there is a low probability of the coefficient being that size if there were *no actual casual relationship*, or if the data was random noise.
 
@@ -182,7 +182,7 @@ get_rmse(pred, test$charges)
 ```
 
 ```
-## [1] 10718.59
+## [1] 11822.16
 ```
 
 The above number does not tell us if this is a good model or not by itself.  We need a comparison.  The fastest check is to compare against a prediction of the mean.  In other words, all values of the `y_hat` are the average of `charges`
@@ -193,7 +193,7 @@ get_rmse(mean(test$charges), test$charges)
 ```
 
 ```
-## [1] 11124.57
+## [1] 12236.66
 ```
 
 The RMSE is **higher** (worse) when using just the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
@@ -237,9 +237,9 @@ testing <- lm(data = test,
 
 |term        | full_data_std_error| test_data_std_error|
 |:-----------|-------------------:|-------------------:|
-|(Intercept) |              1744.1|              3555.1|
-|bmi         |                51.4|               100.4|
-|age         |                22.3|                46.2|
+|(Intercept) |              1744.1|              4161.5|
+|bmi         |                51.4|               123.4|
+|age         |                22.3|                53.3|
 
 All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
 
@@ -250,7 +250,7 @@ coefficients(model)
 
 ```
 ## (Intercept)         bmi         age 
-##  -8045.2315    390.6197    241.8331
+##  -7723.6426    368.8905    245.7615
 ```
 
 Translating the above into an equation we have

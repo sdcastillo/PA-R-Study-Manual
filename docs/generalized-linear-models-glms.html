@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2019-11-21" />
+<meta name="date" content="2019-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -316,16 +316,16 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <div id="example-1" class="section level2">
 <h2><span class="header-section-number">9.4</span> Example</h2>
 <p>Just as with OLS, there is a <code>formula</code> and <code>data argument</code>. In addition, we need to specify the response distribution and link function.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1">model =<span class="st"> </span><span class="kw">glm</span>(<span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>smoker, </a>
-<a class="sourceLine" id="cb180-2" title="2">            <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>),</a>
-<a class="sourceLine" id="cb180-3" title="3">            <span class="dt">data =</span> health_insurance)</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1">model =<span class="st"> </span><span class="kw">glm</span>(<span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>smoker, </a>
+<a class="sourceLine" id="cb178-2" title="2">            <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>),</a>
+<a class="sourceLine" id="cb178-3" title="3">            <span class="dt">data =</span> health_insurance)</a></code></pre></div>
 <p>We see that <code>age</code>, <code>sex</code>, and <code>smoker</code> are all significant (p &lt;0.01). Reading off the coefficient signs, we see that claims</p>
 <ul>
 <li>Increase as age increases</li>
 <li>Are higher for men</li>
 <li>Are slightly higher for patients wich children</li>
 </ul>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tidy</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tidy</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 5
 ##   term        estimate std.error statistic   p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -340,7 +340,7 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <li>Constant variance?</li>
 <li>No obvious pattern?</li>
 </ul>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">3</span>)</a></code></pre></div>
 <p><img src="05-linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.</p>
 <p><strong>In a perfect model, all of these assumptions would be met:</strong></p>
@@ -350,23 +350,23 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <li>Tails are not significantly above or below line? Some tail deviation is ok.</li>
 <li>No sudden “jumps”? This indicates many <span class="math inline">\(Y\)</span>’s which have the same value, such as insurance claims which all have the exact value of $100.00 or $0.00.</li>
 </ul>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="05-linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 <div id="reference-levels" class="section level2">
 <h2><span class="header-section-number">9.5</span> Reference levels</h2>
 <p>When a categorical variable is used in a GLM, the model actually uses indicator variables for each level. The default reference level is the order of the R factors. For the <code>sex</code> variable, the order is <code>female</code> and then <code>male</code>. This means that the base level is <code>female</code> by default.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;female&quot; &quot;male&quot;</code></pre>
 <p>Why does this matter? Statistically, the coefficients are most stable when there are more observations.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
 <pre><code>## female   male 
 ##    662    676</code></pre>
 <p>There is already a function to do this in the <code>tidyverse</code> called <code>fct_infreq</code>. Let’s quickly fix the <code>sex</code> column so that these factor levels are in order of frequency.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">health_insurance &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb189-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">fct_infreq</span>(sex))</a></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">health_insurance &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb187-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">fct_infreq</span>(sex))</a></code></pre></div>
 <p>Now <code>male</code> is the base level.</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1">health_insurance<span class="op">$</span>sex <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;male&quot;   &quot;female&quot;</code></pre>
 </div>
 <div id="interactions" class="section level2">
@@ -386,12 +386,12 @@ By rewriting this we can see that the intercept changes from <span class="math i
  = \beta_0^* + \beta_1^* x_2
 \]</span></p>
 <p>The SOA’s modules give an example with the using age and gender as below. This is not a very strong interaction, as the slopes are almost identical across <code>gender</code>.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1">interactions <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb192-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, actual, <span class="dt">color =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb192-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb192-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Age vs. Actual by Gender&quot;</span>, </a>
-<a class="sourceLine" id="cb192-5" title="5">       <span class="dt">subtitle =</span> <span class="st">&quot;Interactions imply different slopes&quot;</span>,</a>
-<a class="sourceLine" id="cb192-6" title="6">       <span class="dt">caption=</span> <span class="st">&quot;data: interactions&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1">interactions <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb190-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, actual, <span class="dt">color =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb190-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb190-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Age vs. Actual by Gender&quot;</span>, </a>
+<a class="sourceLine" id="cb190-5" title="5">       <span class="dt">subtitle =</span> <span class="st">&quot;Interactions imply different slopes&quot;</span>,</a>
+<a class="sourceLine" id="cb190-6" title="6">       <span class="dt">caption=</span> <span class="st">&quot;data: interactions&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-23"></span>
 <img src="05-linear-models_files/figure-html/unnamed-chunk-23-1.png" alt="Example of weak interaction" width="672" />
 <p class="caption">
@@ -399,11 +399,11 @@ Figure 9.2: Example of weak interaction
 </p>
 </div>
 <p>Here is a clearer example from the <code>auto_claim</code> data. The lines show the slope of a linear model, assuming that only <code>BLUEBOOK</code> and <code>CAR_TYPE</code> were predictors in the model. You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb193-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log</span>(CLM_AMT), <span class="kw">log</span>(BLUEBOOK), <span class="dt">color =</span> CAR_TYPE)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb193-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb193-4" title="4"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb193-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kelly Bluebook Value vs Claim Amount&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb191-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log</span>(CLM_AMT), <span class="kw">log</span>(BLUEBOOK), <span class="dt">color =</span> CAR_TYPE)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb191-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb191-4" title="4"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb191-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kelly Bluebook Value vs Claim Amount&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-24"></span>
 <img src="05-linear-models_files/figure-html/unnamed-chunk-24-1.png" alt="Example of strong interaction" width="672" />
 <p class="caption">
@@ -420,7 +420,7 @@ Figure 9.3: Example of strong interaction
 <p><span class="math display">\[log(\hat{y_i}) = log(m_i) + \beta_0 + \beta_1 x_1 + ... + \beta_p x_p\]</span></p>
 <p>We call the <span class="math inline">\(log(m_i)\)</span> the <code>offset</code> term. Notice that there is no coefficient (beta) on this value, because we already know what the impact will be.</p>
 <p>In R, the code for this equation would be</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(m)) <span class="op">+</span><span class="st"> </span>x, <span class="dt">family=</span><span class="kw">poisson</span>(<span class="dt">link=</span>log) )</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1"><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(m)) <span class="op">+</span><span class="st"> </span>x, <span class="dt">family=</span><span class="kw">poisson</span>(<span class="dt">link=</span>log) )</a></code></pre></div>
 </div>
 <div id="tweedie-regression" class="section level3">
 <h3><span class="header-section-number">9.6.2</span> Tweedie regression</h3>

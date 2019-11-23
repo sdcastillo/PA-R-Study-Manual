@@ -105,11 +105,11 @@ cost %>% head()
 ##   nsplit      CP xerror
 ##    <dbl>   <dbl>  <dbl>
 ## 1      0 0.620    1.00 
-## 2      1 0.144    0.381
+## 2      1 0.144    0.382
 ## 3      2 0.0637   0.240
-## 4      3 0.00967  0.179
-## 5      4 0.00784  0.174
-## 6      5 0.00712  0.165
+## 4      3 0.00967  0.180
+## 5      4 0.00784  0.177
+## 6      5 0.00712  0.166
 ```
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.  
@@ -131,14 +131,14 @@ tree$cptable %>%
 
 ```
 ## # A tibble: 6 x 3
-##   nsplit       CP xerror
-##    <dbl>    <dbl>  <dbl>
-## 1     16 0.00105   0.149
-## 2     17 0.000913  0.149
-## 3     15 0.00116   0.149
-## 4     18 0.000910  0.150
-## 5     22 0.000759  0.150
-## 6     19 0.000837  0.150
+##   nsplit      CP xerror
+##    <dbl>   <dbl>  <dbl>
+## 1     13 0.00134  0.150
+## 2     14 0.00119  0.150
+## 3     12 0.00137  0.150
+## 4     11 0.00145  0.150
+## 5     16 0.00105  0.151
+## 6     15 0.00116  0.151
 ```
 
 The SOA will give you code to find the lowest CP value such as below.  This may or may not be useful depending on if they are asking for predictive performance or interpretability.

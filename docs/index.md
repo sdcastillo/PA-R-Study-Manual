@@ -2,7 +2,7 @@
 title: "Exam PA Study Manual"
 author: 
 - "Sam Castillo"
-date: "2019-11-21"
+date: "2019-11-22"
 github-repo: sdcastillo/PA-R-Study-Manual
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -20,21 +20,22 @@ favicon: images/artificial_actuary_logo_favicon.png
 - All data sets needed packaged in an R library
 - `R code` examples
 
-## Get full access
+## Get full access at [ExamPA.net](https://www.exampa.net/pricing) 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7-d85_h2QJ0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.net/pricing) for 
+******
 
 - <span style="color:darkblue">**Pass Guarantee**: Pass in December or get the next 7 months free!</span>
 - Three **original** practice exams and more coming soon
 - **June Exam PA Video**
 - **Hospital Readmissions Video**
+- **Student Success Video**
 - An online discussion forum
 - Time-saving techniques
 - An RStudio/Data Manipulation tutorial
-- Cloud access to content with your Google Chrome browser (beta)
- 
+
+******
 
 ## Content Samples
 
@@ -61,7 +62,7 @@ Support: sam@exampa.net
 
 ## Contribute
 
-This book was written in [RMarkdown](https://rmarkdown.rstudio.com/) using [bookdown](https://bookdown.org/).  It is built from a github page, where updates can be sent to this page in minutes.  A big shout out to those who have made suggestions already: Erlan Wheeler, David Hill, Caden Collier, Jon Lai, and Peter Schelble.
+This book was written in [RMarkdown](https://rmarkdown.rstudio.com/) using [bookdown](https://bookdown.org/).  It is built from a github page, where updates can be sent to this page in minutes.  A big shout out to those who have made suggestions already: Erlan Wheeler, David Hill, Caden Collier, Jon Lai, Peter Schelble, and Abhinav Gadde.
 
 To submit suggestions, see the 20:00 mark of [this video](https://www.youtube.com/watch?v=dVqVscgwSpw).
 

@@ -6,21 +6,21 @@ This sections shows how to create and interpret simple graphs. In past exams, th
 
 Let's create a histogram of the claims.  The first step is to create a blank canvas that holds the columns that are needed.  The `aesthetic` argument, `aes`, means that the variable shown will the the claims.
 
-```{r message = F}
+```{r message = F, echo = F}
 library(Cairo)
+library(tidyverse)
 theme_set(theme_bw())
 ```
 
 
 ```{r message=F}
-library(tidyverse)
 library(ExamPAData)
 p <- insurance %>% ggplot(aes(claims))
 ```
 
 If we look at `p`, we see that it is nothing but white space with axis for `count` and `income`.
 
-```{r}
+```{r message=F}
 p
 ```
 
@@ -28,19 +28,19 @@ p
 
 We add a histogram
 
-```{r warning = F}
+```{r warning = F, message=F}
 p + geom_histogram()
 ```
 
 Different plots are called "geoms" for "geometric objects".  Geometry = Geo (space) + metre (measure), and graphs measure data.  For instance, instead of creating a histogram, we can draw a gamma distribution with `stat_density`.
 
-```{r}
+```{r message=F}
 p + stat_density()
 ```
 
 Create an xy plot by adding and `x` and a `y` argument to `aesthetic`.
 
-```{r}
+```{r message=F}
 insurance %>% 
   ggplot(aes(x = holders, y = claims)) + 
   geom_point()
@@ -50,7 +50,7 @@ insurance %>%
 
 Pipes allow for data manipulations to be chained with visualizations.
 
-```{r}
+```{r message=F}
 termlife %>% 
   filter(FACE > 0) %>% 
   mutate(INCOME_AGE_RATIO = INCOME/AGE) %>% 

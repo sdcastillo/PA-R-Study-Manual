@@ -20,21 +20,22 @@ favicon: images/artificial_actuary_logo_favicon.png
 - All data sets needed packaged in an R library
 - `R code` examples
 
-## Get full access
+## Get full access at [ExamPA.net](https://www.exampa.net/pricing) 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7-d85_h2QJ0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-While the ebook is available online, sign up at [ExamPA.net](https://www.exampa.net/pricing) for 
+******
 
 - <span style="color:darkblue">**Pass Guarantee**: Pass in December or get the next 7 months free!</span>
 - Three **original** practice exams and more coming soon
 - **June Exam PA Video**
 - **Hospital Readmissions Video**
+- **Student Success Video**
 - An online discussion forum
 - Time-saving techniques
 - An RStudio/Data Manipulation tutorial
-- Cloud access to content with your Google Chrome browser (beta)
- 
+
+******
 
 ## Content Samples
 

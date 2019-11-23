@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2019-11-21" />
+<meta name="date" content="2019-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -264,27 +264,27 @@ Figure 10.1: Standard Logistic Function
 <div id="example-2" class="section level2">
 <h2><span class="header-section-number">10.2</span> Example</h2>
 <p>Using the <code>auto_claim</code> data, we predict whether or not a policy has a claim. This is also known as the <em>claim frequency</em>.</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(CLM_FLAG)</a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(CLM_FLAG)</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   CLM_FLAG     n
 ##   &lt;chr&gt;    &lt;int&gt;
 ## 1 No        7556
 ## 2 Yes       2740</code></pre>
 <p>About 40% do not have a claim while 60% have at least one claim.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb197-2" title="2">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> auto_claim<span class="op">$</span>CLM_FLAG, </a>
-<a class="sourceLine" id="cb197-3" title="3">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()</a>
-<a class="sourceLine" id="cb197-4" title="4">auto_claim &lt;-<span class="st"> </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb197-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">target =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(CLM_FLAG <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)))</a>
-<a class="sourceLine" id="cb197-6" title="6">train &lt;-<span class="st">  </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
-<a class="sourceLine" id="cb197-7" title="7">test &lt;-<span class="st"> </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
-<a class="sourceLine" id="cb197-8" title="8"></a>
-<a class="sourceLine" id="cb197-9" title="9">frequency &lt;-<span class="st"> </span><span class="kw">glm</span>(target <span class="op">~</span><span class="st"> </span>AGE <span class="op">+</span><span class="st"> </span>GENDER <span class="op">+</span><span class="st"> </span>MARRIED <span class="op">+</span><span class="st"> </span>CAR_USE <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb197-10" title="10"><span class="st">                   </span>BLUEBOOK <span class="op">+</span><span class="st"> </span>CAR_TYPE <span class="op">+</span><span class="st"> </span>AREA, </a>
-<a class="sourceLine" id="cb197-11" title="11">                 <span class="dt">data=</span>train, </a>
-<a class="sourceLine" id="cb197-12" title="12">                 <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb195-2" title="2">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> auto_claim<span class="op">$</span>CLM_FLAG, </a>
+<a class="sourceLine" id="cb195-3" title="3">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()</a>
+<a class="sourceLine" id="cb195-4" title="4">auto_claim &lt;-<span class="st"> </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb195-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">target =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(CLM_FLAG <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)))</a>
+<a class="sourceLine" id="cb195-6" title="6">train &lt;-<span class="st">  </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
+<a class="sourceLine" id="cb195-7" title="7">test &lt;-<span class="st"> </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
+<a class="sourceLine" id="cb195-8" title="8"></a>
+<a class="sourceLine" id="cb195-9" title="9">frequency &lt;-<span class="st"> </span><span class="kw">glm</span>(target <span class="op">~</span><span class="st"> </span>AGE <span class="op">+</span><span class="st"> </span>GENDER <span class="op">+</span><span class="st"> </span>MARRIED <span class="op">+</span><span class="st"> </span>CAR_USE <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb195-10" title="10"><span class="st">                   </span>BLUEBOOK <span class="op">+</span><span class="st"> </span>CAR_TYPE <span class="op">+</span><span class="st"> </span>AREA, </a>
+<a class="sourceLine" id="cb195-11" title="11">                 <span class="dt">data=</span>train, </a>
+<a class="sourceLine" id="cb195-12" title="12">                 <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a></code></pre></div>
 <p>All of the variables except for the <code>CAR_TYPE</code> are highly significant. The car types <code>SPORTS CAR</code> and <code>SUV</code> appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for <code>CAR_TYPE == SPORTS CAR</code> and <code>CAR_TYPE == SUV</code>.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1">frequency <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1">frequency <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = target ~ AGE + GENDER + MARRIED + CAR_USE + BLUEBOOK + 
@@ -324,8 +324,8 @@ Figure 10.1: Standard Logistic Function
 <li>Certain values of <code>CAR_TYPE</code> are significant but others are not.</li>
 </ul>
 <p>The output is a predicted probability. We can see that this is centered around a probability of about 0.5.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(frequency, <span class="dt">newdat=</span>test,<span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb200-2" title="2"><span class="kw">qplot</span>(preds) </a></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(frequency, <span class="dt">newdat=</span>test,<span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb198-2" title="2"><span class="kw">qplot</span>(preds) </a></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-30"></span>
 <img src="05-linear-models_files/figure-html/unnamed-chunk-30-1.png" alt="Distribution of Predicted Probability" width="480" />
 <p class="caption">
@@ -333,59 +333,59 @@ Figure 10.2: Distribution of Predicted Probability
 </p>
 </div>
 <p>In order to convert these values to predicted 0’s and 1’s, we assign a <em>cutoff</em> value so that if <span class="math inline">\(\hat{y}\)</span> is above this threshold we use a 1 and 0 othersise. The default cutoff is 0.5. We change this to 0.3 and see that there are 763 policies predicted to have claims.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">test &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred_zero_one =</span> <span class="kw">as.factor</span>(<span class="dv">1</span><span class="op">*</span>(preds<span class="op">&gt;</span>.<span class="dv">3</span>)))</a>
-<a class="sourceLine" id="cb201-2" title="2"><span class="kw">summary</span>(test<span class="op">$</span>pred_zero_one)</a></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1">test &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred_zero_one =</span> <span class="kw">as.factor</span>(<span class="dv">1</span><span class="op">*</span>(preds<span class="op">&gt;</span>.<span class="dv">3</span>)))</a>
+<a class="sourceLine" id="cb199-2" title="2"><span class="kw">summary</span>(test<span class="op">$</span>pred_zero_one)</a></code></pre></div>
 <pre><code>##    0    1 
 ## 1296  763</code></pre>
 <p>How do we decide on this cutoff value? We need to compare cutoff values based on some evaluation metric. For example, we can use <em>accuracy</em>.</p>
 <p><span class="math display">\[\text{Accuracy} = \frac{\text{Correct Guesses}}{\text{Total Guesses}}\]</span></p>
 <p>This results in an accuracy of 70%. But is this good?</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.699</code></pre>
 <p>Consider what would happen if we just predicted all 0’s. The accuracy is 74%.</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(<span class="dv">0</span> <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(<span class="dv">0</span> <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.734</code></pre>
 <p>For policies which experience claims the accuracy is 63%.</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb207-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb207-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb205-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb205-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.631</code></pre>
 <p>But for policies that don’t actually experience claims this is 72%.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb209-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb209-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb207-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb207-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.724</code></pre>
 <p>How do we know if this is a good model? We can repeat this process with a different cutoff value and get different accuracy metrics for these groups. Let’s use a cutoff of 0.6.</p>
 <p>75%</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">test &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred_zero_one =</span> <span class="kw">as.factor</span>(<span class="dv">1</span><span class="op">*</span>(preds<span class="op">&gt;</span>.<span class="dv">6</span>)))</a>
-<a class="sourceLine" id="cb211-2" title="2">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">test &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred_zero_one =</span> <span class="kw">as.factor</span>(<span class="dv">1</span><span class="op">*</span>(preds<span class="op">&gt;</span>.<span class="dv">6</span>)))</a>
+<a class="sourceLine" id="cb209-2" title="2">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.752</code></pre>
 <p>10% for policies with claims and 98% for policies without claims.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb213-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb213-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb211-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb211-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.108</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb215-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb215-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb213-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb213-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
@@ -402,7 +402,7 @@ Figure 10.2: Distribution of Predicted Probability
 <li>No claims but predited to have claims - <strong>False Negatives (FP) = 22</strong></li>
 <li>Had claims but predicted not to - <strong>False Positives (FN) = 489</strong></li>
 </ul>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))<span class="op">$</span>table</a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))<span class="op">$</span>table</a></code></pre></div>
 <pre><code>##           Reference
 ## Prediction    0    1
 ##          0 1489  489
@@ -419,7 +419,7 @@ Figure 10.2: Distribution of Predicted Probability
 <p><span class="math display">\[\text{Cost} = (100)(\text{FN}) + (2)(\text{FP})\]</span></p>
 <p>Then the cutoff value can be tuned in order to find the minimum cost.</p>
 <p>Fortunately, all of this is handled in a single function called <code>confusionMatrix</code>.</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))</a></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -455,8 +455,8 @@ Figure 10.2: Distribution of Predicted Probability
 <p>and the true negative rates</p>
 <p><span class="math display">\[\{\text{FNR} = \{\text{FNR}(k_1), \text{FNR}(k_2), .., \text{FNR}(k_{10})\}\]</span></p>
 <p>Then we set <code>x = TPR</code> and <code>y = FNR</code> and graph x against y. The plot below shows the ROC for the <code>auto_claims</code> data. The Area Under the Curv of 0.6795 is what we would get if we integrated under the curve.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1"><span class="kw">library</span>(pROC)</a>
-<a class="sourceLine" id="cb221-2" title="2"><span class="kw">roc</span>(test<span class="op">$</span>target, preds, <span class="dt">plot =</span> T)</a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1"><span class="kw">library</span>(pROC)</a>
+<a class="sourceLine" id="cb219-2" title="2"><span class="kw">roc</span>(test<span class="op">$</span>target, preds, <span class="dt">plot =</span> T)</a></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-40"></span>
 <img src="05-linear-models_files/figure-html/unnamed-chunk-40-1.png" alt="AUC for auto_claim" width="672" />
 <p class="caption">
