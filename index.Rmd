@@ -24,8 +24,6 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 <iframe src="https://player.vimeo.com/video/375155028" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-******
-
 - <span style="color:darkblue">**Pass Guarantee**: Pass in December or get the next 7 months free!</span>
 - Three **original** practice exams and more coming soon
 - **June Exam PA Video**
@@ -35,7 +33,6 @@ favicon: images/artificial_actuary_logo_favicon.png
 - Time-saving techniques
 - An RStudio/Data Manipulation tutorial
 
-******
 
 ## Content Samples
 

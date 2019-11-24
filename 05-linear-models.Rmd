@@ -245,11 +245,7 @@ $$
 \mathbf{Y|X} \sim N( \mathbf{X \beta}, \mathbf{\sigma^2} I)
 $$
 
-******
-
 Because this notation is getting too cumbersome, we're going to stop using bold letters to denote matrices and just use non-bold characters.  From now on, $\mathbf{X}$ is the same as $X$.
-
-******
 
 These assumptions can be expressed in two parts:
 
@@ -571,7 +567,7 @@ frequency <- glm(target ~ AGE + GENDER + MARRIED + CAR_USE +
                  family = binomial(link="logit"))
 ```
 
-All of the variables except for the `CAR_TYPE` are highly significant.  The car types `SPORTS CAR` and `SUV` appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for `CAR_TYPE == SPORTS CAR` and `CAR_TYPE == SUV`.
+All of the variables except for the `CAR_TYPE` and `GENDERM` are highly significant.  The car types `SPORTS CAR` and `SUV` appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for `CAR_TYPE == SPORTS CAR` and `CAR_TYPE == SUV`.
 
 ```{r}
 frequency %>% summary()

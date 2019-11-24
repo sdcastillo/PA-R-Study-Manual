@@ -70,7 +70,7 @@ Which means that each $y_i$ is a linear combination of the variables $x_1, ..., 
 
 In the one-dimensional case, this creates a line connecting the points.  In higher dimensions, this creates a hyperplane.
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 
 The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
@@ -205,10 +205,7 @@ First, is there a pattern in the residuals?  If there is, this means that the mo
 plot(model, which = 1)
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-9-1.png" alt="Residuals vs. Fitted" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-9)Residuals vs. Fitted</p>
-</div>
+![(\#fig:unnamed-chunk-9)Residuals vs. Fitted](05-linear-models_files/figure-latex/unnamed-chunk-9-1.pdf) 
 
 The normal QQ shows how well the quantiles of the predictions fit to a theoretical normal distribution.  If this is true, then the graph is a straight 45-degree line.  In this model, you can definitely see that this is not the case.  If this were a good model, this distribution would be closer to normal.
 
@@ -217,10 +214,7 @@ The normal QQ shows how well the quantiles of the predictions fit to a theoretic
 plot(model, which = 2)
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-10-1.png" alt="Normal Q-Q" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-10)Normal Q-Q</p>
-</div>
+![(\#fig:unnamed-chunk-10)Normal Q-Q](05-linear-models_files/figure-latex/unnamed-chunk-10-1.pdf) 
 
 Once you have chosen your model, you should re-train over the entire data set.  This is to make the coefficients more stable because `n` is larger.  Below you can see that the standard error is lower after training over the entire data set.
 
@@ -288,11 +282,7 @@ $$
 \mathbf{Y|X} \sim N( \mathbf{X \beta}, \mathbf{\sigma^2} I)
 $$
 
-******
-
 Because this notation is getting too cumbersome, we're going to stop using bold letters to denote matrices and just use non-bold characters.  From now on, $\mathbf{X}$ is the same as $X$.
-
-******
 
 These assumptions can be expressed in two parts:
 
@@ -312,10 +302,9 @@ We relax these two assumptions by saying that the model is defined by
 The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
 
 
-<div class="figure">
-<img src="images/glm_links.png" alt="Distribution-Link Function Combinations" width="804" />
-<p class="caption">(\#fig:unnamed-chunk-14)Distribution-Link Function Combinations</p>
-</div>
+\begin{figure}
+\includegraphics[width=22.32in]{images/glm_links} \caption{Distribution-Link Function Combinations}(\#fig:unnamed-chunk-14)
+\end{figure}
 
 For this exam, a common question is to ask candiates to choose the best distribution and link function.  There is no all-encompasing answer, but a few suggestions are
 
@@ -413,7 +402,7 @@ Below you can see graph of deviance residuals vs. the predicted values.
 plot(model, which = 3)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
 
 The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.  
 
@@ -428,7 +417,7 @@ The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i
 plot(model, which = 2)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 
 ## Reference levels
@@ -513,10 +502,7 @@ interactions %>%
        caption= "data: interactions")
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-23-1.png" alt="Example of weak interaction" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-23)Example of weak interaction</p>
-</div>
+![(\#fig:unnamed-chunk-23)Example of weak interaction](05-linear-models_files/figure-latex/unnamed-chunk-23-1.pdf) 
 
 Here is a clearer example from the `auto_claim` data. The lines show the slope of a linear model, assuming that only `BLUEBOOK` and `CAR_TYPE` were predictors in the model.  You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.  
 
@@ -529,10 +515,7 @@ auto_claim %>%
   labs(title = "Kelly Bluebook Value vs Claim Amount")
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-24-1.png" alt="Example of strong interaction" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-24)Example of strong interaction</p>
-</div>
+![(\#fig:unnamed-chunk-24)Example of strong interaction](05-linear-models_files/figure-latex/unnamed-chunk-24-1.pdf) 
 
 Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction.  We can also use an hypothesis test with a GLM to check this.  Simply include an interaction term and see if the coefficient is zero at the desired significance level.
 
@@ -627,10 +610,14 @@ We can use a special link function, known as the *standard logistic function*, *
 
 $$\mathbf{\hat{y}} = g^{-1}(\mathbf{X} \mathbf{\beta}) = \frac{1}{1 + e^{-\mathbf{X} \mathbf{\beta}}}$$
 
-<div class="figure" style="text-align: center">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-25-1.png" alt="Standard Logistic Function" width="384" />
-<p class="caption">(\#fig:unnamed-chunk-25)Standard Logistic Function</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-25-1} 
+
+}
+
+\caption{Standard Logistic Function}(\#fig:unnamed-chunk-25)
+\end{figure}
 
 Other link functions for classification problems are possible as well, although the logistic function is the most common.  If a problem asks for an alternative link, such as the *probit*, fit both models and compare the performance.
 
@@ -669,7 +656,7 @@ frequency <- glm(target ~ AGE + GENDER + MARRIED + CAR_USE +
                  family = binomial(link="logit"))
 ```
 
-All of the variables except for the `CAR_TYPE` are highly significant.  The car types `SPORTS CAR` and `SUV` appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for `CAR_TYPE == SPORTS CAR` and `CAR_TYPE == SUV`.
+All of the variables except for the `CAR_TYPE` and `GENDERM` are highly significant.  The car types `SPORTS CAR` and `SUV` appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for `CAR_TYPE == SPORTS CAR` and `CAR_TYPE == SUV`.
 
 
 ```r
@@ -731,10 +718,7 @@ preds <- predict(frequency, newdat=test,type="response")
 qplot(preds) 
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-29-1.png" alt="Distribution of Predicted Probability" width="480" />
-<p class="caption">(\#fig:unnamed-chunk-29)Distribution of Predicted Probability</p>
-</div>
+![(\#fig:unnamed-chunk-29)Distribution of Predicted Probability](05-linear-models_files/figure-latex/unnamed-chunk-29-1.pdf) 
 
 In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 othersise.  The default cutoff is 0.5.  We change this to 0.3 and see that there are 763 policies predicted to have claims.
 
@@ -963,10 +947,7 @@ library(pROC)
 roc(test$target, preds, plot = T)
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-39-1.png" alt="AUC for auto_claim" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-39)AUC for auto_claim</p>
-</div>
+![(\#fig:unnamed-chunk-39)AUC for auto_claim](05-linear-models_files/figure-latex/unnamed-chunk-39-1.pdf) 
 
 ```
 ## 

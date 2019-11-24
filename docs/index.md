@@ -2,7 +2,7 @@
 title: "Exam PA Study Manual"
 author: 
 - "Sam Castillo"
-date: "2019-11-23"
+date: "2019-11-24"
 github-repo: sdcastillo/PA-R-Study-Manual
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -24,8 +24,6 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 <iframe src="https://player.vimeo.com/video/375155028" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-******
-
 - <span style="color:darkblue">**Pass Guarantee**: Pass in December or get the next 7 months free!</span>
 - Three **original** practice exams and more coming soon
 - **June Exam PA Video**
@@ -35,7 +33,6 @@ favicon: images/artificial_actuary_logo_favicon.png
 - Time-saving techniques
 - An RStudio/Data Manipulation tutorial
 
-******
 
 ## Content Samples
 

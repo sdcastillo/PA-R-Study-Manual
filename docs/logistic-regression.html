@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2019-11-23" />
+<meta name="date" content="2019-11-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -284,7 +284,7 @@ Figure 10.1: Standard Logistic Function
 <a class="sourceLine" id="cb194-10" title="10"><span class="st">                   </span>BLUEBOOK <span class="op">+</span><span class="st"> </span>CAR_TYPE <span class="op">+</span><span class="st"> </span>AREA, </a>
 <a class="sourceLine" id="cb194-11" title="11">                 <span class="dt">data=</span>train, </a>
 <a class="sourceLine" id="cb194-12" title="12">                 <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a></code></pre></div>
-<p>All of the variables except for the <code>CAR_TYPE</code> are highly significant. The car types <code>SPORTS CAR</code> and <code>SUV</code> appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for <code>CAR_TYPE == SPORTS CAR</code> and <code>CAR_TYPE == SUV</code>.</p>
+<p>All of the variables except for the <code>CAR_TYPE</code> and <code>GENDERM</code> are highly significant. The car types <code>SPORTS CAR</code> and <code>SUV</code> appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for <code>CAR_TYPE == SPORTS CAR</code> and <code>CAR_TYPE == SUV</code>.</p>
 <div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1">frequency <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
 <pre><code>## 
 ## Call:

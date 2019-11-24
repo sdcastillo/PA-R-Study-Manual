@@ -119,13 +119,12 @@
   \title{Exam PA Study Manual}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \subtitle{Crush Exam PA and become an Actuarial Data Scientist}
-  \author{Sam Castillo}
+    \author{Sam Castillo}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-11-12}
+    \date{2019-11-24}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -163,56 +162,66 @@
 \begin{itemize}
 \tightlist
 \item
-  Explanations of the statistical concepts (Clustering \& PCA Sections Pending)
+  Explanations of the statistical concepts
 \item
   All data sets needed packaged in an R library
 \item
   \texttt{R\ code} examples
-\item
-  Tips on taking the exam
 \end{itemize}
 
-\hypertarget{purchase-full-access}{%
-\section{Purchase full access}\label{purchase-full-access}}
-
-While this book is viewable online, a PDF download, practice exams, and answers to exercises are available by signin up at \href{https://www.exampa.net/pricing}{ExamPA.net}
+\hypertarget{get-full-access-at-exampa.net}{%
+\section{\texorpdfstring{Get full access at \href{https://www.exampa.net/pricing}{ExamPA.net}}{Get full access at ExamPA.net}}\label{get-full-access-at-exampa.net}}
 
 \begin{itemize}
 \tightlist
 \item
-  Practice Exams + Video solutions
+  {\textbf{Pass Guarantee}: Pass in December or get the next 7 months free!}
 \item
-  Solutions to prior exams
+  Three \textbf{original} practice exams and more coming soon
+\item
+  \textbf{June Exam PA Video}
+\item
+  \textbf{Hospital Readmissions Video}
+\item
+  \textbf{Student Success Video}
 \item
   An online discussion forum
+\item
+  Time-saving techniques
+\item
+  An RStudio/Data Manipulation tutorial
 \end{itemize}
+
+\hypertarget{content-samples}{%
+\section{Content Samples}\label{content-samples}}
+
+\hypertarget{a-response-to-a-subscribers-question}{%
+\subsection{A Response to a Subscriber's Question}\label{a-response-to-a-subscribers-question}}
+
+An individual on our forum at ExamPA.net just asked this excellent question.
+
+\begin{quote}
+Note: At 3:09, I say ``The L1 norm is lambda'', which is mispeaking. The L1 norm is the sum of the absolute value of the beta coefficients.
+\end{quote}
+
+\hypertarget{an-original-practice-exam-project-statement}{%
+\subsection{An Original Practice Exam Project Statement}\label{an-original-practice-exam-project-statement}}
+
+\href{https://github.com/sdcastillo/JunePAFiles/blob/master/Practice\%20Exam\%20Sample.pdf}{Here} you can see the project statement for a practice exam which is in the format of a real exam.
 
 \hypertarget{about-the-author}{%
 \section{About the author}\label{about-the-author}}
 
 Sam Castillo is a predictive modeler at Milliman in Chicago, maintains a \href{http://artificialactuary.com/}{blog} about the future of risk, and won the 2019 SOA Predictive Analytics and Fururism's \href{https://nbviewer.jupyter.org/github/SOASections/SOA-Predictive-Modeling-Innovation-and-Industry-Contest-2019-First-Place/blob/master/Predicting\%20Uncertainty\%20Prediction\%20Intervals\%20from\%20Gradient\%20Boosted\%20Quantile\%20Regression.ipynb}{Jupyter contest}.
 
-\hypertarget{help-to-make-this-book-even-better}{%
-\section{Help to make this book even better}\label{help-to-make-this-book-even-better}}
+\textbf{Contact:}
 
-\textbf{Your suggested improvements can be added to this book immediatelly.} A special thanks to the following people who have helped to improve this book and or study package: Erlan Wheeler, David Hill, and Caden Collier.
+Support: \href{mailto:sam@exampa.net}{\nolinkurl{sam@exampa.net}}
 
-To submit suggestions, see the 20:00 mark of \url{https://www.youtube.com/watch?v=dVqVscgwSpw}
+\hypertarget{contribute}{%
+\section{Contribute}\label{contribute}}
 
-\includegraphics{images/gitbook_pull_request.png}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Clicking the ``edit'' button at the top of this page
-\item
-  Signing in (or signing up) for github
-\item
-  Forking the repository
-\item
-  Submitting a pull request with the improvements.
-\end{enumerate}
+This book was written in \href{https://rmarkdown.rstudio.com/}{RMarkdown} using \href{https://bookdown.org/}{bookdown}. It is built from a github page, where updates can be sent to this page in minutes. A big shout out to those who have made suggestions already: Erlan Wheeler, David Hill, Caden Collier, Jon Lai, Peter Schelble, and Abhinav Gadde.
 
 \hypertarget{the-exam}{%
 \chapter{The exam}\label{the-exam}}
@@ -284,11 +293,11 @@ For your convenience, all data in this book, including data from prior exams and
 \CommentTok{#then install ExamPAData from github}
 \ControlFlowTok{if}\NormalTok{(}\StringTok{"devtools"} \OperatorTok{%in%}\StringTok{ }\KeywordTok{installed.packages}\NormalTok{())\{}
   \KeywordTok{library}\NormalTok{(devtools)}
-  \KeywordTok{install_github}\NormalTok{(}\StringTok{"https://github.com/sdcastillo/ExamPAData"}\NormalTok{)}
+  \KeywordTok{install_github}\NormalTok{(}\StringTok{"sdcastillo/ExamPAData"}\NormalTok{)}
 \NormalTok{\} }\ControlFlowTok{else}\NormalTok{\{}
   \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
   \KeywordTok{library}\NormalTok{(devtools)}
-  \KeywordTok{install_github}\NormalTok{(}\StringTok{"https://github.com/sdcastillo/ExamPAData"}\NormalTok{)}
+  \KeywordTok{install_github}\NormalTok{(}\StringTok{"sdcastillo/ExamPAData"}\NormalTok{)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -1698,236 +1707,7 @@ The data \texttt{actuary\_salaries} contains the salaries of actuaries collected
 \hypertarget{answers-to-exercises}{%
 \section{Answers to exercises}\label{answers-to-exercises}}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  How many industries are represented?
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }\KeywordTok{count}\NormalTok{(industry)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 4 x 2
-##   industry     n
-##   <chr>    <int>
-## 1 Casualty    45
-## 2 Health      31
-## 3 Life        31
-## 4 Pension     31
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  The \texttt{salary\_high} column is a character type when it should be numeric. Change this column to numeric.
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#method 1}
-\NormalTok{actuary_salaries <-}\StringTok{ }\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{salary_high =} \KeywordTok{as.numeric}\NormalTok{(salary_high))}
-
-\CommentTok{#method 2}
-\NormalTok{actuary_salaries <-}\StringTok{ }\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{modify_at}\NormalTok{(}\StringTok{"salary_high"}\NormalTok{, as.numeric)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{2}
-\tightlist
-\item
-  What are the highest and lowest salaries for an actuary in Health with 5 exams passed?
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(industry }\OperatorTok{==}\StringTok{ "Health"}\NormalTok{, exams }\OperatorTok{==}\StringTok{ }\DecValTok{5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{highest =} \KeywordTok{max}\NormalTok{(salary_high),}
-            \DataTypeTok{lowest =} \KeywordTok{min}\NormalTok{(salary_low))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 1 x 2
-##   highest lowest
-##     <dbl>  <dbl>
-## 1     126     68
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{3}
-\tightlist
-\item
-  Create a new column called \texttt{salary\_mid} which has the middle of the \texttt{salary\_low} and \texttt{salary\_high} columns.
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{actuary_salaries <-}\StringTok{ }\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{salary_mid =}\NormalTok{ (salary_low }\OperatorTok{+}\StringTok{ }\NormalTok{salary_high)}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{4}
-\tightlist
-\item
-  When grouping by industry, what is the highest \texttt{salary\_mid}? What about \texttt{salary\_high}? What is the lowest \texttt{salary\_low}?
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(industry) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{max_salary_mid =} \KeywordTok{max}\NormalTok{(salary_mid),}
-            \DataTypeTok{max_salary_high =} \KeywordTok{max}\NormalTok{(salary_high),}
-            \DataTypeTok{low_salary_low =} \KeywordTok{min}\NormalTok{(salary_low))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 4 x 4
-##   industry max_salary_mid max_salary_high low_salary_low
-##   <chr>             <dbl>           <dbl>          <dbl>
-## 1 Casualty           302.             447             11
-## 2 Health             272.             390             49
-## 3 Life               244              364             51
-## 4 Pension            224.             329             44
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{5}
-\tightlist
-\item
-  There is a mistake when \texttt{salary\_low\ ==\ 11}. Find and fix this mistake, and then rerun the code from the previous task.
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{actuary_salaries <-}\StringTok{ }\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{salary_low =} \KeywordTok{ifelse}\NormalTok{(salary_low }\OperatorTok{==}\StringTok{ }\DecValTok{11}\NormalTok{, }
-                             \DataTypeTok{yes =} \DecValTok{114}\NormalTok{, }\DataTypeTok{no =}\NormalTok{ salary_low),}
-         \DataTypeTok{salary_high =} \KeywordTok{ifelse}\NormalTok{(salary_high }\OperatorTok{==}\StringTok{ }\DecValTok{66}\NormalTok{, }
-                              \DataTypeTok{yes =} \DecValTok{166}\NormalTok{, }\DataTypeTok{no =}\NormalTok{ salary_high))}
-
-\CommentTok{#the minimum salary low is now 48}
-\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(industry) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{max_salary_mid =} \KeywordTok{max}\NormalTok{(salary_mid),}
-            \DataTypeTok{max_salary_high =} \KeywordTok{max}\NormalTok{(salary_high),}
-            \DataTypeTok{low_salary_low =} \KeywordTok{min}\NormalTok{(salary_low))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 4 x 4
-##   industry max_salary_mid max_salary_high low_salary_low
-##   <chr>             <dbl>           <dbl>          <dbl>
-## 1 Casualty           302.             447             48
-## 2 Health             272.             390             49
-## 3 Life               244              364             51
-## 4 Pension            224.             329             44
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{6}
-\tightlist
-\item
-  Create a new column, called \texttt{n\_exams}, which is an integer. Use 7 for ASA/ACAS and 10 for FSA/FCAS.
-\end{enumerate}
-
-Use the code below as a starting point and fill in the \texttt{\_} spaces
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{actuary_salaries <-}\StringTok{ }\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{n_exams =} \KeywordTok{case_when}\NormalTok{(exams }\OperatorTok{==}\StringTok{ "FSA"} \OperatorTok{~}\StringTok{ }\NormalTok{_,}
-\NormalTok{                             exams }\OperatorTok{==}\StringTok{ "ASA"} \OperatorTok{~}\StringTok{ }\NormalTok{_,}
-\NormalTok{                             exams }\OperatorTok{==}\StringTok{ "FCAS"} \OperatorTok{~}\StringTok{ }\NormalTok{_,}
-\NormalTok{                             exams }\OperatorTok{==}\StringTok{ "ACAS"} \OperatorTok{~}\StringTok{ }\NormalTok{_,}
-                             \OtherTok{TRUE} \OperatorTok{~}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{substr}\NormalTok{(exams,_,_)))) }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{actuary_salaries <-}\StringTok{ }\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{n_exams =} \KeywordTok{case_when}\NormalTok{(exams }\OperatorTok{==}\StringTok{ "FSA"} \OperatorTok{~}\StringTok{ }\DecValTok{10}\NormalTok{,}
-\NormalTok{                             exams }\OperatorTok{==}\StringTok{ "ASA"} \OperatorTok{~}\StringTok{ }\DecValTok{7}\NormalTok{,}
-\NormalTok{                             exams }\OperatorTok{==}\StringTok{ "FCAS"} \OperatorTok{~}\StringTok{ }\DecValTok{10}\NormalTok{,}
-\NormalTok{                             exams }\OperatorTok{==}\StringTok{ "ACAS"} \OperatorTok{~}\StringTok{ }\DecValTok{7}\NormalTok{,}
-                             \OtherTok{TRUE} \OperatorTok{~}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{substr}\NormalTok{(exams,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)))) }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning in eval_tidy(pair$rhs, env = default_env): NAs introduced by
-## coercion
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }\KeywordTok{count}\NormalTok{(n_exams)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 8 x 2
-##   n_exams     n
-##     <dbl> <int>
-## 1       1    12
-## 2       2    17
-## 3       3    19
-## 4       4    21
-## 5       5    17
-## 6       6     5
-## 7       7    29
-## 8      10    18
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{7}
-\tightlist
-\item
-  Create a column called \texttt{social\_life}, which is equal to \texttt{n\_exams}/\texttt{experience}. What is the average (mean) \texttt{social\_life} by industry? Bonus question: what is wrong with using this as a statistical measure?
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{actuary_salaries }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{social_life =}\NormalTok{ n_exams}\OperatorTok{/}\NormalTok{experience) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(industry) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{avg_social_life =} \KeywordTok{mean}\NormalTok{(social_life))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 4 x 2
-##   industry avg_social_life
-##   <chr>              <dbl>
-## 1 Casualty           0.985
-## 2 Health             1.06 
-## 3 Life               1.06 
-## 4 Pension            1.00
-\end{verbatim}
-
-This is not REALLY an average as the number of people, or number of actuaries, are not taken into consideration. To correctly take the average, we would need use a weighted average like sum(number\_actuaries*social\_life)/sum(number\_actuaries)
+Answers to these exercises, along with a video tutorial, are available at \href{https://www.exampa.net/pricing}{ExamPA.net}.
 
 \hypertarget{visualization}{%
 \chapter{Visualization}\label{visualization}}
@@ -1937,21 +1717,11 @@ This sections shows how to create and interpret simple graphs. In past exams, th
 \hypertarget{create-a-plot-object-ggplot}{%
 \section{Create a plot object (ggplot)}\label{create-a-plot-object-ggplot}}
 
-The first step is to create a blank canvas that holds the columns that are needed. Let's say that the goal is to graph \texttt{income} and \texttt{count}. We put these into a ggplot object called \texttt{p}.
-
-The \texttt{aesthetic} argument, \texttt{aes}, means that the x-axis will have \texttt{income} and the y-axis will have \texttt{count}.
+Let's create a histogram of the claims. The first step is to create a blank canvas that holds the columns that are needed. The \texttt{aesthetic} argument, \texttt{aes}, means that the variable shown will the the claims.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(Cairo)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
 \KeywordTok{library}\NormalTok{(ExamPAData)}
-\KeywordTok{theme_set}\NormalTok{(}\KeywordTok{theme_bw}\NormalTok{())}
 \NormalTok{p <-}\StringTok{ }\NormalTok{insurance }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(claims))}
 \end{Highlighting}
 \end{Shaded}
@@ -1976,10 +1746,6 @@ We add a histogram
 \NormalTok{p }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_histogram}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-\end{verbatim}
 
 \includegraphics{04-visualization_files/figure-latex/unnamed-chunk-4-1.pdf}
 
@@ -2025,6 +1791,7 @@ Pipes allow for data manipulations to be chained with visualizations.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(ggplot2)}
 \KeywordTok{theme_set}\NormalTok{(}\KeywordTok{theme_bw}\NormalTok{())}
 \end{Highlighting}
@@ -2062,14 +1829,14 @@ The target is
 \[\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}\]
 This represents the \emph{unknown} quantity that we want to be able to predict. In the health care costs example, \(y_1\) would be the costs of the first patient, \(y_2\) the costs of the second patient, and so forth. The variables \(x_{11}\) and \(x_{12}\) might represent the first patient's age and sex respectively, where \(x_{i1}\) is the patient's age, and \(x_{i2} = 1\) if the ith patient is male and 0 if female.
 
-Machine learning is about using \(\mathbf{X}\) to predict \(\mathbf{y}\). We call this ``y-hat'', or simply the prediction. This is based on a function of the data \(X\).
+Machine learning is about using \(X\) to predict \(Y\). We call this ``y-hat'', or simply the prediction. This is based on a function of the data \(X\).
 
-\[\mathbf{\hat{y}} = f(\mathbf{X}) = \begin{pmatrix} \hat{y_1} \\ \hat{y_2} \\ \hat{y_3} \end{pmatrix}\]
+\[\hat{Y} = f(X)\]
 
-This is almost never going to happen perfectly, and so there is always an error term, \(\mathbf{\epsilon}\). This can be made smaller, but is never exactly zero.
+This is almost never going to happen perfectly, and so there is always an error term, \(\epsilon\). This can be made smaller, but is never exactly zero.
 
 \[
-\mathbf{\hat{y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}
+\hat{Y} + \epsilon = f(X) + \epsilon
 \]
 
 In other words, \(\epsilon = y - \hat{y}\). We call this the \emph{residual}. When we predict a person's health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
@@ -2077,27 +1844,24 @@ In other words, \(\epsilon = y - \hat{y}\). We call this the \emph{residual}. Wh
 \hypertarget{ordinary-least-squares-ols}{%
 \section{Ordinary least squares (OLS)}\label{ordinary-least-squares-ols}}
 
-The type of model used refers to the class of function of \(f\). If \(f\) is linear, then we are using a linear model. If \(f\) is non-parametric (does not have input parameters), then it is non-parametric modeling. Linear models are linear in the parameters, \(\beta\).
+The type of model used refers to the class of function of \(f\). If \(f\) is linear, then we are using a linear model. Linear models are linear in the parameters, \(\beta\).
 
-We have the data \(\mathbf{X}\) and the target \(\mathbf{y}\), where all of the y's are real numbers, or \(y_i \in \mathbb{R}\).
+We observe the data \(X\) and the want to predict the target \(Y\).
 
-We want to find a \(\mathbf{\beta}\) so that
+We find a \(\mathbf{\beta}\) so that
 
 \[
-\mathbf{\hat{y}} = \mathbf{X} \mathbf{\beta}
+\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p
 \]
 
 Which means that each \(y_i\) is a linear combination of the variables \(x_1, ..., x_p\), plus a constant \(\beta_0\) which is called the \emph{intercept} term.
-
-\[
-y_i = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p
-\]
 
 In the one-dimensional case, this creates a line connecting the points. In higher dimensions, this creates a hyperplane.
 
 \includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-2-1.pdf}
 
-The question then is \textbf{how can we choose the best values of} \(\beta?\) First of all, we need to define what we mean by ``best''. Ideally, we will choose these values which will create close predictions of \(\mathbf{y}\) on new, unseen data.\\
+The question then is \textbf{how can we choose the best values of} \(\beta?\) First of all, we need to define what we mean by ``best''. Ideally, we will choose these values which will create close predictions of \(\mathbf{y}\) on new, unseen data.
+
 To solve for \(\mathbf{\beta}\), we first need to define a \emph{loss function}. This allows us to compare how well a model is fitting the data. The most commonly used loss function is the residual sum of squares (RSS), also called the \emph{squared error loss} or the L2 norm. When RSS is small, then the predictions are close to the actual values and the model is a good fit. When RSS is large, the model is a poor fit.
 
 \[
@@ -2111,7 +1875,7 @@ You might be asking: why does this need to be the squared error? Why not the abs
 \begin{itemize}
 \tightlist
 \item
-  It provides the same solution if we assume that the distribution of \(\mathbf{Y}|\mathbf{X}\) is guassian and maximize the likelihood function. This method is used for GLMs, in the next chapter.
+  It provides the same solution if we assume that the distribution of \(Y|X\) is guassian and maximize the likelihood function. This method is used for GLMs, in the next chapter.
 \item
   Empirically it has been shown to be less likely to overfit as compared to other loss functions
 \end{itemize}
@@ -2173,9 +1937,9 @@ Below we fit a simple linear model to predict charges.
 \end{Highlighting}
 \end{Shaded}
 
-The \texttt{summary} function gives details about the model. First, the \texttt{Estimate}, gives you the coefficients. The \texttt{Std.\ Error} is the error of the estimate for the coefficient. Higher standard error means greater uncertainty. This is relative to the average value of that variable. The \texttt{t\ value} tells you how ``big'' this error really is based on standard deviations. A larger \texttt{t\ value} implies a low probability of the null hypothesis being rejected saying that the coefficient is zero. This is the same as having a p-value (\texttt{Pr\ (\textgreater{}\textbar{}t\textbar{}))}) being close to zero.
+The \texttt{summary} function gives details about the model. First, the \texttt{Estimate}, gives you the coefficients. The \texttt{Std.\ Error} is the error of the estimate for the coefficient. Higher standard error means greater uncertainty. This is relative to the average value of that variable. The \texttt{t\ value} tells you how ``big'' this error really is based on standard deviations. A larger \texttt{t\ value} implies a low probability of the null hypothesis being accepted saying that the coefficient is zero. This is the same as having a p-value (\texttt{Pr\ (\textgreater{}\textbar{}t\textbar{}))}) being close to zero.
 
-The little \texttt{*}, \texttt{**}, \texttt{***} indicate that the variable is either somewhat significant, significant, or highly significant. ``significance'' here means that there is a low probability of the coefficient being that size if there were \emph{no actual casual relationship}, or if the data was random noise.
+The little \texttt{*}, \texttt{**}, \texttt{***} indicate that the variable is either somewhat significant, significant, or highly significant. ``significance'' here means that there is a low probability of the coefficient being that size (or larger) if there were \emph{no actual casual relationship}, or if the data was random noise.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2205,12 +1969,13 @@ The little \texttt{*}, \texttt{**}, \texttt{***} indicate that the variable is e
 ## F-statistic:  88.6 on 2 and 1335 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
-When evaluating model performance, you should not rely on the \texttt{summary} alone as this is based on the training data. To look at performance, test the model on validation data. This can be done by a) using a hold out set, or b) using cross-validation, which is even better.
+When evaluating model performance, you should not rely on the \texttt{summary} alone as this is based on the training data. To look at performance, test the model on validation data. This can be done by either using a hold out set, or using cross-validation, which is even better.
 
 Let's create an 80\% training set and 20\% testing set. You don't need to worry about understanding this code as the exam will always give this to you.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(caret)}
 \CommentTok{#create a train/test split}
 \NormalTok{index <-}\StringTok{ }\KeywordTok{createDataPartition}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ health_insurance}\OperatorTok{$}\NormalTok{charges, }
@@ -2242,7 +2007,7 @@ Let's look at the Root Mean Squared Error (RMSE).
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 11562.49
+## [1] 11421.96
 \end{verbatim}
 
 The above number does not tell us if this is a good model or not by itself. We need a comparison. The fastest check is to compare against a prediction of the mean. In other words, all values of the \texttt{y\_hat} are the average of \texttt{charges}
@@ -2254,7 +2019,7 @@ The above number does not tell us if this is a good model or not by itself. We n
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 12148.71
+## [1] 12574.97
 \end{verbatim}
 
 The RMSE is \textbf{higher} (worse) when using just the mean, which is what we expect. \textbf{If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.}
@@ -2289,18 +2054,6 @@ The normal QQ shows how well the quantiles of the predictions fit to a theoretic
 \caption{\label{fig:unnamed-chunk-10}Normal Q-Q}
 \end{figure}
 
-\textbf{Caution: This test only applies to linear models which have a gaussian response distribution.}
-
-The below is from an excellent post of Stack Exchange.
-
-\begin{quote}
-R does not have a distinct plot.glm() method. When you fit a model with glm() and run plot(), it calls ?plot.lm, which is appropriate for linear models (i.e., with a normally distributed error term).
-\end{quote}
-
-\begin{quote}
-More specifically, the plots will often `look funny' and lead people to believe that there is something wrong with the model when it is perfectly fine. We can see this by looking at those plots with a couple of simple simulations where we know the model is correct:
-\end{quote}
-
 Once you have chosen your model, you should re-train over the entire data set. This is to make the coefficients more stable because \texttt{n} is larger. Below you can see that the standard error is lower after training over the entire data set.
 
 \begin{Shaded}
@@ -2317,9 +2070,9 @@ Once you have chosen your model, you should re-train over the entire data set. T
 term & full\_data\_std\_error & test\_data\_std\_error\tabularnewline
 \midrule
 \endhead
-(Intercept) & 1744.1 & 3802.2\tabularnewline
-bmi & 51.4 & 110.9\tabularnewline
-age & 22.3 & 50.3\tabularnewline
+(Intercept) & 1744.1 & 3824.2\tabularnewline
+bmi & 51.4 & 111.1\tabularnewline
+age & 22.3 & 47.8\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -2333,18 +2086,18 @@ All interpretations should be based on the model which was trained on the entire
 
 \begin{verbatim}
 ## (Intercept)         bmi         age 
-##  -6463.3281    313.1657    257.2827
+##  -4526.5284    286.8283    228.4372
 \end{verbatim}
 
 Translating the above into an equation we have
 
-\[\hat{y_i} = -6,424.80 + 332.97 \space\text{bmi} + 241.93\space \text{age}\]
+\[\hat{y_i} = -4,526 + 287 \space\text{bmi} + 228\space \text{age}\]
 
 For example, if a patient has \texttt{bmi\ =\ 27.9} and \texttt{age\ =\ 19} then predicted value is
 
-\[\hat{y_1} = -6,424.80 + (332.97)(27.9) + (241.93)(19) = 7,461.73\]
+\[\hat{y_1} = 4,526 + (287)(27.9) + (228)(19) = 16,865\]
 
-This model structure implies that each of the variables \(\mathbf{x_1}, ..., \mathbf{x_p}\) each change the predicted \(\mathbf{\hat{y}}\). If \(x_{ij}\) increases by one unit, then \(y_i\) increases by \(\beta_j\) units, regardless of what happens to all of the other variables. This is one of the main assumptions of linear models: \emph{variable indepdendence}. If the variables are correlated, say, then this assumption will be violated.
+This model structure implies that each of the variables \(x_1, ..., x_p\) each change the predicted \(\hat{y}\). If \(x_{ij}\) increases by one unit, then \(y_i\) increases by \(\beta_j\) units, regardless of what happens to all of the other variables. This is one of the main assumptions of linear models: \emph{variable indepdendence}. If the variables are correlated, say, then this assumption will be violated.
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
@@ -2359,49 +2112,53 @@ ISLR 2.2 Assessing model accuracy &\tabularnewline
 \hypertarget{generalized-linear-models-glms}{%
 \chapter{Generalized linear models (GLMs)}\label{generalized-linear-models-glms}}
 
-\hypertarget{model-form}{%
-\section{Model form}\label{model-form}}
-
-Instead of the model being a direct linear combination of the variables, there is an intermediate step called a \emph{link function} \(g\).
+The linear model that we have considered up to this point, what we called ``OLS'', assumes that the response is a linear combination of the predictor variables. For an error term \(\epsilon_i \sim N(0,\sigma^2)\), this is assumes that
 
 \[
-g(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta}
+Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
 \]
 
-This implies that the response \(\mathbf{y}\) is related to the linear predictor \(\mathbf{X} \mathbf{\beta}\) through the \emph{inverse} link function.
+Another way of saying this is that if \(X\) is the matrix made up of columns \(X_1, ..., X_p\), then
 
 \[
-\mathbf{\hat{y}} = g^-1(\mathbf{X} \mathbf{\beta})
+\mathbf{Y} = \mathbf{X} \mathbf{\beta} + \mathbf{\epsilon}
 \]
 
-This means that \(g(.)\) must be an invertable. For example, if \(g\) is the natural logarithm (aka, the ``log-link''), then
+Another way of saying this is that ``after we adjust for the data, the error is normally distributed and the variance is constant.'' If \(I\) is an n-by-in identity matrix, and \(\sigma^2 I\) is the covariance matrix, then
 
 \[
-log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
+\mathbf{Y|X} \sim N( \mathbf{X \beta}, \mathbf{\sigma^2} I)
 \]
 
-This is useful when the distribution of \(Y\) is skewed, as taking the log corrects skewness.
+Because this notation is getting too cumbersome, we're going to stop using bold letters to denote matrices and just use non-bold characters. From now on, \(\mathbf{X}\) is the same as \(X\).
 
-\begin{figure}
-\centering
-\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-14-1.pdf}
-\caption{\label{fig:unnamed-chunk-14}Taking the log corrects for skewness}
-\end{figure}
+These assumptions can be expressed in two parts:
 
-You might be asking, what if the distribution of \(Y\) is not normal, no matter what choice we have for \(g\)? The short answer is that we can change our assumption of the distribution of \(Y\), and use this to change the parameters. If you have taken exam STAM then you are familiar with \emph{maximum likelihood estimation}.
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  A \emph{random component}: The response variable \(Y|X\) is normally distributed with mean \(\mu = \mu(X) = E(Y|X)\)
+\item
+  A link between the response and the covariates \(\mu(X) = X\beta\)
+\end{enumerate}
 
-We have a response \(\mathbf{Y}\), and we fit a distribution to \(\mathbf{Y} | \mathbf{X}\). This is the target variable conditioned on the data. For each \(y_i\), each observation, we assign a probability \(f_Y(y_i)\)
+\hypertarget{the-generalized-linear-model}{%
+\section{\texorpdfstring{The \emph{generalized} linear model}{The generalized linear model}}\label{the-generalized-linear-model}}
 
-\[
-f_y(y_i | X_1 = x_1, X_2 = x_2, ..., X_p = x_p) = Pr(Y = y_i | \mathbf{X})
-\]
+We relax these two assumptions by saying that the model is defined by
 
-Now, when we choose the response family, we are simply changing \(f_Y\). If we say that the response family is Gaussian, then \(f\) has a Gaussian PDF. If we are modeling counts, then \(f\) is a Poisson PDF. This only works if \(f\) is in the \emph{exponential family} of distributions, which consists of the common names such as Gaussian, Binomial, Gamma, Inverse Gamma, and so forth. Reading the CAS Monograph 5 will provide more detail into this.
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  A random component: \(Y|X \sim \text{some exponential family distribution}\)
+\item
+  A \emph{link function}: between the random component and \(X\): \(g(\mu(X)) = X\beta\)
+\end{enumerate}
 
 The possible combinations of link functions and distribution families are summarized nicely on \href{https://en.wikipedia.org/wiki/Generalized_linear_model\#Link_function}{Wikipedia}.
 
 \begin{figure}
-\includegraphics[width=22.32in]{images/glm_links} \caption{Distribution-Link Function Combinations}\label{fig:unnamed-chunk-15}
+\includegraphics[width=22.32in]{images/glm_links} \caption{Distribution-Link Function Combinations}\label{fig:unnamed-chunk-14}
 \end{figure}
 
 For this exam, a common question is to ask candiates to choose the best distribution and link function. There is no all-encompasing answer, but a few suggestions are
@@ -2417,6 +2174,9 @@ For this exam, a common question is to ask candiates to choose the best distribu
 \item
   If \(Y\) has more than two categories, the multinomial distribution with either the Probit or Logic link (See Logistic Regression)
 \end{itemize}
+
+\hypertarget{interpretation}{%
+\section{Interpretation}\label{interpretation}}
 
 The exam will always ask you to interpret the GLM. These questions can usually be answered by inverting the link function and interpreting the coefficients. In the case of the log link, simply take the exponent of the coefficients and each of these represents a ``relativity'' factor.
 
@@ -2436,6 +2196,31 @@ Where \(R_k\) is the \emph{relativity} of the kth variable. This terminology is 
 
 For binary outcomes with logit or probit link, there is no easy interpretation. This has come up in at least one past sample exam, and the solution was to create ``psuedo'' observations and observe how changing each \(x_k\) would change the predicted value. Due to the time requirements, this is unlikely to come up on an exam. So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.
 
+\hypertarget{residuals}{%
+\section{Residuals}\label{residuals}}
+
+The word ``residual'' by itself actually means the ``raw residual'' in GLM language. This is the difference in actual vs.~predicted values.
+
+\[\text{Raw Residual} = y_i - \hat{y_i}\]
+
+This are not meaningful for GLMs with non-Gaussian response families because the distribution changes depending on the response family chosen. To adjust for this, we need the concept of \emph{deviance residual}.
+
+To paraphrase from \href{www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf}{this paper}
+
+Deviance is a way of assessing the adequacy of a model by comparing it with a more general
+model with the maximum number of parameters that can be estimated. It is referred to
+as the saturated model. In the saturated model there is basically one parameter per
+observation. The deviance assesses the goodness of fit for the model by looking at the
+difference between the log-likelihood functions of the saturated model and the model
+under investigation, i.e.~\(l(b_{sat},y) - l(b,y)\). Here sat \(b_{sat}\) denotes the maximum likelihood
+estimator of the parameter vector of the saturated model, \(\beta_{sat}\) , and \(b\) is the maximum
+likelihood estimator of the parameters of the model under investigation, \(\beta\). The maximum likelihood estimator is the estimator that maximises the likelihood function. \textbf{The deviance is defined as}
+
+\[D = 2[l(b_{sat},y) - l(b,y)]\]
+The deviance residual uses the deviance of the ith observation \(d_i\) and then takes the square root and applies the same sign (aka, the + or - part) of the raw residual.
+
+\[\text{Deviance Residual} = \text{sign}(y_i - \hat{y_i})\sqrt{d_i}\]
+
 \hypertarget{example-1}{%
 \section{Example}\label{example-1}}
 
@@ -2443,22 +2228,22 @@ Just as with OLS, there is a \texttt{formula} and \texttt{data\ argument}. In ad
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{model =}\StringTok{ }\KeywordTok{glm}\NormalTok{(}\DataTypeTok{formula =}\NormalTok{ charges }\OperatorTok{~}\StringTok{ }\NormalTok{age }\OperatorTok{+}\StringTok{ }\NormalTok{sex }\OperatorTok{+}\StringTok{ }\NormalTok{children, }
-            \DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{(}\DataTypeTok{link =} \StringTok{"log"}\NormalTok{),}
+\NormalTok{model =}\StringTok{ }\KeywordTok{glm}\NormalTok{(}\DataTypeTok{formula =}\NormalTok{ charges }\OperatorTok{~}\StringTok{ }\NormalTok{age }\OperatorTok{+}\StringTok{ }\NormalTok{sex }\OperatorTok{+}\StringTok{ }\NormalTok{smoker, }
+            \DataTypeTok{family =} \KeywordTok{Gamma}\NormalTok{(}\DataTypeTok{link =} \StringTok{"log"}\NormalTok{),}
             \DataTypeTok{data =}\NormalTok{ health_insurance)}
 \end{Highlighting}
 \end{Shaded}
 
-We see that \texttt{age}, \texttt{sex}, and \texttt{children} are all significant (p \textless0.01). Reading off the coefficient signs, we see that claims
+We see that \texttt{age}, \texttt{sex}, and \texttt{smoker} are all significant (p \textless0.01). Reading off the coefficient signs, we see that claims
 
 \begin{itemize}
 \tightlist
 \item
   Increase as age increases
 \item
-  Are higher for men
+  Are higher for women
 \item
-  Are slightly higher for patients wich children
+  Are higher for smokers
 \end{itemize}
 
 \begin{Shaded}
@@ -2469,13 +2254,57 @@ We see that \texttt{age}, \texttt{sex}, and \texttt{children} are all significan
 
 \begin{verbatim}
 ## # A tibble: 4 x 5
-##   term        estimate std.error statistic  p.value
-##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)   8.55     0.0953      89.7  0.      
-## 2 age           0.0201   0.00179     11.3  3.12e-28
-## 3 sexmale       0.112    0.0459       2.44 1.49e- 2
-## 4 children      0.0489   0.0182       2.69 7.29e- 3
+##   term        estimate std.error statistic   p.value
+##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
+## 1 (Intercept)   7.82     0.0600     130.   0.       
+## 2 age           0.0290   0.00134     21.6  3.40e- 89
+## 3 sexmale      -0.0468   0.0377      -1.24 2.15e-  1
+## 4 smokeryes     1.50     0.0467      32.1  3.25e-168
 \end{verbatim}
+
+Below you can see graph of deviance residuals vs.~the predicted values.
+
+\textbf{If this were a perfect model, all of these below assumptions would be met:}
+
+\begin{itemize}
+\tightlist
+\item
+  Scattered around zero?
+\item
+  Constant variance?
+\item
+  No obvious pattern?
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(model, }\DataTypeTok{which =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.
+
+\textbf{In a perfect model, all of these assumptions would be met:}
+
+\begin{itemize}
+\tightlist
+\item
+  Points lie on a straight line?\\
+\item
+  Tails are not significantly above or below line? Some tail deviation is ok.
+\item
+  No sudden ``jumps''? This indicates many \(Y\)'s which have the same value, such as insurance claims which all have the exact value of \$100.00 or \$0.00.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(model, }\DataTypeTok{which =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-18-1.pdf}
 
 \hypertarget{reference-levels}{%
 \section{Reference levels}\label{reference-levels}}
@@ -2568,8 +2397,8 @@ The SOA's modules give an example with the using age and gender as below. This i
 
 \begin{figure}
 \centering
-\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-22-1.pdf}
-\caption{\label{fig:unnamed-chunk-22}Example of weak interaction}
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-23-1.pdf}
+\caption{\label{fig:unnamed-chunk-23}Example of weak interaction}
 \end{figure}
 
 Here is a clearer example from the \texttt{auto\_claim} data. The lines show the slope of a linear model, assuming that only \texttt{BLUEBOOK} and \texttt{CAR\_TYPE} were predictors in the model. You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.
@@ -2586,42 +2415,37 @@ Here is a clearer example from the \texttt{auto\_claim} data. The lines show the
 
 \begin{figure}
 \centering
-\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-23-1.pdf}
-\caption{\label{fig:unnamed-chunk-23}Example of strong interaction}
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-24-1.pdf}
+\caption{\label{fig:unnamed-chunk-24}Example of strong interaction}
 \end{figure}
 
 Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction. We can also use an hypothesis test with a GLM to check this. Simply include an interaction term and see if the coefficient is zero at the desired significance level.
 
 \hypertarget{poisson-regression}{%
-\subsection{Poisson Regression}\label{poisson-regression}}
+\section{Poisson Regression}\label{poisson-regression}}
 
-When the dependent variable is a count, such as the number of claims per month, Poisson regression is appropriate. This requires that each claim is independent in that one claim will not make another claim more or less likely. This means that the target variable is actually a rate, \(\frac{\text{claims}}{\text{months}}\). More generally, we call the months the \emph{exposure}.
+When counting something, numbers can only be positive and increase by increments of 1. Statistically, the name for this is a Poisson Process, which is a model for a serious of discrete events where the average time between events is known, called the ``rate'' \(\lambda\), but the exact timing of events is unknown. We could just fit a single rate for all observations, but this would often be a simplification. For a time interval of length \(m\), the expected number of events is \(\lambda m\).
 
-Let \(m_i\) by the units of exposure and \(y_i\) the target. We use a log-link function to correct for skewness.
+By using a GLM, we can fit a different rate for each observation. Because the response is a count, the appropriate response distribution is the Poisson.
 
-\[ log(\frac{\hat{y_i}}{m_i}) = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p\]
+\[Y_i|X_i \sim \text{Poisson}(\lambda_i m_i)\]
 
-By using the fact that \(log(\frac{a}{b}) = log(a) - log(b)\) this turns into
+When all observations have the same exposure, \(m = 1\). When the mean of the data is far from the variance, an additional parameter known as the \emph{dispersion parameter} is used. A classic example is when modeling insurance claim counts which have a lot of zero claims. Then the model is said to be an ``over-dispersed Poisson'' or ``zero-inflated'' model.
 
-\[log(\hat{y_i}) = log(m_i) + \beta_0 + \beta_1 x_1 + ... + \beta_p x_p\]
+\hypertarget{offsets}{%
+\section{Offsets}\label{offsets}}
 
-We call the \(log(m_i)\) the \texttt{offset} term. Notice that there is no coefficient (beta) on this value, because we already know what the impact will be.
+In certain situations, it is convenient to include a constant term in the linear predictor. This is the same as including a variable that has a coefficient equal to 1. We call this an \emph{offset}.
 
-In R, the code for this equation would be
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\KeywordTok{offset}\NormalTok{(}\KeywordTok{log}\NormalTok{(m)) }\OperatorTok{+}\StringTok{ }\NormalTok{x, }\DataTypeTok{family=}\KeywordTok{poisson}\NormalTok{(}\DataTypeTok{link=}\NormalTok{log) )}
-\end{Highlighting}
-\end{Shaded}
+\[g(\mu) = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \text{offset}\]
 
 \hypertarget{tweedie-regression}{%
-\subsection{Tweedie regression}\label{tweedie-regression}}
+\section{Tweedie regression}\label{tweedie-regression}}
 
 While this topic is briefly mentioned on the modules, the only R libraries which support Tweedie Regression (\texttt{statmod} and \texttt{tweedie}) are not on the syllabus, and so there is no way that the SOA could ask you to build a tweedie model. This means that you can be safely skip this section.
 
 \hypertarget{stepwise-subset-selection}{%
-\subsection{Stepwise subset selection}\label{stepwise-subset-selection}}
+\section{Stepwise subset selection}\label{stepwise-subset-selection}}
 
 In theory, we could test all possible combinations of variables and interaction terms. This includes all \(p\) models with one predictor, all p-choose-2 models with two predictors, all p-choose-3 models with three predictors, and so forth. Then we take whichever model has the best performance as the final model.
 
@@ -2681,7 +2505,7 @@ Readings &\tabularnewline
 \end{longtable}
 
 \hypertarget{advantages-and-disadvantages}{%
-\subsection{Advantages and disadvantages}\label{advantages-and-disadvantages}}
+\section{Advantages and disadvantages}\label{advantages-and-disadvantages}}
 
 There is usually at least one question on the PA exam which asks you to ``list some of the advantages and disadvantages of using this particular model'', and so here is one such list. It is unlikely that the grader will take off points for including too many comments and so a good strategy is to include everything that comes to mind.
 
@@ -2699,8 +2523,6 @@ There is usually at least one question on the PA exam which asks you to ``list s
   Models the average response which leads to stable predictions on new data
 \item
   Handles continuous and categorical data
-\item
-  Works well on small data sets
 \end{itemize}
 
 \textbf{GLM Disadvantages}
@@ -2722,8 +2544,8 @@ There is usually at least one question on the PA exam which asks you to ``list s
 \hypertarget{logistic-regression}{%
 \chapter{Logistic Regression}\label{logistic-regression}}
 
-\hypertarget{model-form-1}{%
-\section{Model form}\label{model-form-1}}
+\hypertarget{model-form}{%
+\section{Model form}\label{model-form}}
 
 Logistic regression is a special type of GLM. The name is confusing because the objective is \emph{classification} and not regression. While most examples focus on binary classification, logistic regression also works for multiclass classification.
 
@@ -2738,9 +2560,12 @@ We can use a special link function, known as the \emph{standard logistic functio
 \[\mathbf{\hat{y}} = g^{-1}(\mathbf{X} \mathbf{\beta}) = \frac{1}{1 + e^{-\mathbf{X} \mathbf{\beta}}}\]
 
 \begin{figure}
-\centering
-\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-25-1.pdf}
-\caption{\label{fig:unnamed-chunk-25}Standard Logistic Function}
+
+{\centering \includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-25-1} 
+
+}
+
+\caption{Standard Logistic Function}\label{fig:unnamed-chunk-25}
 \end{figure}
 
 Other link functions for classification problems are possible as well, although the logistic function is the most common. If a problem asks for an alternative link, such as the \emph{probit}, fit both models and compare the performance.
@@ -2783,7 +2608,7 @@ About 40\% do not have a claim while 60\% have at least one claim.
 \end{Highlighting}
 \end{Shaded}
 
-All of the variables except for the \texttt{CAR\_TYPE} are highly significant. The car types \texttt{SPORTS\ CAR} and \texttt{SUV} appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for \texttt{CAR\_TYPE\ ==\ SPORTS\ CAR} and \texttt{CAR\_TYPE\ ==\ SUV}.
+All of the variables except for the \texttt{CAR\_TYPE} and \texttt{GENDERM} are highly significant. The car types \texttt{SPORTS\ CAR} and \texttt{SUV} appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for \texttt{CAR\_TYPE\ ==\ SPORTS\ CAR} and \texttt{CAR\_TYPE\ ==\ SUV}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2827,12 +2652,24 @@ All of the variables except for the \texttt{CAR\_TYPE} are highly significant. T
 ## Number of Fisher Scoring iterations: 5
 \end{verbatim}
 
-There is no easy way of interpreting the coefficients when using a logit link function. The most inference that we can make is to note which variables are significant.
+The signs of the coefficients tell if the probability of having a claim is either increasing or decreasing by each variable. For example, the likelihood of an accident
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{CAR\_USE}, \texttt{MARRIED}, \texttt{BLUEBOOK} are highly significant
+  Decreases as the age of the car increases
+\item
+  Is lower for men
+\item
+  Is higher for sports cars and SUVs
+\end{itemize}
+
+The p-values tell us if the variable is significant.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Age}, \texttt{MarriedYes}, \texttt{CAR\_USEPrivate}, \texttt{BLUEBOOK}, and \texttt{AreaUrban} are significant.
 \item
   Certain values of \texttt{CAR\_TYPE} are significant but others are not.
 \end{itemize}
@@ -2984,7 +2821,7 @@ How do we know if this is a good model? We can repeat this process with a differ
 ## 1    0.985
 \end{verbatim}
 
-The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accuracy for the positive classes (policies with actual claims) vs.~the negative classes (policies without claims).
+The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accuracy for the ``true = 1'' classes (policies with actual claims) vs.~the ``false = 0'' classes (policies without claims).
 
 \hypertarget{classification-metrics}{%
 \section{Classification metrics}\label{classification-metrics}}
@@ -3000,9 +2837,9 @@ A \emph{confusion matrix} shows is a table that summarises how the model classif
 \item
   Had claims and predicted to have claims - \textbf{True Positives (TP) = 59}
 \item
-  No claims but predited to have claims - \textbf{False Negatives (FN) = 22}
+  No claims but predited to have claims - \textbf{False Positives (FP) = 22}
 \item
-  Had claims but predicted not to - \textbf{False Positives (FP) = 489}
+  Had claims but predicted not to - \textbf{False Negatives (FN) = 489}
 \end{itemize}
 
 \begin{Shaded}
@@ -3028,7 +2865,7 @@ These definitions allow us to measure performance on the different groups.
 
 \[\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}\]
 
-The choice of using precision or recall depends on the relative cost of making a FP or a FN error. If FP errors are expensive, then use precision; if FN errors are expensive, then use recall.
+The choice of using precision vs.~recall depends on the relative cost of making a FP or a FN error. If FP errors are expensive, then use precision; if FN errors are expensive, then use recall.
 
 \textbf{Example A:} the model trying to detect a deadly disease, which only 1 out of every 1000 patient's survive without early detection. Then the goal should be to optimize \emph{recall}, because we would want every patient that has the disease to get detected.
 
@@ -3116,6 +2953,22 @@ Then we set \texttt{x\ =\ TPR} and \texttt{y\ =\ FNR} and graph x against y. The
 \end{verbatim}
 
 If we just randomly guess, the AUC would be 0.5, which is represented by the 45-degree line. A perfect model would maximize the curve to the upper-left corner.
+
+AUC is preferred over Accuracy when there are a lot more ``true'' classes than ``false'' classes, which is known as having **class imbalance*. An example is bank fraud detection: 99.99\% of bank transactions are ``false'' or ``0'' classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
+
+\hypertarget{additional-reading}{%
+\subsection{Additional reading}\label{additional-reading}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Title & Source\tabularnewline
+\midrule
+\endhead
+An Overview of Classification & ISL 4.1\tabularnewline
+\href{https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5\#:~:targetText=What\%20is\%20AUC\%20\%2D\%20ROC\%20Curve\%3F,capable\%20of\%20distinguishing\%20between\%20classes.}{Understanding AUC - ROC Curv} & Sarang Narkhede, Towards Data Science\tabularnewline
+\href{https://towardsdatascience.com/precision-vs-recall-386cf9f89488\#:~:targetText=Precision\%20and\%20recall\%20are\%20two,correctly\%20classified\%20by\%20your\%20algorithm.}{Precision vs.~Recall} & Shruti Saxena, Towards Data Science\tabularnewline
+\bottomrule
+\end{longtable}
 
 \hypertarget{penalized-linear-models}{%
 \chapter{Penalized Linear Models}\label{penalized-linear-models}}
@@ -3211,8 +3064,8 @@ ISLR 6.2 Shrinkage Methods &\tabularnewline
 \hypertarget{decision-trees}{%
 \section{Decision Trees}\label{decision-trees}}
 
-\hypertarget{model-form-2}{%
-\subsection{Model form}\label{model-form-2}}
+\hypertarget{model-form-1}{%
+\subsection{Model form}\label{model-form-1}}
 
 Decision trees can be used for either classification or regression problems. The model structure is a series of yes/no questions. Depending on how each observation answers these questions, a prediction is made.
 
@@ -3323,11 +3176,11 @@ This is stored in the \texttt{cptable}
 ##   nsplit      CP xerror
 ##    <dbl>   <dbl>  <dbl>
 ## 1      0 0.620    1.00 
-## 2      1 0.144    0.382
+## 2      1 0.144    0.381
 ## 3      2 0.0637   0.239
 ## 4      3 0.00967  0.178
-## 5      4 0.00784  0.171
-## 6      5 0.00712  0.166
+## 5      4 0.00784  0.175
+## 6      5 0.00712  0.168
 \end{verbatim}
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.
@@ -3352,12 +3205,12 @@ Once we have selected \(\alpha\), the tree is pruned. Sometimes the CP with the 
 ## # A tibble: 6 x 3
 ##   nsplit       CP xerror
 ##    <dbl>    <dbl>  <dbl>
-## 1     19 0.000837  0.150
-## 2     22 0.000759  0.151
-## 3     16 0.00105   0.151
-## 4     24 0.000695  0.151
-## 5     18 0.000910  0.151
-## 6     17 0.000913  0.152
+## 1     17 0.000913  0.147
+## 2     18 0.000910  0.148
+## 3     14 0.00119   0.149
+## 4     19 0.000837  0.149
+## 5     16 0.00105   0.149
+## 6     15 0.00116   0.149
 \end{verbatim}
 
 The SOA will give you code to find the lowest CP value such as below. This may or may not be useful depending on if they are asking for predictive performance or interpretability.
@@ -3511,8 +3364,8 @@ Boosting always uses the original training data and iteratively fits models to t
 \hypertarget{random-forests}{%
 \section{Random Forests}\label{random-forests}}
 
-\hypertarget{model-form-3}{%
-\subsection{Model form}\label{model-form-3}}
+\hypertarget{model-form-2}{%
+\subsection{Model form}\label{model-form-2}}
 
 A random forest is the most common example of bagging. As the name implies, a forest is made up of \emph{trees}. Seperate trees are fit to sampled datasets. For random forests, there is one minor modification: in order to make each model even more different, each tree selects a \emph{random subset of variables}.
 
@@ -3901,11 +3754,19 @@ ISLR 8.2.3 Boosting &\tabularnewline
 \end{longtable}
 
 \hypertarget{exercises-1}{%
-\subsection{Exercises}\label{exercises-1}}
+\section{Exercises}\label{exercises-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ExamPAData)}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
 
 Run this code on your computer to answer these exercises.
 
-\textbf{1. RF with \texttt{randomForest}}
+\hypertarget{rf-with-randomforest}{%
+\subsection{\texorpdfstring{1. RF with \texttt{randomForest}}{1. RF with randomForest}}\label{rf-with-randomforest}}
 
 (Part 1 of 2)
 
@@ -3928,23 +3789,16 @@ There is a problem: all of the predictions are coming out to be 1. Find out why 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 2 x 2
-##   target     n
-##   <fct>  <int>
-## 1 0       1811
-## 2 1      98189
-\end{verbatim}
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(caret)}
+\KeywordTok{library}\NormalTok{(randomForest)}
 \NormalTok{index <-}\StringTok{ }\KeywordTok{createDataPartition}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ df}\OperatorTok{$}\NormalTok{target, }\DataTypeTok{p =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{list =}\NormalTok{ F)}
 
 \NormalTok{train <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{slice}\NormalTok{(index)}
 \NormalTok{test <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{slice}\NormalTok{(}\OperatorTok{-}\NormalTok{index)}
 
-\NormalTok{k =}\StringTok{ }\FloatTok{0.1}
+\NormalTok{k =}\StringTok{ }\FloatTok{0.5}
 \NormalTok{cutoff=}\KeywordTok{c}\NormalTok{(k,}\DecValTok{1}\OperatorTok{-}\NormalTok{k) }
 
 \NormalTok{model <-}\StringTok{ }\KeywordTok{randomForest}\NormalTok{(}
@@ -4017,7 +3871,8 @@ Now up-sample the minority class and repeat the same procedure.
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{2. RF tuning with \texttt{caret}}
+\hypertarget{rf-tuning-with-caret}{%
+\subsection{\texorpdfstring{2. RF tuning with \texttt{caret}}{2. RF tuning with caret}}\label{rf-tuning-with-caret}}
 
 The best practice of tuning a model is with cross-validation. This can only be done in the \texttt{caret} library. If the SOA asks you to use \texttt{caret}, they will likely ask you a question related to cross validation as below.
 
@@ -4025,7 +3880,6 @@ An actuary has trained a predictive model and chosen the best hyperparameters, c
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(caret)}
 \KeywordTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
 \CommentTok{#Take only 1000 records }
 \CommentTok{#Uncomment this when completing this exercise}
@@ -4062,27 +3916,47 @@ An actuary has trained a predictive model and chosen the best hyperparameters, c
 \end{Shaded}
 
 \hypertarget{tuning-a-gbm-with-caret}{%
-\subsubsection{\texorpdfstring{Tuning a GBM with \texttt{caret}}{Tuning a GBM with caret}}\label{tuning-a-gbm-with-caret}}
+\subsection{\texorpdfstring{3. Tuning a GBM with \texttt{caret}}{3. Tuning a GBM with caret}}\label{tuning-a-gbm-with-caret}}
 
 If the SOA asks you to tune a GBM, they will need to give you starting hyperparameters which are close to the ``best'' values due to how slow the Prometric computers are. Another possibility is that they pre-train a GBM model object and ask that you use it.
 
-This example looks at 27 combinations of hyper parameters.
+This example looks at 135 combinations of hyper parameters.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{index <-}\StringTok{ }\KeywordTok{createDataPartition}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ health_insurance}\OperatorTok{$}\NormalTok{charges, }
+                             \DataTypeTok{p =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{list =}\NormalTok{ F)}
+\NormalTok{train <-}\StringTok{ }\NormalTok{health_insurance }\OperatorTok{%>%}\StringTok{ }\KeywordTok{slice}\NormalTok{(index)}
+\NormalTok{test <-}\StringTok{ }\NormalTok{health_insurance }\OperatorTok{%>%}\StringTok{ }\KeywordTok{slice}\NormalTok{(}\OperatorTok{-}\NormalTok{index)}
+
 \NormalTok{tunegrid <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}
-    \DataTypeTok{interaction.depth =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{),}
-    \DataTypeTok{n.trees =} \KeywordTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{100}\NormalTok{), }
-    \DataTypeTok{shrinkage =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.001}\NormalTok{, }\FloatTok{0.0001}\NormalTok{),}
-    \DataTypeTok{n.minobsinnode =} \DecValTok{20}\NormalTok{)}
+    \DataTypeTok{interaction.depth =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{),}
+    \DataTypeTok{n.trees =} \KeywordTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{500}\NormalTok{), }
+    \DataTypeTok{shrinkage =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.0001}\NormalTok{),}
+    \DataTypeTok{n.minobsinnode =} \KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\NormalTok{    )}
 \KeywordTok{nrow}\NormalTok{(tunegrid)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 135
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{control <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}
+  \DataTypeTok{method=}\StringTok{'repeatedcv'}\NormalTok{, }
+  \DataTypeTok{number=}\DecValTok{5}\NormalTok{, }
+  \DataTypeTok{p =} \FloatTok{0.8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gbm <-}\StringTok{ }\KeywordTok{train}\NormalTok{(charges }\OperatorTok{~}\StringTok{ }\NormalTok{bmi }\OperatorTok{+}\StringTok{ }\NormalTok{age }\OperatorTok{+}\StringTok{ }\NormalTok{sex }\OperatorTok{+}\StringTok{ }\NormalTok{region,}
-            \DataTypeTok{data =}\NormalTok{ health_insurance_train,}
+\NormalTok{gbm <-}\StringTok{ }\KeywordTok{train}\NormalTok{(charges }\OperatorTok{~}\StringTok{ }\NormalTok{.,}
+            \DataTypeTok{data =}\NormalTok{ train,}
             \DataTypeTok{method=}\StringTok{'gbm'}\NormalTok{, }
             \DataTypeTok{tuneGrid=}\NormalTok{tunegrid, }
             \DataTypeTok{trControl=}\NormalTok{control,}
@@ -4092,90 +3966,71 @@ This example looks at 27 combinations of hyper parameters.
 \end{Highlighting}
 \end{Shaded}
 
-The output shows the RMSE for each of the 27 models tested.
+The output shows the RMSE for each of the 135 models tested.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{trellis.par.set}\NormalTok{(}\KeywordTok{caretTheme}\NormalTok{())}
-\KeywordTok{plot}\NormalTok{(gbm)}
-\end{Highlighting}
-\end{Shaded}
+(Part 1 of 3)
 
-The \texttt{summary.gbm} function, which R understands from the \texttt{summary} function, shows the variable importance. The most predictive feature is \texttt{age}, followed by \texttt{bmi}.
+Identify the hyperpameter combination that has the lowest training error.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(gbm, }\DataTypeTok{plotit =}\NormalTok{ F) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as_tibble}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
+(Part 2 of 3)
 
-\hypertarget{solutions}{%
-\subsubsection{Solutions}\label{solutions}}
-
-Q1. Part 1 of 2: Set the cutoff to be lower (i.e., 0.1)
-
-Q1. Part 2 of 2: The Accuracy and Kappa are higher (better) for the undersampled vs.~the original data.The up-sampled model is best. With a cutoff of 0.1, accuracy is 0.66 and Kapp 0.32
-
-Q2. (Hint) Look at \texttt{?trainControl}
-
-A bootstrap sample is when samples are taken of the observations with replacement. The default code was using \texttt{method\ =\ boot}, which is using a bootstrap. It is strange that this only repeated twice, and each time the data is only train on \texttt{p\ =\ 0.2} percent (twenty percent!) of the training data. Because the training data is small, \texttt{n} is effectively smaller, which makes the model worse. Additionally, because there are only two bootstrap replications, there is high variance in this estimate.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{control <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}
-  \DataTypeTok{method=}\StringTok{'boot'}\NormalTok{, }
-  \DataTypeTok{number=}\DecValTok{2}\NormalTok{, }
-  \DataTypeTok{p =} \FloatTok{0.2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-This is what the default error is
-
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
 \tightlist
 \item
-  TRAIN 2581.203
-\item
-  TEST 5284.176
-\end{itemize}
-
-A good thought is to increase the number of bootstrap samples to 10 and to increase the training percentage size to the default of 0.75. This, however, results in \textbf{worse} performance on the test set.
+  Suppose that the optimization measure was RMSE. The below table shows the results from three models. Explain why some sets of parameters have better RMSE than the others.
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{control <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}
-  \DataTypeTok{method=}\StringTok{'boot'}\NormalTok{, }
-  \DataTypeTok{number=}\DecValTok{10}\NormalTok{, }
-  \DataTypeTok{p =} \FloatTok{0.75}\NormalTok{)}
+\NormalTok{results <-}\StringTok{ }\NormalTok{gbm}\OperatorTok{$}\NormalTok{results }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(RMSE)}
+\NormalTok{top_result <-}\StringTok{ }\NormalTok{results }\OperatorTok{%>%}\StringTok{ }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{param_rank =} \DecValTok{1}\NormalTok{)}
+\NormalTok{tenth_result <-}\StringTok{ }\NormalTok{results }\OperatorTok{%>%}\StringTok{ }\KeywordTok{slice}\NormalTok{(}\DecValTok{10}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{param_rank =} \DecValTok{10}\NormalTok{)}
+\NormalTok{twenty_seventh_result <-}\StringTok{ }\NormalTok{results }\OperatorTok{%>%}\StringTok{ }\KeywordTok{slice}\NormalTok{(}\DecValTok{135}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{param_rank =} \DecValTok{135}\NormalTok{)}
+
+\KeywordTok{rbind}\NormalTok{(top_result, tenth_result, twenty_seventh_result) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(param_rank, }\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{itemize}
+\begin{verbatim}
+##   param_rank shrinkage interaction.depth n.minobsinnode n.trees      RMSE
+## 1          1     1e-01                 5             30     100  4396.814
+## 2         10     1e-01                10             30     300  4630.433
+## 3        135     1e-04                 1            100     100 12108.185
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
 \tightlist
 \item
-  TRAIN 2580.682
-\item
-  TEST 5286.089
-\end{itemize}
-
-The \textbf{best} method is to use repeated cross-validation. This makes the most use of the data by training over 9-10ths of the observations and evaluating the error on the remaining 1/10th. This estimate of the error is important because it's how \texttt{caret} selects the optimal number of trees to use in the random forest.
+  The partial dependence of \texttt{bmi} onto \texttt{charges} makes it appear as if \texttt{charges} increases monotonically as \texttt{bmi} increases.
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{control <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}
-  \DataTypeTok{method=}\StringTok{'repeatedcv'}\NormalTok{, }
-  \DataTypeTok{number=}\DecValTok{10}\NormalTok{, }
-  \DataTypeTok{p =} \FloatTok{0.8}\NormalTok{)}
+\NormalTok{pdp}\OperatorTok{::}\KeywordTok{partial}\NormalTok{(gbm, }\DataTypeTok{pred.var =} \StringTok{"bmi"}\NormalTok{, }\DataTypeTok{grid.resolution =} \DecValTok{20}\NormalTok{, }\DataTypeTok{plot =}\NormalTok{ T)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{itemize}
-\tightlist
-\item
-  TRAIN 2600.809
-\item
-  TEST 5280.758
-\end{itemize}
+\includegraphics{06-tree-based-models_files/figure-latex/unnamed-chunk-32-1.pdf}
+
+However, when we add in the \texttt{ice} curves, we see that there is something else going on. Explain this graph. Why are there two groups of lines?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pdp}\OperatorTok{::}\KeywordTok{partial}\NormalTok{(gbm, }\DataTypeTok{pred.var =} \StringTok{"bmi"}\NormalTok{, }\DataTypeTok{grid.resolution =} \DecValTok{30}\NormalTok{, }\DataTypeTok{plot =}\NormalTok{ T, }\DataTypeTok{ice =}\NormalTok{ T, }\DataTypeTok{alpha =} \FloatTok{0.1}\NormalTok{, }\DataTypeTok{palette =} \StringTok{"viridis"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{06-tree-based-models_files/figure-latex/unnamed-chunk-33-1.pdf}
+
+\hypertarget{answers-to-exercises-1}{%
+\section{Answers to Exercises}\label{answers-to-exercises-1}}
+
+Answers to these exercises are available at \href{https://www.exampa.net/pricing}{ExamPA.net}.
 
 \hypertarget{practice-exams}{%
 \chapter{Practice Exams}\label{practice-exams}}
@@ -4195,6 +4050,26 @@ Current practice exams and video solutions:
 \item
   A tutorial on data manipulation
 \end{itemize}
+
+(Coming next week)
+- Student Success Video Solution
+- June 2019 Exam Video Solution
+
+\hypertarget{references}{%
+\chapter{References}\label{references}}
+
+Burkov, Andriy. 2019. \emph{The Hundred-Page Machine Learning Book.} \url{http://themlbook.com/}
+
+Goldburd, Mark et al.~2016.\emph{Generalized Linear Models for Insurance Rating: CAS Monograph Series Number 5}. \url{https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf}
+
+Hastie, Trevor, et al.~2002. \emph{The Elements of Statistical Learning}. Print.
+
+James, Gareth, et al.~2017. \emph{An Introduction to Statistical Learning}.
+\url{http://faculty.marshall.usc.edu/gareth-james/ISL/ISLR\%20Seventh\%20Printing.pdf}
+
+Rigollet, Philippe (2017). \emph{Lecture 21: Generalized Linear Models}. Video. \url{https://www.youtube.com/watch?v=X-ix97pw0xY\&t=899s}
+
+Wickham, Hadley. 2019. \emph{R for Data Science}. \url{https://r4ds.had.co.nz/}
 
 \bibliography{book.bib,packages.bib}
 
