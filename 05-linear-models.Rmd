@@ -5,6 +5,7 @@ output:
 ---
 
 ```{r message = F}
+set.seed(1)
 library(ggplot2)
 theme_set(theme_bw())
 ```
@@ -37,39 +38,34 @@ $$
 
 The target is 
 
-$$\mathbf{Y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}$$
+$$\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}$$
 This represents the *unknown* quantity that we want to be able to predict.  In the health care costs example, $y_1$ would be the costs of the first patient, $y_2$ the costs of the second patient, and so forth.  The variables $x_{11}$ and $x_{12}$ might represent the first patient's age and sex respectively, where $x_{i1}$ is the patient's age, and $x_{i2} = 1$ if the ith patient is male and 0 if female.
 
-Machine learning is about using $\mathbf{X}$ to predict $\mathbf{y}$. We call this "y-hat", or simply the prediction.  This is based on a function of the data $X$.
+Machine learning is about using $X$ to predict $Y$. We call this "y-hat", or simply the prediction.  This is based on a function of the data $X$.
 
-$$\mathbf{\hat{Y}} = f(\mathbf{X}) = \begin{pmatrix} \hat{y_1} \\ \hat{y_2} \\ \hat{y_3} \end{pmatrix}$$
+$$\hat{Y} = f(X)$$
 
-
-This is almost never going to happen perfectly, and so there is always an error term, $\mathbf{\epsilon}$.  This can be made smaller, but is never exactly zero.  
+This is almost never going to happen perfectly, and so there is always an error term, $\epsilon$.  This can be made smaller, but is never exactly zero.  
 
 $$
-\mathbf{\hat{Y}} + \mathbf{\epsilon} = f(\mathbf{X}) + \mathbf{\epsilon}
+\hat{Y} + \epsilon = f(X) + \epsilon
 $$
 
 In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict a person's health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
 
 ## Ordinary least squares (OLS)
 
-The type of model used refers to the class of function of $f$.  If $f$ is linear, then we are using a linear model.  If $f$ is non-parametric (does not have input parameters), then it is non-parametric modeling.  Linear models are linear in the parameters, $\beta$.
+The type of model used refers to the class of function of $f$.  If $f$ is linear, then we are using a linear model.  Linear models are linear in the parameters, $\beta$.
 
-We have the data $\mathbf{X}$ and the target $\mathbf{y}$, where all of the y's are real numbers, or $y_i \in \mathbb{R}$.
+We observe the data $X$ and the want to predict the target $Y$.
 
-We want to find a $\mathbf{\beta}$ so that 
+We find a $\mathbf{\beta}$ so that 
 
 $$
-\mathbf{\hat{Y}} = \mathbf{X} \mathbf{\beta}
+\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p
 $$
 
 Which means that each $y_i$ is a linear combination of the variables $x_1, ..., x_p$, plus a constant $\beta_0$ which is called the *intercept* term.  
-
-$$
-y_i = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p
-$$
 
 In the one-dimensional case, this creates a line connecting the points.  In higher dimensions, this creates a hyperplane.
 
@@ -86,6 +82,7 @@ tibble(y = rnorm(10, 0, 1),
 
 
 The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
+
 To solve for $\mathbf{\beta}$, we first need to define a *loss function*.  This allows us to compare how well a model is fitting the data.  The most commonly used loss function is the residual sum of squares (RSS), also called the *squared error loss* or the L2 norm.  When RSS is small, then the predictions are close to the actual values and the model is a good fit.  When RSS is large, the model is a poor fit.
 
 $$
@@ -96,7 +93,7 @@ When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 +
 
 You might be asking: why does this need to be the squared error?  Why not the absolute error, or the cubed error?  Technically, these could be used as well.  In fact, the absolute error (L1 norm) is useful in other models.  Taking the square has a number of advantages.  
 
-- It provides the same solution if we assume that the distribution of $\mathbf{Y}|\mathbf{X}$ is guassian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
+- It provides the same solution if we assume that the distribution of $Y|X$ is guassian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
 - Empirically it has been shown to be less likely to overfit as compared to other loss functions
 
 ## Example
@@ -126,17 +123,18 @@ model <- lm(data = health_insurance, formula = charges ~ bmi + age)
 
 The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `t value` tells you how "big" this error really is based on standard deviations.  A larger `t value` implies a low probability of the null hypothesis being accepted saying that the coefficient is zero.  This is the same as having a p-value (`Pr (>|t|))`) being close to zero.
 
-The little `*`, `**`, `***` indicate that the variable is either somewhat significant, significant, or highly significant.  "significance" here means that there is a low probability of the coefficient being that size if there were *no actual casual relationship*, or if the data was random noise.
+The little `*`, `**`, `***` indicate that the variable is either somewhat significant, significant, or highly significant.  "significance" here means that there is a low probability of the coefficient being that size (or larger) if there were *no actual casual relationship*, or if the data was random noise.
 
 ```{r}
 summary(model)
 ```
 
-When evaluating model performance, you should not rely on the `summary` alone as this is based on the training data.  To look at performance, test the model on validation data.  This can be done by a) using a hold out set, or b) using cross-validation, which is even better.
+When evaluating model performance, you should not rely on the `summary` alone as this is based on the training data.  To look at performance, test the model on validation data.  This can be done by either using a hold out set, or using cross-validation, which is even better.
 
 Let's create an 80% training set and 20% testing set.  You don't need to worry about understanding this code as the exam will always give this to you.
 
 ```{r message = F}
+set.seed(1)
 library(caret)
 #create a train/test split
 index <- createDataPartition(y = health_insurance$charges, 
@@ -212,13 +210,13 @@ coefficients(model)
 
 Translating the above into an equation we have
 
-$$\hat{y_i} = -6,424.80 + 332.97 \space\text{bmi} + 241.93\space \text{age}$$
+$$\hat{y_i} = -4,526 + 287 \space\text{bmi} + 228\space \text{age}$$
 
 For example, if a patient has `bmi = 27.9` and `age = 19` then predicted value is 
 
-$$\hat{y_1} = -6,424.80 + (332.97)(27.9) + (241.93)(19) = 7,461.73$$
+$$\hat{y_1} = 4,526 + (287)(27.9) + (228)(19) = 16,865$$
 
-This model structure implies that each of the variables $\mathbf{x_1}, ..., \mathbf{x_p}$ each change the predicted $\mathbf{\hat{y}}$.  If $x_{ij}$ increases by one unit, then $y_i$ increases by $\beta_j$ units, regardless of what happens to all of the other variables.  This is one of the main assumptions of linear models: *variable indepdendence*.  If the variables are correlated, say, then this assumption will be violated.  
+This model structure implies that each of the variables $x_1, ..., x_p$ each change the predicted $\hat{y}$.  If $x_{ij}$ increases by one unit, then $y_i$ increases by $\beta_j$ units, regardless of what happens to all of the other variables.  This is one of the main assumptions of linear models: *variable indepdendence*.  If the variables are correlated, say, then this assumption will be violated.  
 
 
 | Readings |  | 
@@ -232,29 +230,41 @@ This model structure implies that each of the variables $\mathbf{x_1}, ..., \mat
 The linear model that we have considered up to this point, what we called "OLS", assumes that the response is a linear combination of the predictor variables.  For an error term $\epsilon_i \sim N(0,\sigma^2)$, this is assumes that
 
 $$
-\mathbf{Y} = \mathbf{X} =  \mathbf{\beta} + \mathbf{\epsilon}
+Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
 $$
 
-Another way of saying this is that "after we adjust for the data, the error is normally distributed and the variance is constant."  If $\sigma^2 \mathbf{I}$ is covariance matrix, then
+Another way of saying this is that if $X$ is the matrix made up of columns $X_1, ..., X_p$, then
 
 $$
-\mathbf{Y}|\mathbf{X} \sim N( \mathbf{X} \mathbf{\beta}, \sigma^2 \mathbf{I})
+\mathbf{Y} = \mathbf{X} \mathbf{\beta} + \mathbf{\epsilon}
 $$
+
+Another way of saying this is that "after we adjust for the data, the error is normally distributed and the variance is constant."  If $I$ is an n-by-in identity matrix, and $\sigma^2 I$ is the covariance matrix, then
+
+$$
+\mathbf{Y|X} \sim N( \mathbf{X \beta}, \mathbf{\sigma^2} I)
+$$
+
+******
+
+Because this notation is getting too cumbersome, we're going to stop using bold letters to denote matrices and just use non-bold characters.  From now on, $\mathbf{X}$ is the same as $X$.
+
+******
 
 These assumptions can be expressed in two parts:
 
-1. A *random component*: The response variable $\mathbf{Y|X}$ is normally distributed with mean $\mu = \mu(\mathbf{X}) = E(\mathbf{Y|X})$
+1. A *random component*: The response variable $Y|X$ is normally distributed with mean $\mu = \mu(X) = E(Y|X)$
 
-2. A link between the response and the covariates $\mu(\mathbf{X}) = \mathbf{X\beta}$
+2. A link between the response and the covariates $\mu(X) = X\beta$
 
 
 ## The *generalized* linear model
 
 We relax these two assumptions by saying that the model is defined by 
 
-1. A random component: $\mathbf{Y|X} \sim \text{some exponential family distribution}$
+1. A random component: $Y|X \sim \text{some exponential family distribution}$
 
-2. A *link function*: between the random component and $X$: $g(\mu(\mathbf{X})) = \mathbf{X\beta}$
+2. A *link function*: between the random component and $X$: $g(\mu(X)) = X\beta$
 
 The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
 
@@ -327,8 +337,8 @@ model = glm(formula = charges ~ age + sex + smoker,
 We see that `age`, `sex`, and `smoker` are all significant (p <0.01).  Reading off the coefficient signs, we see that claims
 
 - Increase as age increases
-- Are higher for men
-- Are slightly higher for patients wich children
+- Are higher for women
+- Are higher for smokers
 
 ```{r}
 model %>% tidy()
@@ -435,31 +445,27 @@ auto_claim %>%
 
 Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction.  We can also use an hypothesis test with a GLM to check this.  Simply include an interaction term and see if the coefficient is zero at the desired significance level.
 
-### Poisson Regression
+## Poisson Regression
 
-When the dependent variable is a count, such as the number of claims per month, Poisson regression is appropriate.  This requires that each claim is independent in that one claim will not make another claim more or less likely.  This means that the target variable is actually a rate, $\frac{\text{claims}}{\text{months}}$.  More generally, we call the months the *exposure*.
+When counting something, numbers can only be positive and increase by increments of 1.  Statistically, the name for this is a Poisson Process, which is a model for a serious of discrete events where the average time between events is known, called the "rate" $\lambda$, but the exact timing of events is unknown.  We could just fit a single rate for all observations, but this would often be a simplification.  For a time interval of length $m$, the expected number of events is $\lambda m$.  
 
-Let $m_i$ by the units of exposure and $y_i$ the target.  We use a log-link function to correct for skewness.
+By using a GLM, we can fit a different rate for each observation.  Because the response is a count, the appropriate response distribution is the Poisson.  
 
-$$ log(\frac{\hat{y_i}}{m_i}) = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
+$$Y_i|X_i \sim \text{Poisson}(\lambda_i m_i)$$
 
-By using the fact that $log(\frac{a}{b}) = log(a) - log(b)$ this turns into
+When all observations have the same exposure, $m = 1$.  When the mean of the data is far from the variance, an additional parameter known as the *dispersion parameter* is used.  A classic example is when modeling insurance claim counts which have a lot of zero claims.  Then the model is said to be an "over-dispersed Poisson" or "zero-inflated" model.
 
-$$log(\hat{y_i}) = log(m_i) + \beta_0 + \beta_1 x_1 + ... + \beta_p x_p$$
+## Offsets
 
-We call the $log(m_i)$ the `offset` term.  Notice that there is no coefficient (beta) on this value, because we already know what the impact will be.  
+In certain situations, it is convenient to include a constant term in the linear predictor.  This is the same as including a variable that has a coefficient equal to 1.  We call this an *offset*.
 
-In R, the code for this equation would be
+$$g(\mu) = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \text{offset}$$
 
-```{r eval = F}
-glm(y ~ offset(log(m)) + x, family=poisson(link=log) )
-```
-
-### Tweedie regression
+## Tweedie regression
 
 While this topic is briefly mentioned on the modules, the only R libraries which support Tweedie Regression (`statmod` and `tweedie`) are not on the syllabus, and so there is no way that the SOA could ask you to build a tweedie model. This means that you can be safely skip this section.
 
-### Stepwise subset selection
+## Stepwise subset selection
 
 In theory, we could test all possible combinations of variables and interaction terms.  This includes all $p$ models with one predictor, all p-choose-2 models with two predictors, all p-choose-3 models with three predictors, and so forth.  Then we take whichever model has the best performance as the final model.
 
@@ -493,7 +499,7 @@ A hybrid approach is to consider use both forward and backward selection.  This 
 |-------|---------|
 | [CAS Monograph 5 Chapter 2](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf) |  |
 
-### Advantages and disadvantages
+## Advantages and disadvantages
 
 There is usually at least one question on the PA exam which asks you to "list some of the advantages and disadvantages of using this particular model", and so here is one such list.  It is unlikely that the grader will take off points for including too many comments and so a good strategy is to include everything that comes to mind.
 
@@ -504,7 +510,6 @@ There is usually at least one question on the PA exam which asks you to "list so
 - Handles skewed data through different response distributions
 - Models the average response which leads to stable predictions on new data
 - Handles continuous and categorical data
-- Works well on small data sets
 
 **GLM Disadvantages**
 
@@ -531,7 +536,7 @@ We can use a special link function, known as the *standard logistic function*, *
 
 $$\mathbf{\hat{y}} = g^{-1}(\mathbf{X} \mathbf{\beta}) = \frac{1}{1 + e^{-\mathbf{X} \mathbf{\beta}}}$$
 
-```{r fig.cap="Standard Logistic Function", fig.height=4, fig.width=4, echo = F}
+```{r fig.cap="Standard Logistic Function", fig.height=4, fig.width=4, echo = F, fig.align='center'}
 tibble(x = -6:6,y = 1/(1 + exp(6:-6))) %>% 
   ggplot(aes(x,y)) + 
   geom_line(color = "red") + 
@@ -572,9 +577,15 @@ All of the variables except for the `CAR_TYPE` are highly significant.  The car 
 frequency %>% summary()
 ```
 
-There is no easy way of interpreting the coefficients when using a logit link function. The most inference that we can make is to note which variables are significant. 
+The signs of the coefficients tell if the probability of having a claim is either increasing or decreasing by each variable.  For example, the likelihood of an accident 
 
-- `CAR_USE`, `MARRIED`, `BLUEBOOK` are highly significant
+* Decreases as the age of the car increases
+* Is lower for men 
+* Is higher for sports cars and SUVs
+
+The p-values tell us if the variable is significant.
+
+- `Age`, `MarriedYes`, `CAR_USEPrivate`, `BLUEBOOK`, and `AreaUrban` are significant.
 - Certain values of `CAR_TYPE` are significant but others are not.
 
 The output is a predicted probability.  We can see that this is centered around a probability of about 0.5.  
@@ -654,8 +665,8 @@ A *confusion matrix* shows is a table that summarises how the model classifies e
 
 - No claims and predicted to not have claims - **True Negatives (TN) = 1,489**
 - Had claims and predicted to have claims - **True Positives (TP) = 59**
-- No claims but predited to have claims - **False Negatives (FP) = 22**
-- Had claims but predicted not to - **False Positives (FN) = 489**
+- No claims but predited to have claims - **False Positives (FP) = 22**
+- Had claims but predicted not to - **False Negatives (FN) = 489**
 
 ```{r}
 confusionMatrix(test$pred_zero_one,factor(test$target))$table
@@ -671,7 +682,7 @@ $$\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}$$
 
 $$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}$$
 
-The choice of using precision or recall depends on the relative cost of making a FP or a FN error.  If FP errors are expensive, then use precision; if FN errors are expensive, then use recall.
+The choice of using precision vs. recall depends on the relative cost of making a FP or a FN error.  If FP errors are expensive, then use precision; if FN errors are expensive, then use recall.  
 
 **Example A:** the model trying to detect a deadly disease, which only 1 out of every 1000 patient's survive without early detection.  Then the goal should be to optimize *recall*, because we would want every patient that has the disease to get detected.  
 
@@ -688,7 +699,6 @@ Fortunately, all of this is handled in a single function called `confusionMatrix
 ```{r}
 confusionMatrix(test$pred_zero_one,factor(test$target))
 ```
-
 
 ### Area Under the ROC Curv (AUC)
 
@@ -712,6 +722,16 @@ roc(test$target, preds, plot = T)
 If we just randomly guess, the AUC would be 0.5, which is represented by the 45-degree line.  A perfect model would maximize the curve to the upper-left corner.
 
 AUC is preferred over Accuracy when there are a lot more "true" classes than "false" classes, which is known as having **class imbalance*.  An example is bank fraud detection: 99.99% of bank transactions are "false" or "0" classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
+
+### Additional reading
+
+
+| Title | Source           |
+|---------|-----------------|
+| An Overview of Classification   | ISL 4.1 |
+| [Understanding AUC - ROC Curv](https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5#:~:targetText=What%20is%20AUC%20%2D%20ROC%20Curve%3F,capable%20of%20distinguishing%20between%20classes.)| Sarang Narkhede, Towards Data Science   |
+| [Precision vs. Recall](https://towardsdatascience.com/precision-vs-recall-386cf9f89488#:~:targetText=Precision%20and%20recall%20are%20two,correctly%20classified%20by%20your%20algorithm.)     | Shruti Saxena, Towards Data Science    |
+
 
 # Penalized Linear Models
 

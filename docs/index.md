@@ -2,7 +2,7 @@
 title: "Exam PA Study Manual"
 author: 
 - "Sam Castillo"
-date: "2019-11-22"
+date: "2019-11-23"
 github-repo: sdcastillo/PA-R-Study-Manual
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -22,7 +22,7 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 ## Get full access at [ExamPA.net](https://www.exampa.net/pricing) 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7-d85_h2QJ0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://player.vimeo.com/video/375155028" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 ******
 
