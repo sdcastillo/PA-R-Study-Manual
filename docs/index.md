@@ -64,16 +64,7 @@ Support: sam@exampa.net
 
 This book was written in [RMarkdown](https://rmarkdown.rstudio.com/) using [bookdown](https://bookdown.org/).  It is built from a github page, where updates can be sent to this page in minutes.  A big shout out to those who have made suggestions already: Erlan Wheeler, David Hill, Caden Collier, Jon Lai, Peter Schelble, and Abhinav Gadde.
 
-To submit suggestions, see the 20:00 mark of [this video](https://www.youtube.com/watch?v=dVqVscgwSpw).
-
-![](images/gitbook_pull_request.png)
-
-1.  Clicking the "edit" button at the top of this page
-2.  Signing in (or signing up) for github
-3.  Forking the repository
-4.  Submitting a pull request with the improvements.
-
-
+<iframe src="https://player.vimeo.com/video/375173977?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 
 # The exam
