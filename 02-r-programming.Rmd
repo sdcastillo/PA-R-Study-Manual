@@ -79,7 +79,7 @@ character <- "The"
 character_vector <- c("The", "Quick")
 ```
 
-Characters can be combined with the `paste()` function.
+Character vectors can be combined with the `paste()` function.
 
 ```{r}
 a <- "The"
