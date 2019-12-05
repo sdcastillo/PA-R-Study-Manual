@@ -266,7 +266,7 @@ Just as the name implies, GLMs are more *general* in that they are more flexible
 $$g(\mu(X)) = X\beta$$
 where $g$ is called the *link function* and $\mu = E[Y|X]$.
 
-In words, this is saying that each observation follows *some type of exonential distrubution* (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function.  Additionally, there is a *dispersion* parameter, is more more info that is needed here.  For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf).
+In words, this is saying that each observation follows *some type of exonential distrubution* (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function.  Additionally, there is a *dispersion* parameter, but that is more more info that is needed here.  For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf).
 
 The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
 
@@ -386,7 +386,7 @@ Recall that a GLM has two parts:
 2. A **link function**: between the random component and the covariates: $g(\mu(X)) = X\beta$ where $\mu = E[Y|X]$
 
 
-We create a function that takes in $X$ and returns a gaussian random variable with mean equal to the inverse link of $X$.  If we say that the link is the log, then the inverse link is the exponent.
+Using this definition, we create a function that takes in data $x$ and returns a guassian random variable that has mean equal to the inverse link, which in the case of a log link is the exponent.  We add 10 to $x$ so that the values will always be positive, as will be described later on.
 
 ```{r}
 sim_norm <- function(x) {
@@ -394,7 +394,7 @@ sim_norm <- function(x) {
 }
 ```
 
-The values of $X$ do not need to be normal.  The above assumption is merely that the mean of the response $Y$ is related to $X$ through the link function, `mean = exp(10 + x)`, and that the distribution is normal.  For illustration, here we use $X$'s from a uniform distribution.
+The values of $X$ do not need to be normal.  The above assumption is merely that the mean of the response $Y$ is related to $X$ through the link function, `mean = exp(10 + x)`, and that the distribution is normal.  This has been accomplished with `rnorm` already.  For illustration, here we use $X$'s from a uniform distribution.
 
 ```{r}
 data <- tibble(x = runif(1000)) %>% 

@@ -284,7 +284,7 @@ Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
 </ol>
 <p><span class="math display">\[g(\mu(X)) = X\beta\]</span>
 where <span class="math inline">\(g\)</span> is called the <em>link function</em> and <span class="math inline">\(\mu = E[Y|X]\)</span>.</p>
-<p>In words, this is saying that each observation follows <em>some type of exonential distrubution</em> (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a <em>dispersion</em> parameter, is more more info that is needed here. For an explanation, see <a href="https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf">Ch. 2.2 of CAS Monograph 5</a>.</p>
+<p>In words, this is saying that each observation follows <em>some type of exonential distrubution</em> (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a <em>dispersion</em> parameter, but that is more more info that is needed here. For an explanation, see <a href="https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf">Ch. 2.2 of CAS Monograph 5</a>.</p>
 <p>The possible combinations of link functions and distribution families are summarized nicely on <a href="https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function">Wikipedia</a>.</p>
 <div class="figure"><span id="fig:unnamed-chunk-14"></span>
 <img src="images/glm_links.png" alt="Distribution-Link Function Combinations" width="804" />
@@ -380,16 +380,16 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <p>However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves. In each of these examples, the model will be a perfect fit.</p>
 <div id="gaussian-response-with-log-link" class="section level3">
 <h3><span class="header-section-number">9.5.1</span> Gaussian Response with Log Link</h3>
-<p>The GLM consists of two parts:</p>
+<p>Recall that a GLM has two parts:</p>
 <ol style="list-style-type: decimal">
 <li><p>A <strong>random component</strong>: <span class="math inline">\(Y|X \sim \text{some exponential family distribution}\)</span></p></li>
-<li><p>A <strong>link function</strong>: between the random component and the covariates: <span class="math inline">\(g(\mu(X)) = X\beta\)</span></p></li>
+<li><p>A <strong>link function</strong>: between the random component and the covariates: <span class="math inline">\(g(\mu(X)) = X\beta\)</span> where <span class="math inline">\(\mu = E[Y|X]\)</span></p></li>
 </ol>
-<p>We create a function that takes in <span class="math inline">\(X\)</span> and returns a gaussian random variable with mean equal to the inverse link of <span class="math inline">\(X\)</span>. If we say that the link is the log, then the inverse link is the exponent.</p>
+<p>Using this definition, we create a function that takes in data <span class="math inline">\(x\)</span> and returns a guassian random variable that has mean equal to the inverse link, which in the case of a log link is the exponent. We add 10 to <span class="math inline">\(x\)</span> so that the values will always be positive, as will be described later on.</p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">sim_norm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb183-2" title="2">  <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="kw">exp</span>(<span class="dv">10</span> <span class="op">+</span><span class="st"> </span>x), <span class="dt">sd =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb183-3" title="3">}</a></code></pre></div>
-<p>The values of <span class="math inline">\(X\)</span> do not need to be normal. The above assumption is merely that the mean of the response <span class="math inline">\(Y\)</span> is related to <span class="math inline">\(X\)</span> through the link function, <code>mean = exp(10 + x)</code>, and that the distribution is normal. For illustration, here we use <span class="math inline">\(X\)</span>’s from a uniform distribution.</p>
+<p>The values of <span class="math inline">\(X\)</span> do not need to be normal. The above assumption is merely that the mean of the response <span class="math inline">\(Y\)</span> is related to <span class="math inline">\(X\)</span> through the link function, <code>mean = exp(10 + x)</code>, and that the distribution is normal. This has been accomplished with <code>rnorm</code> already. For illustration, here we use <span class="math inline">\(X\)</span>’s from a uniform distribution.</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">1000</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb184-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a></code></pre></div>
 <p>We already know what the answer is: a gaussian response with a log link. We fit a GLM and see a perfect fit.</p>

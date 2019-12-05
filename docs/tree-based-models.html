@@ -347,11 +347,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##   nsplit      CP xerror
 ##    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
 ## 1      0 0.620    1.00 
-## 2      1 0.144    0.383
+## 2      1 0.144    0.382
 ## 3      2 0.0637   0.240
-## 4      3 0.00967  0.180
-## 5      4 0.00784  0.174
-## 6      5 0.00712  0.169</code></pre>
+## 4      3 0.00967  0.181
+## 5      4 0.00784  0.178
+## 6      5 0.00712  0.170</code></pre>
 <p>As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.</p>
 <p><img src="06-tree-based-models_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>To optimize performance, choose the number of splits which has the lowest error. Often, though, the goal of using a decision tree is to create a simple model. In this case, we can err or the side of a lower <code>nsplit</code> so that the tree is shorter and more interpretable. All of the questions on so far have only used decision trees for interpretability, and a different model method has been used when predictive power is needed.</p>
@@ -364,12 +364,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 6 x 3
 ##   nsplit       CP xerror
 ##    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-## 1     17 0.000913  0.150
-## 2     18 0.000910  0.150
-## 3     19 0.000837  0.151
-## 4     15 0.00116   0.152
-## 5     16 0.00105   0.152
-## 6     14 0.00119   0.154</code></pre>
+## 1     22 0.000759  0.152
+## 2     24 0.000695  0.153
+## 3     25 0.000681  0.153
+## 4     14 0.00119   0.153
+## 5     13 0.00134   0.153
+## 6     15 0.00116   0.153</code></pre>
 <p>The SOA will give you code to find the lowest CP value such as below. This may or may not be useful depending on if they are asking for predictive performance or interpretability.</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1">pruned_tree &lt;-<span class="st"> </span><span class="kw">prune</span>(tree,</a>
 <a class="sourceLine" id="cb264-2" title="2">                     <span class="dt">cp =</span> tree<span class="op">$</span>cptable[<span class="kw">which.min</span>(tree<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]), <span class="st">&quot;CP&quot;</span>])</a></code></pre></div>
