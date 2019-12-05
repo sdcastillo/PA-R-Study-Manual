@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-11-24}
+    \date{2019-12-04}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -2118,7 +2118,7 @@ The linear model that we have considered up to this point, what we called ``OLS'
 Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
 \]
 
-Another way of saying this is that if \(X\) is the matrix made up of columns \(X_1, ..., X_p\), then
+In matrix notation, if \(X\) is the matrix made up of columns \(X_1, ..., X_p\), then
 
 \[
 \mathbf{Y} = \mathbf{X} \mathbf{\beta} + \mathbf{\epsilon}
@@ -2139,21 +2139,28 @@ These assumptions can be expressed in two parts:
 \item
   A \emph{random component}: The response variable \(Y|X\) is normally distributed with mean \(\mu = \mu(X) = E(Y|X)\)
 \item
-  A link between the response and the covariates \(\mu(X) = X\beta\)
+  A link between the response and the covariates (also known as the systemic component) \(\mu(X) = X\beta\)
 \end{enumerate}
 
-\hypertarget{the-generalized-linear-model}{%
-\section{\texorpdfstring{The \emph{generalized} linear model}{The generalized linear model}}\label{the-generalized-linear-model}}
+In words, this is saying that each observation follows a normal distribution which has a mean that is equal to the linear predictor.
 
-We relax these two assumptions by saying that the model is defined by
+\hypertarget{the-generalized-linear-model}{%
+\section{The generalized linear model}\label{the-generalized-linear-model}}
+
+Just as the name implies, GLMs are more \emph{general} in that they are more flexible. We relax these two assumptions by saying that the model is defined by
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   A random component: \(Y|X \sim \text{some exponential family distribution}\)
 \item
-  A \emph{link function}: between the random component and \(X\): \(g(\mu(X)) = X\beta\)
+  A link: between the random component and covariates:
 \end{enumerate}
+
+\[g(\mu(X)) = X\beta\]
+where \(g\) is called the \emph{link function} and \(\mu = E[Y|X]\).
+
+In words, this is saying that each observation follows \emph{some type of exonential distrubution} (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a \emph{dispersion} parameter, is more more info that is needed here. For an explanation, see \href{https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf}{Ch. 2.2 of CAS Monograph 5}.
 
 The possible combinations of link functions and distribution families are summarized nicely on \href{https://en.wikipedia.org/wiki/Generalized_linear_model\#Link_function}{Wikipedia}.
 
@@ -2205,7 +2212,9 @@ The word ``residual'' by itself actually means the ``raw residual'' in GLM langu
 
 This are not meaningful for GLMs with non-Gaussian response families because the distribution changes depending on the response family chosen. To adjust for this, we need the concept of \emph{deviance residual}.
 
-To paraphrase from \href{www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf}{this paper}
+To paraphrase from this paper from the University of Oxford:
+
+www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf
 
 Deviance is a way of assessing the adequacy of a model by comparing it with a more general
 model with the maximum number of parameters that can be estimated. It is referred to
@@ -2306,6 +2315,531 @@ The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i
 
 \includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-18-1.pdf}
 
+\hypertarget{combinations-of-link-and-response-family-examples}{%
+\section{Combinations of Link and Response Family Examples}\label{combinations-of-link-and-response-family-examples}}
+
+What is an example of when to use a log link with a guassian response? What about a Gamma family with an inverse link? What about an inverse Gaussian response and an inverse square link? As these questions illustrate, there are many combinations of link and response family. In the real world, a model rarely fits perfectly, and so often these choices come down to the judgement of the modeler - which model is the best fit and meets the business objectives?
+
+However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves. In each of these examples, the model will be a perfect fit.
+
+\hypertarget{gaussian-response-with-log-link}{%
+\subsection{Gaussian Response with Log Link}\label{gaussian-response-with-log-link}}
+
+Recall that a GLM has two parts:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  A \textbf{random component}: \(Y|X \sim \text{some exponential family distribution}\)
+\item
+  A \textbf{link function}: between the random component and the covariates: \(g(\mu(X)) = X\beta\) where \(\mu = E[Y|X]\)
+\end{enumerate}
+
+We create a function that takes in \(X\) and returns a gaussian random variable with mean equal to the inverse link of \(X\). If we say that the link is the log, then the inverse link is the exponent.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sim_norm <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{mean =} \KeywordTok{exp}\NormalTok{(}\DecValTok{10} \OperatorTok{+}\StringTok{ }\NormalTok{x), }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The values of \(X\) do not need to be normal. The above assumption is merely that the mean of the response \(Y\) is related to \(X\) through the link function, \texttt{mean\ =\ exp(10\ +\ x)}, and that the distribution is normal. For illustration, here we use \(X\)'s from a uniform distribution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{runif}\NormalTok{(}\DecValTok{1000}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map_dbl}\NormalTok{(sim_norm))}
+\end{Highlighting}
+\end{Shaded}
+
+We already know what the answer is: a gaussian response with a log link. We fit a GLM and see a perfect fit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{(}\DataTypeTok{link =} \StringTok{"log"}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ data)}
+
+\KeywordTok{summary}\NormalTok{(glm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = y ~ x, family = gaussian(link = "log"), data = data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -3.0004  -0.6964   0.0005   0.7266   3.0718  
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 1.000e+01  2.195e-06 4554982   <2e-16 ***
+## x           1.000e+00  3.085e-06  324117   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.067056)
+## 
+##     Null deviance: 1.2235e+11  on 999  degrees of freedom
+## Residual deviance: 1.0649e+03  on 998  degrees of freedom
+## AIC: 2906.8
+## 
+## Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(glm, }\DataTypeTok{cex =} \FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+\hypertarget{gaussian-response-with-inverse-link}{%
+\subsection{Gaussian Response with Inverse Link}\label{gaussian-response-with-inverse-link}}
+
+The same steps are repeated except the link function is now the inverse, \texttt{mean\ =\ 1/x}. We see that some values of \(Y\) are negative, which is ok.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sim_norm <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{1}\OperatorTok{/}\NormalTok{x, }\DecValTok{1}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{runif}\NormalTok{(}\DecValTok{10000}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map_dbl}\NormalTok{(sim_norm))}
+\KeywordTok{summary}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        x                   y           
+##  Min.   :0.0001064   Min.   :  -1.957  
+##  1st Qu.:0.2532864   1st Qu.:   1.259  
+##  Median :0.5028875   Median :   2.334  
+##  Mean   :0.5018599   Mean   :  10.214  
+##  3rd Qu.:0.7507694   3rd Qu.:   4.232  
+##  Max.   :0.9998552   Max.   :9394.790
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{(}\DataTypeTok{link =} \StringTok{"inverse"}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ data)}
+
+\KeywordTok{summary}\NormalTok{(glm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = y ~ x, family = gaussian(link = "inverse"), data = data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -3.5186  -0.6747   0.0105   0.6883   3.3764  
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 3.596e-08  2.587e-08    1.39    0.165    
+## x           9.998e-01  2.072e-04 4824.13   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.007483)
+## 
+##     Null deviance: 203905704  on 9999  degrees of freedom
+## Residual deviance:     10073  on 9998  degrees of freedom
+## AIC: 28457
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(glm, }\DataTypeTok{cex =} \FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\hypertarget{gaussian-response-with-identity-link}{%
+\subsection{Gaussian Response with Identity Link}\label{gaussian-response-with-identity-link}}
+
+And now the link is the identity, \texttt{mean\ =\ x}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sim_norm <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{mean =}\NormalTok{ x, }\DecValTok{1}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10000}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map_dbl}\NormalTok{(sim_norm))}
+
+\NormalTok{glm <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{(}\DataTypeTok{link =} \StringTok{"identity"}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ data)}
+
+\KeywordTok{summary}\NormalTok{(glm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = y ~ x, family = gaussian(link = "identity"), data = data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -4.4461  -0.6853   0.0129   0.6794   3.6661  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  0.01393    0.01010   1.379    0.168    
+## x            0.98236    0.01005  97.727   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.020901)
+## 
+##     Null deviance: 19957  on 9999  degrees of freedom
+## Residual deviance: 10207  on 9998  degrees of freedom
+## AIC: 28590
+## 
+## Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(glm, }\DataTypeTok{cex =} \FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-24-1.pdf}
+
+\hypertarget{gaussian-response-with-log-link-and-negative-values}{%
+\subsection{Gaussian Response with Log Link and Negative Values}\label{gaussian-response-with-log-link-and-negative-values}}
+
+By Gaussian response we say that the \emph{mean} of the response is Gaussian. The range of a normal random variable is \((-\infty, +\infty)\), which means that negative values are always possible. Now, if the mean is a large positive number, than negative values are much less likely but still possible: about 95\% of the observations will be within 2 standard deviations of the mean.
+
+We see below that there are some \(Y\) values which are negative.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sim_norm <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{mean =} \KeywordTok{exp}\NormalTok{(x), }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{runif}\NormalTok{(}\DecValTok{1000}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map_dbl}\NormalTok{(sim_norm))}
+\KeywordTok{summary}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        x                   y          
+##  Min.   :0.0000122   Min.   :-1.8709  
+##  1st Qu.:0.2354295   1st Qu.: 0.9815  
+##  Median :0.5055838   Median : 1.6969  
+##  Mean   :0.4968540   Mean   : 1.7275  
+##  3rd Qu.:0.7611768   3rd Qu.: 2.4854  
+##  Max.   :0.9993455   Max.   : 5.0233
+\end{verbatim}
+
+We can also see this from the histogram.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(y)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_density}\NormalTok{( }\DataTypeTok{fill =} \DecValTok{1}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{0.3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-26-1} \end{center}
+
+If we try to fit a GLM with a log link, there is an error.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{(}\DataTypeTok{link =} \StringTok{"log"}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ data)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{Error\ in\ eval(family\$initialize)\ :\ cannot\ find\ valid\ starting\ values:\ please\ specify\ some}
+
+This is because the domain of the natural logarithm only includes positive numbers, and we just tried to take the log of negative numbers.
+
+Our initial reaction might be to add some constant to each \(Y\), say 10 for instance, so that they are all positive. This does produce a model which is a good fit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{+}\StringTok{ }\DecValTok{10} \OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{(}\DataTypeTok{link =} \StringTok{"log"}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ data)}
+\KeywordTok{summary}\NormalTok{(glm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = y + 10 ~ x, family = gaussian(link = "log"), data = data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -3.1527  -0.6538  -0.0336   0.6753   3.3219  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 2.394232   0.005463  438.25   <2e-16 ***
+## x           0.134685   0.009158   14.71   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.987688)
+## 
+##     Null deviance: 1198.70  on 999  degrees of freedom
+## Residual deviance:  985.71  on 998  degrees of freedom
+## AIC: 2829.5
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(glm, }\DataTypeTok{cex =} \FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+We see that on average, the predictions are 10 higher than the target. This is no surprise since \(E[Y + 10] = E[Y] + 10\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y <-}\StringTok{ }\NormalTok{data}\OperatorTok{$}\NormalTok{y }
+\NormalTok{y_hat <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(glm, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+\KeywordTok{mean}\NormalTok{(y_hat) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9.99995
+\end{verbatim}
+
+But we see that the actual predictions are bad. If we were to loot at the R-squared, MAE, RMSE, or any other metric it would tell us the same story. This is because our GLM assumption is \textbf{not} that \(Y\) is related to the link function of \(X\), but that the \textbf{mean} of \(Y\) is.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ y, }\DataTypeTok{y_hat =}\NormalTok{ y_hat }\OperatorTok{-}\StringTok{ }\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(y, y_hat)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+One solution is to adjust the \(X\) which the model is based on. Add a constant term to \(X\) so that the mean of \(Y\) is larger, and hence \(Y\) is non zero. While is a viable approach in the case of only one predictor variable, with more predictors this would not be easy to do.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{runif}\NormalTok{(}\DecValTok{1000}\NormalTok{) }\OperatorTok{+}\StringTok{ }\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map_dbl}\NormalTok{(sim_norm))}
+\KeywordTok{summary}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        x               y        
+##  Min.   :10.00   Min.   :22028  
+##  1st Qu.:10.25   1st Qu.:28291  
+##  Median :10.52   Median :36893  
+##  Mean   :10.51   Mean   :38160  
+##  3rd Qu.:10.77   3rd Qu.:47441  
+##  Max.   :11.00   Max.   :59842
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{(}\DataTypeTok{link =} \StringTok{"log"}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ data)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(glm, }\DataTypeTok{cex =} \FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-31-1.pdf}
+
+A better approach may be to use an inverse link even though the data was generated from a log link. This is a good illustration of the saying ``all models are wrong, but some are useful'' in that the statistical assumption of the model is not correct but the model still works.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{runif}\NormalTok{(}\DecValTok{1000}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map_dbl}\NormalTok{(sim_norm))}
+\NormalTok{glm <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{(}\DataTypeTok{link =} \StringTok{"inverse"}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ data)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(glm, }\DataTypeTok{cex =} \FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-32-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(glm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = y ~ x, family = gaussian(link = "inverse"), data = data)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -3.10622  -0.63739  -0.00542   0.63167   3.06741  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  0.94957    0.03515   27.02   <2e-16 ***
+## x           -0.58667    0.04360  -13.46   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.9967997)
+## 
+##     Null deviance: 1218.78  on 999  degrees of freedom
+## Residual deviance:  994.82  on 998  degrees of freedom
+## AIC: 2838.7
+## 
+## Number of Fisher Scoring iterations: 6
+\end{verbatim}
+
+\hypertarget{gamma-response-with-log-link}{%
+\subsection{Gamma Response with Log Link}\label{gamma-response-with-log-link}}
+
+The gamma distribution with rate parameter \(\alpha\) and scale parameter \(\theta\) is density.
+
+\[f(y) = \frac{(y/\theta)^\alpha}{x \Gamma(\alpha)}e^{-x/\theta}\]
+
+The mean is \(\alpha\theta\).
+
+Let's use a gamma with shape 2 and scale 0.5, which has mean 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gammas <-}\StringTok{ }\KeywordTok{rgamma}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\DataTypeTok{shape=}\DecValTok{2}\NormalTok{, }\DataTypeTok{scale =} \FloatTok{0.5}\NormalTok{)}
+\KeywordTok{mean}\NormalTok{(gammas)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9873887
+\end{verbatim}
+
+We then generate random gamma values. Because the mean now depends on two paramters instead of one, which was just \(\mu\) in the Guassian case, we need to use a slightly different approach to simulate the random values. The link function here is seen in \texttt{exp(x)}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#random component}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\DataTypeTok{min=}\DecValTok{0}\NormalTok{, }\DataTypeTok{max=}\DecValTok{100}\NormalTok{)}
+
+\CommentTok{#relate Y to X with a log link function}
+\NormalTok{y <-}\StringTok{ }\NormalTok{gammas}\OperatorTok{*}\KeywordTok{exp}\NormalTok{(x)}
+
+\NormalTok{data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x, }\DataTypeTok{y  =}\NormalTok{ y)}
+\KeywordTok{summary}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        x                 y            
+##  Min.   : 0.2452   Min.   :0.000e+00  
+##  1st Qu.:27.0464   1st Qu.:4.946e+11  
+##  Median :51.0196   Median :1.057e+22  
+##  Mean   :51.0666   Mean   :2.531e+41  
+##  3rd Qu.:75.3442   3rd Qu.:4.239e+32  
+##  Max.   :99.9213   Max.   :2.693e+43
+\end{verbatim}
+
+As expected, the residual plots are all perfect because the model is perfect.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{family =} \KeywordTok{Gamma}\NormalTok{(}\DataTypeTok{link =} \StringTok{"log"}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ data)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(glm, }\DataTypeTok{cex =} \FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-35-1.pdf}
+
+If we had tried using an inverse instead of the log, the residual plots would look much worse.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{family =} \KeywordTok{Gamma}\NormalTok{(}\DataTypeTok{link =} \StringTok{"inverse"}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ data)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(glm, }\DataTypeTok{cex =} \FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in sqrt(crit * p * (1 - hh)/hh): NaNs produced
+
+## Warning in sqrt(crit * p * (1 - hh)/hh): NaNs produced
+\end{verbatim}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+\hypertarget{gamma-with-inverse-link}{%
+\section{Gamma with Inverse Link}\label{gamma-with-inverse-link}}
+
+With the inverse link, the mean has a factor \texttt{1/(x\ +\ 1)}. Note that we need to add 1 to x to avoid dividing by zero.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#relate Y to X with a log link function}
+\NormalTok{y <-}\StringTok{ }\NormalTok{gammas}\OperatorTok{*}\DecValTok{1}\OperatorTok{/}\NormalTok{(x }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{)}
+
+\NormalTok{data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x, }\DataTypeTok{y  =}\NormalTok{ y)}
+\KeywordTok{summary}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        x                 y            
+##  Min.   : 0.2452   Min.   :0.0005277  
+##  1st Qu.:27.0464   1st Qu.:0.0084840  
+##  Median :51.0196   Median :0.0167640  
+##  Mean   :51.0666   Mean   :0.0485119  
+##  3rd Qu.:75.3442   3rd Qu.:0.0365838  
+##  Max.   :99.9213   Max.   :1.7125489
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{x, }\DataTypeTok{family =} \KeywordTok{Gamma}\NormalTok{(}\DataTypeTok{link =} \StringTok{"inverse"}\NormalTok{), }\DataTypeTok{data =}\NormalTok{ data)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(glm, }\DataTypeTok{cex =} \FloatTok{0.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+\hypertarget{log-transforms-of-continuous-predictors}{%
+\section{Log transforms of continuous predictors}\label{log-transforms-of-continuous-predictors}}
+
+When a log link is used, taking the natural logs of continuous variables allows for the scale of each predictor to match the scale of the thing that they are predicting, the log of the mean of the response. In addition, when the distribution of the continuous variable is skewed, taking the log helps to make it more symmetric.
+
+After taking the log of a predictor, the interpretation becomes a \emph{power transform} of the original variable.
+
+For \(\mu\) the mean response,
+
+\[log(\mu) = \beta_0 + \beta_1 log(X)\]
+To solve for \(\mu\), take the exonent of both sides
+
+\[\mu = e^{\beta_1} e^{\beta_1 log(X)} = e^{\beta_0} X^{\beta_1}\]
+
 \hypertarget{reference-levels}{%
 \section{Reference levels}\label{reference-levels}}
 
@@ -2397,8 +2931,8 @@ The SOA's modules give an example with the using age and gender as below. This i
 
 \begin{figure}
 \centering
-\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-23-1.pdf}
-\caption{\label{fig:unnamed-chunk-23}Example of weak interaction}
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-43-1.pdf}
+\caption{\label{fig:unnamed-chunk-43}Example of weak interaction}
 \end{figure}
 
 Here is a clearer example from the \texttt{auto\_claim} data. The lines show the slope of a linear model, assuming that only \texttt{BLUEBOOK} and \texttt{CAR\_TYPE} were predictors in the model. You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.
@@ -2415,8 +2949,8 @@ Here is a clearer example from the \texttt{auto\_claim} data. The lines show the
 
 \begin{figure}
 \centering
-\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-24-1.pdf}
-\caption{\label{fig:unnamed-chunk-24}Example of strong interaction}
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-44-1.pdf}
+\caption{\label{fig:unnamed-chunk-44}Example of strong interaction}
 \end{figure}
 
 Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction. We can also use an hypothesis test with a GLM to check this. Simply include an interaction term and see if the coefficient is zero at the desired significance level.
@@ -2561,11 +3095,11 @@ We can use a special link function, known as the \emph{standard logistic functio
 
 \begin{figure}
 
-{\centering \includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-25-1} 
+{\centering \includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-45-1} 
 
 }
 
-\caption{Standard Logistic Function}\label{fig:unnamed-chunk-25}
+\caption{Standard Logistic Function}\label{fig:unnamed-chunk-45}
 \end{figure}
 
 Other link functions for classification problems are possible as well, although the logistic function is the most common. If a problem asks for an alternative link, such as the \emph{probit}, fit both models and compare the performance.
@@ -2685,8 +3219,8 @@ The output is a predicted probability. We can see that this is centered around a
 
 \begin{figure}
 \centering
-\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-29-1.pdf}
-\caption{\label{fig:unnamed-chunk-29}Distribution of Predicted Probability}
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-49-1.pdf}
+\caption{\label{fig:unnamed-chunk-49}Distribution of Predicted Probability}
 \end{figure}
 
 In order to convert these values to predicted 0's and 1's, we assign a \emph{cutoff} value so that if \(\hat{y}\) is above this threshold we use a 1 and 0 othersise. The default cutoff is 0.5. We change this to 0.3 and see that there are 763 policies predicted to have claims.
@@ -2939,8 +3473,8 @@ Then we set \texttt{x\ =\ TPR} and \texttt{y\ =\ FNR} and graph x against y. The
 
 \begin{figure}
 \centering
-\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-39-1.pdf}
-\caption{\label{fig:unnamed-chunk-39}AUC for auto\_claim}
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-59-1.pdf}
+\caption{\label{fig:unnamed-chunk-59}AUC for auto\_claim}
 \end{figure}
 
 \begin{verbatim}
@@ -3178,9 +3712,9 @@ This is stored in the \texttt{cptable}
 ## 1      0 0.620    1.00 
 ## 2      1 0.144    0.382
 ## 3      2 0.0637   0.240
-## 4      3 0.00967  0.179
-## 5      4 0.00784  0.175
-## 6      5 0.00712  0.169
+## 4      3 0.00967  0.178
+## 5      4 0.00784  0.173
+## 6      5 0.00712  0.171
 \end{verbatim}
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.
@@ -3203,14 +3737,14 @@ Once we have selected \(\alpha\), the tree is pruned. Sometimes the CP with the 
 
 \begin{verbatim}
 ## # A tibble: 6 x 3
-##   nsplit       CP xerror
-##    <dbl>    <dbl>  <dbl>
-## 1     14 0.00119   0.149
-## 2     15 0.00116   0.149
-## 3     12 0.00137   0.149
-## 4     13 0.00134   0.149
-## 5     22 0.000759  0.150
-## 6     16 0.00105   0.150
+##   nsplit      CP xerror
+##    <dbl>   <dbl>  <dbl>
+## 1     14 0.00119  0.153
+## 2     16 0.00105  0.153
+## 3     15 0.00116  0.154
+## 4     12 0.00137  0.154
+## 5     11 0.00145  0.154
+## 6      9 0.00173  0.154
 \end{verbatim}
 
 The SOA will give you code to find the lowest CP value such as below. This may or may not be useful depending on if they are asking for predictive performance or interpretability.
@@ -4032,28 +4566,15 @@ However, when we add in the \texttt{ice} curves, we see that there is something 
 
 Answers to these exercises are available at \href{https://www.exampa.net/pricing}{ExamPA.net}.
 
+\hypertarget{unsupervised-learning}{%
+\chapter{Unsupervised Learning}\label{unsupervised-learning}}
+
+The chapter on unsuporvised learning, topics from module 8, clustering and PCA, are available at \href{https://www.exampa.net/pricing}{ExamPA.net}.
+
 \hypertarget{practice-exams}{%
 \chapter{Practice Exams}\label{practice-exams}}
 
 Practice exams are available at \href{https://www.exampa.net/pricing}{ExamPA.net}.
-
-Current practice exams and video solutions:
-
-\begin{itemize}
-\tightlist
-\item
-  One introductory practice exam with a custom data set from Kaggle
-\item
-  An adaptation of the Miner's Union December 2018 Exam to the current format
-\item
-  A video solution to Hospital Readmissions
-\item
-  A tutorial on data manipulation
-\end{itemize}
-
-(Coming next week)
-- Student Success Video Solution
-- June 2019 Exam Video Solution
 
 \hypertarget{references}{%
 \chapter{References}\label{references}}

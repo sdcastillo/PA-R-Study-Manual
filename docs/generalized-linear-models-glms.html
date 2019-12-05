@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2019-12-01" />
+<meta name="date" content="2019-12-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -274,6 +274,7 @@ Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
 <li><p>A <em>random component</em>: The response variable <span class="math inline">\(Y|X\)</span> is normally distributed with mean <span class="math inline">\(\mu = \mu(X) = E(Y|X)\)</span></p></li>
 <li><p>A link between the response and the covariates (also known as the systemic component) <span class="math inline">\(\mu(X) = X\beta\)</span></p></li>
 </ol>
+<p>In words, this is saying that each observation follows a normal distribution which has a mean that is equal to the linear predictor.</p>
 <div id="the-generalized-linear-model" class="section level2">
 <h2><span class="header-section-number">9.1</span> The generalized linear model</h2>
 <p>Just as the name implies, GLMs are more <em>general</em> in that they are more flexible. We relax these two assumptions by saying that the model is defined by</p>
@@ -283,6 +284,7 @@ Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
 </ol>
 <p><span class="math display">\[g(\mu(X)) = X\beta\]</span>
 where <span class="math inline">\(g\)</span> is called the <em>link function</em> and <span class="math inline">\(\mu = E[Y|X]\)</span>.</p>
+<p>In words, this is saying that each observation follows <em>some type of exonential distrubution</em> (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a <em>dispersion</em> parameter, is more more info that is needed here. For an explanation, see <a href="https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf">Ch. 2.2 of CAS Monograph 5</a>.</p>
 <p>The possible combinations of link functions and distribution families are summarized nicely on <a href="https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function">Wikipedia</a>.</p>
 <div class="figure"><span id="fig:unnamed-chunk-14"></span>
 <img src="images/glm_links.png" alt="Distribution-Link Function Combinations" width="804" />

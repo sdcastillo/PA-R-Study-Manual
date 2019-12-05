@@ -2,7 +2,7 @@
 title: "Exam PA Study Manual"
 author: 
 - "Sam Castillo"
-date: "2019-12-01"
+date: "2019-12-04"
 github-repo: sdcastillo/PA-R-Study-Manual
 site: bookdown::bookdown_site
 output: bookdown::gitbook
