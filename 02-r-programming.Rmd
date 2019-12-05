@@ -302,19 +302,19 @@ df2
 To index columns in a tibble, the same "$" is used as indexing a list.
 
 ```{r}
-data$age
+df2$age
 ```
 
 To find the number of rows and columns, use `dim`.
 
 ```{r}
-dim(data)
+dim(df2)
 ```
 
 To find a summary, use `summary`
 
 ```{r}
-summary(data)
+summary(df2)
 ```
 
 ## Pipes
