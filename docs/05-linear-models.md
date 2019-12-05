@@ -872,7 +872,7 @@ plot(glm, cex = 0.4)
 <img src="05-linear-models_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
 
-## Gamma with Inverse Link
+### Gamma with Inverse Link
 
 With the inverse link, the mean has a factor `1/(x + 1)`.  Note that we need to add 1 to x to avoid dividing by zero.
 
