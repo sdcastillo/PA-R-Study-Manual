@@ -141,30 +141,30 @@ abc[-c(2, 3)]
 Lists are vectors that can hold mixed object types.
 
 ```{r}
-ls <- list(TRUE, "Character", 3.14)
-ls
+my_list <- list(TRUE, "Character", 3.14)
+my_list
 ```
 
 Lists can be named.
 
 ```{r}
-ls <- list(bool = TRUE, character = "character", numeric = 3.14)
-ls
+my_list <- list(bool = TRUE, character = "character", numeric = 3.14)
+my_list
 ```
 
 The `$` operator indexes lists.
 
 ```{r}
-ls$numeric
+my_list$numeric
 
-ls$numeric + 5
+my_list$numeric + 5
 ```
 
 Lists can also be indexed using `[[`.
 
 ```{r}
-ls[[1]]
-ls[[2]]
+my_list[[1]]
+my_list[[2]]
 ```
 
 
@@ -173,7 +173,7 @@ Lists can contain vectors, other lists, and any other object.
 ```{r}
 everything <- list(vector = c(1, 2, 3), 
                    character = c("a", "b", "c"), 
-                   list = ls)
+                   list = my_list)
 everything
 ```
 
