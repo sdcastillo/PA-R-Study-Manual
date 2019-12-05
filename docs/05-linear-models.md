@@ -437,9 +437,7 @@ plot(model, which = 2)
 
 What is an example of when to use a log link with a guassian response?  What about a Gamma family with an inverse link?  What about an inverse Gaussian response and an inverse square link?  As these questions illustrate, there are many combinations of link and response family.  In the real world, a model rarely fits perfectly, and so often these choices come down to the judgement of the modeler - which model is the best fit and meets the business objectives?
 
-However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves.  In each of these examples, the model will be a perfect fit.
-
-### Gaussian Response with Log Link
+However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves.  
 
 Recall that a GLM has two parts:
 
@@ -447,8 +445,11 @@ Recall that a GLM has two parts:
 
 2. A **link function**: between the random component and the covariates: $g(\mu(X)) = X\beta$ where $\mu = E[Y|X]$
 
+**Following this recipe, we can simulate data from any combination of link function and response family.  This helps us to understand the GLM framework very clearly.**
 
-Using this definition, we create a function that takes in data $x$ and returns a guassian random variable that has mean equal to the inverse link, which in the case of a log link is the exponent.  We add 10 to $x$ so that the values will always be positive, as will be described later on.
+### Gaussian Response with Log Link
+
+We create a function that takes in data $x$ and returns a guassian random variable that has mean equal to the inverse link, which in the case of a log link is the exponent.  We add 10 to $x$ so that the values will always be positive, as will be described later on.
 
 
 ```r

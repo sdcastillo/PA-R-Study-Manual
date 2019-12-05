@@ -377,15 +377,16 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <div id="combinations-of-link-and-response-family-examples" class="section level2">
 <h2><span class="header-section-number">9.5</span> Combinations of Link and Response Family Examples</h2>
 <p>What is an example of when to use a log link with a guassian response? What about a Gamma family with an inverse link? What about an inverse Gaussian response and an inverse square link? As these questions illustrate, there are many combinations of link and response family. In the real world, a model rarely fits perfectly, and so often these choices come down to the judgement of the modeler - which model is the best fit and meets the business objectives?</p>
-<p>However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves. In each of these examples, the model will be a perfect fit.</p>
-<div id="gaussian-response-with-log-link" class="section level3">
-<h3><span class="header-section-number">9.5.1</span> Gaussian Response with Log Link</h3>
+<p>However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves.</p>
 <p>Recall that a GLM has two parts:</p>
 <ol style="list-style-type: decimal">
 <li><p>A <strong>random component</strong>: <span class="math inline">\(Y|X \sim \text{some exponential family distribution}\)</span></p></li>
 <li><p>A <strong>link function</strong>: between the random component and the covariates: <span class="math inline">\(g(\mu(X)) = X\beta\)</span> where <span class="math inline">\(\mu = E[Y|X]\)</span></p></li>
 </ol>
-<p>Using this definition, we create a function that takes in data <span class="math inline">\(x\)</span> and returns a guassian random variable that has mean equal to the inverse link, which in the case of a log link is the exponent. We add 10 to <span class="math inline">\(x\)</span> so that the values will always be positive, as will be described later on.</p>
+<p><strong>Following this recipe, we can simulate data from any combination of link function and response family. This helps us to understand the GLM framework very clearly.</strong></p>
+<div id="gaussian-response-with-log-link" class="section level3">
+<h3><span class="header-section-number">9.5.1</span> Gaussian Response with Log Link</h3>
+<p>We create a function that takes in data <span class="math inline">\(x\)</span> and returns a guassian random variable that has mean equal to the inverse link, which in the case of a log link is the exponent. We add 10 to <span class="math inline">\(x\)</span> so that the values will always be positive, as will be described later on.</p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">sim_norm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb183-2" title="2">  <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="kw">exp</span>(<span class="dv">10</span> <span class="op">+</span><span class="st"> </span>x), <span class="dt">sd =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb183-3" title="3">}</a></code></pre></div>
