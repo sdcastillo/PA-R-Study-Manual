@@ -22,7 +22,7 @@ If we look at `p`, we see that it is nothing but white space with axis for `coun
 p
 ```
 
-![](04-visualization_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
+<img src="04-visualization_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 ## Add a plot
 
@@ -33,7 +33,7 @@ We add a histogram
 p + geom_histogram()
 ```
 
-![](04-visualization_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
+<img src="04-visualization_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 Different plots are called "geoms" for "geometric objects".  Geometry = Geo (space) + metre (measure), and graphs measure data.  For instance, instead of creating a histogram, we can draw a gamma distribution with `stat_density`.
 
@@ -42,7 +42,7 @@ Different plots are called "geoms" for "geometric objects".  Geometry = Geo (spa
 p + stat_density()
 ```
 
-![](04-visualization_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+<img src="04-visualization_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 Create an xy plot by adding and `x` and a `y` argument to `aesthetic`.
 
@@ -53,7 +53,7 @@ insurance %>%
   geom_point()
 ```
 
-![](04-visualization_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+<img src="04-visualization_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 ## Data manipulation chaining
 
@@ -69,5 +69,5 @@ termlife %>%
   theme_bw()
 ```
 
-![](04-visualization_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
+<img src="04-visualization_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 

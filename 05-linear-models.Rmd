@@ -233,7 +233,7 @@ $$
 Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
 $$
 
-Another way of saying this is that if $X$ is the matrix made up of columns $X_1, ..., X_p$, then
+In matrix notation, if $X$ is the matrix made up of columns $X_1, ..., X_p$, then
 
 $$
 \mathbf{Y} = \mathbf{X} \mathbf{\beta} + \mathbf{\epsilon}
@@ -251,19 +251,21 @@ These assumptions can be expressed in two parts:
 
 1. A *random component*: The response variable $Y|X$ is normally distributed with mean $\mu = \mu(X) = E(Y|X)$
 
-2. A link between the response and the covariates $\mu(X) = X\beta$
+2. A link between the response and the covariates (also known as the systemic component) $\mu(X) = X\beta$
 
 
-## The *generalized* linear model
+## The generalized linear model
 
-We relax these two assumptions by saying that the model is defined by 
+Just as the name implies, GLMs are more *general* in that they are more flexible.  We relax these two assumptions by saying that the model is defined by 
 
 1. A random component: $Y|X \sim \text{some exponential family distribution}$
 
-2. A *link function*: between the random component and $X$: $g(\mu(X)) = X\beta$
+2. A link: between the random component and covariates: 
+
+$$g(\mu(X)) = X\beta$$
+where $g$ is called the *link function* and $\mu = E[Y|X]$.
 
 The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
-
 
 ```{r echo = F, fig.cap = "Distribution-Link Function Combinations"}
 knitr::include_graphics("images/glm_links.png")
@@ -304,7 +306,9 @@ $$\text{Raw Residual} = y_i - \hat{y_i}$$
 
 This are not meaningful for GLMs with non-Gaussian response families because the distribution changes depending on the response family chosen.  To adjust for this, we need the concept of *deviance residual*.
 
-To paraphrase from [this paper](www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf)
+To paraphrase from this paper from the University of Oxford:
+
+www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf
 
 Deviance is a way of assessing the adequacy of a model by comparing it with a more general
 model with the maximum number of parameters that can be estimated. It is referred to
@@ -363,6 +367,239 @@ The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i
 ```{r}
 plot(model, which = 2)
 ```
+
+## Combinations of Link and Response Family Examples
+
+What is an example of when to use a log link with a guassian response?  What about a Gamma family with an inverse link?  What about an inverse Gaussian response and an inverse square link?  As these questions illustrate, there are many combinations of link and response family.  In the real world, a model rarely fits perfectly, and so often these choices come down to the judgement of the modeler - which model is the best fit and meets the business objectives?
+
+However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves.  In each of these examples, the model will be a perfect fit.
+
+### Gaussian Response with Log Link
+
+The GLM consists of two parts:
+
+1. A **random component**: $Y|X \sim \text{some exponential family distribution}$
+
+2. A **link function**: between the random component and the covariates: $g(\mu(X)) = X\beta$
+
+We create a function that takes in $X$ and returns a gaussian random variable with mean equal to the inverse link of $X$.  If we say that the link is the log, then the inverse link is the exponent.
+
+```{r}
+sim_norm <- function(x) {
+  rnorm(1, mean = exp(10 + x), sd = 1)
+}
+```
+
+The values of $X$ do not need to be normal.  The above assumption is merely that the mean of the response $Y$ is related to $X$ through the link function, `mean = exp(10 + x)`, and that the distribution is normal.  For illustration, here we use $X$'s from a uniform distribution.
+
+```{r}
+data <- tibble(x = runif(1000)) %>% 
+  mutate(y = x %>% map_dbl(sim_norm))
+```
+
+We already know what the answer is: a gaussian response with a log link.  We fit a GLM and see a perfect fit.
+
+```{r}
+glm <- glm(y ~ x, family = gaussian(link = "log"), data = data)
+
+summary(glm)
+par(mfrow = c(2,2))
+plot(glm, cex = 0.4)
+```
+
+### Gaussian Response with Inverse Link
+
+The same steps are repeated except the link function is now the inverse, `mean = 1/x`.  We see that some values of $Y$ are negative, which is ok.
+
+```{r warning = F}
+sim_norm <- function(x) {
+  rnorm(1, mean = 1/x, 1)
+}
+
+data <- tibble(x = runif(10000)) %>% 
+  mutate(y = x %>% map_dbl(sim_norm))
+summary(data)
+```
+
+```{r}
+glm <- glm(y ~ x, family = gaussian(link = "inverse"), data = data)
+
+summary(glm)
+par(mfrow = c(2,2))
+plot(glm, cex = 0.4)
+```
+
+### Gaussian Response with Identity Link
+
+And now the link is the identity, `mean = x`.
+
+```{r}
+sim_norm <- function(x) {
+  rnorm(1, mean = x, 1)
+}
+
+data <- tibble(x = rnorm(10000)) %>% 
+  mutate(y = x %>% map_dbl(sim_norm))
+
+glm <- glm(y ~ x, family = gaussian(link = "identity"), data = data)
+
+summary(glm)
+par(mfrow = c(2,2))
+plot(glm, cex = 0.4)
+```
+
+### Gaussian Response with Log Link and Negative Values
+
+By Gaussian response we say that the *mean* of the response is Gaussian.  The range of a normal random variable is $(-\infty, +\infty)$, which means that negative values are always possible.  Now, if the mean is a large positive number, than negative values are much less likely but still possible:  about 95% of the observations will be within 2 standard deviations of the mean.
+
+We see below that there are some $Y$ values which are negative.
+
+```{r}
+sim_norm <- function(x) {
+  rnorm(1, mean = exp(x), sd = 1)
+}
+
+data <- tibble(x = runif(1000)) %>% 
+  mutate(y = x %>% map_dbl(sim_norm))
+summary(data)
+```
+
+We can also see this from the histogram.
+
+```{r fig.height=3, fig.align="center"}
+data %>% ggplot(aes(y)) + geom_density( fill = 1, alpha = 0.3)
+```
+
+If we try to fit a GLM with a log link, there is an error.  
+
+```{r eval = F}
+glm <- glm(y ~ x, family = gaussian(link = "log"), data = data)
+```
+
+`Error in eval(family$initialize) : cannot find valid starting values: please specify some`
+
+This is because the domain of the natural logarithm only includes positive numbers, and we just tried to take the log of negative numbers.
+
+Our initial reaction might be to add some constant to each $Y$, say 10 for instance, so that they are all positive.  This does produce a model which is a good fit.
+
+```{r}
+glm <- glm(y + 10 ~ x, family = gaussian(link = "log"), data = data)
+summary(glm)
+par(mfrow = c(2,2))
+plot(glm, cex = 0.4)
+```
+
+We see that on average, the predictions are 10 higher than the target.  This is no surprise since $E[Y + 10] = E[Y] + 10$.
+
+```{r}
+y <- data$y 
+y_hat <- predict(glm, type = "response")
+mean(y_hat) - mean(y)
+```
+
+But we see that the actual predictions are bad.  If we were to loot at the R-squared, MAE, RMSE, or any other metric it would tell us the same story.  This is because our GLM assumption is **not** that $Y$ is related to the link function of $X$, but that the **mean** of $Y$ is.
+
+```{r}
+tibble(y = y, y_hat = y_hat - 10) %>% ggplot(aes(y, y_hat)) + geom_point()
+```
+
+One solution is to adjust the $X$ which the model is based on.  Add a constant term to $X$ so that the mean of $Y$ is larger, and hence $Y$ is non zero.  While is a viable approach in the case of only one predictor variable, with more predictors this would not be easy to do.
+
+```{r}
+data <- tibble(x = runif(1000) + 10) %>% 
+  mutate(y = x %>% map_dbl(sim_norm))
+summary(data)
+glm <- glm(y ~ x, family = gaussian(link = "log"), data = data)
+par(mfrow = c(2,2))
+plot(glm, cex = 0.4)
+```
+
+A better approach may be to use an inverse link even though the data was generated from a log link.  This is a good illustration of the saying "all models are wrong, but some are useful" in that the statistical assumption of the model is not correct but the model still works.
+
+```{r}
+data <- tibble(x = runif(1000)) %>% 
+  mutate(y = x %>% map_dbl(sim_norm))
+glm <- glm(y ~ x, family = gaussian(link = "inverse"), data = data)
+par(mfrow = c(2,2))
+plot(glm, cex = 0.4)
+summary(glm)
+```
+
+### Gamma Response with Log Link
+
+The gamma distribution with rate parameter $\alpha$ and scale parameter $\theta$ is density.
+
+$$f(y) = \frac{(y/\theta)^\alpha}{x \Gamma(\alpha)}e^{-x/\theta}$$
+
+The mean is $\alpha\theta$.
+
+Let's use a gamma with shape 2 and scale 0.5, which has mean 1.  
+
+```{r}
+gammas <- rgamma(1000, shape=2, scale = 0.5)
+mean(gammas)
+```
+
+We then generate random gamma values.  Because the mean now depends on two paramters instead of one, which was just $\mu$ in the Guassian case, we need to use a slightly different approach to simulate the random values.  The link function here is seen in `exp(x)`.
+
+```{r}
+#random component
+x <- runif(1000, min=0, max=100)
+
+#relate Y to X with a log link function
+y <- gammas*exp(x)
+
+data <- tibble(x = x, y  = y)
+summary(data)
+```
+
+As expected, the residual plots are all perfect because the model is perfect.
+
+```{r}
+glm <- glm(y ~ x, family = Gamma(link = "log"), data = data)
+par(mfrow = c(2,2))
+plot(glm, cex = 0.4)
+```
+
+If we had tried using an inverse instead of the log, the residual plots would look much worse.
+
+```{r}
+glm <- glm(y ~ x, family = Gamma(link = "inverse"), data = data)
+par(mfrow = c(2,2))
+plot(glm, cex = 0.4)
+```
+
+
+## Gamma with Inverse Link
+
+With the inverse link, the mean has a factor `1/(x + 1)`.  Note that we need to add 1 to x to avoid dividing by zero.
+
+```{r}
+#relate Y to X with a log link function
+y <- gammas*1/(x + 1)
+
+data <- tibble(x = x, y  = y)
+summary(data)
+```
+
+```{r}
+glm <- glm(y ~ x, family = Gamma(link = "inverse"), data = data)
+par(mfrow = c(2,2))
+plot(glm, cex = 0.4)
+```
+
+## Log transforms of continuous predictors
+
+When a log link is used, taking the natural logs of continuous variables allows for the scale of each predictor to match the scale of the thing that they are predicting, the log of the mean of the response.  In addition, when the distribution of the continuous variable is skewed, taking the log helps to make it more symmetric.
+
+After taking the log of a predictor, the interpretation becomes a *power transform* of the original variable.  
+
+For $\mu$ the mean response,
+
+$$log(\mu) = \beta_0 + \beta_1 log(X)$$
+To solve for $\mu$, take the exonent of both sides
+
+$$\mu = e^{\beta_1} e^{\beta_1 log(X)} = e^{\beta_0} X^{\beta_1}$$
 
 
 ## Reference levels
