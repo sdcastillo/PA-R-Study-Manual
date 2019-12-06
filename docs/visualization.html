@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2019-12-05" />
+<meta name="date" content="2019-12-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -260,40 +260,40 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="create-a-plot-object-ggplot" class="section level2">
 <h2><span class="header-section-number">7.1</span> Create a plot object (ggplot)</h2>
 <p>Let’s create a histogram of the claims. The first step is to create a blank canvas that holds the columns that are needed. The <code>aesthetic</code> argument, <code>aes</code>, means that the variable shown will the the claims.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
-<a class="sourceLine" id="cb157-2" title="2">p &lt;-<span class="st"> </span>insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(claims))</a></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
+<a class="sourceLine" id="cb163-2" title="2">p &lt;-<span class="st"> </span>insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(claims))</a></code></pre></div>
 <p>If we look at <code>p</code>, we see that it is nothing but white space with axis for <code>count</code> and <code>income</code>.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1">p</a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1">p</a></code></pre></div>
 <p><img src="04-visualization_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 <div id="add-a-plot" class="section level2">
 <h2><span class="header-section-number">7.2</span> Add a plot</h2>
 <p>We add a histogram</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
 <p><img src="04-visualization_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Different plots are called “geoms” for “geometric objects”. Geometry = Geo (space) + metre (measure), and graphs measure data. For instance, instead of creating a histogram, we can draw a gamma distribution with <code>stat_density</code>.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">stat_density</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">stat_density</span>()</a></code></pre></div>
 <p><img src="04-visualization_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Create an xy plot by adding and <code>x</code> and a <code>y</code> argument to <code>aesthetic</code>.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1">insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb161-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> holders, <span class="dt">y =</span> claims)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb161-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1">insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb167-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> holders, <span class="dt">y =</span> claims)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb167-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="04-visualization_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="data-manipulation-chaining" class="section level2">
 <h2><span class="header-section-number">7.3</span> Data manipulation chaining</h2>
 <p>Pipes allow for data manipulations to be chained with visualizations.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1">termlife <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb162-2" title="2"><span class="st">  </span><span class="kw">filter</span>(FACE <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb162-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">INCOME_AGE_RATIO =</span> INCOME<span class="op">/</span>AGE) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb162-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(INCOME_AGE_RATIO, FACE)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb162-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb162-6" title="6"><span class="st">  </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">termlife <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb168-2" title="2"><span class="st">  </span><span class="kw">filter</span>(FACE <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb168-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">INCOME_AGE_RATIO =</span> INCOME<span class="op">/</span>AGE) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb168-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(INCOME_AGE_RATIO, FACE)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb168-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb168-6" title="6"><span class="st">  </span><span class="kw">theme_bw</span>()</a></code></pre></div>
 <p><img src="04-visualization_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb163-2" title="2"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb163-3" title="3"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb169-2" title="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb169-3" title="3"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())</a></code></pre></div>
 </div>
 </div>
             </section>

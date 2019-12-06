@@ -1,21 +1,25 @@
 # R programming
 
-This book covers the bare minimum of R programming needed for Exam PA.  The book "R for Data Science" provides more detail.
+This book covers the bare minimum of R programming needed for Exam PA. The book 
+"R for Data Science" provides more detail.
 
 https://r4ds.had.co.nz/
 
 ## Notebook chunks
 
-On the Exam, you will start with an .Rmd (R Markdown) template, which organize code into [R Notebooks](https://bookdown.org/yihui/rmarkdown/notebook.html). Within each notebook, code is organized into chunks.  
+On the Exam, you will start with an .Rmd (R Markdown) template, which organize 
+code into [R Notebooks](https://bookdown.org/yihui/rmarkdown/notebook.html). 
+Within each notebook, code is organized into chunks.  
 
 
 ```r
-#this is a chunk
+# This is a chunk
 ```
 
 Your time is valuable.  Throughout this book, I will include useful keyboard shortcuts.
 
->**Shortcut:** To run everything in a chunk quickly, press `CTRL + SHIFT + ENTER`.  To create a new chunk, use `CTRL + ALT + I`.
+>**Shortcut:** To run everything in a chunk quickly, press `CTRL + SHIFT + ENTER`. 
+To create a new chunk, use `CTRL + ALT + I`.
 
 ## Basic operations
 
@@ -23,7 +27,7 @@ The usual math operations apply.
 
 
 ```r
-#addition
+# Addition
 1 + 2 
 ```
 
@@ -40,8 +44,8 @@ The usual math operations apply.
 ```
 
 ```r
-#multiplication
-2*2
+# Multiplication
+2 * 2
 ```
 
 ```
@@ -49,8 +53,8 @@ The usual math operations apply.
 ```
 
 ```r
-#division
-4/2
+# Division
+4 / 2
 ```
 
 ```
@@ -58,7 +62,7 @@ The usual math operations apply.
 ```
 
 ```r
-#exponentiation
+# Exponentiation
 2^3
 ```
 
@@ -66,18 +70,19 @@ The usual math operations apply.
 ## [1] 8
 ```
 
-There are two assignment operators: `=` and `<-`.  The latter is preferred because it is specific to assigning a variable to a value.  The "=" operator is also used for assigning values in functions (see the functions section).  
+There are two assignment operators: `=` and `<-`.  The latter is preferred because 
+it is specific to assigning a variable to a value.  The `=` operator is also used 
+for specifying arguments in functions (see the functions section).  
 
->**Shortcut:** `ALT + -` creates a `<-`..
+> **Shortcut:** `ALT + -` creates a `<-`..
 
 
 ```r
-#variable assignment
-x = 2
+# Variable assignment
 y <- 2
 
-#equality
-4 == 2 #False
+# Equality
+4 == 2
 ```
 
 ```
@@ -85,7 +90,7 @@ y <- 2
 ```
 
 ```r
-5 == 5 #true
+5 == 5
 ```
 
 ```
@@ -93,7 +98,7 @@ y <- 2
 ```
 
 ```r
-3.14 > 3 #true
+3.14 > 3
 ```
 
 ```
@@ -101,19 +106,20 @@ y <- 2
 ```
 
 ```r
-3.14 >= 3 #true
+3.14 >= 3
 ```
 
 ```
 ## [1] TRUE
 ```
 
-Vectors can be added just like numbers.  The `c` stands for "concatenate", which creates vectors.
+Vectors can be added just like numbers.  The `c` stands for "concatenate", which
+creates vectors.
 
 
 ```r
-x <- c(1,2)
-y <- c(3,4)
+x <- c(1, 2)
+y <- c(3, 4)
 x + y
 ```
 
@@ -122,7 +128,7 @@ x + y
 ```
 
 ```r
-x*y
+x * y
 ```
 
 ```
@@ -139,7 +145,7 @@ z^2
 ```
 
 ```r
-z/2
+z / 2
 ```
 
 ```
@@ -154,7 +160,8 @@ z + 3
 ## [1] 7 9
 ```
 
-Lists are like vectors but can take any type of object type.  I already mentioned `numeric` types.  There are also `character` (string) types, `factor` types, and `boolean` types.
+I already mentioned `numeric` types. There are also `character` (string) types, 
+`factor` types, and `boolean` types.
 
 
 ```r
@@ -162,28 +169,29 @@ character <- "The"
 character_vector <- c("The", "Quick")
 ```
 
-Characters are combined with the `paste` function.
+Character vectors can be combined with the `paste()` function.
 
 
 ```r
-a = "The"
-b = "Quick"
-c = "Brown"
-d = "Fox"
-paste(a,b,c,d)
+a <- "The"
+b <- "Quick"
+c <- "Brown"
+d <- "Fox"
+paste(a, b, c, d)
 ```
 
 ```
 ## [1] "The Quick Brown Fox"
 ```
 
-Factors are characters that expect only specific values.  A character can take on any value.  A factor is only allowed a finite number of values.  This reduces the memory size.
+Factors look like character vectors but can only contain a finite number of predefined 
+values.
 
 The below factor has only one "level", which is the list of assigned values.
 
 
 ```r
-factor = as.factor(character)
+factor <- as.factor(character)
 levels(factor)
 ```
 
@@ -191,7 +199,8 @@ levels(factor)
 ## [1] "The"
 ```
 
-The levels of a factor are by default in R in alphabetical order (Q comes alphabetically before T).
+The levels of a factor are by default in R in alphabetical order (Q comes alphabetically 
+before T).
 
 
 ```r
@@ -203,15 +212,19 @@ levels(factor_vector)
 ## [1] "Quick" "The"
 ```
 
-**In building linear models, the order of the factors matters.**  In GLMs, the "reference level" or "base level" should always be the level which has the most observations.  This will be covered in the section on linear models.
+**In building linear models, the order of the factors matters.**  In GLMs, the 
+"reference level" or "base level" should always be the level which has the most
+observations.  This will be covered in the section on linear models.
 
-Booleans are just True and False values.  R understands `T` or `TRUE` in the same way.  When doing math, bools are converted to 0/1 values where 1 is equivalent to TRUE and 0 FALSE.
+Booleans are just `TRUE` and `FALSE` values.  R understands `T` or `TRUE` in the 
+same way, but the latter is preferred.  When doing math, bools are converted to 
+0/1 values where 1 is equivalent to TRUE and 0 FALSE.
 
 
 ```r
-bool_true <- T
-bool_false <- F
-bool_true*bool_false
+bool_true <- TRUE
+bool_false <- FALSE
+bool_true * bool_false
 ```
 
 ```
@@ -233,7 +246,7 @@ Vectors work in the same way.
 
 
 ```r
-bool_vect <- c(T,T, F)
+bool_vect <- c(TRUE, TRUE, FALSE)
 sum(bool_vect)
 ```
 
@@ -241,12 +254,13 @@ sum(bool_vect)
 ## [1] 2
 ```
 
-Vectors are indexed using `[]`.
+Vectors are indexed using `[`. If you are only extracting a single element, you
+should use `[[` for clarity.
 
 
 ```r
 abc <- c("a", "b", "c")
-abc[1]
+abc[[1]]
 ```
 
 ```
@@ -254,7 +268,7 @@ abc[1]
 ```
 
 ```r
-abc[2]
+abc[[2]]
 ```
 
 ```
@@ -262,7 +276,7 @@ abc[2]
 ```
 
 ```r
-abc[c(1,3)]
+abc[c(1, 3)]
 ```
 
 ```
@@ -270,7 +284,7 @@ abc[c(1,3)]
 ```
 
 ```r
-abc[c(1,2)]
+abc[c(1, 2)]
 ```
 
 ```
@@ -286,7 +300,7 @@ abc[-2]
 ```
 
 ```r
-abc[-c(2,3)]
+abc[-c(2, 3)]
 ```
 
 ```
@@ -296,12 +310,12 @@ abc[-c(2,3)]
 
 ## Lists
 
-Lists are vectors that can hold mixed object types.  Vectors need to be all of the same type.
+Lists are vectors that can hold mixed object types.
 
 
 ```r
-ls <- list(T, "Character", 3.14)
-ls
+my_list <- list(TRUE, "Character", 3.14)
+my_list
 ```
 
 ```
@@ -319,8 +333,8 @@ Lists can be named.
 
 
 ```r
-ls <- list(bool = T, character = "character", numeric = 3.14)
-ls
+my_list <- list(bool = TRUE, character = "character", numeric = 3.14)
+my_list
 ```
 
 ```
@@ -338,7 +352,7 @@ The `$` operator indexes lists.
 
 
 ```r
-ls$numeric
+my_list$numeric
 ```
 
 ```
@@ -346,31 +360,29 @@ ls$numeric
 ```
 
 ```r
-ls$numeric + 5
+my_list$numeric + 5
 ```
 
 ```
 ## [1] 8.14
 ```
 
-Lists can also be indexed using `[]`.
+Lists can also be indexed using `[[`.
 
 
 ```r
-ls[1]
+my_list[[1]]
 ```
 
 ```
-## $bool
 ## [1] TRUE
 ```
 
 ```r
-ls[2]
+my_list[[2]]
 ```
 
 ```
-## $character
 ## [1] "character"
 ```
 
@@ -379,9 +391,9 @@ Lists can contain vectors, other lists, and any other object.
 
 
 ```r
-everything <- list(vector = c(1,2,3), 
+everything <- list(vector = c(1, 2, 3), 
                    character = c("a", "b", "c"), 
-                   list = ls)
+                   list = my_list)
 everything
 ```
 
@@ -450,13 +462,21 @@ summary(everything)
 
 ## Functions
 
-You only need to understand the very basics of functions for this exam.  Still, understanding functions helps you to understand *everything* in R, since R is a functional [programming language](http://adv-r.had.co.nz/Functional-programming.html), unlike Python, C, VBA, Java which are all object-oriented, or SQL which isn't really a language but a series of set-operations.
+You only need to understand the very basics of functions for this exam.  Still,
+understanding functions helps you to understand *everything* in R, since R is a 
+functional [programming language](http://adv-r.had.co.nz/Functional-programming.html), 
+unlike Python, C, VBA, Java which are all object-oriented, or SQL which isn't 
+really a language but a series of set-operations.
 
-Functions do things.  The convention is to name a function as a verb.  The function `make_rainbows()` would create a rainbow.  The function `summarise_vectors` would summarise vectors.  Functions may or may not have an input and output.  
+Functions do things.  The convention is to name a function as a verb.  The function
+`make_rainbows()` would create a rainbow.  The function `summarise_vectors()` 
+would summarise vectors.  Functions may or may not have an input and output.  
 
-If you need to do something in R, there is a high probability that someone has already written a function to do it.  That being said, creating simple functions is quite useful.
+If you need to do something in R, there is a high probability that someone has 
+already written a function to do it.  That being said, creating simple functions 
+is quite useful.
 
-**A function that does not return anything**
+Here is an example that has a side effect of printing the input:
 
 
 ```r
@@ -473,15 +493,16 @@ greet_me("Future Actuary")
 
 **A function that returns something**
 
-When returning something, the `return` statement is optional.
+When returning the last evaluated expression, the `return` statement is optional.
+In fact, it is discouraged by convention.
 
 
 ```r
-add_together <- function(x, y){
+add_together <- function(x, y) {
   x + y
 }
 
-add_together(2,5)
+add_together(2, 5)
 ```
 
 ```
@@ -489,23 +510,24 @@ add_together(2,5)
 ```
 
 ```r
-add_together <- function(x, y){
+add_together <- function(x, y) {
+  # Works, but bad practice
   return(x + y)
 }
 
-add_together(2,5)
+add_together(2, 5)
 ```
 
 ```
 ## [1] 7
 ```
 
-Functions can work with vectors.
+Binary operations in R are vectorized. In other words, they are applied element-wise.
 
 
 ```r
-x_vector <- c(1,2,3)
-y_vector <- c(4,5,6)
+x_vector <- c(1, 2, 3)
+y_vector <- c(4, 5, 6)
 add_together(x_vector, y_vector)
 ```
 
@@ -513,7 +535,8 @@ add_together(x_vector, y_vector)
 ## [1] 5 7 9
 ```
 
-Many functions in R actually return lists!  This is why R objects can be indexed with dollar sign.
+Many functions in R actually return lists!  This is why R objects can be indexed 
+with dollar sign.
 
 
 ```r
@@ -531,13 +554,13 @@ Here's a function that returns a list.
 
 
 ```r
-sum_multiply <- function(x,y){
+sum_multiply <- function(x,y) {
   sum <- x + y
-  product <- x*y
+  product <- x * y
   list("Sum" = sum, "Product" = product)
 }
 
-result <- sum_multiply(2,3)
+result <- sum_multiply(2, 3)
 result$Sum
 ```
 
@@ -555,14 +578,53 @@ result$Product
 
 ## Data frames
 
-R is an old programming language.  The original `data.frame` object has been updated with the newer and better `tibble` (like the word "table").  **Tibbles are really lists of vectors, where each column is a vector**.  
+You can think of a data frame as a table that is implemented as a list of vectors.
 
 
 ```r
-#the tibble library has functions for making tibbles
-library(tibble) 
-data <- tibble(age = c(25, 35), has_fsa = c(F, T))
-data
+df <- data.frame(
+  age = c(25, 35),
+  has_fsa = c(FALSE, TRUE)
+)
+df
+```
+
+```
+##   age has_fsa
+## 1  25   FALSE
+## 2  35    TRUE
+```
+
+You can also work with tibbles, which are data frames but have nicer printing:
+
+
+```r
+# The tidyverse library has functions for making tibbles
+library(tidyverse) 
+```
+
+```
+## -- Attaching packages --------------------------------------------------------- tidyverse 1.2.1 --
+```
+
+```
+## v ggplot2 3.2.1     v purrr   0.3.2
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   1.0.0     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0
+```
+
+```
+## -- Conflicts ------------------------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
+
+```r
+df <- tibble(
+  age = c(25, 35), has_fsa = c(FALSE, TRUE)
+)
+df
 ```
 
 ```
@@ -577,7 +639,7 @@ To index columns in a tibble, the same "$" is used as indexing a list.
 
 
 ```r
-data$age
+df$age
 ```
 
 ```
@@ -588,18 +650,18 @@ To find the number of rows and columns, use `dim`.
 
 
 ```r
-dim(data)
+dim(df)
 ```
 
 ```
 ## [1] 2 2
 ```
 
-To fine a summary, use `summary`
+To find a summary, use `summary`
 
 
 ```r
-summary(data)
+summary(df)
 ```
 
 ```
@@ -614,7 +676,10 @@ summary(data)
 
 ## Pipes
 
-The pipe operator `%>%` is a way of making code *modular*, meaning that it can be written and executed in incremental steps.  Those familiar with Python's Pandas will be see that `%>%` is quite similar to ".".  This also makes code easier to read.
+The pipe operator `%>%` is a way of making code *modular*, meaning that it can 
+be written and executed in incremental steps.  Those familiar with Python's Pandas 
+will be see that `%>%` is quite similar to ".".  This also makes code easier to 
+read.
 
 In five seconds, tell me what the below code is doing.
 
@@ -627,18 +692,18 @@ log(sqrt(exp(log2(sqrt((max(c(3, 4, 16))))))))
 ## [1] 1
 ```
 
-Getting to the answer of 1 requires starting from the inner-most nested brackets and moving outwards from right to left.
+Getting to the answer of 1 requires starting from the inner-most nested brackets
+and moving outwards from right to left.
 
 The math notation would be slightly easier to read, but still painful.
 
 $$log(\sqrt{e^{log_2(\sqrt{max(3,4,16)})}})$$
 
-Here is the same algebra using the pipe.  To read this, replace the `%>%` with the word `THEN`.
+Here is the same algebra using the pipe.  To read this, replace the `%>%` with 
+the word `THEN`.
 
 
 ```r
-#the pipe is from the dplyr library
-library(dplyr) 
 max(c(3, 4, 16)) %>% 
   sqrt() %>% 
   log2() %>% 
@@ -652,19 +717,21 @@ max(c(3, 4, 16)) %>%
 ```
 
 ```r
-#max(c(3, 4, 16) THEN   #The max of 3, 4, and 16 is 16
-#  sqrt() THEN          #The square root of 16 is 4
-#  log2() THEN          #The log in base 2 of 4 is 2
-#  exp() THEN           #the exponent of 2 is e^2
-#  sqrt() THEN          #the square root of e^2 is e
-#  log()                #the natural logarithm of e is 1
+# max(c(3, 4, 16) THEN  # The max of 3, 4, and 16 is 16
+#  sqrt() THEN          # The square root of 16 is 4
+#  log2() THEN          # The log in base 2 of 4 is 2
+#  exp() THEN           # The exponent of 2 is e^2
+#  sqrt() THEN          # The square root of e^2 is e
+#  log()                # The natural logarithm of e is 1
 ```
 
-Pipes are exceptionally useful for data manipulations, which is covered in the next chapter.
+Pipes are exceptionally useful for data manipulations, which is covered in the 
+next chapter.
 
->**Tip:** To quickly produce pipes, use `CTRL + SHIFT + M`.  
+> **Tip:** To quickly produce pipes, use `CTRL + SHIFT + M`.  
 
-By highlighting only certain sections, we can run the code in steps as if we were using a debugger.  This makes testing out code much faster.
+By highlighting only certain sections, we can run the code in steps as if we were
+using a debugger.  This makes testing out code much faster.
 
 
 ```r
