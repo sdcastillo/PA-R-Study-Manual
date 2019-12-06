@@ -291,30 +291,30 @@ df
 You can also work with tibbles, which are data frames but have nicer printing:
 
 ```{r}
-# The tibble library has functions for making tibbles
-library(tibble) 
-df2 <- tibble(
+# The tidyverse library has functions for making tibbles
+library(tidyverse) 
+df <- tibble(
   age = c(25, 35), has_fsa = c(FALSE, TRUE)
 )
-df2
+df
 ```
 
 To index columns in a tibble, the same "$" is used as indexing a list.
 
 ```{r}
-df2$age
+df$age
 ```
 
 To find the number of rows and columns, use `dim`.
 
 ```{r}
-dim(df2)
+dim(df)
 ```
 
 To find a summary, use `summary`
 
 ```{r}
-summary(df2)
+summary(df)
 ```
 
 ## Pipes
@@ -341,8 +341,7 @@ Here is the same algebra using the pipe.  To read this, replace the `%>%` with
 the word `THEN`.
 
 ```{r message = F, warning = F}
-# The pipe is from the magrittr library
-library(magrittr) 
+
 max(c(3, 4, 16)) %>% 
   sqrt() %>% 
   log2() %>% 
