@@ -10,16 +10,9 @@ output:
 For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called `ExamPAData` by the author.  To access, simplly run the below lines of code to download this data.
 
 ```{r eval = F}
-#check if devtools is installed
-#then install ExamPAData from github
-if("devtools" %in% installed.packages()){
-  library(devtools)
-  install_github("sdcastillo/ExamPAData")
-} else{
-  install.packages("devtools")
-  library(devtools)
-  install_github("sdcastillo/ExamPAData")
-}
+# Install remotes if it's not yet installed
+# install.packages("remotes")
+remotes::install_github("sdcastillo/ExamPAData")
 ```
 
 Once this has run, you can access the data using `library(ExamPAData)`.  To check that this is installed correctly see if the `insurance` data set has loaded.  If this returns "object not found", then the library was not installed.
@@ -35,7 +28,7 @@ This book references the publically-avialable textbook "An Introduction to Stati
 
 http://faculty.marshall.usc.edu/gareth-james/ISL/
 
-If you already have R and Rstudio installed then skip to "Download the data". 
+If you already have R and RStudio installed then skip to "Download the data". 
 
 ## New users
 
