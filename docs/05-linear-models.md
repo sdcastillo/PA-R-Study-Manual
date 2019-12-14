@@ -1546,3 +1546,475 @@ Luckily, none of this needs to be memorized.  On the exam, read the documentatio
 
 
 
+
+## Example: Ridge Regression
+
+
+```r
+library(ISLR)
+library(glmnet)
+library(dplyr)
+library(tidyr)
+```
+
+We will use the `glmnet` package in order to perform ridge regression and
+the lasso. The main function in this package is `glmnet()`, which can be used
+to fit ridge regression models, lasso models, and more. This function has
+slightly different syntax from other model-fitting functions that we have
+encountered thus far in this book. In particular, we must pass in an $x$
+matrix as well as a $y$ vector, and we do not use the $y \sim x$ syntax.
+
+Before proceeding, let's first ensure that the missing values have
+been removed from the data, as described in the previous lab.
+
+
+```r
+Hitters = na.omit(Hitters)
+```
+
+We will now perform ridge regression and the lasso in order to predict `Salary` on
+the `Hitters` data. Let's set up our data:
+
+
+```r
+x = model.matrix(Salary~., Hitters)[,-1] # trim off the first column
+                                         # leaving only the predictors
+y = Hitters %>%
+  select(Salary) %>%
+  unlist() %>%
+  as.numeric()
+```
+
+The `model.matrix()` function is particularly useful for creating $x$; not only
+does it produce a matrix corresponding to the 19 predictors but it also
+automatically transforms any qualitative variables into dummy variables.
+The latter property is important because `glmnet()` can only take numerical,
+quantitative inputs.
+
+The `glmnet()` function has an alpha argument that determines what type
+of model is fit. If `alpha = 0` then a ridge regression model is fit, and if `alpha = 1`
+then a lasso model is fit. We first fit a ridge regression model:
+
+
+```r
+grid = 10^seq(10, -2, length = 100)
+ridge_mod = glmnet(x, y, alpha = 0, lambda = grid)
+```
+
+By default the `glmnet()` function performs ridge regression for an automatically
+selected range of $\lambda$ values. However, here we have chosen to implement
+the function over a grid of values ranging from $\lambda = 10^10$ to $\lambda = 10^{-2}$, essentially covering the full range of scenarios from the null model containing
+only the intercept, to the least squares fit. 
+
+As we will see, we can also compute
+model fits for a particular value of $\lambda$ that is not one of the original
+grid values. Note that by default, the `glmnet()` function standardizes the
+variables so that they are on the same scale. To turn off this default setting,
+use the argument `standardize = FALSE`.
+
+Associated with each value of $\lambda$ is a vector of ridge regression coefficients,
+stored in a matrix that can be accessed by `coef()`. In this case, it is a $20 \times 100$
+matrix, with 20 rows (one for each predictor, plus an intercept) and 100
+columns (one for each value of $\lambda$).
+
+
+```r
+dim(coef(ridge_mod))
+```
+
+```
+## [1]  20 100
+```
+
+We expect the coefficient estimates to be much smaller, in terms of $l_2$ norm,
+when a large value of $\lambda$ is used, as compared to when a small value of $\lambda$ is
+used. These are the coefficients when $\lambda = 11498$, along with their $l_2$ norm:
+
+
+```r
+ridge_mod$lambda[50] #Display 50th lambda value
+```
+
+```
+## [1] 11497.57
+```
+
+```r
+coef(ridge_mod)[,50] # Display coefficients associated with 50th lambda value
+```
+
+```
+##   (Intercept)         AtBat          Hits         HmRun          Runs 
+## 407.356050200   0.036957182   0.138180344   0.524629976   0.230701523 
+##           RBI         Walks         Years        CAtBat         CHits 
+##   0.239841459   0.289618741   1.107702929   0.003131815   0.011653637 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##   0.087545670   0.023379882   0.024138320   0.025015421   0.085028114 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+##  -6.215440973   0.016482577   0.002612988  -0.020502690   0.301433531
+```
+
+```r
+sqrt(sum(coef(ridge_mod)[-1,50]^2)) # Calculate l2 norm
+```
+
+```
+## [1] 6.360612
+```
+
+In contrast, here are the coefficients when $\lambda = 705$, along with their $l_2$
+norm. Note the much larger $l_2$ norm of the coefficients associated with this
+smaller value of $\lambda$.
+
+
+```r
+ridge_mod$lambda[60] #Display 60th lambda value
+```
+
+```
+## [1] 705.4802
+```
+
+```r
+coef(ridge_mod)[,60] # Display coefficients associated with 60th lambda value
+```
+
+```
+##  (Intercept)        AtBat         Hits        HmRun         Runs 
+##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713 
+##          RBI        Walks        Years       CAtBat        CHits 
+##   0.84718546   1.31987948   2.59640425   0.01083413   0.04674557 
+##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
+##   0.33777318   0.09355528   0.09780402   0.07189612  13.68370191 
+##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
+## -54.65877750   0.11852289   0.01606037  -0.70358655   8.61181213
+```
+
+```r
+sqrt(sum(coef(ridge_mod)[-1,60]^2)) # Calculate l2 norm
+```
+
+```
+## [1] 57.11001
+```
+
+We can use the `predict()` function for a number of purposes. For instance,
+we can obtain the ridge regression coefficients for a new value of $\lambda$, say 50:
+
+
+```r
+predict(ridge_mod, s=50, type="coefficients")[1:20,]
+```
+
+```
+##   (Intercept)         AtBat          Hits         HmRun          Runs 
+##  4.876610e+01 -3.580999e-01  1.969359e+00 -1.278248e+00  1.145892e+00 
+##           RBI         Walks         Years        CAtBat         CHits 
+##  8.038292e-01  2.716186e+00 -6.218319e+00  5.447837e-03  1.064895e-01 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##  6.244860e-01  2.214985e-01  2.186914e-01 -1.500245e-01  4.592589e+01 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+## -1.182011e+02  2.502322e-01  1.215665e-01 -3.278600e+00 -9.496680e+00
+```
+
+We now split the samples into a training set and a test set in order
+to estimate the test error of ridge regression and the lasso.
+
+
+```r
+set.seed(1)
+
+train = Hitters %>%
+  sample_frac(0.5)
+
+test = Hitters %>%
+  setdiff(train)
+
+x_train = model.matrix(Salary~., train)[,-1]
+x_test = model.matrix(Salary~., test)[,-1]
+
+y_train = train %>%
+  select(Salary) %>%
+  unlist() %>%
+  as.numeric()
+
+y_test = test %>%
+  select(Salary) %>%
+  unlist() %>%
+  as.numeric()
+```
+
+Next we fit a ridge regression model on the training set, and evaluate
+its MSE on the test set, using $\lambda = 4$. Note the use of the `predict()`
+function again: this time we get predictions for a test set, by replacing
+`type="coefficients"` with the `newx` argument.
+
+
+```r
+ridge_mod = glmnet(x_train, y_train, alpha=0, lambda = grid, thresh = 1e-12)
+ridge_pred = predict(ridge_mod, s = 4, newx = x_test)
+mean((ridge_pred - y_test)^2)
+```
+
+```
+## [1] 139858.6
+```
+
+The test MSE is 101242.7. Note that if we had instead simply fit a model
+with just an intercept, we would have predicted each test observation using
+the mean of the training observations. In that case, we could compute the
+test set MSE like this:
+
+
+```r
+mean((mean(y_train) - y_test)^2)
+```
+
+```
+## [1] 224692.1
+```
+
+We could also get the same result by fitting a ridge regression model with
+a very large value of $\lambda$. Note that `1e10` means $10^{10}$.
+
+
+```r
+ridge_pred = predict(ridge_mod, s = 1e10, newx = x_test)
+mean((ridge_pred - y_test)^2)
+```
+
+```
+## [1] 224692.1
+```
+
+So fitting a ridge regression model with $\lambda = 4$ leads to a much lower test
+MSE than fitting a model with just an intercept. We now check whether
+there is any benefit to performing ridge regression with $\lambda = 4$ instead of
+just performing least squares regression. Recall that least squares is simply
+ridge regression with $\lambda = 0$.
+
+\* Note: In order for `glmnet()` to yield the **exact** least squares coefficients when $\lambda = 0$,
+we use the argument `exact=T` when calling the `predict()` function. Otherwise, the
+`predict()` function will interpolate over the grid of $\lambda$ values used in fitting the
+`glmnet()` model, yielding approximate results. Even when we use `exact = T`, there remains
+a slight discrepancy in the third decimal place between the output of `glmnet()` when
+$\lambda = 0$ and the output of `lm()`; this is due to numerical approximation on the part of
+`glmnet()`.
+
+
+```r
+ridge_pred = predict(ridge_mod, s = 0, x = x_train, y = y_train, newx = x_test, exact = T)
+mean((ridge_pred - y_test)^2)
+```
+
+```
+## [1] 175051.7
+```
+
+```r
+lm(Salary~., data = train)
+```
+
+```
+## 
+## Call:
+## lm(formula = Salary ~ ., data = train)
+## 
+## Coefficients:
+## (Intercept)        AtBat         Hits        HmRun         Runs  
+##   2.398e+02   -1.639e-03   -2.179e+00    6.337e+00    7.139e-01  
+##         RBI        Walks        Years       CAtBat        CHits  
+##   8.735e-01    3.594e+00   -1.309e+01   -7.136e-01    3.316e+00  
+##      CHmRun        CRuns         CRBI       CWalks      LeagueN  
+##   3.407e+00   -5.671e-01   -7.525e-01    2.347e-01    1.322e+02  
+##   DivisionW      PutOuts      Assists       Errors   NewLeagueN  
+##  -1.346e+02    2.099e-01    6.229e-01   -4.616e+00   -8.330e+01
+```
+
+```r
+predict(ridge_mod, s = 0, x = x_train, y = y_train, exact = T, type="coefficients")[1:20,]
+```
+
+```
+##   (Intercept)         AtBat          Hits         HmRun          Runs 
+##  239.83274953   -0.00175359   -2.17853087    6.33694957    0.71369687 
+##           RBI         Walks         Years        CAtBat         CHits 
+##    0.87329878    3.59421378  -13.09231408   -0.71351092    3.31523605 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##    3.40701392   -0.56709530   -0.75240961    0.23467433  132.15949536 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+## -134.58503816    0.20992473    0.62288126   -4.61583857  -83.29432536
+```
+
+It looks like we are indeed improving over regular least-squares! Side note: in general, if we want to fit a (unpenalized) least squares model, then
+we should use the `lm()` function, since that function provides more useful
+outputs, such as standard errors and $p$-values for the coefficients.
+
+Instead of arbitrarily choosing $\lambda = 4$, it would be better to
+use cross-validation to choose the tuning parameter $\lambda$. We can do this using
+the built-in cross-validation function, `cv.glmnet()`. By default, the function
+performs 10-fold cross-validation, though this can be changed using the
+argument `folds`. Note that we set a random seed first so our results will be
+reproducible, since the choice of the cross-validation folds is random.
+
+
+```r
+set.seed(1)
+cv.out = cv.glmnet(x_train, y_train, alpha = 0) # Fit ridge regression model on training data
+plot(cv.out) # Draw plot of training MSE as a function of lambda
+```
+
+<img src="05-linear-models_files/figure-html/unnamed-chunk-73-1.png" width="672" />
+
+```r
+bestlam = cv.out$lambda.min  # Select lamda that minimizes training MSE
+bestlam
+```
+
+```
+## [1] 326.1406
+```
+
+Therefore, we see that the value of $\lambda$ that results in the smallest cross-validation
+error is 339.1845 What is the test MSE associated with this value of
+$\lambda$?
+
+
+```r
+ridge_pred = predict(ridge_mod, s = bestlam, newx = x_test) # Use best lambda to predict test data
+mean((ridge_pred - y_test)^2) # Calculate test MSE
+```
+
+```
+## [1] 140056.2
+```
+
+This represents a further improvement over the test MSE that we got using
+$\lambda = 4$. Finally, we refit our ridge regression model on the full data set,
+using the value of $\lambda$ chosen by cross-validation, and examine the coefficient
+estimates.
+
+
+```r
+out = glmnet(x, y, alpha = 0) # Fit ridge regression model on full dataset
+predict(out, type = "coefficients", s = bestlam)[1:20,] # Display coefficients using lambda chosen by CV
+```
+
+```
+##  (Intercept)        AtBat         Hits        HmRun         Runs 
+##  15.44835008   0.07716945   0.85906253   0.60120339   1.06366687 
+##          RBI        Walks        Years       CAtBat        CHits 
+##   0.87936073   1.62437580   1.35296287   0.01134998   0.05746377 
+##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
+##   0.40678422   0.11455696   0.12115916   0.05299953  22.08942749 
+##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
+## -79.03490973   0.16618830   0.02941513  -1.36075644   9.12528398
+```
+
+As expected, none of the coefficients are exactly zero - ridge regression does not
+perform variable selection!
+
+## Example: The Lasso
+
+We saw that ridge regression with a wise choice of $\lambda$ can outperform least
+squares as well as the null model on the Hitters data set. We now ask
+whether the lasso can yield either a more accurate or a more interpretable
+model than ridge regression. In order to fit a lasso model, we once again
+use the `glmnet()` function; however, this time we use the argument `alpha=1`.
+Other than that change, we proceed just as we did in fitting a ridge model:
+
+
+```r
+lasso_mod = glmnet(x_train, y_train, alpha = 1, lambda = grid) # Fit lasso model on training data
+plot(lasso_mod)                                          # Draw plot of coefficients
+```
+
+<img src="05-linear-models_files/figure-html/unnamed-chunk-76-1.png" width="672" />
+
+Notice that in the coefficient plot that depending on the choice of tuning
+parameter, some of the coefficients are exactly equal to zero. We now
+perform cross-validation and compute the associated test error:
+
+
+```r
+set.seed(1)
+cv.out = cv.glmnet(x_train, y_train, alpha = 1) # Fit lasso model on training data
+plot(cv.out) # Draw plot of training MSE as a function of lambda
+```
+
+<img src="05-linear-models_files/figure-html/unnamed-chunk-77-1.png" width="672" />
+
+```r
+bestlam = cv.out$lambda.min # Select lamda that minimizes training MSE
+lasso_pred = predict(lasso_mod, s = bestlam, newx = x_test) # Use best lambda to predict test data
+mean((lasso_pred - y_test)^2) # Calculate test MSE
+```
+
+```
+## [1] 143273
+```
+
+This is substantially lower than the test set MSE of the null model and of
+least squares, and very similar to the test MSE of ridge regression with $\lambda$
+chosen by cross-validation.
+
+However, the lasso has a substantial advantage over ridge regression in
+that the resulting coefficient estimates are sparse. Here we see that 12 of
+the 19 coefficient estimates are exactly zero:
+
+
+```r
+out = glmnet(x, y, alpha = 1, lambda = grid) # Fit lasso model on full dataset
+lasso_coef = predict(out, type = "coefficients", s = bestlam)[1:20,] # Display coefficients using lambda chosen by CV
+lasso_coef
+```
+
+```
+##   (Intercept)         AtBat          Hits         HmRun          Runs 
+##    1.27429897   -0.05490834    2.18012455    0.00000000    0.00000000 
+##           RBI         Walks         Years        CAtBat         CHits 
+##    0.00000000    2.29189433   -0.33767315    0.00000000    0.00000000 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##    0.02822467    0.21627609    0.41713051    0.00000000   20.28190194 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+## -116.16524424    0.23751978    0.00000000   -0.85604181    0.00000000
+```
+
+Selecting only the predictors with non-zero coefficients, we see that the lasso model with $\lambda$
+chosen by cross-validation contains only seven variables:
+
+
+```r
+lasso_coef[lasso_coef!=0] # Display only non-zero coefficients
+```
+
+```
+##   (Intercept)         AtBat          Hits         Walks         Years 
+##    1.27429897   -0.05490834    2.18012455    2.29189433   -0.33767315 
+##        CHmRun         CRuns          CRBI       LeagueN     DivisionW 
+##    0.02822467    0.21627609    0.41713051   20.28190194 -116.16524424 
+##       PutOuts        Errors 
+##    0.23751978   -0.85604181
+```
+
+Practice questions:
+
+ * How do ridge regression and the lasso improve on simple least squares?
+ * In what cases would you expect ridge regression outperform the lasso, and vice versa?
+ 
+## References
+
+These examples of the Ridge and Lasso are an adaptation of p. 251-255 of "Introduction to
+Statistical Learning with Applications in R" by Gareth James, Daniela Witten, Trevor Hastie and Robert
+Tibshirani. Adapted by R. Jordan Crouser at Smith College for SDS293: Machine Learning (Spring 2016), and re-implemented in Fall 2016 in `tidyverse` format by Amelia McNamara and R. Jordan Crouser at Smith College.
+
+Used with permission from Jordan Crouser at Smith College.  Additional Thanks to the following contributors on github:
+
+* github.com/jcrouser
+* github.com/AmeliaMN
+* github.com/mhusseinmidd
+* github.com/rudeboybert
+* github.com/ijlyttle
+
+
+
