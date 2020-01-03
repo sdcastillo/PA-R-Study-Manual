@@ -1,6 +1,6 @@
 # R programming
 
-This book covers the bare minimum of R programming needed for Exam PA. The book 
+This chapter covers the bare minimum of R programming needed for Exam PA. The book 
 "R for Data Science" provides more detail.
 
 https://r4ds.had.co.nz/
@@ -462,7 +462,7 @@ summary(everything)
 
 ## Functions
 
-You only need to understand the very basics of functions for this exam.  Still,
+You only need to understand the very basics of functions.  The big picture, though, is that
 understanding functions helps you to understand *everything* in R, since R is a 
 functional [programming language](http://adv-r.had.co.nz/Functional-programming.html), 
 unlike Python, C, VBA, Java which are all object-oriented, or SQL which isn't 
@@ -604,7 +604,7 @@ library(tidyverse)
 ```
 
 ```
-## -- Attaching packages --------------------------------------------------------- tidyverse 1.2.1 --
+## -- Attaching packages --------------------------------------------------------------------------- tidyverse 1.2.1 --
 ```
 
 ```
@@ -615,7 +615,7 @@ library(tidyverse)
 ```
 
 ```
-## -- Conflicts ------------------------------------------------------------ tidyverse_conflicts() --
+## -- Conflicts ------------------------------------------------------------------------------ tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -802,6 +802,15 @@ max(c(3, 4, 16)) %>%
 ## [1] 1
 ```
 
+## The SOA's code doesn't use pipes or dplyr, so can I skip learning this?
 
+Yes, if you really want to.  
 
+The advantages to learning pipes, and the reason why this manual uses them are
+
+1) It saves you time. 
+2) It will help you in real life data science projects.
+3) The majority of the R community uses this style.
+4) The SOA actuaries who create the Exam PA content will eventually catch on.
+5) Most modern R software is designed around them.  The overall trend is towards greater adoption, as can bee seen from the CRAN download statistics [here](https://hadley.shinyapps.io/cran-downloads/) after filtering to "magrittr" which is the library where the pipe comes from. 
 

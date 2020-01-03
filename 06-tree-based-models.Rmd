@@ -446,7 +446,7 @@ GBMs are easy to overfit, and the parameters need to be carefully tuned using cr
 
 We fit a gbm below without tuning the parameters for the sake of example.  
 
-```{r message = F}
+```{r message = F, cache=T}
 library(gbm)
 gbm <- gbm(charges ~ ., data = train,
            n.trees = 100,
@@ -592,7 +592,7 @@ The best practice of tuning a model is with cross-validation.  This can only be 
 
 An actuary has trained a predictive model and chosen the best hyperparameters, cleaned the data, and performed feature engineering.  They have one problem, however: the error on the training data is far lower than on new, unseen test data.  Read the code below and determine their problem.  Find a way to lower the error on the test data *without changing the model or the data.*  Explain the rational behind your method.
 
-```{r eval = F}
+```{r eval = F, cache=T}
 set.seed(42)
 #Take only 1000 records 
 #Uncomment this when completing this exercise
@@ -654,7 +654,7 @@ control <- trainControl(
   p = 0.8)
 ```
 
-```{r}
+```{r cache=T}
 gbm <- train(charges ~ .,
             data = train,
             method='gbm', 
@@ -687,14 +687,14 @@ rbind(top_result, tenth_result, twenty_seventh_result) %>%
 
 3. The partial dependence of `bmi` onto `charges` makes it appear as if `charges` increases monotonically as `bmi` increases.
 
-```{r fig.width=5, fig.height=5}
-pdp::partial(gbm, pred.var = "bmi", grid.resolution = 20, plot = T)
+```{r fig.width=5, fig.height=5, cache=T}
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 15, plot = T)
 ```
 
 However, when we add in the `ice` curves, we see that there is something else going on.  Explain this graph.  Why are there two groups of lines?
 
-```{r}
-pdp::partial(gbm, pred.var = "bmi", grid.resolution = 30, plot = T, ice = T, alpha = 0.1, palette = "viridis")
+```{r cache=T}
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 15, plot = T, ice = T, alpha = 0.1, palette = "viridis")
 ```
 
 

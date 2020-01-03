@@ -70,7 +70,7 @@ Which means that each $y_i$ is a linear combination of the variables $x_1, ..., 
 
 In the one-dimensional case, this creates a line connecting the points.  In higher dimensions, this creates a hyperplane.
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 
 The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
@@ -205,10 +205,7 @@ First, is there a pattern in the residuals?  If there is, this means that the mo
 plot(model, which = 1)
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-9-1.png" alt="Residuals vs. Fitted" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-9)Residuals vs. Fitted</p>
-</div>
+![(\#fig:unnamed-chunk-9)Residuals vs. Fitted](05-linear-models_files/figure-latex/unnamed-chunk-9-1.pdf) 
 
 The normal QQ shows how well the quantiles of the predictions fit to a theoretical normal distribution.  If this is true, then the graph is a straight 45-degree line.  In this model, you can definitely see that this is not the case.  If this were a good model, this distribution would be closer to normal.
 
@@ -217,10 +214,7 @@ The normal QQ shows how well the quantiles of the predictions fit to a theoretic
 plot(model, which = 2)
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-10-1.png" alt="Normal Q-Q" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-10)Normal Q-Q</p>
-</div>
+![(\#fig:unnamed-chunk-10)Normal Q-Q](05-linear-models_files/figure-latex/unnamed-chunk-10-1.pdf) 
 
 Once you have chosen your model, you should re-train over the entire data set.  This is to make the coefficients more stable because `n` is larger.  Below you can see that the standard error is lower after training over the entire data set.
 
@@ -313,10 +307,9 @@ In words, this is saying that each observation follows *some type of exonential 
 
 The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
 
-<div class="figure">
-<img src="images/glm_links.png" alt="Distribution-Link Function Combinations" width="804" />
-<p class="caption">(\#fig:unnamed-chunk-14)Distribution-Link Function Combinations</p>
-</div>
+\begin{figure}
+\includegraphics[width=22.32in]{images/glm_links} \caption{Distribution-Link Function Combinations}(\#fig:unnamed-chunk-14)
+\end{figure}
 
 For this exam, a common question is to ask candiates to choose the best distribution and link function.  There is no all-encompasing answer, but a few suggestions are
 
@@ -416,7 +409,7 @@ Below you can see graph of deviance residuals vs. the predicted values.
 plot(model, which = 3)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
 
 The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.  
 
@@ -431,7 +424,7 @@ The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i
 plot(model, which = 2)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 ## Combinations of Link and Response Family Examples
 
@@ -505,7 +498,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
 
 ### Gaussian Response with Inverse Link
 
@@ -569,7 +562,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> 
 
 ### Gaussian Response with Identity Link
 
@@ -619,7 +612,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-24-1.pdf)<!-- --> 
 
 ### Gaussian Response with Log Link and Negative Values
 
@@ -655,7 +648,9 @@ We can also see this from the histogram.
 data %>% ggplot(aes(y)) + geom_density( fill = 1, alpha = 0.3)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-26-1} \end{center}
 
 If we try to fit a GLM with a log link, there is an error.  
 
@@ -706,7 +701,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
 
 We see that on average, the predictions are 10 higher than the target.  This is no surprise since $E[Y + 10] = E[Y] + 10$.
 
@@ -728,7 +723,7 @@ But we see that the actual predictions are bad.  If we were to loot at the R-squ
 tibble(y = y, y_hat = y_hat - 10) %>% ggplot(aes(y, y_hat)) + geom_point()
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
 
 One solution is to adjust the $X$ which the model is based on.  Add a constant term to $X$ so that the mean of $Y$ is larger, and hence $Y$ is non zero.  While is a viable approach in the case of only one predictor variable, with more predictors this would not be easy to do.
 
@@ -755,7 +750,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-31-1.pdf)<!-- --> 
 
 A better approach may be to use an inverse link even though the data was generated from a log link.  This is a good illustration of the saying "all models are wrong, but some are useful" in that the statistical assumption of the model is not correct but the model still works.
 
@@ -768,7 +763,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-32-1.pdf)<!-- --> 
 
 ```r
 summary(glm)
@@ -852,7 +847,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-35-1.pdf)<!-- --> 
 
 If we had tried using an inverse instead of the log, the residual plots would look much worse.
 
@@ -869,7 +864,7 @@ plot(glm, cex = 0.4)
 ## Warning in sqrt(crit * p * (1 - hh)/hh): NaNs produced
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-36-1.pdf)<!-- --> 
 
 
 ### Gamma with Inverse Link
@@ -902,7 +897,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-38-1.pdf)<!-- --> 
 
 ## Log transforms of continuous predictors
 
@@ -1000,10 +995,7 @@ interactions %>%
        caption= "data: interactions")
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-43-1.png" alt="Example of weak interaction" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-43)Example of weak interaction</p>
-</div>
+![(\#fig:unnamed-chunk-43)Example of weak interaction](05-linear-models_files/figure-latex/unnamed-chunk-43-1.pdf) 
 
 Here is a clearer example from the `auto_claim` data. The lines show the slope of a linear model, assuming that only `BLUEBOOK` and `CAR_TYPE` were predictors in the model.  You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.  
 
@@ -1016,10 +1008,7 @@ auto_claim %>%
   labs(title = "Kelly Bluebook Value vs Claim Amount")
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-44-1.png" alt="Example of strong interaction" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-44)Example of strong interaction</p>
-</div>
+![(\#fig:unnamed-chunk-44)Example of strong interaction](05-linear-models_files/figure-latex/unnamed-chunk-44-1.pdf) 
 
 Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction.  We can also use an hypothesis test with a GLM to check this.  Simply include an interaction term and see if the coefficient is zero at the desired significance level.
 
@@ -1114,10 +1103,14 @@ We can use a special link function, known as the *standard logistic function*, *
 
 $$\mathbf{\hat{y}} = g^{-1}(\mathbf{X} \mathbf{\beta}) = \frac{1}{1 + e^{-\mathbf{X} \mathbf{\beta}}}$$
 
-<div class="figure" style="text-align: center">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-45-1.png" alt="Standard Logistic Function" width="384" />
-<p class="caption">(\#fig:unnamed-chunk-45)Standard Logistic Function</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-45-1} 
+
+}
+
+\caption{Standard Logistic Function}(\#fig:unnamed-chunk-45)
+\end{figure}
 
 Other link functions for classification problems are possible as well, although the logistic function is the most common.  If a problem asks for an alternative link, such as the *probit*, fit both models and compare the performance.
 
@@ -1218,10 +1211,7 @@ preds <- predict(frequency, newdat=test,type="response")
 qplot(preds) 
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-49-1.png" alt="Distribution of Predicted Probability" width="480" />
-<p class="caption">(\#fig:unnamed-chunk-49)Distribution of Predicted Probability</p>
-</div>
+![(\#fig:unnamed-chunk-49)Distribution of Predicted Probability](05-linear-models_files/figure-latex/unnamed-chunk-49-1.pdf) 
 
 In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 othersise.  The default cutoff is 0.5.  We change this to 0.3 and see that there are 763 policies predicted to have claims.
 
@@ -1450,10 +1440,7 @@ library(pROC)
 roc(test$target, preds, plot = T)
 ```
 
-<div class="figure">
-<img src="05-linear-models_files/figure-html/unnamed-chunk-59-1.png" alt="AUC for auto_claim" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-59)AUC for auto_claim</p>
-</div>
+![(\#fig:unnamed-chunk-59)AUC for auto_claim](05-linear-models_files/figure-latex/unnamed-chunk-59-1.pdf) 
 
 ```
 ## 
@@ -1864,7 +1851,7 @@ cv.out = cv.glmnet(x_train, y_train, alpha = 0) # Fit ridge regression model on 
 plot(cv.out) # Draw plot of training MSE as a function of lambda
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-73-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-73-1.pdf)<!-- --> 
 
 ```r
 bestlam = cv.out$lambda.min  # Select lamda that minimizes training MSE
@@ -1929,7 +1916,7 @@ lasso_mod = glmnet(x_train, y_train, alpha = 1, lambda = grid) # Fit lasso model
 plot(lasso_mod)                                          # Draw plot of coefficients
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-76-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-76-1.pdf)<!-- --> 
 
 Notice that in the coefficient plot that depending on the choice of tuning
 parameter, some of the coefficients are exactly equal to zero. We now
@@ -1942,7 +1929,7 @@ cv.out = cv.glmnet(x_train, y_train, alpha = 1) # Fit lasso model on training da
 plot(cv.out) # Draw plot of training MSE as a function of lambda
 ```
 
-<img src="05-linear-models_files/figure-html/unnamed-chunk-77-1.png" width="672" />
+![](05-linear-models_files/figure-latex/unnamed-chunk-77-1.pdf)<!-- --> 
 
 ```r
 bestlam = cv.out$lambda.min # Select lamda that minimizes training MSE

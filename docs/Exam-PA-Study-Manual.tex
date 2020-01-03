@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-12-04}
+    \date{2020-01-03}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -169,46 +169,6 @@
   \texttt{R\ code} examples
 \end{itemize}
 
-\hypertarget{get-full-access-at-exampa.net}{%
-\section{\texorpdfstring{Get full access at \href{https://www.exampa.net/pricing}{ExamPA.net}}{Get full access at ExamPA.net}}\label{get-full-access-at-exampa.net}}
-
-\begin{itemize}
-\tightlist
-\item
-  {\textbf{Pass Guarantee}: Pass in December or get the next 7 months free!}
-\item
-  Three \textbf{original} practice exams and more coming soon
-\item
-  \textbf{June Exam PA Video}
-\item
-  \textbf{Hospital Readmissions Video}
-\item
-  \textbf{Student Success Video}
-\item
-  An online discussion forum
-\item
-  Time-saving techniques
-\item
-  An RStudio/Data Manipulation tutorial
-\end{itemize}
-
-\hypertarget{content-samples}{%
-\section{Content Samples}\label{content-samples}}
-
-\hypertarget{a-response-to-a-subscribers-question}{%
-\subsection{A Response to a Subscriber's Question}\label{a-response-to-a-subscribers-question}}
-
-An individual on our forum at ExamPA.net just asked this excellent question.
-
-\begin{quote}
-Note: At 3:09, I say ``The L1 norm is lambda'', which is mispeaking. The L1 norm is the sum of the absolute value of the beta coefficients.
-\end{quote}
-
-\hypertarget{an-original-practice-exam-project-statement}{%
-\subsection{An Original Practice Exam Project Statement}\label{an-original-practice-exam-project-statement}}
-
-\href{https://github.com/sdcastillo/JunePAFiles/blob/master/Practice\%20Exam\%20Sample.pdf}{Here} you can see the project statement for a practice exam which is in the format of a real exam.
-
 \hypertarget{about-the-author}{%
 \section{About the author}\label{about-the-author}}
 
@@ -218,17 +178,12 @@ Sam Castillo is a predictive modeler at Milliman in Chicago, maintains a \href{h
 
 Support: \href{mailto:sam@exampa.net}{\nolinkurl{sam@exampa.net}}
 
-\hypertarget{contribute}{%
-\section{Contribute}\label{contribute}}
-
-This book was written in \href{https://rmarkdown.rstudio.com/}{RMarkdown} using \href{https://bookdown.org/}{bookdown}. It is built from a github page, where updates can be sent to this page in minutes. A big shout out to those who have made suggestions already: Erlan Wheeler, David Hill, Caden Collier, Jon Lai, Peter Schelble, and Abhinav Gadde.
-
 \hypertarget{the-exam}{%
 \chapter{The exam}\label{the-exam}}
 
 The main challenge of this exam is in communication: both understanding what they want you to do as well as telling the grader what it is that you did.
 
-You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on a Prometric toaster-oven computer. The syllabus uses fancy language to describe the topics covered on the exam, making it sound more difficult than it should be. A good analogy is a job description that has many complex-sounding tasks, when in reality the day-to-day operations of the employee are far simpler.
+You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on a Prometric computer. The syllabus uses fancy language to describe the topics covered on the exam, making it sound more difficult than it should be. A good analogy is a job description that has many complex-sounding tasks, when in reality the day-to-day operations of the employee are far simpler.
 
 A non-technical translation is as follows:
 
@@ -264,6 +219,13 @@ A non-technical translation is as follows:
   Change model parameters
 \end{itemize}
 
+\hypertarget{prometric-demo}{%
+\chapter{Prometric Demo}\label{prometric-demo}}
+
+The following video from Prometric shows what the computer set up will look like. In addition to the files shown in the video, they will give you a printed out project statement (If they don't give this to you right away, ask for it.)
+
+SOAFinalCut from Prometric on Vimeo.
+
 \hypertarget{you-already-know-what-learning-is}{%
 \chapter{You already know what learning is}\label{you-already-know-what-learning-is}}
 
@@ -289,16 +251,9 @@ For your convenience, all data in this book, including data from prior exams and
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#check if devtools is installed}
-\CommentTok{#then install ExamPAData from github}
-\ControlFlowTok{if}\NormalTok{(}\StringTok{"devtools"} \OperatorTok{%in%}\StringTok{ }\KeywordTok{installed.packages}\NormalTok{())\{}
-  \KeywordTok{library}\NormalTok{(devtools)}
-  \KeywordTok{install_github}\NormalTok{(}\StringTok{"sdcastillo/ExamPAData"}\NormalTok{)}
-\NormalTok{\} }\ControlFlowTok{else}\NormalTok{\{}
-  \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-  \KeywordTok{library}\NormalTok{(devtools)}
-  \KeywordTok{install_github}\NormalTok{(}\StringTok{"sdcastillo/ExamPAData"}\NormalTok{)}
-\NormalTok{\}}
+\CommentTok{# Install remotes if it's not yet installed}
+\CommentTok{# install.packages("remotes")}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"sdcastillo/ExamPAData"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -335,7 +290,7 @@ This book references the publically-avialable textbook ``An Introduction to Stat
 
 \url{http://faculty.marshall.usc.edu/gareth-james/ISL/}
 
-If you already have R and Rstudio installed then skip to ``Download the data''.
+If you already have R and RStudio installed then skip to ``Download the data''.
 
 \hypertarget{new-users}{%
 \section{New users}\label{new-users}}
@@ -363,25 +318,29 @@ R code is organized into libraries. You want to use the exact same code that wil
 \hypertarget{r-programming}{%
 \chapter{R programming}\label{r-programming}}
 
-This book covers the bare minimum of R programming needed for Exam PA. The book ``R for Data Science'' provides more detail.
+This chapter covers the bare minimum of R programming needed for Exam PA. The book
+``R for Data Science'' provides more detail.
 
 \url{https://r4ds.had.co.nz/}
 
 \hypertarget{notebook-chunks}{%
 \section{Notebook chunks}\label{notebook-chunks}}
 
-On the Exam, you will start with an .Rmd (R Markdown) template, which organize code into \href{https://bookdown.org/yihui/rmarkdown/notebook.html}{R Notebooks}. Within each notebook, code is organized into chunks.
+On the Exam, you will start with an .Rmd (R Markdown) template, which organize
+code into \href{https://bookdown.org/yihui/rmarkdown/notebook.html}{R Notebooks}.
+Within each notebook, code is organized into chunks.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#this is a chunk}
+\CommentTok{# This is a chunk}
 \end{Highlighting}
 \end{Shaded}
 
 Your time is valuable. Throughout this book, I will include useful keyboard shortcuts.
 
 \begin{quote}
-\textbf{Shortcut:} To run everything in a chunk quickly, press \texttt{CTRL\ +\ SHIFT\ +\ ENTER}. To create a new chunk, use \texttt{CTRL\ +\ ALT\ +\ I}.
+\textbf{Shortcut:} To run everything in a chunk quickly, press \texttt{CTRL\ +\ SHIFT\ +\ ENTER}.
+To create a new chunk, use \texttt{CTRL\ +\ ALT\ +\ I}.
 \end{quote}
 
 \hypertarget{basic-operations}{%
@@ -391,7 +350,7 @@ The usual math operations apply.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#addition}
+\CommentTok{# Addition}
 \DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{2} 
 \end{Highlighting}
 \end{Shaded}
@@ -412,8 +371,8 @@ The usual math operations apply.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#multiplication}
-\DecValTok{2}\OperatorTok{*}\DecValTok{2}
+\CommentTok{# Multiplication}
+\DecValTok{2} \OperatorTok{*}\StringTok{ }\DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -423,8 +382,8 @@ The usual math operations apply.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#division}
-\DecValTok{4}\OperatorTok{/}\DecValTok{2}
+\CommentTok{# Division}
+\DecValTok{4} \OperatorTok{/}\StringTok{ }\DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -434,7 +393,7 @@ The usual math operations apply.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#exponentiation}
+\CommentTok{# Exponentiation}
 \DecValTok{2}\OperatorTok{^}\DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
@@ -443,7 +402,9 @@ The usual math operations apply.
 ## [1] 8
 \end{verbatim}
 
-There are two assignment operators: \texttt{=} and \texttt{\textless{}-}. The latter is preferred because it is specific to assigning a variable to a value. The ``='' operator is also used for assigning values in functions (see the functions section).
+There are two assignment operators: \texttt{=} and \texttt{\textless{}-}. The latter is preferred because
+it is specific to assigning a variable to a value. The \texttt{=} operator is also used
+for specifying arguments in functions (see the functions section).
 
 \begin{quote}
 \textbf{Shortcut:} \texttt{ALT\ +\ -} creates a \texttt{\textless{}-}..
@@ -451,12 +412,11 @@ There are two assignment operators: \texttt{=} and \texttt{\textless{}-}. The la
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#variable assignment}
-\NormalTok{x =}\StringTok{ }\DecValTok{2}
+\CommentTok{# Variable assignment}
 \NormalTok{y <-}\StringTok{ }\DecValTok{2}
 
-\CommentTok{#equality}
-\DecValTok{4} \OperatorTok{==}\StringTok{ }\DecValTok{2} \CommentTok{#False}
+\CommentTok{# Equality}
+\DecValTok{4} \OperatorTok{==}\StringTok{ }\DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -466,7 +426,7 @@ There are two assignment operators: \texttt{=} and \texttt{\textless{}-}. The la
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{5} \OperatorTok{==}\StringTok{ }\DecValTok{5} \CommentTok{#true}
+\DecValTok{5} \OperatorTok{==}\StringTok{ }\DecValTok{5}
 \end{Highlighting}
 \end{Shaded}
 
@@ -476,7 +436,7 @@ There are two assignment operators: \texttt{=} and \texttt{\textless{}-}. The la
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FloatTok{3.14} \OperatorTok{>}\StringTok{ }\DecValTok{3} \CommentTok{#true}
+\FloatTok{3.14} \OperatorTok{>}\StringTok{ }\DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -486,7 +446,7 @@ There are two assignment operators: \texttt{=} and \texttt{\textless{}-}. The la
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FloatTok{3.14} \OperatorTok{>=}\StringTok{ }\DecValTok{3} \CommentTok{#true}
+\FloatTok{3.14} \OperatorTok{>=}\StringTok{ }\DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -494,12 +454,13 @@ There are two assignment operators: \texttt{=} and \texttt{\textless{}-}. The la
 ## [1] TRUE
 \end{verbatim}
 
-Vectors can be added just like numbers. The \texttt{c} stands for ``concatenate'', which creates vectors.
+Vectors can be added just like numbers. The \texttt{c} stands for ``concatenate'', which
+creates vectors.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)}
-\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
 \NormalTok{x }\OperatorTok{+}\StringTok{ }\NormalTok{y}
 \end{Highlighting}
 \end{Shaded}
@@ -510,7 +471,7 @@ Vectors can be added just like numbers. The \texttt{c} stands for ``concatenate'
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x}\OperatorTok{*}\NormalTok{y}
+\NormalTok{x }\OperatorTok{*}\StringTok{ }\NormalTok{y}
 \end{Highlighting}
 \end{Shaded}
 
@@ -531,7 +492,7 @@ Vectors can be added just like numbers. The \texttt{c} stands for ``concatenate'
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{z}\OperatorTok{/}\DecValTok{2}
+\NormalTok{z }\OperatorTok{/}\StringTok{ }\DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -549,7 +510,8 @@ Vectors can be added just like numbers. The \texttt{c} stands for ``concatenate'
 ## [1] 7 9
 \end{verbatim}
 
-Lists are like vectors but can take any type of object type. I already mentioned \texttt{numeric} types. There are also \texttt{character} (string) types, \texttt{factor} types, and \texttt{boolean} types.
+I already mentioned \texttt{numeric} types. There are also \texttt{character} (string) types,
+\texttt{factor} types, and \texttt{boolean} types.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -558,15 +520,15 @@ Lists are like vectors but can take any type of object type. I already mentioned
 \end{Highlighting}
 \end{Shaded}
 
-Characters are combined with the \texttt{paste} function.
+Character vectors can be combined with the \texttt{paste()} function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a =}\StringTok{ "The"}
-\NormalTok{b =}\StringTok{ "Quick"}
-\NormalTok{c =}\StringTok{ "Brown"}
-\NormalTok{d =}\StringTok{ "Fox"}
-\KeywordTok{paste}\NormalTok{(a,b,c,d)}
+\NormalTok{a <-}\StringTok{ "The"}
+\NormalTok{b <-}\StringTok{ "Quick"}
+\NormalTok{c <-}\StringTok{ "Brown"}
+\NormalTok{d <-}\StringTok{ "Fox"}
+\KeywordTok{paste}\NormalTok{(a, b, c, d)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -574,13 +536,14 @@ Characters are combined with the \texttt{paste} function.
 ## [1] "The Quick Brown Fox"
 \end{verbatim}
 
-Factors are characters that expect only specific values. A character can take on any value. A factor is only allowed a finite number of values. This reduces the memory size.
+Factors look like character vectors but can only contain a finite number of predefined
+values.
 
 The below factor has only one ``level'', which is the list of assigned values.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{factor =}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(character)}
+\NormalTok{factor <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(character)}
 \KeywordTok{levels}\NormalTok{(factor)}
 \end{Highlighting}
 \end{Shaded}
@@ -589,7 +552,8 @@ The below factor has only one ``level'', which is the list of assigned values.
 ## [1] "The"
 \end{verbatim}
 
-The levels of a factor are by default in R in alphabetical order (Q comes alphabetically before T).
+The levels of a factor are by default in R in alphabetical order (Q comes alphabetically
+before T).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -602,15 +566,19 @@ The levels of a factor are by default in R in alphabetical order (Q comes alphab
 ## [1] "Quick" "The"
 \end{verbatim}
 
-\textbf{In building linear models, the order of the factors matters.} In GLMs, the ``reference level'' or ``base level'' should always be the level which has the most observations. This will be covered in the section on linear models.
+\textbf{In building linear models, the order of the factors matters.} In GLMs, the
+``reference level'' or ``base level'' should always be the level which has the most
+observations. This will be covered in the section on linear models.
 
-Booleans are just True and False values. R understands \texttt{T} or \texttt{TRUE} in the same way. When doing math, bools are converted to 0/1 values where 1 is equivalent to TRUE and 0 FALSE.
+Booleans are just \texttt{TRUE} and \texttt{FALSE} values. R understands \texttt{T} or \texttt{TRUE} in the
+same way, but the latter is preferred. When doing math, bools are converted to
+0/1 values where 1 is equivalent to TRUE and 0 FALSE.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{bool_true <-}\StringTok{ }\NormalTok{T}
-\NormalTok{bool_false <-}\StringTok{ }\NormalTok{F}
-\NormalTok{bool_true}\OperatorTok{*}\NormalTok{bool_false}
+\NormalTok{bool_true <-}\StringTok{ }\OtherTok{TRUE}
+\NormalTok{bool_false <-}\StringTok{ }\OtherTok{FALSE}
+\NormalTok{bool_true }\OperatorTok{*}\StringTok{ }\NormalTok{bool_false}
 \end{Highlighting}
 \end{Shaded}
 
@@ -634,7 +602,7 @@ Vectors work in the same way.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{bool_vect <-}\StringTok{ }\KeywordTok{c}\NormalTok{(T,T, F)}
+\NormalTok{bool_vect <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
 \KeywordTok{sum}\NormalTok{(bool_vect)}
 \end{Highlighting}
 \end{Shaded}
@@ -643,12 +611,13 @@ Vectors work in the same way.
 ## [1] 2
 \end{verbatim}
 
-Vectors are indexed using \texttt{{[}{]}}.
+Vectors are indexed using \texttt{{[}}. If you are only extracting a single element, you
+should use \texttt{{[}{[}} for clarity.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{abc <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{)}
-\NormalTok{abc[}\DecValTok{1}\NormalTok{]}
+\NormalTok{abc[[}\DecValTok{1}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -658,7 +627,7 @@ Vectors are indexed using \texttt{{[}{]}}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{abc[}\DecValTok{2}\NormalTok{]}
+\NormalTok{abc[[}\DecValTok{2}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -668,7 +637,7 @@ Vectors are indexed using \texttt{{[}{]}}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{abc[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)]}
+\NormalTok{abc[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{)]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -678,7 +647,7 @@ Vectors are indexed using \texttt{{[}{]}}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{abc[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]}
+\NormalTok{abc[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -698,7 +667,7 @@ Vectors are indexed using \texttt{{[}{]}}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{abc[}\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)]}
+\NormalTok{abc[}\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -709,12 +678,12 @@ Vectors are indexed using \texttt{{[}{]}}.
 \hypertarget{lists}{%
 \section{Lists}\label{lists}}
 
-Lists are vectors that can hold mixed object types. Vectors need to be all of the same type.
+Lists are vectors that can hold mixed object types.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ls <-}\StringTok{ }\KeywordTok{list}\NormalTok{(T, }\StringTok{"Character"}\NormalTok{, }\FloatTok{3.14}\NormalTok{)}
-\NormalTok{ls}
+\NormalTok{my_list <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\StringTok{"Character"}\NormalTok{, }\FloatTok{3.14}\NormalTok{)}
+\NormalTok{my_list}
 \end{Highlighting}
 \end{Shaded}
 
@@ -733,8 +702,8 @@ Lists can be named.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ls <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{bool =}\NormalTok{ T, }\DataTypeTok{character =} \StringTok{"character"}\NormalTok{, }\DataTypeTok{numeric =} \FloatTok{3.14}\NormalTok{)}
-\NormalTok{ls}
+\NormalTok{my_list <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{bool =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{character =} \StringTok{"character"}\NormalTok{, }\DataTypeTok{numeric =} \FloatTok{3.14}\NormalTok{)}
+\NormalTok{my_list}
 \end{Highlighting}
 \end{Shaded}
 
@@ -753,7 +722,7 @@ The \texttt{\$} operator indexes lists.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ls}\OperatorTok{$}\NormalTok{numeric}
+\NormalTok{my_list}\OperatorTok{$}\NormalTok{numeric}
 \end{Highlighting}
 \end{Shaded}
 
@@ -763,7 +732,7 @@ The \texttt{\$} operator indexes lists.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ls}\OperatorTok{$}\NormalTok{numeric }\OperatorTok{+}\StringTok{ }\DecValTok{5}
+\NormalTok{my_list}\OperatorTok{$}\NormalTok{numeric }\OperatorTok{+}\StringTok{ }\DecValTok{5}
 \end{Highlighting}
 \end{Shaded}
 
@@ -771,27 +740,25 @@ The \texttt{\$} operator indexes lists.
 ## [1] 8.14
 \end{verbatim}
 
-Lists can also be indexed using \texttt{{[}{]}}.
+Lists can also be indexed using \texttt{{[}{[}}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ls[}\DecValTok{1}\NormalTok{]}
+\NormalTok{my_list[[}\DecValTok{1}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## $bool
 ## [1] TRUE
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ls[}\DecValTok{2}\NormalTok{]}
+\NormalTok{my_list[[}\DecValTok{2}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## $character
 ## [1] "character"
 \end{verbatim}
 
@@ -799,9 +766,9 @@ Lists can contain vectors, other lists, and any other object.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{everything <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{vector =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }
+\NormalTok{everything <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{vector =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{), }
                    \DataTypeTok{character =} \KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{), }
-                   \DataTypeTok{list =}\NormalTok{ ls)}
+                   \DataTypeTok{list =}\NormalTok{ my_list)}
 \NormalTok{everything}
 \end{Highlighting}
 \end{Shaded}
@@ -878,13 +845,21 @@ To find out the type of an object, use \texttt{class} or \texttt{str} or \texttt
 \hypertarget{functions}{%
 \section{Functions}\label{functions}}
 
-You only need to understand the very basics of functions for this exam. Still, understanding functions helps you to understand \emph{everything} in R, since R is a functional \href{http://adv-r.had.co.nz/Functional-programming.html}{programming language}, unlike Python, C, VBA, Java which are all object-oriented, or SQL which isn't really a language but a series of set-operations.
+You only need to understand the very basics of functions. The big picture, though, is that
+understanding functions helps you to understand \emph{everything} in R, since R is a
+functional \href{http://adv-r.had.co.nz/Functional-programming.html}{programming language},
+unlike Python, C, VBA, Java which are all object-oriented, or SQL which isn't
+really a language but a series of set-operations.
 
-Functions do things. The convention is to name a function as a verb. The function \texttt{make\_rainbows()} would create a rainbow. The function \texttt{summarise\_vectors} would summarise vectors. Functions may or may not have an input and output.
+Functions do things. The convention is to name a function as a verb. The function
+\texttt{make\_rainbows()} would create a rainbow. The function \texttt{summarise\_vectors()}
+would summarise vectors. Functions may or may not have an input and output.
 
-If you need to do something in R, there is a high probability that someone has already written a function to do it. That being said, creating simple functions is quite useful.
+If you need to do something in R, there is a high probability that someone has
+already written a function to do it. That being said, creating simple functions
+is quite useful.
 
-\textbf{A function that does not return anything}
+Here is an example that has a side effect of printing the input:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -902,15 +877,16 @@ If you need to do something in R, there is a high probability that someone has a
 
 \textbf{A function that returns something}
 
-When returning something, the \texttt{return} statement is optional.
+When returning the last evaluated expression, the \texttt{return} statement is optional.
+In fact, it is discouraged by convention.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{add_together <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y)\{}
+\NormalTok{add_together <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y) \{}
 \NormalTok{  x }\OperatorTok{+}\StringTok{ }\NormalTok{y}
 \NormalTok{\}}
 
-\KeywordTok{add_together}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\KeywordTok{add_together}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -920,11 +896,12 @@ When returning something, the \texttt{return} statement is optional.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{add_together <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y)\{}
+\NormalTok{add_together <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y) \{}
+  \CommentTok{# Works, but bad practice}
   \KeywordTok{return}\NormalTok{(x }\OperatorTok{+}\StringTok{ }\NormalTok{y)}
 \NormalTok{\}}
 
-\KeywordTok{add_together}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\KeywordTok{add_together}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -932,12 +909,12 @@ When returning something, the \texttt{return} statement is optional.
 ## [1] 7
 \end{verbatim}
 
-Functions can work with vectors.
+Binary operations in R are vectorized. In other words, they are applied element-wise.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x_vector <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\NormalTok{y_vector <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{)}
+\NormalTok{x_vector <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{y_vector <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{)}
 \KeywordTok{add_together}\NormalTok{(x_vector, y_vector)}
 \end{Highlighting}
 \end{Shaded}
@@ -946,7 +923,8 @@ Functions can work with vectors.
 ## [1] 5 7 9
 \end{verbatim}
 
-Many functions in R actually return lists! This is why R objects can be indexed with dollar sign.
+Many functions in R actually return lists! This is why R objects can be indexed
+with dollar sign.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -965,13 +943,13 @@ Here's a function that returns a list.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sum_multiply <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x,y)\{}
+\NormalTok{sum_multiply <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x,y) \{}
 \NormalTok{  sum <-}\StringTok{ }\NormalTok{x }\OperatorTok{+}\StringTok{ }\NormalTok{y}
-\NormalTok{  product <-}\StringTok{ }\NormalTok{x}\OperatorTok{*}\NormalTok{y}
+\NormalTok{  product <-}\StringTok{ }\NormalTok{x }\OperatorTok{*}\StringTok{ }\NormalTok{y}
   \KeywordTok{list}\NormalTok{(}\StringTok{"Sum"}\NormalTok{ =}\StringTok{ }\NormalTok{sum, }\StringTok{"Product"}\NormalTok{ =}\StringTok{ }\NormalTok{product)}
 \NormalTok{\}}
 
-\NormalTok{result <-}\StringTok{ }\KeywordTok{sum_multiply}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{result <-}\StringTok{ }\KeywordTok{sum_multiply}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
 \NormalTok{result}\OperatorTok{$}\NormalTok{Sum}
 \end{Highlighting}
 \end{Shaded}
@@ -993,14 +971,56 @@ Here's a function that returns a list.
 \hypertarget{data-frames}{%
 \section{Data frames}\label{data-frames}}
 
-R is an old programming language. The original \texttt{data.frame} object has been updated with the newer and better \texttt{tibble} (like the word ``table''). \textbf{Tibbles are really lists of vectors, where each column is a vector}.
+You can think of a data frame as a table that is implemented as a list of vectors.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#the tibble library has functions for making tibbles}
-\KeywordTok{library}\NormalTok{(tibble) }
-\NormalTok{data <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{age =} \KeywordTok{c}\NormalTok{(}\DecValTok{25}\NormalTok{, }\DecValTok{35}\NormalTok{), }\DataTypeTok{has_fsa =} \KeywordTok{c}\NormalTok{(F, T))}
-\NormalTok{data}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
+  \DataTypeTok{age =} \KeywordTok{c}\NormalTok{(}\DecValTok{25}\NormalTok{, }\DecValTok{35}\NormalTok{),}
+  \DataTypeTok{has_fsa =} \KeywordTok{c}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   age has_fsa
+## 1  25   FALSE
+## 2  35    TRUE
+\end{verbatim}
+
+You can also work with tibbles, which are data frames but have nicer printing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# The tidyverse library has functions for making tibbles}
+\KeywordTok{library}\NormalTok{(tidyverse) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------------------------------------------- tidyverse 1.2.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.2.1     v purrr   0.3.2
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   1.0.0     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{age =} \KeywordTok{c}\NormalTok{(}\DecValTok{25}\NormalTok{, }\DecValTok{35}\NormalTok{), }\DataTypeTok{has_fsa =} \KeywordTok{c}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{df}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1016,7 +1036,7 @@ To index columns in a tibble, the same ``\$'' is used as indexing a list.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data}\OperatorTok{$}\NormalTok{age}
+\NormalTok{df}\OperatorTok{$}\NormalTok{age}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1028,7 +1048,7 @@ To find the number of rows and columns, use \texttt{dim}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{dim}\NormalTok{(data)}
+\KeywordTok{dim}\NormalTok{(df)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1036,11 +1056,11 @@ To find the number of rows and columns, use \texttt{dim}.
 ## [1] 2 2
 \end{verbatim}
 
-To fine a summary, use \texttt{summary}
+To find a summary, use \texttt{summary}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(data)}
+\KeywordTok{summary}\NormalTok{(df)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1057,7 +1077,10 @@ To fine a summary, use \texttt{summary}
 \hypertarget{pipes}{%
 \section{Pipes}\label{pipes}}
 
-The pipe operator \texttt{\%\textgreater{}\%} is a way of making code \emph{modular}, meaning that it can be written and executed in incremental steps. Those familiar with Python's Pandas will be see that \texttt{\%\textgreater{}\%} is quite similar to ``.''. This also makes code easier to read.
+The pipe operator \texttt{\%\textgreater{}\%} is a way of making code \emph{modular}, meaning that it can
+be written and executed in incremental steps. Those familiar with Python's Pandas
+will be see that \texttt{\%\textgreater{}\%} is quite similar to ``.''. This also makes code easier to
+read.
 
 In five seconds, tell me what the below code is doing.
 
@@ -1071,18 +1094,18 @@ In five seconds, tell me what the below code is doing.
 ## [1] 1
 \end{verbatim}
 
-Getting to the answer of 1 requires starting from the inner-most nested brackets and moving outwards from right to left.
+Getting to the answer of 1 requires starting from the inner-most nested brackets
+and moving outwards from right to left.
 
 The math notation would be slightly easier to read, but still painful.
 
 \[log(\sqrt{e^{log_2(\sqrt{max(3,4,16)})}})\]
 
-Here is the same algebra using the pipe. To read this, replace the \texttt{\%\textgreater{}\%} with the word \texttt{THEN}.
+Here is the same algebra using the pipe. To read this, replace the \texttt{\%\textgreater{}\%} with
+the word \texttt{THEN}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#the pipe is from the dplyr library}
-\KeywordTok{library}\NormalTok{(dplyr) }
 \KeywordTok{max}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{16}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{sqrt}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{log2}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
@@ -1098,22 +1121,24 @@ Here is the same algebra using the pipe. To read this, replace the \texttt{\%\te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#max(c(3, 4, 16) THEN   #The max of 3, 4, and 16 is 16}
-\CommentTok{#  sqrt() THEN          #The square root of 16 is 4}
-\CommentTok{#  log2() THEN          #The log in base 2 of 4 is 2}
-\CommentTok{#  exp() THEN           #the exponent of 2 is e^2}
-\CommentTok{#  sqrt() THEN          #the square root of e^2 is e}
-\CommentTok{#  log()                #the natural logarithm of e is 1}
+\CommentTok{# max(c(3, 4, 16) THEN  # The max of 3, 4, and 16 is 16}
+\CommentTok{#  sqrt() THEN          # The square root of 16 is 4}
+\CommentTok{#  log2() THEN          # The log in base 2 of 4 is 2}
+\CommentTok{#  exp() THEN           # The exponent of 2 is e^2}
+\CommentTok{#  sqrt() THEN          # The square root of e^2 is e}
+\CommentTok{#  log()                # The natural logarithm of e is 1}
 \end{Highlighting}
 \end{Shaded}
 
-Pipes are exceptionally useful for data manipulations, which is covered in the next chapter.
+Pipes are exceptionally useful for data manipulations, which is covered in the
+next chapter.
 
 \begin{quote}
 \textbf{Tip:} To quickly produce pipes, use \texttt{CTRL\ +\ SHIFT\ +\ M}.
 \end{quote}
 
-By highlighting only certain sections, we can run the code in steps as if we were using a debugger. This makes testing out code much faster.
+By highlighting only certain sections, we can run the code in steps as if we were
+using a debugger. This makes testing out code much faster.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1190,6 +1215,28 @@ By highlighting only certain sections, we can run the code in steps as if we wer
 ## [1] 1
 \end{verbatim}
 
+\hypertarget{the-soas-code-doesnt-use-pipes-or-dplyr-so-can-i-skip-learning-this}{%
+\section{The SOA's code doesn't use pipes or dplyr, so can I skip learning this?}\label{the-soas-code-doesnt-use-pipes-or-dplyr-so-can-i-skip-learning-this}}
+
+Yes, if you really want to.
+
+The advantages to learning pipes, and the reason why this manual uses them are
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  It saves you time.
+\item
+  It will help you in real life data science projects.
+\item
+  The majority of the R community uses this style.
+\item
+  The SOA actuaries who create the Exam PA content will eventually catch on.
+\item
+  Most modern R software is designed around them. The overall trend is towards greater adoption, as can bee seen from the CRAN download statistics \href{https://hadley.shinyapps.io/cran-downloads/}{here} after filtering to ``magrittr'' which is the library where the pipe comes from.
+\end{enumerate}
+
 \hypertarget{data-manipulation}{%
 \chapter{Data manipulation}\label{data-manipulation}}
 
@@ -1206,7 +1253,6 @@ Chapter & Topic\tabularnewline
 10 & Tibbles\tabularnewline
 12 & Tidy data\tabularnewline
 15 & Factors\tabularnewline
-16 & Dates and times\tabularnewline
 17 & Introduction\tabularnewline
 18 & Pipes\tabularnewline
 19 & Functions\tabularnewline
@@ -2160,7 +2206,7 @@ Just as the name implies, GLMs are more \emph{general} in that they are more fle
 \[g(\mu(X)) = X\beta\]
 where \(g\) is called the \emph{link function} and \(\mu = E[Y|X]\).
 
-In words, this is saying that each observation follows \emph{some type of exonential distrubution} (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a \emph{dispersion} parameter, is more more info that is needed here. For an explanation, see \href{https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf}{Ch. 2.2 of CAS Monograph 5}.
+In words, this is saying that each observation follows \emph{some type of exonential distrubution} (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a \emph{dispersion} parameter, but that is more more info that is needed here. For an explanation, see \href{https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf}{Ch. 2.2 of CAS Monograph 5}.
 
 The possible combinations of link functions and distribution families are summarized nicely on \href{https://en.wikipedia.org/wiki/Generalized_linear_model\#Link_function}{Wikipedia}.
 
@@ -2320,10 +2366,7 @@ The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i
 
 What is an example of when to use a log link with a guassian response? What about a Gamma family with an inverse link? What about an inverse Gaussian response and an inverse square link? As these questions illustrate, there are many combinations of link and response family. In the real world, a model rarely fits perfectly, and so often these choices come down to the judgement of the modeler - which model is the best fit and meets the business objectives?
 
-However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves. In each of these examples, the model will be a perfect fit.
-
-\hypertarget{gaussian-response-with-log-link}{%
-\subsection{Gaussian Response with Log Link}\label{gaussian-response-with-log-link}}
+However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves.
 
 Recall that a GLM has two parts:
 
@@ -2335,7 +2378,12 @@ Recall that a GLM has two parts:
   A \textbf{link function}: between the random component and the covariates: \(g(\mu(X)) = X\beta\) where \(\mu = E[Y|X]\)
 \end{enumerate}
 
-We create a function that takes in \(X\) and returns a gaussian random variable with mean equal to the inverse link of \(X\). If we say that the link is the log, then the inverse link is the exponent.
+\textbf{Following this recipe, we can simulate data from any combination of link function and response family. This helps us to understand the GLM framework very clearly.}
+
+\hypertarget{gaussian-response-with-log-link}{%
+\subsection{Gaussian Response with Log Link}\label{gaussian-response-with-log-link}}
+
+We create a function that takes in data \(x\) and returns a guassian random variable that has mean equal to the inverse link, which in the case of a log link is the exponent. We add 10 to \(x\) so that the values will always be positive, as will be described later on.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2345,7 +2393,7 @@ We create a function that takes in \(X\) and returns a gaussian random variable 
 \end{Highlighting}
 \end{Shaded}
 
-The values of \(X\) do not need to be normal. The above assumption is merely that the mean of the response \(Y\) is related to \(X\) through the link function, \texttt{mean\ =\ exp(10\ +\ x)}, and that the distribution is normal. For illustration, here we use \(X\)'s from a uniform distribution.
+The values of \(X\) do not need to be normal. The above assumption is merely that the mean of the response \(Y\) is related to \(X\) through the link function, \texttt{mean\ =\ exp(10\ +\ x)}, and that the distribution is normal. This has been accomplished with \texttt{rnorm} already. For illustration, here we use \(X\)'s from a uniform distribution.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2792,7 +2840,7 @@ If we had tried using an inverse instead of the log, the residual plots would lo
 \includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-36-1.pdf}
 
 \hypertarget{gamma-with-inverse-link}{%
-\section{Gamma with Inverse Link}\label{gamma-with-inverse-link}}
+\subsection{Gamma with Inverse Link}\label{gamma-with-inverse-link}}
 
 With the inverse link, the mean has a factor \texttt{1/(x\ +\ 1)}. Note that we need to add 1 to x to avoid dividing by zero.
 
@@ -3592,6 +3640,527 @@ ISLR 6.2 Shrinkage Methods &\tabularnewline
 \bottomrule
 \end{longtable}
 
+\hypertarget{example-ridge-regression}{%
+\section{Example: Ridge Regression}\label{example-ridge-regression}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ISLR)}
+\KeywordTok{library}\NormalTok{(glmnet)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(tidyr)}
+\end{Highlighting}
+\end{Shaded}
+
+We will use the \texttt{glmnet} package in order to perform ridge regression and
+the lasso. The main function in this package is \texttt{glmnet()}, which can be used
+to fit ridge regression models, lasso models, and more. This function has
+slightly different syntax from other model-fitting functions that we have
+encountered thus far in this book. In particular, we must pass in an \(x\)
+matrix as well as a \(y\) vector, and we do not use the \(y \sim x\) syntax.
+
+Before proceeding, let's first ensure that the missing values have
+been removed from the data, as described in the previous lab.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Hitters =}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(Hitters)}
+\end{Highlighting}
+\end{Shaded}
+
+We will now perform ridge regression and the lasso in order to predict \texttt{Salary} on
+the \texttt{Hitters} data. Let's set up our data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\KeywordTok{model.matrix}\NormalTok{(Salary}\OperatorTok{~}\NormalTok{., Hitters)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{] }\CommentTok{# trim off the first column}
+                                         \CommentTok{# leaving only the predictors}
+\NormalTok{y =}\StringTok{ }\NormalTok{Hitters }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(Salary) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{as.numeric}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{model.matrix()} function is particularly useful for creating \(x\); not only
+does it produce a matrix corresponding to the 19 predictors but it also
+automatically transforms any qualitative variables into dummy variables.
+The latter property is important because \texttt{glmnet()} can only take numerical,
+quantitative inputs.
+
+The \texttt{glmnet()} function has an alpha argument that determines what type
+of model is fit. If \texttt{alpha\ =\ 0} then a ridge regression model is fit, and if \texttt{alpha\ =\ 1}
+then a lasso model is fit. We first fit a ridge regression model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grid =}\StringTok{ }\DecValTok{10}\OperatorTok{^}\KeywordTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{-2}\NormalTok{, }\DataTypeTok{length =} \DecValTok{100}\NormalTok{)}
+\NormalTok{ridge_mod =}\StringTok{ }\KeywordTok{glmnet}\NormalTok{(x, y, }\DataTypeTok{alpha =} \DecValTok{0}\NormalTok{, }\DataTypeTok{lambda =}\NormalTok{ grid)}
+\end{Highlighting}
+\end{Shaded}
+
+By default the \texttt{glmnet()} function performs ridge regression for an automatically
+selected range of \(\lambda\) values. However, here we have chosen to implement
+the function over a grid of values ranging from \(\lambda = 10^10\) to \(\lambda = 10^{-2}\), essentially covering the full range of scenarios from the null model containing
+only the intercept, to the least squares fit.
+
+As we will see, we can also compute
+model fits for a particular value of \(\lambda\) that is not one of the original
+grid values. Note that by default, the \texttt{glmnet()} function standardizes the
+variables so that they are on the same scale. To turn off this default setting,
+use the argument \texttt{standardize\ =\ FALSE}.
+
+Associated with each value of \(\lambda\) is a vector of ridge regression coefficients,
+stored in a matrix that can be accessed by \texttt{coef()}. In this case, it is a \(20 \times 100\)
+matrix, with 20 rows (one for each predictor, plus an intercept) and 100
+columns (one for each value of \(\lambda\)).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(}\KeywordTok{coef}\NormalTok{(ridge_mod))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  20 100
+\end{verbatim}
+
+We expect the coefficient estimates to be much smaller, in terms of \(l_2\) norm,
+when a large value of \(\lambda\) is used, as compared to when a small value of \(\lambda\) is
+used. These are the coefficients when \(\lambda = 11498\), along with their \(l_2\) norm:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ridge_mod}\OperatorTok{$}\NormalTok{lambda[}\DecValTok{50}\NormalTok{] }\CommentTok{#Display 50th lambda value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11497.57
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{coef}\NormalTok{(ridge_mod)[,}\DecValTok{50}\NormalTok{] }\CommentTok{# Display coefficients associated with 50th lambda value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   (Intercept)         AtBat          Hits         HmRun          Runs 
+## 407.356050200   0.036957182   0.138180344   0.524629976   0.230701523 
+##           RBI         Walks         Years        CAtBat         CHits 
+##   0.239841459   0.289618741   1.107702929   0.003131815   0.011653637 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##   0.087545670   0.023379882   0.024138320   0.025015421   0.085028114 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+##  -6.215440973   0.016482577   0.002612988  -0.020502690   0.301433531
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{(}\KeywordTok{coef}\NormalTok{(ridge_mod)[}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{50}\NormalTok{]}\OperatorTok{^}\DecValTok{2}\NormalTok{)) }\CommentTok{# Calculate l2 norm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6.360612
+\end{verbatim}
+
+In contrast, here are the coefficients when \(\lambda = 705\), along with their \(l_2\)
+norm. Note the much larger \(l_2\) norm of the coefficients associated with this
+smaller value of \(\lambda\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ridge_mod}\OperatorTok{$}\NormalTok{lambda[}\DecValTok{60}\NormalTok{] }\CommentTok{#Display 60th lambda value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 705.4802
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{coef}\NormalTok{(ridge_mod)[,}\DecValTok{60}\NormalTok{] }\CommentTok{# Display coefficients associated with 60th lambda value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  (Intercept)        AtBat         Hits        HmRun         Runs 
+##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713 
+##          RBI        Walks        Years       CAtBat        CHits 
+##   0.84718546   1.31987948   2.59640425   0.01083413   0.04674557 
+##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
+##   0.33777318   0.09355528   0.09780402   0.07189612  13.68370191 
+##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
+## -54.65877750   0.11852289   0.01606037  -0.70358655   8.61181213
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{(}\KeywordTok{coef}\NormalTok{(ridge_mod)[}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{60}\NormalTok{]}\OperatorTok{^}\DecValTok{2}\NormalTok{)) }\CommentTok{# Calculate l2 norm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 57.11001
+\end{verbatim}
+
+We can use the \texttt{predict()} function for a number of purposes. For instance,
+we can obtain the ridge regression coefficients for a new value of \(\lambda\), say 50:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{predict}\NormalTok{(ridge_mod, }\DataTypeTok{s=}\DecValTok{50}\NormalTok{, }\DataTypeTok{type=}\StringTok{"coefficients"}\NormalTok{)[}\DecValTok{1}\OperatorTok{:}\DecValTok{20}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   (Intercept)         AtBat          Hits         HmRun          Runs 
+##  4.876610e+01 -3.580999e-01  1.969359e+00 -1.278248e+00  1.145892e+00 
+##           RBI         Walks         Years        CAtBat         CHits 
+##  8.038292e-01  2.716186e+00 -6.218319e+00  5.447837e-03  1.064895e-01 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##  6.244860e-01  2.214985e-01  2.186914e-01 -1.500245e-01  4.592589e+01 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+## -1.182011e+02  2.502322e-01  1.215665e-01 -3.278600e+00 -9.496680e+00
+\end{verbatim}
+
+We now split the samples into a training set and a test set in order
+to estimate the test error of ridge regression and the lasso.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+
+\NormalTok{train =}\StringTok{ }\NormalTok{Hitters }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{sample_frac}\NormalTok{(}\FloatTok{0.5}\NormalTok{)}
+
+\NormalTok{test =}\StringTok{ }\NormalTok{Hitters }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{setdiff}\NormalTok{(train)}
+
+\NormalTok{x_train =}\StringTok{ }\KeywordTok{model.matrix}\NormalTok{(Salary}\OperatorTok{~}\NormalTok{., train)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{x_test =}\StringTok{ }\KeywordTok{model.matrix}\NormalTok{(Salary}\OperatorTok{~}\NormalTok{., test)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+
+\NormalTok{y_train =}\StringTok{ }\NormalTok{train }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(Salary) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{as.numeric}\NormalTok{()}
+
+\NormalTok{y_test =}\StringTok{ }\NormalTok{test }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(Salary) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{as.numeric}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Next we fit a ridge regression model on the training set, and evaluate
+its MSE on the test set, using \(\lambda = 4\). Note the use of the \texttt{predict()}
+function again: this time we get predictions for a test set, by replacing
+\texttt{type="coefficients"} with the \texttt{newx} argument.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ridge_mod =}\StringTok{ }\KeywordTok{glmnet}\NormalTok{(x_train, y_train, }\DataTypeTok{alpha=}\DecValTok{0}\NormalTok{, }\DataTypeTok{lambda =}\NormalTok{ grid, }\DataTypeTok{thresh =} \FloatTok{1e-12}\NormalTok{)}
+\NormalTok{ridge_pred =}\StringTok{ }\KeywordTok{predict}\NormalTok{(ridge_mod, }\DataTypeTok{s =} \DecValTok{4}\NormalTok{, }\DataTypeTok{newx =}\NormalTok{ x_test)}
+\KeywordTok{mean}\NormalTok{((ridge_pred }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 139858.6
+\end{verbatim}
+
+The test MSE is 101242.7. Note that if we had instead simply fit a model
+with just an intercept, we would have predicted each test observation using
+the mean of the training observations. In that case, we could compute the
+test set MSE like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{((}\KeywordTok{mean}\NormalTok{(y_train) }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 224692.1
+\end{verbatim}
+
+We could also get the same result by fitting a ridge regression model with
+a very large value of \(\lambda\). Note that \texttt{1e10} means \(10^{10}\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ridge_pred =}\StringTok{ }\KeywordTok{predict}\NormalTok{(ridge_mod, }\DataTypeTok{s =} \FloatTok{1e10}\NormalTok{, }\DataTypeTok{newx =}\NormalTok{ x_test)}
+\KeywordTok{mean}\NormalTok{((ridge_pred }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 224692.1
+\end{verbatim}
+
+So fitting a ridge regression model with \(\lambda = 4\) leads to a much lower test
+MSE than fitting a model with just an intercept. We now check whether
+there is any benefit to performing ridge regression with \(\lambda = 4\) instead of
+just performing least squares regression. Recall that least squares is simply
+ridge regression with \(\lambda = 0\).
+
+* Note: In order for \texttt{glmnet()} to yield the \textbf{exact} least squares coefficients when \(\lambda = 0\),
+we use the argument \texttt{exact=T} when calling the \texttt{predict()} function. Otherwise, the
+\texttt{predict()} function will interpolate over the grid of \(\lambda\) values used in fitting the
+\texttt{glmnet()} model, yielding approximate results. Even when we use \texttt{exact\ =\ T}, there remains
+a slight discrepancy in the third decimal place between the output of \texttt{glmnet()} when
+\(\lambda = 0\) and the output of \texttt{lm()}; this is due to numerical approximation on the part of
+\texttt{glmnet()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ridge_pred =}\StringTok{ }\KeywordTok{predict}\NormalTok{(ridge_mod, }\DataTypeTok{s =} \DecValTok{0}\NormalTok{, }\DataTypeTok{x =}\NormalTok{ x_train, }\DataTypeTok{y =}\NormalTok{ y_train, }\DataTypeTok{newx =}\NormalTok{ x_test, }\DataTypeTok{exact =}\NormalTok{ T)}
+\KeywordTok{mean}\NormalTok{((ridge_pred }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 175051.7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{lm}\NormalTok{(Salary}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Salary ~ ., data = train)
+## 
+## Coefficients:
+## (Intercept)        AtBat         Hits        HmRun         Runs  
+##   2.398e+02   -1.639e-03   -2.179e+00    6.337e+00    7.139e-01  
+##         RBI        Walks        Years       CAtBat        CHits  
+##   8.735e-01    3.594e+00   -1.309e+01   -7.136e-01    3.316e+00  
+##      CHmRun        CRuns         CRBI       CWalks      LeagueN  
+##   3.407e+00   -5.671e-01   -7.525e-01    2.347e-01    1.322e+02  
+##   DivisionW      PutOuts      Assists       Errors   NewLeagueN  
+##  -1.346e+02    2.099e-01    6.229e-01   -4.616e+00   -8.330e+01
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{predict}\NormalTok{(ridge_mod, }\DataTypeTok{s =} \DecValTok{0}\NormalTok{, }\DataTypeTok{x =}\NormalTok{ x_train, }\DataTypeTok{y =}\NormalTok{ y_train, }\DataTypeTok{exact =}\NormalTok{ T, }\DataTypeTok{type=}\StringTok{"coefficients"}\NormalTok{)[}\DecValTok{1}\OperatorTok{:}\DecValTok{20}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   (Intercept)         AtBat          Hits         HmRun          Runs 
+##  239.83274953   -0.00175359   -2.17853087    6.33694957    0.71369687 
+##           RBI         Walks         Years        CAtBat         CHits 
+##    0.87329878    3.59421378  -13.09231408   -0.71351092    3.31523605 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##    3.40701392   -0.56709530   -0.75240961    0.23467433  132.15949536 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+## -134.58503816    0.20992473    0.62288126   -4.61583857  -83.29432536
+\end{verbatim}
+
+It looks like we are indeed improving over regular least-squares! Side note: in general, if we want to fit a (unpenalized) least squares model, then
+we should use the \texttt{lm()} function, since that function provides more useful
+outputs, such as standard errors and \(p\)-values for the coefficients.
+
+Instead of arbitrarily choosing \(\lambda = 4\), it would be better to
+use cross-validation to choose the tuning parameter \(\lambda\). We can do this using
+the built-in cross-validation function, \texttt{cv.glmnet()}. By default, the function
+performs 10-fold cross-validation, though this can be changed using the
+argument \texttt{folds}. Note that we set a random seed first so our results will be
+reproducible, since the choice of the cross-validation folds is random.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{cv.out =}\StringTok{ }\KeywordTok{cv.glmnet}\NormalTok{(x_train, y_train, }\DataTypeTok{alpha =} \DecValTok{0}\NormalTok{) }\CommentTok{# Fit ridge regression model on training data}
+\KeywordTok{plot}\NormalTok{(cv.out) }\CommentTok{# Draw plot of training MSE as a function of lambda}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-73-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bestlam =}\StringTok{ }\NormalTok{cv.out}\OperatorTok{$}\NormalTok{lambda.min  }\CommentTok{# Select lamda that minimizes training MSE}
+\NormalTok{bestlam}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 326.1406
+\end{verbatim}
+
+Therefore, we see that the value of \(\lambda\) that results in the smallest cross-validation
+error is 339.1845 What is the test MSE associated with this value of
+\(\lambda\)?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ridge_pred =}\StringTok{ }\KeywordTok{predict}\NormalTok{(ridge_mod, }\DataTypeTok{s =}\NormalTok{ bestlam, }\DataTypeTok{newx =}\NormalTok{ x_test) }\CommentTok{# Use best lambda to predict test data}
+\KeywordTok{mean}\NormalTok{((ridge_pred }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{) }\CommentTok{# Calculate test MSE}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 140056.2
+\end{verbatim}
+
+This represents a further improvement over the test MSE that we got using
+\(\lambda = 4\). Finally, we refit our ridge regression model on the full data set,
+using the value of \(\lambda\) chosen by cross-validation, and examine the coefficient
+estimates.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{out =}\StringTok{ }\KeywordTok{glmnet}\NormalTok{(x, y, }\DataTypeTok{alpha =} \DecValTok{0}\NormalTok{) }\CommentTok{# Fit ridge regression model on full dataset}
+\KeywordTok{predict}\NormalTok{(out, }\DataTypeTok{type =} \StringTok{"coefficients"}\NormalTok{, }\DataTypeTok{s =}\NormalTok{ bestlam)[}\DecValTok{1}\OperatorTok{:}\DecValTok{20}\NormalTok{,] }\CommentTok{# Display coefficients using lambda chosen by CV}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  (Intercept)        AtBat         Hits        HmRun         Runs 
+##  15.44835008   0.07716945   0.85906253   0.60120339   1.06366687 
+##          RBI        Walks        Years       CAtBat        CHits 
+##   0.87936073   1.62437580   1.35296287   0.01134998   0.05746377 
+##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
+##   0.40678422   0.11455696   0.12115916   0.05299953  22.08942749 
+##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
+## -79.03490973   0.16618830   0.02941513  -1.36075644   9.12528398
+\end{verbatim}
+
+As expected, none of the coefficients are exactly zero - ridge regression does not
+perform variable selection!
+
+\hypertarget{example-the-lasso}{%
+\section{Example: The Lasso}\label{example-the-lasso}}
+
+We saw that ridge regression with a wise choice of \(\lambda\) can outperform least
+squares as well as the null model on the Hitters data set. We now ask
+whether the lasso can yield either a more accurate or a more interpretable
+model than ridge regression. In order to fit a lasso model, we once again
+use the \texttt{glmnet()} function; however, this time we use the argument \texttt{alpha=1}.
+Other than that change, we proceed just as we did in fitting a ridge model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lasso_mod =}\StringTok{ }\KeywordTok{glmnet}\NormalTok{(x_train, y_train, }\DataTypeTok{alpha =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lambda =}\NormalTok{ grid) }\CommentTok{# Fit lasso model on training data}
+\KeywordTok{plot}\NormalTok{(lasso_mod)                                          }\CommentTok{# Draw plot of coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-76-1.pdf}
+
+Notice that in the coefficient plot that depending on the choice of tuning
+parameter, some of the coefficients are exactly equal to zero. We now
+perform cross-validation and compute the associated test error:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{cv.out =}\StringTok{ }\KeywordTok{cv.glmnet}\NormalTok{(x_train, y_train, }\DataTypeTok{alpha =} \DecValTok{1}\NormalTok{) }\CommentTok{# Fit lasso model on training data}
+\KeywordTok{plot}\NormalTok{(cv.out) }\CommentTok{# Draw plot of training MSE as a function of lambda}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-77-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bestlam =}\StringTok{ }\NormalTok{cv.out}\OperatorTok{$}\NormalTok{lambda.min }\CommentTok{# Select lamda that minimizes training MSE}
+\NormalTok{lasso_pred =}\StringTok{ }\KeywordTok{predict}\NormalTok{(lasso_mod, }\DataTypeTok{s =}\NormalTok{ bestlam, }\DataTypeTok{newx =}\NormalTok{ x_test) }\CommentTok{# Use best lambda to predict test data}
+\KeywordTok{mean}\NormalTok{((lasso_pred }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{) }\CommentTok{# Calculate test MSE}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 143273
+\end{verbatim}
+
+This is substantially lower than the test set MSE of the null model and of
+least squares, and very similar to the test MSE of ridge regression with \(\lambda\)
+chosen by cross-validation.
+
+However, the lasso has a substantial advantage over ridge regression in
+that the resulting coefficient estimates are sparse. Here we see that 12 of
+the 19 coefficient estimates are exactly zero:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{out =}\StringTok{ }\KeywordTok{glmnet}\NormalTok{(x, y, }\DataTypeTok{alpha =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lambda =}\NormalTok{ grid) }\CommentTok{# Fit lasso model on full dataset}
+\NormalTok{lasso_coef =}\StringTok{ }\KeywordTok{predict}\NormalTok{(out, }\DataTypeTok{type =} \StringTok{"coefficients"}\NormalTok{, }\DataTypeTok{s =}\NormalTok{ bestlam)[}\DecValTok{1}\OperatorTok{:}\DecValTok{20}\NormalTok{,] }\CommentTok{# Display coefficients using lambda chosen by CV}
+\NormalTok{lasso_coef}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   (Intercept)         AtBat          Hits         HmRun          Runs 
+##    1.27429897   -0.05490834    2.18012455    0.00000000    0.00000000 
+##           RBI         Walks         Years        CAtBat         CHits 
+##    0.00000000    2.29189433   -0.33767315    0.00000000    0.00000000 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##    0.02822467    0.21627609    0.41713051    0.00000000   20.28190194 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+## -116.16524424    0.23751978    0.00000000   -0.85604181    0.00000000
+\end{verbatim}
+
+Selecting only the predictors with non-zero coefficients, we see that the lasso model with \(\lambda\)
+chosen by cross-validation contains only seven variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lasso_coef[lasso_coef}\OperatorTok{!=}\DecValTok{0}\NormalTok{] }\CommentTok{# Display only non-zero coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   (Intercept)         AtBat          Hits         Walks         Years 
+##    1.27429897   -0.05490834    2.18012455    2.29189433   -0.33767315 
+##        CHmRun         CRuns          CRBI       LeagueN     DivisionW 
+##    0.02822467    0.21627609    0.41713051   20.28190194 -116.16524424 
+##       PutOuts        Errors 
+##    0.23751978   -0.85604181
+\end{verbatim}
+
+Practice questions:
+
+\begin{itemize}
+\tightlist
+\item
+  How do ridge regression and the lasso improve on simple least squares?
+\item
+  In what cases would you expect ridge regression outperform the lasso, and vice versa?
+\end{itemize}
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+These examples of the Ridge and Lasso are an adaptation of p.~251-255 of ``Introduction to
+Statistical Learning with Applications in R'' by Gareth James, Daniela Witten, Trevor Hastie and Robert
+Tibshirani. Adapted by R. Jordan Crouser at Smith College for SDS293: Machine Learning (Spring 2016), and re-implemented in Fall 2016 in \texttt{tidyverse} format by Amelia McNamara and R. Jordan Crouser at Smith College.
+
+Used with permission from Jordan Crouser at Smith College. Additional Thanks to the following contributors on github:
+
+\begin{itemize}
+\tightlist
+\item
+  github.com/jcrouser
+\item
+  github.com/AmeliaMN
+\item
+  github.com/mhusseinmidd
+\item
+  github.com/rudeboybert
+\item
+  github.com/ijlyttle
+\end{itemize}
+
 \hypertarget{tree-based-models}{%
 \chapter{Tree-based models}\label{tree-based-models}}
 
@@ -3710,11 +4279,11 @@ This is stored in the \texttt{cptable}
 ##   nsplit      CP xerror
 ##    <dbl>   <dbl>  <dbl>
 ## 1      0 0.620    1.00 
-## 2      1 0.144    0.382
+## 2      1 0.144    0.383
 ## 3      2 0.0637   0.240
 ## 4      3 0.00967  0.178
-## 5      4 0.00784  0.173
-## 6      5 0.00712  0.171
+## 5      4 0.00784  0.175
+## 6      5 0.00712  0.169
 \end{verbatim}
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.
@@ -3737,14 +4306,14 @@ Once we have selected \(\alpha\), the tree is pruned. Sometimes the CP with the 
 
 \begin{verbatim}
 ## # A tibble: 6 x 3
-##   nsplit      CP xerror
-##    <dbl>   <dbl>  <dbl>
-## 1     14 0.00119  0.153
-## 2     16 0.00105  0.153
-## 3     15 0.00116  0.154
-## 4     12 0.00137  0.154
-## 5     11 0.00145  0.154
-## 6      9 0.00173  0.154
+##   nsplit       CP xerror
+##    <dbl>    <dbl>  <dbl>
+## 1     18 0.000910  0.149
+## 2     19 0.000837  0.150
+## 3     25 0.000681  0.150
+## 4     17 0.000913  0.150
+## 5     22 0.000759  0.151
+## 6     35 0.000497  0.151
 \end{verbatim}
 
 The SOA will give you code to find the lowest CP value such as below. This may or may not be useful depending on if they are asking for predictive performance or interpretability.
@@ -4545,7 +5114,7 @@ Identify the hyperpameter combination that has the lowest training error.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pdp}\OperatorTok{::}\KeywordTok{partial}\NormalTok{(gbm, }\DataTypeTok{pred.var =} \StringTok{"bmi"}\NormalTok{, }\DataTypeTok{grid.resolution =} \DecValTok{20}\NormalTok{, }\DataTypeTok{plot =}\NormalTok{ T)}
+\NormalTok{pdp}\OperatorTok{::}\KeywordTok{partial}\NormalTok{(gbm, }\DataTypeTok{pred.var =} \StringTok{"bmi"}\NormalTok{, }\DataTypeTok{grid.resolution =} \DecValTok{15}\NormalTok{, }\DataTypeTok{plot =}\NormalTok{ T)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4555,7 +5124,7 @@ However, when we add in the \texttt{ice} curves, we see that there is something 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pdp}\OperatorTok{::}\KeywordTok{partial}\NormalTok{(gbm, }\DataTypeTok{pred.var =} \StringTok{"bmi"}\NormalTok{, }\DataTypeTok{grid.resolution =} \DecValTok{30}\NormalTok{, }\DataTypeTok{plot =}\NormalTok{ T, }\DataTypeTok{ice =}\NormalTok{ T, }\DataTypeTok{alpha =} \FloatTok{0.1}\NormalTok{, }\DataTypeTok{palette =} \StringTok{"viridis"}\NormalTok{)}
+\NormalTok{pdp}\OperatorTok{::}\KeywordTok{partial}\NormalTok{(gbm, }\DataTypeTok{pred.var =} \StringTok{"bmi"}\NormalTok{, }\DataTypeTok{grid.resolution =} \DecValTok{15}\NormalTok{, }\DataTypeTok{plot =}\NormalTok{ T, }\DataTypeTok{ice =}\NormalTok{ T, }\DataTypeTok{alpha =} \FloatTok{0.1}\NormalTok{, }\DataTypeTok{palette =} \StringTok{"viridis"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4569,15 +5138,964 @@ Answers to these exercises are available at \href{https://www.exampa.net/pricing
 \hypertarget{unsupervised-learning}{%
 \chapter{Unsupervised Learning}\label{unsupervised-learning}}
 
-The chapter on unsuporvised learning, topics from module 8, clustering and PCA, are available at \href{https://www.exampa.net/pricing}{ExamPA.net}.
+Up to this point we have been trying to predict something. We use data \(X\) to predict an unknown \(Y\), which is a number in the case of regression and a category in the case of classification. These problems are known as \emph{supvervised} because we are ``supervising'' how the model learns by giving it a target.
+
+Here is an easy way to remember this: If you are in kindergarden class, and the teacher provides cards with pictures and words, and then asks each kid to look at the picture and then say the word, this is supervised learning. The label is the name of the picture, and the data is the picture itself. Instead, if the teacher gives out finger paints and says ``express yourself!'', then this is \emph{unsupervised learning}. There is no label but only data.
+
+\hypertarget{principal-componant-analysis-pca}{%
+\section{Principal Componant Analysis (PCA)}\label{principal-componant-analysis-pca}}
+
+Often there are a lot of columns in the data that contain redundant information. For example, if your data consists of city traffic, such as (1) the number of cars on the road, (2) number of taxis, (3) number of pedestrians, and (4) number of Ubers, then knowing any one of these values will tell you about how busy the given road is. If there are a lot of Ubers, then there are probably also a lot of Taxis. Intuitively, we probably don't need four variables to measure this info and we could have a single variable called ``traffic level''. This would be reducing the dimension from 4 to 1.
+
+PCA is a dimensionality reduction method which reduces the number of variables needed to retain most of the information in a matrix. If there are predictor variables \(X_1, X_2, X_3, X_4, X5\), then running PCA and choosing the first three Principal Components (PCs) will reduce the dimension from 5 to 3.
+
+\begin{center}\includegraphics[width=10.47in]{images/PCA} \end{center}
+
+Each PC is a linear combination of the original \(X\)s. For example, PC1 might be
+
+\[PC_1 = 0.2X_1 + 0.3X_2 - 0.2X_3 + 0X_5 + 0.3X_5\]
+The weights here are also called ``loadings'' or ``rotations'', and are (0.2, 0.3, -0.2, 0, 0.3). Each of the PCs can be interpreted as explaining part of the data. In the traffic example, PC1 might explain the traffic level, PC2 the weather, and PC3 the time of day.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Readings &\tabularnewline
+\midrule
+\endhead
+ISLR 10.2 Principal Component Analysis &\tabularnewline
+ISLR 10.3 Clustering Methods &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{example-pca-on-us-arrests}{%
+\subsection{Example: PCA on US Arrests}\label{example-pca-on-us-arrests}}
+
+In this example, we perform PCA on the \texttt{USArrests} data set, which is part of
+the base \texttt{R} package. The rows of the data set contain the 50 states, in
+alphabetical order:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\NormalTok{states=}\KeywordTok{row.names}\NormalTok{(USArrests)}
+\NormalTok{states}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Alabama"        "Alaska"         "Arizona"        "Arkansas"      
+##  [5] "California"     "Colorado"       "Connecticut"    "Delaware"      
+##  [9] "Florida"        "Georgia"        "Hawaii"         "Idaho"         
+## [13] "Illinois"       "Indiana"        "Iowa"           "Kansas"        
+## [17] "Kentucky"       "Louisiana"      "Maine"          "Maryland"      
+## [21] "Massachusetts"  "Michigan"       "Minnesota"      "Mississippi"   
+## [25] "Missouri"       "Montana"        "Nebraska"       "Nevada"        
+## [29] "New Hampshire"  "New Jersey"     "New Mexico"     "New York"      
+## [33] "North Carolina" "North Dakota"   "Ohio"           "Oklahoma"      
+## [37] "Oregon"         "Pennsylvania"   "Rhode Island"   "South Carolina"
+## [41] "South Dakota"   "Tennessee"      "Texas"          "Utah"          
+## [45] "Vermont"        "Virginia"       "Washington"     "West Virginia" 
+## [49] "Wisconsin"      "Wyoming"
+\end{verbatim}
+
+The columns of the data set contain four variables relating to various crimes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(USArrests)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Observations: 50
+## Variables: 4
+## $ Murder   <dbl> 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 17.4,...
+## $ Assault  <int> 236, 263, 294, 190, 276, 204, 110, 238, 335, 211, 46,...
+## $ UrbanPop <int> 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 83, 6...
+## $ Rape     <dbl> 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 31.9,...
+\end{verbatim}
+
+Let's start by taking a quick look at the column means of the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{USArrests }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise_all}\NormalTok{(mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Murder Assault UrbanPop   Rape
+## 1  7.788  170.76    65.54 21.232
+\end{verbatim}
+
+We see right away the the data have \textbf{vastly} different means. We can also examine the variances of the four variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{USArrests }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise_all}\NormalTok{(var)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Murder  Assault UrbanPop     Rape
+## 1 18.97047 6945.166 209.5188 87.72916
+\end{verbatim}
+
+Not surprisingly, the variables also have vastly different variances: the
+\texttt{UrbanPop} variable measures the percentage of the population in each state
+living in an urban area, which is not a comparable number to the number
+of crimes committeed in each state per 100,000 individuals. If we failed to scale the
+variables before performing PCA, then most of the principal components
+that we observed would be driven by the \texttt{Assault} variable, since it has by
+far the largest mean and variance.
+
+Thus, it is important to standardize the
+variables to have mean zero and standard deviation 1 before performing
+PCA. We'll perform principal components analysis using the \texttt{prcomp()} function, which is one of several functions that perform PCA. By default, this centers the variables to have mean zero. By using the option \texttt{scale=TRUE}, we scale the variables to have standard
+deviation 1:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca =}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(USArrests, }\DataTypeTok{scale=}\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The output from \texttt{prcomp()} contains a number of useful quantities:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(pca)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "sdev"     "rotation" "center"   "scale"    "x"
+\end{verbatim}
+
+The \texttt{center} and \texttt{scale} components correspond to the means and standard
+deviations of the variables that were used for scaling prior to implementing
+PCA:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca}\OperatorTok{$}\NormalTok{center}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Murder  Assault UrbanPop     Rape 
+##    7.788  170.760   65.540   21.232
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca}\OperatorTok{$}\NormalTok{scale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Murder   Assault  UrbanPop      Rape 
+##  4.355510 83.337661 14.474763  9.366385
+\end{verbatim}
+
+The rotation matrix provides the principal component loadings; each column
+of \texttt{pr.out\textbackslash{}\$rotation} contains the corresponding principal component
+loading vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca}\OperatorTok{$}\NormalTok{rotation}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 PC1        PC2        PC3         PC4
+## Murder   -0.5358995  0.4181809 -0.3412327  0.64922780
+## Assault  -0.5831836  0.1879856 -0.2681484 -0.74340748
+## UrbanPop -0.2781909 -0.8728062 -0.3780158  0.13387773
+## Rape     -0.5434321 -0.1673186  0.8177779  0.08902432
+\end{verbatim}
+
+We see that there are four distinct principal components. This is to be
+expected because there are in general \texttt{min(n\ −\ 1,\ p)} informative principal
+components in a data set with \(n\) observations and \(p\) variables.
+
+Using the \texttt{prcomp()} function, we do not need to explicitly multiply the
+data by the principal component loading vectors in order to obtain the
+principal component score vectors. Rather the 50 × 4 matrix \(x\) has as its
+columns the principal component score vectors. That is, the \$k\^{}\{th\texttt{column\ is\ the\ \$k\^{}\{th} principal component score vector. We'll take a look at the first few states:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(pca}\OperatorTok{$}\NormalTok{x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   PC1        PC2         PC3          PC4
+## Alabama    -0.9756604  1.1220012 -0.43980366  0.154696581
+## Alaska     -1.9305379  1.0624269  2.01950027 -0.434175454
+## Arizona    -1.7454429 -0.7384595  0.05423025 -0.826264240
+## Arkansas    0.1399989  1.1085423  0.11342217 -0.180973554
+## California -2.4986128 -1.5274267  0.59254100 -0.338559240
+## Colorado   -1.4993407 -0.9776297  1.08400162  0.001450164
+\end{verbatim}
+
+We can plot the first two principal components using the \texttt{biplot()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{biplot}\NormalTok{(pca, }\DataTypeTok{scale=}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+The \texttt{scale=0} argument to \texttt{biplot()} ensures that the arrows are scaled to
+represent the loadings; other values for \texttt{scale} give slightly different biplots
+with different interpretations.
+
+The \texttt{prcomp()} function also outputs the standard deviation of each principal
+component. We can access these standard deviations as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca}\OperatorTok{$}\NormalTok{sdev}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.5748783 0.9948694 0.5971291 0.4164494
+\end{verbatim}
+
+The variance explained by each principal component is obtained by squaring
+these:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca_var=pca}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2}
+\NormalTok{pca_var}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.4802416 0.9897652 0.3565632 0.1734301
+\end{verbatim}
+
+To compute the proportion of variance explained by each principal component,
+we simply divide the variance explained by each principal component
+by the total variance explained by all four principal components:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pve=pca_var}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(pca_var)}
+\NormalTok{pve}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.62006039 0.24744129 0.08914080 0.04335752
+\end{verbatim}
+
+We see that the first principal component explains 62.0\% of the variance
+in the data, the next principal component explains 24.7\% of the variance,
+and so forth. We can plot the PVE explained by each component as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(pve, }\DataTypeTok{xlab=}\StringTok{"Principal Component"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Proportion of Variance Explained"}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{type=}\StringTok{'b'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+We can also use the function \texttt{cumsum()}, which computes the cumulative sum of the elements of a numeric vector, to plot the cumulative PVE:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{cumsum}\NormalTok{(pve), }\DataTypeTok{xlab=}\StringTok{"Principal Component"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Cumulative Proportion of Variance Explained"}\NormalTok{, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{type=}\StringTok{'b'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{8}\NormalTok{,}\OperatorTok{-}\DecValTok{3}\NormalTok{)}
+\KeywordTok{cumsum}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  1  3 11  8
+\end{verbatim}
+
+\hypertarget{example-pca-on-cancel-cells}{%
+\subsection{Example: PCA on Cancel Cells}\label{example-pca-on-cancel-cells}}
+
+The data \texttt{NCI60} contins expression levels of 6,830 genes from 64 cancel cell lines. Cancer type is also recorded.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ISLR)}
+\NormalTok{nci_labs=NCI60}\OperatorTok{$}\NormalTok{labs}
+\NormalTok{nci_data=NCI60}\OperatorTok{$}\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+We first perform PCA on the data after scaling the variables (genes) to
+have standard deviation one, although one could reasonably argue that it
+is better not to scale the genes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca =}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(nci_data, }\DataTypeTok{scale=}\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We now plot the first few principal component score vectors, in order to
+visualize the data. The observations (cell lines) corresponding to a given
+cancer type will be plotted in the same color, so that we can see to what
+extent the observations within a cancer type are similar to each other. We
+first create a simple function that assigns a distinct color to each element
+of a numeric vector. The function will be used to assign a color to each of
+the 64 cell lines, based on the cancer type to which it corresponds.
+We'll make use of the \texttt{rainbow()} function, which takes as its argument a positive integer,
+and returns a vector containing that number of distinct colors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Cols=}\ControlFlowTok{function}\NormalTok{(vec)\{}
+\NormalTok{    cols=}\KeywordTok{rainbow}\NormalTok{(}\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(vec)))}
+    \KeywordTok{return}\NormalTok{(cols[}\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{as.factor}\NormalTok{(vec))])}
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+We now can plot the principal component score vectors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(pca}\OperatorTok{$}\NormalTok{x[,}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{], }\DataTypeTok{col=}\KeywordTok{Cols}\NormalTok{(nci_labs), }\DataTypeTok{pch=}\DecValTok{19}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{"Z1"}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"Z2"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(pca}\OperatorTok{$}\NormalTok{x[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)], }\DataTypeTok{col=}\KeywordTok{Cols}\NormalTok{(nci_labs), }\DataTypeTok{pch=}\DecValTok{19}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{"Z1"}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"Z3"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+On the whole, cell lines corresponding to a single cancer type do tend to have similar values on the
+first few principal component score vectors. This indicates that cell lines
+from the same cancer type tend to have pretty similar gene expression
+levels.
+
+We can obtain a summary of the proportion of variance explained (PVE)
+of the first few principal components using the \texttt{summary()} method for a
+\texttt{prcomp} object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(pca)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Importance of components:
+##                            PC1      PC2      PC3      PC4      PC5
+## Standard deviation     27.8535 21.48136 19.82046 17.03256 15.97181
+## Proportion of Variance  0.1136  0.06756  0.05752  0.04248  0.03735
+## Cumulative Proportion   0.1136  0.18115  0.23867  0.28115  0.31850
+##                             PC6      PC7      PC8      PC9     PC10
+## Standard deviation     15.72108 14.47145 13.54427 13.14400 12.73860
+## Proportion of Variance  0.03619  0.03066  0.02686  0.02529  0.02376
+## Cumulative Proportion   0.35468  0.38534  0.41220  0.43750  0.46126
+##                            PC11     PC12     PC13     PC14     PC15
+## Standard deviation     12.68672 12.15769 11.83019 11.62554 11.43779
+## Proportion of Variance  0.02357  0.02164  0.02049  0.01979  0.01915
+## Cumulative Proportion   0.48482  0.50646  0.52695  0.54674  0.56590
+##                            PC16     PC17     PC18     PC19    PC20
+## Standard deviation     11.00051 10.65666 10.48880 10.43518 10.3219
+## Proportion of Variance  0.01772  0.01663  0.01611  0.01594  0.0156
+## Cumulative Proportion   0.58361  0.60024  0.61635  0.63229  0.6479
+##                            PC21    PC22    PC23    PC24    PC25    PC26
+## Standard deviation     10.14608 10.0544 9.90265 9.64766 9.50764 9.33253
+## Proportion of Variance  0.01507  0.0148 0.01436 0.01363 0.01324 0.01275
+## Cumulative Proportion   0.66296  0.6778 0.69212 0.70575 0.71899 0.73174
+##                           PC27   PC28    PC29    PC30    PC31    PC32
+## Standard deviation     9.27320 9.0900 8.98117 8.75003 8.59962 8.44738
+## Proportion of Variance 0.01259 0.0121 0.01181 0.01121 0.01083 0.01045
+## Cumulative Proportion  0.74433 0.7564 0.76824 0.77945 0.79027 0.80072
+##                           PC33    PC34    PC35    PC36    PC37    PC38
+## Standard deviation     8.37305 8.21579 8.15731 7.97465 7.90446 7.82127
+## Proportion of Variance 0.01026 0.00988 0.00974 0.00931 0.00915 0.00896
+## Cumulative Proportion  0.81099 0.82087 0.83061 0.83992 0.84907 0.85803
+##                           PC39    PC40    PC41   PC42    PC43   PC44
+## Standard deviation     7.72156 7.58603 7.45619 7.3444 7.10449 7.0131
+## Proportion of Variance 0.00873 0.00843 0.00814 0.0079 0.00739 0.0072
+## Cumulative Proportion  0.86676 0.87518 0.88332 0.8912 0.89861 0.9058
+##                           PC45   PC46    PC47    PC48    PC49    PC50
+## Standard deviation     6.95839 6.8663 6.80744 6.64763 6.61607 6.40793
+## Proportion of Variance 0.00709 0.0069 0.00678 0.00647 0.00641 0.00601
+## Cumulative Proportion  0.91290 0.9198 0.92659 0.93306 0.93947 0.94548
+##                           PC51    PC52    PC53    PC54    PC55    PC56
+## Standard deviation     6.21984 6.20326 6.06706 5.91805 5.91233 5.73539
+## Proportion of Variance 0.00566 0.00563 0.00539 0.00513 0.00512 0.00482
+## Cumulative Proportion  0.95114 0.95678 0.96216 0.96729 0.97241 0.97723
+##                           PC57   PC58    PC59    PC60    PC61    PC62
+## Standard deviation     5.47261 5.2921 5.02117 4.68398 4.17567 4.08212
+## Proportion of Variance 0.00438 0.0041 0.00369 0.00321 0.00255 0.00244
+## Cumulative Proportion  0.98161 0.9857 0.98940 0.99262 0.99517 0.99761
+##                           PC63      PC64
+## Standard deviation     4.04124 2.148e-14
+## Proportion of Variance 0.00239 0.000e+00
+## Cumulative Proportion  1.00000 1.000e+00
+\end{verbatim}
+
+Using the \texttt{plot()} function, we can also plot the variance explained by the
+first few principal components:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(pca)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+Note that the height of each bar in the bar plot is given by squaring the
+corresponding element of \texttt{pr.out\textbackslash{}\$sdev}. However, it is generally more informative to
+plot the PVE of each principal component (i.e.~a \textbf{scree plot}) and the cumulative
+PVE of each principal component. This can be done with just a
+little tweaking:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pve =}\StringTok{ }\DecValTok{100}\OperatorTok{*}\NormalTok{pca}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(pca}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(pve,  }\DataTypeTok{type=}\StringTok{"o"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"PVE"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Principal Component"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{cumsum}\NormalTok{(pve), }\DataTypeTok{type=}\StringTok{"o"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Cumulative PVE"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Principal Component"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"brown3"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+We see that together, the first seven principal components
+explain around 40\% of the variance in the data. This is not a huge amount
+of the variance. However, looking at the scree plot, we see that while each
+of the first seven principal components explain a substantial amount of
+variance, there is a marked decrease in the variance explained by further
+principal components. That is, there is an \textbf{elbow} in the plot after approximately
+the seventh principal component. This suggests that there may
+be little benefit to examining more than seven or so principal components
+(phew! even examining seven principal components may be difficult).
+
+\hypertarget{clustering}{%
+\section{Clustering}\label{clustering}}
+
+Imagine that you are a large retailer interested in understanding the customer base. There may be several ``types'' of customers, such as those shopping for business with corporate accounts, those shopping for leisure, or debt-strapped grad students. Each of these customers would exhibit different behavior, and should be treated differently statistically. But how can a customer's ``type'' be defined? Especially for large customer data sets in the millions, one can imagine how this problem can be challenging.
+
+Clustering algorithms look for groups of observations which are similar to one another. Because there is no target variable, measuring the quality of the ``fit'' is much more complicated. There are many clustering algorithms, but this exam only focuses on the two that are most common.
+
+\hypertarget{k-means-clustering}{%
+\subsection{K-Means Clustering}\label{k-means-clustering}}
+
+Kmeans takes continuous data and assigns observations into k clusters, or groups. In the two-dimensional example, this is the same as drawing lines around points. This consists of the following steps:
+
+\textbf{a)} Start with two variables (\(X_1\) on the X-axis, and \(X_2\) on the Y-axis.)
+\textbf{b)} Randomly assign cluster centers.
+\textbf{c)} Put each point into the cluster that is closest.
+\textbf{d) - f)} Move the cluster center to the mean of the points assigned to it and continue until the centers stop moving.
+\textbf{g)} Repeated steps a) - f) a given number of times (controlled by \texttt{n.starts}). This reduces the uncertainty from choosing the initial centers randomly.
+
+\begin{center}\includegraphics[width=21.26in]{07-unsupervised-learning_files/figure-latex/unnamed-chunk-24-1} \end{center}
+
+In \texttt{R}, the function \texttt{kmeans()} performs K-means clustering in R. We begin with
+a simple simulated example in which there truly are two clusters in the
+data: the first 25 observations have a mean shift relative to the next 25
+observations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\NormalTok{x =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{50}\OperatorTok{*}\DecValTok{2}\NormalTok{), }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\NormalTok{x[}\DecValTok{1}\OperatorTok{:}\DecValTok{25}\NormalTok{,}\DecValTok{1}\NormalTok{] =}\StringTok{ }\NormalTok{x[}\DecValTok{1}\OperatorTok{:}\DecValTok{25}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\DecValTok{3}
+\NormalTok{x[}\DecValTok{1}\OperatorTok{:}\DecValTok{25}\NormalTok{,}\DecValTok{2}\NormalTok{] =}\StringTok{ }\NormalTok{x[}\DecValTok{1}\OperatorTok{:}\DecValTok{25}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{-}\DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+We now perform K-means clustering with \texttt{K\ \ =\ \ 2}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{km_out =}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(x,}\DecValTok{2}\NormalTok{,}\DataTypeTok{nstart =} \DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The cluster assignments of the 50 observations are contained in
+\texttt{km\_out\$cluster}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{km_out}\OperatorTok{$}\NormalTok{cluster}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
+## [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+\end{verbatim}
+
+The K-means clustering perfectly separated the observations into two clusters
+even though we did not supply any group information to \texttt{kmeans()}. We
+can plot the data, with each observation colored according to its cluster
+assignment:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(x, }\DataTypeTok{col =}\NormalTok{ (km_out}\OperatorTok{$}\NormalTok{cluster}\OperatorTok{+}\DecValTok{1}\NormalTok{), }\DataTypeTok{main =} \StringTok{"K-Means Clustering Results with K = 2"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{""}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{""}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{cex =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+Here the observations can be easily plotted because they are two-dimensional.
+If there were more than two variables then we could instead perform PCA
+and plot the first two principal components score vectors.
+
+In this example, we knew that there really were two clusters because
+we generated the data. However, for real data, in general we do not know
+the true number of clusters. We could instead have performed K-means
+clustering on this example with \texttt{K\ \ =\ \ 3}. If we do this, K-means clustering will split up the two ``real'' clusters, since it has no information about them:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\NormalTok{km_out =}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(x, }\DecValTok{3}\NormalTok{, }\DataTypeTok{nstart =} \DecValTok{20}\NormalTok{)}
+\NormalTok{km_out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## K-means clustering with 3 clusters of sizes 17, 23, 10
+## 
+## Cluster means:
+##         [,1]        [,2]
+## 1  3.7789567 -4.56200798
+## 2 -0.3820397 -0.08740753
+## 3  2.3001545 -2.69622023
+## 
+## Clustering vector:
+##  [1] 1 3 1 3 1 1 1 3 1 3 1 3 1 3 1 3 1 1 1 1 1 3 1 1 1 2 2 2 2 2 2 2 2 2 2
+## [36] 2 2 2 2 2 2 2 2 3 2 3 2 2 2 2
+## 
+## Within cluster sum of squares by cluster:
+## [1] 25.74089 52.67700 19.56137
+##  (between_SS / total_SS =  79.3 %)
+## 
+## Available components:
+## 
+## [1] "cluster"      "centers"      "totss"        "withinss"    
+## [5] "tot.withinss" "betweenss"    "size"         "iter"        
+## [9] "ifault"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(x, }\DataTypeTok{col =}\NormalTok{ (km_out}\OperatorTok{$}\NormalTok{cluster}\OperatorTok{+}\DecValTok{1}\NormalTok{), }\DataTypeTok{main =} \StringTok{"K-Means Clustering Results with K = 3"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{""}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{""}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\DataTypeTok{cex =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+To run the \texttt{kmeans()} function in R with multiple initial cluster assignments,
+we use the \texttt{nstart} argument. If a value of \texttt{nstart} greater than one
+is used, then K-means clustering will be performed using multiple random
+assignments, and the \texttt{kmeans()} function will
+report only the best results. Here we compare using \texttt{nstart\ =\ 1}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\NormalTok{km_out =}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(x, }\DecValTok{3}\NormalTok{, }\DataTypeTok{nstart =} \DecValTok{1}\NormalTok{)}
+\NormalTok{km_out}\OperatorTok{$}\NormalTok{tot.withinss}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 97.97927
+\end{verbatim}
+
+to \texttt{nstart\ =\ 20}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{km_out =}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(x,}\DecValTok{3}\NormalTok{,}\DataTypeTok{nstart =} \DecValTok{20}\NormalTok{)}
+\NormalTok{km_out}\OperatorTok{$}\NormalTok{tot.withinss}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 97.97927
+\end{verbatim}
+
+Note that \texttt{km\_out\textbackslash{}\$tot.withinss} is the total within-cluster sum of squares,
+which we seek to minimize by performing K-means clustering. The individual within-cluster sum-of-squares are contained in the
+vector \texttt{km\_out\textbackslash{}\$withinss}.
+
+It is generally recommended to always run K-means clustering with a large
+value of \texttt{nstart}, such as 20 or 50 to avoid getting stuck in an undesirable local
+optimum.
+
+When performing K-means clustering, in addition to using multiple initial
+cluster assignments, it is also important to set a random seed using the
+\texttt{set.seed()} function. This way, the initial cluster assignments can
+be replicated, and the K-means output will be fully reproducible.
+
+\hypertarget{hierarchical-clustering}{%
+\section{Hierarchical Clustering}\label{hierarchical-clustering}}
+
+Kmeans required that we choose the number of clusters, k. Hierarchical clustering is an alternative that does not require that we choose only one value of k.
+
+The most common type of hieararchical clustering uses a \emph{bottom-up} approach. This starts with a single \textbf{observation} and then looks for others which are close and puts them into a cluster. Then it looks for other \textbf{clusters} that are similar and groups these together into a \textbf{megacluster}. It continues to do this until all observations are in the same group.
+
+This is analyzed with a graph called a dendrogram (dendro = tree, gram = graph). The height represents ``distance'', or how similar the clusters are to one another. The clusters on the bottom, which are vertically close to one another, have similar data values; the clusters that are further apart vertically are less similar.
+
+Choosing the value of the cutoff height changes the number of clusters that result.
+
+\begin{center}\includegraphics[width=28.86in]{07-unsupervised-learning_files/figure-latex/unnamed-chunk-32-1} \end{center}
+
+Certain data have a natural hiearchical structure. For example, say that the variables are City, Town, State, Country, and Continent. If we used hiearchical clustering, this pattern could be established even if we did not have labels for Cities, Towns, and so forth.
+
+The \texttt{hclust()} function implements hierarchical clustering in R. In the following example we use the data from the previous section to plot the hierarchical
+clustering dendrogram using complete, single, and average linkage clustering,
+with Euclidean distance as the dissimilarity measure. We begin by
+clustering observations using complete linkage. The \texttt{dist()} function is used
+to compute the 50 \(\times\) 50 inter-observation Euclidean distance matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hc_complete =}\StringTok{ }\KeywordTok{hclust}\NormalTok{(}\KeywordTok{dist}\NormalTok{(x), }\DataTypeTok{method =} \StringTok{"complete"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We could just as easily perform hierarchical clustering with average or
+single linkage instead:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hc_average =}\StringTok{ }\KeywordTok{hclust}\NormalTok{(}\KeywordTok{dist}\NormalTok{(x), }\DataTypeTok{method =} \StringTok{"average"}\NormalTok{)}
+\NormalTok{hc_single =}\StringTok{ }\KeywordTok{hclust}\NormalTok{(}\KeywordTok{dist}\NormalTok{(x), }\DataTypeTok{method =} \StringTok{"single"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can now plot the dendrograms obtained using the usual \texttt{plot()} function.
+The numbers at the bottom of the plot identify each observation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(hc_complete,}\DataTypeTok{main =} \StringTok{"Complete Linkage"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{""}\NormalTok{, }\DataTypeTok{sub =} \StringTok{""}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{.9}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(hc_average, }\DataTypeTok{main =} \StringTok{"Average Linkage"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{""}\NormalTok{, }\DataTypeTok{sub =} \StringTok{""}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{.9}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(hc_single, }\DataTypeTok{main =} \StringTok{"Single Linkage"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{""}\NormalTok{, }\DataTypeTok{sub =} \StringTok{""}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{.9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-35-1.pdf}
+
+To determine the cluster labels for each observation associated with a
+given cut of the dendrogram, we can use the \texttt{cutree()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cutree}\NormalTok{(hc_complete, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
+## [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cutree}\NormalTok{(hc_average, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 1 2 2
+## [36] 2 2 2 2 2 2 2 2 1 2 1 2 2 2 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cutree}\NormalTok{(hc_single, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+## [36] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+\end{verbatim}
+
+For this data, complete and average linkage generally separate the observations
+into their correct groups. However, single linkage identifies one point
+as belonging to its own cluster. A more sensible answer is obtained when
+four clusters are selected, although there are still two singletons:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cutree}\NormalTok{(hc_single, }\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3
+## [36] 3 3 3 3 3 3 4 3 3 3 3 3 3 3 3
+\end{verbatim}
+
+To scale the variables before performing hierarchical clustering of the
+observations, we can use the \texttt{scale()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xsc =}\StringTok{ }\KeywordTok{scale}\NormalTok{(x)}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{hclust}\NormalTok{(}\KeywordTok{dist}\NormalTok{(xsc), }\DataTypeTok{method =} \StringTok{"complete"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"Hierarchical Clustering with Scaled Features"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+Correlation-based distance can be computed using the \texttt{as.dist()} function, which converts an arbitrary square symmetric matrix into a form that
+the \texttt{hclust()} function recognizes as a distance matrix. However, this only
+makes sense for data with \textbf{at least three features} since the absolute correlation
+between any two observations with measurements on two features is
+always 1. Let's generate and cluster a three-dimensional data set:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{30}\OperatorTok{*}\DecValTok{3}\NormalTok{), }\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{dd =}\StringTok{ }\KeywordTok{as.dist}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\KeywordTok{cor}\NormalTok{(}\KeywordTok{t}\NormalTok{(x)))}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{hclust}\NormalTok{(dd, }\DataTypeTok{method =} \StringTok{"complete"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"Complete Linkage with Correlation-Based Distance"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{""}\NormalTok{, }\DataTypeTok{sub =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-39-1.pdf}
+
+\hypertarget{example-clustering-cancel-cells}{%
+\subsection{Example: Clustering Cancel Cells}\label{example-clustering-cancel-cells}}
+
+Unsupervised techniques are often used in the analysis of genomic data. In this example, we'll see how hierarchical and K-means clustering compare on the \texttt{NCI60} cancer cell line microarray data, which
+consists of 6,830 gene expression measurements on 64 cancer cell lines:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# The NCI60 data}
+\KeywordTok{library}\NormalTok{(ISLR)}
+\NormalTok{nci_labels =}\StringTok{ }\NormalTok{NCI60}\OperatorTok{$}\NormalTok{labs}
+\NormalTok{nci_data =}\StringTok{ }\NormalTok{NCI60}\OperatorTok{$}\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+Each cell line is labeled with a cancer type. We'll ignore the
+cancer types in performing clustering, as these are unsupervised
+techniques. After performing clustering, we'll use this column to see the extent to which these cancer types agree with the results of these
+unsupervised techniques.
+
+The data has 64 rows and 6,830 columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(nci_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]   64 6830
+\end{verbatim}
+
+Let's take a look at the cancer types for the cell lines:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(nci_labels)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## nci_labels
+##      BREAST         CNS       COLON K562A-repro K562B-repro    LEUKEMIA 
+##           7           5           7           1           1           6 
+## MCF7A-repro MCF7D-repro    MELANOMA       NSCLC     OVARIAN    PROSTATE 
+##           1           1           8           9           6           2 
+##       RENAL     UNKNOWN 
+##           9           1
+\end{verbatim}
+
+We now proceed to hierarchically cluster the cell lines in the \texttt{NCI60} data,
+with the goal of finding out whether or not the observations cluster into
+distinct types of cancer. To begin, we standardize the variables to have
+mean zero and standard deviation one. This step is
+optional, and need only be performed if we want each gene to be on the
+same scale:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sd_data =}\StringTok{ }\KeywordTok{scale}\NormalTok{(nci_data)}
+\end{Highlighting}
+\end{Shaded}
+
+We now perform hierarchical clustering of the observations using complete,
+single, and average linkage. We'll use standard Euclidean distance as the dissimilarity
+measure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\NormalTok{data_dist =}\StringTok{ }\KeywordTok{dist}\NormalTok{(sd_data)}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{hclust}\NormalTok{(data_dist), }\DataTypeTok{labels =}\NormalTok{ nci_labels, }\DataTypeTok{main =} \StringTok{"Complete Linkage"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{""}\NormalTok{, }\DataTypeTok{sub =} \StringTok{""}\NormalTok{,}\DataTypeTok{ylab =} \StringTok{""}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{hclust}\NormalTok{(data_dist, }\DataTypeTok{method =} \StringTok{"average"}\NormalTok{), }\DataTypeTok{labels =}\NormalTok{ nci_labels, }\DataTypeTok{main =} \StringTok{"Average Linkage"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{""}\NormalTok{, }\DataTypeTok{sub =} \StringTok{""}\NormalTok{,}\DataTypeTok{ylab =} \StringTok{""}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{hclust}\NormalTok{(data_dist, }\DataTypeTok{method =} \StringTok{"single"}\NormalTok{), }\DataTypeTok{labels =}\NormalTok{ nci_labels,  }\DataTypeTok{main =} \StringTok{"Single Linkage"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{""}\NormalTok{, }\DataTypeTok{sub =} \StringTok{""}\NormalTok{,}\DataTypeTok{ylab =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-44-1.pdf}
+
+We see that the choice of linkage
+certainly does affect the results obtained. Typically, single linkage will tend
+to yield trailing clusters: very large clusters onto which individual observations
+attach one-by-one. On the other hand, complete and average linkage
+tend to yield more balanced, attractive clusters. For this reason, complete
+and average linkage are generally preferred to single linkage. Clearly cell
+lines within a single cancer type do tend to cluster together, although the
+clustering is not perfect.
+
+Let's use our complete linkage hierarchical clustering
+for the analysis. We can cut the dendrogram at the height that will yield a particular
+number of clusters, say 4:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hc_out =}\StringTok{ }\KeywordTok{hclust}\NormalTok{(}\KeywordTok{dist}\NormalTok{(sd_data))}
+\NormalTok{hc_clusters =}\StringTok{ }\KeywordTok{cutree}\NormalTok{(hc_out,}\DecValTok{4}\NormalTok{)}
+\KeywordTok{table}\NormalTok{(hc_clusters,nci_labels)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            nci_labels
+## hc_clusters BREAST CNS COLON K562A-repro K562B-repro LEUKEMIA MCF7A-repro
+##           1      2   3     2           0           0        0           0
+##           2      3   2     0           0           0        0           0
+##           3      0   0     0           1           1        6           0
+##           4      2   0     5           0           0        0           1
+##            nci_labels
+## hc_clusters MCF7D-repro MELANOMA NSCLC OVARIAN PROSTATE RENAL UNKNOWN
+##           1           0        8     8       6        2     8       1
+##           2           0        0     1       0        0     1       0
+##           3           0        0     0       0        0     0       0
+##           4           1        0     0       0        0     0       0
+\end{verbatim}
+
+There are some clear patterns. All the leukemia cell lines fall in cluster 3,
+while the breast cancer cell lines are spread out over three different clusters.
+We can plot the cut on the dendrogram that produces these four clusters using the \texttt{abline()} function, which draws a straight line on top of any existing plot in R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(hc_out, }\DataTypeTok{labels =}\NormalTok{ nci_labels)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h =} \DecValTok{139}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{07-unsupervised-learning_files/figure-latex/unnamed-chunk-46-1.pdf}
+
+Printing the output of \texttt{hclust} gives a useful brief summary of the object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hc_out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## hclust(d = dist(sd_data))
+## 
+## Cluster method   : complete 
+## Distance         : euclidean 
+## Number of objects: 64
+\end{verbatim}
+
+We claimed earlier that K-means clustering and hierarchical
+clustering with the dendrogram cut to obtain the same number
+of clusters can yield \textbf{very} different results. How do these \texttt{NCI60} hierarchical
+clustering results compare to what we get if we perform K-means clustering
+with \texttt{K\ \ =\ \ 4}?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\NormalTok{km_out =}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(sd_data, }\DecValTok{4}\NormalTok{, }\DataTypeTok{nstart =} \DecValTok{20}\NormalTok{)}
+\NormalTok{km_clusters =}\StringTok{ }\NormalTok{km_out}\OperatorTok{$}\NormalTok{cluster}
+\end{Highlighting}
+\end{Shaded}
+
+We can use a confusion matrix to compare the differences in how the two methods assigned observations to clusters:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(km_clusters,hc_clusters)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            hc_clusters
+## km_clusters  1  2  3  4
+##           1 11  0  0  9
+##           2 20  7  0  0
+##           3  9  0  0  0
+##           4  0  0  8  0
+\end{verbatim}
+
+We see that the four clusters obtained using hierarchical clustering and Kmeans
+clustering are somewhat different. Cluster 2 in K-means clustering is
+identical to cluster 3 in hierarchical clustering. However, the other clusters
+differ: for instance, cluster 4 in K-means clustering contains a portion of
+the observations assigned to cluster 1 by hierarchical clustering, as well as
+all of the observations assigned to cluster 2 by hierarchical clustering.
+
+\hypertarget{references-1}{%
+\subsection{References}\label{references-1}}
+
+These examples are an adaptation of p.~404-407, 410-413 of ``Introduction to
+Statistical Learning with Applications in R'' by Gareth James, Daniela Witten, Trevor Hastie and Robert
+Tibshirani. Adapted by R. Jordan Crouser at Smith College for SDS293: Machine Learning (Spring 2016), and re-implemented in Fall 2016 in \texttt{tidyverse} format by Amelia McNamara and R. Jordan Crouser at Smith College.
+
+Used with permission from Jordan Crouser at Smith College, and to the following contributors on github:
+
+\begin{itemize}
+\tightlist
+\item
+  github.com/jcrouser
+\item
+  github.com/AmeliaMN
+\item
+  github.com/mhusseinmidd
+\item
+  github.com/rudeboybert
+\item
+  github.com/ijlyttle
+\end{itemize}
 
 \hypertarget{practice-exams}{%
 \chapter{Practice Exams}\label{practice-exams}}
 
 Practice exams are available at \href{https://www.exampa.net/pricing}{ExamPA.net}.
 
-\hypertarget{references}{%
-\chapter{References}\label{references}}
+\hypertarget{references-2}{%
+\chapter{References}\label{references-2}}
 
 Burkov, Andriy. 2019. \emph{The Hundred-Page Machine Learning Book.} \url{http://themlbook.com/}
 
@@ -4587,6 +6105,8 @@ Hastie, Trevor, et al.~2002. \emph{The Elements of Statistical Learning}. Print.
 
 James, Gareth, et al.~2017. \emph{An Introduction to Statistical Learning}.
 \url{http://faculty.marshall.usc.edu/gareth-james/ISL/ISLR\%20Seventh\%20Printing.pdf}
+
+Piech, Chris and Ng, Andrew. 2019. Stanford CS221. Course Notes. \url{https://stanford.edu/~cpiech/cs221/handouts/kmeans.html}
 
 Rigollet, Philippe (2017). \emph{Lecture 21: Generalized Linear Models}. Video. \url{https://www.youtube.com/watch?v=X-ix97pw0xY\&t=899s}
 

@@ -20,34 +20,6 @@ favicon: images/artificial_actuary_logo_favicon.png
 - All data sets needed packaged in an R library
 - `R code` examples
 
-## Get full access at [ExamPA.net](https://www.exampa.net/pricing) 
-
-<iframe src="https://player.vimeo.com/video/375155028" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-- <span style="color:darkblue">**Pass Guarantee**: Pass in December or get the next 7 months free!</span>
-- Three **original** practice exams and more coming soon
-- **June Exam PA Video**
-- **Hospital Readmissions Video**
-- **Student Success Video**
-- An online discussion forum
-- Time-saving techniques
-- An RStudio/Data Manipulation tutorial
-
-
-## Content Samples
-
-### A Response to a Subscriber's Question
-
-An individual on our forum at ExamPA.net just asked this excellent question.  
-
-<iframe src="https://player.vimeo.com/video/374497585" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
->Note: At 3:09, I say "The L1 norm is lambda", which is mispeaking.  The L1 norm is the sum of the absolute value of the beta coefficients.
-
-### An Original Practice Exam Project Statement
-
-[Here](https://github.com/sdcastillo/JunePAFiles/blob/master/Practice%20Exam%20Sample.pdf) you can see the project statement for a practice exam which is in the format of a real exam.  
-
 ## About the author
 
 Sam Castillo is a predictive modeler at Milliman in Chicago, maintains a [blog](http://artificialactuary.com/) about the future of risk, and won the 2019 SOA Predictive Analytics and Fururism's [Jupyter contest](https://nbviewer.jupyter.org/github/SOASections/SOA-Predictive-Modeling-Innovation-and-Industry-Contest-2019-First-Place/blob/master/Predicting%20Uncertainty%20Prediction%20Intervals%20from%20Gradient%20Boosted%20Quantile%20Regression.ipynb).
@@ -56,19 +28,11 @@ Sam Castillo is a predictive modeler at Milliman in Chicago, maintains a [blog](
 
 Support: sam@exampa.net
 
-
-## Contribute
-
-This book was written in [RMarkdown](https://rmarkdown.rstudio.com/) using [bookdown](https://bookdown.org/).  It is built from a github page, where updates can be sent to this page in minutes.  A big shout out to those who have made suggestions already: Erlan Wheeler, David Hill, Caden Collier, Jon Lai, Peter Schelble, and Abhinav Gadde.
-
-<iframe src="https://player.vimeo.com/video/375173977?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-
 # The exam
 
 The main challenge  of this exam is in communication: both understanding what they want you to do as well as telling the grader what it is that you did.
 
-You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on a Prometric toaster-oven computer.  The syllabus uses fancy language to describe the topics covered on the exam, making it sound more difficult than it should be.  A good analogy is a job description that has many complex-sounding tasks, when in reality the day-to-day operations of the employee are far simpler.
+You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on a Prometric computer.  The syllabus uses fancy language to describe the topics covered on the exam, making it sound more difficult than it should be.  A good analogy is a job description that has many complex-sounding tasks, when in reality the day-to-day operations of the employee are far simpler.
 
 A non-technical translation is as follows:
 
@@ -88,7 +52,12 @@ A non-technical translation is as follows:
 - Interpret results within a business context
 - Change model parameters
 
+# Prometric Demo
 
+The following video from Prometric shows what the computer set up will look like.  In addition to the files shown in the video, they will give you a printed out project statement (If they don't give this to you right away, ask for it.)
+
+<iframe src="https://player.vimeo.com/video/304653968" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<p><a href="https://vimeo.com/304653968">SOAFinalCut</a> from <a href="https://vimeo.com/user10231556">Prometric</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 # You already know what learning is
 

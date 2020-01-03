@@ -21,7 +21,7 @@ The below example shows how a single tree can predict health claims.
 - For smokers with a `bmi` of less than 30, the predicted annual claims are 21,000.  10% of patients fall into this bucket.
 - For smokers with a `bmi` of more than 30, the prediction is 42,000.  This bucket accounts for 11% of patients.
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 We can cut the data set up into these groups and look at the claim costs.  From this grouping, we can see that `smoker` is the most important variable as the difference in average claims is about 20,000.
 
@@ -66,7 +66,7 @@ tree <- rpart(formula = charges ~  ., data = health_insurance,
 rpart.plot(tree, type = 3)
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 **Step 4: Apply cost comlexity pruning to simplify the tree**
 
@@ -105,16 +105,16 @@ cost %>% head()
 ##   nsplit      CP xerror
 ##    <dbl>   <dbl>  <dbl>
 ## 1      0 0.620    1.00 
-## 2      1 0.144    0.382
+## 2      1 0.144    0.383
 ## 3      2 0.0637   0.240
-## 4      3 0.00967  0.180
-## 5      4 0.00784  0.172
-## 6      5 0.00712  0.168
+## 4      3 0.00967  0.178
+## 5      4 0.00784  0.175
+## 6      5 0.00712  0.169
 ```
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.  
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 To optimize performance, choose the number of splits which has the lowest error.  Often, though, the goal of using a decision tree is to create a simple model.  In this case, we can err or the side of a lower `nsplit` so that the tree is shorter and more interpretable.  All of the questions on so far have only used decision trees for interpretability, and a different model method has been used when predictive power is needed.
 
@@ -133,12 +133,12 @@ tree$cptable %>%
 ## # A tibble: 6 x 3
 ##   nsplit       CP xerror
 ##    <dbl>    <dbl>  <dbl>
-## 1     17 0.000913  0.150
-## 2     16 0.00105   0.152
-## 3      7 0.00196   0.152
-## 4     14 0.00119   0.152
-## 5     18 0.000910  0.152
-## 6     15 0.00116   0.152
+## 1     18 0.000910  0.149
+## 2     19 0.000837  0.150
+## 3     25 0.000681  0.150
+## 4     17 0.000913  0.150
+## 5     22 0.000759  0.151
+## 6     35 0.000497  0.151
 ```
 
 The SOA will give you code to find the lowest CP value such as below.  This may or may not be useful depending on if they are asking for predictive performance or interpretability.
@@ -175,7 +175,7 @@ simple_tree <- rpart(formula = charges ~  .,
 rpart.plot(simple_tree, type = 3)
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 We evaluate the performance on the test set.  Because the target variable `charges` is highly skewed, we use the Root Mean Squared Log Error (RMSLE).  We see that the complex tree has the best (lowest) error, but also has 8 terminal nodes.  The simple tree with only three terminal nodes has worse (higher) error, but this is still an improvement over the mean prediction.
 
@@ -265,7 +265,7 @@ When using only a single tree, there can only be as many predictions as there ar
 
 The below graph illustrates this.  A single tree (left) has stair-like, step-wise predictions whereas a random forest is free to predict any value.  The color represents the predicted value (yellow = highest, black = lowest).
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 Unlike decision trees, random forest trees do not need to be pruned.  This is because overfitting is less of a problem: if one tree overfits, there are other trees which overfit in other areas to compensate.  
 
@@ -322,7 +322,7 @@ rf <- randomForest(charges ~ ., data = train, ntree = 500)
 plot(rf)
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
 
 We again use RMSLE.  This is lower (better) than a model that uses the average as a baseline.
 
@@ -363,7 +363,7 @@ get_rmsle(test$charges, mean(train$charges))
 varImpPlot(x = rf)
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
 
 ### Partial dependence
 
@@ -424,10 +424,7 @@ age <- pdp::partial(rf, pred.var = "age",
 ggarrange(bmi, age)
 ```
 
-<div class="figure">
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-19-1.png" alt="Partial Dependence" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-19)Partial Dependence</p>
-</div>
+![(\#fig:unnamed-chunk-19)Partial Dependence](06-tree-based-models_files/figure-latex/unnamed-chunk-19-1.pdf) 
 
 ### Advantages and disadvantages
 
@@ -791,19 +788,19 @@ rbind(top_result, tenth_result, twenty_seventh_result) %>%
 
 
 ```r
-pdp::partial(gbm, pred.var = "bmi", grid.resolution = 20, plot = T)
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 15, plot = T)
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-32-1.png" width="480" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-32-1.pdf)<!-- --> 
 
 However, when we add in the `ice` curves, we see that there is something else going on.  Explain this graph.  Why are there two groups of lines?
 
 
 ```r
-pdp::partial(gbm, pred.var = "bmi", grid.resolution = 30, plot = T, ice = T, alpha = 0.1, palette = "viridis")
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 15, plot = T, ice = T, alpha = 0.1, palette = "viridis")
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-33-1.pdf)<!-- --> 
 
 
 ## Answers to Exercises

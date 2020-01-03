@@ -17,7 +17,6 @@ Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
 | 10      | Tibbles         |
 | 12      | Tidy data       |
 | 15      | Factors         |
-| 16      | Dates and times |
 | 17      | Introduction    |
 | 18      | Pipes           |
 | 19      | Functions       |
