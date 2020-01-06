@@ -14,21 +14,21 @@ theme_set(theme_bw())
 
 # Introduction to Modeling
 
-About 40-50% of the exam grade is based on modeling.  
+About 40-50% of the exam grade is based on modeling.  The goal is to be able to predict an unknown quantity.  In actuarial applications, this tends to be claims that occur in the future, death or injury, accidents, policy lapse, hurricanes, or some other insurable event.
 
 ## Model Notation
 
-The number of observations will be denoted by $n$.  When we refer to the size of a data set, we are referring to $n$.  We use $p$ to refer the number of input variables used.  The word "variables" is synonymous with "features".  For example, in the `health_insurance` data, the variables are `age`, `sex`, `bmi`, `children`, `smoker` and `region`.  These 7 variables mean that $p = 7$.  The data is collected from 1,338 patients, which means that $n = 1,338$.
+The number of observations will be denoted by $n$.  When we refer to the size of a data set, we are referring to $n$.  We use $p$ to refer the number of input variables used.  The word "variables" is synonymous with "features".  For example, in the `health_insurance` data, the variables are `age`, `sex`, `bmi`, `children`, `smoker` and `region`.  These six variables mean that $p = 6$.  The data is collected from 1,338 patients, which means that $n = 1,338$.
 
 Scalar numbers are denoted by ordinary variables (i.e., $x = 2$, $z = 4$), and vectors are denoted by bold-faced letters 
 
 $$\mathbf{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}$$
 
-We use $\mathbf{y}$ to denote the target variable.  This is the variable which we are trying to predict.  This can be either a whole number, in which case we are performing *regression*, or a category, in which case we are performing *classification*.  In the health insurance example, `y = charges`, which are the annual health care costs for a patient.
+We use $\mathbf{y}$ to denote the target variable.  This is the variable which we are trying to predict.  This can be either a whole number, in which case we are performing *regression*, or a category, in which case we are performing *classification*.  In the health insurance example, `y = charges`, which are the annual health care costs for a patient, which is regression.
 
 Both $n$ and $p$ are important because they tell us what types of models are likely to work well, and which methods are likely to fail.  For the PA exam, we will be dealing with small $n$ (<100,000) due to the limitations of the Prometric computers.  We will use a small $p$ (< 20) in order to make the data sets easier to interpret.
 
-We organize these variables into matrices.  Take an example with $p$ = 2 columns and 3 observations.  The matrix is said to be $3 \times 2$ (read as "2-by-3") matrix.
+We organize these variables into matrices.  Take an example with $p$ = 2 columns and 3 observations.  The matrix is said to be $3 \times 2$ (read as "3-by-2") matrix.
 
 $$
 \mathbf{X} = \begin{pmatrix}x_{11} & x_{21}\\
@@ -42,7 +42,7 @@ The target is
 $$\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}$$
 This represents the *unknown* quantity that we want to be able to predict.  In the health care costs example, $y_1$ would be the costs of the first patient, $y_2$ the costs of the second patient, and so forth.  The variables $x_{11}$ and $x_{12}$ might represent the first patient's age and sex respectively, where $x_{i1}$ is the patient's age, and $x_{i2} = 1$ if the ith patient is male and 0 if female.
 
-Machine learning is about using $X$ to predict $Y$. We call this "y-hat", or simply the prediction.  This is based on a function of the data $X$.
+Machine learning is about using $X$ to predict $Y$. We call this "y-hat", or simply the *prediction*.  This is based on a function of the data $X$.
 
 $$\hat{Y} = f(X)$$
 
@@ -54,6 +54,8 @@ $$
 
 In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict a person's health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
 
+Another way of saying this is to use the expected value.  The model $f(X)$ estimates the expected value of the target $E[Y|X]$.  That is, once we condition on the data $X$, we can make a guess as to what we expect $Y$ to be "close to".  There are many ways of measuring "closeness", as we will see.  
+
 ## Ordinary least squares (OLS)
 
 The type of model used refers to the class of function of $f$.  If $f$ is linear, then we are using a linear model.  Linear models are linear in the parameters, $\beta$.
@@ -63,15 +65,18 @@ We observe the data $X$ and the want to predict the target $Y$.
 We find a $\mathbf{\beta}$ so that 
 
 $$
-\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p
+\hat{Y} = E[Y] =  \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p
 $$
 
 Which means that each $y_i$ is a linear combination of the variables $x_1, ..., x_p$, plus a constant $\beta_0$ which is called the *intercept* term.  
 
 In the one-dimensional case, this creates a line connecting the points.  In higher dimensions, this creates a hyperplane.
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
+The red line shows the *mean* response, as the response $\hat{Y}$ is actually a random variable.  For each of the data points, the model assumes a Gaussian distribution. If there is just a single predictor, $x$, then the mean is $\beta_0 + \beta_1 x$.
+
+<img src="05-linear-models_files/figure-html/unnamed-chunk-3-1.png" width="1250" style="display: block; margin: auto;" />
 
 The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
 
@@ -81,16 +86,23 @@ $$
 \text{RSS} = \sum_i(y_i - \hat{y})^2
 $$
 
-When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 + ... + \beta_p x_p$, take the derivative with respect to $\beta$, set equal to zero, and solve, we can find the optimal values.  This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.
+When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 + ... + \beta_p x_p$, take the derivative with respect to $\beta$, set equal to zero, and solve, we can find the optimal values.  This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.  On Exam STAM, you might remember *maximum likelihood estimation*, which is how these parameters are chosen.
 
-You might be asking: why does this need to be the squared error?  Why not the absolute error, or the cubed error?  Technically, these could be used as well.  In fact, the absolute error (L1 norm) is useful in other models.  Taking the square has a number of advantages.  
+You might be asking: why does this need to be the squared error?  Why not the absolute error, or the cubed error?  Technically, these could be used as well but the betas would not be the maximum likelihood parameters.  In fact, using the absolute error results in the model predicting the *median* as opposed to the *mean*.  Two reasons why RSS is popular are:  
 
-- It provides the same solution if we assume that the distribution of $Y|X$ is guassian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
-- Empirically it has been shown to be less likely to overfit as compared to other loss functions
+- It provides the same solution if we assume that the distribution of $Y|X$ is Guassian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
+- It is computationally easier, and so up until the 2000s when computers became faster this was the only method possible.
+
+>What does it mean when a log transform is applied to $Y$?  I remember from my statistics course on regression that this was done.  
+
+
+This is done so that the variance is more constant.  For example, if the units are in dollars, then it is very common for the values to fluctuate more for higher values than for lower values.  Consider a stock price, for instance.  If the stock is \$50 per share, then it will go up or down less than if it is \$1000 per share.  The log of 50, however, is about 3.9 and the log of 1000 is only 6.9, and so this difference is smaller.  In other words, the variance is smaller.
+
+Transforming the response means that instead of the model predicting $E[Y]$, it predicts $E[log(Y)]$.  A common mistake is to then the take the exponent in an attempt to "undo" this transform, but $e^{E[log(Y)]}$ is not the same as $E[Y]$.
 
 ## Example
 
-In our health, we can create a linear model using `bmi`, `age`, and `sex` as an inputs.  
+In our health insurance data, we can predict a person's health costs based on their age, body mass index, and gender.  Intuitively, we expect that these costs would increase as a person's age increases, would be different for men than for women, and would be higher for those who have a less healthy BMI.  We create a linear model using `bmi`, `age`, and `sex` as an inputs.  
 
 The `formula` controls which variables are included.  There are a few shortcuts for using R formulas.  
 
@@ -102,7 +114,8 @@ The `formula` controls which variables are included.  There are a few shortcuts 
 | log(`charges`) ~ log(`bmi`) + log(`age`) | Use the logs of `age` and `bmi` to predict  log(`charges`) |
 | `charges` ~ . | Use all variables to predict `charges`|
 
-You can use formulas to create new variables (aka feature engineering).  This can save you from needing to re-run code to create data.  
+
+>While you can use formulas to create new variables, the exam questions tend to have you do this in the data itself.  For example, if taking the log transform of a `bmi`, you would add a column `log_bmi` to the data and remove the original `bmi` column.
 
 Below we fit a simple linear model to predict charges.
 
@@ -111,12 +124,12 @@ Below we fit a simple linear model to predict charges.
 library(ExamPAData)
 library(tidyverse)
 
-model <- lm(data = health_insurance, formula = charges ~ bmi + age)
+model <- lm(data = health_insurance, formula = charges ~ bmi + age + sex)
 ```
 
-The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `t value` tells you how "big" this error really is based on standard deviations.  A larger `t value` implies a low probability of the null hypothesis being accepted saying that the coefficient is zero.  This is the same as having a p-value (`Pr (>|t|))`) being close to zero.
+The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `p value` tells you how "big" this error really is based on standard deviations.  A small p-value (`Pr (>|t|))`) means that we can safely reject the null hypothesis that says the cofficient is equal to zero.
 
-The little `*`, `**`, `***` indicate that the variable is either somewhat significant, significant, or highly significant.  "significance" here means that there is a low probability of the coefficient being that size (or larger) if there were *no actual casual relationship*, or if the data was random noise.
+The little `*`, `**`, `***` tell you the significance level.  A variable with a `***` means that the probability of getting a coefficient of that size given that the data was randomly generated is less than 0.001.  The `**` has a significance level of 0.01, and `*` of 0.05.
 
 
 ```r
@@ -126,24 +139,27 @@ summary(model)
 ```
 ## 
 ## Call:
-## lm(formula = charges ~ bmi + age, data = health_insurance)
+## lm(formula = charges ~ bmi + age + sex, data = health_insurance)
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
-## -14457  -7045  -5136   7211  48022 
+## -14974  -7073  -5072   6953  47348 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -6424.80    1744.09  -3.684 0.000239 ***
-## bmi           332.97      51.37   6.481 1.28e-10 ***
-## age           241.93      22.30  10.850  < 2e-16 ***
+## (Intercept) -6986.82    1761.04  -3.967 7.65e-05 ***
+## bmi           327.54      51.37   6.377 2.49e-10 ***
+## age           243.19      22.28  10.917  < 2e-16 ***
+## sexmale      1344.46     622.66   2.159    0.031 *  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 11390 on 1335 degrees of freedom
-## Multiple R-squared:  0.1172,	Adjusted R-squared:  0.1159 
-## F-statistic:  88.6 on 2 and 1335 DF,  p-value: < 2.2e-16
+## Residual standard error: 11370 on 1334 degrees of freedom
+## Multiple R-squared:  0.1203,	Adjusted R-squared:  0.1183 
+## F-statistic: 60.78 on 3 and 1334 DF,  p-value: < 2.2e-16
 ```
+
+>For this exam, variable selection tends to be based on the 0.05 significance level (single star `*`).
 
 When evaluating model performance, you should not rely on the `summary` alone as this is based on the training data.  To look at performance, test the model on validation data.  This can be done by either using a hold out set, or using cross-validation, which is even better.
 
@@ -198,14 +214,17 @@ The RMSE is **higher** (worse) when using just the mean, which is what we expect
 
 The next test is to see if any assumptions have been violated.  
 
-First, is there a pattern in the residuals?  If there is, this means that the model is missing key information.  For the model below, this is a **yes**, which means that this is a bad model.  Because this is just for illustration, I'm going to continue using it, however.  
+First, is there a pattern in the residuals?  If there is, this means that the model is missing key information.  For the model below, this is a **yes**, **which means that this is a bad model**.  Because this is just for illustration, we are going to continue using it.  
 
 
 ```r
 plot(model, which = 1)
 ```
 
-![(\#fig:unnamed-chunk-9)Residuals vs. Fitted](05-linear-models_files/figure-latex/unnamed-chunk-9-1.pdf) 
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-10-1.png" alt="Residuals vs. Fitted" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-10)Residuals vs. Fitted</p>
+</div>
 
 The normal QQ shows how well the quantiles of the predictions fit to a theoretical normal distribution.  If this is true, then the graph is a straight 45-degree line.  In this model, you can definitely see that this is not the case.  If this were a good model, this distribution would be closer to normal.
 
@@ -214,7 +233,10 @@ The normal QQ shows how well the quantiles of the predictions fit to a theoretic
 plot(model, which = 2)
 ```
 
-![(\#fig:unnamed-chunk-10)Normal Q-Q](05-linear-models_files/figure-latex/unnamed-chunk-10-1.pdf) 
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-11-1.png" alt="Normal Q-Q" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-11)Normal Q-Q</p>
+</div>
 
 Once you have chosen your model, you should re-train over the entire data set.  This is to make the coefficients more stable because `n` is larger.  Below you can see that the standard error is lower after training over the entire data set.
 
@@ -233,7 +255,7 @@ testing <- lm(data = test,
 |bmi         |                51.4|               111.1|
 |age         |                22.3|                47.8|
 
-All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
+All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would probably not make a difference.
 
 
 ```r
@@ -255,7 +277,6 @@ $$\hat{y_1} = 4,526 + (287)(27.9) + (228)(19) = 16,865$$
 
 This model structure implies that each of the variables $x_1, ..., x_p$ each change the predicted $\hat{y}$.  If $x_{ij}$ increases by one unit, then $y_i$ increases by $\beta_j$ units, regardless of what happens to all of the other variables.  This is one of the main assumptions of linear models: *variable indepdendence*.  If the variables are correlated, say, then this assumption will be violated.  
 
-
 | Readings |  | 
 |-------|---------|
 | ISLR 2.1 What is statistical learning?|  |
@@ -264,16 +285,16 @@ This model structure implies that each of the variables $x_1, ..., x_p$ each cha
 
 # Generalized linear models (GLMs)
 
-The linear model that we have considered up to this point, what we called "OLS", assumes that the response is a linear combination of the predictor variables.  For an error term $\epsilon_i \sim N(0,\sigma^2)$, this is assumes that
+The linear model that we have considered up to this point, what we have called "OLS", have been quite simple.  We assume that the response is Gaussian with mean equal to the linear predictor.  In other words, each observation has a Gaussian distribution with a mean equal to the expected value of the linear predictor.
 
 $$
-Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
+E[Y] = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p
 $$
 
 In matrix notation, if $X$ is the matrix made up of columns $X_1, ..., X_p$, then
 
 $$
-\mathbf{Y} = \mathbf{X} \mathbf{\beta} + \mathbf{\epsilon}
+E[\mathbf{Y}] = \mathbf{X} \mathbf{\beta}
 $$
 
 Another way of saying this is that "after we adjust for the data, the error is normally distributed and the variance is constant."  If $I$ is an n-by-in identity matrix, and $\sigma^2 I$ is the covariance matrix, then
@@ -290,7 +311,7 @@ These assumptions can be expressed in two parts:
 
 2. A link between the response and the covariates (also known as the systemic component) $\mu(X) = X\beta$
 
-In words, this is saying that each observation follows a normal distribution which has a mean that is  equal to the linear predictor.  
+This says that each observation follows a normal distribution which has a mean that is equal to the linear predictor.  
 
 ## The generalized linear model
 
@@ -303,40 +324,92 @@ Just as the name implies, GLMs are more *general* in that they are more flexible
 $$g(\mu(X)) = X\beta$$
 where $g$ is called the *link function* and $\mu = E[Y|X]$.
 
-In words, this is saying that each observation follows *some type of exonential distrubution* (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function.  Additionally, there is a *dispersion* parameter, but that is more more info that is needed here.  For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf).
+Each observation follows *some type of exonential distrubution* (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function.  Additionally, there is a *dispersion* parameter, but that is more more info that is needed here.  For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf).
 
-The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
+These are the most likely response distributions for this exam.
 
-\begin{figure}
-\includegraphics[width=22.32in]{images/glm_links} \caption{Distribution-Link Function Combinations}(\#fig:unnamed-chunk-14)
-\end{figure}
+<img src="05-linear-models_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" />
 
-For this exam, a common question is to ask candiates to choose the best distribution and link function.  There is no all-encompasing answer, but a few suggestions are
+The choice of response distribution should be similar to the actual distribution of $Y$.  For instance, if $Y$ is never less than zero, then using the Gaussian response is not idea because this can allow for negative values.  If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewd. 
 
-- If $Y$ is counting something, such as the number of claims, number of accidents, or some other discrete and positive counting sequence, use the Poisson;
-- If $Y$ contains negative values, then do not use the Exponential, Gamma, or Inverse Gaussian as these are strictly positive.  Conversely, if $Y$ is only positive, such as the price of a policy (price is always > 0), or the claim costs, then these are good choices;
-- If $Y$ is binary, the the binomial response with either a Probit or Logit link.  The Logit is more common.
-- If $Y$ has more than two categories, the multinomial distribution with either the Probit or Logic link (See Logistic Regression)
+For a $Y$ with discrete values, the Poisson should be used when it is counting something.  For example, if counting the number of claims which a policy has in a given year.  If $Y$ has only two values, then the Binomial is the only choice.  If there are multiple categories, then the multinomial can be used.
 
-## Interpretation
+<img src="05-linear-models_files/figure-html/unnamed-chunk-16-1.png" width="400" style="display: block; margin: auto;" />
 
-The exam will always ask you to interpret the GLM.  These questions can usually be answered by inverting the link function and interpreting the coefficients.  In the case of the log link, simply take the exponent of the coefficients and each of these represents a "relativity" factor.
+There are five link functions for a continuous $Y$, although the choice of response family will typically rule-out several of these immediately.  The linear predictor (a.k.a., the *systemic component*) is $z$ and the link function is how this connects to the expected value of the resonse.
+
+$$z = X\beta = g(\mu)$$
+<img src="05-linear-models_files/figure-html/unnamed-chunk-17-1.png" width="400" style="display: block; margin: auto;" />
+
+If the response distribution *must* have a positive mean, such as in the case of the Inverse Gaussian or Gamma, then the Identity or Inverse links are poor choices because they allow for negative values; the range of the mean is $(-\infty, \infty)$.  The other link functions force the mean to be positive.
+
+For binary responses, there are four link functions.  The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the SOA's Hospital Readmissions practice exam in 2019.  
+
+The probability of an event occuring is $E[Y] = p$.  Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability.  
+
+In the case of the logit, the result is known as *logistic regression*.  There is more on this later.  
+
+<img src="05-linear-models_files/figure-html/unnamed-chunk-18-1.png" width="600" style="display: block; margin: auto;" />
+
+## Interpretation of coefficients
+
+The GLM's interpretation depends on the choice of link function.  
+
+### Log link
+
+In the case of the log link, simply take the exponent of the coefficients and each of these represents a multiplicative factor.
 
 $$
-log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
+log(\hat{Y}) = X\beta \Rightarrow \hat{y} = e^{X \beta}
 $$
 
-For a single observation $y_i$, this is
+For a single observation $Y_i$, this is
 
 $$
-\text{exp}(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + ... + \beta_p x_{ip}) = \\
-e^{\beta_0} e^{\beta_1 x_{i1}}e^{\beta_2 x_{i2}} ...  e^{\beta_p x_{ip}} = 
+\text{exp}(\beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + ... + \beta_p X_{ip}) = \\
+e^{\beta_0} e^{\beta_1 X_{i1}}e^{\beta_2 X_{i2}} ...  e^{\beta_p X_{ip}} = 
 R_0 R_2 R_3 ... R_{p}
 $$
 
-Where $R_k$ is the *relativity* of the kth variable.  This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance.  The data science community does not use this language. 
+$R_k$ is known as the *relativity* of the kth variable.  This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance.  
 
-For binary outcomes with logit or probit link, there is no easy interpretation.  This has come up in at least one past sample exam, and the solution was to create "psuedo" observations and observe how changing each $x_k$ would change the predicted value.  Due to the time requirements, this is unlikely to come up on an exam.  So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.
+Another advantage to the log link is that the coefficients can be interpreted as having a percentage change on the response.  Here is an example for a GLM with variables $X_1$ and $X_2$ and a log link function. This holds any continuous response distribution.
+
+| Variable    | $\beta_j$ | $e^{\beta_j} - 1$ | Interpretation                                    | 
+|-------------|-------------|----------------------|---------------------------------------------------| 
+| (intercept) | 0.100       | 0.105                |                                                   | 
+| $X_1$          | 0.400       | 0.492                | 49% increase in $E[Y]$ for each unit increase in $X_1$ | 
+| $X_2$          | -0.500      | -0.393               | 39% decrease in $E[Y]$ for each unit increase in $X_2$ | 
+
+
+If categorical predictors are used, then the interpretation is very similar.  Say that there is one predictor, `COLOR`, which takes on values of `YELLO` (reference level), `RED`, and `BLUE`.  
+
+| Variable    | $\beta_j$ | $e^{\beta_j} - 1$  | Interpretation                                          | 
+|-------------|-------------|----------------------|---------------------------------------------------------| 
+| (intercept) | 0.100       | 0.105                |                                                         | 
+| Color=RED   | 0.400       | 0.492                | 49% increase  in $E[Y]$ for RED cars as opposed to YELLOW cars| 
+| Color=BLUE  | -0.500      | -0.393               | 39% decrease in $E[Y]$ for BLUE cars rather than YELLOW cars| 
+
+### Logit
+
+The link function $log(\frac{p}{1-p})$ is known as the log-odds, where the odds are $\frac{p}{1-p}$.  These come up in gambling, where bets are placed on the odds of some event occuring.  For example: if the probability of a claim is $p = 0.8$, then the probability of no claim is 0.2 and the odds of a claim occuring are 0.8/0.2 = 4.  
+
+The transformation from probability to odds is monotonic.  This is a fancy way of saying that if $p$ increases, then the odds of $p$ increases as well, and vice versa if $p$ decreases.  The log transform is monotonic as well.  
+
+The net result is that when a variable increases the linear predictor, this increases the log odds, and this increases the log of the odds, and vice versa if the linear predictor decreases.  In other words, the signs of the coefficients indicate whether the variable increases or decreases the probability of the event.
+
+### Probit
+
+Just like the logit, the signs of the coefficients agree with the effect on the response.  Instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1).  There is no way of taking this inverse directly.
+
+
+### Summary
+
+- If $Y$ is counting something, such as the number of claims, number of accidents, or some other discrete and positive counting sequence, use the Poisson;
+- If $Y$ contains negative values, then do not use the Gamma or Inverse Gaussian as these are strictly positive.  Conversely, if $Y$ is only positive, such as the price of a policy (price is always > 0), or the claim costs, then these are good choices;
+- If $Y$ is binary, the the binomial response with either a Probit or Logit link.  The Logit is the most common, but the only way to tell which is best is to test each of the discrete link functions and see which has the lowest error;
+- If $Y$ has more than two categories, the multinomial distribution with either the Probit or Logic link.
+
 
 ## Residuals
 
@@ -348,7 +421,7 @@ This are not meaningful for GLMs with non-Gaussian response families because the
 
 To paraphrase from this paper from the University of Oxford:
 
-www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf
+stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf
 
 Deviance is a way of assessing the adequacy of a model by comparing it with a more general
 model with the maximum number of parameters that can be estimated. It is referred to
@@ -409,7 +482,7 @@ Below you can see graph of deviance residuals vs. the predicted values.
 plot(model, which = 3)
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.  
 
@@ -424,7 +497,7 @@ The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i
 plot(model, which = 2)
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 ## Combinations of Link and Response Family Examples
 
@@ -475,20 +548,20 @@ summary(glm)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -3.0004  -0.6964   0.0005   0.7266   3.0718  
+## -3.7952  -0.6853   0.0178   0.6768   3.0251  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 1.000e+01  2.195e-06 4554982   <2e-16 ***
-## x           1.000e+00  3.085e-06  324117   <2e-16 ***
+## (Intercept) 1.000e+01  2.223e-06 4498054   <2e-16 ***
+## x           1.000e+00  3.146e-06  317840   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 1.067056)
+## (Dispersion parameter for gaussian family taken to be 1.044198)
 ## 
-##     Null deviance: 1.2235e+11  on 999  degrees of freedom
-## Residual deviance: 1.0649e+03  on 998  degrees of freedom
-## AIC: 2906.8
+##     Null deviance: 1.1620e+11  on 999  degrees of freedom
+## Residual deviance: 1.0421e+03  on 998  degrees of freedom
+## AIC: 2885.1
 ## 
 ## Number of Fisher Scoring iterations: 2
 ```
@@ -498,7 +571,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 ### Gaussian Response with Inverse Link
 
@@ -517,12 +590,12 @@ summary(data)
 
 ```
 ##        x                   y           
-##  Min.   :0.0001064   Min.   :  -1.957  
-##  1st Qu.:0.2532864   1st Qu.:   1.259  
-##  Median :0.5028875   Median :   2.334  
-##  Mean   :0.5018599   Mean   :  10.214  
-##  3rd Qu.:0.7507694   3rd Qu.:   4.232  
-##  Max.   :0.9998552   Max.   :9394.790
+##  Min.   :0.0001114   Min.   :  -2.030  
+##  1st Qu.:0.2531351   1st Qu.:   1.264  
+##  Median :0.5016953   Median :   2.341  
+##  Mean   :0.4996103   Mean   :   9.306  
+##  3rd Qu.:0.7441485   3rd Qu.:   4.298  
+##  Max.   :0.9998686   Max.   :8981.143
 ```
 
 
@@ -539,20 +612,20 @@ summary(glm)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -3.5186  -0.6747   0.0105   0.6883   3.3764  
+## -3.8247  -0.6780   0.0231   0.6944   3.6514  
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 3.596e-08  2.587e-08    1.39    0.165    
-## x           9.998e-01  2.072e-04 4824.13   <2e-16 ***
+##               Estimate Std. Error  t value Pr(>|t|)    
+## (Intercept) -5.618e-08  2.880e-08   -1.951   0.0511 .  
+## x            1.000e+00  2.101e-04 4761.172   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 1.007483)
+## (Dispersion parameter for gaussian family taken to be 1.032529)
 ## 
-##     Null deviance: 203905704  on 9999  degrees of freedom
-## Residual deviance:     10073  on 9998  degrees of freedom
-## AIC: 28457
+##     Null deviance: 144250808  on 9999  degrees of freedom
+## Residual deviance:     10323  on 9998  degrees of freedom
+## AIC: 28703
 ## 
 ## Number of Fisher Scoring iterations: 4
 ```
@@ -562,7 +635,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 ### Gaussian Response with Identity Link
 
@@ -589,20 +662,20 @@ summary(glm)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -4.4461  -0.6853   0.0129   0.6794   3.6661  
+## -3.6340  -0.6823   0.0024   0.6953   3.5328  
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  0.01393    0.01010   1.379    0.168    
-## x            0.98236    0.01005  97.727   <2e-16 ***
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -0.007467   0.010209  -0.731    0.465    
+## x            1.009176   0.010277  98.195   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 1.020901)
+## (Dispersion parameter for gaussian family taken to be 1.042072)
 ## 
-##     Null deviance: 19957  on 9999  degrees of freedom
-## Residual deviance: 10207  on 9998  degrees of freedom
-## AIC: 28590
+##     Null deviance: 20467  on 9999  degrees of freedom
+## Residual deviance: 10419  on 9998  degrees of freedom
+## AIC: 28795
 ## 
 ## Number of Fisher Scoring iterations: 2
 ```
@@ -612,7 +685,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-24-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 ### Gaussian Response with Log Link and Negative Values
 
@@ -633,12 +706,12 @@ summary(data)
 
 ```
 ##        x                   y          
-##  Min.   :0.0000122   Min.   :-1.8709  
-##  1st Qu.:0.2354295   1st Qu.: 0.9815  
-##  Median :0.5055838   Median : 1.6969  
-##  Mean   :0.4968540   Mean   : 1.7275  
-##  3rd Qu.:0.7611768   3rd Qu.: 2.4854  
-##  Max.   :0.9993455   Max.   : 5.0233
+##  Min.   :0.0002406   Min.   :-2.7828  
+##  1st Qu.:0.2261328   1st Qu.: 0.9731  
+##  Median :0.4922281   Median : 1.6525  
+##  Mean   :0.4935482   Mean   : 1.6790  
+##  3rd Qu.:0.7565278   3rd Qu.: 2.4135  
+##  Max.   :0.9989343   Max.   : 5.2179
 ```
 
 We can also see this from the histogram.
@@ -648,9 +721,7 @@ We can also see this from the histogram.
 data %>% ggplot(aes(y)) + geom_density( fill = 1, alpha = 0.3)
 ```
 
-
-
-\begin{center}\includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-26-1} \end{center}
+<img src="05-linear-models_files/figure-html/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" />
 
 If we try to fit a GLM with a log link, there is an error.  
 
@@ -678,20 +749,20 @@ summary(glm)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -3.1527  -0.6538  -0.0336   0.6753   3.3219  
+## -4.2043  -0.6349   0.0087   0.6463   3.0994  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 2.394232   0.005463  438.25   <2e-16 ***
-## x           0.134685   0.009158   14.71   <2e-16 ***
+## (Intercept) 2.382326   0.005557  428.73   <2e-16 ***
+## x           0.150921   0.009321   16.19   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 0.987688)
+## (Dispersion parameter for gaussian family taken to be 1.015937)
 ## 
-##     Null deviance: 1198.70  on 999  degrees of freedom
-## Residual deviance:  985.71  on 998  degrees of freedom
-## AIC: 2829.5
+##     Null deviance: 1279.4  on 999  degrees of freedom
+## Residual deviance: 1013.9  on 998  degrees of freedom
+## AIC: 2857.7
 ## 
 ## Number of Fisher Scoring iterations: 4
 ```
@@ -701,7 +772,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 We see that on average, the predictions are 10 higher than the target.  This is no surprise since $E[Y + 10] = E[Y] + 10$.
 
@@ -713,7 +784,7 @@ mean(y_hat) - mean(y)
 ```
 
 ```
-## [1] 9.99995
+## [1] 9.99994
 ```
 
 But we see that the actual predictions are bad.  If we were to loot at the R-squared, MAE, RMSE, or any other metric it would tell us the same story.  This is because our GLM assumption is **not** that $Y$ is related to the link function of $X$, but that the **mean** of $Y$ is.
@@ -723,7 +794,7 @@ But we see that the actual predictions are bad.  If we were to loot at the R-squ
 tibble(y = y, y_hat = y_hat - 10) %>% ggplot(aes(y, y_hat)) + geom_point()
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 One solution is to adjust the $X$ which the model is based on.  Add a constant term to $X$ so that the mean of $Y$ is larger, and hence $Y$ is non zero.  While is a viable approach in the case of only one predictor variable, with more predictors this would not be easy to do.
 
@@ -736,12 +807,12 @@ summary(data)
 
 ```
 ##        x               y        
-##  Min.   :10.00   Min.   :22028  
-##  1st Qu.:10.25   1st Qu.:28291  
-##  Median :10.52   Median :36893  
-##  Mean   :10.51   Mean   :38160  
-##  3rd Qu.:10.77   3rd Qu.:47441  
-##  Max.   :11.00   Max.   :59842
+##  Min.   :10.00   Min.   :22034  
+##  1st Qu.:10.26   1st Qu.:28486  
+##  Median :10.49   Median :36113  
+##  Mean   :10.49   Mean   :37583  
+##  3rd Qu.:10.72   3rd Qu.:45391  
+##  Max.   :11.00   Max.   :59865
 ```
 
 ```r
@@ -750,7 +821,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-31-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 A better approach may be to use an inverse link even though the data was generated from a log link.  This is a good illustration of the saying "all models are wrong, but some are useful" in that the statistical assumption of the model is not correct but the model still works.
 
@@ -763,7 +834,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-32-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
 ```r
 summary(glm)
@@ -775,21 +846,21 @@ summary(glm)
 ## glm(formula = y ~ x, family = gaussian(link = "inverse"), data = data)
 ## 
 ## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -3.10622  -0.63739  -0.00542   0.63167   3.06741  
+##     Min       1Q   Median       3Q      Max  
+## -2.7606  -0.6717  -0.0103   0.6931   3.3262  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  0.94957    0.03515   27.02   <2e-16 ***
-## x           -0.58667    0.04360  -13.46   <2e-16 ***
+## (Intercept)  0.94293    0.03409   27.66   <2e-16 ***
+## x           -0.59889    0.04206  -14.24   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 0.9967997)
+## (Dispersion parameter for gaussian family taken to be 1.010457)
 ## 
-##     Null deviance: 1218.78  on 999  degrees of freedom
-## Residual deviance:  994.82  on 998  degrees of freedom
-## AIC: 2838.7
+##     Null deviance: 1258.7  on 999  degrees of freedom
+## Residual deviance: 1008.4  on 998  degrees of freedom
+## AIC: 2852.3
 ## 
 ## Number of Fisher Scoring iterations: 6
 ```
@@ -811,7 +882,7 @@ mean(gammas)
 ```
 
 ```
-## [1] 0.9873887
+## [1] 1.023239
 ```
 
 We then generate random gamma values.  Because the mean now depends on two paramters instead of one, which was just $\mu$ in the Guassian case, we need to use a slightly different approach to simulate the random values.  The link function here is seen in `exp(x)`.
@@ -829,13 +900,13 @@ summary(data)
 ```
 
 ```
-##        x                 y            
-##  Min.   : 0.2452   Min.   :0.000e+00  
-##  1st Qu.:27.0464   1st Qu.:4.946e+11  
-##  Median :51.0196   Median :1.057e+22  
-##  Mean   :51.0666   Mean   :2.531e+41  
-##  3rd Qu.:75.3442   3rd Qu.:4.239e+32  
-##  Max.   :99.9213   Max.   :2.693e+43
+##        x                  y            
+##  Min.   : 0.02434   Min.   :1.000e+00  
+##  1st Qu.:24.30658   1st Qu.:2.455e+10  
+##  Median :48.88862   Median :1.572e+21  
+##  Mean   :49.81554   Mean   :4.289e+41  
+##  3rd Qu.:75.71660   3rd Qu.:5.953e+32  
+##  Max.   :99.98863   Max.   :5.525e+43
 ```
 
 As expected, the residual plots are all perfect because the model is perfect.
@@ -847,7 +918,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-35-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 If we had tried using an inverse instead of the log, the residual plots would look much worse.
 
@@ -864,7 +935,7 @@ plot(glm, cex = 0.4)
 ## Warning in sqrt(crit * p * (1 - hh)/hh): NaNs produced
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-36-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 
 ### Gamma with Inverse Link
@@ -881,13 +952,13 @@ summary(data)
 ```
 
 ```
-##        x                 y            
-##  Min.   : 0.2452   Min.   :0.0005277  
-##  1st Qu.:27.0464   1st Qu.:0.0084840  
-##  Median :51.0196   Median :0.0167640  
-##  Mean   :51.0666   Mean   :0.0485119  
-##  3rd Qu.:75.3442   3rd Qu.:0.0365838  
-##  Max.   :99.9213   Max.   :1.7125489
+##        x                  y           
+##  Min.   : 0.02434   Min.   :0.000268  
+##  1st Qu.:24.30658   1st Qu.:0.009395  
+##  Median :48.88862   Median :0.018291  
+##  Mean   :49.81554   Mean   :0.047239  
+##  3rd Qu.:75.71660   3rd Qu.:0.037240  
+##  Max.   :99.98863   Max.   :1.784577
 ```
 
 
@@ -897,7 +968,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-38-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-42-1.png" width="672" />
 
 ## Log transforms of continuous predictors
 
@@ -995,7 +1066,10 @@ interactions %>%
        caption= "data: interactions")
 ```
 
-![(\#fig:unnamed-chunk-43)Example of weak interaction](05-linear-models_files/figure-latex/unnamed-chunk-43-1.pdf) 
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-47-1.png" alt="Example of weak interaction" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-47)Example of weak interaction</p>
+</div>
 
 Here is a clearer example from the `auto_claim` data. The lines show the slope of a linear model, assuming that only `BLUEBOOK` and `CAR_TYPE` were predictors in the model.  You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.  
 
@@ -1008,7 +1082,10 @@ auto_claim %>%
   labs(title = "Kelly Bluebook Value vs Claim Amount")
 ```
 
-![(\#fig:unnamed-chunk-44)Example of strong interaction](05-linear-models_files/figure-latex/unnamed-chunk-44-1.pdf) 
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-48-1.png" alt="Example of strong interaction" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-48)Example of strong interaction</p>
+</div>
 
 Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction.  We can also use an hypothesis test with a GLM to check this.  Simply include an interaction term and see if the coefficient is zero at the desired significance level.
 
@@ -1103,14 +1180,10 @@ We can use a special link function, known as the *standard logistic function*, *
 
 $$\mathbf{\hat{y}} = g^{-1}(\mathbf{X} \mathbf{\beta}) = \frac{1}{1 + e^{-\mathbf{X} \mathbf{\beta}}}$$
 
-\begin{figure}
-
-{\centering \includegraphics{05-linear-models_files/figure-latex/unnamed-chunk-45-1} 
-
-}
-
-\caption{Standard Logistic Function}(\#fig:unnamed-chunk-45)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-49-1.png" alt="Standard Logistic Function" width="384" />
+<p class="caption">(\#fig:unnamed-chunk-49)Standard Logistic Function</p>
+</div>
 
 Other link functions for classification problems are possible as well, although the logistic function is the most common.  If a problem asks for an alternative link, such as the *probit*, fit both models and compare the performance.
 
@@ -1211,7 +1284,10 @@ preds <- predict(frequency, newdat=test,type="response")
 qplot(preds) 
 ```
 
-![(\#fig:unnamed-chunk-49)Distribution of Predicted Probability](05-linear-models_files/figure-latex/unnamed-chunk-49-1.pdf) 
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-53-1.png" alt="Distribution of Predicted Probability" width="480" />
+<p class="caption">(\#fig:unnamed-chunk-53)Distribution of Predicted Probability</p>
+</div>
 
 In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 othersise.  The default cutoff is 0.5.  We change this to 0.3 and see that there are 763 policies predicted to have claims.
 
@@ -1440,7 +1516,10 @@ library(pROC)
 roc(test$target, preds, plot = T)
 ```
 
-![(\#fig:unnamed-chunk-59)AUC for auto_claim](05-linear-models_files/figure-latex/unnamed-chunk-59-1.pdf) 
+<div class="figure">
+<img src="05-linear-models_files/figure-html/unnamed-chunk-63-1.png" alt="AUC for auto_claim" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-63)AUC for auto_claim</p>
+</div>
 
 ```
 ## 
@@ -1851,7 +1930,7 @@ cv.out = cv.glmnet(x_train, y_train, alpha = 0) # Fit ridge regression model on 
 plot(cv.out) # Draw plot of training MSE as a function of lambda
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-73-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-77-1.png" width="672" />
 
 ```r
 bestlam = cv.out$lambda.min  # Select lamda that minimizes training MSE
@@ -1916,7 +1995,7 @@ lasso_mod = glmnet(x_train, y_train, alpha = 1, lambda = grid) # Fit lasso model
 plot(lasso_mod)                                          # Draw plot of coefficients
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-76-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-80-1.png" width="672" />
 
 Notice that in the coefficient plot that depending on the choice of tuning
 parameter, some of the coefficients are exactly equal to zero. We now
@@ -1929,7 +2008,7 @@ cv.out = cv.glmnet(x_train, y_train, alpha = 1) # Fit lasso model on training da
 plot(cv.out) # Draw plot of training MSE as a function of lambda
 ```
 
-![](05-linear-models_files/figure-latex/unnamed-chunk-77-1.pdf)<!-- --> 
+<img src="05-linear-models_files/figure-html/unnamed-chunk-81-1.png" width="672" />
 
 ```r
 bestlam = cv.out$lambda.min # Select lamda that minimizes training MSE

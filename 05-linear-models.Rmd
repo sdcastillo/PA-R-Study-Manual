@@ -13,21 +13,21 @@ theme_set(theme_bw())
 
 # Introduction to Modeling
 
-About 40-50% of the exam grade is based on modeling.  
+About 40-50% of the exam grade is based on modeling.  The goal is to be able to predict an unknown quantity.  In actuarial applications, this tends to be claims that occur in the future, death or injury, accidents, policy lapse, hurricanes, or some other insurable event.
 
 ## Model Notation
 
-The number of observations will be denoted by $n$.  When we refer to the size of a data set, we are referring to $n$.  We use $p$ to refer the number of input variables used.  The word "variables" is synonymous with "features".  For example, in the `health_insurance` data, the variables are `age`, `sex`, `bmi`, `children`, `smoker` and `region`.  These 7 variables mean that $p = 7$.  The data is collected from 1,338 patients, which means that $n = 1,338$.
+The number of observations will be denoted by $n$.  When we refer to the size of a data set, we are referring to $n$.  We use $p$ to refer the number of input variables used.  The word "variables" is synonymous with "features".  For example, in the `health_insurance` data, the variables are `age`, `sex`, `bmi`, `children`, `smoker` and `region`.  These six variables mean that $p = 6$.  The data is collected from 1,338 patients, which means that $n = 1,338$.
 
 Scalar numbers are denoted by ordinary variables (i.e., $x = 2$, $z = 4$), and vectors are denoted by bold-faced letters 
 
 $$\mathbf{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}$$
 
-We use $\mathbf{y}$ to denote the target variable.  This is the variable which we are trying to predict.  This can be either a whole number, in which case we are performing *regression*, or a category, in which case we are performing *classification*.  In the health insurance example, `y = charges`, which are the annual health care costs for a patient.
+We use $\mathbf{y}$ to denote the target variable.  This is the variable which we are trying to predict.  This can be either a whole number, in which case we are performing *regression*, or a category, in which case we are performing *classification*.  In the health insurance example, `y = charges`, which are the annual health care costs for a patient, which is regression.
 
 Both $n$ and $p$ are important because they tell us what types of models are likely to work well, and which methods are likely to fail.  For the PA exam, we will be dealing with small $n$ (<100,000) due to the limitations of the Prometric computers.  We will use a small $p$ (< 20) in order to make the data sets easier to interpret.
 
-We organize these variables into matrices.  Take an example with $p$ = 2 columns and 3 observations.  The matrix is said to be $3 \times 2$ (read as "2-by-3") matrix.
+We organize these variables into matrices.  Take an example with $p$ = 2 columns and 3 observations.  The matrix is said to be $3 \times 2$ (read as "3-by-2") matrix.
 
 $$
 \mathbf{X} = \begin{pmatrix}x_{11} & x_{21}\\
@@ -41,7 +41,7 @@ The target is
 $$\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}$$
 This represents the *unknown* quantity that we want to be able to predict.  In the health care costs example, $y_1$ would be the costs of the first patient, $y_2$ the costs of the second patient, and so forth.  The variables $x_{11}$ and $x_{12}$ might represent the first patient's age and sex respectively, where $x_{i1}$ is the patient's age, and $x_{i2} = 1$ if the ith patient is male and 0 if female.
 
-Machine learning is about using $X$ to predict $Y$. We call this "y-hat", or simply the prediction.  This is based on a function of the data $X$.
+Machine learning is about using $X$ to predict $Y$. We call this "y-hat", or simply the *prediction*.  This is based on a function of the data $X$.
 
 $$\hat{Y} = f(X)$$
 
@@ -53,6 +53,8 @@ $$
 
 In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict a person's health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
 
+Another way of saying this is to use the expected value.  The model $f(X)$ estimates the expected value of the target $E[Y|X]$.  That is, once we condition on the data $X$, we can make a guess as to what we expect $Y$ to be "close to".  There are many ways of measuring "closeness", as we will see.  
+
 ## Ordinary least squares (OLS)
 
 The type of model used refers to the class of function of $f$.  If $f$ is linear, then we are using a linear model.  Linear models are linear in the parameters, $\beta$.
@@ -62,7 +64,7 @@ We observe the data $X$ and the want to predict the target $Y$.
 We find a $\mathbf{\beta}$ so that 
 
 $$
-\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p
+\hat{Y} = E[Y] =  \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p
 $$
 
 Which means that each $y_i$ is a linear combination of the variables $x_1, ..., x_p$, plus a constant $\beta_0$ which is called the *intercept* term.  
@@ -80,6 +82,12 @@ tibble(y = rnorm(10, 0, 1),
   theme(legend.position = "top")
 ```
 
+The red line shows the *mean* response, as the response $\hat{Y}$ is actually a random variable.  For each of the data points, the model assumes a Gaussian distribution. If there is just a single predictor, $x$, then the mean is $\beta_0 + \beta_1 x$.
+
+```{r echo = F, fig.align="center", message=F, warning = F}
+library(magick)
+image_read("images/conditional_response.jpg")
+```
 
 The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $\mathbf{y}$ on new, unseen data.  
 
@@ -89,16 +97,23 @@ $$
 \text{RSS} = \sum_i(y_i - \hat{y})^2
 $$
 
-When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 + ... + \beta_p x_p$, take the derivative with respect to $\beta$, set equal to zero, and solve, we can find the optimal values.  This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.
+When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 + ... + \beta_p x_p$, take the derivative with respect to $\beta$, set equal to zero, and solve, we can find the optimal values.  This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.  On Exam STAM, you might remember *maximum likelihood estimation*, which is how these parameters are chosen.
 
-You might be asking: why does this need to be the squared error?  Why not the absolute error, or the cubed error?  Technically, these could be used as well.  In fact, the absolute error (L1 norm) is useful in other models.  Taking the square has a number of advantages.  
+You might be asking: why does this need to be the squared error?  Why not the absolute error, or the cubed error?  Technically, these could be used as well but the betas would not be the maximum likelihood parameters.  In fact, using the absolute error results in the model predicting the *median* as opposed to the *mean*.  Two reasons why RSS is popular are:  
 
-- It provides the same solution if we assume that the distribution of $Y|X$ is guassian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
-- Empirically it has been shown to be less likely to overfit as compared to other loss functions
+- It provides the same solution if we assume that the distribution of $Y|X$ is Guassian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
+- It is computationally easier, and so up until the 2000s when computers became faster this was the only method possible.
+
+>What does it mean when a log transform is applied to $Y$?  I remember from my statistics course on regression that this was done.  
+
+
+This is done so that the variance is more constant.  For example, if the units are in dollars, then it is very common for the values to fluctuate more for higher values than for lower values.  Consider a stock price, for instance.  If the stock is \$50 per share, then it will go up or down less than if it is \$1000 per share.  The log of 50, however, is about 3.9 and the log of 1000 is only 6.9, and so this difference is smaller.  In other words, the variance is smaller.
+
+Transforming the response means that instead of the model predicting $E[Y]$, it predicts $E[log(Y)]$.  A common mistake is to then the take the exponent in an attempt to "undo" this transform, but $e^{E[log(Y)]}$ is not the same as $E[Y]$.
 
 ## Example
 
-In our health, we can create a linear model using `bmi`, `age`, and `sex` as an inputs.  
+In our health insurance data, we can predict a person's health costs based on their age, body mass index, and gender.  Intuitively, we expect that these costs would increase as a person's age increases, would be different for men than for women, and would be higher for those who have a less healthy BMI.  We create a linear model using `bmi`, `age`, and `sex` as an inputs.  
 
 The `formula` controls which variables are included.  There are a few shortcuts for using R formulas.  
 
@@ -110,7 +125,8 @@ The `formula` controls which variables are included.  There are a few shortcuts 
 | log(`charges`) ~ log(`bmi`) + log(`age`) | Use the logs of `age` and `bmi` to predict  log(`charges`) |
 | `charges` ~ . | Use all variables to predict `charges`|
 
-You can use formulas to create new variables (aka feature engineering).  This can save you from needing to re-run code to create data.  
+
+>While you can use formulas to create new variables, the exam questions tend to have you do this in the data itself.  For example, if taking the log transform of a `bmi`, you would add a column `log_bmi` to the data and remove the original `bmi` column.
 
 Below we fit a simple linear model to predict charges.
 
@@ -118,16 +134,18 @@ Below we fit a simple linear model to predict charges.
 library(ExamPAData)
 library(tidyverse)
 
-model <- lm(data = health_insurance, formula = charges ~ bmi + age)
+model <- lm(data = health_insurance, formula = charges ~ bmi + age + sex)
 ```
 
-The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `t value` tells you how "big" this error really is based on standard deviations.  A larger `t value` implies a low probability of the null hypothesis being accepted saying that the coefficient is zero.  This is the same as having a p-value (`Pr (>|t|))`) being close to zero.
+The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `p value` tells you how "big" this error really is based on standard deviations.  A small p-value (`Pr (>|t|))`) means that we can safely reject the null hypothesis that says the cofficient is equal to zero.
 
-The little `*`, `**`, `***` indicate that the variable is either somewhat significant, significant, or highly significant.  "significance" here means that there is a low probability of the coefficient being that size (or larger) if there were *no actual casual relationship*, or if the data was random noise.
+The little `*`, `**`, `***` tell you the significance level.  A variable with a `***` means that the probability of getting a coefficient of that size given that the data was randomly generated is less than 0.001.  The `**` has a significance level of 0.01, and `*` of 0.05.
 
 ```{r}
 summary(model)
 ```
+
+>For this exam, variable selection tends to be based on the 0.05 significance level (single star `*`).
 
 When evaluating model performance, you should not rely on the `summary` alone as this is based on the training data.  To look at performance, test the model on validation data.  This can be done by either using a hold out set, or using cross-validation, which is even better.
 
@@ -170,7 +188,7 @@ The RMSE is **higher** (worse) when using just the mean, which is what we expect
 
 The next test is to see if any assumptions have been violated.  
 
-First, is there a pattern in the residuals?  If there is, this means that the model is missing key information.  For the model below, this is a **yes**, which means that this is a bad model.  Because this is just for illustration, I'm going to continue using it, however.  
+First, is there a pattern in the residuals?  If there is, this means that the model is missing key information.  For the model below, this is a **yes**, **which means that this is a bad model**.  Because this is just for illustration, we are going to continue using it.  
 
 ```{r fig.cap="Residuals vs. Fitted"}
 plot(model, which = 1)
@@ -202,7 +220,7 @@ all_data %>% tidy() %>%
   kableExtra::kable("markdown")
 ```
 
-All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.
+All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would probably not make a difference.
 
 ```{r}
 coefficients(model)
@@ -218,7 +236,6 @@ $$\hat{y_1} = 4,526 + (287)(27.9) + (228)(19) = 16,865$$
 
 This model structure implies that each of the variables $x_1, ..., x_p$ each change the predicted $\hat{y}$.  If $x_{ij}$ increases by one unit, then $y_i$ increases by $\beta_j$ units, regardless of what happens to all of the other variables.  This is one of the main assumptions of linear models: *variable indepdendence*.  If the variables are correlated, say, then this assumption will be violated.  
 
-
 | Readings |  | 
 |-------|---------|
 | ISLR 2.1 What is statistical learning?|  |
@@ -227,16 +244,16 @@ This model structure implies that each of the variables $x_1, ..., x_p$ each cha
 
 # Generalized linear models (GLMs)
 
-The linear model that we have considered up to this point, what we called "OLS", assumes that the response is a linear combination of the predictor variables.  For an error term $\epsilon_i \sim N(0,\sigma^2)$, this is assumes that
+The linear model that we have considered up to this point, what we have called "OLS", have been quite simple.  We assume that the response is Gaussian with mean equal to the linear predictor.  In other words, each observation has a Gaussian distribution with a mean equal to the expected value of the linear predictor.
 
 $$
-Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
+E[Y] = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p
 $$
 
 In matrix notation, if $X$ is the matrix made up of columns $X_1, ..., X_p$, then
 
 $$
-\mathbf{Y} = \mathbf{X} \mathbf{\beta} + \mathbf{\epsilon}
+E[\mathbf{Y}] = \mathbf{X} \mathbf{\beta}
 $$
 
 Another way of saying this is that "after we adjust for the data, the error is normally distributed and the variance is constant."  If $I$ is an n-by-in identity matrix, and $\sigma^2 I$ is the covariance matrix, then
@@ -253,7 +270,7 @@ These assumptions can be expressed in two parts:
 
 2. A link between the response and the covariates (also known as the systemic component) $\mu(X) = X\beta$
 
-In words, this is saying that each observation follows a normal distribution which has a mean that is  equal to the linear predictor.  
+This says that each observation follows a normal distribution which has a mean that is equal to the linear predictor.  
 
 ## The generalized linear model
 
@@ -266,40 +283,124 @@ Just as the name implies, GLMs are more *general* in that they are more flexible
 $$g(\mu(X)) = X\beta$$
 where $g$ is called the *link function* and $\mu = E[Y|X]$.
 
-In words, this is saying that each observation follows *some type of exonential distrubution* (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function.  Additionally, there is a *dispersion* parameter, but that is more more info that is needed here.  For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf).
+Each observation follows *some type of exonential distrubution* (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function.  Additionally, there is a *dispersion* parameter, but that is more more info that is needed here.  For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf).
 
-The possible combinations of link functions and distribution families are summarized nicely on [Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function).
+These are the most likely response distributions for this exam.
 
-```{r echo = F, fig.cap = "Distribution-Link Function Combinations"}
-knitr::include_graphics("images/glm_links.png")
+```{r message = F, echo = F, warning = F, fig.align="center"}
+library(mgcv)
+library(ggpubr)
+sample_size = 3000
+p1 <- tibble(gaussian = rnorm(sample_size),
+       gamma = rgamma(sample_size, 1, 1/2),
+       inverse_gaussian = rig(sample_size, 1, 2)) %>% 
+  gather(distribution, values) %>% 
+  ggplot(aes(values)) + 
+  geom_density(fill = "blue", alpha = 0.2) + 
+  facet_wrap(vars(distribution), scales = "free") + 
+  ggtitle("Continuous Distributions") + 
+  xlab("")
+
+
+p2 <- tibble(binomial = rbinom(sample_size, 20,0.5),
+       poisson = rpois(sample_size, 1)) %>% 
+  gather(distribution, values) %>% 
+  ggplot(aes(values)) + 
+  geom_histogram() + 
+  facet_wrap(vars(distribution), scales = "free") + 
+  ggtitle("Discrete Distributions") + 
+  xlab("")
+
+ggarrange(p1,p2, nrow = 2)
 ```
 
-For this exam, a common question is to ask candiates to choose the best distribution and link function.  There is no all-encompasing answer, but a few suggestions are
+The choice of response distribution should be similar to the actual distribution of $Y$.  For instance, if $Y$ is never less than zero, then using the Gaussian response is not idea because this can allow for negative values.  If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewd. 
 
-- If $Y$ is counting something, such as the number of claims, number of accidents, or some other discrete and positive counting sequence, use the Poisson;
-- If $Y$ contains negative values, then do not use the Exponential, Gamma, or Inverse Gaussian as these are strictly positive.  Conversely, if $Y$ is only positive, such as the price of a policy (price is always > 0), or the claim costs, then these are good choices;
-- If $Y$ is binary, the the binomial response with either a Probit or Logit link.  The Logit is more common.
-- If $Y$ has more than two categories, the multinomial distribution with either the Probit or Logic link (See Logistic Regression)
+For a $Y$ with discrete values, the Poisson should be used when it is counting something.  For example, if counting the number of claims which a policy has in a given year.  If $Y$ has only two values, then the Binomial is the only choice.  If there are multiple categories, then the multinomial can be used.
 
-## Interpretation
+```{r echo = F, fig.align="center", warning=F, message = F}
+library(magick)
+image_read("images/response_distributions.png") %>% image_scale("800")
+```
 
-The exam will always ask you to interpret the GLM.  These questions can usually be answered by inverting the link function and interpreting the coefficients.  In the case of the log link, simply take the exponent of the coefficients and each of these represents a "relativity" factor.
+There are five link functions for a continuous $Y$, although the choice of response family will typically rule-out several of these immediately.  The linear predictor (a.k.a., the *systemic component*) is $z$ and the link function is how this connects to the expected value of the resonse.
+
+$$z = X\beta = g(\mu)$$
+```{r echo = F, fig.align="center", warning=F, message = F}
+image_read("images/link_functions.png") %>% image_scale("800")
+```
+
+If the response distribution *must* have a positive mean, such as in the case of the Inverse Gaussian or Gamma, then the Identity or Inverse links are poor choices because they allow for negative values; the range of the mean is $(-\infty, \infty)$.  The other link functions force the mean to be positive.
+
+For binary responses, there are four link functions.  The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the SOA's Hospital Readmissions practice exam in 2019.  
+
+The probability of an event occuring is $E[Y] = p$.  Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability.  
+
+In the case of the logit, the result is known as *logistic regression*.  There is more on this later.  
+
+```{r echo = F, fig.align="center", warning=F, message = F}
+image_read("images/discrete_link_functions.png") %>% image_scale("1200")
+```
+
+## Interpretation of coefficients
+
+The GLM's interpretation depends on the choice of link function.  
+
+### Log link
+
+In the case of the log link, simply take the exponent of the coefficients and each of these represents a multiplicative factor.
 
 $$
-log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
+log(\hat{Y}) = X\beta \Rightarrow \hat{y} = e^{X \beta}
 $$
 
-For a single observation $y_i$, this is
+For a single observation $Y_i$, this is
 
 $$
-\text{exp}(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + ... + \beta_p x_{ip}) = \\
-e^{\beta_0} e^{\beta_1 x_{i1}}e^{\beta_2 x_{i2}} ...  e^{\beta_p x_{ip}} = 
+\text{exp}(\beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + ... + \beta_p X_{ip}) = \\
+e^{\beta_0} e^{\beta_1 X_{i1}}e^{\beta_2 X_{i2}} ...  e^{\beta_p X_{ip}} = 
 R_0 R_2 R_3 ... R_{p}
 $$
 
-Where $R_k$ is the *relativity* of the kth variable.  This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance.  The data science community does not use this language. 
+$R_k$ is known as the *relativity* of the kth variable.  This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance.  
 
-For binary outcomes with logit or probit link, there is no easy interpretation.  This has come up in at least one past sample exam, and the solution was to create "psuedo" observations and observe how changing each $x_k$ would change the predicted value.  Due to the time requirements, this is unlikely to come up on an exam.  So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.
+Another advantage to the log link is that the coefficients can be interpreted as having a percentage change on the response.  Here is an example for a GLM with variables $X_1$ and $X_2$ and a log link function. This holds any continuous response distribution.
+
+| Variable    | $\beta_j$ | $e^{\beta_j} - 1$ | Interpretation                                    | 
+|-------------|-------------|----------------------|---------------------------------------------------| 
+| (intercept) | 0.100       | 0.105                |                                                   | 
+| $X_1$          | 0.400       | 0.492                | 49% increase in $E[Y]$ for each unit increase in $X_1$ | 
+| $X_2$          | -0.500      | -0.393               | 39% decrease in $E[Y]$ for each unit increase in $X_2$ | 
+
+
+If categorical predictors are used, then the interpretation is very similar.  Say that there is one predictor, `COLOR`, which takes on values of `YELLO` (reference level), `RED`, and `BLUE`.  
+
+| Variable    | $\beta_j$ | $e^{\beta_j} - 1$  | Interpretation                                          | 
+|-------------|-------------|----------------------|---------------------------------------------------------| 
+| (intercept) | 0.100       | 0.105                |                                                         | 
+| Color=RED   | 0.400       | 0.492                | 49% increase  in $E[Y]$ for RED cars as opposed to YELLOW cars| 
+| Color=BLUE  | -0.500      | -0.393               | 39% decrease in $E[Y]$ for BLUE cars rather than YELLOW cars| 
+
+### Logit
+
+The link function $log(\frac{p}{1-p})$ is known as the log-odds, where the odds are $\frac{p}{1-p}$.  These come up in gambling, where bets are placed on the odds of some event occuring.  For example: if the probability of a claim is $p = 0.8$, then the probability of no claim is 0.2 and the odds of a claim occuring are 0.8/0.2 = 4.  
+
+The transformation from probability to odds is monotonic.  This is a fancy way of saying that if $p$ increases, then the odds of $p$ increases as well, and vice versa if $p$ decreases.  The log transform is monotonic as well.  
+
+The net result is that when a variable increases the linear predictor, this increases the log odds, and this increases the log of the odds, and vice versa if the linear predictor decreases.  In other words, the signs of the coefficients indicate whether the variable increases or decreases the probability of the event.
+
+### Probit
+
+Just like the logit, the signs of the coefficients agree with the effect on the response.  Instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1).  There is no way of taking this inverse directly.
+
+
+### Summary
+
+- If $Y$ is counting something, such as the number of claims, number of accidents, or some other discrete and positive counting sequence, use the Poisson;
+- If $Y$ contains negative values, then do not use the Gamma or Inverse Gaussian as these are strictly positive.  Conversely, if $Y$ is only positive, such as the price of a policy (price is always > 0), or the claim costs, then these are good choices;
+- If $Y$ is binary, the the binomial response with either a Probit or Logit link.  The Logit is the most common, but the only way to tell which is best is to test each of the discrete link functions and see which has the lowest error;
+- If $Y$ has more than two categories, the multinomial distribution with either the Probit or Logic link.
+
 
 ## Residuals
 
@@ -311,7 +412,7 @@ This are not meaningful for GLMs with non-Gaussian response families because the
 
 To paraphrase from this paper from the University of Oxford:
 
-www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf
+stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf
 
 Deviance is a way of assessing the adequacy of a model by comparing it with a more general
 model with the maximum number of parameters that can be estimated. It is referred to

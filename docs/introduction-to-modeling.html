@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2020-01-03" />
+<meta name="date" content="2020-01-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -127,9 +127,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Exam PA Study Manual</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What’s in this book</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i><b>1.1</b> About the author</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> How to use this book</a></li>
 <li class="chapter" data-level="2" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>2</b> The exam</a></li>
 <li class="chapter" data-level="3" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>3</b> Prometric Demo</a></li>
 <li class="chapter" data-level="4" data-path="you-already-know-what-learning-is.html"><a href="you-already-know-what-learning-is.html"><i class="fa fa-check"></i><b>4</b> You already know what learning is</a></li>
@@ -165,7 +163,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html"><i class="fa fa-check"></i><b>10</b> Generalized linear models (GLMs)</a><ul>
 <li class="chapter" data-level="10.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#the-generalized-linear-model"><i class="fa fa-check"></i><b>10.1</b> The generalized linear model</a></li>
-<li class="chapter" data-level="10.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation"><i class="fa fa-check"></i><b>10.2</b> Interpretation</a></li>
+<li class="chapter" data-level="10.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>10.2</b> Interpretation of coefficients</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#log-link"><i class="fa fa-check"></i><b>10.2.1</b> Log link</a></li>
+<li class="chapter" data-level="10.2.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#logit"><i class="fa fa-check"></i><b>10.2.2</b> Logit</a></li>
+<li class="chapter" data-level="10.2.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#probit"><i class="fa fa-check"></i><b>10.2.3</b> Probit</a></li>
+<li class="chapter" data-level="10.2.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#summary"><i class="fa fa-check"></i><b>10.2.4</b> Summary</a></li>
+</ul></li>
 <li class="chapter" data-level="10.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#residuals"><i class="fa fa-check"></i><b>10.3</b> Residuals</a></li>
 <li class="chapter" data-level="10.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#example-1"><i class="fa fa-check"></i><b>10.4</b> Example</a></li>
 <li class="chapter" data-level="10.5" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#combinations-of-link-and-response-family-examples"><i class="fa fa-check"></i><b>10.5</b> Combinations of Link and Response Family Examples</a><ul>
@@ -267,15 +270,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="introduction-to-modeling" class="section level1">
 <h1><span class="header-section-number"> 9</span> Introduction to Modeling</h1>
-<p>About 40-50% of the exam grade is based on modeling.</p>
+<p>About 40-50% of the exam grade is based on modeling. The goal is to be able to predict an unknown quantity. In actuarial applications, this tends to be claims that occur in the future, death or injury, accidents, policy lapse, hurricanes, or some other insurable event.</p>
 <div id="model-notation" class="section level2">
 <h2><span class="header-section-number">9.1</span> Model Notation</h2>
-<p>The number of observations will be denoted by <span class="math inline">\(n\)</span>. When we refer to the size of a data set, we are referring to <span class="math inline">\(n\)</span>. We use <span class="math inline">\(p\)</span> to refer the number of input variables used. The word “variables” is synonymous with “features”. For example, in the <code>health_insurance</code> data, the variables are <code>age</code>, <code>sex</code>, <code>bmi</code>, <code>children</code>, <code>smoker</code> and <code>region</code>. These 7 variables mean that <span class="math inline">\(p = 7\)</span>. The data is collected from 1,338 patients, which means that <span class="math inline">\(n = 1,338\)</span>.</p>
+<p>The number of observations will be denoted by <span class="math inline">\(n\)</span>. When we refer to the size of a data set, we are referring to <span class="math inline">\(n\)</span>. We use <span class="math inline">\(p\)</span> to refer the number of input variables used. The word “variables” is synonymous with “features”. For example, in the <code>health_insurance</code> data, the variables are <code>age</code>, <code>sex</code>, <code>bmi</code>, <code>children</code>, <code>smoker</code> and <code>region</code>. These six variables mean that <span class="math inline">\(p = 6\)</span>. The data is collected from 1,338 patients, which means that <span class="math inline">\(n = 1,338\)</span>.</p>
 <p>Scalar numbers are denoted by ordinary variables (i.e., <span class="math inline">\(x = 2\)</span>, <span class="math inline">\(z = 4\)</span>), and vectors are denoted by bold-faced letters</p>
 <p><span class="math display">\[\mathbf{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}\]</span></p>
-<p>We use <span class="math inline">\(\mathbf{y}\)</span> to denote the target variable. This is the variable which we are trying to predict. This can be either a whole number, in which case we are performing <em>regression</em>, or a category, in which case we are performing <em>classification</em>. In the health insurance example, <code>y = charges</code>, which are the annual health care costs for a patient.</p>
+<p>We use <span class="math inline">\(\mathbf{y}\)</span> to denote the target variable. This is the variable which we are trying to predict. This can be either a whole number, in which case we are performing <em>regression</em>, or a category, in which case we are performing <em>classification</em>. In the health insurance example, <code>y = charges</code>, which are the annual health care costs for a patient, which is regression.</p>
 <p>Both <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> are important because they tell us what types of models are likely to work well, and which methods are likely to fail. For the PA exam, we will be dealing with small <span class="math inline">\(n\)</span> (&lt;100,000) due to the limitations of the Prometric computers. We will use a small <span class="math inline">\(p\)</span> (&lt; 20) in order to make the data sets easier to interpret.</p>
-<p>We organize these variables into matrices. Take an example with <span class="math inline">\(p\)</span> = 2 columns and 3 observations. The matrix is said to be <span class="math inline">\(3 \times 2\)</span> (read as “2-by-3”) matrix.</p>
+<p>We organize these variables into matrices. Take an example with <span class="math inline">\(p\)</span> = 2 columns and 3 observations. The matrix is said to be <span class="math inline">\(3 \times 2\)</span> (read as “3-by-2”) matrix.</p>
 <p><span class="math display">\[
 \mathbf{X} = \begin{pmatrix}x_{11} &amp; x_{21}\\
 x_{21} &amp; x_{22}\\
@@ -285,13 +288,14 @@ x_{31} &amp; x_{32}
 <p>The target is</p>
 <p><span class="math display">\[\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}\]</span>
 This represents the <em>unknown</em> quantity that we want to be able to predict. In the health care costs example, <span class="math inline">\(y_1\)</span> would be the costs of the first patient, <span class="math inline">\(y_2\)</span> the costs of the second patient, and so forth. The variables <span class="math inline">\(x_{11}\)</span> and <span class="math inline">\(x_{12}\)</span> might represent the first patient’s age and sex respectively, where <span class="math inline">\(x_{i1}\)</span> is the patient’s age, and <span class="math inline">\(x_{i2} = 1\)</span> if the ith patient is male and 0 if female.</p>
-<p>Machine learning is about using <span class="math inline">\(X\)</span> to predict <span class="math inline">\(Y\)</span>. We call this “y-hat”, or simply the prediction. This is based on a function of the data <span class="math inline">\(X\)</span>.</p>
+<p>Machine learning is about using <span class="math inline">\(X\)</span> to predict <span class="math inline">\(Y\)</span>. We call this “y-hat”, or simply the <em>prediction</em>. This is based on a function of the data <span class="math inline">\(X\)</span>.</p>
 <p><span class="math display">\[\hat{Y} = f(X)\]</span></p>
 <p>This is almost never going to happen perfectly, and so there is always an error term, <span class="math inline">\(\epsilon\)</span>. This can be made smaller, but is never exactly zero.</p>
 <p><span class="math display">\[
 \hat{Y} + \epsilon = f(X) + \epsilon
 \]</span></p>
 <p>In other words, <span class="math inline">\(\epsilon = y - \hat{y}\)</span>. We call this the <em>residual</em>. When we predict a person’s health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).</p>
+<p>Another way of saying this is to use the expected value. The model <span class="math inline">\(f(X)\)</span> estimates the expected value of the target <span class="math inline">\(E[Y|X]\)</span>. That is, once we condition on the data <span class="math inline">\(X\)</span>, we can make a guess as to what we expect <span class="math inline">\(Y\)</span> to be “close to”. There are many ways of measuring “closeness”, as we will see.</p>
 </div>
 <div id="ordinary-least-squares-ols" class="section level2">
 <h2><span class="header-section-number">9.2</span> Ordinary least squares (OLS)</h2>
@@ -299,26 +303,33 @@ This represents the <em>unknown</em> quantity that we want to be able to predict
 <p>We observe the data <span class="math inline">\(X\)</span> and the want to predict the target <span class="math inline">\(Y\)</span>.</p>
 <p>We find a <span class="math inline">\(\mathbf{\beta}\)</span> so that</p>
 <p><span class="math display">\[
-\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p
+\hat{Y} = E[Y] =  \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p
 \]</span></p>
 <p>Which means that each <span class="math inline">\(y_i\)</span> is a linear combination of the variables <span class="math inline">\(x_1, ..., x_p\)</span>, plus a constant <span class="math inline">\(\beta_0\)</span> which is called the <em>intercept</em> term.</p>
 <p>In the one-dimensional case, this creates a line connecting the points. In higher dimensions, this creates a hyperplane.</p>
 <p><img src="05-linear-models_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>The red line shows the <em>mean</em> response, as the response <span class="math inline">\(\hat{Y}\)</span> is actually a random variable. For each of the data points, the model assumes a Gaussian distribution. If there is just a single predictor, <span class="math inline">\(x\)</span>, then the mean is <span class="math inline">\(\beta_0 + \beta_1 x\)</span>.</p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-3-1.png" width="1250" style="display: block; margin: auto;" /></p>
 <p>The question then is <strong>how can we choose the best values of</strong> <span class="math inline">\(\beta?\)</span> First of all, we need to define what we mean by “best”. Ideally, we will choose these values which will create close predictions of <span class="math inline">\(\mathbf{y}\)</span> on new, unseen data.</p>
 <p>To solve for <span class="math inline">\(\mathbf{\beta}\)</span>, we first need to define a <em>loss function</em>. This allows us to compare how well a model is fitting the data. The most commonly used loss function is the residual sum of squares (RSS), also called the <em>squared error loss</em> or the L2 norm. When RSS is small, then the predictions are close to the actual values and the model is a good fit. When RSS is large, the model is a poor fit.</p>
 <p><span class="math display">\[
 \text{RSS} = \sum_i(y_i - \hat{y})^2
 \]</span></p>
-<p>When you replace <span class="math inline">\(\hat{y_i}\)</span> in the above equation with <span class="math inline">\(\beta_0 + \beta_1 x_1 + ... + \beta_p x_p\)</span>, take the derivative with respect to <span class="math inline">\(\beta\)</span>, set equal to zero, and solve, we can find the optimal values. This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.</p>
-<p>You might be asking: why does this need to be the squared error? Why not the absolute error, or the cubed error? Technically, these could be used as well. In fact, the absolute error (L1 norm) is useful in other models. Taking the square has a number of advantages.</p>
+<p>When you replace <span class="math inline">\(\hat{y_i}\)</span> in the above equation with <span class="math inline">\(\beta_0 + \beta_1 x_1 + ... + \beta_p x_p\)</span>, take the derivative with respect to <span class="math inline">\(\beta\)</span>, set equal to zero, and solve, we can find the optimal values. This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly. On Exam STAM, you might remember <em>maximum likelihood estimation</em>, which is how these parameters are chosen.</p>
+<p>You might be asking: why does this need to be the squared error? Why not the absolute error, or the cubed error? Technically, these could be used as well but the betas would not be the maximum likelihood parameters. In fact, using the absolute error results in the model predicting the <em>median</em> as opposed to the <em>mean</em>. Two reasons why RSS is popular are:</p>
 <ul>
-<li>It provides the same solution if we assume that the distribution of <span class="math inline">\(Y|X\)</span> is guassian and maximize the likelihood function. This method is used for GLMs, in the next chapter.</li>
-<li>Empirically it has been shown to be less likely to overfit as compared to other loss functions</li>
+<li>It provides the same solution if we assume that the distribution of <span class="math inline">\(Y|X\)</span> is Guassian and maximize the likelihood function. This method is used for GLMs, in the next chapter.</li>
+<li>It is computationally easier, and so up until the 2000s when computers became faster this was the only method possible.</li>
 </ul>
+<blockquote>
+<p>What does it mean when a log transform is applied to <span class="math inline">\(Y\)</span>? I remember from my statistics course on regression that this was done.</p>
+</blockquote>
+<p>This is done so that the variance is more constant. For example, if the units are in dollars, then it is very common for the values to fluctuate more for higher values than for lower values. Consider a stock price, for instance. If the stock is $50 per share, then it will go up or down less than if it is $1000 per share. The log of 50, however, is about 3.9 and the log of 1000 is only 6.9, and so this difference is smaller. In other words, the variance is smaller.</p>
+<p>Transforming the response means that instead of the model predicting <span class="math inline">\(E[Y]\)</span>, it predicts <span class="math inline">\(E[log(Y)]\)</span>. A common mistake is to then the take the exponent in an attempt to “undo” this transform, but <span class="math inline">\(e^{E[log(Y)]}\)</span> is not the same as <span class="math inline">\(E[Y]\)</span>.</p>
 </div>
 <div id="example" class="section level2">
 <h2><span class="header-section-number">9.3</span> Example</h2>
-<p>In our health, we can create a linear model using <code>bmi</code>, <code>age</code>, and <code>sex</code> as an inputs.</p>
+<p>In our health insurance data, we can predict a person’s health costs based on their age, body mass index, and gender. Intuitively, we expect that these costs would increase as a person’s age increases, would be different for men than for women, and would be higher for those who have a less healthy BMI. We create a linear model using <code>bmi</code>, <code>age</code>, and <code>sex</code> as an inputs.</p>
 <p>The <code>formula</code> controls which variables are included. There are a few shortcuts for using R formulas.</p>
 <table>
 <colgroup>
@@ -354,34 +365,40 @@ This represents the <em>unknown</em> quantity that we want to be able to predict
 </tr>
 </tbody>
 </table>
-<p>You can use formulas to create new variables (aka feature engineering). This can save you from needing to re-run code to create data.</p>
+<blockquote>
+<p>While you can use formulas to create new variables, the exam questions tend to have you do this in the data itself. For example, if taking the log transform of a <code>bmi</code>, you would add a column <code>log_bmi</code> to the data and remove the original <code>bmi</code> column.</p>
+</blockquote>
 <p>Below we fit a simple linear model to predict charges.</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
 <a class="sourceLine" id="cb170-2" title="2"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb170-3" title="3"></a>
-<a class="sourceLine" id="cb170-4" title="4">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> health_insurance, <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age)</a></code></pre></div>
-<p>The <code>summary</code> function gives details about the model. First, the <code>Estimate</code>, gives you the coefficients. The <code>Std. Error</code> is the error of the estimate for the coefficient. Higher standard error means greater uncertainty. This is relative to the average value of that variable. The <code>t value</code> tells you how “big” this error really is based on standard deviations. A larger <code>t value</code> implies a low probability of the null hypothesis being accepted saying that the coefficient is zero. This is the same as having a p-value (<code>Pr (&gt;|t|))</code>) being close to zero.</p>
-<p>The little <code>*</code>, <code>**</code>, <code>***</code> indicate that the variable is either somewhat significant, significant, or highly significant. “significance” here means that there is a low probability of the coefficient being that size (or larger) if there were <em>no actual casual relationship</em>, or if the data was random noise.</p>
+<a class="sourceLine" id="cb170-4" title="4">model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> health_insurance, <span class="dt">formula =</span> charges <span class="op">~</span><span class="st"> </span>bmi <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>sex)</a></code></pre></div>
+<p>The <code>summary</code> function gives details about the model. First, the <code>Estimate</code>, gives you the coefficients. The <code>Std. Error</code> is the error of the estimate for the coefficient. Higher standard error means greater uncertainty. This is relative to the average value of that variable. The <code>p value</code> tells you how “big” this error really is based on standard deviations. A small p-value (<code>Pr (&gt;|t|))</code>) means that we can safely reject the null hypothesis that says the cofficient is equal to zero.</p>
+<p>The little <code>*</code>, <code>**</code>, <code>***</code> tell you the significance level. A variable with a <code>***</code> means that the probability of getting a coefficient of that size given that the data was randomly generated is less than 0.001. The <code>**</code> has a significance level of 0.01, and <code>*</code> of 0.05.</p>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="kw">summary</span>(model)</a></code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = charges ~ bmi + age, data = health_insurance)
+## lm(formula = charges ~ bmi + age + sex, data = health_insurance)
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
-## -14457  -7045  -5136   7211  48022 
+## -14974  -7073  -5072   6953  47348 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -6424.80    1744.09  -3.684 0.000239 ***
-## bmi           332.97      51.37   6.481 1.28e-10 ***
-## age           241.93      22.30  10.850  &lt; 2e-16 ***
+## (Intercept) -6986.82    1761.04  -3.967 7.65e-05 ***
+## bmi           327.54      51.37   6.377 2.49e-10 ***
+## age           243.19      22.28  10.917  &lt; 2e-16 ***
+## sexmale      1344.46     622.66   2.159    0.031 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 11390 on 1335 degrees of freedom
-## Multiple R-squared:  0.1172, Adjusted R-squared:  0.1159 
-## F-statistic:  88.6 on 2 and 1335 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 11370 on 1334 degrees of freedom
+## Multiple R-squared:  0.1203, Adjusted R-squared:  0.1183 
+## F-statistic: 60.78 on 3 and 1334 DF,  p-value: &lt; 2.2e-16</code></pre>
+<blockquote>
+<p>For this exam, variable selection tends to be based on the 0.05 significance level (single star <code>*</code>).</p>
+</blockquote>
 <p>When evaluating model performance, you should not rely on the <code>summary</code> alone as this is based on the training data. To look at performance, test the model on validation data. This can be done by either using a hold out set, or using cross-validation, which is even better.</p>
 <p>Let’s create an 80% training set and 20% testing set. You don’t need to worry about understanding this code as the exam will always give this to you.</p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
@@ -406,18 +423,18 @@ This represents the <em>unknown</em> quantity that we want to be able to predict
 <pre><code>## [1] 12574.97</code></pre>
 <p>The RMSE is <strong>higher</strong> (worse) when using just the mean, which is what we expect. <strong>If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.</strong></p>
 <p>The next test is to see if any assumptions have been violated.</p>
-<p>First, is there a pattern in the residuals? If there is, this means that the model is missing key information. For the model below, this is a <strong>yes</strong>, which means that this is a bad model. Because this is just for illustration, I’m going to continue using it, however.</p>
+<p>First, is there a pattern in the residuals? If there is, this means that the model is missing key information. For the model below, this is a <strong>yes</strong>, <strong>which means that this is a bad model</strong>. Because this is just for illustration, we are going to continue using it.</p>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">1</span>)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-9"></span>
-<img src="05-linear-models_files/figure-html/unnamed-chunk-9-1.png" alt="Residuals vs. Fitted" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-10-1.png" alt="Residuals vs. Fitted" width="672" />
 <p class="caption">
 Figure 9.1: Residuals vs. Fitted
 </p>
 </div>
 <p>The normal QQ shows how well the quantiles of the predictions fit to a theoretical normal distribution. If this is true, then the graph is a straight 45-degree line. In this model, you can definitely see that this is not the case. If this were a good model, this distribution would be closer to normal.</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">2</span>)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-10"></span>
-<img src="05-linear-models_files/figure-html/unnamed-chunk-10-1.png" alt="Normal Q-Q" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-11"></span>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-11-1.png" alt="Normal Q-Q" width="672" />
 <p class="caption">
 Figure 9.2: Normal Q-Q
 </p>
@@ -453,7 +470,7 @@ Figure 9.2: Normal Q-Q
 </tr>
 </tbody>
 </table>
-<p>All interpretations should be based on the model which was trained on the entire data set. Obviously, this only makes a difference if you are interpreting the precise values of the coefficients. If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would not change.</p>
+<p>All interpretations should be based on the model which was trained on the entire data set. Obviously, this only makes a difference if you are interpreting the precise values of the coefficients. If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would probably not make a difference.</p>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1"><span class="kw">coefficients</span>(model)</a></code></pre></div>
 <pre><code>## (Intercept)         bmi         age 
 ##  -4526.5284    286.8283    228.4372</code></pre>

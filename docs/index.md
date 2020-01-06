@@ -2,7 +2,7 @@
 title: "Exam PA Study Manual"
 author: 
 - "Sam Castillo"
-date: "2020-01-03"
+date: "2020-01-06"
 github-repo: sdcastillo/PA-R-Study-Manual
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -14,19 +14,15 @@ link-citations: yes
 favicon: images/artificial_actuary_logo_favicon.png
 ---
 
-# What's in this book
+# How to use this book
 
-- Explanations of the statistical concepts
-- All data sets needed packaged in an R library
-- `R code` examples
-
-## About the author
-
-Sam Castillo is a predictive modeler at Milliman in Chicago, maintains a [blog](http://artificialactuary.com/) about the future of risk, and won the 2019 SOA Predictive Analytics and Fururism's [Jupyter contest](https://nbviewer.jupyter.org/github/SOASections/SOA-Predictive-Modeling-Innovation-and-Industry-Contest-2019-First-Place/blob/master/Predicting%20Uncertainty%20Prediction%20Intervals%20from%20Gradient%20Boosted%20Quantile%20Regression.ipynb).
+* Run the examples on your own machine by downloading the ExamPAData library
+* Download a PDF by clicking the "Download" button on the top of the page
+* Use the arrow keys to navigate the chapters
 
 **Contact:**
 
-Support: sam@exampa.net
+Support: info@exampa.net
 
 # The exam
 
@@ -51,6 +47,14 @@ A non-technical translation is as follows:
 
 - Interpret results within a business context
 - Change model parameters
+
+Follow the SOA's page for the latest updates
+
+https://www.soa.org/education/exam-req/edu-exam-pa-detail/
+
+The exam pass rates are about 50%.
+
+http://www.actuarial-lookup.com/exams/pa
 
 # Prometric Demo
 

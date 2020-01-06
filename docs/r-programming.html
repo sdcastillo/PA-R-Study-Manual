@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2020-01-03" />
+<meta name="date" content="2020-01-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -127,9 +127,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Exam PA Study Manual</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What’s in this book</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i><b>1.1</b> About the author</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> How to use this book</a></li>
 <li class="chapter" data-level="2" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>2</b> The exam</a></li>
 <li class="chapter" data-level="3" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>3</b> Prometric Demo</a></li>
 <li class="chapter" data-level="4" data-path="you-already-know-what-learning-is.html"><a href="you-already-know-what-learning-is.html"><i class="fa fa-check"></i><b>4</b> You already know what learning is</a></li>
@@ -165,7 +163,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html"><i class="fa fa-check"></i><b>10</b> Generalized linear models (GLMs)</a><ul>
 <li class="chapter" data-level="10.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#the-generalized-linear-model"><i class="fa fa-check"></i><b>10.1</b> The generalized linear model</a></li>
-<li class="chapter" data-level="10.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation"><i class="fa fa-check"></i><b>10.2</b> Interpretation</a></li>
+<li class="chapter" data-level="10.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>10.2</b> Interpretation of coefficients</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#log-link"><i class="fa fa-check"></i><b>10.2.1</b> Log link</a></li>
+<li class="chapter" data-level="10.2.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#logit"><i class="fa fa-check"></i><b>10.2.2</b> Logit</a></li>
+<li class="chapter" data-level="10.2.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#probit"><i class="fa fa-check"></i><b>10.2.3</b> Probit</a></li>
+<li class="chapter" data-level="10.2.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#summary"><i class="fa fa-check"></i><b>10.2.4</b> Summary</a></li>
+</ul></li>
 <li class="chapter" data-level="10.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#residuals"><i class="fa fa-check"></i><b>10.3</b> Residuals</a></li>
 <li class="chapter" data-level="10.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#example-1"><i class="fa fa-check"></i><b>10.4</b> Example</a></li>
 <li class="chapter" data-level="10.5" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#combinations-of-link-and-response-family-examples"><i class="fa fa-check"></i><b>10.5</b> Combinations of Link and Response Family Examples</a><ul>
@@ -535,12 +538,12 @@ with dollar sign.</p>
 <p>You can also work with tibbles, which are data frames but have nicer printing:</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="co"># The tidyverse library has functions for making tibbles</span></a>
 <a class="sourceLine" id="cb97-2" title="2"><span class="kw">library</span>(tidyverse) </a></code></pre></div>
-<pre><code>## -- Attaching packages -------------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## -- Attaching packages -------------------------------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
 <pre><code>## v ggplot2 3.2.1     v purrr   0.3.2
 ## v tibble  2.1.3     v dplyr   0.8.3
 ## v tidyr   1.0.0     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.4.0</code></pre>
-<pre><code>## -- Conflicts ----------------------------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts ----------------------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
@@ -639,7 +642,7 @@ using a debugger. This makes testing out code much faster.</p>
 <li>It saves you time.</li>
 <li>It will help you in real life data science projects.</li>
 <li>The majority of the R community uses this style.</li>
-<li>The SOA actuaries who create the Exam PA content will eventually catch ons.</li>
+<li>The SOA actuaries who create the Exam PA content will eventually catch on.</li>
 <li>Most modern R software is designed around them. The overall trend is towards greater adoption, as can bee seen from the CRAN download statistics <a href="https://hadley.shinyapps.io/cran-downloads/">here</a> after filtering to “magrittr” which is the library where the pipe comes from.</li>
 </ol>
 

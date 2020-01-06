@@ -24,7 +24,7 @@
 <meta name="author" content="Sam Castillo" />
 
 
-<meta name="date" content="2020-01-03" />
+<meta name="date" content="2020-01-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -127,9 +127,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Exam PA Study Manual</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What’s in this book</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i><b>1.1</b> About the author</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> How to use this book</a></li>
 <li class="chapter" data-level="2" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>2</b> The exam</a></li>
 <li class="chapter" data-level="3" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>3</b> Prometric Demo</a></li>
 <li class="chapter" data-level="4" data-path="you-already-know-what-learning-is.html"><a href="you-already-know-what-learning-is.html"><i class="fa fa-check"></i><b>4</b> You already know what learning is</a></li>
@@ -165,7 +163,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html"><i class="fa fa-check"></i><b>10</b> Generalized linear models (GLMs)</a><ul>
 <li class="chapter" data-level="10.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#the-generalized-linear-model"><i class="fa fa-check"></i><b>10.1</b> The generalized linear model</a></li>
-<li class="chapter" data-level="10.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation"><i class="fa fa-check"></i><b>10.2</b> Interpretation</a></li>
+<li class="chapter" data-level="10.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>10.2</b> Interpretation of coefficients</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#log-link"><i class="fa fa-check"></i><b>10.2.1</b> Log link</a></li>
+<li class="chapter" data-level="10.2.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#logit"><i class="fa fa-check"></i><b>10.2.2</b> Logit</a></li>
+<li class="chapter" data-level="10.2.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#probit"><i class="fa fa-check"></i><b>10.2.3</b> Probit</a></li>
+<li class="chapter" data-level="10.2.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#summary"><i class="fa fa-check"></i><b>10.2.4</b> Summary</a></li>
+</ul></li>
 <li class="chapter" data-level="10.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#residuals"><i class="fa fa-check"></i><b>10.3</b> Residuals</a></li>
 <li class="chapter" data-level="10.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#example-1"><i class="fa fa-check"></i><b>10.4</b> Example</a></li>
 <li class="chapter" data-level="10.5" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#combinations-of-link-and-response-family-examples"><i class="fa fa-check"></i><b>10.5</b> Combinations of Link and Response Family Examples</a><ul>
@@ -267,13 +270,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="generalized-linear-models-glms" class="section level1">
 <h1><span class="header-section-number"> 10</span> Generalized linear models (GLMs)</h1>
-<p>The linear model that we have considered up to this point, what we called “OLS”, assumes that the response is a linear combination of the predictor variables. For an error term <span class="math inline">\(\epsilon_i \sim N(0,\sigma^2)\)</span>, this is assumes that</p>
+<p>The linear model that we have considered up to this point, what we have called “OLS”, have been quite simple. We assume that the response is Gaussian with mean equal to the linear predictor. In other words, each observation has a Gaussian distribution with a mean equal to the expected value of the linear predictor.</p>
 <p><span class="math display">\[
-Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
+E[Y] = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p
 \]</span></p>
 <p>In matrix notation, if <span class="math inline">\(X\)</span> is the matrix made up of columns <span class="math inline">\(X_1, ..., X_p\)</span>, then</p>
 <p><span class="math display">\[
-\mathbf{Y} = \mathbf{X} \mathbf{\beta} + \mathbf{\epsilon}
+E[\mathbf{Y}] = \mathbf{X} \mathbf{\beta}
 \]</span></p>
 <p>Another way of saying this is that “after we adjust for the data, the error is normally distributed and the variance is constant.” If <span class="math inline">\(I\)</span> is an n-by-in identity matrix, and <span class="math inline">\(\sigma^2 I\)</span> is the covariance matrix, then</p>
 <p><span class="math display">\[
@@ -285,7 +288,7 @@ Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
 <li><p>A <em>random component</em>: The response variable <span class="math inline">\(Y|X\)</span> is normally distributed with mean <span class="math inline">\(\mu = \mu(X) = E(Y|X)\)</span></p></li>
 <li><p>A link between the response and the covariates (also known as the systemic component) <span class="math inline">\(\mu(X) = X\beta\)</span></p></li>
 </ol>
-<p>In words, this is saying that each observation follows a normal distribution which has a mean that is equal to the linear predictor.</p>
+<p>This says that each observation follows a normal distribution which has a mean that is equal to the linear predictor.</p>
 <div id="the-generalized-linear-model" class="section level2">
 <h2><span class="header-section-number">10.1</span> The generalized linear model</h2>
 <p>Just as the name implies, GLMs are more <em>general</em> in that they are more flexible. We relax these two assumptions by saying that the model is defined by</p>
@@ -295,36 +298,125 @@ Y = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon
 </ol>
 <p><span class="math display">\[g(\mu(X)) = X\beta\]</span>
 where <span class="math inline">\(g\)</span> is called the <em>link function</em> and <span class="math inline">\(\mu = E[Y|X]\)</span>.</p>
-<p>In words, this is saying that each observation follows <em>some type of exonential distrubution</em> (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a <em>dispersion</em> parameter, but that is more more info that is needed here. For an explanation, see <a href="https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf">Ch. 2.2 of CAS Monograph 5</a>.</p>
-<p>The possible combinations of link functions and distribution families are summarized nicely on <a href="https://en.wikipedia.org/wiki/Generalized_linear_model#Link_function">Wikipedia</a>.</p>
-<div class="figure"><span id="fig:unnamed-chunk-14"></span>
-<img src="images/glm_links.png" alt="Distribution-Link Function Combinations" width="804" />
-<p class="caption">
-Figure 10.1: Distribution-Link Function Combinations
-</p>
+<p>Each observation follows <em>some type of exonential distrubution</em> (Gamma, Inverse Gaussian, Poisson, etc.) and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a <em>dispersion</em> parameter, but that is more more info that is needed here. For an explanation, see <a href="https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf">Ch. 2.2 of CAS Monograph 5</a>.</p>
+<p>These are the most likely response distributions for this exam.</p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The choice of response distribution should be similar to the actual distribution of <span class="math inline">\(Y\)</span>. For instance, if <span class="math inline">\(Y\)</span> is never less than zero, then using the Gaussian response is not idea because this can allow for negative values. If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewd.</p>
+<p>For a <span class="math inline">\(Y\)</span> with discrete values, the Poisson should be used when it is counting something. For example, if counting the number of claims which a policy has in a given year. If <span class="math inline">\(Y\)</span> has only two values, then the Binomial is the only choice. If there are multiple categories, then the multinomial can be used.</p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-16-1.png" width="400" style="display: block; margin: auto;" /></p>
+<p>There are five link functions for a continuous <span class="math inline">\(Y\)</span>, although the choice of response family will typically rule-out several of these immediately. The linear predictor (a.k.a., the <em>systemic component</em>) is <span class="math inline">\(z\)</span> and the link function is how this connects to the expected value of the resonse.</p>
+<p><span class="math display">\[z = X\beta = g(\mu)\]</span>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-17-1.png" width="400" style="display: block; margin: auto;" /></p>
+<p>If the response distribution <em>must</em> have a positive mean, such as in the case of the Inverse Gaussian or Gamma, then the Identity or Inverse links are poor choices because they allow for negative values; the range of the mean is <span class="math inline">\((-\infty, \infty)\)</span>. The other link functions force the mean to be positive.</p>
+<p>For binary responses, there are four link functions. The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the SOA’s Hospital Readmissions practice exam in 2019.</p>
+<p>The probability of an event occuring is <span class="math inline">\(E[Y] = p\)</span>. Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability.</p>
+<p>In the case of the logit, the result is known as <em>logistic regression</em>. There is more on this later.</p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-18-1.png" width="600" style="display: block; margin: auto;" /></p>
 </div>
-<p>For this exam, a common question is to ask candiates to choose the best distribution and link function. There is no all-encompasing answer, but a few suggestions are</p>
-<ul>
-<li>If <span class="math inline">\(Y\)</span> is counting something, such as the number of claims, number of accidents, or some other discrete and positive counting sequence, use the Poisson;</li>
-<li>If <span class="math inline">\(Y\)</span> contains negative values, then do not use the Exponential, Gamma, or Inverse Gaussian as these are strictly positive. Conversely, if <span class="math inline">\(Y\)</span> is only positive, such as the price of a policy (price is always &gt; 0), or the claim costs, then these are good choices;</li>
-<li>If <span class="math inline">\(Y\)</span> is binary, the the binomial response with either a Probit or Logit link. The Logit is more common.</li>
-<li>If <span class="math inline">\(Y\)</span> has more than two categories, the multinomial distribution with either the Probit or Logic link (See Logistic Regression)</li>
-</ul>
-</div>
-<div id="interpretation" class="section level2">
-<h2><span class="header-section-number">10.2</span> Interpretation</h2>
-<p>The exam will always ask you to interpret the GLM. These questions can usually be answered by inverting the link function and interpreting the coefficients. In the case of the log link, simply take the exponent of the coefficients and each of these represents a “relativity” factor.</p>
+<div id="interpretation-of-coefficients" class="section level2">
+<h2><span class="header-section-number">10.2</span> Interpretation of coefficients</h2>
+<p>The GLM’s interpretation depends on the choice of link function.</p>
+<div id="log-link" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> Log link</h3>
+<p>In the case of the log link, simply take the exponent of the coefficients and each of these represents a multiplicative factor.</p>
 <p><span class="math display">\[
-log(\mathbf{\hat{y}}) = \mathbf{X} \mathbf{\beta} \Rightarrow \mathbf{\hat{y}} = e^{\mathbf{X} \mathbf{\beta}}
+log(\hat{Y}) = X\beta \Rightarrow \hat{y} = e^{X \beta}
 \]</span></p>
-<p>For a single observation <span class="math inline">\(y_i\)</span>, this is</p>
+<p>For a single observation <span class="math inline">\(Y_i\)</span>, this is</p>
 <p><span class="math display">\[
-\text{exp}(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + ... + \beta_p x_{ip}) = \\
-e^{\beta_0} e^{\beta_1 x_{i1}}e^{\beta_2 x_{i2}} ...  e^{\beta_p x_{ip}} = 
+\text{exp}(\beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + ... + \beta_p X_{ip}) = \\
+e^{\beta_0} e^{\beta_1 X_{i1}}e^{\beta_2 X_{i2}} ...  e^{\beta_p X_{ip}} = 
 R_0 R_2 R_3 ... R_{p}
 \]</span></p>
-<p>Where <span class="math inline">\(R_k\)</span> is the <em>relativity</em> of the kth variable. This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance. The data science community does not use this language.</p>
-<p>For binary outcomes with logit or probit link, there is no easy interpretation. This has come up in at least one past sample exam, and the solution was to create “psuedo” observations and observe how changing each <span class="math inline">\(x_k\)</span> would change the predicted value. Due to the time requirements, this is unlikely to come up on an exam. So if you are asked to use a logit or probit link, saying that the result is not easy to interpret should suffice.</p>
+<p><span class="math inline">\(R_k\)</span> is known as the <em>relativity</em> of the kth variable. This terminology is from insurance ratemaking, where actuaries need to be able to explain the impact of each variable in pricing insurance.</p>
+<p>Another advantage to the log link is that the coefficients can be interpreted as having a percentage change on the response. Here is an example for a GLM with variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> and a log link function. This holds any continuous response distribution.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th><span class="math inline">\(\beta_j\)</span></th>
+<th><span class="math inline">\(e^{\beta_j} - 1\)</span></th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(intercept)</td>
+<td>0.100</td>
+<td>0.105</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X_1\)</span></td>
+<td>0.400</td>
+<td>0.492</td>
+<td>49% increase in <span class="math inline">\(E[Y]\)</span> for each unit increase in <span class="math inline">\(X_1\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(X_2\)</span></td>
+<td>-0.500</td>
+<td>-0.393</td>
+<td>39% decrease in <span class="math inline">\(E[Y]\)</span> for each unit increase in <span class="math inline">\(X_2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>If categorical predictors are used, then the interpretation is very similar. Say that there is one predictor, <code>COLOR</code>, which takes on values of <code>YELLO</code> (reference level), <code>RED</code>, and <code>BLUE</code>.</p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="20%" />
+<col width="54%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th><span class="math inline">\(\beta_j\)</span></th>
+<th><span class="math inline">\(e^{\beta_j} - 1\)</span></th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(intercept)</td>
+<td>0.100</td>
+<td>0.105</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Color=RED</td>
+<td>0.400</td>
+<td>0.492</td>
+<td>49% increase in <span class="math inline">\(E[Y]\)</span> for RED cars as opposed to YELLOW cars</td>
+</tr>
+<tr class="odd">
+<td>Color=BLUE</td>
+<td>-0.500</td>
+<td>-0.393</td>
+<td>39% decrease in <span class="math inline">\(E[Y]\)</span> for BLUE cars rather than YELLOW cars</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="logit" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> Logit</h3>
+<p>The link function <span class="math inline">\(log(\frac{p}{1-p})\)</span> is known as the log-odds, where the odds are <span class="math inline">\(\frac{p}{1-p}\)</span>. These come up in gambling, where bets are placed on the odds of some event occuring. For example: if the probability of a claim is <span class="math inline">\(p = 0.8\)</span>, then the probability of no claim is 0.2 and the odds of a claim occuring are 0.8/0.2 = 4.</p>
+<p>The transformation from probability to odds is monotonic. This is a fancy way of saying that if <span class="math inline">\(p\)</span> increases, then the odds of <span class="math inline">\(p\)</span> increases as well, and vice versa if <span class="math inline">\(p\)</span> decreases. The log transform is monotonic as well.</p>
+<p>The net result is that when a variable increases the linear predictor, this increases the log odds, and this increases the log of the odds, and vice versa if the linear predictor decreases. In other words, the signs of the coefficients indicate whether the variable increases or decreases the probability of the event.</p>
+</div>
+<div id="probit" class="section level3">
+<h3><span class="header-section-number">10.2.3</span> Probit</h3>
+<p>Just like the logit, the signs of the coefficients agree with the effect on the response. Instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1). There is no way of taking this inverse directly.</p>
+</div>
+<div id="summary" class="section level3">
+<h3><span class="header-section-number">10.2.4</span> Summary</h3>
+<ul>
+<li>If <span class="math inline">\(Y\)</span> is counting something, such as the number of claims, number of accidents, or some other discrete and positive counting sequence, use the Poisson;</li>
+<li>If <span class="math inline">\(Y\)</span> contains negative values, then do not use the Gamma or Inverse Gaussian as these are strictly positive. Conversely, if <span class="math inline">\(Y\)</span> is only positive, such as the price of a policy (price is always &gt; 0), or the claim costs, then these are good choices;</li>
+<li>If <span class="math inline">\(Y\)</span> is binary, the the binomial response with either a Probit or Logit link. The Logit is the most common, but the only way to tell which is best is to test each of the discrete link functions and see which has the lowest error;</li>
+<li>If <span class="math inline">\(Y\)</span> has more than two categories, the multinomial distribution with either the Probit or Logic link.</li>
+</ul>
+</div>
 </div>
 <div id="residuals" class="section level2">
 <h2><span class="header-section-number">10.3</span> Residuals</h2>
@@ -332,7 +424,7 @@ R_0 R_2 R_3 ... R_{p}
 <p><span class="math display">\[\text{Raw Residual} = y_i - \hat{y_i}\]</span></p>
 <p>This are not meaningful for GLMs with non-Gaussian response families because the distribution changes depending on the response family chosen. To adjust for this, we need the concept of <em>deviance residual</em>.</p>
 <p>To paraphrase from this paper from the University of Oxford:</p>
-<p>www.stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf</p>
+<p>stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf</p>
 <p>Deviance is a way of assessing the adequacy of a model by comparing it with a more general
 model with the maximum number of parameters that can be estimated. It is referred to
 as the saturated model. In the saturated model there is basically one parameter per
@@ -373,7 +465,7 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <li>No obvious pattern?</li>
 </ul>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">3</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.</p>
 <p><strong>In a perfect model, all of these assumptions would be met:</strong></p>
 <ul>
@@ -383,7 +475,7 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <li>No sudden “jumps”? This indicates many <span class="math inline">\(Y\)</span>’s which have the same value, such as insurance claims which all have the exact value of $100.00 or $0.00.</li>
 </ul>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 </div>
 <div id="combinations-of-link-and-response-family-examples" class="section level2">
 <h2><span class="header-section-number">10.5</span> Combinations of Link and Response Family Examples</h2>
@@ -414,25 +506,25 @@ The deviance residual uses the deviance of the ith observation <span class="math
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -3.0004  -0.6964   0.0005   0.7266   3.0718  
+## -3.7952  -0.6853   0.0178   0.6768   3.0251  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 1.000e+01  2.195e-06 4554982   &lt;2e-16 ***
-## x           1.000e+00  3.085e-06  324117   &lt;2e-16 ***
+## (Intercept) 1.000e+01  2.223e-06 4498054   &lt;2e-16 ***
+## x           1.000e+00  3.146e-06  317840   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 1.067056)
+## (Dispersion parameter for gaussian family taken to be 1.044198)
 ## 
-##     Null deviance: 1.2235e+11  on 999  degrees of freedom
-## Residual deviance: 1.0649e+03  on 998  degrees of freedom
-## AIC: 2906.8
+##     Null deviance: 1.1620e+11  on 999  degrees of freedom
+## Residual deviance: 1.0421e+03  on 998  degrees of freedom
+## AIC: 2885.1
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb193-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 <div id="gaussian-response-with-inverse-link" class="section level3">
 <h3><span class="header-section-number">10.5.2</span> Gaussian Response with Inverse Link</h3>
@@ -445,12 +537,12 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <a class="sourceLine" id="cb194-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
 <a class="sourceLine" id="cb194-7" title="7"><span class="kw">summary</span>(data)</a></code></pre></div>
 <pre><code>##        x                   y           
-##  Min.   :0.0001064   Min.   :  -1.957  
-##  1st Qu.:0.2532864   1st Qu.:   1.259  
-##  Median :0.5028875   Median :   2.334  
-##  Mean   :0.5018599   Mean   :  10.214  
-##  3rd Qu.:0.7507694   3rd Qu.:   4.232  
-##  Max.   :0.9998552   Max.   :9394.790</code></pre>
+##  Min.   :0.0001114   Min.   :  -2.030  
+##  1st Qu.:0.2531351   1st Qu.:   1.264  
+##  Median :0.5016953   Median :   2.341  
+##  Mean   :0.4996103   Mean   :   9.306  
+##  3rd Qu.:0.7441485   3rd Qu.:   4.298  
+##  Max.   :0.9998686   Max.   :8981.143</code></pre>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
 <a class="sourceLine" id="cb196-2" title="2"></a>
 <a class="sourceLine" id="cb196-3" title="3"><span class="kw">summary</span>(glm)</a></code></pre></div>
@@ -460,25 +552,25 @@ The deviance residual uses the deviance of the ith observation <span class="math
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -3.5186  -0.6747   0.0105   0.6883   3.3764  
+## -3.8247  -0.6780   0.0231   0.6944   3.6514  
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 3.596e-08  2.587e-08    1.39    0.165    
-## x           9.998e-01  2.072e-04 4824.13   &lt;2e-16 ***
+##               Estimate Std. Error  t value Pr(&gt;|t|)    
+## (Intercept) -5.618e-08  2.880e-08   -1.951   0.0511 .  
+## x            1.000e+00  2.101e-04 4761.172   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 1.007483)
+## (Dispersion parameter for gaussian family taken to be 1.032529)
 ## 
-##     Null deviance: 203905704  on 9999  degrees of freedom
-## Residual deviance:     10073  on 9998  degrees of freedom
-## AIC: 28457
+##     Null deviance: 144250808  on 9999  degrees of freedom
+## Residual deviance:     10323  on 9998  degrees of freedom
+## AIC: 28703
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb198-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 <div id="gaussian-response-with-identity-link" class="section level3">
 <h3><span class="header-section-number">10.5.3</span> Gaussian Response with Identity Link</h3>
@@ -499,25 +591,25 @@ The deviance residual uses the deviance of the ith observation <span class="math
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -4.4461  -0.6853   0.0129   0.6794   3.6661  
+## -3.6340  -0.6823   0.0024   0.6953   3.5328  
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  0.01393    0.01010   1.379    0.168    
-## x            0.98236    0.01005  97.727   &lt;2e-16 ***
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -0.007467   0.010209  -0.731    0.465    
+## x            1.009176   0.010277  98.195   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 1.020901)
+## (Dispersion parameter for gaussian family taken to be 1.042072)
 ## 
-##     Null deviance: 19957  on 9999  degrees of freedom
-## Residual deviance: 10207  on 9998  degrees of freedom
-## AIC: 28590
+##     Null deviance: 20467  on 9999  degrees of freedom
+## Residual deviance: 10419  on 9998  degrees of freedom
+## AIC: 28795
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb201-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 <div id="gaussian-response-with-log-link-and-negative-values" class="section level3">
 <h3><span class="header-section-number">10.5.4</span> Gaussian Response with Log Link and Negative Values</h3>
@@ -531,15 +623,15 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <a class="sourceLine" id="cb202-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
 <a class="sourceLine" id="cb202-7" title="7"><span class="kw">summary</span>(data)</a></code></pre></div>
 <pre><code>##        x                   y          
-##  Min.   :0.0000122   Min.   :-1.8709  
-##  1st Qu.:0.2354295   1st Qu.: 0.9815  
-##  Median :0.5055838   Median : 1.6969  
-##  Mean   :0.4968540   Mean   : 1.7275  
-##  3rd Qu.:0.7611768   3rd Qu.: 2.4854  
-##  Max.   :0.9993455   Max.   : 5.0233</code></pre>
+##  Min.   :0.0002406   Min.   :-2.7828  
+##  1st Qu.:0.2261328   1st Qu.: 0.9731  
+##  Median :0.4922281   Median : 1.6525  
+##  Mean   :0.4935482   Mean   : 1.6790  
+##  3rd Qu.:0.7565278   3rd Qu.: 2.4135  
+##  Max.   :0.9989343   Max.   : 5.2179</code></pre>
 <p>We can also see this from the histogram.</p>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1">data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>( <span class="dt">fill =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>If we try to fit a GLM with a log link, there is an error.</p>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a></code></pre></div>
 <p><code>Error in eval(family$initialize) : cannot find valid starting values: please specify some</code></p>
@@ -553,76 +645,76 @@ The deviance residual uses the deviance of the ith observation <span class="math
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -3.1527  -0.6538  -0.0336   0.6753   3.3219  
+## -4.2043  -0.6349   0.0087   0.6463   3.0994  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 2.394232   0.005463  438.25   &lt;2e-16 ***
-## x           0.134685   0.009158   14.71   &lt;2e-16 ***
+## (Intercept) 2.382326   0.005557  428.73   &lt;2e-16 ***
+## x           0.150921   0.009321   16.19   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 0.987688)
+## (Dispersion parameter for gaussian family taken to be 1.015937)
 ## 
-##     Null deviance: 1198.70  on 999  degrees of freedom
-## Residual deviance:  985.71  on 998  degrees of freedom
-## AIC: 2829.5
+##     Null deviance: 1279.4  on 999  degrees of freedom
+## Residual deviance: 1013.9  on 998  degrees of freedom
+## AIC: 2857.7
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb208-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <p>We see that on average, the predictions are 10 higher than the target. This is no surprise since <span class="math inline">\(E[Y + 10] = E[Y] + 10\)</span>.</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">y &lt;-<span class="st"> </span>data<span class="op">$</span>y </a>
 <a class="sourceLine" id="cb209-2" title="2">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(glm, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
 <a class="sourceLine" id="cb209-3" title="3"><span class="kw">mean</span>(y_hat) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)</a></code></pre></div>
-<pre><code>## [1] 9.99995</code></pre>
+<pre><code>## [1] 9.99994</code></pre>
 <p>But we see that the actual predictions are bad. If we were to loot at the R-squared, MAE, RMSE, or any other metric it would tell us the same story. This is because our GLM assumption is <strong>not</strong> that <span class="math inline">\(Y\)</span> is related to the link function of <span class="math inline">\(X\)</span>, but that the <strong>mean</strong> of <span class="math inline">\(Y\)</span> is.</p>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="kw">tibble</span>(<span class="dt">y =</span> y, <span class="dt">y_hat =</span> y_hat <span class="op">-</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(y, y_hat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <p>One solution is to adjust the <span class="math inline">\(X\)</span> which the model is based on. Add a constant term to <span class="math inline">\(X\)</span> so that the mean of <span class="math inline">\(Y\)</span> is larger, and hence <span class="math inline">\(Y\)</span> is non zero. While is a viable approach in the case of only one predictor variable, with more predictors this would not be easy to do.</p>
 <div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">1000</span>) <span class="op">+</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb212-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
 <a class="sourceLine" id="cb212-3" title="3"><span class="kw">summary</span>(data)</a></code></pre></div>
 <pre><code>##        x               y        
-##  Min.   :10.00   Min.   :22028  
-##  1st Qu.:10.25   1st Qu.:28291  
-##  Median :10.52   Median :36893  
-##  Mean   :10.51   Mean   :38160  
-##  3rd Qu.:10.77   3rd Qu.:47441  
-##  Max.   :11.00   Max.   :59842</code></pre>
+##  Min.   :10.00   Min.   :22034  
+##  1st Qu.:10.26   1st Qu.:28486  
+##  Median :10.49   Median :36113  
+##  Mean   :10.49   Mean   :37583  
+##  3rd Qu.:10.72   3rd Qu.:45391  
+##  Max.   :11.00   Max.   :59865</code></pre>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a>
 <a class="sourceLine" id="cb214-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb214-3" title="3"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>A better approach may be to use an inverse link even though the data was generated from a log link. This is a good illustration of the saying “all models are wrong, but some are useful” in that the statistical assumption of the model is not correct but the model still works.</p>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">1000</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb215-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
 <a class="sourceLine" id="cb215-3" title="3">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
 <a class="sourceLine" id="cb215-4" title="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb215-5" title="5"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1"><span class="kw">summary</span>(glm)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x, family = gaussian(link = &quot;inverse&quot;), data = data)
 ## 
 ## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -3.10622  -0.63739  -0.00542   0.63167   3.06741  
+##     Min       1Q   Median       3Q      Max  
+## -2.7606  -0.6717  -0.0103   0.6931   3.3262  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  0.94957    0.03515   27.02   &lt;2e-16 ***
-## x           -0.58667    0.04360  -13.46   &lt;2e-16 ***
+## (Intercept)  0.94293    0.03409   27.66   &lt;2e-16 ***
+## x           -0.59889    0.04206  -14.24   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 0.9967997)
+## (Dispersion parameter for gaussian family taken to be 1.010457)
 ## 
-##     Null deviance: 1218.78  on 999  degrees of freedom
-## Residual deviance:  994.82  on 998  degrees of freedom
-## AIC: 2838.7
+##     Null deviance: 1258.7  on 999  degrees of freedom
+## Residual deviance: 1008.4  on 998  degrees of freedom
+## AIC: 2852.3
 ## 
 ## Number of Fisher Scoring iterations: 6</code></pre>
 </div>
@@ -634,7 +726,7 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <p>Let’s use a gamma with shape 2 and scale 0.5, which has mean 1.</p>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1">gammas &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">1000</span>, <span class="dt">shape=</span><span class="dv">2</span>, <span class="dt">scale =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb218-2" title="2"><span class="kw">mean</span>(gammas)</a></code></pre></div>
-<pre><code>## [1] 0.9873887</code></pre>
+<pre><code>## [1] 1.023239</code></pre>
 <p>We then generate random gamma values. Because the mean now depends on two paramters instead of one, which was just <span class="math inline">\(\mu\)</span> in the Guassian case, we need to use a slightly different approach to simulate the random values. The link function here is seen in <code>exp(x)</code>.</p>
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1"><span class="co">#random component</span></a>
 <a class="sourceLine" id="cb220-2" title="2">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">100</span>)</a>
@@ -644,18 +736,18 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <a class="sourceLine" id="cb220-6" title="6"></a>
 <a class="sourceLine" id="cb220-7" title="7">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y  =</span> y)</a>
 <a class="sourceLine" id="cb220-8" title="8"><span class="kw">summary</span>(data)</a></code></pre></div>
-<pre><code>##        x                 y            
-##  Min.   : 0.2452   Min.   :0.000e+00  
-##  1st Qu.:27.0464   1st Qu.:4.946e+11  
-##  Median :51.0196   Median :1.057e+22  
-##  Mean   :51.0666   Mean   :2.531e+41  
-##  3rd Qu.:75.3442   3rd Qu.:4.239e+32  
-##  Max.   :99.9213   Max.   :2.693e+43</code></pre>
+<pre><code>##        x                  y            
+##  Min.   : 0.02434   Min.   :1.000e+00  
+##  1st Qu.:24.30658   1st Qu.:2.455e+10  
+##  Median :48.88862   Median :1.572e+21  
+##  Mean   :49.81554   Mean   :4.289e+41  
+##  3rd Qu.:75.71660   3rd Qu.:5.953e+32  
+##  Max.   :99.98863   Max.   :5.525e+43</code></pre>
 <p>As expected, the residual plots are all perfect because the model is perfect.</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a>
 <a class="sourceLine" id="cb222-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb222-3" title="3"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>If we had tried using an inverse instead of the log, the residual plots would look much worse.</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
 <a class="sourceLine" id="cb223-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
@@ -663,7 +755,7 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <pre><code>## Warning in sqrt(crit * p * (1 - hh)/hh): NaNs produced
 
 ## Warning in sqrt(crit * p * (1 - hh)/hh): NaNs produced</code></pre>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 </div>
 <div id="gamma-with-inverse-link" class="section level3">
 <h3><span class="header-section-number">10.5.6</span> Gamma with Inverse Link</h3>
@@ -673,17 +765,17 @@ The deviance residual uses the deviance of the ith observation <span class="math
 <a class="sourceLine" id="cb225-3" title="3"></a>
 <a class="sourceLine" id="cb225-4" title="4">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y  =</span> y)</a>
 <a class="sourceLine" id="cb225-5" title="5"><span class="kw">summary</span>(data)</a></code></pre></div>
-<pre><code>##        x                 y            
-##  Min.   : 0.2452   Min.   :0.0005277  
-##  1st Qu.:27.0464   1st Qu.:0.0084840  
-##  Median :51.0196   Median :0.0167640  
-##  Mean   :51.0666   Mean   :0.0485119  
-##  3rd Qu.:75.3442   3rd Qu.:0.0365838  
-##  Max.   :99.9213   Max.   :1.7125489</code></pre>
+<pre><code>##        x                  y           
+##  Min.   : 0.02434   Min.   :0.000268  
+##  1st Qu.:24.30658   1st Qu.:0.009395  
+##  Median :48.88862   Median :0.018291  
+##  Mean   :49.81554   Mean   :0.047239  
+##  3rd Qu.:75.71660   3rd Qu.:0.037240  
+##  Max.   :99.98863   Max.   :1.784577</code></pre>
 <div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
 <a class="sourceLine" id="cb227-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb227-3" title="3"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="05-linear-models_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="05-linear-models_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 </div>
 </div>
 <div id="log-transforms-of-continuous-predictors" class="section level2">
@@ -734,10 +826,10 @@ By rewriting this we can see that the intercept changes from <span class="math i
 <a class="sourceLine" id="cb235-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Age vs. Actual by Gender&quot;</span>, </a>
 <a class="sourceLine" id="cb235-5" title="5">       <span class="dt">subtitle =</span> <span class="st">&quot;Interactions imply different slopes&quot;</span>,</a>
 <a class="sourceLine" id="cb235-6" title="6">       <span class="dt">caption=</span> <span class="st">&quot;data: interactions&quot;</span>)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-43"></span>
-<img src="05-linear-models_files/figure-html/unnamed-chunk-43-1.png" alt="Example of weak interaction" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-47"></span>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-47-1.png" alt="Example of weak interaction" width="672" />
 <p class="caption">
-Figure 10.2: Example of weak interaction
+Figure 10.1: Example of weak interaction
 </p>
 </div>
 <p>Here is a clearer example from the <code>auto_claim</code> data. The lines show the slope of a linear model, assuming that only <code>BLUEBOOK</code> and <code>CAR_TYPE</code> were predictors in the model. You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.</p>
@@ -746,10 +838,10 @@ Figure 10.2: Example of weak interaction
 <a class="sourceLine" id="cb236-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb236-4" title="4"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb236-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kelly Bluebook Value vs Claim Amount&quot;</span>)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-44"></span>
-<img src="05-linear-models_files/figure-html/unnamed-chunk-44-1.png" alt="Example of strong interaction" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-48"></span>
+<img src="05-linear-models_files/figure-html/unnamed-chunk-48-1.png" alt="Example of strong interaction" width="672" />
 <p class="caption">
-Figure 10.3: Example of strong interaction
+Figure 10.2: Example of strong interaction
 </p>
 </div>
 <p>Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction. We can also use an hypothesis test with a GLM to check this. Simply include an interaction term and see if the coefficient is zero at the desired significance level.</p>
