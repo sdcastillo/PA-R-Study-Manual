@@ -21,17 +21,17 @@ The below example shows how a single tree can predict health claims.
 - For smokers with a `bmi` of less than 30, the predicted annual claims are 21,000.  10% of patients fall into this bucket.
 - For smokers with a `bmi` of more than 30, the prediction is 42,000.  This bucket accounts for 11% of patients.
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 We can cut the data set up into these groups and look at the claim costs.  From this grouping, we can see that `smoker` is the most important variable as the difference in average claims is about 20,000.
 
 
 |smoker |bmi_30    |mean_claims | percent|
 |:------|:---------|:-----------|-------:|
-|no     |bmi < 30  |$7,977.03   |    0.38|
-|no     |bmi >= 30 |$8,842.69   |    0.42|
-|yes    |bmi < 30  |$21,363.22  |    0.10|
-|yes    |bmi >= 30 |$41,557.99  |    0.11|
+|no     |bmi < 30  |$7,371.06   |    0.38|
+|no     |bmi >= 30 |$9,396.85   |    0.45|
+|yes    |bmi < 30  |$21,574.90  |    0.06|
+|yes    |bmi >= 30 |$42,334.12  |    0.11|
 
 This was a very simple example because there were only two variables.  If we have more variables, the tree will get large very quickly.  This will result in overfitting; there will be good performance on the training data but poor performance on the test data.
 
@@ -66,7 +66,7 @@ tree <- rpart(formula = charges ~  ., data = health_insurance,
 rpart.plot(tree, type = 3)
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 **Step 4: Apply cost comlexity pruning to simplify the tree**
 
@@ -106,15 +106,15 @@ cost %>% head()
 ##    <dbl>   <dbl>  <dbl>
 ## 1      0 0.620    1.00 
 ## 2      1 0.144    0.382
-## 3      2 0.0637   0.240
-## 4      3 0.00967  0.181
-## 5      4 0.00784  0.177
-## 6      5 0.00712  0.170
+## 3      2 0.0637   0.237
+## 4      3 0.00967  0.177
+## 5      4 0.00784  0.172
+## 6      5 0.00712  0.166
 ```
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.  
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 To optimize performance, choose the number of splits which has the lowest error.  Often, though, the goal of using a decision tree is to create a simple model.  In this case, we can err or the side of a lower `nsplit` so that the tree is shorter and more interpretable.  All of the questions on so far have only used decision trees for interpretability, and a different model method has been used when predictive power is needed.
 
@@ -133,12 +133,12 @@ tree$cptable %>%
 ## # A tibble: 6 x 3
 ##   nsplit       CP xerror
 ##    <dbl>    <dbl>  <dbl>
-## 1     25 0.000681  0.151
-## 2     17 0.000913  0.151
-## 3     18 0.000910  0.151
-## 4     22 0.000759  0.151
-## 5     19 0.000837  0.152
-## 6     26 0.000610  0.152
+## 1     22 0.000759  0.148
+## 2     24 0.000695  0.149
+## 3     29 0.000575  0.150
+## 4     32 0.000575  0.150
+## 5     19 0.000837  0.150
+## 6     33 0.000549  0.150
 ```
 
 The SOA will give you code to find the lowest CP value such as below.  This may or may not be useful depending on if they are asking for predictive performance or interpretability.
@@ -175,7 +175,7 @@ simple_tree <- rpart(formula = charges ~  .,
 rpart.plot(simple_tree, type = 3)
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 We evaluate the performance on the test set.  Because the target variable `charges` is highly skewed, we use the Root Mean Squared Log Error (RMSLE).  We see that the complex tree has the best (lowest) error, but also has 8 terminal nodes.  The simple tree with only three terminal nodes has worse (higher) error, but this is still an improvement over the mean prediction.
 
@@ -265,7 +265,7 @@ When using only a single tree, there can only be as many predictions as there ar
 
 The below graph illustrates this.  A single tree (left) has stair-like, step-wise predictions whereas a random forest is free to predict any value.  The color represents the predicted value (yellow = highest, black = lowest).
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 Unlike decision trees, random forest trees do not need to be pruned.  This is because overfitting is less of a problem: if one tree overfits, there are other trees which overfit in other areas to compensate.  
 
@@ -280,6 +280,7 @@ This expects only numeric values.  We create dummy (indicator) columns.
 
 ```r
 rf_data <- health_insurance %>% 
+  sample_frac(0.2) %>% 
   mutate(sex = ifelse(sex == "male", 1, 0),
          smoker = ifelse(smoker == "yes", 1, 0),
          region_ne = ifelse(region == "northeast", 1,0),
@@ -291,18 +292,18 @@ rf_data %>% glimpse(50)
 ```
 
 ```
-## Observations: 1,338
+## Observations: 268
 ## Variables: 10
-## $ age       <dbl> 19, 18, 28, 33, 32, 31, 46,...
-## $ sex       <dbl> 0, 1, 1, 1, 1, 0, 0, 0, 1, ...
-## $ bmi       <dbl> 27.900, 33.770, 33.000, 22....
-## $ children  <dbl> 0, 1, 3, 0, 0, 0, 1, 3, 2, ...
-## $ smoker    <dbl> 1, 0, 0, 0, 0, 0, 0, 0, 0, ...
-## $ charges   <dbl> 16884.924, 1725.552, 4449.4...
-## $ region_ne <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 1, ...
-## $ region_nw <dbl> 0, 0, 0, 1, 1, 0, 0, 1, 0, ...
-## $ region_se <dbl> 0, 1, 1, 0, 0, 1, 1, 0, 0, ...
-## $ region_sw <dbl> 1, 0, 0, 0, 0, 0, 0, 0, 0, ...
+## $ age       <dbl> 42, 44, 31, 36, 64, 28, 45,...
+## $ sex       <dbl> 1, 1, 1, 1, 1, 0, 1, 1, 0, ...
+## $ bmi       <dbl> 26.125, 39.520, 27.645, 34....
+## $ children  <dbl> 2, 0, 2, 2, 0, 3, 0, 0, 0, ...
+## $ smoker    <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 1, ...
+## $ charges   <dbl> 7729.646, 6948.701, 5031.27...
+## $ region_ne <dbl> 1, 0, 1, 0, 1, 0, 0, 0, 0, ...
+## $ region_nw <dbl> 0, 1, 0, 0, 0, 1, 1, 0, 1, ...
+## $ region_se <dbl> 0, 0, 0, 1, 0, 0, 0, 1, 0, ...
+## $ region_sw <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
 ```
 
 
@@ -318,11 +319,11 @@ test <- rf_data %>% slice(-index)
 
 
 ```r
-rf <- randomForest(charges ~ ., data = train, ntree = 500)
+rf <- randomForest(charges ~ ., data = train, ntree = 400)
 plot(rf)
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
 
 We again use RMSLE.  This is lower (better) than a model that uses the average as a baseline.
 
@@ -337,7 +338,7 @@ get_rmsle(test$charges, pred)
 ```
 
 ```
-## [1] 0.4772576
+## [1] 0.5252518
 ```
 
 ```r
@@ -345,7 +346,7 @@ get_rmsle(test$charges, mean(train$charges))
 ```
 
 ```
-## [1] 0.9996513
+## [1] 1.118947
 ```
 
 ### Variable Importance
@@ -363,7 +364,7 @@ get_rmsle(test$charges, mean(train$charges))
 varImpPlot(x = rf)
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+![](06-tree-based-models_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
 
 ### Partial dependence
 
@@ -415,19 +416,16 @@ For the RandomForest, this is done with `pdp::partial()`.
 ```r
 library(pdp)
 bmi <- pdp::partial(rf, pred.var = "bmi", 
-                    grid.resolution = 20) %>% 
+                    grid.resolution = 15) %>% 
   autoplot() + theme_bw()
 age <- pdp::partial(rf, pred.var = "age", 
-                    grid.resolution = 20) %>% 
+                    grid.resolution = 15) %>% 
   autoplot() + theme_bw()
 
 ggarrange(bmi, age)
 ```
 
-<div class="figure">
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-19-1.png" alt="Partial Dependence" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-19)Partial Dependence</p>
-</div>
+![(\#fig:unnamed-chunk-19)Partial Dependence](06-tree-based-models_files/figure-latex/unnamed-chunk-19-1.pdf) 
 
 ### Advantages and disadvantages
 
@@ -583,9 +581,10 @@ There is a problem: all of the predictions are coming out to be 1.  Find out why
 
 ```r
 set.seed(42)
-#For the sake of this example, only take 20% of the records
+#When writing this book, only 5% of the records were used so that the code runs faster.
+#Increase this sampling if running this on your machine.
 df <- soa_mortality %>% 
-  sample_frac(0.2) %>% 
+  sample_frac(0.05) %>% #20% sample
   mutate(target = as.factor(ifelse(actual_cnt == 0, 1, 0))) %>% 
   select(target, prodcat, distchan, smoker, sex, issage, uwkey) %>% 
   mutate_if(is.character, ~as.factor(.x))
@@ -680,9 +679,9 @@ An actuary has trained a predictive model and chosen the best hyperparameters, c
 
 ```r
 set.seed(42)
-#Take only 1000 records 
+#Take only 250 records 
 #Uncomment this when completing this exercise
-data <- health_insurance %>% sample_n(1000) 
+data <- health_insurance %>% sample_n(250) 
 
 index <- createDataPartition(
   y = data$charges, p = 0.8, list = F) %>% 
@@ -724,23 +723,19 @@ This example looks at 135 combinations of hyper parameters.
 set.seed(42)
 index <- createDataPartition(y = health_insurance$charges, 
                              p = 0.8, list = F)
-train <- health_insurance %>% slice(index)
-test <- health_insurance %>% slice(-index)
+#To make this run faster, only take 50% sample
+df <- health_insurance %>% sample_frac(0.50) 
+train <- df %>% slice(index) 
+test <- df %>% sample_frac(0.05)%>% slice(-index)
 
 tunegrid <- expand.grid(
     interaction.depth = c(1,5, 10),
-    n.trees = c(100, 200, 300, 400, 500), 
+    n.trees = c(50, 100, 200, 300, 400), 
     shrinkage = c(0.5, 0.1, 0.0001),
     n.minobsinnode = c(5, 30, 100)
     )
 nrow(tunegrid)
-```
 
-```
-## [1] 135
-```
-
-```r
 control <- trainControl(
   method='repeatedcv', 
   number=5, 
@@ -780,13 +775,6 @@ rbind(top_result, tenth_result, twenty_seventh_result) %>%
   select(param_rank, 1:5)
 ```
 
-```
-##   param_rank shrinkage interaction.depth n.minobsinnode n.trees      RMSE
-## 1          1     1e-01                 5             30     100  4396.814
-## 2         10     1e-01                10             30     300  4630.433
-## 3        135     1e-04                 1            100     100 12108.185
-```
-
 3. The partial dependence of `bmi` onto `charges` makes it appear as if `charges` increases monotonically as `bmi` increases.
 
 
@@ -794,18 +782,10 @@ rbind(top_result, tenth_result, twenty_seventh_result) %>%
 pdp::partial(gbm, pred.var = "bmi", grid.resolution = 15, plot = T)
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-32-1.png" width="480" />
-
 However, when we add in the `ice` curves, we see that there is something else going on.  Explain this graph.  Why are there two groups of lines?
 
 
 ```r
-pdp::partial(gbm, pred.var = "bmi", grid.resolution = 15, plot = T, ice = T, alpha = 0.1, palette = "viridis")
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 20, plot = T, ice = T, alpha = 0.1, palette = "viridis")
 ```
 
-<img src="06-tree-based-models_files/figure-html/unnamed-chunk-33-1.png" width="672" />
-
-
-## Answers to Exercises
-
-Answers to these exercises are available at [ExamPA.net](https://www.exampa.net/pricing).

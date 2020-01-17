@@ -19,7 +19,6 @@ PCA is a dimensionality reduction method which reduces the number of variables n
 ```{r echo = F, message = F, warning = F, fig.align="center"}
 library(png)
 library(tidyverse)
-library(magick)
 knitr::include_graphics("images/PCA.png")
 ```
 
@@ -271,8 +270,8 @@ Kmeans takes continuous data and assigns observations into k clusters, or groups
 **d) - f)** Move the cluster center to the mean of the points assigned to it and continue until the centers stop moving.
 **g)** Repeated steps a) - f) a given number of times (controlled by `n.starts`).  This reduces the uncertainty from choosing the initial centers randomly.
 
-```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.align="center"}
-image_read("images/kmeans.png") %>% image_trim() %>%  image_scale("x1000")
+```{r, message = FALSE, warning = FALSE, echo = FALSE, out.width="1000%"}
+knitr::include_graphics("images/kmeans.png")
 ```
 
 In `R`, the function `kmeans()` performs K-means clustering in R. We begin with
@@ -367,8 +366,8 @@ This is analyzed with a graph called a dendrogram (dendro = tree, gram = graph).
 
 Choosing the value of the cutoff height changes the number of clusters that result.
 
-```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.align="center"}
-image_read("images/HClustering.png") %>% image_trim() %>%  image_scale("x1000")
+```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.align="center", out.width="1000%"}
+knitr::include_graphics("images/HClustering.png")
 ```
 
 Certain data have a natural hiearchical structure.  For example, say that the variables are City, Town, State, Country, and Continent.  If we used hiearchical clustering, this pattern could be established even if we did not have labels for Cities, Towns, and so forth.

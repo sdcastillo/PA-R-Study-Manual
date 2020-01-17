@@ -21,3 +21,4 @@ Rigollet, Philippe (2017).  *Lecture 21: Generalized Linear Models*.  Video.  ht
 
 Wickham, Hadley. 2019.  *R for Data Science*.  https://r4ds.had.co.nz/
 
+"Complimentary Log Log Model".  University of Alberta.  Accessed 2020.  http://www.stat.ualberta.ca/~kcarrier/STAT562/comp_log_log.pdf

@@ -16,7 +16,8 @@ Often there are a lot of columns in the data that contain redundant information.
 
 PCA is a dimensionality reduction method which reduces the number of variables needed to retain most of the information in a matrix.  If there are predictor variables $X_1, X_2, X_3, X_4, X5$, then running PCA and choosing the first three Principal Components (PCs) will reduce the dimension from 5 to 3.
 
-<img src="images/PCA.png" width="377" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=10.47in]{images/PCA} \end{center}
 
 Each PC is a linear combination of the original $X$s.  For example, PC1 might be
 
@@ -199,7 +200,7 @@ We can plot the first two principal components using the `biplot()` function:
 biplot(pca, scale=0)
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-11-1.png" width="768" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 The `scale=0` argument to `biplot()` ensures that the arrows are scaled to
 represent the loadings; other values for `scale` give slightly different biplots
@@ -253,7 +254,7 @@ and so forth. We can plot the PVE explained by each component as follows:
 plot(pve, xlab="Principal Component", ylab="Proportion of Variance Explained", ylim=c(0,1),type='b')
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
 
 We can also use the function `cumsum()`, which computes the cumulative sum of the elements of a numeric vector, to plot the cumulative PVE:
 
@@ -262,7 +263,7 @@ We can also use the function `cumsum()`, which computes the cumulative sum of th
 plot(cumsum(pve), xlab="Principal Component", ylab="Cumulative Proportion of Variance Explained", ylim=c(0,1),type='b')
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
 
 ```r
 a=c(1,2,8,-3)
@@ -320,7 +321,7 @@ plot(pca$x[,1:2], col=Cols(nci_labs), pch=19,xlab="Z1",ylab="Z2")
 plot(pca$x[,c(1,3)], col=Cols(nci_labs), pch=19,xlab="Z1",ylab="Z3")
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
 
 On the whole, cell lines corresponding to a single cancer type do tend to have similar values on the
 first few principal component score vectors. This indicates that cell lines
@@ -396,7 +397,7 @@ first few principal components:
 plot(pca)
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
 
 Note that the height of each bar in the bar plot is given by squaring the
 corresponding element of `pr.out\$sdev`. However, it is generally more informative to
@@ -412,7 +413,7 @@ plot(pve,  type="o", ylab="PVE", xlab="Principal Component", col="blue")
 plot(cumsum(pve), type="o", ylab="Cumulative PVE", xlab="Principal Component", col="brown3")
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> 
 
 We see that together, the first seven principal components
 explain around 40% of the variance in the data. This is not a huge amount
@@ -441,7 +442,8 @@ Kmeans takes continuous data and assigns observations into k clusters, or groups
 **d) - f)** Move the cluster center to the mean of the points assigned to it and continue until the centers stop moving.
 **g)** Repeated steps a) - f) a given number of times (controlled by `n.starts`).  This reduces the uncertainty from choosing the initial centers randomly.
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-24-1.png" width="766" style="display: block; margin: auto;" />
+
+\includegraphics[width=10\linewidth]{images/kmeans} 
 
 In `R`, the function `kmeans()` performs K-means clustering in R. We begin with
 a simple simulated example in which there truly are two clusters in the
@@ -486,7 +488,7 @@ assignment:
 plot(x, col = (km_out$cluster+1), main = "K-Means Clustering Results with K = 2", xlab = "", ylab = "", pch = 20, cex = 2)
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
 
 Here the observations can be easily plotted because they are two-dimensional.
 If there were more than two variables then we could instead perform PCA
@@ -532,7 +534,7 @@ km_out
 plot(x, col = (km_out$cluster+1), main = "K-Means Clustering Results with K = 3", xlab = "", ylab = "", pch = 20, cex = 2)
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-29-1.pdf)<!-- --> 
 
 To run the `kmeans()` function in R with multiple initial cluster assignments,
 we use the `nstart` argument. If a value of `nstart` greater than one
@@ -586,7 +588,8 @@ This is analyzed with a graph called a dendrogram (dendro = tree, gram = graph).
 
 Choosing the value of the cutoff height changes the number of clusters that result.
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-32-1.png" width="1039" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=10\linewidth]{images/HClustering} \end{center}
 
 Certain data have a natural hiearchical structure.  For example, say that the variables are City, Town, State, Country, and Continent.  If we used hiearchical clustering, this pattern could be established even if we did not have labels for Cities, Towns, and so forth.
 
@@ -621,7 +624,7 @@ plot(hc_average, main = "Average Linkage", xlab = "", sub = "", cex = .9)
 plot(hc_single, main = "Single Linkage", xlab = "", sub = "", cex = .9)
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-35-1.pdf)<!-- --> 
 
 To determine the cluster labels for each observation associated with a
 given cut of the dendrogram, we can use the `cutree()` function:
@@ -678,7 +681,7 @@ xsc = scale(x)
 plot(hclust(dist(xsc), method = "complete"), main = "Hierarchical Clustering with Scaled Features")
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-38-1.pdf)<!-- --> 
 
 Correlation-based distance can be computed using the `as.dist()` function, which converts an arbitrary square symmetric matrix into a form that
 the `hclust()` function recognizes as a distance matrix. However, this only
@@ -693,7 +696,7 @@ dd = as.dist(1-cor(t(x)))
 plot(hclust(dd, method = "complete"), main = "Complete Linkage with Correlation-Based Distance", xlab = "", sub = "")
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-39-1.pdf)<!-- --> 
 
 ### Example: Clustering Cancel Cells
 
@@ -766,7 +769,7 @@ plot(hclust(data_dist, method = "average"), labels = nci_labels, main = "Average
 plot(hclust(data_dist, method = "single"), labels = nci_labels,  main = "Single Linkage", xlab = "", sub = "",ylab = "")
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-44-1.pdf)<!-- --> 
 
 We see that the choice of linkage
 certainly does affect the results obtained. Typically, single linkage will tend
@@ -814,7 +817,7 @@ plot(hc_out, labels = nci_labels)
 abline(h = 139, col = "red")
 ```
 
-<img src="07-unsupervised-learning_files/figure-html/unnamed-chunk-46-1.png" width="672" />
+![](07-unsupervised-learning_files/figure-latex/unnamed-chunk-46-1.pdf)<!-- --> 
 
 Printing the output of `hclust` gives a useful brief summary of the object:
 

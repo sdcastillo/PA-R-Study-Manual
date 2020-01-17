@@ -38,6 +38,7 @@ library(scales)
 library(kableExtra)
 
 health_insurance %>% 
+  sample_frac(0.2) %>% 
   mutate(bmi_30 = ifelse(bmi < 30, "bmi < 30", "bmi >= 30")) %>% 
   group_by(smoker,bmi_30) %>% 
   summarise(mean_claims = dollar(mean(charges)),
@@ -280,6 +281,7 @@ This expects only numeric values.  We create dummy (indicator) columns.
 
 ```{r}
 rf_data <- health_insurance %>% 
+  sample_frac(0.2) %>% 
   mutate(sex = ifelse(sex == "male", 1, 0),
          smoker = ifelse(smoker == "yes", 1, 0),
          region_ne = ifelse(region == "northeast", 1,0),
@@ -301,7 +303,7 @@ test <- rf_data %>% slice(-index)
 ```
 
 ```{r fig.height=4, include = T}
-rf <- randomForest(charges ~ ., data = train, ntree = 500)
+rf <- randomForest(charges ~ ., data = train, ntree = 400)
 plot(rf)
 ```
 
@@ -360,10 +362,10 @@ For the RandomForest, this is done with `pdp::partial()`.
 ```{r message = F,fig.cap="Partial Dependence", fig.height=4}
 library(pdp)
 bmi <- pdp::partial(rf, pred.var = "bmi", 
-                    grid.resolution = 20) %>% 
+                    grid.resolution = 15) %>% 
   autoplot() + theme_bw()
 age <- pdp::partial(rf, pred.var = "age", 
-                    grid.resolution = 20) %>% 
+                    grid.resolution = 15) %>% 
   autoplot() + theme_bw()
 
 ggarrange(bmi, age)
@@ -503,9 +505,10 @@ There is a problem: all of the predictions are coming out to be 1.  Find out why
 
 ```{r eval = F}
 set.seed(42)
-#For the sake of this example, only take 20% of the records
+#When writing this book, only 5% of the records were used so that the code runs faster.
+#Increase this sampling if running this on your machine.
 df <- soa_mortality %>% 
-  sample_frac(0.2) %>% 
+  sample_frac(0.05) %>% #20% sample
   mutate(target = as.factor(ifelse(actual_cnt == 0, 1, 0))) %>% 
   select(target, prodcat, distchan, smoker, sex, issage, uwkey) %>% 
   mutate_if(is.character, ~as.factor(.x))
@@ -594,9 +597,9 @@ An actuary has trained a predictive model and chosen the best hyperparameters, c
 
 ```{r eval = F, cache=T}
 set.seed(42)
-#Take only 1000 records 
+#Take only 250 records 
 #Uncomment this when completing this exercise
-data <- health_insurance %>% sample_n(1000) 
+data <- health_insurance %>% sample_n(250) 
 
 index <- createDataPartition(
   y = data$charges, p = 0.8, list = F) %>% 
@@ -633,16 +636,18 @@ If the SOA asks you to tune a GBM, they will need to give you starting hyperpara
 
 This example looks at 135 combinations of hyper parameters.
 
-```{r}
+```{r, eval = F}
 set.seed(42)
 index <- createDataPartition(y = health_insurance$charges, 
                              p = 0.8, list = F)
-train <- health_insurance %>% slice(index)
-test <- health_insurance %>% slice(-index)
+#To make this run faster, only take 50% sample
+df <- health_insurance %>% sample_frac(0.50) 
+train <- df %>% slice(index) 
+test <- df %>% sample_frac(0.05)%>% slice(-index)
 
 tunegrid <- expand.grid(
     interaction.depth = c(1,5, 10),
-    n.trees = c(100, 200, 300, 400, 500), 
+    n.trees = c(50, 100, 200, 300, 400), 
     shrinkage = c(0.5, 0.1, 0.0001),
     n.minobsinnode = c(5, 30, 100)
     )
@@ -654,7 +659,7 @@ control <- trainControl(
   p = 0.8)
 ```
 
-```{r cache=T}
+```{r cache=T, eval = F}
 gbm <- train(charges ~ .,
             data = train,
             method='gbm', 
@@ -675,7 +680,7 @@ Identify the hyperpameter combination that has the lowest training error.
 
 2. Suppose that the optimization measure was RMSE.  The below table shows the results from three models.  Explain why some sets of parameters have better RMSE than the others.  
 
-```{r}
+```{r, eval = F}
 results <- gbm$results %>% arrange(RMSE)
 top_result <- results %>% slice(1)%>% mutate(param_rank = 1)
 tenth_result <- results %>% slice(10)%>% mutate(param_rank = 10)
@@ -687,17 +692,13 @@ rbind(top_result, tenth_result, twenty_seventh_result) %>%
 
 3. The partial dependence of `bmi` onto `charges` makes it appear as if `charges` increases monotonically as `bmi` increases.
 
-```{r fig.width=5, fig.height=5, cache=T}
+```{r fig.width=5, fig.height=5, cache=T, eval = F}
 pdp::partial(gbm, pred.var = "bmi", grid.resolution = 15, plot = T)
 ```
 
 However, when we add in the `ice` curves, we see that there is something else going on.  Explain this graph.  Why are there two groups of lines?
 
-```{r cache=T}
-pdp::partial(gbm, pred.var = "bmi", grid.resolution = 15, plot = T, ice = T, alpha = 0.1, palette = "viridis")
+```{r cache=T, eval = F}
+pdp::partial(gbm, pred.var = "bmi", grid.resolution = 20, plot = T, ice = T, alpha = 0.1, palette = "viridis")
 ```
 
-
-## Answers to Exercises
-
-Answers to these exercises are available at [ExamPA.net](https://www.exampa.net/pricing).
