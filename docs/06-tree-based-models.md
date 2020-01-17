@@ -28,10 +28,10 @@ We can cut the data set up into these groups and look at the claim costs.  From 
 
 |smoker |bmi_30    |mean_claims | percent|
 |:------|:---------|:-----------|-------:|
-|no     |bmi < 30  |$7,287.61   |    0.41|
-|no     |bmi >= 30 |$8,445.52   |    0.42|
-|yes    |bmi < 30  |$20,347.72  |    0.08|
-|yes    |bmi >= 30 |$42,169.66  |    0.09|
+|no     |bmi < 30  |$8,267.95   |    0.41|
+|no     |bmi >= 30 |$9,504.24   |    0.40|
+|yes    |bmi < 30  |$21,406.68  |    0.07|
+|yes    |bmi >= 30 |$42,566.23  |    0.12|
 
 This was a very simple example because there were only two variables.  If we have more variables, the tree will get large very quickly.  This will result in overfitting; there will be good performance on the training data but poor performance on the test data.
 
@@ -105,11 +105,11 @@ cost %>% head()
 ##   nsplit      CP xerror
 ##    <dbl>   <dbl>  <dbl>
 ## 1      0 0.620    1.00 
-## 2      1 0.144    0.382
+## 2      1 0.144    0.383
 ## 3      2 0.0637   0.240
-## 4      3 0.00967  0.179
-## 5      4 0.00784  0.173
-## 6      5 0.00712  0.172
+## 4      3 0.00967  0.178
+## 5      4 0.00784  0.176
+## 6      5 0.00712  0.169
 ```
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.  
@@ -133,12 +133,12 @@ tree$cptable %>%
 ## # A tibble: 6 x 3
 ##   nsplit       CP xerror
 ##    <dbl>    <dbl>  <dbl>
-## 1     15 0.00116   0.148
-## 2     14 0.00119   0.148
-## 3     13 0.00134   0.149
-## 4     17 0.000913  0.149
-## 5     16 0.00105   0.150
-## 6     12 0.00137   0.150
+## 1     17 0.000913  0.147
+## 2     16 0.00105   0.147
+## 3     19 0.000837  0.149
+## 4     15 0.00116   0.149
+## 5     18 0.000910  0.149
+## 6     14 0.00119   0.149
 ```
 
 The SOA will give you code to find the lowest CP value such as below.  This may or may not be useful depending on if they are asking for predictive performance or interpretability.
