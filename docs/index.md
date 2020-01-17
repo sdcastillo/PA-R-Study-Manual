@@ -66,6 +66,8 @@ The following video from Prometric shows what the computer set up will look like
 <iframe src="https://player.vimeo.com/video/304653968" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 <p><a href="https://vimeo.com/304653968">SOAFinalCut</a> from <a href="https://vimeo.com/user10231556">Prometric</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
+https://player.vimeo.com/video/304653968
+
 # Introduction
 
 While "machine learning" is relatively new, the process of learning itself is not.   All of use are already familiar with how to learn - by improving from our mistakes.  By repeating what is successful and avoiding what results in failure, we learn by doing, by experience, or trial-and-error.  Machines learn in a similar way.

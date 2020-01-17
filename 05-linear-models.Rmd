@@ -359,9 +359,10 @@ If the target distribution *must* have a positive mean, such as in the case of t
 ## Interpretation of coefficients
 
 The GLM's interpretation depends on the choice of link function.  
+
 ### Identity link
 
-This is the easiest.  For each one-unit increase in $\X_j$, the expected value of the target, $E[Y]$, increases by $\beta_j$, assuming that all other variables are held constant.
+This is the easiest to interpret.  For each one-unit increase in $X_j$, the expected value of the target, $E[Y]$, increases by $\beta_j$, assuming that all other variables are held constant.
 
 ### Log link
 
@@ -399,11 +400,11 @@ If categorical predictors are used, then the interpretation is very similar.  Sa
 | Color=RED   | 0.400       | 0.492                | 49% increase  in $E[Y]$ for RED cars as opposed to YELLOW cars*| 
 | Color=BLUE  | -0.500      | -0.393               | 39% decrease in $E[Y]$ for BLUE cars rather than YELLOW cars*| 
 
-* Assuming all other variables are held constant.
+\* Assuming all other variables are held constant.
 
 ## Other links
 
-The other link functions are not straight-forward to interpret and so it is unlikely that you would be asked to.
+The other link functions are not straight-forward to interpret and so it is unlikely that you would be asked to do so.
 
 # GLMs for classification
 
