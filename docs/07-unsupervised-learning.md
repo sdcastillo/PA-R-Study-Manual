@@ -68,10 +68,10 @@ glimpse(USArrests)
 ```
 ## Observations: 50
 ## Variables: 4
-## $ Murder   <dbl> 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 17.4,...
-## $ Assault  <int> 236, 263, 294, 190, 276, 204, 110, 238, 335, 211, 46,...
-## $ UrbanPop <int> 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 83, 6...
-## $ Rape     <dbl> 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 31.9,...
+## $ Murder   <dbl> 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 17.4, 5.3,...
+## $ Assault  <int> 236, 263, 294, 190, 276, 204, 110, 238, 335, 211, 46, 120,...
+## $ UrbanPop <int> 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 83, 65, 57...
+## $ Rape     <dbl> 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 31.9, 25.8...
 ```
 
 Let's start by taking a quick look at the column means of the data. 
@@ -338,54 +338,46 @@ summary(pca)
 
 ```
 ## Importance of components:
-##                            PC1      PC2      PC3      PC4      PC5
-## Standard deviation     27.8535 21.48136 19.82046 17.03256 15.97181
-## Proportion of Variance  0.1136  0.06756  0.05752  0.04248  0.03735
-## Cumulative Proportion   0.1136  0.18115  0.23867  0.28115  0.31850
-##                             PC6      PC7      PC8      PC9     PC10
-## Standard deviation     15.72108 14.47145 13.54427 13.14400 12.73860
-## Proportion of Variance  0.03619  0.03066  0.02686  0.02529  0.02376
-## Cumulative Proportion   0.35468  0.38534  0.41220  0.43750  0.46126
-##                            PC11     PC12     PC13     PC14     PC15
-## Standard deviation     12.68672 12.15769 11.83019 11.62554 11.43779
-## Proportion of Variance  0.02357  0.02164  0.02049  0.01979  0.01915
-## Cumulative Proportion   0.48482  0.50646  0.52695  0.54674  0.56590
-##                            PC16     PC17     PC18     PC19    PC20
-## Standard deviation     11.00051 10.65666 10.48880 10.43518 10.3219
-## Proportion of Variance  0.01772  0.01663  0.01611  0.01594  0.0156
-## Cumulative Proportion   0.58361  0.60024  0.61635  0.63229  0.6479
-##                            PC21    PC22    PC23    PC24    PC25    PC26
-## Standard deviation     10.14608 10.0544 9.90265 9.64766 9.50764 9.33253
-## Proportion of Variance  0.01507  0.0148 0.01436 0.01363 0.01324 0.01275
-## Cumulative Proportion   0.66296  0.6778 0.69212 0.70575 0.71899 0.73174
-##                           PC27   PC28    PC29    PC30    PC31    PC32
-## Standard deviation     9.27320 9.0900 8.98117 8.75003 8.59962 8.44738
-## Proportion of Variance 0.01259 0.0121 0.01181 0.01121 0.01083 0.01045
-## Cumulative Proportion  0.74433 0.7564 0.76824 0.77945 0.79027 0.80072
-##                           PC33    PC34    PC35    PC36    PC37    PC38
-## Standard deviation     8.37305 8.21579 8.15731 7.97465 7.90446 7.82127
-## Proportion of Variance 0.01026 0.00988 0.00974 0.00931 0.00915 0.00896
-## Cumulative Proportion  0.81099 0.82087 0.83061 0.83992 0.84907 0.85803
-##                           PC39    PC40    PC41   PC42    PC43   PC44
-## Standard deviation     7.72156 7.58603 7.45619 7.3444 7.10449 7.0131
-## Proportion of Variance 0.00873 0.00843 0.00814 0.0079 0.00739 0.0072
-## Cumulative Proportion  0.86676 0.87518 0.88332 0.8912 0.89861 0.9058
-##                           PC45   PC46    PC47    PC48    PC49    PC50
-## Standard deviation     6.95839 6.8663 6.80744 6.64763 6.61607 6.40793
-## Proportion of Variance 0.00709 0.0069 0.00678 0.00647 0.00641 0.00601
-## Cumulative Proportion  0.91290 0.9198 0.92659 0.93306 0.93947 0.94548
-##                           PC51    PC52    PC53    PC54    PC55    PC56
-## Standard deviation     6.21984 6.20326 6.06706 5.91805 5.91233 5.73539
-## Proportion of Variance 0.00566 0.00563 0.00539 0.00513 0.00512 0.00482
-## Cumulative Proportion  0.95114 0.95678 0.96216 0.96729 0.97241 0.97723
-##                           PC57   PC58    PC59    PC60    PC61    PC62
-## Standard deviation     5.47261 5.2921 5.02117 4.68398 4.17567 4.08212
-## Proportion of Variance 0.00438 0.0041 0.00369 0.00321 0.00255 0.00244
-## Cumulative Proportion  0.98161 0.9857 0.98940 0.99262 0.99517 0.99761
-##                           PC63      PC64
-## Standard deviation     4.04124 2.148e-14
-## Proportion of Variance 0.00239 0.000e+00
-## Cumulative Proportion  1.00000 1.000e+00
+##                            PC1      PC2      PC3      PC4      PC5      PC6
+## Standard deviation     27.8535 21.48136 19.82046 17.03256 15.97181 15.72108
+## Proportion of Variance  0.1136  0.06756  0.05752  0.04248  0.03735  0.03619
+## Cumulative Proportion   0.1136  0.18115  0.23867  0.28115  0.31850  0.35468
+##                             PC7      PC8      PC9     PC10     PC11     PC12
+## Standard deviation     14.47145 13.54427 13.14400 12.73860 12.68672 12.15769
+## Proportion of Variance  0.03066  0.02686  0.02529  0.02376  0.02357  0.02164
+## Cumulative Proportion   0.38534  0.41220  0.43750  0.46126  0.48482  0.50646
+##                            PC13     PC14     PC15     PC16     PC17     PC18
+## Standard deviation     11.83019 11.62554 11.43779 11.00051 10.65666 10.48880
+## Proportion of Variance  0.02049  0.01979  0.01915  0.01772  0.01663  0.01611
+## Cumulative Proportion   0.52695  0.54674  0.56590  0.58361  0.60024  0.61635
+##                            PC19    PC20     PC21    PC22    PC23    PC24
+## Standard deviation     10.43518 10.3219 10.14608 10.0544 9.90265 9.64766
+## Proportion of Variance  0.01594  0.0156  0.01507  0.0148 0.01436 0.01363
+## Cumulative Proportion   0.63229  0.6479  0.66296  0.6778 0.69212 0.70575
+##                           PC25    PC26    PC27   PC28    PC29    PC30    PC31
+## Standard deviation     9.50764 9.33253 9.27320 9.0900 8.98117 8.75003 8.59962
+## Proportion of Variance 0.01324 0.01275 0.01259 0.0121 0.01181 0.01121 0.01083
+## Cumulative Proportion  0.71899 0.73174 0.74433 0.7564 0.76824 0.77945 0.79027
+##                           PC32    PC33    PC34    PC35    PC36    PC37    PC38
+## Standard deviation     8.44738 8.37305 8.21579 8.15731 7.97465 7.90446 7.82127
+## Proportion of Variance 0.01045 0.01026 0.00988 0.00974 0.00931 0.00915 0.00896
+## Cumulative Proportion  0.80072 0.81099 0.82087 0.83061 0.83992 0.84907 0.85803
+##                           PC39    PC40    PC41   PC42    PC43   PC44    PC45
+## Standard deviation     7.72156 7.58603 7.45619 7.3444 7.10449 7.0131 6.95839
+## Proportion of Variance 0.00873 0.00843 0.00814 0.0079 0.00739 0.0072 0.00709
+## Cumulative Proportion  0.86676 0.87518 0.88332 0.8912 0.89861 0.9058 0.91290
+##                          PC46    PC47    PC48    PC49    PC50    PC51    PC52
+## Standard deviation     6.8663 6.80744 6.64763 6.61607 6.40793 6.21984 6.20326
+## Proportion of Variance 0.0069 0.00678 0.00647 0.00641 0.00601 0.00566 0.00563
+## Cumulative Proportion  0.9198 0.92659 0.93306 0.93947 0.94548 0.95114 0.95678
+##                           PC53    PC54    PC55    PC56    PC57   PC58    PC59
+## Standard deviation     6.06706 5.91805 5.91233 5.73539 5.47261 5.2921 5.02117
+## Proportion of Variance 0.00539 0.00513 0.00512 0.00482 0.00438 0.0041 0.00369
+## Cumulative Proportion  0.96216 0.96729 0.97241 0.97723 0.98161 0.9857 0.98940
+##                           PC60    PC61    PC62    PC63      PC64
+## Standard deviation     4.68398 4.17567 4.08212 4.04124 2.148e-14
+## Proportion of Variance 0.00321 0.00255 0.00244 0.00239 0.000e+00
+## Cumulative Proportion  0.99262 0.99517 0.99761 1.00000 1.000e+00
 ```
 
 Using the `plot()` function, we can also plot the variance explained by the
@@ -472,8 +464,8 @@ km_out$cluster
 ```
 
 ```
-##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
-## [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [39] 2 2 2 2 2 2 2 2 2 2 2 2
 ```
 
 The K-means clustering perfectly separated the observations into two clusters
@@ -514,8 +506,8 @@ km_out
 ## 3  2.3001545 -2.69622023
 ## 
 ## Clustering vector:
-##  [1] 1 3 1 3 1 1 1 3 1 3 1 3 1 3 1 3 1 1 1 1 1 3 1 1 1 2 2 2 2 2 2 2 2 2 2
-## [36] 2 2 2 2 2 2 2 2 3 2 3 2 2 2 2
+##  [1] 1 3 1 3 1 1 1 3 1 3 1 3 1 3 1 3 1 1 1 1 1 3 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [39] 2 2 2 2 2 3 2 3 2 2 2 2
 ## 
 ## Within cluster sum of squares by cluster:
 ## [1] 25.74089 52.67700 19.56137
@@ -523,9 +515,8 @@ km_out
 ## 
 ## Available components:
 ## 
-## [1] "cluster"      "centers"      "totss"        "withinss"    
-## [5] "tot.withinss" "betweenss"    "size"         "iter"        
-## [9] "ifault"
+## [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+## [6] "betweenss"    "size"         "iter"         "ifault"
 ```
 
 ```r
@@ -632,8 +623,8 @@ cutree(hc_complete, 2)
 ```
 
 ```
-##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
-## [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [39] 2 2 2 2 2 2 2 2 2 2 2 2
 ```
 
 ```r
@@ -641,8 +632,8 @@ cutree(hc_average, 2)
 ```
 
 ```
-##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 1 2 2
-## [36] 2 2 2 2 2 2 2 2 1 2 1 2 2 2 2
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 1 2 2 2 2 2
+## [39] 2 2 2 2 2 1 2 1 2 2 2 2
 ```
 
 ```r
@@ -650,8 +641,8 @@ cutree(hc_single, 2)
 ```
 
 ```
-##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-## [36] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+## [39] 1 1 1 1 1 1 1 1 1 1 1 1
 ```
 
 For this data, complete and average linkage generally separate the observations
@@ -665,8 +656,8 @@ cutree(hc_single, 4)
 ```
 
 ```
-##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3
-## [36] 3 3 3 3 3 3 4 3 3 3 3 3 3 3 3
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3
+## [39] 3 3 3 4 3 3 3 3 3 3 3 3
 ```
 
 To scale the variables before performing hierarchical clustering of the

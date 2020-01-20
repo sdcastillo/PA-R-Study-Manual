@@ -8,6 +8,8 @@ format_table <- function(data){data %>% kableExtra::kable("html") %>% kable_styl
 
 About two hours in this exam will be spent just on data manipulation.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.  In addition, a common saying when building models is "garbage in means garbage out", on this exam, mistakes on the data manipulation can lead to lost points on the modeling sections.
 
+Data vocabulary is sloppy because many words mean the same thing.  *Cleaning*, *wrangling*, *manipulating*, and *ransforming* all describe the process making data easier to work with.  
+
 Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
 
 

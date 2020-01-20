@@ -28,10 +28,10 @@ We can cut the data set up into these groups and look at the claim costs.  From 
 
 |smoker |bmi_30    |mean_claims | percent|
 |:------|:---------|:-----------|-------:|
-|no     |bmi < 30  |$8,267.95   |    0.41|
-|no     |bmi >= 30 |$9,504.24   |    0.40|
-|yes    |bmi < 30  |$21,406.68  |    0.07|
-|yes    |bmi >= 30 |$42,566.23  |    0.12|
+|no     |bmi < 30  |$7,286.00   |    0.41|
+|no     |bmi >= 30 |$9,466.15   |    0.38|
+|yes    |bmi < 30  |$22,742.94  |    0.09|
+|yes    |bmi >= 30 |$42,891.38  |    0.12|
 
 This was a very simple example because there were only two variables.  If we have more variables, the tree will get large very quickly.  This will result in overfitting; there will be good performance on the training data but poor performance on the test data.
 
@@ -107,9 +107,9 @@ cost %>% head()
 ## 1      0 0.620    1.00 
 ## 2      1 0.144    0.383
 ## 3      2 0.0637   0.240
-## 4      3 0.00967  0.178
+## 4      3 0.00967  0.180
 ## 5      4 0.00784  0.176
-## 6      5 0.00712  0.169
+## 6      5 0.00712  0.172
 ```
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.  
@@ -133,12 +133,12 @@ tree$cptable %>%
 ## # A tibble: 6 x 3
 ##   nsplit       CP xerror
 ##    <dbl>    <dbl>  <dbl>
-## 1     17 0.000913  0.147
-## 2     16 0.00105   0.147
-## 3     19 0.000837  0.149
-## 4     15 0.00116   0.149
-## 5     18 0.000910  0.149
-## 6     14 0.00119   0.149
+## 1     19 0.000837  0.152
+## 2     22 0.000759  0.152
+## 3     18 0.000910  0.153
+## 4     15 0.00116   0.153
+## 5     16 0.00105   0.153
+## 6     17 0.000913  0.153
 ```
 
 The SOA will give you code to find the lowest CP value such as below.  This may or may not be useful depending on if they are asking for predictive performance or interpretability.
@@ -528,7 +528,7 @@ get_rmsle(test$charges, pred)
 ```
 
 ```
-## [1] 0.4411494
+## [1] 1.052716
 ```
 
 ```r
@@ -536,7 +536,7 @@ get_rmsle(test$charges, mean(train$charges))
 ```
 
 ```
-## [1] 0.9996513
+## [1] 1.118947
 ```
 
 ### Advantages and disadvantages

@@ -2,13 +2,15 @@ bookdown::gitbook:
   css: style.css
   highlight: tango
   config:
+    sharing:
+      github: no
+      facebook: no
+      twitter: no
     toc:
       before: |
-        <li><a href="./">Exam PA Study Manual</a></li>
-      after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/%s
-    download: ["pdf", "epub"]
+        <li><a href="./">Exam PA Study Guide</a></li>
+
+    download: ["pdf"]
 bookdown::pdf_book:
   dev: "cairo_pdf"
   toc_unnumbered: yes

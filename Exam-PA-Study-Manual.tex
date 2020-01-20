@@ -1,35 +1,46 @@
-\documentclass[openany]{book}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  openany]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={ExamPA.net Study Manual},
-            pdfauthor={Sam Castillo},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{apalike}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={ExamPA.net Study Manual},
+  pdfauthor={Sam Castillo},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -71,6 +82,14 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -80,51 +99,14 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{ExamPA.net Study Manual}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Sam Castillo}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-    \date{}
-    \predate{}\postdate{}
-  
 \usepackage{booktabs}
 \usepackage{amsthm}
 \makeatletter
@@ -147,6 +129,12 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{ExamPA.net Study Manual}
+\author{Sam Castillo}
+\date{}
 
 \begin{document}
 \maketitle
@@ -233,6 +221,8 @@ The exam pass rates are about 50\%.
 The following video from Prometric shows what the computer set up will look like. In addition to the files shown in the video, they will give you a printed out project statement (If they don't give this to you right away, ask for it.)
 
 SOAFinalCut from Prometric on Vimeo.
+
+\url{https://player.vimeo.com/video/304653968}
 
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
@@ -1007,18 +997,18 @@ You can also work with tibbles, which are data frames but have nicer printing:
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages --------------------------------------------------------------- tidyverse 1.2.1 --
+## -- Attaching packages -------------------------------------------------------------------------- tidyverse 1.3.0 --
 \end{verbatim}
 
 \begin{verbatim}
-## v ggplot2 3.2.1     v purrr   0.3.2
+## v ggplot2 3.2.1     v purrr   0.3.3
 ## v tibble  2.1.3     v dplyr   0.8.3
 ## v tidyr   1.0.0     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.4.0
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts ------------------------------------------------------------------ tidyverse_conflicts() --
+## -- Conflicts ----------------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -1347,13 +1337,13 @@ The \texttt{glimpse} function is a transpose of the \texttt{head()} function, wh
 \begin{verbatim}
 ## Observations: 1,338
 ## Variables: 7
-## $ age      <dbl> 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 5...
-## $ sex      <chr> "female", "male", "male", "male", "male", "female", "...
-## $ bmi      <dbl> 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.44...
-## $ children <dbl> 0, 1, 3, 0, 0, 0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0,...
-## $ smoker   <chr> "yes", "no", "no", "no", "no", "no", "no", "no", "no"...
-## $ region   <chr> "southwest", "southeast", "southeast", "northwest", "...
-## $ charges  <dbl> 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3...
+## $ age      <dbl> 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 56, 27...
+## $ sex      <chr> "female", "male", "male", "male", "male", "female", "femal...
+## $ bmi      <dbl> 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.440, 27...
+## $ children <dbl> 0, 1, 3, 0, 0, 0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0...
+## $ smoker   <chr> "yes", "no", "no", "no", "no", "no", "no", "no", "no", "no...
+## $ region   <chr> "southwest", "southeast", "southeast", "northwest", "north...
+## $ charges  <dbl> 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3756.6...
 \end{verbatim}
 
 One of the most useful data science tools is counting things. The function \texttt{count()} gives the number of records by a categorical feature.
@@ -1710,12 +1700,12 @@ The data \texttt{actuary\_salaries} contains the salaries of actuaries collected
 \begin{verbatim}
 ## Observations: 138
 ## Variables: 6
-## $ industry    <chr> "Casualty", "Casualty", "Casualty", "Casualty", "C...
-## $ exams       <chr> "1 Exam", "2 Exams", "3 Exams", "4 Exams", "1 Exam...
-## $ experience  <dbl> 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5,...
-## $ salary      <chr> "48 - 65", "50 - 71", "54 - 77", "58 - 82", "54 - ...
-## $ salary_low  <dbl> 48, 50, 54, 58, 54, 57, 62, 63, 65, 70, 72, 85, 55...
-## $ salary_high <chr> "65", "71", "77", "82", "72", "81", "87", "91", "9...
+## $ industry    <chr> "Casualty", "Casualty", "Casualty", "Casualty", "Casual...
+## $ exams       <chr> "1 Exam", "2 Exams", "3 Exams", "4 Exams", "1 Exam", "2...
+## $ experience  <dbl> 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5...
+## $ salary      <chr> "48 - 65", "50 - 71", "54 - 77", "58 - 82", "54 - 72", ...
+## $ salary_low  <dbl> 48, 50, 54, 58, 54, 57, 62, 63, 65, 70, 72, 85, 55, 58,...
+## $ salary_high <chr> "65", "71", "77", "82", "72", "81", "87", "91", "95", "...
 \end{verbatim}
 
 \begin{enumerate}
@@ -1843,14 +1833,6 @@ Pipes allow for data manipulations to be chained with visualizations.
 
 \includegraphics{04-visualization_files/figure-latex/unnamed-chunk-7-1.pdf}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{theme_set}\NormalTok{(}\KeywordTok{theme_bw}\NormalTok{())}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{introduction-to-modeling}{%
 \chapter{Introduction to modeling}\label{introduction-to-modeling}}
 
@@ -1922,7 +1904,7 @@ In the one-dimensional case, this creates a line connecting the points. In highe
 
 The red line shows the \emph{expected value} of the target, as the target \(\hat{Y}\) is actually a random variable. For each of the data points, the model assumes a Gaussian distribution. If there is just a single predictor, \(x\), then the mean is \(\beta_0 + \beta_1 x\).
 
-\begin{center}\includegraphics[width=2\linewidth]{images/conditional_response} \end{center}
+\begin{center}\includegraphics[width=2\linewidth]{C:/Users/sam.castillo/Desktop/PA-MAS-R-Study-Manual/images/conditional_response} \end{center}
 
 The question then is \textbf{how can we choose the best values of} \(\beta?\) First of all, we need to define what we mean by ``best''. Ideally, we will choose these values which will create close predictions of \(Y\) on new, unseen data.
 
@@ -1966,7 +1948,7 @@ The choice of error metric has a big difference on the outcome. When explaining 
 
 These are the regression metrics that are most likely to appear on Exam PA. Memorizing these formulas for AIC and BIC is not necessary as they are in the R documentation by typing \texttt{?AIC} or \texttt{?BIC} into the R console.
 
-\begin{center}\includegraphics[width=13\linewidth]{images/regression_metrics} \end{center}
+\begin{center}\includegraphics[width=13\linewidth]{C:/Users/sam.castillo/Desktop/PA-MAS-R-Study-Manual/images/regression_metrics} \end{center}
 
 \hypertarget{example}{%
 \section{Example}\label{example}}
@@ -2318,23 +2300,25 @@ For regression problems, we try to match the actual distribution to the model's 
 
 The choice of target distribution should be similar to the actual distribution of \(Y\). For instance, if \(Y\) is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values. If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewd.
 
-\begin{center}\includegraphics[width=8\linewidth]{images/response_distributions} \end{center}
+\begin{center}\includegraphics[width=8\linewidth]{C:/Users/sam.castillo/Desktop/PA-MAS-R-Study-Manual/images/response_distributions} \end{center}
 
 There are five link functions for a continuous \(Y\), although the choice of distribution family will typically rule-out several of these immediately. The linear predictor (a.k.a., the \emph{systemic component}) is \(z\) and the link function is how this connects to the expected value of the resonse.
 
 \[z = X\beta = g(\mu)\]
 
-\begin{center}\includegraphics[width=8\linewidth]{images/link_functions} \end{center}
+\begin{center}\includegraphics[width=2\linewidth]{C:/Users/sam.castillo/Desktop/PA-MAS-R-Study-Manual/images/link_functions} \end{center}
 
 If the target distribution \emph{must} have a positive mean, such as in the case of the Inverse Gaussian or Gamma, then the Identity or Inverse links are poor choices because they allow for negative values; the range of the mean is \((-\infty, \infty)\). The other link functions force the mean to be positive.
 
 \hypertarget{interpretation-of-coefficients}{%
 \section{Interpretation of coefficients}\label{interpretation-of-coefficients}}
 
-The GLM's interpretation depends on the choice of link function.\\
-\#\#\# Identity link
+The GLM's interpretation depends on the choice of link function.
 
-This is the easiest. For each one-unit increase in \(\X_j\), the expected value of the target, \(E[Y]\), increases by \(\beta_j\), assuming that all other variables are held constant.
+\hypertarget{identity-link}{%
+\subsection{Identity link}\label{identity-link}}
+
+This is the easiest to interpret. For each one-unit increase in \(X_j\), the expected value of the target, \(E[Y]\), increases by \(\beta_j\), assuming that all other variables are held constant.
 
 \hypertarget{log-link}{%
 \subsection{Log link}\label{log-link}}
@@ -2413,16 +2397,12 @@ Color=BLUE\strut
 \bottomrule
 \end{longtable}
 
-\begin{itemize}
-\tightlist
-\item
-  Assuming all other variables are held constant.
-\end{itemize}
+* Assuming all other variables are held constant.
 
 \hypertarget{other-links}{%
 \section{Other links}\label{other-links}}
 
-The other link functions are not straight-forward to interpret and so it is unlikely that you would be asked to.
+The other link functions are not straight-forward to interpret and so it is unlikely that you would be asked to do so.
 
 \hypertarget{glms-for-classification}{%
 \chapter{GLMs for classification}\label{glms-for-classification}}
@@ -2452,7 +2432,7 @@ When all observations have the same exposure, \(m = 1\). When the mean of the da
 
 There are four link functions. The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the SOA's Hospital Readmissions practice exam in 2019. The identity link does not make sense for classification because it would result in predictions being outside of \((0,1)\)
 
-\begin{center}\includegraphics[width=12\linewidth]{images/discrete_link_functions} \end{center}
+\begin{center}\includegraphics[width=12\linewidth]{C:/Users/sam.castillo/Desktop/PA-MAS-R-Study-Manual/images/discrete_link_functions} \end{center}
 
 \begin{quote}
 The \emph{logit} is also known as the \emph{standard logistic function} or \emph{sigmoid} and is also used in deep learning.
@@ -3964,14 +3944,14 @@ smaller value of \(\lambda\).
 \end{Shaded}
 
 \begin{verbatim}
-##  (Intercept)        AtBat         Hits        HmRun         Runs 
-##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713 
-##          RBI        Walks        Years       CAtBat        CHits 
-##   0.84718546   1.31987948   2.59640425   0.01083413   0.04674557 
-##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
-##   0.33777318   0.09355528   0.09780402   0.07189612  13.68370191 
-##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
-## -54.65877750   0.11852289   0.01606037  -0.70358655   8.61181213
+##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713   0.84718546 
+##        Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+##   1.31987948   2.59640425   0.01083413   0.04674557   0.33777318   0.09355528 
+##         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+##   0.09780402   0.07189612  13.68370191 -54.65877750   0.11852289   0.01606037 
+##       Errors   NewLeagueN 
+##  -0.70358655   8.61181213
 \end{verbatim}
 
 \begin{Shaded}
@@ -4115,14 +4095,14 @@ a slight discrepancy in the third decimal place between the output of \texttt{gl
 ## lm(formula = Salary ~ ., data = train)
 ## 
 ## Coefficients:
-## (Intercept)        AtBat         Hits        HmRun         Runs  
-##   2.398e+02   -1.639e-03   -2.179e+00    6.337e+00    7.139e-01  
-##         RBI        Walks        Years       CAtBat        CHits  
-##   8.735e-01    3.594e+00   -1.309e+01   -7.136e-01    3.316e+00  
-##      CHmRun        CRuns         CRBI       CWalks      LeagueN  
-##   3.407e+00   -5.671e-01   -7.525e-01    2.347e-01    1.322e+02  
-##   DivisionW      PutOuts      Assists       Errors   NewLeagueN  
-##  -1.346e+02    2.099e-01    6.229e-01   -4.616e+00   -8.330e+01
+## (Intercept)        AtBat         Hits        HmRun         Runs          RBI  
+##   2.398e+02   -1.639e-03   -2.179e+00    6.337e+00    7.139e-01    8.735e-01  
+##       Walks        Years       CAtBat        CHits       CHmRun        CRuns  
+##   3.594e+00   -1.309e+01   -7.136e-01    3.316e+00    3.407e+00   -5.671e-01  
+##        CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists  
+##  -7.525e-01    2.347e-01    1.322e+02   -1.346e+02    2.099e-01    6.229e-01  
+##      Errors   NewLeagueN  
+##  -4.616e+00   -8.330e+01
 \end{verbatim}
 
 \begin{Shaded}
@@ -4202,14 +4182,14 @@ estimates.
 \end{Shaded}
 
 \begin{verbatim}
-##  (Intercept)        AtBat         Hits        HmRun         Runs 
-##  15.44835008   0.07716945   0.85906253   0.60120339   1.06366687 
-##          RBI        Walks        Years       CAtBat        CHits 
-##   0.87936073   1.62437580   1.35296287   0.01134998   0.05746377 
-##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
-##   0.40678422   0.11455696   0.12115916   0.05299953  22.08942749 
-##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
-## -79.03490973   0.16618830   0.02941513  -1.36075644   9.12528398
+##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+##  15.44835008   0.07716945   0.85906253   0.60120339   1.06366687   0.87936073 
+##        Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+##   1.62437580   1.35296287   0.01134998   0.05746377   0.40678422   0.11455696 
+##         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+##   0.12115916   0.05299953  22.08942749 -79.03490973   0.16618830   0.02941513 
+##       Errors   NewLeagueN 
+##  -1.36075644   9.12528398
 \end{verbatim}
 
 As expected, none of the coefficients are exactly zero - ridge regression does not
@@ -4370,10 +4350,10 @@ We can cut the data set up into these groups and look at the claim costs. From t
 smoker & bmi\_30 & mean\_claims & percent\tabularnewline
 \midrule
 \endhead
-no & bmi \textless{} 30 & \$7,371.06 & 0.38\tabularnewline
-no & bmi \textgreater= 30 & \$9,396.85 & 0.45\tabularnewline
-yes & bmi \textless{} 30 & \$21,574.90 & 0.06\tabularnewline
-yes & bmi \textgreater= 30 & \$42,334.12 & 0.11\tabularnewline
+no & bmi \textless{} 30 & \$8,335.60 & 0.40\tabularnewline
+no & bmi \textgreater= 30 & \$8,636.70 & 0.41\tabularnewline
+yes & bmi \textless{} 30 & \$21,190.16 & 0.10\tabularnewline
+yes & bmi \textgreater= 30 & \$41,555.59 & 0.09\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -4456,11 +4436,11 @@ This is stored in the \texttt{cptable}
 ##   nsplit      CP xerror
 ##    <dbl>   <dbl>  <dbl>
 ## 1      0 0.620    1.00 
-## 2      1 0.144    0.382
-## 3      2 0.0637   0.237
-## 4      3 0.00967  0.177
-## 5      4 0.00784  0.172
-## 6      5 0.00712  0.166
+## 2      1 0.144    0.383
+## 3      2 0.0637   0.239
+## 4      3 0.00967  0.180
+## 5      4 0.00784  0.176
+## 6      5 0.00712  0.172
 \end{verbatim}
 
 As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.
@@ -4485,12 +4465,12 @@ Once we have selected \(\alpha\), the tree is pruned. Sometimes the CP with the 
 ## # A tibble: 6 x 3
 ##   nsplit       CP xerror
 ##    <dbl>    <dbl>  <dbl>
-## 1     22 0.000759  0.148
-## 2     24 0.000695  0.149
-## 3     29 0.000575  0.150
-## 4     32 0.000575  0.150
-## 5     19 0.000837  0.150
-## 6     33 0.000549  0.150
+## 1     16 0.00105   0.153
+## 2     13 0.00134   0.153
+## 3     14 0.00119   0.153
+## 4     17 0.000913  0.153
+## 5     15 0.00116   0.154
+## 6     22 0.000759  0.154
 \end{verbatim}
 
 The SOA will give you code to find the lowest CP value such as below. This may or may not be useful depending on if they are asking for predictive performance or interpretability.
@@ -4980,7 +4960,7 @@ We fit a gbm below without tuning the parameters for the sake of example.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.4411494
+## [1] 1.052716
 \end{verbatim}
 
 \begin{Shaded}
@@ -4990,7 +4970,7 @@ We fit a gbm below without tuning the parameters for the sake of example.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.9996513
+## [1] 1.118947
 \end{verbatim}
 
 \hypertarget{advantages-and-disadvantages-4}{%
@@ -5365,10 +5345,10 @@ The columns of the data set contain four variables relating to various crimes:
 \begin{verbatim}
 ## Observations: 50
 ## Variables: 4
-## $ Murder   <dbl> 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 17.4,...
-## $ Assault  <int> 236, 263, 294, 190, 276, 204, 110, 238, 335, 211, 46,...
-## $ UrbanPop <int> 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 83, 6...
-## $ Rape     <dbl> 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 31.9,...
+## $ Murder   <dbl> 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 17.4, 5.3,...
+## $ Assault  <int> 236, 263, 294, 190, 276, 204, 110, 238, 335, 211, 46, 120,...
+## $ UrbanPop <int> 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 83, 65, 57...
+## $ Rape     <dbl> 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 31.9, 25.8...
 \end{verbatim}
 
 Let's start by taking a quick look at the column means of the data.
@@ -5657,54 +5637,46 @@ of the first few principal components using the \texttt{summary()} method for a
 
 \begin{verbatim}
 ## Importance of components:
-##                            PC1      PC2      PC3      PC4      PC5
-## Standard deviation     27.8535 21.48136 19.82046 17.03256 15.97181
-## Proportion of Variance  0.1136  0.06756  0.05752  0.04248  0.03735
-## Cumulative Proportion   0.1136  0.18115  0.23867  0.28115  0.31850
-##                             PC6      PC7      PC8      PC9     PC10
-## Standard deviation     15.72108 14.47145 13.54427 13.14400 12.73860
-## Proportion of Variance  0.03619  0.03066  0.02686  0.02529  0.02376
-## Cumulative Proportion   0.35468  0.38534  0.41220  0.43750  0.46126
-##                            PC11     PC12     PC13     PC14     PC15
-## Standard deviation     12.68672 12.15769 11.83019 11.62554 11.43779
-## Proportion of Variance  0.02357  0.02164  0.02049  0.01979  0.01915
-## Cumulative Proportion   0.48482  0.50646  0.52695  0.54674  0.56590
-##                            PC16     PC17     PC18     PC19    PC20
-## Standard deviation     11.00051 10.65666 10.48880 10.43518 10.3219
-## Proportion of Variance  0.01772  0.01663  0.01611  0.01594  0.0156
-## Cumulative Proportion   0.58361  0.60024  0.61635  0.63229  0.6479
-##                            PC21    PC22    PC23    PC24    PC25    PC26
-## Standard deviation     10.14608 10.0544 9.90265 9.64766 9.50764 9.33253
-## Proportion of Variance  0.01507  0.0148 0.01436 0.01363 0.01324 0.01275
-## Cumulative Proportion   0.66296  0.6778 0.69212 0.70575 0.71899 0.73174
-##                           PC27   PC28    PC29    PC30    PC31    PC32
-## Standard deviation     9.27320 9.0900 8.98117 8.75003 8.59962 8.44738
-## Proportion of Variance 0.01259 0.0121 0.01181 0.01121 0.01083 0.01045
-## Cumulative Proportion  0.74433 0.7564 0.76824 0.77945 0.79027 0.80072
-##                           PC33    PC34    PC35    PC36    PC37    PC38
-## Standard deviation     8.37305 8.21579 8.15731 7.97465 7.90446 7.82127
-## Proportion of Variance 0.01026 0.00988 0.00974 0.00931 0.00915 0.00896
-## Cumulative Proportion  0.81099 0.82087 0.83061 0.83992 0.84907 0.85803
-##                           PC39    PC40    PC41   PC42    PC43   PC44
-## Standard deviation     7.72156 7.58603 7.45619 7.3444 7.10449 7.0131
-## Proportion of Variance 0.00873 0.00843 0.00814 0.0079 0.00739 0.0072
-## Cumulative Proportion  0.86676 0.87518 0.88332 0.8912 0.89861 0.9058
-##                           PC45   PC46    PC47    PC48    PC49    PC50
-## Standard deviation     6.95839 6.8663 6.80744 6.64763 6.61607 6.40793
-## Proportion of Variance 0.00709 0.0069 0.00678 0.00647 0.00641 0.00601
-## Cumulative Proportion  0.91290 0.9198 0.92659 0.93306 0.93947 0.94548
-##                           PC51    PC52    PC53    PC54    PC55    PC56
-## Standard deviation     6.21984 6.20326 6.06706 5.91805 5.91233 5.73539
-## Proportion of Variance 0.00566 0.00563 0.00539 0.00513 0.00512 0.00482
-## Cumulative Proportion  0.95114 0.95678 0.96216 0.96729 0.97241 0.97723
-##                           PC57   PC58    PC59    PC60    PC61    PC62
-## Standard deviation     5.47261 5.2921 5.02117 4.68398 4.17567 4.08212
-## Proportion of Variance 0.00438 0.0041 0.00369 0.00321 0.00255 0.00244
-## Cumulative Proportion  0.98161 0.9857 0.98940 0.99262 0.99517 0.99761
-##                           PC63      PC64
-## Standard deviation     4.04124 2.148e-14
-## Proportion of Variance 0.00239 0.000e+00
-## Cumulative Proportion  1.00000 1.000e+00
+##                            PC1      PC2      PC3      PC4      PC5      PC6
+## Standard deviation     27.8535 21.48136 19.82046 17.03256 15.97181 15.72108
+## Proportion of Variance  0.1136  0.06756  0.05752  0.04248  0.03735  0.03619
+## Cumulative Proportion   0.1136  0.18115  0.23867  0.28115  0.31850  0.35468
+##                             PC7      PC8      PC9     PC10     PC11     PC12
+## Standard deviation     14.47145 13.54427 13.14400 12.73860 12.68672 12.15769
+## Proportion of Variance  0.03066  0.02686  0.02529  0.02376  0.02357  0.02164
+## Cumulative Proportion   0.38534  0.41220  0.43750  0.46126  0.48482  0.50646
+##                            PC13     PC14     PC15     PC16     PC17     PC18
+## Standard deviation     11.83019 11.62554 11.43779 11.00051 10.65666 10.48880
+## Proportion of Variance  0.02049  0.01979  0.01915  0.01772  0.01663  0.01611
+## Cumulative Proportion   0.52695  0.54674  0.56590  0.58361  0.60024  0.61635
+##                            PC19    PC20     PC21    PC22    PC23    PC24
+## Standard deviation     10.43518 10.3219 10.14608 10.0544 9.90265 9.64766
+## Proportion of Variance  0.01594  0.0156  0.01507  0.0148 0.01436 0.01363
+## Cumulative Proportion   0.63229  0.6479  0.66296  0.6778 0.69212 0.70575
+##                           PC25    PC26    PC27   PC28    PC29    PC30    PC31
+## Standard deviation     9.50764 9.33253 9.27320 9.0900 8.98117 8.75003 8.59962
+## Proportion of Variance 0.01324 0.01275 0.01259 0.0121 0.01181 0.01121 0.01083
+## Cumulative Proportion  0.71899 0.73174 0.74433 0.7564 0.76824 0.77945 0.79027
+##                           PC32    PC33    PC34    PC35    PC36    PC37    PC38
+## Standard deviation     8.44738 8.37305 8.21579 8.15731 7.97465 7.90446 7.82127
+## Proportion of Variance 0.01045 0.01026 0.00988 0.00974 0.00931 0.00915 0.00896
+## Cumulative Proportion  0.80072 0.81099 0.82087 0.83061 0.83992 0.84907 0.85803
+##                           PC39    PC40    PC41   PC42    PC43   PC44    PC45
+## Standard deviation     7.72156 7.58603 7.45619 7.3444 7.10449 7.0131 6.95839
+## Proportion of Variance 0.00873 0.00843 0.00814 0.0079 0.00739 0.0072 0.00709
+## Cumulative Proportion  0.86676 0.87518 0.88332 0.8912 0.89861 0.9058 0.91290
+##                          PC46    PC47    PC48    PC49    PC50    PC51    PC52
+## Standard deviation     6.8663 6.80744 6.64763 6.61607 6.40793 6.21984 6.20326
+## Proportion of Variance 0.0069 0.00678 0.00647 0.00641 0.00601 0.00566 0.00563
+## Cumulative Proportion  0.9198 0.92659 0.93306 0.93947 0.94548 0.95114 0.95678
+##                           PC53    PC54    PC55    PC56    PC57   PC58    PC59
+## Standard deviation     6.06706 5.91805 5.91233 5.73539 5.47261 5.2921 5.02117
+## Proportion of Variance 0.00539 0.00513 0.00512 0.00482 0.00438 0.0041 0.00369
+## Cumulative Proportion  0.96216 0.96729 0.97241 0.97723 0.98161 0.9857 0.98940
+##                           PC60    PC61    PC62    PC63      PC64
+## Standard deviation     4.68398 4.17567 4.08212 4.04124 2.148e-14
+## Proportion of Variance 0.00321 0.00255 0.00244 0.00239 0.000e+00
+## Cumulative Proportion  0.99262 0.99517 0.99761 1.00000 1.000e+00
 \end{verbatim}
 
 Using the \texttt{plot()} function, we can also plot the variance explained by the
@@ -5797,8 +5769,8 @@ The cluster assignments of the 50 observations are contained in
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
-## [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [39] 2 2 2 2 2 2 2 2 2 2 2 2
 \end{verbatim}
 
 The K-means clustering perfectly separated the observations into two clusters
@@ -5841,8 +5813,8 @@ clustering on this example with \texttt{K\ \ =\ \ 3}. If we do this, K-means clu
 ## 3  2.3001545 -2.69622023
 ## 
 ## Clustering vector:
-##  [1] 1 3 1 3 1 1 1 3 1 3 1 3 1 3 1 3 1 1 1 1 1 3 1 1 1 2 2 2 2 2 2 2 2 2 2
-## [36] 2 2 2 2 2 2 2 2 3 2 3 2 2 2 2
+##  [1] 1 3 1 3 1 1 1 3 1 3 1 3 1 3 1 3 1 1 1 1 1 3 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [39] 2 2 2 2 2 3 2 3 2 2 2 2
 ## 
 ## Within cluster sum of squares by cluster:
 ## [1] 25.74089 52.67700 19.56137
@@ -5850,9 +5822,8 @@ clustering on this example with \texttt{K\ \ =\ \ 3}. If we do this, K-means clu
 ## 
 ## Available components:
 ## 
-## [1] "cluster"      "centers"      "totss"        "withinss"    
-## [5] "tot.withinss" "betweenss"    "size"         "iter"        
-## [9] "ifault"
+## [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+## [6] "betweenss"    "size"         "iter"         "ifault"
 \end{verbatim}
 
 \begin{Shaded}
@@ -5968,8 +5939,8 @@ given cut of the dendrogram, we can use the \texttt{cutree()} function:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
-## [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [39] 2 2 2 2 2 2 2 2 2 2 2 2
 \end{verbatim}
 
 \begin{Shaded}
@@ -5979,8 +5950,8 @@ given cut of the dendrogram, we can use the \texttt{cutree()} function:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 1 2 2
-## [36] 2 2 2 2 2 2 2 2 1 2 1 2 2 2 2
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 1 2 2 2 2 2
+## [39] 2 2 2 2 2 1 2 1 2 2 2 2
 \end{verbatim}
 
 \begin{Shaded}
@@ -5990,8 +5961,8 @@ given cut of the dendrogram, we can use the \texttt{cutree()} function:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-## [36] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+## [39] 1 1 1 1 1 1 1 1 1 1 1 1
 \end{verbatim}
 
 For this data, complete and average linkage generally separate the observations
@@ -6006,8 +5977,8 @@ four clusters are selected, although there are still two singletons:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3
-## [36] 3 3 3 3 3 3 4 3 3 3 3 3 3 3 3
+##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3
+## [39] 3 3 3 4 3 3 3 3 3 3 3 3
 \end{verbatim}
 
 To scale the variables before performing hierarchical clustering of the
@@ -6266,7 +6237,6 @@ Wickham, Hadley. 2019. \emph{R for Data Science}. \url{https://r4ds.had.co.nz/}
 
 ``Complimentary Log Log Model''. University of Alberta. Accessed 2020. \url{http://www.stat.ualberta.ca/~kcarrier/STAT562/comp_log_log.pdf}
 
-\bibliography{book.bib,packages.bib}
-
+  \bibliography{book.bib,packages.bib}
 
 \end{document}

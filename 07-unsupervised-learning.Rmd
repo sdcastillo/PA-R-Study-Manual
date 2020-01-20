@@ -12,9 +12,15 @@ Here is an easy way to remember this: If you are in kindergarden class, and the 
 
 ## Principal Componant Analysis (PCA)
 
-Often there are a lot of columns in the data that contain redundant information.  For example, if your data consists of city traffic, such as (1) the number of cars on the road, (2) number of taxis, (3) number of pedestrians, and (4) number of Ubers, then knowing any one of these values will tell you about how busy the given road is.  If there are a lot of Ubers, then there are probably also a lot of Taxis.  Intuitively, we probably don't need four variables to measure this info and we could have a single variable called "traffic level". This would be reducing the dimension from 4 to 1.
+Often there are a lot of columns in the data that contain redundant information.  PCA is one method of simplifying.
 
-PCA is a dimensionality reduction method which reduces the number of variables needed to retain most of the information in a matrix.  If there are predictor variables $X_1, X_2, X_3, X_4, X5$, then running PCA and choosing the first three Principal Components (PCs) will reduce the dimension from 5 to 3.
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FgakZw6K1QQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+StatQuest. “Principal Component Analysis (PCA), Step-by-Step” YouTube, Joshua Starmer, 2 Apr 2018, https://www.youtube.com/watch?v=FgakZw6K1QQ
+
+For example, if your data consists of city traffic, such as (1) the number of cars on the road, (2) number of taxis, (3) number of pedestrians, and (4) number of Ubers, then knowing any one of these values will tell you about how busy the given road is.  If there are a lot of Ubers, then there are probably also a lot of Taxis.  Intuitively, we probably don't need four variables to measure this info and we could have a single variable called "traffic level". This would be reducing the dimension from 4 to 1.
+
+PCA is a dimensionality reduction method which reduces the number of variables needed to retain most of the information in a matrix.  If there are predictor variables $X_1, X_2, X_3, X_4, X_5$, then running PCA and choosing the first three Principal Components (PCs) will reduce the dimension from 5 to 3.
 
 ```{r echo = F, message = F, warning = F, fig.align="center"}
 library(png)
@@ -26,6 +32,9 @@ Each PC is a linear combination of the original $X$s.  For example, PC1 might be
 
 $$PC_1 = 0.2X_1 + 0.3X_2 - 0.2X_3 + 0X_5 + 0.3X_5$$
 The weights here are also called "loadings" or "rotations", and are (0.2, 0.3, -0.2, 0, 0.3).  Each of the PCs can be interpreted as explaining part of the data.  In the traffic example, PC1 might explain the traffic level, PC2 the weather, and PC3 the time of day.
+
+
+
 
 | Readings |  | 
 |-------|---------|
@@ -262,7 +271,13 @@ Clustering algorithms look for groups of observations which are similar to one a
 
 ### K-Means Clustering
 
-Kmeans takes continuous data and assigns observations into k clusters, or groups. In the two-dimensional example, this is the same as drawing lines around points.  This consists of the following steps:
+Kmeans takes continuous data and assigns observations into k clusters, or groups. In the two-dimensional example, this is the same as drawing lines around points.  
+
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=4b5d3muPQmA&t=268s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+StatQuest. “ K-means clustering” YouTube, Joshua Starmer, 2 Apr 2018, https://www.youtube.com/watch?v=4b5d3muPQmA&t=268s
+
+Kmeans consists of the following steps:
 
 **a)** Start with two variables ($X_1$ on the X-axis, and $X_2$ on the Y-axis.)
 **b)** Randomly assign cluster centers.
@@ -273,6 +288,8 @@ Kmeans takes continuous data and assigns observations into k clusters, or groups
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, out.width="1000%"}
 knitr::include_graphics("images/kmeans.png")
 ```
+
+#### R Example
 
 In `R`, the function `kmeans()` performs K-means clustering in R. We begin with
 a simple simulated example in which there truly are two clusters in the
@@ -359,6 +376,10 @@ be replicated, and the K-means output will be fully reproducible.
 ## Hierarchical Clustering
 
 Kmeans required that we choose the number of clusters, k.  Hierarchical clustering is an alternative that does not require that we choose only one value of k.
+
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=7xHsRkOdVwo&t=137s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+StatQuest. “ Hierarchical Clustering” YouTube, Joshua Starmer, 20 Jun, 2017, https://www.youtube.com/watch?v=7xHsRkOdVwo&t=137s
 
 The most common type of hieararchical clustering uses a *bottom-up* approach.  This starts with a single **observation** and then looks for others which are close and puts them into a cluster.  Then it looks for other **clusters** that are similar and groups these together into a **megacluster**.  It continues to do this until all observations are in the same group.
 

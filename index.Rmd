@@ -1,7 +1,7 @@
 --- 
 title: "ExamPA.net Study Manual"
-author: 
-- "Sam Castillo"
+author: "Sam Castillo"
+date: "1/19/2020"
 github-repo: 
 site: bookdown::bookdown_site
 output: bookdown::gitbook

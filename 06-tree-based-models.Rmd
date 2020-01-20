@@ -12,9 +12,16 @@ library(tidyverse)
 
 # Tree-based models
 
+The models up to this point have been linear.  This means that $Y$ changes gradually as $X$ changes.
+
+Tree-based models allow for abrupt changes in $Y$.
+
+
 ## Decision Trees
 
-### Model form
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/7VeUPuFGJHk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+StatQuest. “Decision Trees” YouTube, Joshua Starmer, 22 Jan. 2018, https://www.youtube.com/watch?v=7VeUPuFGJHk
 
 Decision trees can be used for either classification or regression problems.  The model structure is a series of yes/no questions.  Depending on how each observation answers these questions, a prediction is made.
 
@@ -228,7 +235,9 @@ Boosting always uses the original training data and iteratively fits models to t
 
 ## Random Forests
 
-### Model form
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/J4Wdy0Wc_xQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+StatQuest. “Random Forests” YouTube, Joshua Starmer, 5 Feb 2018, https://www.youtube.com/watch?v=J4Wdy0Wc_xQ&t=472s
 
 A random forest is the most common example of bagging.  As the name implies, a forest is made up of *trees*.  Seperate trees are fit to sampled datasets.  For random forests, there is one minor modification: in order to make each model even more different, each tree selects a *random subset of variables*.
 
@@ -396,9 +405,26 @@ ggarrange(bmi, age)
 
 ## Gradient Boosted Trees
 
-Another ensemble learning method is *gradient boosting*, also known as the Gradient Boosted Machine (GBM).  Although this is unlikely to get significant attention on the PA exam due to the complexity, this is the most widely-used and powerful machine learning algorithms that are in use today.
+Another ensemble learning method is *gradient boosting*, also known as the Gradient Boosted Machine (GBM).  This is one of the most widely-used and powerful machine learning algorithms that is in use today.
 
-We start with an initial model, which is just a constant prediction of the mean.
+Before diving in to the gradient boosting, understanding the AdaBoost algorithm is helpful.
+
+### AdaBoost
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LsK-xG1cLYA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+StatQuest. “AdaBoost, Clearly Explained” YouTube, Joshua Starmer, 14 Jan 2019, https://www.youtube.com/watch?v=LsK-xG1cLYA&t=215s
+
+### Gradient Boosting
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/3CC4N4z3GJc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+StatQuest. “Gradient Boost Part 1: Understanding Main Ideas” YouTube, Joshua Starmer, 25 Mar 2019, https://www.youtube.com/watch?v=3CC4N4z3GJc&t=390s
+
+
+### Notation
+
+Start with an initial model, which is just a constant prediction of the mean.
 
 $$f = f_0(\mathbf{x_i}) = \frac{1}{n}\sum_{i=1}^ny_i$$
 

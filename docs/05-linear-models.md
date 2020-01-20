@@ -1781,14 +1781,14 @@ coef(ridge_mod)[,60] # Display coefficients associated with 60th lambda value
 ```
 
 ```
-##  (Intercept)        AtBat         Hits        HmRun         Runs 
-##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713 
-##          RBI        Walks        Years       CAtBat        CHits 
-##   0.84718546   1.31987948   2.59640425   0.01083413   0.04674557 
-##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
-##   0.33777318   0.09355528   0.09780402   0.07189612  13.68370191 
-##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
-## -54.65877750   0.11852289   0.01606037  -0.70358655   8.61181213
+##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713   0.84718546 
+##        Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+##   1.31987948   2.59640425   0.01083413   0.04674557   0.33777318   0.09355528 
+##         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+##   0.09780402   0.07189612  13.68370191 -54.65877750   0.11852289   0.01606037 
+##       Errors   NewLeagueN 
+##  -0.70358655   8.61181213
 ```
 
 ```r
@@ -1922,14 +1922,14 @@ lm(Salary~., data = train)
 ## lm(formula = Salary ~ ., data = train)
 ## 
 ## Coefficients:
-## (Intercept)        AtBat         Hits        HmRun         Runs  
-##   2.398e+02   -1.639e-03   -2.179e+00    6.337e+00    7.139e-01  
-##         RBI        Walks        Years       CAtBat        CHits  
-##   8.735e-01    3.594e+00   -1.309e+01   -7.136e-01    3.316e+00  
-##      CHmRun        CRuns         CRBI       CWalks      LeagueN  
-##   3.407e+00   -5.671e-01   -7.525e-01    2.347e-01    1.322e+02  
-##   DivisionW      PutOuts      Assists       Errors   NewLeagueN  
-##  -1.346e+02    2.099e-01    6.229e-01   -4.616e+00   -8.330e+01
+## (Intercept)        AtBat         Hits        HmRun         Runs          RBI  
+##   2.398e+02   -1.639e-03   -2.179e+00    6.337e+00    7.139e-01    8.735e-01  
+##       Walks        Years       CAtBat        CHits       CHmRun        CRuns  
+##   3.594e+00   -1.309e+01   -7.136e-01    3.316e+00    3.407e+00   -5.671e-01  
+##        CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists  
+##  -7.525e-01    2.347e-01    1.322e+02   -1.346e+02    2.099e-01    6.229e-01  
+##      Errors   NewLeagueN  
+##  -4.616e+00   -8.330e+01
 ```
 
 ```r
@@ -2002,14 +2002,14 @@ predict(out, type = "coefficients", s = bestlam)[1:20,] # Display coefficients u
 ```
 
 ```
-##  (Intercept)        AtBat         Hits        HmRun         Runs 
-##  15.44835008   0.07716945   0.85906253   0.60120339   1.06366687 
-##          RBI        Walks        Years       CAtBat        CHits 
-##   0.87936073   1.62437580   1.35296287   0.01134998   0.05746377 
-##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
-##   0.40678422   0.11455696   0.12115916   0.05299953  22.08942749 
-##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
-## -79.03490973   0.16618830   0.02941513  -1.36075644   9.12528398
+##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+##  15.44835008   0.07716945   0.85906253   0.60120339   1.06366687   0.87936073 
+##        Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+##   1.62437580   1.35296287   0.01134998   0.05746377   0.40678422   0.11455696 
+##         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+##   0.12115916   0.05299953  22.08942749 -79.03490973   0.16618830   0.02941513 
+##       Errors   NewLeagueN 
+##  -1.36075644   9.12528398
 ```
 
 As expected, none of the coefficients are exactly zero - ridge regression does not
