@@ -13,15 +13,18 @@ link-citations: yes
 favicon: images/artificial_actuary_logo_favicon.png
 ---
 
-# Welcome {-} 
+# Preface {-} 
 
-<img src="https://raw.githubusercontent.com/sdcastillo/ExamPAContent/master/book_cover.jpg" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />This is the study guide for [ExamPA.net](https://www.exampa.net/).  While meeting all of the learning requirements of Exam PA, this book gives you data science and machine learning training.  You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.  The statistics is just the first phase, as you’ll also learn how to explain the results in easy-to-understand, non-technical business language.
+<img src="https://raw.githubusercontent.com/sdcastillo/ExamPAContent/master/book_cover.jpg" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />Welcome!  This is the study guide for [ExamPA.net](https://www.exampa.net/).  While meeting all of the learning requirements of Exam PA, this book gives you data science and machine learning training.  You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.  The statistics is just the first phase, as you’ll also learn how to explain the results in easy-to-understand, non-technical business language.
+
+*We are thankful to all of the reviewers, guest editors, and past exam-takers who have helped to improve this book.  Thanks to the following persons who made changes to this book and its past versions: David Hill, Erlan Wheeler, Caden Collier, Peter Shelbe, Abhinav Gadde, Allen Meriken, and [Kevin Kuo](https://github.com/kevinykuo).*
+
 
 # How to use this book
 
 * Run the examples on your own machine by downloading the ExamPAData library
-* Download a PDF by clicking the "Download" button on the top of the page
 * Use the arrow keys to navigate the chapters
+* Download by right-clicking -> "Save As..."
 
 **Contact:**
 
