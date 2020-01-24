@@ -8,7 +8,6 @@ output:
 set.seed(1)
 library(ggplot2)
 theme_set(theme_bw())
-book_dir <- "C:/Users/sam.castillo/Desktop/PA-MAS-R-Study-Manual"
 ```
 
 
@@ -89,7 +88,7 @@ tibble(y = rnorm(10, 0, 1),
 The red line shows the *expected value* of the target, as the target $\hat{Y}$ is actually a random variable.  For each of the data points, the model assumes a Gaussian distribution. If there is just a single predictor, $x$, then the mean is $\beta_0 + \beta_1 x$.
 
 ```{r echo = F, fig.align="center", message=F, warning = F, out.width="200%"}
-knitr::include_graphics(file.path(book_dir,"images/conditional_response.jpg"))
+knitr::include_graphics("images/conditional_response.jpg")
 ```
 
 The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $Y$ on new, unseen data.  
@@ -126,7 +125,7 @@ The choice of error metric has a big difference on the outcome.  When explaining
 These are the regression metrics that are most likely to appear on Exam PA.  Memorizing these formulas for AIC and BIC is not necessary as they are in the R documentation by typing `?AIC` or `?BIC` into the R console.
 
 ```{r echo = F, fig.align="center", warning=F, message = F, out.width="1300%"}
-knitr::include_graphics(file.path(book_dir,"images/regression_metrics.png"))
+knitr::include_graphics("images/regression_metrics.png")
 ```
 
 ## Example
@@ -343,15 +342,16 @@ tibble(gaussian = rnorm(sample_size),
 
 The choice of target distribution should be similar to the actual distribution of $Y$.  For instance, if $Y$ is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values.  If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewd. 
 
-```{r echo = F, fig.align="center", warning=F, out.width="800%"}
-knitr::include_graphics(file.path(book_dir,"images/response_distributions.png"))
+```{r echo = F, fig.align="center", warning=F, out.width="400%"}
+knitr::include_graphics("images/response_distributions.png")
 ```
 
 There are five link functions for a continuous $Y$, although the choice of distribution family will typically rule-out several of these immediately.  The linear predictor (a.k.a., the *systemic component*) is $z$ and the link function is how this connects to the expected value of the resonse.
 
 $$z = X\beta = g(\mu)$$
+
 ```{r echo = F, fig.align="center", warning=F, message = F, out.width="200%"}
-knitr::include_graphics(file.path(book_dir,"images/link_functions.png"))
+knitr::include_graphics("images/link_functions.png")
 ```
 
 If the target distribution *must* have a positive mean, such as in the case of the Inverse Gaussian or Gamma, then the Identity or Inverse links are poor choices because they allow for negative values; the range of the mean is $(-\infty, \infty)$.  The other link functions force the mean to be positive. 
@@ -432,7 +432,7 @@ When all observations have the same exposure, $m = 1$.  When the mean of the dat
 There are four link functions.  The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the SOA's Hospital Readmissions practice exam in 2019.  The identity link does not make sense for classification because it would result in predictions being outside of $(0,1)$
 
 ```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
-knitr::include_graphics(file.path(book_dir,"images/discrete_link_functions.png"))
+knitr::include_graphics("images/discrete_link_functions.png")
 ```
 
 > The *logit* is also known as the *standard logistic function* or *sigmoid* and is also used in deep learning.
@@ -457,10 +457,10 @@ tibble(z = seq(-9, 9, 0.01)) %>%
   theme(legend.position = "top")
 ```
 
-- <span style="color:green ">Logit: </span> Most commonly used; default in R; canonical link for the binomial distribution.
+- <span style="color:#85C1E9 ">Logit: </span> Most commonly used; default in R; canonical link for the binomial distribution.
 - <span style="color:purple ">Probit: </span> Sharper curves than the other links which may have best performance for certain data; Inverse CDF of a standard normal distribution makes it easy to explain.
 - <span style="color:red ">Cauchit: </span> Very gradual curves may be best for certain data;  CDF for the standard Cauchy distribution which is a t distribution with one degree of freedom.
-- <span style="color:#85C1E9">Complimentary Log-Log (cloglog)</span> Asymmetric; Important in survival analysis (not on this exam).
+- <span style="color:green">Complimentary Log-Log (cloglog)</span> Asymmetric; Important in survival analysis (not on this exam).
 
 
 ## Interpretation of coefficients

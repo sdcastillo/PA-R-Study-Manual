@@ -126,7 +126,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Exam PA Study Guide</a></li>
+<li><a href="./">Exam PA Study Manual</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
@@ -265,6 +265,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="references-2.html"><a href="references-2.html"><i class="fa fa-check"></i><b>17</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -300,17 +303,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="link-functions" class="section level2">
 <h2><span class="header-section-number">11.3</span> Link functions</h2>
 <p>There are four link functions. The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the SOA’s Hospital Readmissions practice exam in 2019. The identity link does not make sense for classification because it would result in predictions being outside of <span class="math inline">\((0,1)\)</span></p>
-<p><img src="C:/Users/sam.castillo/Desktop/PA-MAS-R-Study-Manual/images/discrete_link_functions.png" width="1200%" style="display: block; margin: auto;" /></p>
+<p><img src="images/discrete_link_functions.png" width="1200%" style="display: block; margin: auto;" /></p>
 <blockquote>
 <p>The <em>logit</em> is also known as the <em>standard logistic function</em> or <em>sigmoid</em> and is also used in deep learning.</p>
 </blockquote>
 <p>Below we see how the linear predictor (x-axis) gets converted to a probability (y-axis).</p>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-89-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
-<li><span style="color:green ">Logit: </span> Most commonly used; default in R; canonical link for the binomial distribution.</li>
+<li><span style="color:#85C1E9 ">Logit: </span> Most commonly used; default in R; canonical link for the binomial distribution.</li>
 <li><span style="color:purple ">Probit: </span> Sharper curves than the other links which may have best performance for certain data; Inverse CDF of a standard normal distribution makes it easy to explain.</li>
 <li><span style="color:red ">Cauchit: </span> Very gradual curves may be best for certain data; CDF for the standard Cauchy distribution which is a t distribution with one degree of freedom.</li>
-<li><span style="color:#85C1E9">Complimentary Log-Log (cloglog)</span> Asymmetric; Important in survival analysis (not on this exam).</li>
+<li><span style="color:green">Complimentary Log-Log (cloglog)</span> Asymmetric; Important in survival analysis (not on this exam).</li>
 </ul>
 </div>
 <div id="interpretation-of-coefficients-1" class="section level2">
@@ -503,8 +506,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/05-linear-models.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,

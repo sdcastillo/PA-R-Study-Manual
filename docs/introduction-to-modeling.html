@@ -126,7 +126,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Exam PA Study Guide</a></li>
+<li><a href="./">Exam PA Study Manual</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
@@ -265,6 +265,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="references-2.html"><a href="references-2.html"><i class="fa fa-check"></i><b>17</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -326,7 +329,7 @@ x_{31} &amp; x_{32}
 <p>In the one-dimensional case, this creates a line connecting the points. In higher dimensions, this creates a hyperplane.</p>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 <p>The red line shows the <em>expected value</em> of the target, as the target <span class="math inline">\(\hat{Y}\)</span> is actually a random variable. For each of the data points, the model assumes a Gaussian distribution. If there is just a single predictor, <span class="math inline">\(x\)</span>, then the mean is <span class="math inline">\(\beta_0 + \beta_1 x\)</span>.</p>
-<p><img src="C:/Users/sam.castillo/Desktop/PA-MAS-R-Study-Manual/images/conditional_response.jpg" width="200%" style="display: block; margin: auto;" /></p>
+<p><img src="images/conditional_response.jpg" width="200%" style="display: block; margin: auto;" /></p>
 <p>The question then is <strong>how can we choose the best values of</strong> <span class="math inline">\(\beta?\)</span> First of all, we need to define what we mean by “best”. Ideally, we will choose these values which will create close predictions of <span class="math inline">\(Y\)</span> on new, unseen data.</p>
 <p>To solve for <span class="math inline">\(\mathbf{\beta}\)</span>, we first need to define a <em>loss function</em>. This allows us to compare how well a model is fitting the data. The most commonly used loss function is the residual sum of squares (RSS), also called the <em>squared error loss</em> or the L2 norm. When RSS is small, then the predictions are close to the actual values and the model is a good fit. When RSS is large, the model is a poor fit.</p>
 <p><span class="math display">\[
@@ -353,7 +356,7 @@ x_{31} &amp; x_{32}
 <p>For any model, the goal is always to reduce an error metric. This is a way of measuring how well the model can explain the target. The phrases “reducing error”, “improving performance”, or “making a better fit” are synonymous with reducing the error. The word “better” means “lower error” and “worse” means “higher error”.</p>
 <p>The choice of error metric has a big difference on the outcome. When explaining a model to a businessperson, using simpler metrics such as R-Squared and Accuracy is convenient. When training the model, however, using a more nuanced metric is almost always better.</p>
 <p>These are the regression metrics that are most likely to appear on Exam PA. Memorizing these formulas for AIC and BIC is not necessary as they are in the R documentation by typing <code>?AIC</code> or <code>?BIC</code> into the R console.</p>
-<p><img src="C:/Users/sam.castillo/Desktop/PA-MAS-R-Study-Manual/images/regression_metrics.png" width="1300%" style="display: block; margin: auto;" /></p>
+<p><img src="images/regression_metrics.png" width="1300%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="example" class="section level2">
 <h2><span class="header-section-number">9.6</span> Example</h2>
@@ -573,8 +576,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/05-linear-models.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
