@@ -1,5 +1,5 @@
 p.caption {
-  color: #777;
+  color: rgb(119, 119, 119);
   margin-top: 10px;
 }
 p code {
@@ -33,3 +33,14 @@ div.FOO {
     top:0px;
     font-size: 45px;
  }
+
+ .rcorners {
+  border-radius: 25px;
+  border: 2px solid #0A3FAC;
+  padding: 20px;
+  width: 100; 
+  height: 160px;  
+  text-align: left;
+  font-size: 20px;
+  vertical-align: middle;
+}

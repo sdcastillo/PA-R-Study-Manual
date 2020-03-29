@@ -1,5 +1,5 @@
 --- 
-title: "ExamPA.net Study Manual"
+title: "Predictive Analytics for Actuaries"
 author: "Sam Castillo"
 date: "1/19/2020"
 github-repo: 
@@ -15,9 +15,40 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 # Preface {-} 
 
-<img src="https://raw.githubusercontent.com/sdcastillo/ExamPAContent/master/book_cover.jpg" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />Welcome!  This is the study guide for [ExamPA.net](https://www.exampa.net/).  While meeting all of the learning requirements of Exam PA, this book gives you data science and machine learning training.  You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.  The statistics is just the first phase, as you’ll also learn how to explain the results in easy-to-understand, non-technical business language.
+<img src="https://raw.githubusercontent.com/sdcastillo/ExamPAContent/master/book_cover.jpg" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />Welcome!  This is the study guide for the SOA's [Predictive Analytics Exam](https://www.soa.org/education/exam-req/edu-exam-pa-detail/).  While meeting all of the learning requirements of Exam PA, this book gives you data science and machine learning training.  You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.  The statistics is just the first phase, as you’ll also learn how to explain the results in easy-to-understand, non-technical business language.
 
 *We are thankful to all of the reviewers, guest editors, and past exam-takers who have helped to improve this book.  Thanks to the following persons who made changes to this book and its past versions: David Hill, Erlan Wheeler, Caden Collier, Peter Shelbe, Abhinav Gadde, Allen Meriken, and [Kevin Kuo](https://github.com/kevinykuo).*
+
+# Join the online course
+
+---
+
+**"Teaching actuaries to train, validate, and explain their predictive models using plain English.**
+
+**Machine learning should be as simple as possible, but not simpler.**
+
+**- Sam Castillo, Predictive Modeler, Coach, Blogger."**
+
+---
+
+<img src="https://media-exp1.licdn.com/dms/image/C4E03AQGvNo3LIM7VpQ/profile-displayphoto-shrink_200_200/0?e=1590019200&v=beta&t=I7vG3TxlkEluoXzFiMGS1dnSPt1ZUayClFEwADUHgpY" align="left" style="margin: 0 1em 0 1em">
+
+While working for Milliman in Chicago, Sam maintains a [blog](http://sdcastillo.github.io) about the future of risk, and won the 2019 SOA Predictive Analytics and Fururism's [Jupyter contest](https://nbviewer.jupyter.org/github/SOASections/SOA-Predictive-Modeling-Innovation-and-Industry-Contest-2019-First-Place/blob/master/Predicting%20Uncertainty%20Prediction%20Intervals%20from%20Gradient%20Boosted%20Quantile%20Regression.ipynb).
+
+<br></br>
+<br></br>
+<br></br>
+
+```{block, type='rcorners'}
+- **Video solutions** save you time
+- **Original exams** for extra practice
+- **Cheat sheets** give your brain a break
+- Sign up today at **[ExamPA.net](https://www.exampa.net/).**
+```
+
+
+
+
 
 
 # How to use this book
