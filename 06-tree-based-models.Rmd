@@ -330,9 +330,9 @@ get_rmsle(test$charges, mean(train$charges))
 
 ### Variable Importance
 
-*Variable importance* is a way of measuring how each variable contributes to overall model.  For single decision trees, if a variable was "higher" up in the tree, then this variable would have greater influence.  Statistically, there are two ways of measuring this:
+*Variable importance* is a way of measuring how each variable contributes to the overall model's performance.  For single decision trees, variable "higher up" in the tree have greater influence.  Statistically, there are two ways of measuring this:
 
-1) Look at the reduction in error when a the variable is randomly permuted verses using the actual values.  This is done with `type = 1`.
+1) Look at the mean reduction in accuracy when the variable is randomly permuted verses using the actual values from the data.  This is done with `type = 1` (default).
 
 2) Use the total decrease in node impurities from splitting on the variable, averaged over all trees.  For classification, the node impurity is measured by the Gini index; for regression, it is measured by the residual sum of squares $\text{RSS}$.  This is `type = 2`.
 

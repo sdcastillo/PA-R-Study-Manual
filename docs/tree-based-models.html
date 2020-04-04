@@ -564,9 +564,9 @@ Unable to predict beyond the range of the training data for regression (because 
 </div>
 <div id="variable-importance" class="section level3">
 <h3><span class="header-section-number">16.3.2</span> Variable Importance</h3>
-<p><em>Variable importance</em> is a way of measuring how each variable contributes to overall model. For single decision trees, if a variable was “higher” up in the tree, then this variable would have greater influence. Statistically, there are two ways of measuring this:</p>
+<p><em>Variable importance</em> is a way of measuring how each variable contributes to the overall model’s performance. For single decision trees, variable “higher up” in the tree have greater influence. Statistically, there are two ways of measuring this:</p>
 <ol style="list-style-type: decimal">
-<li><p>Look at the reduction in error when a the variable is randomly permuted verses using the actual values. This is done with <code>type = 1</code>.</p></li>
+<li><p>Look at the mean reduction in accuracy when the variable is randomly permuted verses using the actual values from the data. This is done with <code>type = 1</code> (default).</p></li>
 <li><p>Use the total decrease in node impurities from splitting on the variable, averaged over all trees. For classification, the node impurity is measured by the Gini index; for regression, it is measured by the residual sum of squares <span class="math inline">\(\text{RSS}\)</span>. This is <code>type = 2</code>.</p></li>
 </ol>
 <p><code>smoker</code>, <code>bmi</code>, and <code>age</code> are the most importance predictors of charges. As you can imagine, variable importance is a highly useful tool for building models. We could use this to test out newly engineered features, or perform feature selection by taking the top-n features and use them in a different model. Random forests can handle very high dimensional data which allows for many tests to be run at once.</p>
