@@ -7,7 +7,7 @@ output:
 
 ## Download the data
 
-For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called `ExamPAData` by the author.  To access, simplly run the below lines of code to download this data.
+For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called `ExamPAData` by the author.  To access, simply run the below lines of code to download this data.
 
 ```{r eval = F}
 # Install remotes if it's not yet installed

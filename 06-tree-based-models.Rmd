@@ -64,7 +64,7 @@ The step-by-step process of building a tree is
 
 This could be any variable in `age`, `children`, `charges`, `sex`, `smoker`, `age_bucket`, `bmi`, or `region`.
 
-**Step 2: Find the split point which best seperates observations out based on the value of $y$.  A good split is one where the $y$'s are very different. * **
+**Step 2: Find the split point which best separates observations out based on the value of $y$.  A good split is one where the $y$'s are very different. * **
 
 In this case, `smoker` was chosen.  Then we can only split this in one way: `smoker = 1` or `smoker = 0`.
 
@@ -221,7 +221,7 @@ Unable to predict beyond the range of the training data for regression (because 
 
 ## Ensemble learning
 
-The "wisdom of crowds" says that often many are smater than the few.  In the context of modeling, the models which we have looked at so far have been single guesses; however, often the underlying process is more complex than any single model can explain.  If we build separate models and then combine them, known as *ensembling*, performance can be improved.  Instead of trying to create a single perfect model, many simple models, known as *weak learners* are combined into a *meta-model*.
+The "wisdom of crowds" says that often many are smarter than the few.  In the context of modeling, the models which we have looked at so far have been single guesses; however, often the underlying process is more complex than any single model can explain.  If we build separate models and then combine them, known as *ensembling*, performance can be improved.  Instead of trying to create a single perfect model, many simple models, known as *weak learners* are combined into a *meta-model*.
 
 The two main ways that models are combined are through *bagging* and *boosting*.
 
@@ -239,7 +239,7 @@ Boosting always uses the original training data and iteratively fits models to t
 
 StatQuest. “Random Forests” YouTube, Joshua Starmer, 5 Feb 2018, https://www.youtube.com/watch?v=J4Wdy0Wc_xQ&t=472s
 
-A random forest is the most common example of bagging.  As the name implies, a forest is made up of *trees*.  Seperate trees are fit to sampled datasets.  For random forests, there is one minor modification: in order to make each model even more different, each tree selects a *random subset of variables*.
+A random forest is the most common example of bagging.  As the name implies, a forest is made up of *trees*.  Seperate trees are fit to sampled data sets.  For random forests, there is one minor modification: in order to make each model even more different, each tree selects a *random subset of variables*.
 
 1. Assume that the underlying process, $Y$, has some signal within the data $\mathbf{X}$.
 2. Introduce randomness (variance) to capture the signal.
@@ -280,7 +280,7 @@ ggarrange(p1,p2)
 
 Unlike decision trees, random forest trees do not need to be pruned.  This is because overfitting is less of a problem: if one tree overfits, there are other trees which overfit in other areas to compensate.  
 
-In most applications, only the `mtry` parameter, which controls how many variables to consider at each split, needs to be tuned.  Tuning the `ntrees` parameter is not required; however, the soa may still ask you to.
+In most applications, only the `mtry` parameter, which controls how many variables to consider at each split, needs to be tuned.  Tuning the `ntrees` parameter is not required; however, the SOA may still ask you to.
 
 ### Example
 
@@ -366,7 +366,7 @@ df %>% group_by(x1) %>% summarise(f = mean(f))
 
 This method of using the mean is know as the *Monte Carlo* method.  There are other methods for partial dependence that are not on the syllabus.
 
-For the RandomForest, this is done with `pdp::partial()`.
+For the Random Forest, this is done with `pdp::partial()`.
 
 ```{r message = F,fig.cap="Partial Dependence", fig.height=4}
 library(pdp)

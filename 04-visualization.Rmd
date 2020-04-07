@@ -32,7 +32,7 @@ We add a histogram
 p + geom_histogram()
 ```
 
-Different plots are called "geoms" for "geometric objects".  Geometry = Geo (space) + metre (measure), and graphs measure data.  For instance, instead of creating a histogram, we can draw a gamma distribution with `stat_density`.
+Different plots are called "geoms" for "geometric objects".  Geometry = Geo (space) + meter (measure), and graphs measure data.  For instance, instead of creating a histogram, we can draw a gamma distribution with `stat_density`.
 
 ```{r message=F}
 p + stat_density()

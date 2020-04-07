@@ -8,9 +8,9 @@ output:
 
 Up to this point we have been trying to predict something.  We use data $X$ to predict an unknown $Y$, which is a number in the case of regression and a category in the case of classification.  These problems are known as *supvervised* because we are "supervising" how the model learns by giving it a target.
 
-Here is an easy way to remember this: If you are in kindergarden class, and the teacher provides cards with pictures and words, and then asks each kid to look at the picture and then say the word, this is supervised learning.  The label is the name of the picture, and the data is the picture itself.  Instead, if the teacher gives out finger paints and says "express yourself!", then this is *unsupervised learning*.  There is no label but only data.
+Here is an easy way to remember this: If you are in kindergarten class, and the teacher provides cards with pictures and words, and then asks each kid to look at the picture and then say the word, this is supervised learning.  The label is the name of the picture, and the data is the picture itself.  Instead, if the teacher gives out finger paints and says "express yourself!", then this is *unsupervised learning*.  There is no label but only data.
 
-## Principal Componant Analysis (PCA)
+## Principal Component Analysis (PCA)
 
 Often there are a lot of columns in the data that contain redundant information.  PCA is one method of simplifying.
 
@@ -75,7 +75,7 @@ USArrests %>% summarise_all(var)
 Not surprisingly, the variables also have vastly different variances: the
 `UrbanPop` variable measures the percentage of the population in each state
 living in an urban area, which is not a comparable number to the number
-of crimes committeed in each state per 100,000 individuals. If we failed to scale the
+of crimes committed in each state per 100,000 individuals. If we failed to scale the
 variables before performing PCA, then most of the principal components
 that we observed would be driven by the `Assault` variable, since it has by
 far the largest mean and variance. 
@@ -133,7 +133,7 @@ biplot(pca, scale=0)
 ```
 
 The `scale=0` argument to `biplot()` ensures that the arrows are scaled to
-represent the loadings; other values for `scale` give slightly different biplots
+represent the loadings; other values for `scale` give slightly different bi plots
 with different interpretations.
 
 The `prcomp()` function also outputs the standard deviation of each principal
@@ -178,7 +178,7 @@ cumsum(a)
 
 ### Example: PCA on Cancel Cells
 
-The data  `NCI60` contins expression levels of 6,830 genes from 64 cancel cell lines.  Cancer type is also recorded.
+The data  `NCI60` contains expression levels of 6,830 genes from 64 cancel cell lines.  Cancer type is also recorded.
 
 ```{r}
 library(ISLR)
@@ -381,7 +381,7 @@ Kmeans required that we choose the number of clusters, k.  Hierarchical clusteri
 
 StatQuest. “ Hierarchical Clustering” YouTube, Joshua Starmer, 20 Jun, 2017, https://www.youtube.com/watch?v=7xHsRkOdVwo&t=137s
 
-The most common type of hieararchical clustering uses a *bottom-up* approach.  This starts with a single **observation** and then looks for others which are close and puts them into a cluster.  Then it looks for other **clusters** that are similar and groups these together into a **megacluster**.  It continues to do this until all observations are in the same group.
+The most common type of hierarchical clustering uses a *bottom-up* approach.  This starts with a single **observation** and then looks for others which are close and puts them into a cluster.  Then it looks for other **clusters** that are similar and groups these together into a **mega cluster**.  It continues to do this until all observations are in the same group.
 
 This is analyzed with a graph called a dendrogram (dendro = tree, gram = graph).  The height represents "distance", or how similar the clusters are to one another.  The clusters on the bottom, which are vertically close to one another, have similar data values; the clusters that are further apart vertically are less similar.
 
@@ -391,7 +391,7 @@ Choosing the value of the cutoff height changes the number of clusters that resu
 knitr::include_graphics("images/HClustering.png")
 ```
 
-Certain data have a natural hiearchical structure.  For example, say that the variables are City, Town, State, Country, and Continent.  If we used hiearchical clustering, this pattern could be established even if we did not have labels for Cities, Towns, and so forth.
+Certain data have a natural hierarchical structure.  For example, say that the variables are City, Town, State, Country, and Continent.  If we used hierarchical clustering, this pattern could be established even if we did not have labels for Cities, Towns, and so forth.
 
 The `hclust()` function implements hierarchical clustering in R. In the following example we use the data from the previous section to plot the hierarchical
 clustering dendrogram using complete, single, and average linkage clustering,
@@ -461,7 +461,7 @@ plot(hclust(dd, method = "complete"), main = "Complete Linkage with Correlation-
 
 ### Example: Clustering Cancel Cells
 
-Unsupervised techniques are often used in the analysis of genomic data. In this example, we'll see how hierarchical and K-means clustering compare on the `NCI60` cancer cell line microarray data, which
+Unsupervised techniques are often used in the analysis of genomic data. In this example, we'll see how hierarchical and K-means clustering compare on the `NCI60` cancer cell line micro array data, which
 consists of 6,830 gene expression measurements on 64 cancer cell lines:
 
 ```{r}
