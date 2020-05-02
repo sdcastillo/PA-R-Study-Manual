@@ -1150,8 +1150,8 @@ In ISLR, Hastie et al show that this results in coefficients being forced to be 
 
 The Elastic Net uses a penalty term which is between the L1 and L2 norms. The penalty term is a weighted average using the mixing parameter $0 \leq \alpha \leq 1$. The loss function is then
 
-$$\text{RSS} + (1 - \alpha)/2 \sum_{j = 1}^{p}\beta_j^2 + \alpha \sum_{j = 1}^p |\beta_j|$$
-When $\alpha = 1$ is turns into a Lasso; when $\alpha = 1$ this is the Ridge model. 
+$$\text{RSS} + (1 - \alpha) \sum_{j = 1}^{p}\beta_j^2 + \alpha \sum_{j = 1}^p |\beta_j|$$
+When $\alpha = 1$, the model is known as the Lasso, and when $\alpha = 0$, the model is known as Ridge Regression. 
 
 Luckily, none of this needs to be memorized.  On the exam, read the documentation in R to refresh your memory.  For the Elastic Net, the function is `glmnet`, and so running `?glmnet` will give you this info.
 

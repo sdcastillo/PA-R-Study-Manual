@@ -361,8 +361,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="elastic-net" class="section level2">
 <h2><span class="header-section-number">16.5</span> Elastic Net</h2>
 <p>The Elastic Net uses a penalty term which is between the L1 and L2 norms. The penalty term is a weighted average using the mixing parameter <span class="math inline">\(0 \leq \alpha \leq 1\)</span>. The loss function is then</p>
-<p><span class="math display">\[\text{RSS} + (1 - \alpha)/2 \sum_{j = 1}^{p}\beta_j^2 + \alpha \sum_{j = 1}^p |\beta_j|\]</span>
-When <span class="math inline">\(\alpha = 1\)</span> is turns into a Lasso; when <span class="math inline">\(\alpha = 1\)</span> this is the Ridge model.</p>
+<p><span class="math display">\[\text{RSS} + (1 - \alpha) \sum_{j = 1}^{p}\beta_j^2 + \alpha \sum_{j = 1}^p |\beta_j|\]</span>
+When <span class="math inline">\(\alpha = 1\)</span>, the model is known as the Lasso, and when <span class="math inline">\(\alpha = 0\)</span>, the model is known as Ridge Regression.</p>
 <p>Luckily, none of this needs to be memorized. On the exam, read the documentation in R to refresh your memory. For the Elastic Net, the function is <code>glmnet</code>, and so running <code>?glmnet</code> will give you this info.</p>
 <blockquote>
 <p><strong>Shortcut</strong>: When using complicated functions on the exam, use <code>?function_name</code> to get the documentation.</p>
