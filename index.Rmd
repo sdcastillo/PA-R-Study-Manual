@@ -21,7 +21,7 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 # Join the online course
 
-<font size="15"> Put studying in *fast forward* so you can plan your ASA celebration party `r emo::ji("party")` `r emo::ji("cake")` `r emo::ji("beer")` </font> 
+<font size="15"> Put studying in *fast forward* so you can plan your ASA celebration party `r emo::ji("party")` `r emo::ji("cake")` </font> 
 
 Online course with proven success in December 2019 Exam PA, tutorial videos, and hands-on practice.
 
