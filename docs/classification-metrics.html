@@ -297,7 +297,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>No claims but predicted to have claims - <strong>False Positives (FP) = 22</strong></li>
 <li>Had claims but predicted not to - <strong>False Negatives (FN) = 489</strong></li>
 </ul>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))<span class="op">$</span>table</a></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))<span class="op">$</span>table</a></code></pre></div>
 <pre><code>##           Reference
 ## Prediction    0    1
 ##          0 1489  489
@@ -314,7 +314,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[\text{Cost} = (100)(\text{FN}) + (2)(\text{FP})\]</span></p>
 <p>The cutoff value can be tuned in order to find the minimum cost.</p>
 <p>Fortunately, all of this is handled in a single function called <code>confusionMatrix</code>.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))</a></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -350,8 +350,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>and the true negative rates</p>
 <p><span class="math display">\[\{\text{FNR} = \{\text{FNR}(k_1), \text{FNR}(k_2), .., \text{FNR}(k_{10})\}\]</span></p>
 <p>Then we set <code>x = TPR</code> and <code>y = FNR</code> and graph x against y. The plot below shows the ROC for the <code>auto_claims</code> data. The Area Under the Curve of 0.6795 is what we would get if we integrated under the curve.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1"><span class="kw">library</span>(pROC)</a>
-<a class="sourceLine" id="cb213-2" title="2"><span class="kw">roc</span>(test<span class="op">$</span>target, preds, <span class="dt">plot =</span> T)</a></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="kw">library</span>(pROC)</a>
+<a class="sourceLine" id="cb214-2" title="2"><span class="kw">roc</span>(test<span class="op">$</span>target, preds, <span class="dt">plot =</span> T)</a></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-104"></span>
 <img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-104-1.png" alt="AUC for auto_claim" width="672" />
 <p class="caption">

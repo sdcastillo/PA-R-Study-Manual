@@ -21,6 +21,10 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 # Join the online course
 
+<font size="15"> Put studying in *fast forward* so you can plan your ASA celebration party `r emo::ji("party")` `r emo::ji("cake")` `r emo::ji("beer")` </font> 
+
+Online course with proven success in December 2019 Exam PA, tutorial videos, and hands-on practice.
+
 ---
 
 **"Teaching actuaries to train, validate, and explain their predictive models using plain English.**
@@ -31,23 +35,60 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 ---
 
-<img src="https://media-exp1.licdn.com/dms/image/C4E03AQGvNo3LIM7VpQ/profile-displayphoto-shrink_200_200/0?e=1590019200&v=beta&t=I7vG3TxlkEluoXzFiMGS1dnSPt1ZUayClFEwADUHgpY" align="left" style="margin: 0 1em 0 1em">
+<img src="https://media-exp1.licdn.com/dms/image/C4E03AQGvNo3LIM7VpQ/profile-displayphoto-shrink_200_200/0?e=1595462400&v=beta&t=MdgKCnTFjA7erX4_H0qQAsW73qOTlhOnQkfK9gGrbOY" align="left" style="margin: 0 1em 0 1em">
 
-While working for Milliman in Chicago, Sam maintains a [blog](http://sdcastillo.github.io) about the future of risk, and won the 2019 SOA Predictive Analytics and Futurism's [Jupyter contest](https://nbviewer.jupyter.org/github/SOASections/SOA-Predictive-Modeling-Innovation-and-Industry-Contest-2019-First-Place/blob/master/Predicting%20Uncertainty%20Prediction%20Intervals%20from%20Gradient%20Boosted%20Quantile%20Regression.ipynb).
+With 3 years of predictive modeling experience at Milliman and Willis Towers Watson, Sam now coaches predictive modeling, maintains a [blog](http://sdcastillo.github.io) about the future of risk, and won the 2019 SOA Predictive Analytics and Futurism's [Jupyter contest](https://nbviewer.jupyter.org/github/SOASections/SOA-Predictive-Modeling-Innovation-and-Industry-Contest-2019-First-Place/blob/master/Predicting%20Uncertainty%20Prediction%20Intervals%20from%20Gradient%20Boosted%20Quantile%20Regression.ipynb).
 
 <br></br>
 <br></br>
+
+
+<font size="6">**My manager didn’t think that I could pass both exams at once.**</font>
+
+Let me show you how I passed exam PA with only about 80 study hours while also passing STAM in the same week.  This method worked for me and has worked for hundreds of other people.
+
+Passing PA was possible by focusing on key aspects such as
+
+•	Master communication – Imagine that this is English 101 rather than a math test.
+
+•	Avoid technical difficulties that eat up your time.
+
+•	Check your answers before the exam ends.
+
+<br></br>
+<br></br>
+
+<font size="6">**Learn from my mistakes instead of yours.**</font>
+
+The latest video collapses more than 1,000 study hours down to a single 3-hr video (300 hours for my initial sitting in June 2019, 500 hours when coaching other actuaries in December 2019, 200 hours writing the R study guide).  In total, I've been through each practice exam more than 6 times, each time under a 5-hour, and have encountered every mistake in the book!
+
+<br></br>
+<br></br>
+
+<font size="6">**There's no need to be an R expert.**</font>
+
+Most questions focus on comprehension and explanation.  While having R experience is certainly helpful, anyone can watch how I write answers in plain english.  With more than 6 years of R experience, my tutorials show you the cleanest way to get every answer, without getting lost in the weeds.
+
+
+Our study packages features
+
+- **Video solutions** to save you time `r emo::ji("clock")`
+- **Original exams** for extra practice `r emo::ji("muscle")`
+- **Cheat sheets** that give your brain a break `r emo::ji("sweat")`
+
 <br></br>
 
 ```{block, type='rcorners'}
-- **Video solutions** save you time
-- **Original exams** for extra practice
-- **Cheat sheets** give your brain a break
-- Sign up today at **[ExamPA.net](https://www.exampa.net/).**
+<font size="9">**[Sign Up](https://www.exampa.net/)**</font>
 ```
 
+
+
+
 <br></br>
-**COVID-19 Update**: In the event of a postponed June exam, all course members will receive an extension through the revised exam date.
+<br></br>
+
+**COVID-19 Update**: In the event of a postponed June exam, all course members will receive an extension through the revised exam date.  Our Extended Access Guarantee gives you a free subscription if unsuccessful.  See the [Terms of Service](https://www.exampa.net/terms) for details.
 
 
 # How to use this book
