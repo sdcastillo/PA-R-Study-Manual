@@ -1,14 +1,329 @@
 # Data manipulation
 
-```{r echo = F, message = F}
+```{r warning = F, echo = F, message = F}
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(caret)
+
+#set figure size
+knitr::opts_chunk$set(fig.width=6, fig.height=4) 
+
+#This is an optional library to add emojis to rmd files
+# install.packages("devtools")
+#devtools::install_github("hadley/emo")
+library(emo)
+
+library(ExamPAData)
+library(tidyverse)#always load AFTER plyr.  Otherwise there are errors because some functions have the same names in both libraries.
+
 library(kableExtra)
 format_table <- function(data){data %>% kableExtra::kable("html") %>% kable_styling(bootstrap_options = "striped", full_width = F)}
 ```
 
+Exam PA will have questions about the data.  That is a fact.  Every version of Exam PA such as December 2018, June 2019, and December 2019 have all had questions about data manipulation.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.  
 
-About two hours in this exam will be spent just on data manipulation.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.  In addition, a common saying when building models is "garbage in means garbage out", on this exam, mistakes on the data manipulation can lead to lost points on the modeling sections.
+This lesson is based on the first task of the 2019 Exam PA.
 
-Data vocabulary is sloppy because many words mean the same thing.  *Cleaning*, *wrangling*, *manipulating*, and *ransforming* all describe the process making data easier to work with.  
+**TASK 1 (12 points)**
+
+> Examine each variable and make appropriate adjustments.
+
+> Examine each predictor variable other than cap_gain both on its own and with respect to value_flag.  Make appropriate adjustments.  Do not make any adjustments to the cap_gain variable at this time.
+
+>There should be no further variable adjustments unless specifically requested.
+
+All data for this book can be accessed from the package `ExamPAData`.  In the real exam, you will read the file from the Prometric computer.
+
+Because the data is already loaded, simply use the below code to access the data.
+
+```{r}
+library(ExamPAData)
+```
+
+To save keystrokes, give the data a short name such as `df` for "data frame".
+
+```{r}
+df <- customer_value %>% mutate_if(is.character, as.factor)
+```
+
+## Garbage in; garbage out `r emo::ji("trash")`
+
+This is a common saying when working with predictive models.  No matter how complex the model, if the data is bad then the entire result will be bad.  For this exam, master the art of data manipulation and everything becomes easier!
+
+Begin by looking at a summary.
+
+```{r}
+summary(df)
+str(df)
+```
+
+## Be a detective `r emo::ji("magnifying")`
+
+Sherlock Holmes is famous for saying "You see, Watson, but you do not observe!"
+
+Just like detectives, actuaries need to collect data and make observations.  Each exam has a few "anomalies" in the data which they expect candidates to mention.  These could be
+
+* Any value that doesn't match the Data Dictionary in the Project Statement
+* Variables that have `NA` values
+* Variables that have a lot of factor levels
+* Incorrect data types
+    * Factors that are read as characters or vice versa
+    * Numeric variables that are factor/character
+* Extreme values (Numeric values are too high or low)
+
+You'll get very good at spotting these with practice.  Just from looking at the above `summary`, we can observe the following:
+
+**Observations**
+
+* The data consists of 48,842 obs. of 8 variables.
+* The lowest `age` is 17 but the Project Statement says to only include records with `age` >= 25.
+* The `age` distribution is right skewed because the median (37) is less than the mean (38).
+* `education_num` takes integer values between 1 and 16.  There are a lot of values that are low.
+* There are missing values when `occupation` is `group NA`, which means that the person's occupationw as unknown.
+* The amount that people work per work, `hours_per_week`, varies by a lot.  The lowest is 1 hour and the highest is 99.  Most people work 40 hours per week.
+
+The SOA's solution recommends leaving comments in your Rmd file.  This helps to give you partial credit on questions that you may answer incorrectly.  
+
+**Good comments**
+
+```{r}
+#I observe that there are no missing values other than those indicated by Group NA for occupation.
+
+#I removed the code provided by my assistant. It is embedded in later chunks as needed.
+
+#I excluded people under the age of 25
+df <- df[df$age >= 25,]
+
+#I convert the target to 0-1.
+df$value_flag <- ifelse(df$value_flag == "High",1,0)
+```
+
+**Useless comments**
+
+```{r}
+#this is a comment
+
+#this loads a library called ggplot2
+library(ggplot2)
+```
+
+## A picture is worth a thousand words `r emo::ji("camera")`
+
+What's your favorite type of graph?  Mine is a radar chart  This is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes staring from the same point.
+
+Isn't this pretty?
+
+```{r echo = F, message = F, warning = f}
+# Library
+library(fmsb)
+ 
+# Create data: note in High school for Jonathan:
+data <- as.data.frame(matrix( sample( 2:20 , 10 , replace=T) , ncol=10))
+colnames(data) <- c("math" , "english" , "biology" , "music" , "R-coding", "data-viz" , "french" , "physic", "statistic", "sport" )
+ 
+# To use the fmsb package, I have to add 2 lines to the dataframe: the max and min of each topic to show on the plot!
+data <- rbind(rep(20,10) , rep(0,10) , data)
+ 
+# Check your data, it has to look like this!
+# head(data)
+
+# The default radar chart 
+radarchart(data)
+```
+
+**Don't waste time trying to make the graphs perfect!**
+
+Only change code that you **need** to change.  The SOA is trying to help you save time by giving you templates.  That being said, if you can do it faster on your own, then do it your own way.
+
+This is the code template that they give you.  You only need to change the "variable" names.
+
+```{r eval = F}
+# This code makes a histogram for a continuous variable.
+ggplot(df, aes(x = variable)) + 
+  geom_histogram(bins = 30) +
+  labs(x = "variable") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+# This code makes a bar chart for a factor variable.
+ggplot(df, aes(x = variable)) +
+  geom_bar() +
+  labs(x = "variable") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+Okay, that wasn't 100% true.  It's common for the code to require **small** changes. For instance, the histogram that they give you has bins that are too narrow for`age`, which causes these spikes to show up in the graph.
+
+> The best candidates altered the code to create more appropriate plots and summary tables.
+
+```{r message = F}
+# This code makes a histogram for a continuous variable.
+ggplot(df, aes(x = age)) + 
+  geom_histogram(bins = 30) + #not the right number of bins
+  labs(x = "age") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  ggtitle("Bad: Default histogram with spikes")
+
+#Histograms of continuous variables
+ggplot(df, aes(x = age)) +
+  geom_histogram(breaks = seq(24.5,99.5, by = 5)) +  #make bins wider and set range 
+  labs(x = "Age") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  ggtitle("Good: After adjusting the breaks")
+```
+
+How do you know when a variable should a factor and when it should be numeric?
+
+## Factor or numeric `r emo::ji("question")`
+
+Which variables should be converted to factors and which should be numeric? 
+
+Questions of this sort have come up twice.  On Hospital Readmissions, there was a Length of Stay variable that was numeric, but had only a few values and so some candidates treated it as a factor.  The `education_num` variable here is also numeric but only has 16 unique values.  So should this be a numeric or a factor?
+
+```{r}
+table(df$education_num)
+```
+
+Ask yourself this question: is there a way of comparing two values of the variable together?
+
+* If yes, then use numeric  
+* If no, then use a factor
+
+For exmaple, we can say that `education_num = 2` is less than `education_num = 4`, which means that there's a natural order.  This is also known as an **ordinal**.
+
+If the factor is say, `color`, which can be `red`, `blue`, or `green`, then there is no way of comparing values together.  Is `red` greater than `blue`?  This question has no meaning.
+
+
+```{r}
+ggplot(df, aes(x = education_num)) +
+  geom_histogram(bins = 30) +
+  labs(x = "Education") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  ggtitle("Default number of bins (30)")
+
+ggplot(df, aes(x = education_num)) +
+  geom_histogram(bins = 16) +
+  labs(x = "Education") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  ggtitle("Set number of bins to number of factor levels (16) ")
+# Set bins equal to number of levels, could have made bar chart.
+```
+
+We could also use a bar plot.
+
+```{r}
+ggplot(df, aes(x = education_num)) + 
+  geom_bar(stat = "count") + 
+  ggtitle("Bar plot")
+```
+
+Lastly, read the Project Statement carefully and only do what it tells you to do.
+
+> Candidates were not required to make a plot for cap_gain. This solution has the plot made here rather than in Task 6.
+
+## 73.6% of statistics are false `r emo::ji("shocked")`
+
+Really?  No, but statistics can help you see patterns that data visualization by itself can miss.  Along with the ggplot codes, there will be code to look at summary statistics.  Here's a refresher on what these statistics mean (no pun intended).
+
+* **Mean**: The average. This gets skewed by outliers easily.  If the mean greater than the median, then the distribution is right skewed. 
+* **Median**: The "middle" value.  This is an average that reduces the impact of outliers.
+* **Variance**: Amount by which each observation differs from the mean.  
+* **Standard Deviation**: Square root of the variance.
+* **n()**: Number of observations. Always take note of groups that don't have many observations.
+
+```{r eval =F}
+# This code provides, for each level of a factor variable, the number for which value_flag is zero, the number for which it is one, the total number of observations, and the proportion of ones.
+# Note that the variable name should not be enclosed in quotation marks.
+df %>%
+  group_by(variable) %>%
+  summarise(
+    zeros = sum(value_flag == 0),
+    ones = sum(value_flag == 1),
+    n = n(),
+    proportion = mean(value_flag)
+  )
+```
+
+Factors levels should be simplified.  If a group has only a few observations then there will be problems with the model.  In our data, take a look at the `marital_status` column.  Do you observe anything unusual?
+
+```{r}
+table(df$marital_status)
+```
+
+Only 31 records have `Married-AF-spouse`.  This is because the sample size `n = 31` is too small.  In modeling jargon, this is "statistical insignificant" and will cause the p-value on `marital_status` to be large.  You can fix this in a few different ways
+
+* Delete these records (Not recommended)
+* Group these records together with `Married-spouse` (Simplest method)
+
+Let's use the second method.
+
+First, look at the levels of the factor variable.
+
+```{r}
+levels(df$marital_status)
+```
+
+Now look at the profitability across marital status.  For `Married-AF-spouse` and `Married-civ-spouse` the proportion of high profit customers is **high**, but for `Married-spouse-absent` it is **low.**  Even though these are all "married", it would be a bad idea to combine them because the profitability is so different.
+
+```{r}
+#Proportion of ones by category of factor variable
+df %>%
+  group_by(marital_status) %>%
+  summarise(
+    zeros = sum(value_flag == 0),
+    ones = sum(value_flag == 1),
+    n = n(),
+    proportion = mean(value_flag)
+  )
+```
+
+
+Then create a vector that has the simpler levels that you want.  The order needs to be the same.
+
+```{r}
+simple_levels <- c("Divorced", "Married-spouse", "Married-spouse", "Married-spuouse-absent", "Neber-married", "Separated", "Widowed")
+```
+
+The SOA likes to use the function `mapvalues`.  This takes in three arguments.  You can read about this by typing `?mapvalues` into the console.
+
+`x`	: the factor or vector to modify
+
+`from` : a vector of the items to replace
+
+`to`	: a vector of replacement values
+
+Then map the old values to the simpler values.
+
+```{r}
+#Combine the two marital status levels
+var.levels <- levels(df$marital_status)
+df$marital_status <- mapvalues(x = df$marital_status,
+                               from = var.levels, 
+                               to = simple_levels) 
+```
+
+Now, when you look at the `marital_status` levels, you will see the simpler levels.  
+
+```{r}
+levels(df$marital_status)
+```
+
+You can also check that the number of records is what you expect.
+
+```{r}
+table(df$marital_status)
+```
+
+There's an automatic way of doing this as well.  And everyone likes to automate things because it gives us more free time `r emo::ji("sleep")`.
+
+Create dummy variables for each category and then use a variable selection method to decide which levels to keep.  This could be from a LASSO, a GLM with Step AIC/BIC, or any tree-based method.
+
+## How to save time with dplyr
+
+You may have noticed that writing code for data manipulation can be slow.  Fortunately, there is a faster, 100%-legal, way of doing data manipulation that has worked for hundreds of exam candidates (the author included) who have taken Exam PA.  
+
+Up to this point we have been using old R libraries.  By making use of newer R libraries we can save ourselves time.  These will all be provided for you at Prometric within the (tidyverse)[https://www.tidyverse.org/] library.
+
 
 Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
 
@@ -23,15 +338,6 @@ Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
 | 18      | Pipes           |
 | 19      | Functions       |
 | 20      | Vectors         |
-
-
-All data for this book can be accessed from the package `ExamPAData`.  In the real exam, you will read the file from the Prometric computer.  To read files into R, the [readr](https://readr.tidyverse.org/articles/readr.html) package has several tools, one for each data format.  For instance, the most common format, comma separated values (csv) are read with the `read_csv()` function.
-
-Because the data is already loaded, simply use the below code to access the data.
-
-```{r}
-library(ExamPAData)
-```
 
 
 ## Look at the data

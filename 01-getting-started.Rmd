@@ -12,7 +12,7 @@ For your convenience, all data in this book, including data from prior exams and
 ```{r eval = F}
 # Install remotes if it's not yet installed
 # install.packages("remotes")
-remotes::install_github("sdcastillo/ExamPAData")
+remotes::install_github("sdcastillo/ExamPAData", force = TRUE)
 ```
 
 Once this has run, you can access the data using `library(ExamPAData)`.  To check that this is installed correctly see if the `insurance` data set has loaded.  If this returns "object not found", then the library was not installed.
