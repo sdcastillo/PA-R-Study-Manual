@@ -114,22 +114,9 @@ What's your favorite type of graph?  Mine is a radar chart  This is a graphical 
 
 Isn't this pretty?
 
-```{r echo = F, message = F, warning = f}
-# Library
-library(fmsb)
- 
-# Create data: note in High school for Jonathan:
-data <- as.data.frame(matrix( sample( 2:20 , 10 , replace=T) , ncol=10))
-colnames(data) <- c("math" , "english" , "biology" , "music" , "R-coding", "data-viz" , "french" , "physic", "statistic", "sport" )
- 
-# To use the fmsb package, I have to add 2 lines to the dataframe: the max and min of each topic to show on the plot!
-data <- rbind(rep(20,10) , rep(0,10) , data)
- 
-# Check your data, it has to look like this!
-# head(data)
 
-# The default radar chart 
-radarchart(data)
+```{r echo = F, fig.align="center", warning=F, message = F, out.width="1300%"}
+knitr::include_graphics("images/radar_graph.png")
 ```
 
 **Don't waste time trying to make the graphs perfect!**
@@ -236,7 +223,7 @@ Really?  No, but statistics can help you see patterns that data visualization by
 # Note that the variable name should not be enclosed in quotation marks.
 df %>%
   group_by(variable) %>%
-  summarise(
+  dplyr::summarise(
     zeros = sum(value_flag == 0),
     ones = sum(value_flag == 1),
     n = n(),
@@ -269,7 +256,7 @@ Now look at the profitability across marital status.  For `Married-AF-spouse` an
 #Proportion of ones by category of factor variable
 df %>%
   group_by(marital_status) %>%
-  summarise(
+  dplyr::summarise(
     zeros = sum(value_flag == 0),
     ones = sum(value_flag == 1),
     n = n(),
@@ -320,9 +307,16 @@ Create dummy variables for each category and then use a variable selection metho
 
 ## How to save time with dplyr
 
+```{r echo = F, message= F, warning=F}
+#detach functions which are from plyr
+#An easier alternative is just to restart R
+if(any(grepl("package:plyr", search()))) detach("package:plyr") else message("plyr not loaded")
+```
+
+
 You may have noticed that writing code for data manipulation can be slow.  Fortunately, there is a faster, 100%-legal, way of doing data manipulation that has worked for hundreds of exam candidates (the author included) who have taken Exam PA.  
 
-Up to this point we have been using old R libraries.  By making use of newer R libraries we can save ourselves time.  These will all be provided for you at Prometric within the (tidyverse)[https://www.tidyverse.org/] library.
+Up to this point we have been using old R libraries.  By making use of newer R libraries we can save ourselves time.  These will all be provided for you at Prometric within the [tidyverse](https://www.tidyverse.org/) library.
 
 
 Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
@@ -342,7 +336,7 @@ Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
 
 ## Look at the data
 
-The data that we are using is `health_insurance`, which has information on patients and their health care costs.
+Let's look at the health insurance data set.  This contains information on patients along with their annual health care costs.
 
 The descriptions of the columns are below.  
 
@@ -357,7 +351,6 @@ The descriptions of the columns are below.
 `head()` shows the top n rows.  `head(20)` shows the top 20 rows.  
 
 ```{r message = F}
-library(tidyverse)
 head(health_insurance)
 ```
 
@@ -369,7 +362,7 @@ health_insurance %>% head()
 
 >**Shortcut**: Use `CTRL` + `SHFT` + `M` to create pipes `%>%`
 
-The `glimpse` function is a transpose of the `head()` function, which can be more spatially efficient.  This also gives you the dimension (1,338 rows, 7 columns).
+The `glimpse` function is similar to `str()`.
 
 ```{r}
 health_insurance %>% glimpse()

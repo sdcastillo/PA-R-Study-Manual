@@ -151,10 +151,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.7" data-path="r-programming.html"><a href="r-programming.html#the-soas-code-doesnt-use-pipes-or-dplyr-so-can-i-skip-learning-this"><i class="fa fa-check"></i><b>8.7</b> The SOA’s code doesn’t use pipes or dplyr, so can I skip learning this?</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>9</b> Data manipulation</a><ul>
-<li class="chapter" data-level="9.1" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>9.1</b> Look at the data</a></li>
-<li class="chapter" data-level="9.2" data-path="data-manipulation.html"><a href="data-manipulation.html#transform-the-data"><i class="fa fa-check"></i><b>9.2</b> Transform the data</a></li>
-<li class="chapter" data-level="9.3" data-path="data-manipulation.html"><a href="data-manipulation.html#exercises"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
-<li class="chapter" data-level="9.4" data-path="data-manipulation.html"><a href="data-manipulation.html#answers-to-exercises"><i class="fa fa-check"></i><b>9.4</b> Answers to exercises</a></li>
+<li class="chapter" data-level="9.1" data-path="data-manipulation.html"><a href="data-manipulation.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>9.1</b> Garbage in; garbage out 🗑</a></li>
+<li class="chapter" data-level="9.2" data-path="data-manipulation.html"><a href="data-manipulation.html#be-a-detective"><i class="fa fa-check"></i><b>9.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="9.3" data-path="data-manipulation.html"><a href="data-manipulation.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>9.3</b> A picture is worth a thousand words 📷</a></li>
+<li class="chapter" data-level="9.4" data-path="data-manipulation.html"><a href="data-manipulation.html#factor-or-numeric"><i class="fa fa-check"></i><b>9.4</b> Factor or numeric ❓</a></li>
+<li class="chapter" data-level="9.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>9.5</b> 73.6% of statistics are false 🤯</a></li>
+<li class="chapter" data-level="9.6" data-path="data-manipulation.html"><a href="data-manipulation.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>9.6</b> How to save time with dplyr</a></li>
+<li class="chapter" data-level="9.7" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>9.7</b> Look at the data</a></li>
+<li class="chapter" data-level="9.8" data-path="data-manipulation.html"><a href="data-manipulation.html#transform-the-data"><i class="fa fa-check"></i><b>9.8</b> Transform the data</a></li>
+<li class="chapter" data-level="9.9" data-path="data-manipulation.html"><a href="data-manipulation.html#exercises"><i class="fa fa-check"></i><b>9.9</b> Exercises</a></li>
+<li class="chapter" data-level="9.10" data-path="data-manipulation.html"><a href="data-manipulation.html#answers-to-exercises"><i class="fa fa-check"></i><b>9.10</b> Answers to exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>10</b> Visualization</a><ul>
 <li class="chapter" data-level="10.1" data-path="visualization.html"><a href="visualization.html#create-a-plot-object-ggplot"><i class="fa fa-check"></i><b>10.1</b> Create a plot object (ggplot)</a></li>
@@ -293,36 +299,36 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="create-a-plot-object-ggplot" class="section level2">
 <h2><span class="header-section-number">10.1</span> Create a plot object (ggplot)</h2>
 <p>Let’s create a histogram of the claims. The first step is to create a blank canvas that holds the columns that are needed. The <code>aesthetic</code> argument, <code>aes</code>, means that the variable shown will the the claims.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
-<a class="sourceLine" id="cb164-2" title="2">p &lt;-<span class="st"> </span>insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(claims))</a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
+<a class="sourceLine" id="cb193-2" title="2">p &lt;-<span class="st"> </span>insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(claims))</a></code></pre></div>
 <p>If we look at <code>p</code>, we see that it is nothing but white space with axis for <code>count</code> and <code>income</code>.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1">p</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1">p</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-84-1.png" width="576" /></p>
 </div>
 <div id="add-a-plot" class="section level2">
 <h2><span class="header-section-number">10.2</span> Add a plot</h2>
 <p>We add a histogram</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-85-1.png" width="576" /></p>
 <p>Different plots are called “geoms” for “geometric objects”. Geometry = Geo (space) + meter (measure), and graphs measure data. For instance, instead of creating a histogram, we can draw a gamma distribution with <code>stat_density</code>.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">stat_density</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">stat_density</span>()</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-86-1.png" width="576" /></p>
 <p>Create an xy plot by adding and <code>x</code> and a <code>y</code> argument to <code>aesthetic</code>.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> holders, <span class="dt">y =</span> claims)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb168-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1">insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb197-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> holders, <span class="dt">y =</span> claims)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb197-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-87-1.png" width="576" /></p>
 </div>
 <div id="data-manipulation-chaining" class="section level2">
 <h2><span class="header-section-number">10.3</span> Data manipulation chaining</h2>
 <p>Pipes allow for data manipulations to be chained with visualizations.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1">termlife <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb169-2" title="2"><span class="st">  </span><span class="kw">filter</span>(FACE <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb169-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">INCOME_AGE_RATIO =</span> INCOME<span class="op">/</span>AGE) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb169-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(INCOME_AGE_RATIO, FACE)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb169-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb169-6" title="6"><span class="st">  </span><span class="kw">theme_bw</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1">termlife <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb198-2" title="2"><span class="st">  </span><span class="kw">filter</span>(FACE <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb198-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">INCOME_AGE_RATIO =</span> INCOME<span class="op">/</span>AGE) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb198-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(INCOME_AGE_RATIO, FACE)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb198-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb198-6" title="6"><span class="st">  </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-88-1.png" width="576" /></p>
 
 </div>
 </div>

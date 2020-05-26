@@ -151,10 +151,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.7" data-path="r-programming.html"><a href="r-programming.html#the-soas-code-doesnt-use-pipes-or-dplyr-so-can-i-skip-learning-this"><i class="fa fa-check"></i><b>8.7</b> The SOA’s code doesn’t use pipes or dplyr, so can I skip learning this?</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>9</b> Data manipulation</a><ul>
-<li class="chapter" data-level="9.1" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>9.1</b> Look at the data</a></li>
-<li class="chapter" data-level="9.2" data-path="data-manipulation.html"><a href="data-manipulation.html#transform-the-data"><i class="fa fa-check"></i><b>9.2</b> Transform the data</a></li>
-<li class="chapter" data-level="9.3" data-path="data-manipulation.html"><a href="data-manipulation.html#exercises"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
-<li class="chapter" data-level="9.4" data-path="data-manipulation.html"><a href="data-manipulation.html#answers-to-exercises"><i class="fa fa-check"></i><b>9.4</b> Answers to exercises</a></li>
+<li class="chapter" data-level="9.1" data-path="data-manipulation.html"><a href="data-manipulation.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>9.1</b> Garbage in; garbage out 🗑</a></li>
+<li class="chapter" data-level="9.2" data-path="data-manipulation.html"><a href="data-manipulation.html#be-a-detective"><i class="fa fa-check"></i><b>9.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="9.3" data-path="data-manipulation.html"><a href="data-manipulation.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>9.3</b> A picture is worth a thousand words 📷</a></li>
+<li class="chapter" data-level="9.4" data-path="data-manipulation.html"><a href="data-manipulation.html#factor-or-numeric"><i class="fa fa-check"></i><b>9.4</b> Factor or numeric ❓</a></li>
+<li class="chapter" data-level="9.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>9.5</b> 73.6% of statistics are false 🤯</a></li>
+<li class="chapter" data-level="9.6" data-path="data-manipulation.html"><a href="data-manipulation.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>9.6</b> How to save time with dplyr</a></li>
+<li class="chapter" data-level="9.7" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>9.7</b> Look at the data</a></li>
+<li class="chapter" data-level="9.8" data-path="data-manipulation.html"><a href="data-manipulation.html#transform-the-data"><i class="fa fa-check"></i><b>9.8</b> Transform the data</a></li>
+<li class="chapter" data-level="9.9" data-path="data-manipulation.html"><a href="data-manipulation.html#exercises"><i class="fa fa-check"></i><b>9.9</b> Exercises</a></li>
+<li class="chapter" data-level="9.10" data-path="data-manipulation.html"><a href="data-manipulation.html#answers-to-exercises"><i class="fa fa-check"></i><b>9.10</b> Answers to exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>10</b> Visualization</a><ul>
 <li class="chapter" data-level="10.1" data-path="visualization.html"><a href="visualization.html#create-a-plot-object-ggplot"><i class="fa fa-check"></i><b>10.1</b> Create a plot object (ggplot)</a></li>
@@ -557,13 +563,13 @@ with dollar sign.</p>
 <p>You can also work with tibbles, which are data frames but have nicer printing:</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="co"># The tidyverse library has functions for making tibbles</span></a>
 <a class="sourceLine" id="cb97-2" title="2"><span class="kw">library</span>(tidyverse) </a></code></pre></div>
-<pre><code>## -- Attaching packages ------------------------------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## -- Attaching packages ---------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
 <pre><code>## v ggplot2 3.2.1     v purrr   0.3.4
 ## v tibble  2.1.3     v dplyr   0.8.3
 ## v tidyr   1.0.0     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.4.0</code></pre>
 <pre><code>## Warning: package &#39;purrr&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## -- Conflicts ---------------------------------------------------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts ------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
