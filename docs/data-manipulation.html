@@ -152,10 +152,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>9</b> Data manipulation</a><ul>
 <li class="chapter" data-level="9.1" data-path="data-manipulation.html"><a href="data-manipulation.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>9.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="9.2" data-path="data-manipulation.html"><a href="data-manipulation.html#be-a-detective"><i class="fa fa-check"></i><b>9.2</b> Be a detective 🔎</a></li>
+<li class="chapter" data-level="9.2" data-path="data-manipulation.html"><a href="data-manipulation.html#be-a-detective"><i class="fa fa-check"></i><b>9.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="9.3" data-path="data-manipulation.html"><a href="data-manipulation.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>9.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="9.4" data-path="data-manipulation.html"><a href="data-manipulation.html#factor-or-numeric"><i class="fa fa-check"></i><b>9.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="9.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>9.5</b> 73.6% of statistics are false 😨</a></li>
+<li class="chapter" data-level="9.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>9.5</b> 73.6% of statistics are false 😱</a></li>
 <li class="chapter" data-level="9.6" data-path="data-manipulation.html"><a href="data-manipulation.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>9.6</b> How to save time with dplyr</a></li>
 <li class="chapter" data-level="9.7" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>9.7</b> Look at the data</a></li>
 <li class="chapter" data-level="9.8" data-path="data-manipulation.html"><a href="data-manipulation.html#transform-the-data"><i class="fa fa-check"></i><b>9.8</b> Transform the data</a></li>
@@ -345,7 +345,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##  $ value_flag    : Factor w/ 2 levels &quot;High&quot;,&quot;Low&quot;: 2 2 2 2 2 2 2 1 1 1 ...</code></pre>
 </div>
 <div id="be-a-detective" class="section level2">
-<h2><span class="header-section-number">9.2</span> Be a detective 🔎</h2>
+<h2><span class="header-section-number">9.2</span> Be a detective 🔍</h2>
 <p>Sherlock Holmes is famous for saying “You see, Watson, but you do not observe!”</p>
 <p>Just like detectives, actuaries need to collect data and make observations. Each exam has a few “anomalies” in the data which they expect candidates to mention. These could be</p>
 <ul>
@@ -366,7 +366,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>The lowest <code>age</code> is 17 but the Project Statement says to only include records with <code>age</code> &gt;= 25.</li>
 <li>The <code>age</code> distribution is right skewed because the median (37) is less than the mean (38).</li>
 <li><code>education_num</code> takes integer values between 1 and 16. There are a lot of values that are low.</li>
-<li>There are missing values when <code>occupation</code> is <code>group NA</code>, which means that the person’s occupationw as unknown.</li>
+<li>There are missing values when <code>occupation</code> is <code>group NA</code>, which means that the person’s occupation is unknown.</li>
 <li>The amount that people work per work, <code>hours_per_week</code>, varies by a lot. The lowest is 1 hour and the highest is 99. Most people work 40 hours per week.</li>
 </ul>
 <p>The SOA’s solution recommends leaving comments in your Rmd file. This helps to give you partial credit on questions that you may answer incorrectly.</p>
@@ -467,15 +467,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 </div>
 <div id="of-statistics-are-false" class="section level2">
-<h2><span class="header-section-number">9.5</span> 73.6% of statistics are false 😨</h2>
+<h2><span class="header-section-number">9.5</span> 73.6% of statistics are false 😱</h2>
 <p>Really? No, but statistics can help you see patterns that data visualization by itself can miss. Along with the ggplot codes, there will be code to look at summary statistics. Here’s a refresher on what these statistics mean (no pun intended).</p>
 <ul>
-<li><strong>Mean</strong>: The average. This gets skewed by outliers easily. If the mean greater than the median, then the distribution is right skewed.</li>
+<li><strong>Mean</strong>: The average. This gets skewed by outliers easily. If the mean is greater than the median, then the distribution is right skewed.</li>
 <li><strong>Median</strong>: The “middle” value. This is an average that reduces the impact of outliers.</li>
-<li><strong>Variance</strong>: Amount by which each observation differs from the mean.<br />
+<li><strong>Variance</strong>: The amount by which each observation differs from the mean.<br />
 </li>
-<li><strong>Standard Deviation</strong>: Square root of the variance.</li>
-<li><strong>n()</strong>: Number of observations. Always take note of groups that don’t have many observations.</li>
+<li><strong>Standard Deviation</strong>: The square root of the variance.</li>
+<li><strong>n()</strong>: The number of observations. Always take note of groups that don’t have many observations.</li>
 </ul>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1"><span class="co"># This code provides, for each level of a factor variable, the number for which value_flag is zero, the number for which it is one, the total number of observations, and the proportion of ones.</span></a>
 <a class="sourceLine" id="cb144-2" title="2"><span class="co"># Note that the variable name should not be enclosed in quotation marks.</span></a>
@@ -550,7 +550,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##                   6498                  21692                    573 
 ##          Neber-married              Separated                Widowed 
 ##                   8697                   1438                   1512</code></pre>
-<p>There’s an automatic way of doing this as well. And everyone likes to automate things because it gives us more free time 😪.</p>
+<p>There’s an automatic way of doing this as well. And everyone likes to automate things because it gives us more free time 😴.</p>
 <p>Create dummy variables for each category and then use a variable selection method to decide which levels to keep. This could be from a LASSO, a GLM with Step AIC/BIC, or any tree-based method.</p>
 </div>
 <div id="how-to-save-time-with-dplyr" class="section level2">
