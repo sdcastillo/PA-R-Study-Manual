@@ -80,7 +80,7 @@ You'll get very good at spotting these with practice.  Just from looking at the 
 * The lowest `age` is 17 but the Project Statement says to only include records with `age` >= 25.
 * The `age` distribution is right skewed because the median (37) is less than the mean (38).
 * `education_num` takes integer values between 1 and 16.  There are a lot of values that are low.
-* There are missing values when `occupation` is `group NA`, which means that the person's occupationw as unknown.
+* There are missing values when `occupation` is `group NA`, which means that the person's occupation is unknown.
 * The amount that people work per work, `hours_per_week`, varies by a lot.  The lowest is 1 hour and the highest is 99.  Most people work 40 hours per week.
 
 The SOA's solution recommends leaving comments in your Rmd file.  This helps to give you partial credit on questions that you may answer incorrectly.  
@@ -212,11 +212,11 @@ Lastly, read the Project Statement carefully and only do what it tells you to do
 
 Really?  No, but statistics can help you see patterns that data visualization by itself can miss.  Along with the ggplot codes, there will be code to look at summary statistics.  Here's a refresher on what these statistics mean (no pun intended).
 
-* **Mean**: The average. This gets skewed by outliers easily.  If the mean greater than the median, then the distribution is right skewed. 
+* **Mean**: The average. This gets skewed by outliers easily.  If the mean is greater than the median, then the distribution is right skewed. 
 * **Median**: The "middle" value.  This is an average that reduces the impact of outliers.
-* **Variance**: Amount by which each observation differs from the mean.  
-* **Standard Deviation**: Square root of the variance.
-* **n()**: Number of observations. Always take note of groups that don't have many observations.
+* **Variance**: The amount by which each observation differs from the mean.  
+* **Standard Deviation**: The square root of the variance.
+* **n()**: The number of observations. Always take note of groups that don't have many observations.
 
 ```{r eval =F}
 # This code provides, for each level of a factor variable, the number for which value_flag is zero, the number for which it is one, the total number of observations, and the proportion of ones.
