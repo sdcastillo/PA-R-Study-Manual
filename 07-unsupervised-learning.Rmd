@@ -273,7 +273,7 @@ Clustering algorithms look for groups of observations which are similar to one a
 
 Kmeans takes continuous data and assigns observations into k clusters, or groups. In the two-dimensional example, this is the same as drawing lines around points.  
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=4b5d3muPQmA&t=268s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4b5d3muPQmA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 StatQuest. “ K-means clustering” YouTube, Joshua Starmer, 2 Apr 2018, https://www.youtube.com/watch?v=4b5d3muPQmA&t=268s
 
@@ -377,7 +377,7 @@ be replicated, and the K-means output will be fully reproducible.
 
 Kmeans required that we choose the number of clusters, k.  Hierarchical clustering is an alternative that does not require that we choose only one value of k.
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=7xHsRkOdVwo&t=137s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7xHsRkOdVwo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 StatQuest. “ Hierarchical Clustering” YouTube, Joshua Starmer, 20 Jun, 2017, https://www.youtube.com/watch?v=7xHsRkOdVwo&t=137s
 

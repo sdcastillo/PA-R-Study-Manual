@@ -366,7 +366,7 @@ This is the easiest to interpret.  For each one-unit increase in $X_j$, the expe
 
 ### Log link
 
-This is the most popular choice when the results need to be easy to understand.  Simply take the exponent of the coefficients and model turns into a product of numbers being multiplied together.
+This is the most popular choice when the results need to be easy to understand.  Simply take the exponent of the coefficients and the model turns into a product of numbers being multiplied together.
 
 $$
 log(\hat{Y}) = X\beta \Rightarrow \hat{Y} = e^{X \beta}
