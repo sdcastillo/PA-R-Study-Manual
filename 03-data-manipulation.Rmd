@@ -23,7 +23,7 @@ format_table <- function(data){data %>% kableExtra::kable("html") %>% kable_styl
 
 Exam PA will have questions about the data.  That is a fact.  Every version of Exam PA such as December 2018, June 2019, and December 2019 have all had questions about data manipulation.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.  
 
-This lesson is based on the first task of the 2019 Exam PA.
+This lesson is based on the first task of the December 2019 Exam PA.
 
 **TASK 1 (12 points)**
 
