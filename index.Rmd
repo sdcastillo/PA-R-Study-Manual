@@ -1,7 +1,7 @@
 --- 
 title: "Predictive Analytics for Actuaries"
 author: "Sam Castillo"
-date: "6/17/2020"
+date: "7/31/2020"
 github-repo: 
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -13,84 +13,28 @@ link-citations: yes
 favicon: images/artificial_actuary_logo_favicon.png
 ---
 
-# Preface {-} 
+# Welcome {-} 
 
-<img src="https://raw.githubusercontent.com/sdcastillo/ExamPAContent/master/book_cover.jpg" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />Welcome!  This is the study guide for the SOA's [Predictive Analytics Exam](https://www.soa.org/education/exam-req/edu-exam-pa-detail/).  While meeting all of the learning requirements of Exam PA, this book gives you data science and machine learning training.  You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.  The statistics is just the first phase, as you’ll also learn how to explain the results in easy-to-understand, non-technical business language.
+<hr>
 
-*We are thankful to all of the reviewers, guest editors, and past exam-takers who have helped to improve this book.  Thanks to the following persons who made changes to this book and its past versions: David Hill, Erlan Wheeler, Caden Collier, Peter Shelbe, Abhinav Gadde, Allen Meriken, [Kevin Kuo](https://github.com/kevinykuo), Aamir Ali, Matthew Caseras, and Liu Chang.*
+This is the study guide for [ExamPA.net](https://exampa.net), the online course for the SOA's Predictive Analytics exam.
 
-# Join the online course
-
-<font size="15"> Put studying in *fast forward* so you can plan your ASA celebration party `r emo::ji("party")` `r emo::ji("cake")` </font> 
-
-Online course with proven success in December 2019 Exam PA, tutorial videos, and hands-on practice.
-
----
-
-**"Teaching actuaries to train, validate, and explain their predictive models using plain English.**
-
-**Machine learning should be as simple as possible, but not simpler.**
-
-**- Sam Castillo, Predictive Modeler, Coach, Blogger."**
-
----
-
-<img src="https://media-exp1.licdn.com/dms/image/C4E03AQGvNo3LIM7VpQ/profile-displayphoto-shrink_200_200/0?e=1595462400&v=beta&t=MdgKCnTFjA7erX4_H0qQAsW73qOTlhOnQkfK9gGrbOY" align="left" style="margin: 0 1em 0 1em">
-
-With 3 years of predictive modeling experience at Milliman and Willis Towers Watson, Sam has coached hundreds of actuaries on Exam PA.  He also maintains a [blog](http://sdcastillo.github.io) about the future of risk and won the 2019 SOA Predictive Analytics and Futurism's [Jupyter contest](https://nbviewer.jupyter.org/github/SOASections/SOA-Predictive-Modeling-Innovation-and-Industry-Contest-2019-First-Place/blob/master/Predicting%20Uncertainty%20Prediction%20Intervals%20from%20Gradient%20Boosted%20Quantile%20Regression.ipynb).  
-
-<br></br>
-<br></br>
-
-<font size="6">**There's no need to be an R expert.**</font>
-
-Most questions focus on comprehension and explanation.  While having R experience is certainly helpful, our tutorials speak using plain English.  Avoid technical difficulties - we show you the cleanest way to get every answer, without getting lost in the weeds.
-
-<font size="6">**Learn at your own pace.**</font>
-
-With more than 20 hours of highly-condensed, annotated video solutions, you watch in **fast forward** as we walk through every Task of the practice exams.  Learn the fastest way of answering each type of question - each of our video solutions completes the exam in under 3.5 hours (out of the 5 hours and 15 minutes available), leaving you plenty of extra time to double-check your work or write longer answers.
-
-<br></br>
-<br></br>
-
-
-Our study packages features
-
-- **Video solutions** to save you time `r emo::ji("clock")`
-- **Original exams** for extra practice `r emo::ji("muscle")`
-- **Cheat sheets** that give your brain a break `r emo::ji("sweat")`
-
-<br></br>
+</br>
 
 ```{block, type='rcorners'}
-<font size="9">**[Sign Up](https://www.exampa.net/)**</font>
+<font size="10">**[Join the Online Course](https://www.exampa.net/)**</font>
 ```
 
 
-<br></br>
-<br></br>
+</br>
 
-**COVID-19 Update**: In the event of a postponed June exam, all course members will receive an extension through the revised exam date.  Our Extended Access Guarantee gives you a free subscription if unsuccessful.  See the [Terms of Service](https://www.exampa.net/terms) for details.
+<img src="https://raw.githubusercontent.com/sdcastillo/ExamPAContent/master/book_cover.jpg" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />While meeting all of the learning requirements of Exam PA, this **200-page study guide** gives you data science and machine learning training. You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.
 
+The chapters on R-programming cover the foundational concepts with a focus on modern data science applications.  We give you time-saving coding tips and ways of checking your answers within RStudio.
 
-# How to use this book
+All of the statistical theory is explained, from linear regression to gradient boosted trees, and examples are provided of each model that you can reproduce.  Following the course materials “An Introduction to Statistical Learning“, we discuss model training, validation, as well as the advantages and disadvantages to each algorithm.
 
-* Run the examples on your own machine by downloading the ExamPAData library
-* Use the arrow keys to navigate the chapters
-* Download this book:
-  1) Go to the first chapter (https://sdcastillo.github.io/PA-R-Study-Manual/index.html)
-  2) Right click anywhere on the page -> "Save As..."
-
-
-# How to Contribute to this book
-
-Your suggestions can be added within hours.  By submittine a pull request via Github, changes can be made to the R files which create this book.
-
-<iframe src="https://player.vimeo.com/video/375173977?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></p>
-
-**Contact:**
-
-info@exampa.net
+*We are thankful to all of the reviewers, guest editors, and past exam-takers who have helped to improve this book.  Thanks to the following persons who made changes to this book and its past versions: David Hill, Erlan Wheeler, Caden Collier, Peter Shelbe, Abhinav Gadde, Allen Meriken, [Kevin Kuo](https://github.com/kevinykuo), Aamir Ali, Matthew Caseras, and Liu Chang.*
 
 
 # The exam
