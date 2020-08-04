@@ -6,5 +6,5 @@ output:
 
 # Practice Exams
 
-Practice exams are available at [ExamPA.net](https://www.exampa.net/pricing).
+Practice exams are available at [ExamPA.net](https://exampa.net/pricing).
 
