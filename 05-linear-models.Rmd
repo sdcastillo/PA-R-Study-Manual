@@ -99,6 +99,8 @@ $$\text{RSS} = \sum_i(y_i - \hat{y})^2$$
 
 When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 + ... + \beta_p x_p$, take the derivative with respect to $\beta$, set equal to zero, and solve, we can find the optimal values.  This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.  
 
+You will also see the term **Root Mean Squared Error** (RMSE) which is just the average of the square root of the $\text{RSS}$, or just **Mean Squared Error** (MSE).
+
 You might be asking: why does this need to be the squared error?  Why not the absolute error, or the cubed error?  Technically, these could be used as well but the betas would not be the maximum likelihood parameters.  In fact, using the absolute error results in the model predicting the *median* as opposed to the *mean*.  Two reasons why RSS is popular are:  
 
 - It provides the same solution if we assume that the distribution of $Y|X$ is Gaussian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
@@ -109,6 +111,40 @@ You might be asking: why does this need to be the squared error?  Why not the ab
 This is done so that the variance is closer to being constant.  For example, if the units are in dollars, then it is very common for the values to fluctuate more for higher values than for lower values.  Consider a stock price, for instance.  If the stock is \$50 per share, then it will go up or down less than if it is \$1000 per share.  The log of 50, however, is about 3.9 and the log of 1000 is only 6.9, and so this difference is smaller.  In other words, the variance is smaller.
 
 Transforming the target means that instead of the model predicting $E[Y]$, it predicts $E[log(Y)]$.  A common mistake is to then the take the exponent in an attempt to "undo" this transform, but $e^{E[log(Y)]}$ is not the same as $E[Y]$.
+
+
+## R^2 Statistic
+
+One of the most common ways of measuring model fit, which you may be familiar with from a course on linear regression, is the "R-Squared" statistic.  The *RSS* provides an absolute measure of fit, because the number can be any positive value, but it's not always clear what a "good" RSS is because it's measured in units of $Y$.  The $R^2$ statistic provides an alternative measure of fit.  It takes the proportion of variance explained - so that it's always a value between 0 and 1, and is independent of the scale of $Y$.
+
+$$R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}}$$
+
+Where $\text{TSS} = \sum(y_i - \hat{y})^2$ is the total sum of squares.  TSS measures the total variance in the response $Y$ and can be thought of as the amount of variability inherent in the response before the regression is performed.  In contrast, RSS measures the amount of variability that is left unexplained after performing the regression.  Hench, $\text{TSS} - \text{RSS}$ measures the amount of variability in the response that is explained (or removed) be performing the regression, and R^2 measures the proportion of variability in $Y$ that can be explained using $X$.  A value near 1 indicates that a large proportion of the variability in the response has been explained by the regression.  A number near 0 indicates that the regression did not explain much of the variability in the response; this might occur because the linear model is wrong.
+
+The $R^2$ statistic has an interpretational advantage over the RSE.  In actuarial applications, it is useful to use an absolute measure of model fit, such as RSS, to train the model, and then use $R^2$ when you are explaining it to your clients so that it is easier to communicate.
+
+This chapter was based on Chapter 3, *Linear Regression*, of *An Introduction to Statistical Learning.*
+
+## Correlation
+
+### Pearson's correlation
+
+**Pearson correlation:** Measures a linear dependence between two variables $X$ and $Y$. This is the most commonly used correlation method.  
+
+The *correlation* is defined by $r$,
+
+$$r = Cor(X,Y) = \frac{\sum(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum(x_i - \bar{x})^2}\sqrt{(y_i - \bar{y})^2}}$$
+
+and this is also a measure of the linear relationship between two vectors, $X$ and $Y$.  This suggests that we might be able to use $r = Cor(X,Y)$ instead of $R^2$ to assess the model fit.  In the case of simple linear regression, where there is only one predictor variable, it is tree that $R^2 = r^2$; however, this relationship does not extend automatically when there are more than one predictor variable.  This is because $X$ becomes a *matrix* instead of a single *vector.*
+
+### Spearman (rank) correlation
+
+**Spearman correlation:** Computes the correlation between the rank of x and the rank of y variables.
+
+$$rho = \frac{\sum(x' - m_{x'})(y'_i - m_{y'})}{\sqrt{\sum(x' - m_{x'})^2 \sum(y' - m_{y'})^2}}$$
+Where $x′=rank(x)$ and $y′=rank(y)$
+
+Most questions on Exam PA will ask you about Pearson's correlation.  One advantage to Spearman over Pearson is that Spearman works for *ordinal* variables.  See Chapter 6 for the difference between *ordinal* and *numeric* variables.
 
 ## Regression vs. classification
 

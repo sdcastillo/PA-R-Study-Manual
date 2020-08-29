@@ -465,3 +465,4 @@ actuary_salaries <- actuary_salaries %>%
 ## Answers to exercises
 
 Answers to these exercises, along with a video tutorial, are available at [ExamPA.net](https://www.exampa.net/pricing).
+Answers to these exercises, along with a video tutorial, are available at [ExamPA.net](https://exampa.net/pricing).
