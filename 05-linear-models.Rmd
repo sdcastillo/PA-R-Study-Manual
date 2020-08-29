@@ -95,9 +95,7 @@ The question then is **how can we choose the best values of** $\beta?$  First of
 
 To solve for $\mathbf{\beta}$, we first need to define a *loss function*.  This allows us to compare how well a model is fitting the data.  The most commonly used loss function is the residual sum of squares (RSS), also called the *squared error loss* or the L2 norm.  When RSS is small, then the predictions are close to the actual values and the model is a good fit.  When RSS is large, the model is a poor fit.
 
-$$
-\text{RSS} = \sum_i(y_i - \hat{y})^2
-$$
+$$\text{RSS} = \sum_i(y_i - \hat{y})^2$$
 
 When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 + ... + \beta_p x_p$, take the derivative with respect to $\beta$, set equal to zero, and solve, we can find the optimal values.  This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.  
 

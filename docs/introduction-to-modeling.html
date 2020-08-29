@@ -152,7 +152,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="data-manipulation.html"><a href="data-manipulation.html#be-a-detective"><i class="fa fa-check"></i><b>6.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="6.3" data-path="data-manipulation.html"><a href="data-manipulation.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="6.4" data-path="data-manipulation.html"><a href="data-manipulation.html#factor-or-numeric"><i class="fa fa-check"></i><b>6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="6.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>6.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="6.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>6.5</b> 73.6% of statistics are false 😱</a></li>
 <li class="chapter" data-level="6.6" data-path="data-manipulation.html"><a href="data-manipulation.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>6.6</b> How to save time with dplyr</a></li>
 <li class="chapter" data-level="6.7" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>6.7</b> Look at the data</a></li>
 <li class="chapter" data-level="6.8" data-path="data-manipulation.html"><a href="data-manipulation.html#transform-the-data"><i class="fa fa-check"></i><b>6.8</b> Transform the data</a></li>
@@ -337,9 +337,7 @@ x_{31} &amp; x_{32}
 <p><img src="images/conditional_response.jpg" width="200%" style="display: block; margin: auto;" /></p>
 <p>The question then is <strong>how can we choose the best values of</strong> <span class="math inline">\(\beta?\)</span> First of all, we need to define what we mean by “best”. Ideally, we will choose these values which will create close predictions of <span class="math inline">\(Y\)</span> on new, unseen data.</p>
 <p>To solve for <span class="math inline">\(\mathbf{\beta}\)</span>, we first need to define a <em>loss function</em>. This allows us to compare how well a model is fitting the data. The most commonly used loss function is the residual sum of squares (RSS), also called the <em>squared error loss</em> or the L2 norm. When RSS is small, then the predictions are close to the actual values and the model is a good fit. When RSS is large, the model is a poor fit.</p>
-<p><span class="math display">\[
-\text{RSS} = \sum_i(y_i - \hat{y})^2
-\]</span></p>
+<p><span class="math display">\[\text{RSS} = \sum_i(y_i - \hat{y})^2\]</span></p>
 <p>When you replace <span class="math inline">\(\hat{y_i}\)</span> in the above equation with <span class="math inline">\(\beta_0 + \beta_1 x_1 + ... + \beta_p x_p\)</span>, take the derivative with respect to <span class="math inline">\(\beta\)</span>, set equal to zero, and solve, we can find the optimal values. This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.</p>
 <p>You might be asking: why does this need to be the squared error? Why not the absolute error, or the cubed error? Technically, these could be used as well but the betas would not be the maximum likelihood parameters. In fact, using the absolute error results in the model predicting the <em>median</em> as opposed to the <em>mean</em>. Two reasons why RSS is popular are:</p>
 <ul>

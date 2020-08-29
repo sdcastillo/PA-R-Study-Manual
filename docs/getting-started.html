@@ -152,7 +152,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="data-manipulation.html"><a href="data-manipulation.html#be-a-detective"><i class="fa fa-check"></i><b>6.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="6.3" data-path="data-manipulation.html"><a href="data-manipulation.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="6.4" data-path="data-manipulation.html"><a href="data-manipulation.html#factor-or-numeric"><i class="fa fa-check"></i><b>6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="6.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>6.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="6.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>6.5</b> 73.6% of statistics are false 😱</a></li>
 <li class="chapter" data-level="6.6" data-path="data-manipulation.html"><a href="data-manipulation.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>6.6</b> How to save time with dplyr</a></li>
 <li class="chapter" data-level="6.7" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>6.7</b> Look at the data</a></li>
 <li class="chapter" data-level="6.8" data-path="data-manipulation.html"><a href="data-manipulation.html#transform-the-data"><i class="fa fa-check"></i><b>6.8</b> Transform the data</a></li>
@@ -297,7 +297,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called <code>ExamPAData</code> by the author. To access, simply run the below lines of code to download this data.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Install remotes if it&#39;s not yet installed</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="co"># install.packages(&quot;remotes&quot;)</span></a>
-<a class="sourceLine" id="cb1-3" title="3">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;sdcastillo/ExamPAData&quot;</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">Sys.setenv</span>(<span class="dt">R_REMOTES_NO_ERRORS_FROM_WARNINGS=</span><span class="st">&quot;false&quot;</span>)</a>
+<a class="sourceLine" id="cb1-4" title="4">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;sdcastillo/ExamPAData&quot;</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Once this has run, you can access the data using <code>library(ExamPAData)</code>. To check that this is installed correctly see if the <code>insurance</code> data set has loaded. If this returns “object not found”, then the library was not installed.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw">summary</span>(insurance)</a></code></pre></div>
