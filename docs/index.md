@@ -15,7 +15,7 @@ favicon: images/artificial_actuary_logo_favicon.png
 
 # Welcome {-} 
 
-<img src="https://raw.githubusercontent.com/sdcastillo/ExamPAContent/master/book_cover.jpg" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />This is the study guide for [ExamPA.net](https://www.exampa.net/).  While meeting all of the learning requirements of Exam PA, this book gives you data science and machine learning training.  You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.  The statistics is just the first phase, as you’ll also learn how to explain the results in easy-to-understand, non-technical business language.
+<img src="https://raw.githubusercontent.com/sdcastillo/ExamPAContent/master/book_cover.jpg" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />This is the study guide for [ExamPA.net](https://exampa.net/).  While meeting all of the learning requirements of Exam PA, this book gives you data science and machine learning training.  You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.  The statistics is just the first phase, as you’ll also learn how to explain the results in easy-to-understand, non-technical business language.
 
 # How to use this book
 
