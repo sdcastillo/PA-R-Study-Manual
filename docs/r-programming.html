@@ -149,14 +149,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>6</b> Data manipulation</a><ul>
 <li class="chapter" data-level="6.1" data-path="data-manipulation.html"><a href="data-manipulation.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>6.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="6.2" data-path="data-manipulation.html"><a href="data-manipulation.html#be-a-detective"><i class="fa fa-check"></i><b>6.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="6.2" data-path="data-manipulation.html"><a href="data-manipulation.html#be-a-detective"><i class="fa fa-check"></i><b>6.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="6.3" data-path="data-manipulation.html"><a href="data-manipulation.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="6.4" data-path="data-manipulation.html"><a href="data-manipulation.html#factor-or-numeric"><i class="fa fa-check"></i><b>6.4</b> Factor or numeric ❓</a></li>
-<<<<<<< HEAD
-<li class="chapter" data-level="6.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>6.5</b> 73.6% of statistics are false 😱</a></li>
-=======
 <li class="chapter" data-level="6.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>6.5</b> 73.6% of statistics are false 🤯</a></li>
->>>>>>> 9c7ed031cfd581cc54f9b1c823f2e6dc9d5bd90d
 <li class="chapter" data-level="6.6" data-path="data-manipulation.html"><a href="data-manipulation.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>6.6</b> How to save time with dplyr</a></li>
 <li class="chapter" data-level="6.7" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>6.7</b> Look at the data</a></li>
 <li class="chapter" data-level="6.8" data-path="data-manipulation.html"><a href="data-manipulation.html#transform-the-data"><i class="fa fa-check"></i><b>6.8</b> Transform the data</a></li>
@@ -569,13 +565,13 @@ with dollar sign.</p>
 <p>You can also work with tibbles, which are data frames but have nicer printing:</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="co"># The tidyverse library has functions for making tibbles</span></a>
 <a class="sourceLine" id="cb97-2" title="2"><span class="kw">library</span>(tidyverse) </a></code></pre></div>
-<pre><code>## -- Attaching packages --------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
 <pre><code>## v ggplot2 3.2.1     v purrr   0.3.4
 ## v tibble  2.1.3     v dplyr   0.8.3
 ## v tidyr   1.0.0     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.4.0</code></pre>
 <pre><code>## Warning: package &#39;purrr&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------------------------ tidyverse_conflicts() --
+<pre><code>## -- Conflicts ---------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
