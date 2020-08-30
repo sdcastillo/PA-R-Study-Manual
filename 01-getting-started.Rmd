@@ -16,12 +16,31 @@ Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="false")
 remotes::install_github("sdcastillo/ExamPAData", force = TRUE)
 ```
 
-Once this has run, you can access the data using `library(ExamPAData)`.  To check that this is installed correctly see if the `insurance` data set has loaded.  If this returns "object not found", then the library was not installed.
+Once this has run, you can access the data using `library(ExamPAData)`.  To check that this is installed correctly see if the `insurance` data set has loaded.  If this returns "object not found", then the library was not installed.  If you get an error during the installation, restart your RStudio and then run `Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="false")` and `remotes::install_github("sdcastillo/ExamPAData", force = TRUE)` separately.
 
 ```{r}
 library(ExamPAData)
 summary(insurance)
 ```
+
+For your convenience, you can use these data sets for your own practice.  They make great candidates for machine learning problems.  
+
+| Dataset   |      Description      |
+|----------|-------------|
+|`actuary_salaries`| DW Simpson actuarial salary data|
+|`june_pa`|Auto crash data set from SOA June 2019 PA|
+|`customer_value`| Customer value data set from December 2019 PA|
+|`exam_pa_titanic`| Titanic passengers as used in ExamPA.net's practice exam |
+|`apartment_apps`| Apartment applications as used in ExamPA.net's Practice Exam|
+|`health_insurance`| Health insurance claims as used in ExamPA.net's Practice Exam|
+|`student_success`| SOA Student Success PA Sample Project, 2019|
+|`readmission`| SOA Hospital Readmissions Sample Exam, 2019 |
+|`insurance`| SOA Insurance data set, 2019|
+|`auto_claim`| Automotive claims |
+|`boston`| Boston housing data set |
+|`galton`| Galton data set used in ISLR |
+|`german`| Credit data from UCI Machine Learning Repository |
+
 
 ## Download ISLR
 

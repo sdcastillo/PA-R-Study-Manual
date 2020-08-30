@@ -149,10 +149,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>6</b> Data manipulation</a><ul>
 <li class="chapter" data-level="6.1" data-path="data-manipulation.html"><a href="data-manipulation.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>6.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="6.2" data-path="data-manipulation.html"><a href="data-manipulation.html#be-a-detective"><i class="fa fa-check"></i><b>6.2</b> Be a detective 🔎</a></li>
+<li class="chapter" data-level="6.2" data-path="data-manipulation.html"><a href="data-manipulation.html#be-a-detective"><i class="fa fa-check"></i><b>6.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="6.3" data-path="data-manipulation.html"><a href="data-manipulation.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="6.4" data-path="data-manipulation.html"><a href="data-manipulation.html#factor-or-numeric"><i class="fa fa-check"></i><b>6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="6.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>6.5</b> 73.6% of statistics are false 🤯</a></li>
+<li class="chapter" data-level="6.5" data-path="data-manipulation.html"><a href="data-manipulation.html#of-statistics-are-false"><i class="fa fa-check"></i><b>6.5</b> 73.6% of statistics are false 😲</a></li>
 <li class="chapter" data-level="6.6" data-path="data-manipulation.html"><a href="data-manipulation.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>6.6</b> How to save time with dplyr</a></li>
 <li class="chapter" data-level="6.7" data-path="data-manipulation.html"><a href="data-manipulation.html#look-at-the-data"><i class="fa fa-check"></i><b>6.7</b> Look at the data</a></li>
 <li class="chapter" data-level="6.8" data-path="data-manipulation.html"><a href="data-manipulation.html#transform-the-data"><i class="fa fa-check"></i><b>6.8</b> Transform the data</a></li>
@@ -304,7 +304,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-2" title="2"><span class="co"># install.packages(&quot;remotes&quot;)</span></a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw">Sys.setenv</span>(<span class="dt">R_REMOTES_NO_ERRORS_FROM_WARNINGS=</span><span class="st">&quot;false&quot;</span>)</a>
 <a class="sourceLine" id="cb1-4" title="4">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;sdcastillo/ExamPAData&quot;</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p>Once this has run, you can access the data using <code>library(ExamPAData)</code>. To check that this is installed correctly see if the <code>insurance</code> data set has loaded. If this returns “object not found”, then the library was not installed.</p>
+<p>Once this has run, you can access the data using <code>library(ExamPAData)</code>. To check that this is installed correctly see if the <code>insurance</code> data set has loaded. If this returns “object not found”, then the library was not installed. If you get an error during the installation, restart your RStudio and then run <code>Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="false")</code> and <code>remotes::install_github("sdcastillo/ExamPAData", force = TRUE)</code> separately.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw">summary</span>(insurance)</a></code></pre></div>
 <pre><code>##     district       group               age               holders       
@@ -321,6 +321,73 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##  Mean   : 49.23  
 ##  3rd Qu.: 55.50  
 ##  Max.   :400.00</code></pre>
+<p>For your convenience, you can use these data sets for your own practice. They make great candidates for machine learning problems.</p>
+<table>
+<colgroup>
+<col width="43%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>actuary_salaries</code></td>
+<td>DW Simpson actuarial salary data</td>
+</tr>
+<tr class="even">
+<td><code>june_pa</code></td>
+<td>Auto crash data set from SOA June 2019 PA</td>
+</tr>
+<tr class="odd">
+<td><code>customer_value</code></td>
+<td>Customer value data set from December 2019 PA</td>
+</tr>
+<tr class="even">
+<td><code>exam_pa_titanic</code></td>
+<td>Titanic passengers as used in ExamPA.net’s practice exam</td>
+</tr>
+<tr class="odd">
+<td><code>apartment_apps</code></td>
+<td>Apartment applications as used in ExamPA.net’s Practice Exam</td>
+</tr>
+<tr class="even">
+<td><code>health_insurance</code></td>
+<td>Health insurance claims as used in ExamPA.net’s Practice Exam</td>
+</tr>
+<tr class="odd">
+<td><code>student_success</code></td>
+<td>SOA Student Success PA Sample Project, 2019</td>
+</tr>
+<tr class="even">
+<td><code>readmission</code></td>
+<td>SOA Hospital Readmissions Sample Exam, 2019</td>
+</tr>
+<tr class="odd">
+<td><code>insurance</code></td>
+<td>SOA Insurance data set, 2019</td>
+</tr>
+<tr class="even">
+<td><code>auto_claim</code></td>
+<td>Automotive claims</td>
+</tr>
+<tr class="odd">
+<td><code>boston</code></td>
+<td>Boston housing data set</td>
+</tr>
+<tr class="even">
+<td><code>galton</code></td>
+<td>Galton data set used in ISLR</td>
+</tr>
+<tr class="odd">
+<td><code>german</code></td>
+<td>Credit data from UCI Machine Learning Repository</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="download-islr" class="section level2">
 <h2><span class="header-section-number">4.2</span> Download ISLR</h2>
