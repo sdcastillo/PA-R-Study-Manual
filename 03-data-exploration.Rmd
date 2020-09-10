@@ -1,4 +1,4 @@
-# Data manipulation
+# Data exploration
 
 ```{r warning = F, echo = F, message = F}
 library(plyr)
@@ -21,9 +21,97 @@ library(kableExtra)
 format_table <- function(data){data %>% kableExtra::kable("html") %>% kable_styling(bootstrap_options = "striped", full_width = F)}
 ```
 
-Exam PA will have questions about the data.  That is a fact.  Every version of Exam PA such as December 2018, June 2019, and December 2019 have all had questions about data manipulation.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.  
+Exploration is about making discoveries.  You'll need a strong sense of curiosity coupled with technical skill if you want to be able to make sense of the data.  A scientist may use a microscope or a physicist a partical accelerator to explore their ideas, but actuaries use data visualization and statistics.  This chapter will give you the tools to take dirty, unprocessed data and clean it up, discover trends using graphs and summary statistics, and communicate your results to a business audience.
 
-This lesson is based on the first task of the December 2019 Exam PA.
+Exam PA will have questions about the data.  That is a fact.  Every version of Exam PA such as December 2018, June 2019, and December 2019 have all had questions about data exploration ranging from 10 - 15 points.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.  
+
+## How to make graphs in R
+
+Let's create a histogram of the claims.  The first step is to create a blank canvas that holds the columns that are needed.  The library to make this is called [ggplot2](https://ggplot2.tidyverse.org/).  
+
+The `aesthetic` argument, `aes`, means that the variable shown will the the claims.
+
+```{r message = F, echo = F}
+library(Cairo)
+library(tidyverse)
+theme_set(theme_bw())
+```
+
+
+```{r message=F}
+library(ExamPAData)
+p <- insurance %>% ggplot(aes(claims))
+```
+
+If we look at `p`, we see that it is nothing but white space with axis for `count` and `income`.
+
+```{r message=F}
+p
+```
+
+## Add a plot
+
+We add a histogram
+
+```{r warning = F, message=F}
+p + geom_histogram()
+```
+
+Different plots are called "geoms" for "geometric objects".  Geometry = Geo (space) + meter (measure), and graphs measure data.  For instance, instead of creating a histogram, we can draw a gamma distribution with `stat_density`.
+
+```{r message=F}
+p + stat_density()
+```
+
+Create an xy plot by adding and `x` and a `y` argument to `aesthetic`.
+
+```{r message=F}
+insurance %>% 
+  ggplot(aes(x = holders, y = claims)) + 
+  geom_point()
+```
+
+## Data manipulation chaining
+
+Pipes allow for data manipulations to be chained with visualizations.
+
+```{r message=F}
+termlife %>% 
+  filter(FACE > 0) %>% 
+  mutate(INCOME_AGE_RATIO = INCOME/AGE) %>% 
+  ggplot(aes(INCOME_AGE_RATIO, FACE)) + 
+  geom_point() + 
+  theme_bw()
+```
+
+## The different graph types
+
+Only four types of graphs are used for data exploration.  You will only need to understand how to interpret them.  The SOA will provide you with code needed to create them.  There will not be enough time for you to make your own graphs.
+
+### Histogram
+
+The [histogram](https://ggplot2.tidyverse.org/reference/geom_histogram.html) is used when you want to look at the probability distribution of a continuous variable.  
+
+The template code in your Rmd file will look like this.  Just change "variable" to the name without quotes of the variable and then copy and paste.
+
+
+### Box plot
+
+The [boxplot](https://ggplot2.tidyverse.org/reference/geom_boxplot.html) compactly displays the distribution of a continuous variable. It visualises five summary statistics (the median, two hinges and two whiskers), and all "outlying" points individually.
+
+### Scatterplot
+
+The [point geom](https://ggplot2.tidyverse.org/reference/geom_point.html) is used to create scatterplots. The scatterplot is most useful for displaying the relationship between two continuous variables. It can be used to compare one continuous and one categorical variable, or two categorical variables.
+
+### Bar charts
+
+There are two types of [bar charts](https://ggplot2.tidyverse.org/reference/geom_bar.html): geom_bar() (Univariate) and geom_col() (Bivatiate). geom_bar() makes the height of the bar proportional to the number of cases in each group (or if the weight aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use geom_col() instead. geom_bar() uses stat_count() by default: it counts the number of cases at each x position.
+
+
+
+## Exam question examples
+
+This chapter is based on the first task of the December 2019 Exam PA.
 
 **TASK 1 (12 points)**
 
