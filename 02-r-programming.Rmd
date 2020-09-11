@@ -1,4 +1,6 @@
-# How much R do I need to knoew to pass?
+# How much R do I need to know to pass?
+
+<span style="color: blue;">**This is a communication exam.**</span>
 
 There is no need to become an R expert for this exam.  They will provide you with a lot of code and the challenging part will be in interpreting what it does.  You won't be expected to do complex tasks from scratch.  The most programming-intensive part is the data exploration, but this is only the first few questions.  Subsequent questions on modeling will ask you to make changes to parameters.
 
@@ -109,7 +111,7 @@ Don't panic if all of this code is confusing.  Just focus on reading the comment
 This chapter covers the bare minimum of R programming needed for Exam PA. The book 
 "R for Data Science" provides more detail.
 
-https://r4ds.had.co.nz/
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SluU_zBIFsE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Notebook chunks
 
