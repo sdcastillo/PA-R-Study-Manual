@@ -36,6 +36,11 @@ All of the statistical theory is explained, from linear regression to gradient b
 
 *We are thankful to all of the reviewers, guest editors, and past exam-takers who have helped to improve this book.  Thanks to the following persons who made changes to this book and its past versions: David Hill, Erlan Wheeler, Caden Collier, Peter Shelbe, Abhinav Gadde, Allen Meriken, [Kevin Kuo](https://github.com/kevinykuo), Aamir Ali, Matthew Caseras, and Liu Chang.*
 
+# Join the discussion
+
+Do you have questions about PA?  Have you discovered a typo in this Study Guide after running the code on your own computer?  Do you have suggestions for topics that need to be covered in this book but do not yet exist?  
+
+Your voice matters.  It's **you**, the actuarial community, who have made this online course so successful and so we want to hear what you have to say.  Send us a message on this thread on the [Actuarial Outpost](http://www.actuarialoutpost.com/actuarial_discussion_forum/showthread.php?t=345865).
 
 # The exam
 
