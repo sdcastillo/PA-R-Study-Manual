@@ -1,3 +1,109 @@
+# How much R do I need to knoew to pass?
+
+There is no need to become an R expert for this exam.  They will provide you with a lot of code and the challenging part will be in interpreting what it does.  You won't be expected to do complex tasks from scratch.  The most programming-intensive part is the data exploration, but this is only the first few questions.  Subsequent questions on modeling will ask you to make changes to parameters.
+
+You will be expected to tweak parts and explore what happens.  A good attention to detail and a close reading of the R documention will go a long ways.  You will spend much more of your time writing in English and explaining what the code is doing than writing it yourself.  You will also be graded based on how well you document your code in the .Rmd file. 
+
+The June 16 2020 Project Statement has this under "General information for candidates."
+
+>Each task will be graded on the quality of your thought process, **added or modified code**, and conclusions
+
+>At a minimum you must submit your completed report template and an Rmd file that supports your
+work. Graders expect that your Rmd code can be run from beginning to end. The code snippets provided
+should either be commented out or adapted for execution. Ensure that it is clear where in the code each
+of the tasks is addressed. 
+
+In other words, whatever results you have in your report will need to be consistent with what the grading team finds when they run your .rmd file.
+
+## Example 1 - Making parameter changes
+
+**SOA Exam PA June 16, 2020, Task 8**
+
+>8. (4 points) Perform feature selection with lasso regression.
+>
+>Run a lasso regression using the code chunk provided. **The code will need to be modified to
+reflect your decision in Task 7 regarding the PCA variable.**
+
+You probably read this and asked "what is a lasso regression?" and with good reason - we haven't yet covered this topic.  All that you need to know is **highlighted in black:** you will need to change the code that they give you, which is below.
+
+You need to choose between using one of two data sets:
+
+- DATA SET A
+- DATA SET B
+
+Then ignore everything else!
+
+```{r eval = F , echo = T}
+# Format data as matrices (necessary for glmnet). 
+# Uncomment two items that reflect your decision from Task 7.
+
+#DATA SET A
+lasso.mat.train <- model.matrix(days ~ . - PC1, data.train)
+lasso.mat.test <- model.matrix(days ~ . - PC1, data.test)
+
+#DATA SET B
+# lasso.mat.train <- model.matrix(days ~ . - num_procs - num_meds - num_ip - num_diags, data.train)
+# lasso.mat.test <- model.matrix(days ~ . - num_procs - num_meds - num_ip - num_diags, data.test)
+
+set.seed(789)
+
+lasso.cv <- cv.glmnet(
+  x = lasso.mat.train,
+  y = data.train$days,
+  family = "poisson", # Do not change.
+  alpha = 1 # alpha = 1 for lasso
+)
+```
+
+
+If you wanted to use data set B, you would just add comments to data set A and uncomment B.
+
+```{r eval = F , echo = T}
+#DATA SET A
+# lasso.mat.train <- model.matrix(days ~ . - PC1, data.train)
+# lasso.mat.test <- model.matrix(days ~ . - PC1, data.test)
+
+#DATA SET B
+lasso.mat.train <- model.matrix(days ~ . - num_procs - num_meds - num_ip - num_diags, data.train)
+lasso.mat.test <- model.matrix(days ~ . - num_procs - num_meds - num_ip - num_diags, data.test)
+
+```
+
+## Example 2 - Data exploration
+
+That last example was easy.  They might ask you to do something like the following:
+
+**Template code: **
+
+```{r eval = F, echo = T}
+# This code takes a continuous variable and creates a binned factor variable. 
+# The code applies it directly to the capital gain variable as an 
+# example. right = FALSE means that the left number is included and 
+# the right number excluded. So, in this case, the first bin runs from 0 to 
+# 1000 and includes 0 and excludes 1000. Note that the code creates a new 
+# variable, so the original variable is retained.
+df$cap_gain_cut <- cut(df$cap_gain, breaks = c(0, 1000, 5000, Inf), right = FALSE, labels = c("lowcg", "mediumcg", "highcg"))
+```
+
+To answer this question correctly, you would need to 
+
+- Understand that the code is taking the capital gains recorded on investments, `cap_gain`, and then creating bins so that the new variable is "lowcg" for values between 0 and 1000, "mediumcp" from 1000 to 5000, and "highcg" for all values above 5000.  
+- Then you would need to interpret a statistical model
+- Finally, use this result to change these cutoff values so that "low cg" is all values less than 5095.5, "medium cg" is all values from 5095.5 to 7055.5, and so forth.  You would need to do this for two data sets, `data.train`, and `data.test`.
+
+**Solution code: **
+
+```{r eval = F}
+# This code cuts a continuous variable into buckets. 
+# The process is applied to both the training and test sets. 
+
+data.train$cap_gain_cut <- cut(data.train$cap_gain, breaks = c(0, 5095.5, 7055.5, Inf), right = FALSE, labels = c("lowcg", "mediumcg", "highcg"))
+
+data.test$cap_gain_cut <- cut(data.test$cap_gain, breaks = c(0, 5095.5, 7055.5, Inf), right = FALSE, labels = c("lowcg", "mediumcg", "highcg"))
+```
+
+Don't panic if all of this code is confusing.  Just focus on reading the comments.  As you can see, this is less of a programming question than it is a "logic and reasoning" question.  
+
 # R programming
 
 This chapter covers the bare minimum of R programming needed for Exam PA. The book 

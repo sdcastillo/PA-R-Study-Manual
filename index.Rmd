@@ -1,7 +1,7 @@
 --- 
 title: "Predictive Analytics for Actuaries"
 author: "Sam Castillo"
-date: "7/31/2020"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 github-repo: 
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -77,6 +77,16 @@ The following video from Prometric shows what the computer set up will look like
 <p><a href="https://vimeo.com/304653968">SOAFinalCut</a> from <a href="https://vimeo.com/user10231556">Prometric</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 https://player.vimeo.com/video/304653968
+
+In the past, candidates have been given out a printed Project Statement which they were allowed to read during the 15-minute tutorial before the timer startedl however, as of [Fall 2020](https://www.soa.org/globalassets/assets/files/edu/2020/fall/soa-exams-additional-details.pdf), this may no longer be the case and all files will be given to you on the computer.  This announcement by the SOA may be referring to only those exams which used to be on paper but are transferring to computer-based testing, in which case PA candidates would still get the printed statement.  It may be best to practice assuming that you will need to work on a single monitor.  We will update this once we confirm with the SOA.
+
+</br>
+
+```{block, type='studytip'}
+**Warning:** Be careful to submit the right version of your RMD file!  If you upload the wrong version of the file at Prometric then you will be graded unfairly and there is no way to recover your lost file.  The SOA will only confirm that they received your files.  You can email them after your exam (before the grading starts) to confirm that they received your files.
+```
+
+</br>
 
 # Introduction
 

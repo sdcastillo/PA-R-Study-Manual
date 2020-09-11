@@ -44,3 +44,11 @@ div.FOO {
   font-size: 16px;
   vertical-align: middle;
 }
+
+.studytip {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 10px; 
+  width: 600px;
+  text-align: left
+}

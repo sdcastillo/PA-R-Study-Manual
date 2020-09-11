@@ -781,7 +781,7 @@ The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i
 plot(model, which = 2)
 ```
 
-## Log transforms of continuous predictors
+## Log transforms of predictors
 
 When a log link is used, taking the natural logs of continuous variables allows for the scale of each predictor to match the scale of the thing that they are predicting, the log of the mean of the response.  In addition, when the distribution of the continuous variable is skewed, taking the log helps to make it more symmetric.
 
@@ -793,7 +793,30 @@ $$log(\mu) = \beta_0 + \beta_1 log(X)$$
 To solve for $\mu$, take the exponent of both sides
 
 $$\mu = e^{\beta_1} e^{\beta_1 log(X)} = e^{\beta_0} X^{\beta_1}$$
+### Example
 
+In the Hospital Readmission sample project, one of the predictor variables, "Length of stay", is the number of days since a person has been readmitted to the hospital.  You can tell that it's right-skewd because the median is higher than the mean.
+
+```{r}
+summary(readmission$LOS)
+```
+
+But it could also be thought of as a discrete variable because it only takes on 36 values. **Should you still apply a log transform?**
+
+```{r}
+readmission %>% count(LOS)
+```
+
+Here are the histograms
+
+```{r echo = F, warning=F, message = F, fig.height=4}
+library(ggpubr)
+p1 <- readmission %>% ggplot(aes(LOS)) + geom_histogram() + ggtitle("Without Log Transform")
+p2 <- readmission %>% ggplot(aes(log(LOS))) + geom_histogram() + ggtitle("With Log Transform")
+ggarrange(p1,p2)
+```
+
+**Yes**, the SOA's solution applys the log transform.
 
 ## Reference levels
 
