@@ -11,7 +11,7 @@ For your convenience, all data in this book, including data from prior exams and
 
 ```{r eval = F}
 # Install remotes if it's not yet installed
-# install.packages("remotes")
+install.packages("remotes")
 Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="false")
 remotes::install_github("sdcastillo/ExamPAData", force = TRUE)
 ```

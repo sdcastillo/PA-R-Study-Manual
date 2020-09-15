@@ -168,7 +168,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="data-exploration.html"><a href="data-exploration.html#how-to-transform-the-data"><i class="fa fa-check"></i><b>8.5</b> How to transform the data</a></li>
 <li class="chapter" data-level="8.6" data-path="data-exploration.html"><a href="data-exploration.html#a-real-example"><i class="fa fa-check"></i><b>8.6</b> A real example</a><ul>
 <li class="chapter" data-level="8.6.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>8.6.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="8.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>8.6.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="8.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>8.6.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="8.6.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>8.6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="8.6.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>8.6.4</b> Factor or numeric ❓</a></li>
 <li class="chapter" data-level="8.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>8.6.5</b> 73.6% of statistics are false 😲</a></li>
@@ -313,7 +313,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> Download the data</h2>
 <p>For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called <code>ExamPAData</code> by the author. To access, simply run the below lines of code to download this data.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Install remotes if it&#39;s not yet installed</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co"># install.packages(&quot;remotes&quot;)</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw">Sys.setenv</span>(<span class="dt">R_REMOTES_NO_ERRORS_FROM_WARNINGS=</span><span class="st">&quot;false&quot;</span>)</a>
 <a class="sourceLine" id="cb1-4" title="4">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;sdcastillo/ExamPAData&quot;</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Once this has run, you can access the data using <code>library(ExamPAData)</code>. To check that this is installed correctly see if the <code>insurance</code> data set has loaded. If this returns “object not found”, then the library was not installed. If you get an error during the installation, restart your RStudio and then run <code>Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="false")</code> and <code>remotes::install_github("sdcastillo/ExamPAData", force = TRUE)</code> separately.</p>
