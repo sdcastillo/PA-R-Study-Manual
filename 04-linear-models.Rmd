@@ -436,9 +436,25 @@ If categorical predictors are used, then the interpretation is very similar.  Sa
 
 \* Assuming all other variables are held constant.
 
+
+</br>
+
+```{block, type='studytip'}
+**Warning:** Never take the log of Y with a GLM!  This is a common mistake because that's how we handled skewness for multiple linear regression models, but that was before we had the GLM in our toolbox.  Don't move on until you understand the difference between these two models: 
+
+`glm(y ~ x, family = gaussian(link = "log"), data = data)` 
+
+`glm(log(y) ~ x, family = gaussian(link = "identity"), data = data)`
+
+The first says that the target has a Gaussian distribution which has a mean equal to the log of the linear predictor.  The second says that the **log of the target** has a Guassian distribution has a mean exactly equal to the linear predictor.  You'll remember from Exam P that when you apply a transform to a random variable, the distribution changes completely.  Try running the above examples on real data and see if you can spot the differences in the results.
+```
+
+</br>
+
+
 ## Other links
 
-The other link functions are not straight-forward to interpret and so it is unlikely that you would be asked to do so.
+The other link functions are not straight-forward to interpret using math.  One solution is to use the **model-demo-method.**
 
 # GLMs for classification
 
@@ -511,11 +527,52 @@ The net result is that when a variable increases the linear predictor, this incr
 
 ### Probit, Cauchit, Cloglog
 
-These link functions are still monotonic and so the signs of the coefficients can be interpreted to mean that the variable has a positive or negative impact on the target.  
+These link functions are still monotonic and so the signs of the coefficients can be interpreted to mean that the variable has a positive or negative impact on the target. 
 
-More extensive interpretation is not straight-forward.  In the case of the Probit, instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1).  There is no way of taking this inverse directly.
+More extensive interpretation is not straight-forward.  In the case of the Probit, instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1).  There is no way of taking this inverse directly.  
 
-## Example
+## Demo the model for interpretation
+
+For uglier link functions, we can rely on trial-and-error to interpret the result.  We'll call this the **"model-demo method"**, which as the name implies, involes running example cases through and seeing how the results change.
+
+This method works not only for categorical GLMs, but **any other type of model** such as a continuous GLM, GBM, or random forest.
+
+**SOA Exam PA, December 12, 2019, task 11**
+
+>Marketing has asked for a demonstration of how your model is to be used with examples of cases that predict high value and cases that predict low value. Your assistant has prepared some sample cases that can be run through your model. You may need to adjust some of them to obtain illustrative examples that would be of interest to marketing.
+
+>Write, in language appropriate for marketing, the illustration and demonstration they are looking for. This demonstration should be more detailed than what will go into your executive summary (which could include an example).
+
+>The sample cases are provided here and in your report template in case you wish to include them in your report.
+
+The answer asks you to run the example cases through your model to calculated the predicted probability of each case.  You need to create the column **Prob of high** using your GLM.  Then you assign each case as being "High" or "Low" depending on if this value is above the cutoff.
+
+The values that change are in **bold.**
+
+|age|education num|marital status    |occupation|cap_ga in|hours_per week|score|**Prob of high**|**Value**|
+|---|-------------|------------------|----------|---------|--------------|-----|------------|-----|
+|39 |10           |Married-spouse    |Group 3   |0        |40            |60   |0.32     |High |
+|39 |10           |**Never-married**    |Group 3   |0        |40            |60   |0.24      |**Low** |
+|39 |**5**           |Married-spouse    |Group 3   |0        |40            |60   |0.39       |High |
+|39 |10           |Married-spouse    |**Group 5**   |0        |40            |60   |0.80     |High |
+|39 |10           |Married-spouse    |Group 3   |0        |**30**            |60   |0.18        |**Low**  |
+
+You can interpret this as:
+
+- The typical profitable customer is middle aged (39 years old), has 10 years of education, is married, and in group 3
+- Having never married decreases profitability
+- Being less educated does not decreases profitability.  You can see this because the customer with `education_num = 5` has the same characteristics as the first customer
+- Being in Group 5 increases profitability.  You can see this because `Prob of high` increases to 0.8.
+- Working fewer than 40 hours per week decreases profitability
+
+This was a difficult question.  Don't be afraid to be assertive and think creatively or to change the values that they give you.  The SOA's solutions says
+
+>Many candidates struggled with this task. Candidates needed to include sample cases that resulted in low and high value predictions and clearly describe the analysis for the marketing team. 
+
+>Candidates were encouraged to modify the supplied cases. Few elected to test changes in both directions from the base case.
+
+
+## Example - Logit
 
 Using the `auto_claim` data, we predict whether or not a policy has a claim.  This is also known as the *claim frequency*.
 
