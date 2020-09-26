@@ -171,7 +171,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>8.6.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="8.6.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>8.6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="8.6.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>8.6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="8.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>8.6.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="8.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>8.6.5</b> 73.6% of statistics are false 😱</a></li>
 </ul></li>
 <li class="chapter" data-level="8.7" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>8.7</b> Exercises</a></li>
 <li class="chapter" data-level="8.8" data-path="data-exploration.html"><a href="data-exploration.html#answers-to-exercises"><i class="fa fa-check"></i><b>8.8</b> Answers to exercises</a></li>
@@ -473,7 +473,19 @@ Figure 13.2: Example of strong interaction
 <div id="offsets" class="section level2">
 <h2><span class="header-section-number">13.6</span> Offsets</h2>
 <p>In certain situations, it is convenient to include a constant term in the linear predictor. This is the same as including a variable that has a coefficient equal to 1. We call this an <em>offset</em>.</p>
-<p><span class="math display">\[g(\mu) = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \text{offset}\]</span></p>
+<p><span class="math display">\[g(\mu) = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \text{offset}\]</span>
+On Exam PA, offsets will only be used for one special case:</p>
+<ol style="list-style-type: decimal">
+<li>With Poisson regression</li>
+<li>With a log link function</li>
+<li>As a measure of exposure (usually length of policy period)</li>
+</ol>
+<p>While it’s technically possible to use offsets in other ways, this is not likely to appear on PA.</p>
+<p>If modeling the spread of COVID, the exposure would be the number of people who were exposed to the virus and the response would be the number of people who were infected.</p>
+<p>In auto insurance, the exposure might be the number of months of coverage and the response would be the claims incurred. Consider a very simple model which only uses the year that the car was manufactured as a predictor. This expected value of the claims, the target variable, would be</p>
+<p><span class="math display">\[log(E[\frac{\text{Claims}}{\text{Months}}]) = \beta_0 + \beta_1  \text{Year}\]</span>
+Then you can use the property of the log where <span class="math inline">\(log(\frac{A}{B}) = log(A) - log(B)\)</span> to move things around. Because <span class="math inline">\(\text{Months}\)</span> is known, you can remove the expected value. This is the offset term.</p>
+<p><span class="math display">\[log(E[\text{Claims}]) = \beta_0 + \beta_1  \text{Year} + \text{Months}\]</span></p>
 </div>
 <div id="tweedie-regression" class="section level2">
 <h2><span class="header-section-number">13.7</span> Tweedie regression</h2>

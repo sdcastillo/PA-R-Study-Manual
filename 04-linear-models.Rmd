@@ -957,7 +957,25 @@ Any time that the effect that one variable has on the response is different depe
 
 In certain situations, it is convenient to include a constant term in the linear predictor.  This is the same as including a variable that has a coefficient equal to 1.  We call this an *offset*.
 
+
 $$g(\mu) = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \text{offset}$$
+On Exam PA, offsets will only be used for one special case:
+
+1) With Poisson regression
+2) With a log link function
+3) As a measure of exposure (usually length of policy period)
+
+While it's technically possible to use offsets in other ways, this is not likely to appear on PA.
+
+If modeling the spread of COVID, the exposure would be the number of people who were exposed to the virus and the response would be the number of people who were infected.
+
+In auto insurance, the exposure might be the number of months of coverage and the response would be the claims incurred.  Consider a very simple model which only uses the year that the car was manufactured as a predictor.  This expected value of the claims, the target variable, would be
+
+$$log(E[\frac{\text{Claims}}{\text{Months}}]) = \beta_0 + \beta_1  \text{Year}$$
+Then you can use the property of the log where $log(\frac{A}{B}) = log(A) - log(B)$ to move things around.  Because $\text{Months}$ is known, you can remove the expected value.  This is the offset term.
+
+
+$$log(E[\text{Claims}]) = \beta_0 + \beta_1  \text{Year} + \text{Months}$$
 
 ## Tweedie regression
 
