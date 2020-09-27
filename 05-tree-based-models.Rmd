@@ -19,9 +19,8 @@ Tree-based models allow for abrupt changes in $Y$.
 
 ## Decision Trees
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/7VeUPuFGJHk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=7VeUPuFGJHk,wpNl-JwwplA,g9c66TUylZ4,D0efHEJsfHo" frameborder="0" allowfullscreen></iframe>
 
-StatQuest. “Decision Trees” YouTube, Joshua Starmer, 22 Jan. 2018, https://www.youtube.com/watch?v=7VeUPuFGJHk
 
 Decision trees can be used for either classification or regression problems.  The model structure is a series of yes/no questions.  Depending on how each observation answers these questions, a prediction is made.
 
@@ -235,11 +234,12 @@ Boosting always uses the original training data and iteratively fits models to t
 
 ## Random Forests
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/J4Wdy0Wc_xQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-StatQuest. “Random Forests” YouTube, Joshua Starmer, 5 Feb 2018, https://www.youtube.com/watch?v=J4Wdy0Wc_xQ&t=472s
-
 A random forest is the most common example of bagging.  As the name implies, a forest is made up of *trees*.  Seperate trees are fit to sampled data sets.  For random forests, there is one minor modification: in order to make each model even more different, each tree selects a *random subset of variables*.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=J4Wdy0Wc_xQ,nyxTdL_4Q-Q,6EXPYzbfLCE" frameborder="0" allowfullscreen></iframe>
+
+
+If we had to explain why a random forest works in three steps, they would be:
 
 1. Assume that the underlying process, $Y$, has some signal within the data $\mathbf{X}$.
 2. Introduce randomness (variance) to capture the signal.
@@ -409,18 +409,13 @@ Another ensemble learning method is *gradient boosting*, also known as the Gradi
 
 Before diving in to the gradient boosting, understanding the AdaBoost algorithm is helpful.
 
-### AdaBoost
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LsK-xG1cLYA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-StatQuest. “AdaBoost, Clearly Explained” YouTube, Joshua Starmer, 14 Jan 2019, https://www.youtube.com/watch?v=LsK-xG1cLYA&t=215s
 
 ### Gradient Boosting
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/3CC4N4z3GJc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=LsK-xG1cLYA,3CC4N4z3GJc,2xudPOBz-vs,jxuNLH5dXCs,StWY5QWMXCw" frameborder="0" allowfullscreen></iframe>
 
-StatQuest. “Gradient Boost Part 1: Understanding Main Ideas” YouTube, Joshua Starmer, 25 Mar 2019, https://www.youtube.com/watch?v=3CC4N4z3GJc&t=390s
-
+<br>
 
 ### Notation
 

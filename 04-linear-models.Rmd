@@ -64,6 +64,10 @@ Another way of saying this is in terms of expected value: the model $f(X)$ estim
 
 Also known as *simple linear regression*, OLS predicts the target as a weighted sum of the variables.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=nk2CQITm_eo,u1cc1r_Y7M0" frameborder="0" allowfullscreen></iframe>
+
+<br>
+
 We find a $\mathbf{\beta}$ so that 
 
 $$
@@ -458,7 +462,12 @@ The other link functions are not straight-forward to interpret using math.  One 
 
 # GLMs for classification
 
-For classification, the predicted values need to be a category instead of a number.  Using a discrete target distribution ensures that this will be the case.  The probability of an event occurring is $E[Y] = p$.  Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability.  
+For classification, the predicted values need to be a category instead of a number.  Using a discrete target distribution ensures that this will be the case.  The probability of an event occurring is $E[Y] = p$.  Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability. 
+
+These StatQuest videos explain the most common type of GLM classification model: Logistic regression.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=yIYKR4sgzI8,vN5cNN2-HWE,BfKanl1aSG0,xxFYro8QuXA,C4N3_XJJ-jU" frameborder="0" allowfullscreen></iframe>
+
 
 ## Binary target
 
@@ -687,6 +696,8 @@ The punchline is that the accuracy depends on the cutoff value, and changing the
 
 For regression problems, when the output is a whole number, we can use the sum of squares $\text{RSS}$, the r-squared $R^2$, the mean absolute error $\text{MAE}$, and the likelihood.  For classification problems we need to a new set of metrics.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4jRBRDbJemM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 A *confusion matrix* shows is a table that summarizes how the model classifies each group.
 
 - No claims and predicted to not have claims - **True Negatives (TN) = 1,489**
@@ -766,6 +777,8 @@ So far we have focused on how the target is related to the target.
 
 Learning from mistakes is the path to improvement.  For GLMs, residual analysis looks for patterns in the errors in order to find ways of improving the model.
 
+<iframe width="563" height="383" src="https://www.youtube.com/embed/9T0wlKdew6I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ### Raw residuals
 
 The word "residual" by itself actually means the "raw residual" in GLM language.  This is the difference in actual vs. predicted values.
@@ -775,6 +788,8 @@ $$\text{Raw Residual} = y_i - \hat{y_i}$$
 ### Deviance residuals
 
 This is not meaningful for GLMs with non-Gaussian distributions.  To adjust for other distributions, we need the concept of *deviance residuals*.
+
+<iframe width="563" height="383" src="https://www.youtube.com/embed/JC56jS2gVUE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 To paraphrase from this paper from the University of Oxford:
 
@@ -1262,6 +1277,8 @@ $$
 \sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2 + \lambda \sum_{j = 1}^p\beta_j^2
 $$
 
+<iframe width="563" height="383" src="https://www.youtube.com/embed/Q81RR3yKn30" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 This $\lambda$ controls how much of a penalty is imposed on the size of the coefficients.  When $\lambda$ is high, simpler models are treated more favorably because the $\sum_{j = 1}^p\beta_j^2$ carries more weight.  Conversely, then $\lambda$ is low, complex models are more favored.  When $\lambda = 0$, we have an ordinary GLM.
 
 ## Lasso
@@ -1274,6 +1291,8 @@ $$
 \sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2 + \lambda \sum_{j = 1}^p|\beta_j|
 $$
 
+<iframe width="563" height="383" src="https://www.youtube.com/embed/NGf0voTMlcs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 In ISLR, Hastie et al show that this results in coefficients being forced to be exactly 0.  This is extremely useful because it means that by changing $\lambda$, we can select how many variables to use in the model.
 
 **Note**: While any response family is possible with penalized regression, in R, only the Gaussian family is possible in the library `glmnet`, and so this is the only type of question that the SOA can ask.
@@ -1284,6 +1303,9 @@ The Elastic Net uses a penalty term which is between the L1 and L2 norms. The pe
 
 $$\text{RSS} + (1 - \alpha) \sum_{j = 1}^{p}\beta_j^2 + \alpha \sum_{j = 1}^p |\beta_j|$$
 When $\alpha = 1$, the model is known as the Lasso, and when $\alpha = 0$, the model is known as Ridge Regression. 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=1dKRdX9bfIo,ctmNq7FgbvI" frameborder="0" allowfullscreen></iframe>
+
 
 Luckily, none of this needs to be memorized.  On the exam, read the documentation in R to refresh your memory.  For the Elastic Net, the function is `glmnet`, and so running `?glmnet` will give you this info.
 
