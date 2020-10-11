@@ -15,6 +15,12 @@ theme_set(theme_bw())
 
 About 40-50% of the exam grade is based on modeling.  The goal is to be able to predict an unknown quantity.  In actuarial applications, this tends to be claims that occur in the future, death, injury, accidents, policy lapse, hurricanes, or some other insurable event.
 
+This chapter will cover the following learning objectives.
+
+```{r echo = F, fig.align="center", warning=F, out.width="400%"}
+knitr::include_graphics("images/learning_obj6.png")
+```
+
 ## Modeling vocabulary
 
 Modeling notation is sloppy because there are many words that mean the same thing.
@@ -1602,6 +1608,8 @@ Practice questions:
  * How do ridge regression and the lasso improve on simple least squares?
  * In what cases would you expect ridge regression outperform the lasso, and vice versa?
  
+# Bias-variance trade-off
+
 
  
 ## References

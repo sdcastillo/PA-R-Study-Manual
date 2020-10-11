@@ -27,6 +27,9 @@ For your convenience, you can use these data sets for your own practice.  They m
 
 | Dataset   |      Description      |
 |----------|-------------|
+|`customer_phone_calls`| Data used on June 18, 2020 Exam PA |
+|`patient_length_of_stay`| Data used on June 16, 2020 Exam PA|
+|`patient_num_labs`| Data used on June 19, 2020 Exam PA |
 |`actuary_salaries`| DW Simpson actuarial salary data|
 |`june_pa`|Auto crash data set from SOA June 2019 PA|
 |`customer_value`| Customer value data set from December 2019 PA|

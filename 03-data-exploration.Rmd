@@ -25,6 +25,21 @@ Exploration is about making discoveries.  You'll need a strong sense of curiosit
 
 About 10 - 15% of your grade will be based on data exploration.  Every version of Exam PA such as December 2018, June 2019, and December 2019 have all had questions about data exploration.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.  
 
+The syllabus divides this into *three* learning objectives, which can make the topic intimidating.  Data Visualization, Data Types and Exploration, and Data Issues and Resolutions, but you will always be doing these things together and so this chapter will cover all three at once.
+
+```{r echo = F, fig.align="center", warning=F, out.width="400%"}
+knitr::include_graphics("images/learning_obj3.png")
+```
+
+```{r echo = F, fig.align="center", warning=F, out.width="400%"}
+knitr::include_graphics("images/learning_obj4.png")
+```
+
+```{r echo = F, fig.align="center", warning=F, out.width="400%"}
+knitr::include_graphics("images/learning_obj5.png")
+```
+
+
 Exploratory Data Analysis (EDA) is usually the first phase of an analytics project.  This is as much of an art as it is a science because everyone has their own style.  If you ask two actuaries perform EDA on the same data set, they will likely use different methods.  These can be broken down into phases.  
 
 ```{r echo = F, fig.cap="Data Exploration Phases - From *R for Data Science*"}
