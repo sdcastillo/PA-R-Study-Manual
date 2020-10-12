@@ -1,7 +1,5 @@
 --- 
 title: "Exam PA Study Guide, Fall 2020"
-author: "Sam Castillo"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 github-repo: 
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -13,11 +11,15 @@ link-citations: yes
 favicon: images/artificial_actuary_logo_favicon.png
 ---
 
-# Welcome {-} 
+# Welcome {-}
 
 <hr>
 
-This is the study guide for [ExamPA.net](https://exampa.net), the online course for the SOA's Predictive Analytics exam.
+<img src="https://raw.githubusercontent.com/sdcastillo/ExamPAContent/master/Exam PA Study Guide.png" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />This is the study guide for [ExamPA.net](https://exampa.net), the online course for the SOA's Predictive Analytics exam. While meeting all of the learning requirements of Exam PA, this **200-page study guide** gives you data science and machine learning training. You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.
+
+The chapters on R-programming cover the foundational concepts with a focus on modern data science applications.  We give you time-saving coding tips and ways of checking your answers within RStudio.
+
+All of the statistical theory is explained, from linear regression to gradient boosted trees, and examples are provided of each model that you can reproduce.  Following the course materials “An Introduction to Statistical Learning“, we discuss model training, validation, as well as the advantages and disadvantages to each algorithm.
 
 </br>
 
@@ -25,14 +27,15 @@ This is the study guide for [ExamPA.net](https://exampa.net), the online course 
 <font size="10">**[Join the Online Course](https://www.exampa.net/)**</font>
 ```
 
-
 </br>
 
-<img src="https://raw.githubusercontent.com/sdcastillo/ExamPAContent/master/Exam PA Study Guide.png" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />While meeting all of the learning requirements of Exam PA, this **200-page study guide** gives you data science and machine learning training. You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.
+## FAQ: Frequently Asked Questions
 
-The chapters on R-programming cover the foundational concepts with a focus on modern data science applications.  We give you time-saving coding tips and ways of checking your answers within RStudio.
+**Does this replace the modules?**  No.  You can use the Fall 2020 Study Guide to *supplement* rather than replace the SOA's modules. You can think of the modules as the "textbook" which contains the source material and this study guide as the Cliff's Notes version.  We strive to make this study guide as thorough as possible, but a passive-learning, textbook format is not as efficient as giving you hands-on practice questions and access to live instructors where you can get answers to your questions in real-time.  After all, our goal is to reduce your study time as much as possible.  The online course gives gives you everthing needed to pass.
 
-All of the statistical theory is explained, from linear regression to gradient boosted trees, and examples are provided of each model that you can reproduce.  Following the course materials “An Introduction to Statistical Learning“, we discuss model training, validation, as well as the advantages and disadvantages to each algorithm.
+**Why is this free when other study manuals cost hundreds of dollars?** We're making this available to everyone taking the exam to spread the word about the course!  We're so confident that you will benefit from our hands-on teaching style that you will want to join our online course after getting a taste with this online textbook.  
+
+**How many study hours are needed?**  [Here is a study template](https://exampa.net/study-schedule/) which allocates 155 hours for this course and the SOA's modules.  The exact number of hours needed varies by individual.  Is English your native language?  Have you taken SRM?  Do you have prior R experience?  Are you a confident communicator?  All of these factors play a role.  That being said, planning a study schedule for PA is not different than for any of the other exams. You might have important deadlines, travel plans, or other obligations which need to be accomodated.  
 
 *We are thankful to all of the reviewers, guest editors, and past exam-takers who have helped to improve this book.  Thanks to the following persons who made changes to this book and its past versions: David Hill, Erlan Wheeler, Caden Collier, Peter Shelbe, Abhinav Gadde, Allen Meriken, [Kevin Kuo](https://github.com/kevinykuo), Aamir Ali, Matthew Caseras, and Liu Chang.*
 
@@ -40,7 +43,7 @@ All of the statistical theory is explained, from linear regression to gradient b
 
 Do you have questions about PA?  Have you discovered a typo in this Study Guide after running the code on your own computer?  Do you have suggestions for topics that need to be covered in this book but do not yet exist?  
 
-Your voice matters.  It's **you**, the actuarial community, who have made this online course so successful and so we want to hear what you have to say.  Send us a message on this thread on the [Actuarial Outpost](http://www.actuarialoutpost.com/actuarial_discussion_forum/showthread.php?t=345865).
+Your voice matters.  It's **you**, the actuarial community, who have made this online course so successful and so we want to hear what you have to say.  Send us a message on this thread on the [Actuarial Outpost](http://204.232.242.165/actuarial_discussion_forum/showthread.php?t=345865).
 
 # The exam
 
@@ -82,8 +85,6 @@ The following video from Prometric shows what the computer set up will look like
 
 <iframe src="https://player.vimeo.com/video/304653968" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 <p><a href="https://vimeo.com/304653968">SOAFinalCut</a> from <a href="https://vimeo.com/user10231556">Prometric</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-
-https://player.vimeo.com/video/304653968
 
 In the past, candidates have been given out a printed Project Statement which they were allowed to read during the 15-minute tutorial before the timer startedl however, as of [Fall 2020](https://www.soa.org/globalassets/assets/files/edu/2020/fall/soa-exams-additional-details.pdf), this may no longer be the case and all files will be given to you on the computer.  This announcement by the SOA may be referring to only those exams which used to be on paper but are transferring to computer-based testing, in which case PA candidates would still get the printed statement.  It may be best to practice assuming that you will need to work on a single monitor.  We will update this once we confirm with the SOA.
 

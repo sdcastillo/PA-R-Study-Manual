@@ -380,7 +380,7 @@ FROM health_insurance
 ```
 
 
-## A real example
+## Example: SOA PA 12/12/19, Task 1
 
 This chapter is based on the first task of the December 2019 Exam PA.
 

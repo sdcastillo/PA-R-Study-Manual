@@ -15,7 +15,7 @@ theme_set(theme_bw())
 
 About 40-50% of the exam grade is based on modeling.  The goal is to be able to predict an unknown quantity.  In actuarial applications, this tends to be claims that occur in the future, death, injury, accidents, policy lapse, hurricanes, or some other insurable event.
 
-This chapter will cover the following learning objectives.
+The next few chapters will cover the following learning objectives.
 
 ```{r echo = F, fig.align="center", warning=F, out.width="400%"}
 knitr::include_graphics("images/learning_obj6.png")
@@ -137,6 +137,10 @@ This chapter was based on Chapter 3, *Linear Regression*, of *An Introduction to
 
 ## Correlation
 
+*Correlation does not imply causation.*
+
+This is a common saying.  Just because two things are correlated does not necessarily mean that one casues the other.  Just because most actuaries work remotely when there it is cold and snowing does not mean that cold and snow cause anti-social, introverted work habits.  A more likely explanation is that actuaries are concerned about driving safely on icy roads and avoiding being involved in a car accident.
+
 ### Pearson's correlation
 
 **Pearson correlation:** Measures a linear dependence between two variables $X$ and $Y$. This is the most commonly used correlation method.  
@@ -172,7 +176,61 @@ These are the regression metrics that are most likely to appear on Exam PA.  Mem
 knitr::include_graphics("images/regression_metrics.png")
 ```
 
-## Example
+</br>
+
+```{block, type='studytip'}
+**Don't forget** the most important metric: **"usefullness!"**.  A model which has high predictive accuracy but which does not meet the needs of the business problem has low usefulness.  A model which is easy to explain to the PA exam graders has high usefulness.  
+
+>"Some candidates did not consider both predictive power and applicability to the business
+problem, and others gave justifications based on one of these but then chose a model based on
+the other." - SOA PA 6/18/20, Task 12 Solution
+
+> "Which of the three models would you recommend for this analysis? Do not
+base your recommendation solely on the mean squared errors (RMSE) from each model." - SOA PA 6/13/19, Task 9 Project Statement
+
+```
+
+</br>
+
+
+### Example: SOA PA 6/18/20, Task 4
+
+> (3 points) Investigate correlations.
+
+>1) Create a correlation coefficient matrix for all the numeric variables in the dataset.
+
+>2) Among these pairwise correlations, determine which correlations concern you in building GLM and tree models. The response may differ by model.
+
+>3) State a method other than principal components analysis (PCA) that can be used to handle the correlated variables. Do not implement this method.
+ 
+I compare the correlations of the linear variables below.  Two variables are correlated when there is a tendency of one variable to increase as the other variable increases and to decrease when that variable decreases.
+
+- I see that edu_years and age have a negative correlation
+- Interest rate and CPI have a very high correlation of 0.59
+- Employment and CPI also have a high correlation of 0.98
+
+```{r echo = F, fig.align="center", warning=F, out.width="400%"}
+knitr::include_graphics("images/correlation_example.png")
+```
+
+One of the assumptions of GLMs is that the predictor variables are not correlated.  These correlations between irate and employment may cause problems when fitting the model.  Decision trees, on the other hand, handle correlations well and would not be impacted.
+
+GLMs perform poorly because there are separate coefficients for each of the correlated variables which have an offsetting impact.  This results in an unstable model which can have its coefficients change drastically depending on the training split.  The p-values for the correlated variables would likely be large.  
+
+Trees are not impacted strongly by this because only one of the variables will be selected at each split.  In other words, the feature selection attribute of trees will only choose one of the correlated variables at a time.
+
+1)	One method other than PCA for handling the correlated variables is to use one of the variables and
+delete the redundant ones. (This is the method in the SOA's solution.)
+
+2)	Use stepwise selection such as Step AIC or Step BIC to remove a subset of the correlated variables automatically.  That will work because once one variable is included in the model, adding another correlated variable would not lead to improvement in the AIC or BIC and so this model variation would not be used.
+
+3)	Use a LASSO to remove variables.  Similarly to stepwise selection, this removes variables which do not decrease the test error (root mean squared error) based on the cross-validation results.  
+
+4)	Use clustering to group together customers based on the correlated variables and then use this cluster number as a new feature.  Customers who had similar cluster characteristics would be grouped together.  For instance, customers who were called during an economic downturn when interest rates, employment, and CPI were low may be in one cluster and customers who were called during a booming economy when CCI was high and prices were high may be in another.  The cluster number would be a new categorical feature in the model.
+
+Note: only one answer is needed.  Four are provided here for your reading benefit.
+
+## Example: Health Costs
 
 In our health insurance data, we can predict a person's health costs based on their age, body mass index, and gender.  Intuitively, we expect that these costs would increase as a person's age increases, would be different for men than for women, and would be higher for those who have a less healthy BMI.  We create a linear model using `bmi`, `age`, and `sex` as an inputs.
 
@@ -187,7 +245,7 @@ The `formula` controls which variables are included.  There are a few shortcuts 
 | `charges` ~ . | Use all variables to predict `charges`|
 
 
->While you can use formulas to create new variables, the exam questions tend to have you do this in the data itself.  For example, if taking the log transform of a `bmi`, you would add a column `log_bmi` to the data and remove the original `bmi` column.
+While you can use formulas to create new variables, the exam questions tend to have you do this in the data itself.  For example, if taking the log transform of a `bmi`, you would add a column `log_bmi` to the data and remove the original `bmi` column.
 
 Below we fit a simple linear model to predict charges.
 
@@ -370,23 +428,38 @@ There is usually at least one question on the PA exam which asks you to "list so
 
 For regression problems, we try to match the actual distribution to the model's distribution being used in the GLM.  These are the most likely distributions.
 
+
+The choice of target distribution should be similar to the actual distribution of $Y$.  For instance, if $Y$ is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values.  If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewed. 
+
 ```{r fig.height = 4, message = F, echo = F, warning = F, fig.align="center"}
 library(mgcv)
+library(ggpubr)
 sample_size = 3000
-tibble(gaussian = rnorm(sample_size),
+p1 <- tibble(gaussian = rnorm(sample_size),
        gamma = rgamma(sample_size, 1, 1/2),
        inverse_gaussian = rig(sample_size, 1, 2)) %>% 
   gather(distribution, values) %>% 
   ggplot(aes(values)) + 
   geom_density(fill = "blue", alpha = 0.2) + 
   facet_wrap(vars(distribution), scales = "free") + 
-  ggtitle("Target Distributions") + 
+  ggtitle("Continuous Target Distributions") + 
   xlab("")
+
+p2 <- tibble(poisson = rpois(sample_size, 1),
+       binomial = rbinom(sample_size, 10, 0.5)) %>% 
+  gather(distribution, values) %>% 
+  ggplot(aes(values)) + 
+  geom_histogram(fill = "blue", alpha = 0.2) + 
+  facet_wrap(vars(distribution), scales = "free") + 
+  ggtitle("Discrete Target Distributions") + 
+  xlab("")
+
+ggarrange(p1,p2,nrow=2)
 ```
 
-The choice of target distribution should be similar to the actual distribution of $Y$.  For instance, if $Y$ is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values.  If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewed. 
+Notice that the top three distributions are continuous but the bottom three are discrete.  
 
-```{r echo = F, fig.align="center", warning=F, out.width="400%"}
+```{r echo = F, fig.align="center", warning=F, out.width="250%"}
 knitr::include_graphics("images/response_distributions.png")
 ```
 
@@ -464,7 +537,8 @@ The first says that the target has a Gaussian distribution which has a mean equa
 
 ## Other links
 
-The other link functions are not straight-forward to interpret using math.  One solution is to use the **model-demo-method.**
+The other link functions are not straight-forward to interpret using math.  One solution is to use the **model-demo-method.**  See the example at the end of this next chapter.
+
 
 # GLMs for classification
 
@@ -552,7 +626,54 @@ For uglier link functions, we can rely on trial-and-error to interpret the resul
 
 This method works not only for categorical GLMs, but **any other type of model** such as a continuous GLM, GBM, or random forest.
 
-**SOA Exam PA, December 12, 2019, task 11**
+See the example from **SOA PA 12/12/19** below to learn how this works.
+
+## Example: SOA HR, Task 5
+
+The following question is from the Hospital Readmissions sample project from 2018.
+
+>"With the target variable being only 0 or 1, the binomial distribution is the only reasonable choice.  your assistant has done some research and learned that for the glm package in R there are five link functions that can be used with the binomial distribution.  They are shown below (the inverse of the link function is presented here as it represents how the linear predictor is transformed into the actual response), where $\nu$
+
+```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
+knitr::include_graphics("images/hospital_readmissions_link.png")
+```
+
+I split the data up into a training and test set, where 75% of the patients where used for training the model and the other 25% were used for testing.  The readmission rate was about 13% in both data sets.
+
+TRAIN: 0.1252346
+
+TEST: 0.1280101
+
+A GLM allows for multiple inputs to be mapped to predict a single output, called the response.  In this case, the response is binary and so only the binomial response distribution makes sense.  The model predictors are related to the predicted readmission through a link function.  Because we want the result to be a probability between 0 and 1, we limit out choices of link functions to those which have a domain of (0,1).  
+
+I ruled out the log link immediately because it allows for outputs outside of 0 and 1.
+I tested out the model on the test set for the other links.
+I compare the model’s performance based on the AUC score.  The goal of this analysis was to beat the LACE index of 0.7.
+
+**Logit**
+
+The logit is the most common link function for binary classification is the canonical link for the binomial family.  It is also the default in R, and is commonly used in Logistic Regression. 
+
+Area under the curve: 0.7451
+
+**Probit**
+
+The Probit is the inverse cumulative distribution of a standard normal random variable.  The AUC the same as the logit.
+
+Area under the curve: 0.7451
+
+**Cauchit**
+
+The Cauchit has a worse (lower) AUC than the Logit or Probit and so it is not considered further.
+Area under the curve: 0.7449
+
+**ClogLog**
+
+Area under the curve: 0.745
+
+I chose to use the Logit link.  
+
+## Example: SOA PA 12/12/19, Task 11
 
 >Marketing has asked for a demonstration of how your model is to be used with examples of cases that predict high value and cases that predict low value. Your assistant has prepared some sample cases that can be run through your model. You may need to adjust some of them to obtain illustrative examples that would be of interest to marketing.
 
@@ -560,7 +681,7 @@ This method works not only for categorical GLMs, but **any other type of model**
 
 >The sample cases are provided here and in your report template in case you wish to include them in your report.
 
-The answer asks you to run the example cases through your model to calculated the predicted probability of each case.  You need to create the column **Prob of high** using your GLM.  Then you assign each case as being "High" or "Low" depending on if this value is above the cutoff.
+The answer asks you to run the example cases through your model to calculate the predicted probability of each case.  You need to create the column **Prob of high** using your GLM.  Then you assign each case as being "High" or "Low" depending on if this value is above the cutoff.
 
 The values that change are in **bold.**
 
@@ -575,7 +696,7 @@ The values that change are in **bold.**
 You can interpret this as:
 
 - The typical profitable customer is middle aged (39 years old), has 10 years of education, is married, and in group 3
-- Having never married decreases profitability
+- Having never been married decreases profitability
 - Being less educated does not decreases profitability.  You can see this because the customer with `education_num = 5` has the same characteristics as the first customer
 - Being in Group 5 increases profitability.  You can see this because `Prob of high` increases to 0.8.
 - Working fewer than 40 hours per week decreases profitability
@@ -587,7 +708,7 @@ This was a difficult question.  Don't be afraid to be assertive and think creati
 >Candidates were encouraged to modify the supplied cases. Few elected to test changes in both directions from the base case.
 
 
-## Example - Logit
+## Example - Auto Claims
 
 Using the `auto_claim` data, we predict whether or not a policy has a claim.  This is also known as the *claim frequency*.
 
@@ -700,10 +821,8 @@ The punchline is that the accuracy depends on the cutoff value, and changing the
 
 # Classification metrics
 
-For regression problems, when the output is a whole number, we can use the sum of squares $\text{RSS}$, the r-squared $R^2$, the mean absolute error $\text{MAE}$, and the likelihood.  For classification problems we need to a new set of metrics.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4jRBRDbJemM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+For regression problems, when the output is a whole number, we can use the sum of squares $\text{RSS}$, the r-squared $R^2$, the mean absolute error $\text{MAE}$, and the likelihood.  For classification problems we need to a new set of metrics.  
+  
 A *confusion matrix* shows is a table that summarizes how the model classifies each group.
 
 - No claims and predicted to not have claims - **True Negatives (TN) = 1,489**
@@ -755,7 +874,51 @@ and the true negative rates
 
 $$\{\text{FNR} = \{\text{FNR}(k_1), \text{FNR}(k_2), .., \text{FNR}(k_{10})\}$$
 
-Then we set `x = TPR` and `y = FNR` and graph x against y.  The plot below shows the ROC for the `auto_claims` data.  The Area Under the Curve of 0.6795 is what we would get if we integrated under the curve.
+Then we set `x = TPR` and `y = FNR` and graph x against y. The resulting plot is called the **Receiver Operator Curve (ROC)** and the the Area Under the Curve is called the AUC.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4jRBRDbJemM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+You can also think of AUC as being a **probability.**  Unlike a conventional probability, this ranges between 0.5 and 1 instead of 0 and 1.  In the Logit example, we were predicting whether or not an auto policy would file a claim.  Then you can interpret the AUC as
+
+- The expected proportion of positives ranked before a uniformly drawn random negative
+
+- The probability that a model prediction for a policy which actually filed a claim is greater than the model prediction for a policy which did not file a claim
+
+- The expected true positive rate if the ranking is split just before a uniformly drawn random negative.
+
+- The expected proportion of negatives ranked after a uniformly drawn random positive.
+
+- The expected false positive rate if the ranking is split just after a uniformly drawn random positive.
+
+You can save yourself time by memorizing these three scenarios:
+
+$$ \text{AUC} = 1.0 $$
+
+```{r echo = F, fig.align="center", warning=F, out.width="50%"}
+knitr::include_graphics("images/auc_one.png")
+```
+
+
+This is a perfect model that predicts the correct class for new data each time.  It will have a ROC plot showing the curve approaching the top left corner so that the area of the square is 1.0.
+
+$$ \text{AUC} = 0.5 $$*
+
+```{r echo = F, fig.align="center", warning=F, out.width="50%"}
+knitr::include_graphics("images/auc_point_five.png")
+```
+
+When the ROC curve runs along the diagonal then the area is 0.5.  This performance is no better than randomly selecting the class for new data such that the proportions of each class matches that of the data.
+
+$$ \text{AUC} < 0.5 $$
+Any model having an AUC less than 0.5 means it is providing predictions that are worse than random selection, with a near 0 AUC indicating that the model makes the wrong classification almost every time.  This can occur in two ways
+
+1) The model is overfitting.  For example, the AUC on the train data set may be higher than 0.8 but only 0.2 on the test data set.  This indicates that you need to adjust your model's parameters.  See the chapter on the Bias-Variance Tradeoff.
+
+2) There is an error in the AUC calculation or model prediction.
+
+### Example - Auto Claims
+
+Let's create an ROC curve and find the AUC for our logit.  
 
 ```{r message=F, fig.cap="AUC for auto_claim"}
 library(pROC)
@@ -764,7 +927,10 @@ roc(test$target, preds, plot = T)
 
 If we just randomly guess, the AUC would be 0.5, which is represented by the 45-degree line.  A perfect model would maximize the curve to the upper-left corner.
 
-AUC is preferred over Accuracy when there are a lot more "true" classes than "false" classes, which is known as having *class imbalance*.  An example is bank fraud detection: 99.99% of bank transactions are "false" or "0" classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
+The AUC of 0.76 is decent.  If we had multiple models we could compare them based on the AUC.  
+
+In general, AUC is preferred over Accuracy when there are a lot more "true" classes than "false" classes, which is known as having *class imbalance*.  An example is bank fraud detection: 99.99% of bank transactions are "false" or "0" classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
+
 
 ## Additional reading
 
@@ -777,7 +943,7 @@ AUC is preferred over Accuracy when there are a lot more "true" classes than "fa
 
 # Additional GLM topics
 
-So far we have focused on how the target is related to the target.  
+We have only begun to scratch the surface of the wide variety of GLM models which are possible.
 
 ## Residuals
 
@@ -1610,6 +1776,7 @@ Practice questions:
  
 # Bias-variance trade-off
 
+This chapter will be released shortly
 
  
 ## References

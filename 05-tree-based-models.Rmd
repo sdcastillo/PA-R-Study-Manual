@@ -9,7 +9,6 @@ library(ExamPAData)
 library(tidyverse)
 ```
 
-
 # Tree-based models
 
 The models up to this point have been linear.  This means that $Y$ changes gradually as $X$ changes.
