@@ -72,7 +72,7 @@ Also known as *simple linear regression*, OLS predicts the target as a weighted 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=nk2CQITm_eo,u1cc1r_Y7M0" frameborder="0" allowfullscreen></iframe>
 
-<br>
+</br>
 
 We find a $\mathbf{\beta}$ so that 
 
@@ -1392,6 +1392,8 @@ plot(glm, cex = 0.4)
 
 # GLM variable selection
 
+Predictive Analytics is about using results to solve business problems.  Complex models are almost useless if they cannot be explained.  In this chapter, we will learn how to make GLMs easier to explain by either removing variables entirely or lessening their impact.
+
 ## Stepwise subset selection
 
 In theory, we could test all possible combinations of variables and interaction terms.  This includes all $p$ models with one predictor, all p-choose-2 models with two predictors, all p-choose-3 models with three predictors, and so forth.  Then we take whichever model has the best performance as the final model.
@@ -1425,6 +1427,23 @@ A hybrid approach is to consider use both forward and backward selection.  This 
 | Readings |  | 
 |-------|---------|
 | [CAS Monograph 5 Chapter 2](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf) |  |
+
+## Example: SOA PA 6/12/19, Task 6
+
+> 6. (12 points) Select features using AIC or BIC
+
+> AIC and BIC are among the available techniques for feature selection. Briefly describe them and
+outline the differences in the two criteria. Make a recommendation as to which one should be
+used for this problem. Use only your recommended criterion when completing this task.
+
+>Some of the features may lack predictive power and lead to overfitting. Determine which
+features should be retained. Use the stepAIC function (from the MASS package) to make this
+determination. When using this function, there are two decisions to make. Make each decision
+based on the business problem. Use ?stepAIC to learn more about these parameters (note that
+the MASS package must be loaded before help on this function can be accessed).
+
+> Use direction = “backward” or direction = “forward”
+> Use AIC (k = 2) or BIC (k=log(nrow(train)))
 
 
 ## Penalized Linear Models

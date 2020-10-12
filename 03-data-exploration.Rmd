@@ -255,9 +255,13 @@ health_insurance %>%
   summary()
 ```
 
+</br>
+
 ```{block, type='studytip'}
 **Shortcut:** This "mutate_if" trick can save you time from having to copy and paste from the SOA's template code and convert each variable to a factor individually
 ```
+
+</br>
 
 ## How to transform the data
 
@@ -442,9 +446,13 @@ You'll get very good at spotting these with practice.  Just from looking at the 
 * There are missing values when `occupation` is `group NA`, which means that the person's occupation is unknown.
 * The amount that people work per work, `hours_per_week`, varies by a lot.  The lowest is 1 hour and the highest is 99.  Most people work 40 hours per week.
 
+</br>
+
 ```{block, type='studytip'}
 **Study Tip:** Never apply a log transform to the target variable.  Only the predictor variables get logs taken.  At this stage we simply note if it is right-skewed or not. 
 ```
+
+</br>
 
 The SOA's solution recommends leaving comments in your Rmd file.  This helps to give you partial credit on questions that you may answer incorrectly.  
 

@@ -17,9 +17,9 @@ of the tasks is addressed.
 
 In other words, whatever results you have in your report will need to be consistent with what the grading team finds when they run your .rmd file.
 
-## Example 1 - Making parameter changes
+## Example: SOA PA 6/16/20, Task 8
 
-**SOA Exam PA June 16, 2020, Task 8**
+This question is from the June 16, 2020 exam.  You can see that very little code changes need to be made!  As you can see in this video, the programming required is very minimal.  The remainder of this question consists of a short-answer response.  This is very typical of Exam PA.  
 
 >8. (4 points) Perform feature selection with lasso regression.
 >
@@ -125,8 +125,13 @@ Within each notebook, code is organized into chunks.
 
 Your time is valuable.  Throughout this book, I will include useful keyboard shortcuts.
 
->**Shortcut:** To run everything in a chunk quickly, press `CTRL + SHIFT + ENTER`. 
+</br>
+
+```{block, type='studytip'}
+**Shortcut:** To run everything in a chunk quickly, press `CTRL + SHIFT + ENTER`. 
 To create a new chunk, use `CTRL + ALT + I`.
+```
+</br>
 
 ## Basic operations
 
@@ -151,7 +156,11 @@ There are two assignment operators: `=` and `<-`.  The latter is preferred becau
 it is specific to assigning a variable to a value.  The `=` operator is also used 
 for specifying arguments in functions (see the functions section).  
 
-> **Shortcut:** `ALT + -` creates a `<-`..
+</br>
+```{block, type='studytip'}
+**Shortcut:** `ALT + -` creates a `<-`..
+```
+</br>
 
 ```{r}
 # Variable assignment
@@ -469,7 +478,11 @@ max(c(3, 4, 16)) %>%
 Pipes are exceptionally useful for data manipulations, which is covered in the 
 next chapter.
 
-> **Tip:** To quickly produce pipes, use `CTRL + SHIFT + M`.  
+</br>
+```{block, type='studytip'}
+**Shortcut:** To quickly produce pipes, use `CTRL + SHIFT + M`. 
+```
+</br>
 
 By highlighting only certain sections, we can run the code in steps as if we were
 using a debugger.  This makes testing out code much faster.

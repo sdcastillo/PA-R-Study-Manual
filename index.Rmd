@@ -37,13 +37,11 @@ All of the statistical theory is explained, from linear regression to gradient b
 
 **How many study hours are needed?**  [Here is a study template](https://exampa.net/study-schedule/) which allocates 155 hours for this course and the SOA's modules.  The exact number of hours needed varies by individual.  Is English your native language?  Have you taken SRM?  Do you have prior R experience?  Are you a confident communicator?  All of these factors play a role.  That being said, planning a study schedule for PA is not different than for any of the other exams. You might have important deadlines, travel plans, or other obligations which need to be accomodated.  
 
+# Actuarial Outpost
+
+We want to hear what you have to say!  Ask questions, request new chapters, or report errors at [Actuarial Outpost](http://204.232.242.165/actuarial_discussion_forum/showthread.php?t=345865).
+
 *We are thankful to all of the reviewers, guest editors, and past exam-takers who have helped to improve this book.  Thanks to the following persons who made changes to this book and its past versions: David Hill, Erlan Wheeler, Caden Collier, Peter Shelbe, Abhinav Gadde, Allen Meriken, [Kevin Kuo](https://github.com/kevinykuo), Aamir Ali, Matthew Caseras, and Liu Chang.*
-
-# Join the discussion
-
-Do you have questions about PA?  Have you discovered a typo in this Study Guide after running the code on your own computer?  Do you have suggestions for topics that need to be covered in this book but do not yet exist?  
-
-Your voice matters.  It's **you**, the actuarial community, who have made this online course so successful and so we want to hear what you have to say.  Send us a message on this thread on the [Actuarial Outpost](http://204.232.242.165/actuarial_discussion_forum/showthread.php?t=345865).
 
 # The exam
 
@@ -87,6 +85,12 @@ The following video from Prometric shows what the computer set up will look like
 <p><a href="https://vimeo.com/304653968">SOAFinalCut</a> from <a href="https://vimeo.com/user10231556">Prometric</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 In the past, candidates have been given out a printed Project Statement which they were allowed to read during the 15-minute tutorial before the timer startedl however, as of [Fall 2020](https://www.soa.org/globalassets/assets/files/edu/2020/fall/soa-exams-additional-details.pdf), this may no longer be the case and all files will be given to you on the computer.  This announcement by the SOA may be referring to only those exams which used to be on paper but are transferring to computer-based testing, in which case PA candidates would still get the printed statement.  It may be best to practice assuming that you will need to work on a single monitor.  We will update this once we confirm with the SOA.
+
+</br>
+
+```{block, type='studytip'}
+**Are you a lefty?** Prometric computers will be set up with the mouse on the right side.  Arrive a few minutes early and request for the change.  A lot of lefties also switch the configuration so that the right button, which is hit with the index finger, is a normal click.  The left button, hit with the middle finger, is what you think of as a "right click."  Unfortunately, if you use this configuration then you will need to suffer through the exam anyways.  Just be sure to practice with the same setup which you will use.
+```
 
 </br>
 

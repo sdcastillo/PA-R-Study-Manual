@@ -11,10 +11,9 @@ library(tidyverse)
 
 # Tree-based models
 
-The models up to this point have been linear.  This means that $Y$ changes gradually as $X$ changes.
+The models up to this point have been linear.  On the PA Syllabus, these all fall under **Topic 6: Generalized Linear Models.**  This if for good reason: every sitting of exam PA has included a GLM.  While GLMs get a lot of attention, the syllabus also contains **Topic 7: Decision Trees.**  Fortunately, much of what you already know about modeling will apply here.  We will use the same set up for training and testing, performance metrics, concepts of bias and variance, and weights that you already know about.
 
-Tree-based models allow for abrupt changes in $Y$.
-
+This chapter is called "tree-**based** models" because the algorithms all rely on the atomic unit of a decision tree.  This is a flowchart-like structure in which each internal node represents a "test" on an attribute (e.g. whether a coin flip comes up heads or tails), each branch represents the outcome of the test, and each leaf node represents a class label (decision taken after computing all attributes). The paths from root to leaf represent classification rule.s
 
 ## Decision Trees
 
@@ -58,15 +57,15 @@ This was a very simple example because there were only two variables.  If we hav
 
 The step-by-step process of building a tree is
 
-**Step 1: Choose a variable at random.**  
+**Step 1: Find the best predictor-split-point combination**  
 
-This could be any variable in `age`, `children`, `charges`, `sex`, `smoker`, `age_bucket`, `bmi`, or `region`.
+This variable could be any one of `age`, `children`, `charges`, `sex`, `smoker`, `age_bucket`, `bmi`, or `region`.
 
-**Step 2: Find the split point which best separates observations out based on the value of $y$.  A good split is one where the $y$'s are very different. * **
+The split point which best separates observations out based on the value of $y$.  A good split is one where the $y$'s are very different. * **
 
-In this case, `smoker` was chosen.  Then we can only split this in one way: `smoker = 1` or `smoker = 0`.
+In this case, `smoker` was chosen.  Then we can only split this in one way: `smoker = "yes"` or `smoker = "no"`.  Notice that although this is a categorical variable, the tree does not need to binanize the variables.  Instead,  like the table above shows, the data gets partitioned by the categories directly.
 
-Then for each of these groups, smokers and non-smokers, choose another variable at random.  In this case, for no-smokers, `age` was chosen.  To find the best cut point of `age`, look at all possible age cut points from 18, 19, 20, 21, ..., 64 and choose the one which best separates the data.
+Then for each of these groups, smokers and non-smokers, find the next variable and split point which best separates out the claims.  In this case, for no-smokers, `age` was chosen.  To find the best cut point of `age`, look at all possible age cut points from 18, 19, 20, 21, ..., 64 and choose the one which best separates the data.
 
 There are three ways of deciding where to split
 
@@ -76,7 +75,7 @@ There are three ways of deciding where to split
 
 Of these, only the first two are commonly used.  The exam is not going to ask you to calculate either of these.  Just know that neither method will work better on all data sets, and so the best practice is to test both and compare the performance. 
 
-**Step 3: Continue doing this until a stopping criteria is reached.  For example, the minimum number of observations is 5 or less.** 
+**Step 2: Continue doing this until a stopping criteria is reached.  For example, the minimum number of observations is 5 or less.** 
 
 As you can see, this results in a very deep tree.
 
@@ -86,13 +85,13 @@ tree <- rpart(formula = charges ~  ., data = health_insurance,
 rpart.plot(tree, type = 3)
 ```
 
-**Step 4: Apply cost comlexity pruning to simplify the tree**
+**Step 3: Apply cost comlexity pruning to simplify the tree**
 
 Intuitively, we know that the above model would perform poorly due to overfitting.  We want to make it simpler by removing nodes.  This is very similar to how in linear models we reduce complexity by reducing the number of coefficients.
 
-A measure of the depth of the tree is the *complexity*.  A simple way of measuring this from the number of terminal nodes, called $|T|$.  This is similar to the "degrees of freedom" in a linear model.  In the above example, $|T| = 8$.  The amount of penalization is controlled by $\alpha$.  This is very similar to $\lambda$ in the Lasso.
+A measure of the depth of the tree is the *complexity*.  A simple way of measuring this from the number of terminal nodes, called $|T|$.  In the above example, $|T| = 8$.  The amount of penalization is controlled by $\alpha$.  This is very similar to $\lambda$ in the Lasso.
 
-Intuitively, merely only looking at the number of nodes by itself is too simple because not all data sets will have the same characteristics such as $n$, $p$, the number of categorical variables, correlations between variables, and so fourth.  In addition, if we just looked at the error (squared error in this case) we would overfit very easily.  To address this issue, we use a cost function which takes into account the error as well as $|T|$.
+Intuitively, only looking at the number of nodes by itself is too simple because not all data sets will have the same characteristics such as $n$, $p$, the number of categorical variables, correlations between variables, and so fourth.  In addition, if we just looked at the error (squared error in this case) we would overfit very easily.  To address this issue, we use a cost function which takes into account the error as well as $|T|$.
 
 To calculate the cost of a tree, number the terminal nodes from $1$ to $|T|$, and let the set of observations that fall into the $mth$ bucket be $R_m$.  Then add up the squared error over all terminal nodes to the penalty term.
 
@@ -101,7 +100,7 @@ $$
 $$
 
 
-**Step 5: Use cross-validation to select the best alpha**
+**Step 4: Use cross-validation to select the best alpha**
 
 The cost is controlled by the `CP` parameter.  In the above example, did you notice the line `rpart.control(cp = 0.003)`?  This is telling `rpart` to continue growing the tree until the CP reaches 0.003.  At each subtree, we can measure the cost `CP` as well as the cross-validation error `xerror`.
 
@@ -134,17 +133,16 @@ cost %>%
 
 To optimize performance, choose the number of splits which has the lowest error.  Often, though, the goal of using a decision tree is to create a simple model.  In this case, we can err or the side of a lower `nsplit` so that the tree is shorter and more interpretable.  All of the questions on so far have only used decision trees for interpretability, and a different model method has been used when predictive power is needed.
 
-Once we have selected $\alpha$, the tree is pruned.  Sometimes the CP with the lowest error has a large number of splits, such as the case is here.
+Once we have selected $\alpha$, the tree is pruned.  This table below shows 6 different trees.  The `xerror` column is the missclassification error.  The `rel error` is the relative error, which is the missclassification error divided by its smallest value.  This rescales `xerror` so that the tree with the smallest error is given a `rel error` of 1.00.
 
 ```{r include = T}
 tree$cptable %>% 
   as_tibble() %>% 
-  select(nsplit, CP, xerror) %>% 
-  arrange(xerror) %>% 
+  select(nsplit, CP, xerror, `rel error`) %>% 
   head()
 ```
 
-The SOA will give you code to find the lowest CP value such as below.  This may or may not be useful depending on if they are asking for predictive performance or interpretability.
+The SOA may give you code to find the lowest CP value such as below.  You could always find this value yourself by inspecting the CP table and choosing the value of `CP` which has the lowest `xerror`.
 
 ```{r}
 pruned_tree <- prune(tree,
@@ -190,16 +188,35 @@ get_rmsle(test$charges, tree_pred)
 get_rmsle(test$charges, simple_tree_pred)
 get_rmsle(test$charges, mean(train$charges))
 ```
+### Example: SOA PA 6/18/2020, Task 6
 
+(10 Points)
+
+> Describe what pruning does and why it might be considered it for this business problem.
+
+> Construct an unpruned regression tree using the code provided.
+
+> Review the complexity parameter table and plot for this tree. State the optimal
+complexity parameter and the number of leaves that will result if the tree is pruned
+using that value.
+
+> Prune the tree using a complexity parameter that will result in eight leaves. If eight is
+not a possible option, select the largest number less than eight that is possible.
+
+> Calculate and compare the Pearson goodness-of-fit statistic on the test set for both
+trees (original and pruned).
+
+> Interpret the entire pruned tree (all leaves) in the context of the business problem. 
 
 ### Advantages and disadvantages
 
 **Advantages**
 
-- Easy to interpret
+- Easy to interpret 
+- Performs variable selection
+- Categorical variables do not require binarization in order for each level to be used as a separate predictor
+- Captures non-linearities 
 - Captures interaction effects
-- Captures non-linearities
-- Handles continuous and categorical data
 - Handles missing values
 
 **Disadvantages**
@@ -207,7 +224,6 @@ get_rmsle(test$charges, mean(train$charges))
 - Is a “weak learner” because of low predictive power
 - Does not work on small data sets
 - Is often a simplification of the underlying process because all observations at terminal nodes have equal predicted values
-- Is biased towards selecting high-cardinality features because more possible split points for these features tend to lead to overfitting
 - High variance (which can be alleviated with stricter parameters) leads the “easy to interpret results” to change upon retraining
 Unable to predict beyond the range of the training data for regression (because each predicted value is an average of training samples)
 
@@ -414,7 +430,7 @@ Before diving in to the gradient boosting, understanding the AdaBoost algorithm 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=LsK-xG1cLYA,3CC4N4z3GJc,2xudPOBz-vs,jxuNLH5dXCs,StWY5QWMXCw" frameborder="0" allowfullscreen></iframe>
 
-<br>
+</br>
 
 ### Notation
 
@@ -462,7 +478,11 @@ For random forests, the individual tree parameters do not get tuned.  For GBMs, 
 
 GBMs are easy to overfit, and the parameters need to be carefully tuned using cross-validation.  In the Examples section we go through how to do this.
 
->**Tip:** Whenever fitting a model, use `?model_name` to get the documentation.  The parameters below are from `?gbm`.
+</br>
+
+```{block, type='studytip'}
+**Tip:** Whenever fitting a model, use `?model_name` to get the documentation.  The parameters below are from `?gbm`. 
+```
 
 ### Example
 
