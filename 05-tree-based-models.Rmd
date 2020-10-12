@@ -13,7 +13,7 @@ library(tidyverse)
 
 The models up to this point have been linear.  On the PA Syllabus, these all fall under **Topic 6: Generalized Linear Models.**  This if for good reason: every sitting of exam PA has included a GLM.  While GLMs get a lot of attention, the syllabus also contains **Topic 7: Decision Trees.**  Fortunately, much of what you already know about modeling will apply here.  We will use the same set up for training and testing, performance metrics, concepts of bias and variance, and weights that you already know about.
 
-This chapter is called "tree-**based** models" because the algorithms all rely on the atomic unit of a decision tree.  This is a flowchart-like structure in which each internal node represents a "test" on an attribute (e.g. whether a coin flip comes up heads or tails), each branch represents the outcome of the test, and each leaf node represents a class label (decision taken after computing all attributes). The paths from root to leaf represent classification rule.s
+This chapter is called "tree-**based** models" because the algorithms all rely on the atomic unit of a decision tree.  This is a flowchart-like structure in which each internal node represents a "test" on an attribute (e.g. whether a coin flip comes up heads or tails), each branch represents the outcome of the test, and each leaf node represents a class label (decision taken after computing all attributes). The paths from root to leaf represent classification rule.
 
 ## Decision Trees
 

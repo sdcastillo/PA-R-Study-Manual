@@ -428,7 +428,6 @@ There is usually at least one question on the PA exam which asks you to "list so
 
 For regression problems, we try to match the actual distribution to the model's distribution being used in the GLM.  These are the most likely distributions.
 
-
 The choice of target distribution should be similar to the actual distribution of $Y$.  For instance, if $Y$ is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values.  If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewed. 
 
 ```{r fig.height = 4, message = F, echo = F, warning = F, fig.align="center"}
@@ -457,7 +456,7 @@ p2 <- tibble(poisson = rpois(sample_size, 1),
 ggarrange(p1,p2,nrow=2)
 ```
 
-Notice that the top three distributions are continuous but the bottom three are discrete.  
+Notice that the top three distributions are continuous but the bottom two are discrete.  
 
 ```{r echo = F, fig.align="center", warning=F, out.width="250%"}
 knitr::include_graphics("images/response_distributions.png")
@@ -627,85 +626,6 @@ For uglier link functions, we can rely on trial-and-error to interpret the resul
 This method works not only for categorical GLMs, but **any other type of model** such as a continuous GLM, GBM, or random forest.
 
 See the example from **SOA PA 12/12/19** below to learn how this works.
-
-## Example: SOA HR, Task 5
-
-The following question is from the Hospital Readmissions sample project from 2018.
-
->"With the target variable being only 0 or 1, the binomial distribution is the only reasonable choice.  your assistant has done some research and learned that for the glm package in R there are five link functions that can be used with the binomial distribution.  They are shown below (the inverse of the link function is presented here as it represents how the linear predictor is transformed into the actual response), where $\nu$
-
-```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
-knitr::include_graphics("images/hospital_readmissions_link.png")
-```
-
-I split the data up into a training and test set, where 75% of the patients where used for training the model and the other 25% were used for testing.  The readmission rate was about 13% in both data sets.
-
-TRAIN: 0.1252346
-
-TEST: 0.1280101
-
-A GLM allows for multiple inputs to be mapped to predict a single output, called the response.  In this case, the response is binary and so only the binomial response distribution makes sense.  The model predictors are related to the predicted readmission through a link function.  Because we want the result to be a probability between 0 and 1, we limit out choices of link functions to those which have a domain of (0,1).  
-
-I ruled out the log link immediately because it allows for outputs outside of 0 and 1.
-I tested out the model on the test set for the other links.
-I compare the model’s performance based on the AUC score.  The goal of this analysis was to beat the LACE index of 0.7.
-
-**Logit**
-
-The logit is the most common link function for binary classification is the canonical link for the binomial family.  It is also the default in R, and is commonly used in Logistic Regression. 
-
-Area under the curve: 0.7451
-
-**Probit**
-
-The Probit is the inverse cumulative distribution of a standard normal random variable.  The AUC the same as the logit.
-
-Area under the curve: 0.7451
-
-**Cauchit**
-
-The Cauchit has a worse (lower) AUC than the Logit or Probit and so it is not considered further.
-Area under the curve: 0.7449
-
-**ClogLog**
-
-Area under the curve: 0.745
-
-I chose to use the Logit link.  
-
-## Example: SOA PA 12/12/19, Task 11
-
->Marketing has asked for a demonstration of how your model is to be used with examples of cases that predict high value and cases that predict low value. Your assistant has prepared some sample cases that can be run through your model. You may need to adjust some of them to obtain illustrative examples that would be of interest to marketing.
-
->Write, in language appropriate for marketing, the illustration and demonstration they are looking for. This demonstration should be more detailed than what will go into your executive summary (which could include an example).
-
->The sample cases are provided here and in your report template in case you wish to include them in your report.
-
-The answer asks you to run the example cases through your model to calculate the predicted probability of each case.  You need to create the column **Prob of high** using your GLM.  Then you assign each case as being "High" or "Low" depending on if this value is above the cutoff.
-
-The values that change are in **bold.**
-
-|age|education num|marital status    |occupation|cap_ga in|hours_per week|score|**Prob of high**|**Value**|
-|---|-------------|------------------|----------|---------|--------------|-----|------------|-----|
-|39 |10           |Married-spouse    |Group 3   |0        |40            |60   |0.32     |High |
-|39 |10           |**Never-married**    |Group 3   |0        |40            |60   |0.24      |**Low** |
-|39 |**5**           |Married-spouse    |Group 3   |0        |40            |60   |0.39       |High |
-|39 |10           |Married-spouse    |**Group 5**   |0        |40            |60   |0.80     |High |
-|39 |10           |Married-spouse    |Group 3   |0        |**30**            |60   |0.18        |**Low**  |
-
-You can interpret this as:
-
-- The typical profitable customer is middle aged (39 years old), has 10 years of education, is married, and in group 3
-- Having never been married decreases profitability
-- Being less educated does not decreases profitability.  You can see this because the customer with `education_num = 5` has the same characteristics as the first customer
-- Being in Group 5 increases profitability.  You can see this because `Prob of high` increases to 0.8.
-- Working fewer than 40 hours per week decreases profitability
-
-This was a difficult question.  Don't be afraid to be assertive and think creatively or to change the values that they give you.  The SOA's solutions says
-
->Many candidates struggled with this task. Candidates needed to include sample cases that resulted in low and high value predictions and clearly describe the analysis for the marketing team. 
-
->Candidates were encouraged to modify the supplied cases. Few elected to test changes in both directions from the base case.
 
 
 ## Example - Auto Claims
@@ -916,7 +836,7 @@ Any model having an AUC less than 0.5 means it is providing predictions that are
 
 2) There is an error in the AUC calculation or model prediction.
 
-### Example - Auto Claims
+## Example - Auto Claims
 
 Let's create an ROC curve and find the AUC for our logit.  
 
@@ -932,6 +852,86 @@ The AUC of 0.76 is decent.  If we had multiple models we could compare them base
 In general, AUC is preferred over Accuracy when there are a lot more "true" classes than "false" classes, which is known as having *class imbalance*.  An example is bank fraud detection: 99.99% of bank transactions are "false" or "0" classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
 
 
+## Example: SOA HR, Task 5
+
+The following question is from the Hospital Readmissions sample project from 2018.
+
+>"With the target variable being only 0 or 1, the binomial distribution is the only reasonable choice.  your assistant has done some research and learned that for the glm package in R there are five link functions that can be used with the binomial distribution.  They are shown below (the inverse of the link function is presented here as it represents how the linear predictor is transformed into the actual response), where $\nu$ is the linear predictor and $\p$ is the response.
+
+```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
+knitr::include_graphics("images/hospital_readmissions_link.png")
+```
+
+I split the data up into a training and test set, where 75% of the patients where used for training the model and the other 25% were used for testing.  The readmission rate was about 13% in both data sets.
+
+TRAIN: 0.1252346
+
+TEST: 0.1280101
+
+A GLM allows for multiple inputs to be mapped to predict a single output, called the response.  In this case, the response is binary and so only the binomial response distribution makes sense.  The model predictors are related to the predicted readmission through a link function.  Because we want the result to be a probability between 0 and 1, we limit out choices of link functions to those which have a domain of (0,1).  
+
+I ruled out the log link immediately because it allows for outputs outside of 0 and 1.
+I tested out the model on the test set for the other links.
+I compare the model’s performance based on the AUC score.  The goal of this analysis was to beat the LACE index of 0.7.
+
+**Logit**
+
+The logit is the most common link function for binary classification is the canonical link for the binomial family.  It is also the default in R, and is commonly used in Logistic Regression. 
+
+Area under the curve: 0.7451
+
+**Probit**
+
+The Probit is the inverse cumulative distribution of a standard normal random variable.  The AUC the same as the logit.
+
+Area under the curve: 0.7451
+
+**Cauchit**
+
+The Cauchit has a worse (lower) AUC than the Logit or Probit and so it is not considered further.
+Area under the curve: 0.7449
+
+**ClogLog**
+
+Area under the curve: 0.745
+
+I chose to use the Logit link.  
+
+## Example: SOA PA 12/12/19, Task 11
+
+>Marketing has asked for a demonstration of how your model is to be used with examples of cases that predict high value and cases that predict low value. Your assistant has prepared some sample cases that can be run through your model. You may need to adjust some of them to obtain illustrative examples that would be of interest to marketing.
+
+>Write, in language appropriate for marketing, the illustration and demonstration they are looking for. This demonstration should be more detailed than what will go into your executive summary (which could include an example).
+
+>The sample cases are provided here and in your report template in case you wish to include them in your report.
+
+The answer asks you to run the example cases through your model to calculate the predicted probability of each case.  You need to create the column **Prob of high** using your GLM.  Then you assign each case as being "High" or "Low" depending on if this value is above the cutoff.
+
+The values that change are in **bold.**
+
+|age|education num|marital status    |occupation|cap_ga in|hours_per week|score|**Prob of high**|**Value**|
+|---|-------------|------------------|----------|---------|--------------|-----|------------|-----|
+|39 |10           |Married-spouse    |Group 3   |0        |40            |60   |0.32     |High |
+|39 |10           |**Never-married**    |Group 3   |0        |40            |60   |0.24      |**Low** |
+|39 |**5**           |Married-spouse    |Group 3   |0        |40            |60   |0.39       |High |
+|39 |10           |Married-spouse    |**Group 5**   |0        |40            |60   |0.80     |High |
+|39 |10           |Married-spouse    |Group 3   |0        |**30**            |60   |0.18        |**Low**  |
+
+You can interpret this as:
+
+- The typical profitable customer is middle aged (39 years old), has 10 years of education, is married, and in group 3
+- Having never been married decreases profitability
+- Being less educated does not decreases profitability.  You can see this because the customer with `education_num = 5` has the same characteristics as the first customer
+- Being in Group 5 increases profitability.  You can see this because `Prob of high` increases to 0.8.
+- Working fewer than 40 hours per week decreases profitability
+
+This was a difficult question.  Don't be afraid to be assertive and think creatively or to change the values that they give you.  The SOA's solutions says
+
+>Many candidates struggled with this task. Candidates needed to include sample cases that resulted in low and high value predictions and clearly describe the analysis for the marketing team. 
+
+>Candidates were encouraged to modify the supplied cases. Few elected to test changes in both directions from the base case.
+
+
 ## Additional reading
 
 | Title | Source           |
@@ -943,7 +943,7 @@ In general, AUC is preferred over Accuracy when there are a lot more "true" clas
 
 # Additional GLM topics
 
-We have only begun to scratch the surface of the wide variety of GLM models which are possible.
+As you can tell, PA has a lot of small topics related to GLMs.  This chapter completes some of the *residual* (no pun intended) topics.  
 
 ## Residuals
 
@@ -963,10 +963,6 @@ This is not meaningful for GLMs with non-Gaussian distributions.  To adjust for 
 
 <iframe width="563" height="383" src="https://www.youtube.com/embed/JC56jS2gVUE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-To paraphrase from this paper from the University of Oxford:
-
-stats.ox.ac.uk/pub/bdr/IAUL/ModellingLecture5.pdf
-
 Deviance is a way of assessing the adequacy of a model by comparing it with a more general
 model with the maximum number of parameters that can be estimated. It is referred to
 as the saturated model. In the saturated model there is basically one parameter per
@@ -977,6 +973,7 @@ estimator of the parameter vector of the saturated model, $\beta_{sat}$ , and $b
 likelihood estimator of the parameters of the model under investigation, $\beta$. The maximum likelihood estimator is the estimator that maximizes the likelihood function.  **The deviance is defined as**
 
 $$D = 2[l(b_{sat},y) - l(b,y)]$$
+
 The deviance residual uses the deviance of the ith observation $d_i$ and then takes the square root and applies the same sign (aka, the + or - part) of the raw residual.
 
 $$\text{Deviance Residual} = \text{sign}(y_i - \hat{y_i})\sqrt{d_i}$$
