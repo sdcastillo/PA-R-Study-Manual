@@ -8,7 +8,7 @@ output:
 
 Burkov, Andriy.  2019.  *The Hundred-Page Machine Learning Book.*  http://themlbook.com/
 
-Goldburd, Mark et al. 2016.*Generalized Linear Models for Insurance Rating: CAS Monograph Series Number 5*. https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf
+Goldburd, Mark et al. 2016.*Generalized Linear Models for Insurance Rating: CAS Monograph Series Number 5*. https://contentpreview.s3.us-east-2.amazonaws.com/CAS+Monograph+5+-+Generalized+Linear+Models+for+Insurance+Ratemaking.pdf
 
 Hastie, Trevor, et al. 2002.  *The Elements of Statistical Learning*. Print.
 

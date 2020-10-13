@@ -346,7 +346,7 @@ Just as the name implies, GLMs are more *general* in that they are more flexible
 $$g(\mu(X)) = X\beta$$
 where $g$ is called the *link function* and $\mu = E[Y|X]$.
 
-Each observation follows *some type of exonential distrubution* (Gamma, Inverse Gaussian, Poisson, Binomial, etc.) and that distribution has a mean which is related to the linear predictor through the link function.  Additionally, there is a *dispersion* parameter, but that is more more info that is needed here.  For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf).
+Each observation follows *some type of exonential distrubution* (Gamma, Inverse Gaussian, Poisson, Binomial, etc.) and that distribution has a mean which is related to the linear predictor through the link function.  Additionally, there is a *dispersion* parameter, but that is more more info that is needed here.  For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://contentpreview.s3.us-east-2.amazonaws.com/CAS+Monograph+5+-+Generalized+Linear+Models+for+Insurance+Ratemaking.pdf).
 
 ## Advantages and disadvantages
 
@@ -1582,7 +1582,7 @@ A hybrid approach is to consider use both forward and backward selection.  This 
 
 | Readings |  | 
 |-------|---------|
-| [CAS Monograph 5 Chapter 2](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf) |  |
+| [CAS Monograph 5 Chapter 2](https://contentpreview.s3.us-east-2.amazonaws.com/CAS+Monograph+5+-+Generalized+Linear+Models+for+Insurance+Ratemaking.pdf) |  |
 
 
 ## Penalized Linear Models

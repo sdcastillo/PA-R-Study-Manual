@@ -2002,7 +2002,7 @@ glm(y ~ offset(log(m)) + x, family=poisson(link=log) )
 
 | Readings |  | 
 |-------|---------|
-| [CAS Monograph 5 Chapter 2](https://www.casact.org/pubs/monographs/papers/05-Goldburd-Khare-Tevet.pdf) |  |
+| [CAS Monograph 5 Chapter 2](https://contentpreview.s3.us-east-2.amazonaws.com/CAS+Monograph+5+-+Generalized+Linear+Models+for+Insurance+Ratemaking.pdf) |  |
 | ISLR 2.2 Assessing model accuracy|  |
 
 ### Advantages and disadvantages

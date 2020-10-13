@@ -21,6 +21,8 @@ In other words, whatever results you have in your report will need to be consist
 
 This question is from the June 16, 2020 exam.  You can see that very little code changes need to be made!  As you can see in this video, the programming required is very minimal.  The remainder of this question consists of a short-answer response.  This is very typical of Exam PA.  
 
+<iframe src="https://player.vimeo.com/video/467866045?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
 >8. (4 points) Perform feature selection with lasso regression.
 >
 >Run a lasso regression using the code chunk provided. **The code will need to be modified to
