@@ -22,3 +22,19 @@ Rigollet, Philippe (2017).  *Lecture 21: Generalized Linear Models*.  Video.  ht
 Wickham, Hadley. 2019.  *R for Data Science*.  https://r4ds.had.co.nz/
 
 "Complimentary Log Log Model".  University of Alberta.  Accessed 2020.  http://www.stat.ualberta.ca/~kcarrier/STAT562/comp_log_log.pdf
+
+The examples of the Ridge and Lasso are an adaptation of p. 251-255 of "Introduction to
+Statistical Learning with Applications in R" by Gareth James, Daniela Witten, Trevor Hastie and Robert
+Tibshirani. Adapted by R. Jordan Crouser at Smith College for SDS293: Machine Learning (Spring 2016), and re-implemented in Fall 2016 in `tidyverse` format by Amelia McNamara and R. Jordan Crouser at Smith College.
+
+Used with permission from Jordan Crouser at Smith College.  Additional Thanks to the following contributors on github:
+
+* github.com/jcrouser
+* github.com/AmeliaMN
+* github.com/mhusseinmidd
+* github.com/rudeboybert
+* github.com/ijlyttle
+
+
+
+
