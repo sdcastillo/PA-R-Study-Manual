@@ -17,8 +17,9 @@ This chapter is called "tree-**based** models" because the algorithms all rely o
 
 ## Decision Trees
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=7VeUPuFGJHk&vl,g9c66TUylZ4,D0efHEJsfHo" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7VeUPuFGJHk" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7VeUPuFGJHk&?rel=0&showinfo=1&playlist=wpNl-JwwplA,g9c66TUylZ4,D0efHEJsfHo" frameborder="0" allowfullscreen></iframe>
 
 Decision trees can be used for either classification or regression problems.  The model structure is a series of yes/no questions.  Depending on how each observation answers these questions, a prediction is made.
 
@@ -251,7 +252,7 @@ Boosting always uses the original training data and iteratively fits models to t
 
 A random forest is the most common example of bagging.  As the name implies, a forest is made up of *trees*.  Seperate trees are fit to sampled data sets.  For random forests, there is one minor modification: in order to make each model even more different, each tree selects a *random subset of variables*.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=nyxTdL_4Q-Q,6EXPYzbfLCE" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J4Wdy0Wc_xQ?rel=0&showinfo=1&playlist=nyxTdL_4Q-Q,6EXPYzbfLCE" frameborder="0" allowfullscreen></iframe>
 
 
 If we had to explain why a random forest works in three steps, they would be:
@@ -428,7 +429,7 @@ Before diving in to the gradient boosting, understanding the AdaBoost algorithm 
 
 ### Gradient Boosting
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=3CC4N4z3GJc,2xudPOBz-vs,jxuNLH5dXCs,StWY5QWMXCw" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3CC4N4z3GJc?rel=0&showinfo=1&playlist=2xudPOBz-vs,jxuNLH5dXCs,StWY5QWMXCw" frameborder="0" allowfullscreen></iframe>
 
 </br>
 
