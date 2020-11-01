@@ -11,88 +11,168 @@ library(tidyverse)
 
 # Tree-based models
 
-The models up to this point have been linear.  On the PA Syllabus, these all fall under **Topic 6: Generalized Linear Models.**  This if for good reason: every sitting of exam PA has included a GLM.  While GLMs get a lot of attention, the syllabus also contains **Topic 7: Decision Trees.**  Fortunately, much of what you already know about modeling will apply here.  We will use the same set up for training and testing, performance metrics, concepts of bias and variance, and weights that you already know about.
+The models that you have used up to this point have been linear.  On the PA Syllabus, these all fall under **Topic 6: Generalized Linear Models.**  This if for good reason: every sitting of exam PA has included a GLM.  While GLMs get a lot of attention, the syllabus also contains **Topic 7: Decision Trees.**  Fortunately, much of what you already know about modeling will apply here.  We will use the same set up for training and testing, performance metrics, concepts of bias and variance, and weights that you already know about.  This chapter is called "tree-**based** models" because the algorithms all rely on the atomic unit of a decision tree.  
 
-This chapter is called "tree-**based** models" because the algorithms all rely on the atomic unit of a decision tree.  This is a flowchart-like structure in which each internal node represents a "test" on an attribute (e.g. whether a coin flip comes up heads or tails), each branch represents the outcome of the test, and each leaf node represents a class label (decision taken after computing all attributes). The paths from root to leaf represent classification rule.
+As of the fall of 2020, there have been eight different PA exams.  The above table shows which types of models were used on each.  You will definitely see a question about GLMs or decision trees because every exam has included these.  There are variations as to the type of GLM - whether it is using stepwise selection or elastic net.  The final two models are popular with data scientists but do not get much attention on PA - the random forest and the GBM.  
 
-## Decision Trees
+```{r echo = F, fig.align="center", warning=F, out.width="100%"}
+knitr::include_graphics("images/model_q_history.png")
+```
+
+The syllabus describes these topics.
+
+```{r echo = F, fig.align="center", warning=F, out.width="400%"}
+knitr::include_graphics("images/learning_obj7.png")
+```
+
+## The basics of decision trees
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7VeUPuFGJHk" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7VeUPuFGJHk&?rel=0&showinfo=1&playlist=wpNl-JwwplA,g9c66TUylZ4,D0efHEJsfHo" frameborder="0" allowfullscreen></iframe>
 
-Decision trees can be used for either classification or regression problems.  The model structure is a series of yes/no questions.  Depending on how each observation answers these questions, a prediction is made.
+<br>
 
-The below example shows how a single tree can predict health claims.
+Let's take an example of predicting whether or not a patient has a large claim of over \$ 10,000 or not.  First, we look at all of the patients on a graph.  The shape and color reflects whether the claim is large or not.  On the x-axis is the patient's age and on the y-axis is their body-mass index (bmi).
 
-- For non-smokers, the predicted annual claims are 8,434.  This represents 80% of the observations
-- For smokers with a `bmi` of less than 30, the predicted annual claims are 21,000.  10% of patients fall into this bucket.
-- For smokers with a `bmi` of more than 30, the prediction is 42,000.  This bucket accounts for 11% of patients.
+```{r echo = F, fig.align="center", warning=F, out.width="100%"}
+knitr::include_graphics("images/treeslabeled.png")
+```
 
-```{r message = F, echo= F}
+Trees make predictions by asking a series of yes/no questions to each patient.  The questions are called *nodes* or *splits*.  The first node is called the *root*.  You can remember this by imagining that the tree is upside down and growing out of the ground.  The *depth* is the highest number of nodes.  Every patient begins at the top and moves either left or right at each node.  At the end is the predicted probability that that patient will have high claims.
+
+- For patients over the age of 52, 96% had large claims and so the predicted probability is 0.96.  This represents 24% of the data
+- For patients under the age of 52, who were smokers, 100% had large claims.  This accounts for 16%.
+
+The other branches are interpreted in the same way.
+
+## Choosing where to split  
+
+We divide the predictor space, that is, the set of possible values for `age`, `children`, `charges`, `sex`, `smoker`, `age_bucket`, `bmi`, and `region`, into distinct non-overlaping regions.  In theory, the trree could be composed by any combination of rules based on these variables.  In reality, though, this is not computationally practical.  Consider a single variable, say, `age`.  You would need to consider all rules where `age<1`, `age<2`, `age<3`, `age<4`, and so on.  Instead, an approximation method is used known as *recursive binary splitting*.  
+
+This is called a *top-down* approach because it begins at the top of the tree, which is the point where all observations belong to a single tree and then successively splits the predictor space.  It's also called a *greedy* approach because at each step, the best split is made.  
+
+How is the "best" split determined?  There are two ways.  Neither method works best on all data sets so it's best to try out both and compare.  On PA, this topic has never appeared on the exam and so you don't need to memorize these details but should be familiar with the concepts.
+
+### Entropy 
+
+Also known as information gain, entropy is a measure of disorder or randomness.  For a given split $S$ with binary outcomes, where the probability of being in the positive class is $p$ and $\bar{p}$ of being in the negative class (the compelementary probability),the entropy is
+
+$$E(S) = -plog_2(p) - \bar{p}log_2(\bar{p})$$
+
+### Gini
+
+This is the method which the StatQuest videos show.
+
+$$G(S) = 1 - p^2 - \bar{p}^2$$
+
+Where $G(S) = 0$ or $E(S) = 0$ $\rightarrow$ Best split $\rightarrow$ Highest purity $\rightarrow$ all elements belong to a single class.
+
+Where  $G(S) = 1$ or $E(S) = 1$ $\rightarrow$ Worst split $\rightarrow$ Lowest purity $\rightarrow$ Elements are randomly distributed across the classes.
+
+Consider the below split at `age = 20`.  The gini and entropy are first calculated for each branch of the tree and then the overall average is taken.
+
+```{r echo = F, fig.align="center", warning=F, out.width="50%"}
+knitr::include_graphics("images/splitrule2.png")
+```
+
+```{r include = F}
+get_gini <- function(p){round(1 - p^2 - (1-p)^2,2)}
+
+get_entropy <- function(p){round(-p*log2(p) - (1-p)*log2(1-p),2)}
+```
+
+
+**Left Branch: Age < 20**
+
+There are four large claims and only one small claim and so $p = 4/5 = 0.8$.
+
+$$G(S) = 1 - 0.8^2 - 0.2^2 = 0.32$$
+
+$$E(S) = -0.8log_2(0.8) - 0.2log_2(0.2) = 0.72$$
+
+**Right branch: Age >= 20**
+
+There are four small claims and two large claims and so $p = 2/6 = 0.33$
+
+$$G(S) = 1 - 0.33^2 - 0.67^2 = 0.44$$
+
+$$E(s) = 0.33log2(0.33) - 0.67log2(0.67) = 0.91$$
+
+
+To get the overall score, take the weighted average with the number of patients as the weights.
+
+$$G(S) = (5(0.32) + 6(0.44))/11 = 0.39$$
+
+$$E(S) = (5(0.72) + 6(0.91))/11 = 0.82$$
+
+Is this better or worse than a split where `age = 30`?  
+
+```{r echo = F, fig.align="center", warning=F, out.width="50%"}
+knitr::include_graphics("images/splitrule3.png")
+```
+
+**Left Branch: Age < 30**
+
+$$p = 4/7 = 0.571$$
+
+$$G(S) = 1 - 0.571^2 - 0.429^2 = 0.49$$
+$$E(S) = 0.99$$
+
+**Right Branch: Age >= 30**
+
+$$p = 2/4 = 0.5$$
+
+$$G(S) = 1 - 0.5^2 - 0.5^2 = 0.5$$
+$$E(S) = 1$$
+
+The overall gini is $(0.49(7) + 0.5(4))/11 = 0.49$ and the overall entropy is $(0.99(7) + 1.0(4))/11 = 0.99$.  In both cases, this is higher (worse) than the split at $age = 20$ because the groups are less homogeneous.  
+
+Once the first split has been chosen based on the gini or entropy, the next step is to further subdivide each of the regions.  For all patients over the age of 20, the algorithm will look at the variable-split-point combinations of all other variables and again choose the one with the best criteria.  For example, this might be at $\text{BMI} = 15$.  The lower right and upper right regions have only divided the large claims from the small claims, which is the objective.  The entropy and gini of these regions is 0.
+
+This tree can be writtten as a series of simple if statements:
+
+- If `age` < 20, predict `yes` with probability 4/5 
+- If `age` >= 20 and `bmi` > 15, predict `no` with probability 4/4
+- If `age` >= 20 and `bmi` < 15, predict `yes` with probability 2/2
+
+The first group on the left could be partiontioned down again.  We could take into consideration other variables such as `smoker`, `children`, and so forth.
+
+
+```{r echo = F, fig.align="center", warning=F, out.width="50%"}
+knitr::include_graphics("images/splitrule4.png")
+```
+
+### Example - SRM Practice Question 33
+
+This question from the SOA's Statistics for Risk Modeling (SRM) exam is an example of how to interpret a tree.  Simply begin at the top and proceed downwards, asking each question.  The first auto has `agecat = 1` and so there's only one possible value, which results in a prediction of 8.146.  The second has `agecat >=1.5`, `veh_age >= 2.5`, `agecat >= 4.5`, and `veh_age >= 3.5`, which results in a predicted value of 8.028.  The third auto is interpreted similarly.
+
+```{r echo = F, fig.align="center", warning=F, out.width="100%"}
+knitr::include_graphics("images/srm33.png")
+```
+
+## Tree complexity
+
+If this pattern of recursive partitioning continues for too long then the model will overfit.  This results in high accuracy on the training data but poor accuracy on the test data.  This type of model is useless in real life because predictions are always made on new, never-before-seen data.  In addition, the tree structure is often too complicated to explain in business terms.
+
+Consider this tree
+
+```{r }
 library(rpart)
 library(rpart.plot)
-tree <- rpart(charges ~ smoker + bmi, data = health_insurance)
+df <- health_insurance %>% mutate(large_claim = ifelse(charges > 10000, "yes", "no"))
+tree <- rpart(formula = large_claim ~  age + bmi + smoker + sex + children, data = df,
+              control = rpart.control(cp = 0))
+
 rpart.plot(tree, type = 3)
 ```
 
-We can cut the data set up into these groups and look at the claim costs.  From this grouping, we can see that `smoker` is the most important variable as the difference in average claims is about 20,000.
 
-```{r message = F, echo = F}
-library(scales)
-library(kableExtra)
-
-health_insurance %>% 
-  sample_frac(0.2) %>% 
-  mutate(bmi_30 = ifelse(bmi < 30, "bmi < 30", "bmi >= 30")) %>% 
-  group_by(smoker,bmi_30) %>% 
-  summarise(mean_claims = dollar(mean(charges)),
-            n = n()) %>% 
-  ungroup() %>% 
-  mutate(percent = round(n/sum(n),2)) %>% 
-  select(-n) %>% 
-  kable("markdown")
-```
-
-This was a very simple example because there were only two variables.  If we have more variables, the tree will get large very quickly.  This will result in overfitting; there will be good performance on the training data but poor performance on the test data.
-
-The step-by-step process of building a tree is
-
-**Step 1: Find the best predictor-split-point combination**  
-
-This variable could be any one of `age`, `children`, `charges`, `sex`, `smoker`, `age_bucket`, `bmi`, or `region`.
-
-The split point which best separates observations out based on the value of $y$.  A good split is one where the $y$'s are very different. * **
-
-In this case, `smoker` was chosen.  Then we can only split this in one way: `smoker = "yes"` or `smoker = "no"`.  Notice that although this is a categorical variable, the tree does not need to binanize the variables.  Instead,  like the table above shows, the data gets partitioned by the categories directly.
-
-Then for each of these groups, smokers and non-smokers, find the next variable and split point which best separates out the claims.  In this case, for no-smokers, `age` was chosen.  To find the best cut point of `age`, look at all possible age cut points from 18, 19, 20, 21, ..., 64 and choose the one which best separates the data.
-
-There are three ways of deciding where to split
-
-- *Entropy* (aka, information gain)
-- *Gini*
-- *Classification error*
-
-Of these, only the first two are commonly used.  The exam is not going to ask you to calculate either of these.  Just know that neither method will work better on all data sets, and so the best practice is to test both and compare the performance. 
-
-**Step 2: Continue doing this until a stopping criteria is reached.  For example, the minimum number of observations is 5 or less.** 
-
-As you can see, this results in a very deep tree.
-
-```{r}
-tree <- rpart(formula = charges ~  ., data = health_insurance,
-              control = rpart.control(cp = 0.003))
-rpart.plot(tree, type = 3)
-```
-
-**Step 3: Apply cost comlexity pruning to simplify the tree**
-
-Intuitively, we know that the above model would perform poorly due to overfitting.  We want to make it simpler by removing nodes.  This is very similar to how in linear models we reduce complexity by reducing the number of coefficients.
+*Pruning* is the process of making a tree simpler by trimming off branches.  This is very similar to how with linear models we reduce complexity by reducing the number of coefficients.
 
 A measure of the depth of the tree is the *complexity*.  A simple way of measuring this from the number of terminal nodes, called $|T|$.  In the above example, $|T| = 8$.  The amount of penalization is controlled by $\alpha$.  This is very similar to $\lambda$ in the Lasso.
 
-Intuitively, only looking at the number of nodes by itself is too simple because not all data sets will have the same characteristics such as $n$, $p$, the number of categorical variables, correlations between variables, and so fourth.  In addition, if we just looked at the error (squared error in this case) we would overfit very easily.  To address this issue, we use a cost function which takes into account the error as well as $|T|$.
+Intuitively, only looking at the number of nodes by itself is too simple because not all data sets will have the same characteristics such as $n$, $p$, the number of categorical variables, correlations between variables, and so fourth.  In addition, if we just looked at the error then we would overfit very easily.  To address this issue, we use a cost function which takes into account the error as well as $|T|$.  If this were a regression tree then squared error would be used, and if a classification tree then misclassification error would be used.
 
 To calculate the cost of a tree, number the terminal nodes from $1$ to $|T|$, and let the set of observations that fall into the $mth$ bucket be $R_m$.  Then add up the squared error over all terminal nodes to the penalty term.
 
@@ -100,20 +180,21 @@ $$
 \text{Cost}_\alpha(T) = \sum_{m=1}^{|T|} \sum_{R_m}(y_i - \hat{y}_{Rm})^2 + \alpha |T|
 $$
 
+The argument `cp` is the complexity parameter.  Essentially, the user informs the program that any split which does not improve the fit by `cp` will likely be pruned off by cross-validation, and that hence the program need not pursue it.  The above tree sets `cp = 0`which means that no pruning takes place.  The tree continues to create more splits until there are 5 or fewer patients in the leaf nodes.
 
-**Step 4: Use cross-validation to select the best alpha**
+```{block, type='studytip'}
+**You don't need to memorize parameter definitions!** Simply type `?rpart.control` into the console to bring up the documentation.  You can do this on the Prometric computer as well.
+```
 
-The cost is controlled by the `CP` parameter.  In the above example, did you notice the line `rpart.control(cp = 0.003)`?  This is telling `rpart` to continue growing the tree until the CP reaches 0.003.  At each subtree, we can measure the cost `CP` as well as the cross-validation error `xerror`.
+## Cost-complexity pruning
 
-This is stored in the `cptable` 
+Now that you have a way of comparing trees together based on their complexity, how do we know which amount of complexity is right?  If complexity is too low, the model will be underfitting and will not capture all of the signal that is in the data.  On the other hand, if complexity is too high, then the tree will be too sensitive to random noise and will overfit.  
+
+This table shows the `cp` along with the number of splits at each tree.  When `nsplit = 0`, all patients are in the same group.  When `cp = 0`, then `nsplit = 18` which is the above tree.  The `xerror` column is the missclassification error, and `rel error` is the normalized version so that it is between 0 and 1.  `xstd` is the standard deviation of the predictions.  **For PA, you want to choose a tree that strikes a balance between having a low error and having few splits so that it can be interpreted.**
 
 ```{r message = F}
-tree <- rpart(formula = charges ~  ., data = health_insurance,
-              control = rpart.control(cp = 0.0001))
 cost <- tree$cptable %>% 
-  as_tibble() %>% 
-  select(nsplit, CP, xerror) 
-
+  as_tibble() 
 cost %>% head()
 ```
 
@@ -121,7 +202,7 @@ As more splits are added, the cost continues to decrease, reaches a minimum, and
 
 ```{r echo = F}
 cost %>% 
-  filter(nsplit > 1) %>% 
+ # filter(nsplit > 1) %>% 
   mutate(min = ifelse(xerror == min(cost$xerror),"y", "n")) %>% 
   ggplot(aes(nsplit, xerror, color = min)) + 
   geom_line() + 
@@ -129,18 +210,7 @@ cost %>%
   theme_bw() + 
   theme(legend.position = "none") + 
   scale_color_manual(values = c("black", "red")) + 
-  annotate("text", x = 25, y = 0.17, label = "Minimum Error", color = "red")
-```
-
-To optimize performance, choose the number of splits which has the lowest error.  Often, though, the goal of using a decision tree is to create a simple model.  In this case, we can err or the side of a lower `nsplit` so that the tree is shorter and more interpretable.  All of the questions on so far have only used decision trees for interpretability, and a different model method has been used when predictive power is needed.
-
-Once we have selected $\alpha$, the tree is pruned.  This table below shows 6 different trees.  The `xerror` column is the missclassification error.  The `rel error` is the relative error, which is the missclassification error divided by its smallest value.  This rescales `xerror` so that the tree with the smallest error is given a `rel error` of 1.00.
-
-```{r include = T}
-tree$cptable %>% 
-  as_tibble() %>% 
-  select(nsplit, CP, xerror, `rel error`) %>% 
-  head()
+  annotate("text", x = 4, y = 0.2, label = "Minimum Error", color = "red")
 ```
 
 The SOA may give you code to find the lowest CP value such as below.  You could always find this value yourself by inspecting the CP table and choosing the value of `CP` which has the lowest `xerror`.
@@ -150,10 +220,10 @@ pruned_tree <- prune(tree,
                      cp = tree$cptable[which.min(tree$cptable[, "xerror"]), "CP"])
 ```
 
-To make a simple tree, there are a few options
+Many questions on PA have given candidates a big tree and then asked that they use pruning to make it simpler.  There are ways of doing this besides just adjusting `cp`.  To make a simpler tree, you can 
 
+- Set `cp` to be higher
 - Set the maximum depth of a tree with `maxdepth`
-- Manually set `cp` to be higher
 - Use fewer input variables and avoid categories with many levels
 - Force a high number of minimum observations per terminal node with `minbucket`
 
@@ -170,26 +240,14 @@ test <- health_insurance %>% slice(-index)
 simple_tree <- rpart(formula = charges ~  ., 
               data = train,
               control = rpart.control(cp = 0.0001, 
-                                      minbucket = 200,
-                                      maxdepth = 10))
+                                      minbucket = 100,
+                                      maxdepth = 4))
 rpart.plot(simple_tree, type = 3)
 ```
 
-We evaluate the performance on the test set.  Because the target variable `charges` is highly skewed, we use the Root Mean Squared Log Error (RMSLE).  We see that the complex tree has the best (lowest) error, but also has 8 terminal nodes.  The simple tree with only three terminal nodes has worse (higher) error, but this is still an improvement over the mean prediction.
-
-```{r}
-tree_pred <- predict(tree, test)
-simple_tree_pred <- predict(simple_tree, test)
-
-get_rmsle <- function(y, y_hat){
-  sqrt(mean((log(y) - log(y_hat))^2))
-}
-
-get_rmsle(test$charges, tree_pred)
-get_rmsle(test$charges, simple_tree_pred)
-get_rmsle(test$charges, mean(train$charges))
-```
 ### Example: SOA PA 6/18/2020, Task 6
+
+<iframe src="https://player.vimeo.com/video/467846520" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 (10 Points)
 
@@ -209,6 +267,7 @@ trees (original and pruned).
 
 > Interpret the entire pruned tree (all leaves) in the context of the business problem. 
 
+
 ### Advantages and disadvantages
 
 **Advantages**
@@ -216,17 +275,14 @@ trees (original and pruned).
 - Easy to interpret 
 - Performs variable selection
 - Categorical variables do not require binarization in order for each level to be used as a separate predictor
-- Captures non-linearities 
-- Captures interaction effects
+- Captures non-linearities and interaction effects
 - Handles missing values
 
 **Disadvantages**
 
-- Is a “weak learner” because of low predictive power
-- Does not work on small data sets
+- Predictive accuracy tends to be lower than other models on PA
 - Is often a simplification of the underlying process because all observations at terminal nodes have equal predicted values
-- High variance (which can be alleviated with stricter parameters) leads the “easy to interpret results” to change upon retraining
-Unable to predict beyond the range of the training data for regression (because each predicted value is an average of training samples)
+- Can be very non-robust because small changes in the data can cause a large change in the final estimated tree
 
 | Readings |  | 
 |-------|---------|
@@ -263,7 +319,7 @@ If we had to explain why a random forest works in three steps, they would be:
 
 When using only a single tree, there can only be as many predictions as there are terminal nodes.  In a random forest, predictions can be more granular due to the contribution of each of the trees.
 
-The below graph illustrates this.  A single tree (left) has stair-like, step-wise predictions whereas a random forest is free to predict any value.  The color represents the predicted value (yellow = highest, black = lowest).
+The below graph illustrates this.  A single tree (left) has stair-like, step-wise predictions whereas a random forest is free to predict any value.  The color represents the predicted value (light blue = highest, black = lowest).
 
 ```{r message = F, echo = F, fig.height = 4}
 library(randomForest)
