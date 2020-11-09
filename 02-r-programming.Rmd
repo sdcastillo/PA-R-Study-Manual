@@ -23,7 +23,7 @@ This question is from the June 16, 2020 exam.  You can see that very little code
 
 <iframe src="https://player.vimeo.com/video/467866045?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-Already enrolled?  Watch the [full video](https://course.exampa.net/mod/page/view.php?id=85).
+Already enrolled?  Watch the <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=85">full video.</a>
 
 >8. (4 points) Perform feature selection with lasso regression.
 >

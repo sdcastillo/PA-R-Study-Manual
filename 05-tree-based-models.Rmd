@@ -249,8 +249,6 @@ rpart.plot(simple_tree, type = 3)
 
 <iframe src="https://player.vimeo.com/video/467846520" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-Already enrolled?  Watch the [full video](https://course.exampa.net/mod/page/view.php?id=85).
-
 Already enrolled?  Watch the <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=85">full video.</a>
 
 (10 Points)
