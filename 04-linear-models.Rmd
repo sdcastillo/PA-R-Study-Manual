@@ -858,6 +858,8 @@ The following question is from the Hospital Readmissions sample project from 201
 
 <iframe src="https://player.vimeo.com/video/467845050?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
+Already enrolled?  Watch the [full video](https://course.exampa.net/mod/page/view.php?id=56).
+
 >"With the target variable being only 0 or 1, the binomial distribution is the only reasonable choice.  your assistant has done some research and learned that for the glm package in R there are five link functions that can be used with the binomial distribution.  They are shown below (the inverse of the link function is presented here as it represents how the linear predictor is transformed into the actual response), where $\nu$ is the linear predictor and $\p$ is the response.
 
 ```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
@@ -902,6 +904,8 @@ I chose to use the Logit link.
 ## Example: SOA PA 12/12/19, Task 11
 
 <iframe src="https://player.vimeo.com/video/467848221?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+Already enrolled?  Watch the [full video](https://course.exampa.net/mod/page/view.php?id=60).
 
 >Marketing has asked for a demonstration of how your model is to be used with examples of cases that predict high value and cases that predict low value. Your assistant has prepared some sample cases that can be run through your model. You may need to adjust some of them to obtain illustrative examples that would be of interest to marketing.
 
@@ -1432,6 +1436,9 @@ A hybrid approach is to consider use both forward and backward selection.  This 
 ## Example: SOA PA 6/12/19, Task 6
 
 <iframe src="https://player.vimeo.com/video/467840434?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+
+Already enrolled?  Watch the [full video](https://course.exampa.net/mod/page/view.php?id=60).
 
 > AIC and BIC are among the available techniques for feature selection. Briefly describe them and
 outline the differences in the two criteria. Make a recommendation as to which one should be

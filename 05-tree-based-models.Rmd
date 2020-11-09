@@ -245,7 +245,7 @@ simple_tree <- rpart(formula = charges ~  .,
 rpart.plot(simple_tree, type = 3)
 ```
 
-### Example: SOA PA 6/18/2020, Task 6
+### Example: SOA PA 6/16/2020, Task 6
 
 <iframe src="https://player.vimeo.com/video/467846520" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
