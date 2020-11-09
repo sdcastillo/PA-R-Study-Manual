@@ -245,9 +245,12 @@ simple_tree <- rpart(formula = charges ~  .,
 rpart.plot(simple_tree, type = 3)
 ```
 
-### Example: SOA PA 6/16/2020, Task 6
+## Example: SOA PA 6/16/2020, Task 6
 
 <iframe src="https://player.vimeo.com/video/467846520" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+Already enrolled?  Watch the [full video](https://course.exampa.net/mod/page/view.php?id=85).
+
 
 (10 Points)
 
@@ -268,7 +271,7 @@ trees (original and pruned).
 > Interpret the entire pruned tree (all leaves) in the context of the business problem. 
 
 
-### Advantages and disadvantages
+## Advantages and disadvantages
 
 **Advantages**
 

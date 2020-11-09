@@ -1437,8 +1437,7 @@ A hybrid approach is to consider use both forward and backward selection.  This 
 
 <iframe src="https://player.vimeo.com/video/467840434?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-
-Already enrolled?  Watch the [full video](https://course.exampa.net/mod/page/view.php?id=60).
+Already enrolled?  Watch the [full video](https://course.exampa.net/mod/page/view.php?id=58).
 
 > AIC and BIC are among the available techniques for feature selection. Briefly describe them and
 outline the differences in the two criteria. Make a recommendation as to which one should be
