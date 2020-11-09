@@ -251,6 +251,7 @@ rpart.plot(simple_tree, type = 3)
 
 Already enrolled?  Watch the [full video](https://course.exampa.net/mod/page/view.php?id=85).
 
+Already enrolled?  Watch the <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=85">full video.</a>
 
 (10 Points)
 
