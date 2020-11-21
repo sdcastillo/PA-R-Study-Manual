@@ -6,43 +6,83 @@ output:
 
 # Unsupervised Learning
 
-Up to this point we have been trying to predict something.  We use data $X$ to predict an unknown $Y$, which is a number in the case of regression and a category in the case of classification.  These problems are known as *supvervised* because we are "supervising" how the model learns by giving it a target.
+This chapter covers the eighth learning objective along with one additional topic, **correlation analysis**.
 
-Here is an easy way to remember this: If you are in kindergarten class, and the teacher provides cards with pictures and words, and then asks each kid to look at the picture and then say the word, this is supervised learning.  The label is the name of the picture, and the data is the picture itself.  Instead, if the teacher gives out finger paints and says "express yourself!", then this is *unsupervised learning*.  There is no label but only data.
+```{r echo = F, fig.align="center", warning=F, out.width="400%"}
+knitr::include_graphics("images/learning_obj8.png")
+```
+
+As of the fall of 2020, there have been eight different PA exams.  The table below shows the types of questions in each.  Your exam in December will likely have a question on either k-means or hierarchical clustering because these topics have not frequently been tested.  The Hospital Readmissions sample project did have one question related to k-means but that was in 2018.  Our ExamPA.net practice exams contain questions on both topics.
+
+```{r echo = F, fig.align="center", warning=F, out.width="400%"}
+knitr::include_graphics("images/prior_unsupervised_qs.png")
+```
+
+## Types of Learning
+
+You are in a classroom and your teacher is giving a lesson which has a correct answer, such as 1 + 2 = 2.  This is called *supervised learning*.  The teacher is the supervisor, who is responsible for minimizing the number of incorrect answers.  When a question is answered correctly, there is a reward, and when a mistake is made there is a penalty.  In machine learning, we measure the performance using metrics such as RMSE and we say that the model is a good "fit" when this metric is low.
+
+```{r, echo=FALSE,out.width="49%", out.height="20%",fig.cap="Supervised (Left), Unsupervised (Right)",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("images/classroom.png","images/legos.png"))
+``` 
+
+If instead you are given a pile of **Legos** and told to build whatever you want, that would be *unsupervised learning*.  There are no right or wrong answers and to goal is to explore patterns in the data.  There are no performance metrics and it is impossible to say whether a model is a good fit or not.
+
+Up to this point, you have been working with supervised learning.  This is the major focus of PA because predictive analytics often is used to predict a future outcome.  We now move on to the unsupervised learning algorithms.  Here are all if the learning algorithms on PA:
+
+|Supervised                   |Unsupervised                      |
+|-----------------------------|----------------------------------|
+|GLM                          |Correlation analysis              |
+|Lasso, Ridge, and Elastic Net|Principal component analysis (PCA)|
+|Decision Tree                |K-means clustering                |
+|Bagged Tree                  |Hierarchical clustering           |
+|Boosted Tree                 |                                  |
+
+**Semi-Supervised Learning** is a mix of the two.  One example of this is using PCA or Clustering to create features that are used in a supervised model.
+
+## Correlation Analysis
+
+- Two variables are said to be positively correlated when increasing one tends to increase the other and negatively correlated when increasing one decreases the other
+- Correlation is unsupervised because it does not depend on the target variable
+- Correlation is only defined for numeric variables.  It is possible to calculate correlation between binary variables if they have been coded as 0 or 1 but these questions have never appeared on PA.
+
+### Correlation does not equal causation
+
+This is a common saying of statisticians.  Two things happening at the same time is not sufficient evidence to suggest that one causes the other.  A [spurious correlation](https://tylervigen.com/old-version.html) is when two unrelated variables have a positive or negative correlation by random chance.
+
+Examples:
+
+**Number of Drownings and Ice Cream Sales:** Drownings rise when ice cream sales rise because the heat causes more people to go swimming as well as to want ice cream.
+
+**Executives who say "please" and "thank you" more often enjoy better performance reviews:**  It might at first appear that this is due to brown-nosing, or flatery, but a more likely explanation is that people who take the extra effort to be polite also take the extra effort to do their jobs well.  People who have good performance may also by polite, but not all polite people are high performers.
 
 ## Principal Component Analysis (PCA)
 
-Often there are a lot of columns in the data that contain redundant information.  PCA is one method of simplifying.
+Often there are variables that contain redundant information.  PCA is one method of simplifying them.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FgakZw6K1QQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 StatQuest. “Principal Component Analysis (PCA), Step-by-Step” YouTube, Joshua Starmer, 2 Apr 2018, https://www.youtube.com/watch?v=FgakZw6K1QQ
 
-For example, if your data consists of city traffic, such as (1) the number of cars on the road, (2) number of taxis, (3) number of pedestrians, and (4) number of Ubers, then knowing any one of these values will tell you about how busy the given road is.  If there are a lot of Ubers, then there are probably also a lot of Taxis.  Intuitively, we probably don't need four variables to measure this info and we could have a single variable called "traffic level". This would be reducing the dimension from 4 to 1.
-
-PCA is a dimensionality reduction method which reduces the number of variables needed to retain most of the information in a matrix.  If there are predictor variables $X_1, X_2, X_3, X_4, X_5$, then running PCA and choosing the first three Principal Components (PCs) will reduce the dimension from 5 to 3.
+PCA is a *dimensionality reduction* method which reduces the number of variables needed to retain most of the information in a matrix.  If there are predictor variables $(x_1, x_2, x_3)$, then running PCA and choosing the first two Principal Components (PCs) would reduce the dimension from 3 to 2.  You can imagine this as points in three-dimensional space being projected down onto a plane.  The coordinates of this plane are $(\text{PC}_1, \text{PC}_2)$.
 
 ```{r echo = F, message = F, warning = F, fig.align="center"}
 library(png)
 library(tidyverse)
-knitr::include_graphics("images/PCA.png")
+knitr::include_graphics("images/3d_dim_reduction.png")
 ```
 
-Each PC is a linear combination of the original $X$s.  For example, PC1 might be
+Each PC is a linear combination of the original variables.  For example, PC1 might be
 
-$$PC_1 = 0.2X_1 + 0.3X_2 - 0.2X_3 + 0X_5 + 0.3X_5$$
-The weights here are also called "loadings" or "rotations", and are (0.2, 0.3, -0.2, 0, 0.3).  Each of the PCs can be interpreted as explaining part of the data.  In the traffic example, PC1 might explain the traffic level, PC2 the weather, and PC3 the time of day.
-
-
-
+$$PC_1 = 0.2X_1 + 0.3X_2 - 0.2X_3$$
+The weights here are also called *loadings* or *rotations*, and are (0.2, 0.3, -0.2) in this example.  
 
 | Readings |  | 
 |-------|---------|
 | ISLR 10.2 Principal Component Analysis|  |
 | ISLR 10.3 Clustering Methods|  |
 
-
-### Example: PCA on US Arrests
+### Example: US Arrests
 
 In this example, we perform PCA on the `USArrests` data set, which is part of
 the base `R` package. The rows of the data set contain the 50 states, in
@@ -176,6 +216,21 @@ a=c(1,2,8,-3)
 cumsum(a)
 ```
 
+
+### SOA PA 6/13/19, Task 3
+
+>3. (9 points) Use observations from principal components analysis (PCA) to generate a new feature
+
+>Your assistant has provided code to run a PCA on three variables. Run the code on these three variables. Interpret the output, including the loadings on significant principal components. Generate one new feature based on your observations (which may also involve dropping some current variables). Your assistant has provided some notes on using PCA on factor variables in the Rmd file.
+
+Principal component analysis is a dimensionality reduction method which collapses data into fewer principal components, thereby reducing the dimensionality.  Each principal component (PC) is a linear combination of the original variables in which the weights loadings serve as loadingsweights.
+First, all factors are converted into numeric 0/1 indicators.  These variables include Rd_Conditions, Light, and Weather.  The weight information is then used to construct features capturing information about poor weather conditions.  This includes:
+•	-0.51 Rd_ConditionsDRY 
+•	0.5 Rd_ConditionsWET
+•	-0.46 WeatherCLEAR
+This feature is then added to the data.
+
+
 ### Example: PCA on Cancel Cells
 
 The data  `NCI60` contains expression levels of 6,830 genes from 64 cancel cell lines.  Cancer type is also recorded.
@@ -269,7 +324,7 @@ Imagine that you are a large retailer interested in understanding the customer b
 Clustering algorithms look for groups of observations which are similar to one another.  Because there is no target variable, measuring the quality of the "fit" is much more complicated.  There are many clustering algorithms, but this exam only focuses on the two that are most common.
 
 
-### K-Means Clustering
+## K-Means Clustering
 
 Kmeans takes continuous data and assigns observations into k clusters, or groups. In the two-dimensional example, this is the same as drawing lines around points.  
 

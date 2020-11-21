@@ -13,7 +13,7 @@ library(tidyverse)
 
 The models that you have used up to this point have been linear.  On the PA Syllabus, these all fall under **Topic 6: Generalized Linear Models.**  This if for good reason: every sitting of exam PA has included a GLM.  While GLMs get a lot of attention, the syllabus also contains **Topic 7: Decision Trees.**  Fortunately, much of what you already know about modeling will apply here.  We will use the same set up for training and testing, performance metrics, concepts of bias and variance, and weights that you already know about.  This chapter is called "tree-**based** models" because the algorithms all rely on the atomic unit of a decision tree.  
 
-As of the fall of 2020, there have been eight different PA exams.  The above table shows which types of models were used on each.  You will definitely see a question about GLMs or decision trees because every exam has included these.  There are variations as to the type of GLM - whether it is using stepwise selection or elastic net.  The final two models are popular with data scientists but do not get much attention on PA - the random forest and the GBM.  
+As of the fall of 2020, there have been eight different PA exams.  The below table shows which types of models were used on each.  You will definitely see a question about GLMs or decision trees because every exam has included these.  There are variations as to the type of GLM - whether it is using stepwise selection or elastic net.  The final two models are popular with data scientists but do not get much attention on PA - the random forest and the GBM.  
 
 ```{r echo = F, fig.align="center", warning=F, out.width="100%"}
 knitr::include_graphics("images/model_q_history.png")
