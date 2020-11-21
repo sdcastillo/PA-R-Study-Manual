@@ -217,17 +217,22 @@ cumsum(a)
 ```
 
 
-### SOA PA 6/13/19, Task 3
+### Example: SOA PA 6/13/19, Task 3
 
 >3. (9 points) Use observations from principal components analysis (PCA) to generate a new feature
 
 >Your assistant has provided code to run a PCA on three variables. Run the code on these three variables. Interpret the output, including the loadings on significant principal components. Generate one new feature based on your observations (which may also involve dropping some current variables). Your assistant has provided some notes on using PCA on factor variables in the Rmd file.
 
+Already enrolled?  Watch the <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=58">full video.</a>
+
 Principal component analysis is a dimensionality reduction method which collapses data into fewer principal components, thereby reducing the dimensionality.  Each principal component (PC) is a linear combination of the original variables in which the weights loadings serve as loadingsweights.
-First, all factors are converted into numeric 0/1 indicators.  These variables include Rd_Conditions, Light, and Weather.  The weight information is then used to construct features capturing information about poor weather conditions.  This includes:
-•	-0.51 Rd_ConditionsDRY 
-•	0.5 Rd_ConditionsWET
-•	-0.46 WeatherCLEAR
+First, all factors are converted into numeric 0/1 indicators.  These variables include Rd_Conditions, Light, and Weather.  The weight information is then used to construct features capturing information about poor weather conditions.  
+
+This includes:
+-	-0.51 Rd_ConditionsDRY 
+-	0.5 Rd_ConditionsWET
+-	-0.46 WeatherCLEAR
+
 This feature is then added to the data.
 
 

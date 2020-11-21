@@ -169,10 +169,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="data-exploration.html"><a href="data-exploration.html#how-to-transform-the-data"><i class="fa fa-check"></i><b>8.5</b> How to transform the data</a></li>
 <li class="chapter" data-level="8.6" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>8.6</b> Example: SOA PA 12/12/19, Task 1</a><ul>
 <li class="chapter" data-level="8.6.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>8.6.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="8.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>8.6.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="8.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>8.6.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="8.6.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>8.6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="8.6.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>8.6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="8.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>8.6.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="8.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>8.6.5</b> 73.6% of statistics are false 😨</a></li>
 </ul></li>
 <li class="chapter" data-level="8.7" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>8.7</b> Exercises</a></li>
 <li class="chapter" data-level="8.8" data-path="data-exploration.html"><a href="data-exploration.html#answers-to-exercises"><i class="fa fa-check"></i><b>8.8</b> Answers to exercises</a></li>
@@ -294,7 +294,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>17.3</b> Principal Component Analysis (PCA)</a><ul>
 <li class="chapter" data-level="17.3.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-us-arrests"><i class="fa fa-check"></i><b>17.3.1</b> Example: US Arrests</a></li>
-<li class="chapter" data-level="17.3.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#soa-pa-61319-task-3"><i class="fa fa-check"></i><b>17.3.2</b> SOA PA 6/13/19, Task 3</a></li>
+<li class="chapter" data-level="17.3.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-soa-pa-61319-task-3"><i class="fa fa-check"></i><b>17.3.2</b> Example: SOA PA 6/13/19, Task 3</a></li>
 <li class="chapter" data-level="17.3.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-pca-on-cancel-cells"><i class="fa fa-check"></i><b>17.3.3</b> Example: PCA on Cancel Cells</a></li>
 </ul></li>
 <li class="chapter" data-level="17.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#clustering"><i class="fa fa-check"></i><b>17.4</b> Clustering</a></li>
@@ -536,8 +536,8 @@ and so forth. We can plot the PVE explained by each component as follows:</p>
 <a class="sourceLine" id="cb418-2" title="2"><span class="kw">cumsum</span>(a)</a></code></pre></div>
 <pre><code>## [1]  1  3 11  8</code></pre>
 </div>
-<div id="soa-pa-61319-task-3" class="section level3">
-<h3><span class="header-section-number">17.3.2</span> SOA PA 6/13/19, Task 3</h3>
+<div id="example-soa-pa-61319-task-3" class="section level3">
+<h3><span class="header-section-number">17.3.2</span> Example: SOA PA 6/13/19, Task 3</h3>
 <blockquote>
 <ol start="3" style="list-style-type: decimal">
 <li>(9 points) Use observations from principal components analysis (PCA) to generate a new feature</li>
@@ -546,12 +546,14 @@ and so forth. We can plot the PVE explained by each component as follows:</p>
 <blockquote>
 <p>Your assistant has provided code to run a PCA on three variables. Run the code on these three variables. Interpret the output, including the loadings on significant principal components. Generate one new feature based on your observations (which may also involve dropping some current variables). Your assistant has provided some notes on using PCA on factor variables in the Rmd file.</p>
 </blockquote>
+<p>Already enrolled? Watch the <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=58">full video.</a></p>
 <p>Principal component analysis is a dimensionality reduction method which collapses data into fewer principal components, thereby reducing the dimensionality. Each principal component (PC) is a linear combination of the original variables in which the weights loadings serve as loadingsweights.
-First, all factors are converted into numeric 0/1 indicators. These variables include Rd_Conditions, Light, and Weather. The weight information is then used to construct features capturing information about poor weather conditions. This includes:
-• -0.51 Rd_ConditionsDRY
-• 0.5 Rd_ConditionsWET
-• -0.46 WeatherCLEAR
-This feature is then added to the data.</p>
+First, all factors are converted into numeric 0/1 indicators. These variables include Rd_Conditions, Light, and Weather. The weight information is then used to construct features capturing information about poor weather conditions.</p>
+<p>This includes:
+- -0.51 Rd_ConditionsDRY
+- 0.5 Rd_ConditionsWET
+- -0.46 WeatherCLEAR</p>
+<p>This feature is then added to the data.</p>
 </div>
 <div id="example-pca-on-cancel-cells" class="section level3">
 <h3><span class="header-section-number">17.3.3</span> Example: PCA on Cancel Cells</h3>
