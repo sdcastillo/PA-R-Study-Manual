@@ -223,6 +223,8 @@ cumsum(a)
 
 >Your assistant has provided code to run a PCA on three variables. Run the code on these three variables. Interpret the output, including the loadings on significant principal components. Generate one new feature based on your observations (which may also involve dropping some current variables). Your assistant has provided some notes on using PCA on factor variables in the Rmd file.
 
+<iframe src="https://player.vimeo.com/video/465063620" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
 Already enrolled?  Watch the <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=58">full video.</a>
 
 Principal component analysis is a dimensionality reduction method which collapses data into fewer principal components, thereby reducing the dimensionality.  Each principal component (PC) is a linear combination of the original variables in which the weights loadings serve as loadingsweights.
