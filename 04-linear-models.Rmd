@@ -203,32 +203,7 @@ base your recommendation solely on the mean squared errors (RMSE) from each mode
 
 >3) State a method other than principal components analysis (PCA) that can be used to handle the correlated variables. Do not implement this method.
  
-I compare the correlations of the linear variables below.  Two variables are correlated when there is a tendency of one variable to increase as the other variable increases and to decrease when that variable decreases.
-
-- I see that edu_years and age have a negative correlation
-- Interest rate and CPI have a very high correlation of 0.59
-- Employment and CPI also have a high correlation of 0.98
-
-```{r echo = F, fig.align="center", warning=F, out.width="400%"}
-knitr::include_graphics("images/correlation_example.png")
-```
-
-One of the assumptions of GLMs is that the predictor variables are not correlated.  These correlations between irate and employment may cause problems when fitting the model.  Decision trees, on the other hand, handle correlations well and would not be impacted.
-
-GLMs perform poorly because there are separate coefficients for each of the correlated variables which have an offsetting impact.  This results in an unstable model which can have its coefficients change drastically depending on the training split.  The p-values for the correlated variables would likely be large.  
-
-Trees are not impacted strongly by this because only one of the variables will be selected at each split.  In other words, the feature selection attribute of trees will only choose one of the correlated variables at a time.
-
-1)	One method other than PCA for handling the correlated variables is to use one of the variables and
-delete the redundant ones. (This is the method in the SOA's solution.)
-
-2)	Use stepwise selection such as Step AIC or Step BIC to remove a subset of the correlated variables automatically.  That will work because once one variable is included in the model, adding another correlated variable would not lead to improvement in the AIC or BIC and so this model variation would not be used.
-
-3)	Use a LASSO to remove variables.  Similarly to stepwise selection, this removes variables which do not decrease the test error (root mean squared error) based on the cross-validation results.  
-
-4)	Use clustering to group together customers based on the correlated variables and then use this cluster number as a new feature.  Customers who had similar cluster characteristics would be grouped together.  For instance, customers who were called during an economic downturn when interest rates, employment, and CPI were low may be in one cluster and customers who were called during a booming economy when CCI was high and prices were high may be in another.  The cluster number would be a new categorical feature in the model.
-
-Note: only one answer is needed.  Four are provided here for your reading benefit.
+ 
 
 ## Example: Health Costs
 
@@ -865,41 +840,6 @@ Already enrolled?  Watch the <a target="_parent" href="https://course.exampa.net
 ```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
 knitr::include_graphics("images/hospital_readmissions_link.png")
 ```
-
-I split the data up into a training and test set, where 75% of the patients where used for training the model and the other 25% were used for testing.  The readmission rate was about 13% in both data sets.
-
-TRAIN: 0.1252346
-
-TEST: 0.1280101
-
-A GLM allows for multiple inputs to be mapped to predict a single output, called the response.  In this case, the response is binary and so only the binomial response distribution makes sense.  The model predictors are related to the predicted readmission through a link function.  Because we want the result to be a probability between 0 and 1, we limit out choices of link functions to those which have a domain of (0,1).  
-
-I ruled out the log link immediately because it allows for outputs outside of 0 and 1.
-I tested out the model on the test set for the other links.
-I compare the model’s performance based on the AUC score.  The goal of this analysis was to beat the LACE index of 0.7.
-
-**Logit**
-
-The logit is the most common link function for binary classification is the canonical link for the binomial family.  It is also the default in R, and is commonly used in Logistic Regression. 
-
-Area under the curve: 0.7451
-
-**Probit**
-
-The Probit is the inverse cumulative distribution of a standard normal random variable.  The AUC the same as the logit.
-
-Area under the curve: 0.7451
-
-**Cauchit**
-
-The Cauchit has a worse (lower) AUC than the Logit or Probit and so it is not considered further.
-Area under the curve: 0.7449
-
-**ClogLog**
-
-Area under the curve: 0.745
-
-I chose to use the Logit link.  
 
 ## Example: SOA PA 12/12/19, Task 11
 

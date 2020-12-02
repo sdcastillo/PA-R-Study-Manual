@@ -227,17 +227,6 @@ cumsum(a)
 
 Already enrolled?  Watch the <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=58">full video.</a>
 
-Principal component analysis is a dimensionality reduction method which collapses data into fewer principal components, thereby reducing the dimensionality.  Each principal component (PC) is a linear combination of the original variables in which the weights loadings serve as loadingsweights.
-First, all factors are converted into numeric 0/1 indicators.  These variables include Rd_Conditions, Light, and Weather.  The weight information is then used to construct features capturing information about poor weather conditions.  
-
-This includes:
--	-0.51 Rd_ConditionsDRY 
--	0.5 Rd_ConditionsWET
--	-0.46 WeatherCLEAR
-
-This feature is then added to the data.
-
-
 ### Example: PCA on Cancel Cells
 
 The data  `NCI60` contains expression levels of 6,830 genes from 64 cancel cell lines.  Cancer type is also recorded.

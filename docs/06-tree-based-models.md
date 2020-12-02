@@ -503,6 +503,8 @@ GBMs are easy to overfit, and the parameters need to be carefully tuned using cr
 
 >**Tip:** Whenever fitting a model, use `?model_name` to get the documentation.  The parameters below are from `?gbm`.
 
+
+
 ### Example
 
 We fit a gbm below without tuning the parameters for the sake of example.  

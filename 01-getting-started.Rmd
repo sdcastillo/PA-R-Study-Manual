@@ -38,11 +38,9 @@ For your convenience, you can use these data sets for your own practice.  They m
 |`health_insurance`| Health insurance claims as used in ExamPA.net's Practice Exam|
 |`student_success`| SOA Student Success PA Sample Project, 2019|
 |`readmission`| SOA Hospital Readmissions Sample Exam, 2019 |
-|`insurance`| SOA Insurance data set, 2019|
 |`auto_claim`| Automotive claims |
 |`boston`| Boston housing data set |
-|`galton`| Galton data set used in ISLR |
-|`german`| Credit data from UCI Machine Learning Repository |
+|`bank_loans`| Credit data from UCI Machine Learning Repository |
 
 
 ## Download ISLR

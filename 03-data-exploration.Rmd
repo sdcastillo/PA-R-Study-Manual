@@ -126,19 +126,6 @@ insurance %>%
   geom_point()
 ```
 
-### Data manipulation chaining
-
-Pipes allow for data manipulations to be chained with visualizations.
-
-```{r message=F}
-termlife %>% 
-  filter(FACE > 0) %>% 
-  mutate(INCOME_AGE_RATIO = INCOME/AGE) %>% 
-  ggplot(aes(INCOME_AGE_RATIO, FACE)) + 
-  geom_point() + 
-  theme_bw()
-```
-
 ## The different graph types
 
 Only four types of graphs are used for data exploration.  You will only need to understand how to interpret them.  The SOA will provide you with code needed to create them.  There will not be enough time for you to make your own graphs.
@@ -167,6 +154,19 @@ You may have noticed that writing code for data manipulation can be slow.  Fortu
 
 Up to this point we have been using old R libraries.  By making use of newer R libraries we can save ourselves time.  These will all be provided for you at Prometric within the [tidyverse](https://www.tidyverse.org/) library.
 
+### Data manipulation chaining
+
+Pipes allow for data manipulations to be chained with visualizations.  The possibilities are nearly limitless.
+
+```{r message=F}
+library(tidyverse)
+iris %>%
+  select_if(is.numeric) %>%
+  gather(feature,value) %>%
+  ggplot(aes(value)) +
+  geom_histogram() +
+  facet_wrap(vars(feature))
+```
 
 Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
 
@@ -181,6 +181,7 @@ Suggested reading of *R for Data Science* (https://r4ds.had.co.nz/index.html):
 | 18      | Pipes           |
 | 19      | Functions       |
 | 20      | Vectors         |
+
 
 
 ## How to explore the data
