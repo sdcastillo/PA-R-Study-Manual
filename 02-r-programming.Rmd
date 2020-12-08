@@ -112,10 +112,9 @@ Don't panic if all of this code is confusing.  Just focus on reading the comment
 
 # R programming
 
-This chapter covers the bare minimum of R programming needed for Exam PA. The book 
-"R for Data Science" provides more detail.
+This chapter teaches you the R skills that are needed to pass PA. 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SluU_zBIFsE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://player.vimeo.com/video/487660455" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 ## Notebook chunks
 
