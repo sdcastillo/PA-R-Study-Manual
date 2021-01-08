@@ -651,3 +651,7 @@ However, when we add in the `ice` curves, we see that there is something else go
 pdp::partial(gbm, pred.var = "bmi", grid.resolution = 20, plot = T, ice = T, alpha = 0.1, palette = "viridis")
 ```
 
+**Solutions**:
+
+Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=214
+">Self-Study Course</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=165">160-Study Hours Course</a>

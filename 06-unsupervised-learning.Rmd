@@ -217,7 +217,7 @@ cumsum(a)
 ```
 
 
-### Example: SOA PA 6/13/19, Task 3
+### Example: SOA PA 6/12/19, Task 3
 
 >3. (9 points) Use observations from principal components analysis (PCA) to generate a new feature
 
@@ -225,7 +225,7 @@ cumsum(a)
 
 <iframe src="https://player.vimeo.com/video/465063620" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-Already enrolled?  Watch the <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=58">full video.</a>
+Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=204">Self-Study Course</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=155">160-Study Hours Course</a>
 
 ### Example: PCA on Cancel Cells
 

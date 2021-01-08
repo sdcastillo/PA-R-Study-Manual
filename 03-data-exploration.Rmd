@@ -391,8 +391,9 @@ This chapter is based on the first task of the December 2019 Exam PA.
 
 <iframe src="https://player.vimeo.com/video/467838183?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-Already enrolled?  Watch the <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=60">full video.</a>
-
+Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=206
+">Self-Study Course</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=157
+">160-Study Hours Course</a>
 
 **TASK 1 (12 points)**
 
