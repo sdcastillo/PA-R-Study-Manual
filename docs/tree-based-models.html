@@ -135,9 +135,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
 <li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
 <li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a><ul>
-<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.1</b> Download the data</a></li>
-<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.2</b> Download ISLR</a></li>
-<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#new-users"><i class="fa fa-check"></i><b>4.3</b> New users</a></li>
+<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.1</b> Installing R</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.2</b> Installing RStudio</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.3</b> Download the data</a></li>
+<li class="chapter" data-level="4.4" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.4</b> Download ISLR</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html"><i class="fa fa-check"></i><b>5</b> How much R do I need to know to pass?</a><ul>
 <li class="chapter" data-level="5.1" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#example-soa-pa-61620-task-8"><i class="fa fa-check"></i><b>5.1</b> Example: SOA PA 6/16/20, Task 8</a></li>
@@ -333,7 +334,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>For smokers with a <code>bmi</code> of less than 30, the predicted annual claims are 21,000. 10% of patients fall into this bucket.</li>
 <li>For smokers with a <code>bmi</code> of more than 30, the prediction is 42,000. This bucket accounts for 11% of patients.</li>
 </ul>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-204-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-206-1.png" width="576" /></p>
 <p>We can cut the data set up into these groups and look at the claim costs. From this grouping, we can see that <code>smoker</code> is the most important variable as the difference in average claims is about 20,000.</p>
 <table>
 <thead>
@@ -390,7 +391,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" title="1">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(<span class="dt">formula =</span> charges <span class="op">~</span><span class="st">  </span>., <span class="dt">data =</span> health_insurance,</a>
 <a class="sourceLine" id="cb352-2" title="2">              <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.003</span>))</a>
 <a class="sourceLine" id="cb352-3" title="3"><span class="kw">rpart.plot</span>(tree, <span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-206-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-208-1.png" width="576" /></p>
 <p><strong>Step 3: Apply cost comlexity pruning to simplify the tree</strong></p>
 <p>Intuitively, we know that the above model would perform poorly due to overfitting. We want to make it simpler by removing nodes. This is very similar to how in linear models we reduce complexity by reducing the number of coefficients.</p>
 <p>A measure of the depth of the tree is the <em>complexity</em>. A simple way of measuring this from the number of terminal nodes, called <span class="math inline">\(|T|\)</span>. In the above example, <span class="math inline">\(|T| = 8\)</span>. The amount of penalization is controlled by <span class="math inline">\(\alpha\)</span>. This is very similar to <span class="math inline">\(\lambda\)</span> in the Lasso.</p>
@@ -419,7 +420,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5      4 0.00784  0.169
 ## 6      5 0.00712  0.163</code></pre>
 <p>As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.</p>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-208-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-210-1.png" width="576" /></p>
 <p>To optimize performance, choose the number of splits which has the lowest error. Often, though, the goal of using a decision tree is to create a simple model. In this case, we can err or the side of a lower <code>nsplit</code> so that the tree is shorter and more interpretable. All of the questions on so far have only used decision trees for interpretability, and a different model method has been used when predictive power is needed.</p>
 <p>Once we have selected <span class="math inline">\(\alpha\)</span>, the tree is pruned. This table below shows 6 different trees. The <code>xerror</code> column is the missclassification error. The <code>rel error</code> is the relative error, which is the missclassification error divided by its smallest value. This rescales <code>xerror</code> so that the tree with the smallest error is given a <code>rel error</code> of 1.00.</p>
 <div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" title="1">tree<span class="op">$</span>cptable <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -459,7 +460,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb358-11" title="11">                                      <span class="dt">minbucket =</span> <span class="dv">200</span>,</a>
 <a class="sourceLine" id="cb358-12" title="12">                                      <span class="dt">maxdepth =</span> <span class="dv">10</span>))</a>
 <a class="sourceLine" id="cb358-13" title="13"><span class="kw">rpart.plot</span>(simple_tree, <span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-211-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-213-1.png" width="576" /></p>
 <p>We evaluate the performance on the test set. Because the target variable <code>charges</code> is highly skewed, we use the Root Mean Squared Log Error (RMSLE). We see that the complex tree has the best (lowest) error, but also has 8 terminal nodes. The simple tree with only three terminal nodes has worse (higher) error, but this is still an improvement over the mean prediction.</p>
 <div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" title="1">tree_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, test)</a>
 <a class="sourceLine" id="cb359-2" title="2">simple_tree_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(simple_tree, test)</a>
@@ -570,7 +571,7 @@ Unable to predict beyond the range of the training data for regression (because 
 </ol>
 <p>When using only a single tree, there can only be as many predictions as there are terminal nodes. In a random forest, predictions can be more granular due to the contribution of each of the trees.</p>
 <p>The below graph illustrates this. A single tree (left) has stair-like, step-wise predictions whereas a random forest is free to predict any value. The color represents the predicted value (yellow = highest, black = lowest).</p>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-213-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-215-1.png" width="576" /></p>
 <p>Unlike decision trees, random forest trees do not need to be pruned. This is because overfitting is less of a problem: if one tree overfits, there are other trees which overfit in other areas to compensate.</p>
 <p>In most applications, only the <code>mtry</code> parameter, which controls how many variables to consider at each split, needs to be tuned. Tuning the <code>ntrees</code> parameter is not required; however, the SOA may still ask you to.</p>
 <div id="example-1" class="section level3">
@@ -607,7 +608,7 @@ Unable to predict beyond the range of the training data for regression (because 
 <a class="sourceLine" id="cb367-6" title="6">test &lt;-<span class="st"> </span>rf_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a></code></pre></div>
 <div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" title="1">rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(charges <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train, <span class="dt">ntree =</span> <span class="dv">400</span>)</a>
 <a class="sourceLine" id="cb368-2" title="2"><span class="kw">plot</span>(rf)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-216-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-218-1.png" width="576" /></p>
 <p>We again use RMSLE. This is lower (better) than a model that uses the average as a baseline.</p>
 <div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" title="1">pred &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, test)</a>
 <a class="sourceLine" id="cb369-2" title="2">get_rmsle &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
@@ -628,7 +629,7 @@ Unable to predict beyond the range of the training data for regression (because 
 </ol>
 <p><code>smoker</code>, <code>bmi</code>, and <code>age</code> are the most importance predictors of charges. As you can imagine, variable importance is a highly useful tool for building models. We could use this to test out newly engineered features, or perform feature selection by taking the top-n features and use them in a different model. Random forests can handle very high dimensional data which allows for many tests to be run at once.</p>
 <div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" title="1"><span class="kw">varImpPlot</span>(<span class="dt">x =</span> rf)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-218-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-220-1.png" width="576" /></p>
 </div>
 <div id="partial-dependence" class="section level3">
 <h3><span class="header-section-number">15.3.3</span> Partial dependence</h3>
@@ -664,8 +665,8 @@ Unable to predict beyond the range of the training data for regression (because 
 <a class="sourceLine" id="cb378-7" title="7"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a>
 <a class="sourceLine" id="cb378-8" title="8"></a>
 <a class="sourceLine" id="cb378-9" title="9"><span class="kw">ggarrange</span>(bmi, age)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-221"></span>
-<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-221-1.png" alt="Partial Dependence" width="576" />
+<div class="figure"><span id="fig:unnamed-chunk-223"></span>
+<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-223-1.png" alt="Partial Dependence" width="576" />
 <p class="caption">
 Figure 15.1: Partial Dependence
 </p>

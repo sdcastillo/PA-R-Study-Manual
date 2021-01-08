@@ -5,6 +5,45 @@ output:
 ---
 # Getting started 
 
+This chapter tells you how to install the necessary software on your computer.
+
+## Installing R
+
+To begin, you will need to install R.  This is the engine that *runs* the code.  You need to install two versions - the newest version **(v4)** as well as an older version **(v3.6.2)**.  The older version will be used when running the code from the SOA's modules, which needs to be consistent with what will be installed on the Prometric computers.  This course uses the newest version so that you will not have as many errors during practice.
+
+Download it from here: https://cran.r-project.org/mirrors.html
+
+Once both have been installed, switching between the two is easy.
+
+```{r echo = F, fig.align="center", warning=F, out.width="50%"}
+knitr::include_graphics("images/rversion1.png")
+```
+
+
+```{r echo = F, fig.align="center", warning=F, out.width="50%"}
+knitr::include_graphics("images/rversion2.png")
+```
+
+Remember: 
+
+**For this course, use a version later than 4.0.2.**
+
+**For the SOA's modules, use version 3.6.2.**
+
+## Installing RStudio
+
+This is the tool that helps you to *write* the code.  Just as MS Word creates documents, RStudio creates R scripts and other documents.  Download RStudio Desktop (the free edition) and choose a place on your computer to install it.
+
+Download it from here: https://rstudio.com/products/rstudio/download/
+
+Then you need to set the R library.
+
+R code is organized into libraries.  You want to use the exact same code that will be on the Prometric Computers.  This requires installing older versions of libraries.  Change your R library to the one which was included within the SOA's modules.
+
+```{r eval = F}
+.libPaths("PATH_TO_SOAS_LIBRARY/PAlibrary")
+```
+
 ## Download the data
 
 For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called `ExamPAData` by the author.  To access, simply run the below lines of code to download this data.
@@ -50,23 +89,3 @@ This book references the publically-avialable textbook "An Introduction to Stati
 http://faculty.marshall.usc.edu/gareth-james/ISL/
 
 If you already have R and RStudio installed then skip to "Download the data". 
-
-## New users
-
-Install R:
-
-This is the engine that *runs* the code.  https://cran.r-project.org/mirrors.html
-
-Install RStudio
-
-This is the tool that helps you to *write* the code.  Just as MS Word creates documents, RStudio creates R scripts and other documents.  Download RStudio Desktop (the free edition) and choose a place on your computer to install it.
-
-https://rstudio.com/products/rstudio/download/
-
-Set the R library
-
-R code is organized into libraries.  You want to use the exact same code that will be on the Prometric Computers.  This requires installing older versions of libraries.  Change your R library to the one which was included within the SOA's modules.
-
-```{r eval = F}
-.libPaths("PATH_TO_SOAS_LIBRARY/PAlibrary")
-```

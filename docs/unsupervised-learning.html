@@ -135,9 +135,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
 <li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
 <li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a><ul>
-<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.1</b> Download the data</a></li>
-<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.2</b> Download ISLR</a></li>
-<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#new-users"><i class="fa fa-check"></i><b>4.3</b> New users</a></li>
+<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.1</b> Installing R</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.2</b> Installing RStudio</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.3</b> Download the data</a></li>
+<li class="chapter" data-level="4.4" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.4</b> Download ISLR</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html"><i class="fa fa-check"></i><b>5</b> How much R do I need to know to pass?</a><ul>
 <li class="chapter" data-level="5.1" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#example-soa-pa-61620-task-8"><i class="fa fa-check"></i><b>5.1</b> Example: SOA PA 6/16/20, Task 8</a></li>
@@ -327,7 +328,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="types-of-learning" class="section level2">
 <h2><span class="header-section-number">16.1</span> Types of Learning</h2>
 <p>You are in a classroom and your teacher is giving a lesson which has a correct answer, such as 1 + 2 = 2. This is called <em>supervised learning</em>. The teacher is the supervisor, who is responsible for minimizing the number of incorrect answers. When a question is answered correctly, there is a reward, and when a mistake is made there is a penalty. In machine learning, we measure the performance using metrics such as RMSE and we say that the model is a good “fit” when this metric is low.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-233"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-235"></span>
 <img src="images/classroom.png" alt="Supervised (Left), Unsupervised (Right)" width="49%" height="20%" /><img src="images/legos.png" alt="Supervised (Left), Unsupervised (Right)" width="49%" height="20%" />
 <p class="caption">
 Figure 16.1: Supervised (Left), Unsupervised (Right)
@@ -498,7 +499,7 @@ columns the principal component score vectors. That is, the $k^{th<code>column i
 ## Colorado   -1.4993407 -0.9776297  1.08400162  0.001450164</code></pre>
 <p>We can plot the first two principal components using the <code>biplot()</code> function:</p>
 <div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb411-1" title="1"><span class="kw">biplot</span>(pca, <span class="dt">scale=</span><span class="dv">0</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-244-1.png" width="768" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-246-1.png" width="768" /></p>
 <p>The <code>scale=0</code> argument to <code>biplot()</code> ensures that the arrows are scaled to
 represent the loadings; other values for <code>scale</code> give slightly different bi plots
 with different interpretations.</p>
@@ -521,10 +522,10 @@ by the total variance explained by all four principal components:</p>
 in the data, the next principal component explains 24.7% of the variance,
 and so forth. We can plot the PVE explained by each component as follows:</p>
 <div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb418-1" title="1"><span class="kw">plot</span>(pve, <span class="dt">xlab=</span><span class="st">&quot;Principal Component&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Proportion of Variance Explained&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dt">type=</span><span class="st">&#39;b&#39;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-248-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-250-1.png" width="576" /></p>
 <p>We can also use the function <code>cumsum()</code>, which computes the cumulative sum of the elements of a numeric vector, to plot the cumulative PVE:</p>
 <div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" title="1"><span class="kw">plot</span>(<span class="kw">cumsum</span>(pve), <span class="dt">xlab=</span><span class="st">&quot;Principal Component&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Cumulative Proportion of Variance Explained&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dt">type=</span><span class="st">&#39;b&#39;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-249-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-251-1.png" width="576" /></p>
 <div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" title="1">a=<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">8</span>,<span class="op">-</span><span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb420-2" title="2"><span class="kw">cumsum</span>(a)</a></code></pre></div>
 <pre><code>## [1]  1  3 11  8</code></pre>
@@ -570,7 +571,7 @@ and returns a vector containing that number of distinct colors.</p>
 <div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb425-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb425-2" title="2"><span class="kw">plot</span>(pca<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">col=</span><span class="kw">Cols</span>(nci_labs), <span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">xlab=</span><span class="st">&quot;Z1&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Z2&quot;</span>)</a>
 <a class="sourceLine" id="cb425-3" title="3"><span class="kw">plot</span>(pca<span class="op">$</span>x[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)], <span class="dt">col=</span><span class="kw">Cols</span>(nci_labs), <span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">xlab=</span><span class="st">&quot;Z1&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Z3&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-253-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-255-1.png" width="576" /></p>
 <p>On the whole, cell lines corresponding to a single cancer type do tend to have similar values on the
 first few principal component score vectors. This indicates that cell lines
 from the same cancer type tend to have pretty similar gene expression
@@ -623,7 +624,7 @@ of the first few principal components using the <code>summary()</code> method fo
 <p>Using the <code>plot()</code> function, we can also plot the variance explained by the
 first few principal components:</p>
 <div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" title="1"><span class="kw">plot</span>(pca)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-255-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-257-1.png" width="576" /></p>
 <p>Note that the height of each bar in the bar plot is given by squaring the
 corresponding element of <code>pr.out\$sdev</code>. However, it is generally more informative to
 plot the PVE of each principal component (i.e. a <strong>scree plot</strong>) and the cumulative
@@ -633,7 +634,7 @@ little tweaking:</p>
 <a class="sourceLine" id="cb429-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb429-3" title="3"><span class="kw">plot</span>(pve,  <span class="dt">type=</span><span class="st">&quot;o&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;PVE&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Principal Component&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a>
 <a class="sourceLine" id="cb429-4" title="4"><span class="kw">plot</span>(<span class="kw">cumsum</span>(pve), <span class="dt">type=</span><span class="st">&quot;o&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Cumulative PVE&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Principal Component&quot;</span>, <span class="dt">col=</span><span class="st">&quot;brown3&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-256-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-258-1.png" width="576" /></p>
 <p>We see that together, the first seven principal components
 explain around 40% of the variance in the data. This is not a huge amount
 of the variance. However, looking at the scree plot, we see that while each
@@ -685,7 +686,7 @@ even though we did not supply any group information to <code>kmeans()</code>. We
 can plot the data, with each observation colored according to its cluster
 assignment:</p>
 <div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" title="1"><span class="kw">plot</span>(x, <span class="dt">col =</span> (km_out<span class="op">$</span>cluster<span class="op">+</span><span class="dv">1</span>), <span class="dt">main =</span> <span class="st">&quot;K-Means Clustering Results with K = 2&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-261-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-263-1.png" width="576" /></p>
 <p>Here the observations can be easily plotted because they are two-dimensional.
 If there were more than two variables then we could instead perform PCA
 and plot the first two principal components score vectors.</p>
@@ -717,7 +718,7 @@ clustering on this example with <code>K  =  3</code>. If we do this, K-means clu
 ## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
 ## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
 <div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" title="1"><span class="kw">plot</span>(x, <span class="dt">col =</span> (km_out<span class="op">$</span>cluster<span class="op">+</span><span class="dv">1</span>), <span class="dt">main =</span> <span class="st">&quot;K-Means Clustering Results with K = 3&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-262-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-264-1.png" width="576" /></p>
 <p>To run the <code>kmeans()</code> function in R with multiple initial cluster assignments,
 we use the <code>nstart</code> argument. If a value of <code>nstart</code> greater than one
 is used, then K-means clustering will be performed using multiple random
@@ -770,7 +771,7 @@ The numbers at the bottom of the plot identify each observation:</p>
 <a class="sourceLine" id="cb444-2" title="2"><span class="kw">plot</span>(hc_complete,<span class="dt">main =</span> <span class="st">&quot;Complete Linkage&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;&quot;</span>, <span class="dt">cex =</span> <span class="fl">.9</span>)</a>
 <a class="sourceLine" id="cb444-3" title="3"><span class="kw">plot</span>(hc_average, <span class="dt">main =</span> <span class="st">&quot;Average Linkage&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;&quot;</span>, <span class="dt">cex =</span> <span class="fl">.9</span>)</a>
 <a class="sourceLine" id="cb444-4" title="4"><span class="kw">plot</span>(hc_single, <span class="dt">main =</span> <span class="st">&quot;Single Linkage&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;&quot;</span>, <span class="dt">cex =</span> <span class="fl">.9</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-268-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-270-1.png" width="576" /></p>
 <p>To determine the cluster labels for each observation associated with a
 given cut of the dendrogram, we can use the <code>cutree()</code> function:</p>
 <div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" title="1"><span class="kw">cutree</span>(hc_complete, <span class="dv">2</span>)</a></code></pre></div>
@@ -793,7 +794,7 @@ four clusters are selected, although there are still two singletons:</p>
 observations, we can use the <code>scale()</code> function:</p>
 <div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" title="1">xsc =<span class="st"> </span><span class="kw">scale</span>(x)</a>
 <a class="sourceLine" id="cb453-2" title="2"><span class="kw">plot</span>(<span class="kw">hclust</span>(<span class="kw">dist</span>(xsc), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;Hierarchical Clustering with Scaled Features&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-271-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-273-1.png" width="576" /></p>
 <p>Correlation-based distance can be computed using the <code>as.dist()</code> function, which converts an arbitrary square symmetric matrix into a form that
 the <code>hclust()</code> function recognizes as a distance matrix. However, this only
 makes sense for data with <strong>at least three features</strong> since the absolute correlation
@@ -802,7 +803,7 @@ always 1. Let’s generate and cluster a three-dimensional data set:</p>
 <div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" title="1">x =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">30</span><span class="op">*</span><span class="dv">3</span>), <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb454-2" title="2">dd =<span class="st"> </span><span class="kw">as.dist</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">cor</span>(<span class="kw">t</span>(x)))</a>
 <a class="sourceLine" id="cb454-3" title="3"><span class="kw">plot</span>(<span class="kw">hclust</span>(dd, <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;Complete Linkage with Correlation-Based Distance&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-272-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-274-1.png" width="576" /></p>
 <div id="example-clustering-cancel-cells" class="section level3">
 <h3><span class="header-section-number">16.6.1</span> Example: Clustering Cancel Cells</h3>
 <p>Unsupervised techniques are often used in the analysis of genomic data. In this example, we’ll see how hierarchical and K-means clustering compare on the <code>NCI60</code> cancer cell line micro array data, which
@@ -842,7 +843,7 @@ measure:</p>
 <a class="sourceLine" id="cb461-3" title="3"><span class="kw">plot</span>(<span class="kw">hclust</span>(data_dist), <span class="dt">labels =</span> nci_labels, <span class="dt">main =</span> <span class="st">&quot;Complete Linkage&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>)</a>
 <a class="sourceLine" id="cb461-4" title="4"><span class="kw">plot</span>(<span class="kw">hclust</span>(data_dist, <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>), <span class="dt">labels =</span> nci_labels, <span class="dt">main =</span> <span class="st">&quot;Average Linkage&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>)</a>
 <a class="sourceLine" id="cb461-5" title="5"><span class="kw">plot</span>(<span class="kw">hclust</span>(data_dist, <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>), <span class="dt">labels =</span> nci_labels,  <span class="dt">main =</span> <span class="st">&quot;Single Linkage&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-277-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-279-1.png" width="576" /></p>
 <p>We see that the choice of linkage
 certainly does affect the results obtained. Typically, single linkage will tend
 to yield trailing clusters: very large clusters onto which individual observations
@@ -875,7 +876,7 @@ We can plot the cut on the dendrogram that produces these four clusters using th
 <div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
 <a class="sourceLine" id="cb464-2" title="2"><span class="kw">plot</span>(hc_out, <span class="dt">labels =</span> nci_labels)</a>
 <a class="sourceLine" id="cb464-3" title="3"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">139</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-279-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-281-1.png" width="576" /></p>
 <p>Printing the output of <code>hclust</code> gives a useful brief summary of the object:</p>
 <div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" title="1">hc_out</a></code></pre></div>
 <pre><code>## 

@@ -135,9 +135,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
 <li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
 <li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a><ul>
-<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.1</b> Download the data</a></li>
-<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.2</b> Download ISLR</a></li>
-<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#new-users"><i class="fa fa-check"></i><b>4.3</b> New users</a></li>
+<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.1</b> Installing R</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.2</b> Installing RStudio</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.3</b> Download the data</a></li>
+<li class="chapter" data-level="4.4" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.4</b> Download ISLR</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html"><i class="fa fa-check"></i><b>5</b> How much R do I need to know to pass?</a><ul>
 <li class="chapter" data-level="5.1" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#example-soa-pa-61620-task-8"><i class="fa fa-check"></i><b>5.1</b> Example: SOA PA 6/16/20, Task 8</a></li>
@@ -344,7 +345,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>The <em>logit</em> is also known as the <em>standard logistic function</em> or <em>sigmoid</em> and is also used in deep learning.</p>
 </blockquote>
 <p>Below we see how the linear predictor (x-axis) gets converted to a probability (y-axis).</p>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-129-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-131-1.png" width="576" style="display: block; margin: auto;" /></p>
 <ul>
 <li><span style="color:#85C1E9 ">Logit: </span> Most commonly used; default in R; canonical link for the binomial distribution.</li>
 <li><span style="color:purple ">Probit: </span> Sharper curves than the other links which may have best performance for certain data; Inverse CDF of a standard normal distribution makes it easy to explain.</li>
@@ -444,8 +445,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>The output is a predicted probability. We can see that this is centered around a probability of about 0.3.</p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(frequency, <span class="dt">newdat=</span>test,<span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
 <a class="sourceLine" id="cb225-2" title="2"><span class="kw">qplot</span>(preds) </a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-133"></span>
-<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-133-1.png" alt="Distribution of Predicted Probability" width="480" />
+<div class="figure"><span id="fig:unnamed-chunk-135"></span>
+<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-135-1.png" alt="Distribution of Predicted Probability" width="480" />
 <p class="caption">
 Figure 10.1: Distribution of Predicted Probability
 </p>

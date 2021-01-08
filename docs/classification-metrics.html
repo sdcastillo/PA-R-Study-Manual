@@ -135,9 +135,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
 <li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
 <li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a><ul>
-<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.1</b> Download the data</a></li>
-<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.2</b> Download ISLR</a></li>
-<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#new-users"><i class="fa fa-check"></i><b>4.3</b> New users</a></li>
+<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.1</b> Installing R</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.2</b> Installing RStudio</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.3</b> Download the data</a></li>
+<li class="chapter" data-level="4.4" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.4</b> Download ISLR</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html"><i class="fa fa-check"></i><b>5</b> How much R do I need to know to pass?</a><ul>
 <li class="chapter" data-level="5.1" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#example-soa-pa-61620-task-8"><i class="fa fa-check"></i><b>5.1</b> Example: SOA PA 6/16/20, Task 8</a></li>
@@ -410,8 +411,8 @@ Any model having an AUC less than 0.5 means it is providing predictions that are
 <p>Let’s create an ROC curve and find the AUC for our logit.</p>
 <div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" title="1"><span class="kw">library</span>(pROC)</a>
 <a class="sourceLine" id="cb246-2" title="2"><span class="kw">roc</span>(test<span class="op">$</span>target, preds, <span class="dt">plot =</span> T)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-145"></span>
-<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-145-1.png" alt="AUC for auto_claim" width="576" />
+<div class="figure"><span id="fig:unnamed-chunk-147"></span>
+<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-147-1.png" alt="AUC for auto_claim" width="576" />
 <p class="caption">
 Figure 11.1: AUC for auto_claim
 </p>

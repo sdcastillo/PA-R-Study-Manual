@@ -135,9 +135,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
 <li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
 <li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a><ul>
-<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.1</b> Download the data</a></li>
-<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.2</b> Download ISLR</a></li>
-<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#new-users"><i class="fa fa-check"></i><b>4.3</b> New users</a></li>
+<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.1</b> Installing R</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.2</b> Installing RStudio</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.3</b> Download the data</a></li>
+<li class="chapter" data-level="4.4" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.4</b> Download ISLR</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html"><i class="fa fa-check"></i><b>5</b> How much R do I need to know to pass?</a><ul>
 <li class="chapter" data-level="5.1" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#example-soa-pa-61620-task-8"><i class="fa fa-check"></i><b>5.1</b> Example: SOA PA 6/16/20, Task 8</a></li>
@@ -327,8 +328,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/learning_obj4.png" width="400%" style="display: block; margin: auto;" /></p>
 <p><img src="images/learning_obj5.png" width="400%" style="display: block; margin: auto;" /></p>
 <p>Exploratory Data Analysis (EDA) is usually the first phase of an analytics project. This is as much of an art as it is a science because everyone has their own style. If you ask two actuaries perform EDA on the same data set, they will likely use different methods. These can be broken down into phases.</p>
-<div class="figure"><span id="fig:unnamed-chunk-54"></span>
-<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-54-1.png" alt="Data Exploration Phases - From *R for Data Science*" width="700" />
+<div class="figure"><span id="fig:unnamed-chunk-56"></span>
+<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-56-1.png" alt="Data Exploration Phases - From *R for Data Science*" width="700" />
 <p class="caption">
 Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 </p>
@@ -374,20 +375,20 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 <a class="sourceLine" id="cb131-2" title="2">p &lt;-<span class="st"> </span>insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(claims))</a></code></pre></div>
 <p>If we look at <code>p</code>, we see that it is nothing but white space with axis for <code>count</code> and <code>income</code>.</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1">p</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-57-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-59-1.png" width="576" /></p>
 <div id="add-a-plot" class="section level3">
 <h3><span class="header-section-number">7.1.1</span> Add a plot</h3>
 <p>We add a histogram</p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-58-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-60-1.png" width="576" /></p>
 <p>Different plots are called “geoms” for “geometric objects”. Geometry = Geo (space) + meter (measure), and graphs measure data. For instance, instead of creating a histogram, we can draw a gamma distribution with <code>stat_density</code>.</p>
 <div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">stat_density</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-59-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-61-1.png" width="576" /></p>
 <p>Create an xy plot by adding and <code>x</code> and a <code>y</code> argument to <code>aesthetic</code>.</p>
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1">insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb135-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> holders, <span class="dt">y =</span> claims)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb135-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-60-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-62-1.png" width="576" /></p>
 </div>
 </div>
 <div id="the-different-graph-types" class="section level2">
@@ -425,7 +426,7 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 <a class="sourceLine" id="cb136-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb136-6" title="6"><span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb136-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(feature))</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-61-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-63-1.png" width="576" /></p>
 <p>Suggested reading of <em>R for Data Science</em> (<a href="https://r4ds.had.co.nz/index.html" class="uri">https://r4ds.had.co.nz/index.html</a>):</p>
 <table>
 <thead>
@@ -859,14 +860,14 @@ arrange() -&gt; ORDER BY
 <a class="sourceLine" id="cb178-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;age&quot;</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb178-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb178-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bad: Default histogram with spikes&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-90-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-92-1.png" width="576" /></p>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1"><span class="co">#Histograms of continuous variables</span></a>
 <a class="sourceLine" id="cb179-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> age)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb179-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="fl">24.5</span>,<span class="fl">99.5</span>, <span class="dt">by =</span> <span class="dv">5</span>)) <span class="op">+</span><span class="st">  </span><span class="co">#make bins wider and set range </span></a>
 <a class="sourceLine" id="cb179-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Age&quot;</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb179-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb179-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Good: After adjusting the breaks&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-90-2.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-92-2.png" width="576" /></p>
 <p>How do you know when a variable should a factor and when it should be numeric?</p>
 </div>
 <div id="factor-or-numeric" class="section level3">
@@ -892,19 +893,19 @@ arrange() -&gt; ORDER BY
 <a class="sourceLine" id="cb182-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb182-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb182-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Default number of bins (30)&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-92-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-94-1.png" width="576" /></p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> education_num)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb183-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">16</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb183-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb183-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb183-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Set number of bins to number of factor levels (16) &quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-92-2.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-94-2.png" width="576" /></p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="co"># Set bins equal to number of levels, could have made bar chart.</span></a></code></pre></div>
 <p>We could also use a bar plot.</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> education_num)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb185-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb185-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bar plot&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-93-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-95-1.png" width="576" /></p>
 <p>Lastly, read the Project Statement carefully and only do what it tells you to do.</p>
 <blockquote>
 <p>Candidates were not required to make a plot for cap_gain. This solution has the plot made here rather than in Task 6.</p>

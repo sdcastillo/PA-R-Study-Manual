@@ -135,9 +135,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
 <li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
 <li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a><ul>
-<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.1</b> Download the data</a></li>
-<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.2</b> Download ISLR</a></li>
-<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#new-users"><i class="fa fa-check"></i><b>4.3</b> New users</a></li>
+<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.1</b> Installing R</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.2</b> Installing RStudio</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.3</b> Download the data</a></li>
+<li class="chapter" data-level="4.4" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.4</b> Download ISLR</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html"><i class="fa fa-check"></i><b>5</b> How much R do I need to know to pass?</a><ul>
 <li class="chapter" data-level="5.1" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#example-soa-pa-61620-task-8"><i class="fa fa-check"></i><b>5.1</b> Example: SOA PA 6/16/20, Task 8</a></li>
@@ -320,16 +321,36 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="getting-started" class="section level1">
 <h1><span class="header-section-number"> 4</span> Getting started</h1>
+<p>This chapter tells you how to install the necessary software on your computer.</p>
+<div id="installing-r" class="section level2">
+<h2><span class="header-section-number">4.1</span> Installing R</h2>
+<p>To begin, you will need to install R. This is the engine that <em>runs</em> the code. You need to install two versions - the newest version <strong>(v4)</strong> as well as an older version <strong>(v3.6.2)</strong>. The older version will be used when running the code from the SOA’s modules, which needs to be consistent with what will be installed on the Prometric computers. This course uses the newest version so that you will not have as many errors during practice.</p>
+<p>Download it from here: <a href="https://cran.r-project.org/mirrors.html" class="uri">https://cran.r-project.org/mirrors.html</a></p>
+<p>Once both have been installed, switching between the two is easy.</p>
+<p><img src="images/rversion1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rversion2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>Remember:</p>
+<p><strong>For this course, use a version later than 4.0.2.</strong></p>
+<p><strong>For the SOA’s modules, use version 3.6.2.</strong></p>
+</div>
+<div id="installing-rstudio" class="section level2">
+<h2><span class="header-section-number">4.2</span> Installing RStudio</h2>
+<p>This is the tool that helps you to <em>write</em> the code. Just as MS Word creates documents, RStudio creates R scripts and other documents. Download RStudio Desktop (the free edition) and choose a place on your computer to install it.</p>
+<p>Download it from here: <a href="https://rstudio.com/products/rstudio/download/" class="uri">https://rstudio.com/products/rstudio/download/</a></p>
+<p>Then you need to set the R library.</p>
+<p>R code is organized into libraries. You want to use the exact same code that will be on the Prometric Computers. This requires installing older versions of libraries. Change your R library to the one which was included within the SOA’s modules.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">.libPaths</span>(<span class="st">&quot;PATH_TO_SOAS_LIBRARY/PAlibrary&quot;</span>)</a></code></pre></div>
+</div>
 <div id="download-the-data" class="section level2">
-<h2><span class="header-section-number">4.1</span> Download the data</h2>
+<h2><span class="header-section-number">4.3</span> Download the data</h2>
 <p>For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called <code>ExamPAData</code> by the author. To access, simply run the below lines of code to download this data.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Install remotes if it&#39;s not yet installed</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">Sys.setenv</span>(<span class="dt">R_REMOTES_NO_ERRORS_FROM_WARNINGS=</span><span class="st">&quot;false&quot;</span>)</a>
-<a class="sourceLine" id="cb1-4" title="4">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;sdcastillo/ExamPAData&quot;</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Install remotes if it&#39;s not yet installed</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">Sys.setenv</span>(<span class="dt">R_REMOTES_NO_ERRORS_FROM_WARNINGS=</span><span class="st">&quot;false&quot;</span>)</a>
+<a class="sourceLine" id="cb2-4" title="4">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;sdcastillo/ExamPAData&quot;</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Once this has run, you can access the data using <code>library(ExamPAData)</code>. To check that this is installed correctly see if the <code>insurance</code> data set has loaded. If this returns “object not found”, then the library was not installed. If you get an error during the installation, restart your RStudio and then run <code>Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="false")</code> and <code>remotes::install_github("sdcastillo/ExamPAData", force = TRUE)</code> separately.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw">summary</span>(insurance)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">summary</span>(insurance)</a></code></pre></div>
 <pre><code>##     district       group               age               holders       
 ##  Min.   :1.00   Length:64          Length:64          Min.   :   3.00  
 ##  1st Qu.:1.75   Class :character   Class :character   1st Qu.:  46.75  
@@ -417,21 +438,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <div id="download-islr" class="section level2">
-<h2><span class="header-section-number">4.2</span> Download ISLR</h2>
+<h2><span class="header-section-number">4.4</span> Download ISLR</h2>
 <p>This book references the publically-avialable textbook “An Introduction to Statistical Learning”, which can be downloaded for free</p>
 <p><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/" class="uri">http://faculty.marshall.usc.edu/gareth-james/ISL/</a></p>
 <p>If you already have R and RStudio installed then skip to “Download the data”.</p>
-</div>
-<div id="new-users" class="section level2">
-<h2><span class="header-section-number">4.3</span> New users</h2>
-<p>Install R:</p>
-<p>This is the engine that <em>runs</em> the code. <a href="https://cran.r-project.org/mirrors.html" class="uri">https://cran.r-project.org/mirrors.html</a></p>
-<p>Install RStudio</p>
-<p>This is the tool that helps you to <em>write</em> the code. Just as MS Word creates documents, RStudio creates R scripts and other documents. Download RStudio Desktop (the free edition) and choose a place on your computer to install it.</p>
-<p><a href="https://rstudio.com/products/rstudio/download/" class="uri">https://rstudio.com/products/rstudio/download/</a></p>
-<p>Set the R library</p>
-<p>R code is organized into libraries. You want to use the exact same code that will be on the Prometric Computers. This requires installing older versions of libraries. Change your R library to the one which was included within the SOA’s modules.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">.libPaths</span>(<span class="st">&quot;PATH_TO_SOAS_LIBRARY/PAlibrary&quot;</span>)</a></code></pre></div>
 
 </div>
 </div>
