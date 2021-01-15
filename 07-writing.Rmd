@@ -1,0 +1,19 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Writing and Communication
+
+## Spelling and Grammar
+
+[![Lecture](images/lesson-writing.PNG)](https://exampa.net/)
+
+## How to Write Your Executive Summary
+
+[![Lecture](images/lesson-executive-summary.PNG)](https://exampa.net/)
+
+
+
+

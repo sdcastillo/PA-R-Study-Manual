@@ -15,6 +15,9 @@ The models up to this point have been linear.  This means that $Y$ changes gradu
 
 Tree-based models allow for abrupt changes in $Y$.
 
+[![Lecture](images/lesson-decisiontrees.PNG)](https://exampa.net/)
+
+
 
 ## Decision Trees
 

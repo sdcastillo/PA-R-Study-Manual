@@ -8,6 +8,9 @@ output:
 
 This chapter covers the eighth learning objective along with one additional topic, **correlation analysis**.
 
+
+[![Lecture](images/lesson-unsupervised-learning.PNG)](https://exampa.net/)
+
 ```{r echo = F, fig.align="center", warning=F, out.width="400%"}
 knitr::include_graphics("images/learning_obj8.png")
 ```

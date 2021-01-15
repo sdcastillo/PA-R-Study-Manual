@@ -175,7 +175,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.6.4</b> Factor or numeric ❓</a></li>
 <li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😲</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.7</b> Exercises</a></li>
+<li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.7</b> Exercises</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.7.1</b> Data Exploration Practice</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#dplyr-practice"><i class="fa fa-check"></i><b>7.7.2</b> Dplyr Practice</a></li>
+</ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#answers-to-exercises"><i class="fa fa-check"></i><b>7.8</b> Answers to exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html"><i class="fa fa-check"></i><b>8</b> Introduction to modeling</a><ul>
@@ -298,7 +301,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.6.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#references"><i class="fa fa-check"></i><b>16.6.2</b> References</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>17</b> References</a></li>
+<li class="chapter" data-level="17" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>17</b> Writing and Communication</a><ul>
+<li class="chapter" data-level="17.1" data-path="writing-and-communication.html"><a href="writing-and-communication.html#spelling-and-grammar"><i class="fa fa-check"></i><b>17.1</b> Spelling and Grammar</a></li>
+<li class="chapter" data-level="17.2" data-path="writing-and-communication.html"><a href="writing-and-communication.html#how-to-write-your-executive-summary"><i class="fa fa-check"></i><b>17.2</b> How to Write Your Executive Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -999,6 +1006,13 @@ arrange() -&gt; ORDER BY
 </div>
 <div id="exercises" class="section level2">
 <h2><span class="header-section-number">7.7</span> Exercises</h2>
+<div id="data-exploration-practice" class="section level3">
+<h3><span class="header-section-number">7.7.1</span> Data Exploration Practice</h3>
+<p><a href="https://exampa.net/"><img src="images/tutorial-data-exploration.PNG" alt="Lecture" /></a></p>
+</div>
+<div id="dplyr-practice" class="section level3">
+<h3><span class="header-section-number">7.7.2</span> Dplyr Practice</h3>
+<p><a href="https://exampa.net/"><img src="images/lesson-dplyr.PNG" alt="Lecture" /></a></p>
 <p>Run this code on your computer to answer these exercises.</p>
 <p>The data <code>actuary_salaries</code> contains the salaries of actuaries collected from the DW Simpson survey. Use this data to answer the exercises below.</p>
 <div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1">actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>()</a></code></pre></div>
@@ -1029,6 +1043,7 @@ arrange() -&gt; ORDER BY
 <ol start="8" style="list-style-type: decimal">
 <li>Create a column called <code>social_life</code>, which is equal to <code>n_exams</code>/<code>experience</code>. What is the average (mean) <code>social_life</code> by industry? Bonus question: what is wrong with using this as a statistical measure?</li>
 </ol>
+</div>
 </div>
 <div id="answers-to-exercises" class="section level2">
 <h2><span class="header-section-number">7.8</span> Answers to exercises</h2>

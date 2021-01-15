@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 5 How much R do I need to know to pass? | Exam PA Study Guide, Spring 2021</title>
-  <meta name="description" content=" 5 How much R do I need to know to pass? | Exam PA Study Guide, Spring 2021" />
+  <title> 17 Writing and Communication | Exam PA Study Guide, Spring 2021</title>
+  <meta name="description" content=" 17 Writing and Communication | Exam PA Study Guide, Spring 2021" />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 5 How much R do I need to know to pass? | Exam PA Study Guide, Spring 2021" />
+  <meta property="og:title" content=" 17 Writing and Communication | Exam PA Study Guide, Spring 2021" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 5 How much R do I need to know to pass? | Exam PA Study Guide, Spring 2021" />
+  <meta name="twitter:title" content=" 17 Writing and Communication | Exam PA Study Guide, Spring 2021" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/artificial_actuary_logo_favicon.png" type="image/x-icon" />
-<link rel="prev" href="getting-started.html"/>
-<link rel="next" href="r-programming.html"/>
+<link rel="prev" href="unsupervised-learning.html"/>
+<link rel="next" href="references-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -326,98 +326,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="how-much-r-do-i-need-to-know-to-pass" class="section level1">
-<h1><span class="header-section-number"> 5</span> How much R do I need to know to pass?</h1>
-<p><span style="color: blue;"><strong>This is a communication exam.</strong></span></p>
-<p>There is no need to become an R expert for this exam. They will provide you with a lot of code and the challenging part will be in interpreting what it does. You won’t be expected to do complex tasks from scratch. The most programming-intensive part is the data exploration, but this is only the first few questions. Subsequent questions on modeling will ask you to make changes to parameters.</p>
-<p>You will be expected to tweak parts and explore what happens. A good attention to detail and a close reading of the R documention will go a long ways. You will spend much more of your time writing in English and explaining what the code is doing than writing it yourself. You will also be graded based on how well you document your code in the .Rmd file.</p>
-<p>The June 16 2020 Project Statement has this under “General information for candidates.”</p>
-<blockquote>
-<p>Each task will be graded on the quality of your thought process, <strong>added or modified code</strong>, and conclusions</p>
-</blockquote>
-<blockquote>
-<p>At a minimum you must submit your completed report template and an Rmd file that supports your
-work. Graders expect that your Rmd code can be run from beginning to end. The code snippets provided
-should either be commented out or adapted for execution. Ensure that it is clear where in the code each
-of the tasks is addressed.</p>
-</blockquote>
-<p>In other words, whatever results you have in your report will need to be consistent with what the grading team finds when they run your .rmd file.</p>
-<div id="example-soa-pa-61620-task-8" class="section level2">
-<h2><span class="header-section-number">5.1</span> Example: SOA PA 6/16/20, Task 8</h2>
-<p>This question is from the June 16, 2020 exam. You can see that very little code changes need to be made! As you can see in this video, the programming required is very minimal. The remainder of this question consists of a short-answer response. This is very typical of Exam PA.</p>
-<iframe src="https://player.vimeo.com/video/467866045?title=0&amp;byline=0&amp;portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
-</iframe>
-<p>Already enrolled? Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=210&forceview=1
-">Self-Study Course</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=161
-">160-Study Hours Course</a></p>
-<blockquote>
-<ol start="8" style="list-style-type: decimal">
-<li>(4 points) Perform feature selection with lasso regression.</li>
-</ol>
-<p>Run a lasso regression using the code chunk provided. <strong>The code will need to be modified to
-reflect your decision in Task 7 regarding the PCA variable.</strong></p>
-</blockquote>
-<p>You probably read this and asked “what is a lasso regression?” and with good reason - we haven’t yet covered this topic. All that you need to know is <strong>highlighted in black:</strong> you will need to change the code that they give you, which is below.</p>
-<p>You need to choose between using one of two data sets:</p>
-<ul>
-<li>DATA SET A</li>
-<li>DATA SET B</li>
-</ul>
-<p>Then ignore everything else!</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Format data as matrices (necessary for glmnet). </span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co"># Uncomment two items that reflect your decision from Task 7.</span></a>
-<a class="sourceLine" id="cb5-3" title="3"></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co">#DATA SET A</span></a>
-<a class="sourceLine" id="cb5-5" title="5">lasso.mat.train &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>PC1, data.train)</a>
-<a class="sourceLine" id="cb5-6" title="6">lasso.mat.test &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>PC1, data.test)</a>
-<a class="sourceLine" id="cb5-7" title="7"></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">#DATA SET B</span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="co"># lasso.mat.train &lt;- model.matrix(days ~ . - num_procs - num_meds - num_ip - num_diags, data.train)</span></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co"># lasso.mat.test &lt;- model.matrix(days ~ . - num_procs - num_meds - num_ip - num_diags, data.test)</span></a>
-<a class="sourceLine" id="cb5-11" title="11"></a>
-<a class="sourceLine" id="cb5-12" title="12"><span class="kw">set.seed</span>(<span class="dv">789</span>)</a>
-<a class="sourceLine" id="cb5-13" title="13"></a>
-<a class="sourceLine" id="cb5-14" title="14">lasso.cv &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(</a>
-<a class="sourceLine" id="cb5-15" title="15">  <span class="dt">x =</span> lasso.mat.train,</a>
-<a class="sourceLine" id="cb5-16" title="16">  <span class="dt">y =</span> data.train<span class="op">$</span>days,</a>
-<a class="sourceLine" id="cb5-17" title="17">  <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, <span class="co"># Do not change.</span></a>
-<a class="sourceLine" id="cb5-18" title="18">  <span class="dt">alpha =</span> <span class="dv">1</span> <span class="co"># alpha = 1 for lasso</span></a>
-<a class="sourceLine" id="cb5-19" title="19">)</a></code></pre></div>
-<p>If you wanted to use data set B, you would just add comments to data set A and uncomment B.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co">#DATA SET A</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co"># lasso.mat.train &lt;- model.matrix(days ~ . - PC1, data.train)</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co"># lasso.mat.test &lt;- model.matrix(days ~ . - PC1, data.test)</span></a>
-<a class="sourceLine" id="cb6-4" title="4"></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#DATA SET B</span></a>
-<a class="sourceLine" id="cb6-6" title="6">lasso.mat.train &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>num_procs <span class="op">-</span><span class="st"> </span>num_meds <span class="op">-</span><span class="st"> </span>num_ip <span class="op">-</span><span class="st"> </span>num_diags, data.train)</a>
-<a class="sourceLine" id="cb6-7" title="7">lasso.mat.test &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>num_procs <span class="op">-</span><span class="st"> </span>num_meds <span class="op">-</span><span class="st"> </span>num_ip <span class="op">-</span><span class="st"> </span>num_diags, data.test)</a></code></pre></div>
+<div id="writing-and-communication" class="section level1">
+<h1><span class="header-section-number"> 17</span> Writing and Communication</h1>
+<div id="spelling-and-grammar" class="section level2">
+<h2><span class="header-section-number">17.1</span> Spelling and Grammar</h2>
+<p><a href="https://exampa.net/"><img src="images/lesson-writing.PNG" alt="Lecture" /></a></p>
 </div>
-<div id="example-2---data-exploration" class="section level2">
-<h2><span class="header-section-number">5.2</span> Example 2 - Data exploration</h2>
-<p>That last example was easy. They might ask you to do something like the following:</p>
-<p><strong>Template code: </strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># This code takes a continuous variable and creates a binned factor variable. </span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="co"># The code applies it directly to the capital gain variable as an </span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="co"># example. right = FALSE means that the left number is included and </span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co"># the right number excluded. So, in this case, the first bin runs from 0 to </span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="co"># 1000 and includes 0 and excludes 1000. Note that the code creates a new </span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co"># variable, so the original variable is retained.</span></a>
-<a class="sourceLine" id="cb7-7" title="7">df<span class="op">$</span>cap_gain_cut &lt;-<span class="st"> </span><span class="kw">cut</span>(df<span class="op">$</span>cap_gain, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">5000</span>, <span class="ot">Inf</span>), <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;lowcg&quot;</span>, <span class="st">&quot;mediumcg&quot;</span>, <span class="st">&quot;highcg&quot;</span>))</a></code></pre></div>
-<p>To answer this question correctly, you would need to</p>
-<ul>
-<li>Understand that the code is taking the capital gains recorded on investments, <code>cap_gain</code>, and then creating bins so that the new variable is “lowcg” for values between 0 and 1000, “mediumcp” from 1000 to 5000, and “highcg” for all values above 5000.<br />
-</li>
-<li>Then you would need to interpret a statistical model</li>
-<li>Finally, use this result to change these cutoff values so that “low cg” is all values less than 5095.5, “medium cg” is all values from 5095.5 to 7055.5, and so forth. You would need to do this for two data sets, <code>data.train</code>, and <code>data.test</code>.</li>
-</ul>
-<p><strong>Solution code: </strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># This code cuts a continuous variable into buckets. </span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="co"># The process is applied to both the training and test sets. </span></a>
-<a class="sourceLine" id="cb8-3" title="3"></a>
-<a class="sourceLine" id="cb8-4" title="4">data.train<span class="op">$</span>cap_gain_cut &lt;-<span class="st"> </span><span class="kw">cut</span>(data.train<span class="op">$</span>cap_gain, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">5095.5</span>, <span class="fl">7055.5</span>, <span class="ot">Inf</span>), <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;lowcg&quot;</span>, <span class="st">&quot;mediumcg&quot;</span>, <span class="st">&quot;highcg&quot;</span>))</a>
-<a class="sourceLine" id="cb8-5" title="5"></a>
-<a class="sourceLine" id="cb8-6" title="6">data.test<span class="op">$</span>cap_gain_cut &lt;-<span class="st"> </span><span class="kw">cut</span>(data.test<span class="op">$</span>cap_gain, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">5095.5</span>, <span class="fl">7055.5</span>, <span class="ot">Inf</span>), <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;lowcg&quot;</span>, <span class="st">&quot;mediumcg&quot;</span>, <span class="st">&quot;highcg&quot;</span>))</a></code></pre></div>
-<p>Don’t panic if all of this code is confusing. Just focus on reading the comments. As you can see, this is less of a programming question than it is a “logic and reasoning” question.</p>
+<div id="how-to-write-your-executive-summary" class="section level2">
+<h2><span class="header-section-number">17.2</span> How to Write Your Executive Summary</h2>
+<p><a href="https://exampa.net/"><img src="images/lesson-executive-summary.PNG" alt="Lecture" /></a></p>
+
 </div>
 </div>
             </section>
@@ -425,8 +343,8 @@ reflect your decision in Task 7 regarding the PCA variable.</strong></p>
           </div>
         </div>
       </div>
-<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="r-programming.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="unsupervised-learning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -457,7 +375,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/02-r-programming.Rmd",
+"link": "https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/07-writing.Rmd",
 "text": "Edit"
 },
 "history": {

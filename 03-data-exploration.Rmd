@@ -692,6 +692,14 @@ table(df$marital_status)
 
 ## Exercises
 
+### Data Exploration Practice
+
+[![Lecture](images/tutorial-data-exploration.PNG)](https://exampa.net/)
+
+### Dplyr Practice
+
+[![Lecture](images/lesson-dplyr.PNG)](https://exampa.net/)
+
 Run this code on your computer to answer these exercises.
 
 The data `actuary_salaries` contains the salaries of actuaries collected from the DW Simpson survey.  Use this data to answer the exercises below.

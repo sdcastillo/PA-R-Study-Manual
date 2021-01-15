@@ -350,6 +350,8 @@ This model structure implies that each of the variables $x_1, ..., x_p$ each cha
 
 # Generalized linear Models (GLMs)
 
+[![Lecture](images/glms lesson.png)](https://exampa.net/)
+
 GLMs are a broad category of models.  Ordinary Least Squares and Logistic Regression are both examples of GLMs.
 
 ### Assumptions of OLS

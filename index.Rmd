@@ -98,6 +98,9 @@ In the past, candidates have been given out a printed Project Statement which th
 
 # Introduction
 
+[![Lecture](images/lesson-whatispa.png)](https://exampa.net/)
+
+
 While "machine learning" is relatively new, the process of learning itself is not.   All of use are already familiar with how to learn - by improving from our mistakes.  By repeating what is successful and avoiding what results in failure, we learn by doing, by experience, or trial-and-error.  Machines learn in a similar way.
 
 Take for example the process of studying for an exam.  Some study methods work well, but other methods do not.  The "data" are the practice problems, and the “label” is the answer (A,B,C,D,E).  We want to build a mental "model” that reads the question and predicts the answer.
