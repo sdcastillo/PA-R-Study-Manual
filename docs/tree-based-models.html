@@ -173,7 +173,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.6.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.6.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.6.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😨</a></li>
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.7</b> Exercises</a><ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.7.1</b> Data Exploration Practice</a></li>
@@ -342,7 +342,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>For smokers with a <code>bmi</code> of less than 30, the predicted annual claims are 21,000. 10% of patients fall into this bucket.</li>
 <li>For smokers with a <code>bmi</code> of more than 30, the prediction is 42,000. This bucket accounts for 11% of patients.</li>
 </ul>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-206-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-204-1.png" width="576" /></p>
 <p>We can cut the data set up into these groups and look at the claim costs. From this grouping, we can see that <code>smoker</code> is the most important variable as the difference in average claims is about 20,000.</p>
 <table>
 <thead>
@@ -396,10 +396,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Of these, only the first two are commonly used. The exam is not going to ask you to calculate either of these. Just know that neither method will work better on all data sets, and so the best practice is to test both and compare the performance.</p>
 <p><strong>Step 2: Continue doing this until a stopping criteria is reached. For example, the minimum number of observations is 5 or less.</strong></p>
 <p>As you can see, this results in a very deep tree.</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" title="1">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(<span class="dt">formula =</span> charges <span class="op">~</span><span class="st">  </span>., <span class="dt">data =</span> health_insurance,</a>
-<a class="sourceLine" id="cb352-2" title="2">              <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.003</span>))</a>
-<a class="sourceLine" id="cb352-3" title="3"><span class="kw">rpart.plot</span>(tree, <span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-208-1.png" width="576" /></p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb351-1" title="1">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(<span class="dt">formula =</span> charges <span class="op">~</span><span class="st">  </span>., <span class="dt">data =</span> health_insurance,</a>
+<a class="sourceLine" id="cb351-2" title="2">              <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.003</span>))</a>
+<a class="sourceLine" id="cb351-3" title="3"><span class="kw">rpart.plot</span>(tree, <span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-206-1.png" width="576" /></p>
 <p><strong>Step 3: Apply cost comlexity pruning to simplify the tree</strong></p>
 <p>Intuitively, we know that the above model would perform poorly due to overfitting. We want to make it simpler by removing nodes. This is very similar to how in linear models we reduce complexity by reducing the number of coefficients.</p>
 <p>A measure of the depth of the tree is the <em>complexity</em>. A simple way of measuring this from the number of terminal nodes, called <span class="math inline">\(|T|\)</span>. In the above example, <span class="math inline">\(|T| = 8\)</span>. The amount of penalization is controlled by <span class="math inline">\(\alpha\)</span>. This is very similar to <span class="math inline">\(\lambda\)</span> in the Lasso.</p>
@@ -411,13 +411,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Step 4: Use cross-validation to select the best alpha</strong></p>
 <p>The cost is controlled by the <code>CP</code> parameter. In the above example, did you notice the line <code>rpart.control(cp = 0.003)</code>? This is telling <code>rpart</code> to continue growing the tree until the CP reaches 0.003. At each subtree, we can measure the cost <code>CP</code> as well as the cross-validation error <code>xerror</code>.</p>
 <p>This is stored in the <code>cptable</code></p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb353-1" title="1">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(<span class="dt">formula =</span> charges <span class="op">~</span><span class="st">  </span>., <span class="dt">data =</span> health_insurance,</a>
-<a class="sourceLine" id="cb353-2" title="2">              <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.0001</span>))</a>
-<a class="sourceLine" id="cb353-3" title="3">cost &lt;-<span class="st"> </span>tree<span class="op">$</span>cptable <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb353-4" title="4"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb353-5" title="5"><span class="st">  </span><span class="kw">select</span>(nsplit, CP, xerror) </a>
-<a class="sourceLine" id="cb353-6" title="6"></a>
-<a class="sourceLine" id="cb353-7" title="7">cost <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" title="1">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(<span class="dt">formula =</span> charges <span class="op">~</span><span class="st">  </span>., <span class="dt">data =</span> health_insurance,</a>
+<a class="sourceLine" id="cb352-2" title="2">              <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.0001</span>))</a>
+<a class="sourceLine" id="cb352-3" title="3">cost &lt;-<span class="st"> </span>tree<span class="op">$</span>cptable <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb352-4" title="4"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb352-5" title="5"><span class="st">  </span><span class="kw">select</span>(nsplit, CP, xerror) </a>
+<a class="sourceLine" id="cb352-6" title="6"></a>
+<a class="sourceLine" id="cb352-7" title="7">cost <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##   nsplit      CP xerror
 ##    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
@@ -428,13 +428,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5      4 0.00784  0.169
 ## 6      5 0.00712  0.163</code></pre>
 <p>As more splits are added, the cost continues to decrease, reaches a minimum, and then begins to increase.</p>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-210-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-208-1.png" width="576" /></p>
 <p>To optimize performance, choose the number of splits which has the lowest error. Often, though, the goal of using a decision tree is to create a simple model. In this case, we can err or the side of a lower <code>nsplit</code> so that the tree is shorter and more interpretable. All of the questions on so far have only used decision trees for interpretability, and a different model method has been used when predictive power is needed.</p>
 <p>Once we have selected <span class="math inline">\(\alpha\)</span>, the tree is pruned. This table below shows 6 different trees. The <code>xerror</code> column is the missclassification error. The <code>rel error</code> is the relative error, which is the missclassification error divided by its smallest value. This rescales <code>xerror</code> so that the tree with the smallest error is given a <code>rel error</code> of 1.00.</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" title="1">tree<span class="op">$</span>cptable <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb355-2" title="2"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb355-3" title="3"><span class="st">  </span><span class="kw">select</span>(nsplit, CP, xerror, <span class="st">`</span><span class="dt">rel error</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb355-4" title="4"><span class="st">  </span><span class="kw">head</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" title="1">tree<span class="op">$</span>cptable <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb354-2" title="2"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb354-3" title="3"><span class="st">  </span><span class="kw">select</span>(nsplit, CP, xerror, <span class="st">`</span><span class="dt">rel error</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb354-4" title="4"><span class="st">  </span><span class="kw">head</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   nsplit      CP xerror `rel error`
 ##    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;
@@ -445,8 +445,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5      4 0.00784  0.169       0.163
 ## 6      5 0.00712  0.163       0.155</code></pre>
 <p>The SOA may give you code to find the lowest CP value such as below. You could always find this value yourself by inspecting the CP table and choosing the value of <code>CP</code> which has the lowest <code>xerror</code>.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb357-1" title="1">pruned_tree &lt;-<span class="st"> </span><span class="kw">prune</span>(tree,</a>
-<a class="sourceLine" id="cb357-2" title="2">                     <span class="dt">cp =</span> tree<span class="op">$</span>cptable[<span class="kw">which.min</span>(tree<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]), <span class="st">&quot;CP&quot;</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" title="1">pruned_tree &lt;-<span class="st"> </span><span class="kw">prune</span>(tree,</a>
+<a class="sourceLine" id="cb356-2" title="2">                     <span class="dt">cp =</span> tree<span class="op">$</span>cptable[<span class="kw">which.min</span>(tree<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]), <span class="st">&quot;CP&quot;</span>])</a></code></pre></div>
 <p>To make a simple tree, there are a few options</p>
 <ul>
 <li>Set the maximum depth of a tree with <code>maxdepth</code></li>
@@ -455,33 +455,33 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Force a high number of minimum observations per terminal node with <code>minbucket</code></li>
 </ul>
 <p>For instance, using these suggestions allows for a simpler tree to be fit.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" title="1"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb358-2" title="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb358-3" title="3">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> health_insurance<span class="op">$</span>charges, </a>
-<a class="sourceLine" id="cb358-4" title="4">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F)</a>
-<a class="sourceLine" id="cb358-5" title="5">train &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
-<a class="sourceLine" id="cb358-6" title="6">test &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
-<a class="sourceLine" id="cb358-7" title="7"></a>
-<a class="sourceLine" id="cb358-8" title="8">simple_tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(<span class="dt">formula =</span> charges <span class="op">~</span><span class="st">  </span>., </a>
-<a class="sourceLine" id="cb358-9" title="9">              <span class="dt">data =</span> train,</a>
-<a class="sourceLine" id="cb358-10" title="10">              <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.0001</span>, </a>
-<a class="sourceLine" id="cb358-11" title="11">                                      <span class="dt">minbucket =</span> <span class="dv">200</span>,</a>
-<a class="sourceLine" id="cb358-12" title="12">                                      <span class="dt">maxdepth =</span> <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb358-13" title="13"><span class="kw">rpart.plot</span>(simple_tree, <span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-213-1.png" width="576" /></p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb357-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb357-2" title="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb357-3" title="3">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> health_insurance<span class="op">$</span>charges, </a>
+<a class="sourceLine" id="cb357-4" title="4">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F)</a>
+<a class="sourceLine" id="cb357-5" title="5">train &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
+<a class="sourceLine" id="cb357-6" title="6">test &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
+<a class="sourceLine" id="cb357-7" title="7"></a>
+<a class="sourceLine" id="cb357-8" title="8">simple_tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(<span class="dt">formula =</span> charges <span class="op">~</span><span class="st">  </span>., </a>
+<a class="sourceLine" id="cb357-9" title="9">              <span class="dt">data =</span> train,</a>
+<a class="sourceLine" id="cb357-10" title="10">              <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">cp =</span> <span class="fl">0.0001</span>, </a>
+<a class="sourceLine" id="cb357-11" title="11">                                      <span class="dt">minbucket =</span> <span class="dv">200</span>,</a>
+<a class="sourceLine" id="cb357-12" title="12">                                      <span class="dt">maxdepth =</span> <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb357-13" title="13"><span class="kw">rpart.plot</span>(simple_tree, <span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-211-1.png" width="576" /></p>
 <p>We evaluate the performance on the test set. Because the target variable <code>charges</code> is highly skewed, we use the Root Mean Squared Log Error (RMSLE). We see that the complex tree has the best (lowest) error, but also has 8 terminal nodes. The simple tree with only three terminal nodes has worse (higher) error, but this is still an improvement over the mean prediction.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" title="1">tree_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, test)</a>
-<a class="sourceLine" id="cb359-2" title="2">simple_tree_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(simple_tree, test)</a>
-<a class="sourceLine" id="cb359-3" title="3"></a>
-<a class="sourceLine" id="cb359-4" title="4">get_rmsle &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
-<a class="sourceLine" id="cb359-5" title="5">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">log</span>(y) <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(y_hat))<span class="op">^</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb359-6" title="6">}</a>
-<a class="sourceLine" id="cb359-7" title="7"></a>
-<a class="sourceLine" id="cb359-8" title="8"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, tree_pred)</a></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" title="1">tree_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, test)</a>
+<a class="sourceLine" id="cb358-2" title="2">simple_tree_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(simple_tree, test)</a>
+<a class="sourceLine" id="cb358-3" title="3"></a>
+<a class="sourceLine" id="cb358-4" title="4">get_rmsle &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
+<a class="sourceLine" id="cb358-5" title="5">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">log</span>(y) <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(y_hat))<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb358-6" title="6">}</a>
+<a class="sourceLine" id="cb358-7" title="7"></a>
+<a class="sourceLine" id="cb358-8" title="8"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, tree_pred)</a></code></pre></div>
 <pre><code>## [1] 0.3920546</code></pre>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb361-1" title="1"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, simple_tree_pred)</a></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" title="1"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, simple_tree_pred)</a></code></pre></div>
 <pre><code>## [1] 0.5678457</code></pre>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb363-1" title="1"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, <span class="kw">mean</span>(train<span class="op">$</span>charges))</a></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" title="1"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, <span class="kw">mean</span>(train<span class="op">$</span>charges))</a></code></pre></div>
 <pre><code>## [1] 0.9996513</code></pre>
 <div id="example-soa-pa-6182020-task-6" class="section level3">
 <h3><span class="header-section-number">15.1.1</span> Example: SOA PA 6/18/2020, Task 6</h3>
@@ -579,23 +579,23 @@ Unable to predict beyond the range of the training data for regression (because 
 </ol>
 <p>When using only a single tree, there can only be as many predictions as there are terminal nodes. In a random forest, predictions can be more granular due to the contribution of each of the trees.</p>
 <p>The below graph illustrates this. A single tree (left) has stair-like, step-wise predictions whereas a random forest is free to predict any value. The color represents the predicted value (yellow = highest, black = lowest).</p>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-215-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-213-1.png" width="576" /></p>
 <p>Unlike decision trees, random forest trees do not need to be pruned. This is because overfitting is less of a problem: if one tree overfits, there are other trees which overfit in other areas to compensate.</p>
 <p>In most applications, only the <code>mtry</code> parameter, which controls how many variables to consider at each split, needs to be tuned. Tuning the <code>ntrees</code> parameter is not required; however, the SOA may still ask you to.</p>
 <div id="example-1" class="section level3">
 <h3><span class="header-section-number">15.3.1</span> Example</h3>
 <p>Using the basic <code>randomForest</code> package we fit a model with 500 trees.</p>
 <p>This expects only numeric values. We create dummy (indicator) columns.</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" title="1">rf_data &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb365-2" title="2"><span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb365-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">ifelse</span>(sex <span class="op">==</span><span class="st"> &quot;male&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb365-4" title="4">         <span class="dt">smoker =</span> <span class="kw">ifelse</span>(smoker <span class="op">==</span><span class="st"> &quot;yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb365-5" title="5">         <span class="dt">region_ne =</span> <span class="kw">ifelse</span>(region <span class="op">==</span><span class="st"> &quot;northeast&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb365-6" title="6">         <span class="dt">region_nw =</span> <span class="kw">ifelse</span>(region <span class="op">==</span><span class="st"> &quot;northwest&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb365-7" title="7">         <span class="dt">region_se =</span> <span class="kw">ifelse</span>(region <span class="op">==</span><span class="st"> &quot;southeast&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb365-8" title="8">         <span class="dt">region_sw =</span> <span class="kw">ifelse</span>(region <span class="op">==</span><span class="st"> &quot;southwest&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb365-9" title="9"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>region)</a>
-<a class="sourceLine" id="cb365-10" title="10">rf_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>(<span class="dv">50</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" title="1">rf_data &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb364-2" title="2"><span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb364-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">ifelse</span>(sex <span class="op">==</span><span class="st"> &quot;male&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb364-4" title="4">         <span class="dt">smoker =</span> <span class="kw">ifelse</span>(smoker <span class="op">==</span><span class="st"> &quot;yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb364-5" title="5">         <span class="dt">region_ne =</span> <span class="kw">ifelse</span>(region <span class="op">==</span><span class="st"> &quot;northeast&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb364-6" title="6">         <span class="dt">region_nw =</span> <span class="kw">ifelse</span>(region <span class="op">==</span><span class="st"> &quot;northwest&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb364-7" title="7">         <span class="dt">region_se =</span> <span class="kw">ifelse</span>(region <span class="op">==</span><span class="st"> &quot;southeast&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb364-8" title="8">         <span class="dt">region_sw =</span> <span class="kw">ifelse</span>(region <span class="op">==</span><span class="st"> &quot;southwest&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb364-9" title="9"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>region)</a>
+<a class="sourceLine" id="cb364-10" title="10">rf_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>(<span class="dv">50</span>)</a></code></pre></div>
 <pre><code>## Observations: 268
 ## Variables: 10
 ## $ age       &lt;dbl&gt; 42, 44, 31, 36, 64, 28, 45,...
@@ -608,24 +608,24 @@ Unable to predict beyond the range of the training data for regression (because 
 ## $ region_nw &lt;dbl&gt; 0, 1, 0, 0, 0, 1, 1, 0, 1, ...
 ## $ region_se &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 1, 0, ...
 ## $ region_sw &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, ...</code></pre>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" title="1"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb367-2" title="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb367-3" title="3">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> rf_data<span class="op">$</span>charges, </a>
-<a class="sourceLine" id="cb367-4" title="4">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F)</a>
-<a class="sourceLine" id="cb367-5" title="5">train &lt;-<span class="st"> </span>rf_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
-<a class="sourceLine" id="cb367-6" title="6">test &lt;-<span class="st"> </span>rf_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a></code></pre></div>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" title="1">rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(charges <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train, <span class="dt">ntree =</span> <span class="dv">400</span>)</a>
-<a class="sourceLine" id="cb368-2" title="2"><span class="kw">plot</span>(rf)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-218-1.png" width="576" /></p>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" title="1"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb366-2" title="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb366-3" title="3">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> rf_data<span class="op">$</span>charges, </a>
+<a class="sourceLine" id="cb366-4" title="4">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F)</a>
+<a class="sourceLine" id="cb366-5" title="5">train &lt;-<span class="st"> </span>rf_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
+<a class="sourceLine" id="cb366-6" title="6">test &lt;-<span class="st"> </span>rf_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" title="1">rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(charges <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train, <span class="dt">ntree =</span> <span class="dv">400</span>)</a>
+<a class="sourceLine" id="cb367-2" title="2"><span class="kw">plot</span>(rf)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-216-1.png" width="576" /></p>
 <p>We again use RMSLE. This is lower (better) than a model that uses the average as a baseline.</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" title="1">pred &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, test)</a>
-<a class="sourceLine" id="cb369-2" title="2">get_rmsle &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
-<a class="sourceLine" id="cb369-3" title="3">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">log</span>(y) <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(y_hat))<span class="op">^</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb369-4" title="4">}</a>
-<a class="sourceLine" id="cb369-5" title="5"></a>
-<a class="sourceLine" id="cb369-6" title="6"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, pred)</a></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" title="1">pred &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, test)</a>
+<a class="sourceLine" id="cb368-2" title="2">get_rmsle &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
+<a class="sourceLine" id="cb368-3" title="3">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">log</span>(y) <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(y_hat))<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb368-4" title="4">}</a>
+<a class="sourceLine" id="cb368-5" title="5"></a>
+<a class="sourceLine" id="cb368-6" title="6"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, pred)</a></code></pre></div>
 <pre><code>## [1] 0.5252518</code></pre>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" title="1"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, <span class="kw">mean</span>(train<span class="op">$</span>charges))</a></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb370-1" title="1"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, <span class="kw">mean</span>(train<span class="op">$</span>charges))</a></code></pre></div>
 <pre><code>## [1] 1.118947</code></pre>
 </div>
 <div id="variable-importance" class="section level3">
@@ -636,8 +636,8 @@ Unable to predict beyond the range of the training data for regression (because 
 <li><p>Use the total decrease in node impurities from splitting on the variable, averaged over all trees. For classification, the node impurity is measured by the Gini index; for regression, it is measured by the residual sum of squares <span class="math inline">\(\text{RSS}\)</span>. This is <code>type = 2</code>.</p></li>
 </ol>
 <p><code>smoker</code>, <code>bmi</code>, and <code>age</code> are the most importance predictors of charges. As you can imagine, variable importance is a highly useful tool for building models. We could use this to test out newly engineered features, or perform feature selection by taking the top-n features and use them in a different model. Random forests can handle very high dimensional data which allows for many tests to be run at once.</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" title="1"><span class="kw">varImpPlot</span>(<span class="dt">x =</span> rf)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-220-1.png" width="576" /></p>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" title="1"><span class="kw">varImpPlot</span>(<span class="dt">x =</span> rf)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-218-1.png" width="576" /></p>
 </div>
 <div id="partial-dependence" class="section level3">
 <h3><span class="header-section-number">15.3.3</span> Partial dependence</h3>
@@ -645,9 +645,9 @@ Unable to predict beyond the range of the training data for regression (because 
 <p>Although this is commonly used for trees, this approach is model-agnostic in that any model could be used.</p>
 <p>Take a model of two predictors, <span class="math inline">\(\hat{\mathbf{y}} = f(\mathbf{X}_1, \mathbf{X_2})\)</span>. For simplicity, say that <span class="math inline">\(f(x_1, x_2) = 2x_1 + 3x_2\)</span>.</p>
 <p>The data looks like this</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb374-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x1 =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>), <span class="dt">x2 =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb374-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">f =</span> <span class="dv">2</span><span class="op">*</span>x1 <span class="op">+</span><span class="st"> </span><span class="dv">3</span><span class="op">*</span>x2)</a>
-<a class="sourceLine" id="cb374-3" title="3">df</a></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x1 =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>), <span class="dt">x2 =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb373-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">f =</span> <span class="dv">2</span><span class="op">*</span>x1 <span class="op">+</span><span class="st"> </span><span class="dv">3</span><span class="op">*</span>x2)</a>
+<a class="sourceLine" id="cb373-3" title="3">df</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##      x1    x2     f
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -656,7 +656,7 @@ Unable to predict beyond the range of the training data for regression (because 
 ## 3     2     5    19
 ## 4     2     6    22</code></pre>
 <p>Here is the partial dependence of <code>x1</code> on to <code>f</code>.</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb376-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(x1) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">f =</span> <span class="kw">mean</span>(f))</a></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb375-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(x1) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">f =</span> <span class="kw">mean</span>(f))</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##      x1     f
 ##   &lt;dbl&gt; &lt;dbl&gt;
@@ -664,17 +664,17 @@ Unable to predict beyond the range of the training data for regression (because 
 ## 2     2  20.5</code></pre>
 <p>This method of using the mean is know as the <em>Monte Carlo</em> method. There are other methods for partial dependence that are not on the syllabus.</p>
 <p>For the Random Forest, this is done with <code>pdp::partial()</code>.</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb378-1" title="1"><span class="kw">library</span>(pdp)</a>
-<a class="sourceLine" id="cb378-2" title="2">bmi &lt;-<span class="st"> </span>pdp<span class="op">::</span><span class="kw">partial</span>(rf, <span class="dt">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, </a>
-<a class="sourceLine" id="cb378-3" title="3">                    <span class="dt">grid.resolution =</span> <span class="dv">15</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb378-4" title="4"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a>
-<a class="sourceLine" id="cb378-5" title="5">age &lt;-<span class="st"> </span>pdp<span class="op">::</span><span class="kw">partial</span>(rf, <span class="dt">pred.var =</span> <span class="st">&quot;age&quot;</span>, </a>
-<a class="sourceLine" id="cb378-6" title="6">                    <span class="dt">grid.resolution =</span> <span class="dv">15</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb378-7" title="7"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a>
-<a class="sourceLine" id="cb378-8" title="8"></a>
-<a class="sourceLine" id="cb378-9" title="9"><span class="kw">ggarrange</span>(bmi, age)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-223"></span>
-<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-223-1.png" alt="Partial Dependence" width="576" />
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" title="1"><span class="kw">library</span>(pdp)</a>
+<a class="sourceLine" id="cb377-2" title="2">bmi &lt;-<span class="st"> </span>pdp<span class="op">::</span><span class="kw">partial</span>(rf, <span class="dt">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, </a>
+<a class="sourceLine" id="cb377-3" title="3">                    <span class="dt">grid.resolution =</span> <span class="dv">15</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb377-4" title="4"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a>
+<a class="sourceLine" id="cb377-5" title="5">age &lt;-<span class="st"> </span>pdp<span class="op">::</span><span class="kw">partial</span>(rf, <span class="dt">pred.var =</span> <span class="st">&quot;age&quot;</span>, </a>
+<a class="sourceLine" id="cb377-6" title="6">                    <span class="dt">grid.resolution =</span> <span class="dv">15</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb377-7" title="7"><span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a>
+<a class="sourceLine" id="cb377-8" title="8"></a>
+<a class="sourceLine" id="cb377-9" title="9"><span class="kw">ggarrange</span>(bmi, age)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-221"></span>
+<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-221-1.png" alt="Partial Dependence" width="576" />
 <p class="caption">
 Figure 15.1: Partial Dependence
 </p>
@@ -769,18 +769,18 @@ Figure 15.1: Partial Dependence
 <div id="example-2" class="section level3">
 <h3><span class="header-section-number">15.4.4</span> Example</h3>
 <p>We fit a gbm below without tuning the parameters for the sake of example.</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" title="1"><span class="kw">library</span>(gbm)</a>
-<a class="sourceLine" id="cb379-2" title="2">gbm &lt;-<span class="st"> </span><span class="kw">gbm</span>(charges <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train,</a>
-<a class="sourceLine" id="cb379-3" title="3">           <span class="dt">n.trees =</span> <span class="dv">100</span>,</a>
-<a class="sourceLine" id="cb379-4" title="4">           <span class="dt">interaction.depth =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb379-5" title="5">           <span class="dt">n.minobsinnode =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb379-6" title="6">           <span class="dt">shrinkage =</span> <span class="fl">0.1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb378-1" title="1"><span class="kw">library</span>(gbm)</a>
+<a class="sourceLine" id="cb378-2" title="2">gbm &lt;-<span class="st"> </span><span class="kw">gbm</span>(charges <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train,</a>
+<a class="sourceLine" id="cb378-3" title="3">           <span class="dt">n.trees =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb378-4" title="4">           <span class="dt">interaction.depth =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb378-5" title="5">           <span class="dt">n.minobsinnode =</span> <span class="dv">50</span>,</a>
+<a class="sourceLine" id="cb378-6" title="6">           <span class="dt">shrinkage =</span> <span class="fl">0.1</span>)</a></code></pre></div>
 <pre><code>## Distribution not specified, assuming gaussian ...</code></pre>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" title="1">pred &lt;-<span class="st"> </span><span class="kw">predict</span>(gbm, test, <span class="dt">n.trees =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb381-2" title="2"></a>
-<a class="sourceLine" id="cb381-3" title="3"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, pred)</a></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" title="1">pred &lt;-<span class="st"> </span><span class="kw">predict</span>(gbm, test, <span class="dt">n.trees =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb380-2" title="2"></a>
+<a class="sourceLine" id="cb380-3" title="3"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, pred)</a></code></pre></div>
 <pre><code>## [1] 1.052716</code></pre>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" title="1"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, <span class="kw">mean</span>(train<span class="op">$</span>charges))</a></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" title="1"><span class="kw">get_rmsle</span>(test<span class="op">$</span>charges, <span class="kw">mean</span>(train<span class="op">$</span>charges))</a></code></pre></div>
 <pre><code>## [1] 1.118947</code></pre>
 </div>
 <div id="advantages-and-disadvantages-4" class="section level3">
@@ -818,78 +818,78 @@ Can overfit if not tuned correctly</li>
 </div>
 <div id="exercises-1" class="section level2">
 <h2><span class="header-section-number">15.5</span> Exercises</h2>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
-<a class="sourceLine" id="cb385-2" title="2"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
+<a class="sourceLine" id="cb384-2" title="2"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 <p>Run this code on your computer to answer these exercises.</p>
 <div id="rf-tuning-with-caret" class="section level3">
 <h3><span class="header-section-number">15.5.1</span> 1. RF tuning with <code>caret</code></h3>
 <p>The best practice of tuning a model is with cross-validation. This can only be done in the <code>caret</code> library. If the SOA asks you to use <code>caret</code>, they will likely ask you a question related to cross validation as below.</p>
 <p>An actuary has trained a predictive model and chosen the best hyperparameters, cleaned the data, and performed feature engineering. They have one problem, however: the error on the training data is far lower than on new, unseen test data. Read the code below and determine their problem. Find a way to lower the error on the test data <em>without changing the model or the data.</em> Explain the rational behind your method.</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb386-2" title="2"><span class="co">#Take only 250 records </span></a>
-<a class="sourceLine" id="cb386-3" title="3"><span class="co">#Uncomment this when completing this exercise</span></a>
-<a class="sourceLine" id="cb386-4" title="4">data &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_n</span>(<span class="dv">250</span>) </a>
-<a class="sourceLine" id="cb386-5" title="5"></a>
-<a class="sourceLine" id="cb386-6" title="6">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(</a>
-<a class="sourceLine" id="cb386-7" title="7">  <span class="dt">y =</span> data<span class="op">$</span>charges, <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb386-8" title="8"><span class="st">  </span><span class="kw">as.numeric</span>()</a>
-<a class="sourceLine" id="cb386-9" title="9">train &lt;-<span class="st">  </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
-<a class="sourceLine" id="cb386-10" title="10">test &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
-<a class="sourceLine" id="cb386-11" title="11"></a>
-<a class="sourceLine" id="cb386-12" title="12">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
-<a class="sourceLine" id="cb386-13" title="13">  <span class="dt">method=</span><span class="st">&#39;boot&#39;</span>, </a>
-<a class="sourceLine" id="cb386-14" title="14">  <span class="dt">number=</span><span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb386-15" title="15">  <span class="dt">p =</span> <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb386-16" title="16"></a>
-<a class="sourceLine" id="cb386-17" title="17">tunegrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.mtry=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb386-18" title="18">rf &lt;-<span class="st"> </span><span class="kw">train</span>(charges <span class="op">~</span><span class="st"> </span>.,</a>
-<a class="sourceLine" id="cb386-19" title="19">            <span class="dt">data =</span> train,</a>
-<a class="sourceLine" id="cb386-20" title="20">            <span class="dt">method=</span><span class="st">&#39;rf&#39;</span>, </a>
-<a class="sourceLine" id="cb386-21" title="21">            <span class="dt">tuneGrid=</span>tunegrid, </a>
-<a class="sourceLine" id="cb386-22" title="22">            <span class="dt">trControl=</span>control)</a>
-<a class="sourceLine" id="cb386-23" title="23"></a>
-<a class="sourceLine" id="cb386-24" title="24">pred_train &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, train)</a>
-<a class="sourceLine" id="cb386-25" title="25">pred_test &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, test)</a>
-<a class="sourceLine" id="cb386-26" title="26"></a>
-<a class="sourceLine" id="cb386-27" title="27">get_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
-<a class="sourceLine" id="cb386-28" title="28">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span>y_hat)<span class="op">^</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb386-29" title="29">}</a>
-<a class="sourceLine" id="cb386-30" title="30"></a>
-<a class="sourceLine" id="cb386-31" title="31"><span class="kw">get_rmse</span>(pred_train, train<span class="op">$</span>charges)</a>
-<a class="sourceLine" id="cb386-32" title="32"><span class="kw">get_rmse</span>(pred_test, test<span class="op">$</span>charges)</a></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb385-2" title="2"><span class="co">#Take only 250 records </span></a>
+<a class="sourceLine" id="cb385-3" title="3"><span class="co">#Uncomment this when completing this exercise</span></a>
+<a class="sourceLine" id="cb385-4" title="4">data &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_n</span>(<span class="dv">250</span>) </a>
+<a class="sourceLine" id="cb385-5" title="5"></a>
+<a class="sourceLine" id="cb385-6" title="6">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(</a>
+<a class="sourceLine" id="cb385-7" title="7">  <span class="dt">y =</span> data<span class="op">$</span>charges, <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb385-8" title="8"><span class="st">  </span><span class="kw">as.numeric</span>()</a>
+<a class="sourceLine" id="cb385-9" title="9">train &lt;-<span class="st">  </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
+<a class="sourceLine" id="cb385-10" title="10">test &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
+<a class="sourceLine" id="cb385-11" title="11"></a>
+<a class="sourceLine" id="cb385-12" title="12">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
+<a class="sourceLine" id="cb385-13" title="13">  <span class="dt">method=</span><span class="st">&#39;boot&#39;</span>, </a>
+<a class="sourceLine" id="cb385-14" title="14">  <span class="dt">number=</span><span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb385-15" title="15">  <span class="dt">p =</span> <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb385-16" title="16"></a>
+<a class="sourceLine" id="cb385-17" title="17">tunegrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.mtry=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb385-18" title="18">rf &lt;-<span class="st"> </span><span class="kw">train</span>(charges <span class="op">~</span><span class="st"> </span>.,</a>
+<a class="sourceLine" id="cb385-19" title="19">            <span class="dt">data =</span> train,</a>
+<a class="sourceLine" id="cb385-20" title="20">            <span class="dt">method=</span><span class="st">&#39;rf&#39;</span>, </a>
+<a class="sourceLine" id="cb385-21" title="21">            <span class="dt">tuneGrid=</span>tunegrid, </a>
+<a class="sourceLine" id="cb385-22" title="22">            <span class="dt">trControl=</span>control)</a>
+<a class="sourceLine" id="cb385-23" title="23"></a>
+<a class="sourceLine" id="cb385-24" title="24">pred_train &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, train)</a>
+<a class="sourceLine" id="cb385-25" title="25">pred_test &lt;-<span class="st"> </span><span class="kw">predict</span>(rf, test)</a>
+<a class="sourceLine" id="cb385-26" title="26"></a>
+<a class="sourceLine" id="cb385-27" title="27">get_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(y, y_hat){</a>
+<a class="sourceLine" id="cb385-28" title="28">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span>y_hat)<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb385-29" title="29">}</a>
+<a class="sourceLine" id="cb385-30" title="30"></a>
+<a class="sourceLine" id="cb385-31" title="31"><span class="kw">get_rmse</span>(pred_train, train<span class="op">$</span>charges)</a>
+<a class="sourceLine" id="cb385-32" title="32"><span class="kw">get_rmse</span>(pred_test, test<span class="op">$</span>charges)</a></code></pre></div>
 </div>
 <div id="tuning-a-gbm-with-caret" class="section level3">
 <h3><span class="header-section-number">15.5.2</span> 2. Tuning a GBM with <code>caret</code></h3>
 <p>If the SOA asks you to tune a GBM, they will need to give you starting hyperparameters which are close to the “best” values due to how slow the Prometric computers are. Another possibility is that they pre-train a GBM model object and ask that you use it.</p>
 <p>This example looks at 135 combinations of hyper parameters.</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb387-2" title="2">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> health_insurance<span class="op">$</span>charges, </a>
-<a class="sourceLine" id="cb387-3" title="3">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F)</a>
-<a class="sourceLine" id="cb387-4" title="4"><span class="co">#To make this run faster, only take 50% sample</span></a>
-<a class="sourceLine" id="cb387-5" title="5">df &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_frac</span>(<span class="fl">0.50</span>) </a>
-<a class="sourceLine" id="cb387-6" title="6">train &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index) </a>
-<a class="sourceLine" id="cb387-7" title="7">test &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_frac</span>(<span class="fl">0.05</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
-<a class="sourceLine" id="cb387-8" title="8"></a>
-<a class="sourceLine" id="cb387-9" title="9">tunegrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</a>
-<a class="sourceLine" id="cb387-10" title="10">    <span class="dt">interaction.depth =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>, <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb387-11" title="11">    <span class="dt">n.trees =</span> <span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>), </a>
-<a class="sourceLine" id="cb387-12" title="12">    <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.1</span>, <span class="fl">0.0001</span>),</a>
-<a class="sourceLine" id="cb387-13" title="13">    <span class="dt">n.minobsinnode =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb387-14" title="14">    )</a>
-<a class="sourceLine" id="cb387-15" title="15"><span class="kw">nrow</span>(tunegrid)</a>
-<a class="sourceLine" id="cb387-16" title="16"></a>
-<a class="sourceLine" id="cb387-17" title="17">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
-<a class="sourceLine" id="cb387-18" title="18">  <span class="dt">method=</span><span class="st">&#39;repeatedcv&#39;</span>, </a>
-<a class="sourceLine" id="cb387-19" title="19">  <span class="dt">number=</span><span class="dv">5</span>, </a>
-<a class="sourceLine" id="cb387-20" title="20">  <span class="dt">p =</span> <span class="fl">0.8</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" title="1">gbm &lt;-<span class="st"> </span><span class="kw">train</span>(charges <span class="op">~</span><span class="st"> </span>.,</a>
-<a class="sourceLine" id="cb388-2" title="2">            <span class="dt">data =</span> train,</a>
-<a class="sourceLine" id="cb388-3" title="3">            <span class="dt">method=</span><span class="st">&#39;gbm&#39;</span>, </a>
-<a class="sourceLine" id="cb388-4" title="4">            <span class="dt">tuneGrid=</span>tunegrid, </a>
-<a class="sourceLine" id="cb388-5" title="5">            <span class="dt">trControl=</span>control,</a>
-<a class="sourceLine" id="cb388-6" title="6">            <span class="co">#Show detailed output</span></a>
-<a class="sourceLine" id="cb388-7" title="7">            <span class="dt">verbose =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb388-8" title="8">            )</a></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb386-2" title="2">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> health_insurance<span class="op">$</span>charges, </a>
+<a class="sourceLine" id="cb386-3" title="3">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F)</a>
+<a class="sourceLine" id="cb386-4" title="4"><span class="co">#To make this run faster, only take 50% sample</span></a>
+<a class="sourceLine" id="cb386-5" title="5">df &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_frac</span>(<span class="fl">0.50</span>) </a>
+<a class="sourceLine" id="cb386-6" title="6">train &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index) </a>
+<a class="sourceLine" id="cb386-7" title="7">test &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_frac</span>(<span class="fl">0.05</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
+<a class="sourceLine" id="cb386-8" title="8"></a>
+<a class="sourceLine" id="cb386-9" title="9">tunegrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</a>
+<a class="sourceLine" id="cb386-10" title="10">    <span class="dt">interaction.depth =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>, <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb386-11" title="11">    <span class="dt">n.trees =</span> <span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>), </a>
+<a class="sourceLine" id="cb386-12" title="12">    <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.1</span>, <span class="fl">0.0001</span>),</a>
+<a class="sourceLine" id="cb386-13" title="13">    <span class="dt">n.minobsinnode =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb386-14" title="14">    )</a>
+<a class="sourceLine" id="cb386-15" title="15"><span class="kw">nrow</span>(tunegrid)</a>
+<a class="sourceLine" id="cb386-16" title="16"></a>
+<a class="sourceLine" id="cb386-17" title="17">control &lt;-<span class="st"> </span><span class="kw">trainControl</span>(</a>
+<a class="sourceLine" id="cb386-18" title="18">  <span class="dt">method=</span><span class="st">&#39;repeatedcv&#39;</span>, </a>
+<a class="sourceLine" id="cb386-19" title="19">  <span class="dt">number=</span><span class="dv">5</span>, </a>
+<a class="sourceLine" id="cb386-20" title="20">  <span class="dt">p =</span> <span class="fl">0.8</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" title="1">gbm &lt;-<span class="st"> </span><span class="kw">train</span>(charges <span class="op">~</span><span class="st"> </span>.,</a>
+<a class="sourceLine" id="cb387-2" title="2">            <span class="dt">data =</span> train,</a>
+<a class="sourceLine" id="cb387-3" title="3">            <span class="dt">method=</span><span class="st">&#39;gbm&#39;</span>, </a>
+<a class="sourceLine" id="cb387-4" title="4">            <span class="dt">tuneGrid=</span>tunegrid, </a>
+<a class="sourceLine" id="cb387-5" title="5">            <span class="dt">trControl=</span>control,</a>
+<a class="sourceLine" id="cb387-6" title="6">            <span class="co">#Show detailed output</span></a>
+<a class="sourceLine" id="cb387-7" title="7">            <span class="dt">verbose =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb387-8" title="8">            )</a></code></pre></div>
 <p>The output shows the RMSE for each of the 135 models tested.</p>
 <p>(Part 1 of 3)</p>
 <p>Identify the hyperpameter combination that has the lowest training error.</p>
@@ -897,19 +897,19 @@ Can overfit if not tuned correctly</li>
 <ol start="2" style="list-style-type: decimal">
 <li>Suppose that the optimization measure was RMSE. The below table shows the results from three models. Explain why some sets of parameters have better RMSE than the others.</li>
 </ol>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" title="1">results &lt;-<span class="st"> </span>gbm<span class="op">$</span>results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(RMSE)</a>
-<a class="sourceLine" id="cb389-2" title="2">top_result &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="dv">1</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">param_rank =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb389-3" title="3">tenth_result &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="dv">10</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">param_rank =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb389-4" title="4">twenty_seventh_result &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="dv">135</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">param_rank =</span> <span class="dv">135</span>)</a>
-<a class="sourceLine" id="cb389-5" title="5"></a>
-<a class="sourceLine" id="cb389-6" title="6"><span class="kw">rbind</span>(top_result, tenth_result, twenty_seventh_result) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb389-7" title="7"><span class="st">  </span><span class="kw">select</span>(param_rank, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" title="1">results &lt;-<span class="st"> </span>gbm<span class="op">$</span>results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(RMSE)</a>
+<a class="sourceLine" id="cb388-2" title="2">top_result &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="dv">1</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">param_rank =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb388-3" title="3">tenth_result &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="dv">10</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">param_rank =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb388-4" title="4">twenty_seventh_result &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="dv">135</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">param_rank =</span> <span class="dv">135</span>)</a>
+<a class="sourceLine" id="cb388-5" title="5"></a>
+<a class="sourceLine" id="cb388-6" title="6"><span class="kw">rbind</span>(top_result, tenth_result, twenty_seventh_result) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb388-7" title="7"><span class="st">  </span><span class="kw">select</span>(param_rank, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>The partial dependence of <code>bmi</code> onto <code>charges</code> makes it appear as if <code>charges</code> increases monotonically as <code>bmi</code> increases.</li>
 </ol>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" title="1">pdp<span class="op">::</span><span class="kw">partial</span>(gbm, <span class="dt">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, <span class="dt">grid.resolution =</span> <span class="dv">15</span>, <span class="dt">plot =</span> T)</a></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" title="1">pdp<span class="op">::</span><span class="kw">partial</span>(gbm, <span class="dt">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, <span class="dt">grid.resolution =</span> <span class="dv">15</span>, <span class="dt">plot =</span> T)</a></code></pre></div>
 <p>However, when we add in the <code>ice</code> curves, we see that there is something else going on. Explain this graph. Why are there two groups of lines?</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" title="1">pdp<span class="op">::</span><span class="kw">partial</span>(gbm, <span class="dt">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, <span class="dt">grid.resolution =</span> <span class="dv">20</span>, <span class="dt">plot =</span> T, <span class="dt">ice =</span> T, <span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">palette =</span> <span class="st">&quot;viridis&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" title="1">pdp<span class="op">::</span><span class="kw">partial</span>(gbm, <span class="dt">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, <span class="dt">grid.resolution =</span> <span class="dv">20</span>, <span class="dt">plot =</span> T, <span class="dt">ice =</span> T, <span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">palette =</span> <span class="st">&quot;viridis&quot;</span>)</a></code></pre></div>
 <p><strong>Solutions</strong>:</p>
 <p>Already enrolled? Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=214
 ">Self-Study Course</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=165">160-Study Hours Course</a></p>

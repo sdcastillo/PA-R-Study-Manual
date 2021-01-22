@@ -173,7 +173,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.6.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.6.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.6.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😨</a></li>
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.7</b> Exercises</a><ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.7.1</b> Data Exploration Practice</a></li>
@@ -479,15 +479,15 @@ encountered thus far in this book. In particular, we must pass in an <span class
 matrix as well as a <span class="math inline">\(y\)</span> vector, and we do not use the <span class="math inline">\(y \sim x\)</span> syntax.</p>
 <p>Before proceeding, let’s first ensure that the missing values have
 been removed from the data, as described in the previous lab.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1">Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</a></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" title="1">Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</a></code></pre></div>
 <p>We will now perform ridge regression and the lasso in order to predict <code>Salary</code> on
 the <code>Hitters</code> data. Let’s set up our data:</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1">x =<span class="st"> </span><span class="kw">model.matrix</span>(Salary<span class="op">~</span>., Hitters)[,<span class="op">-</span><span class="dv">1</span>] <span class="co"># trim off the first column</span></a>
-<a class="sourceLine" id="cb306-2" title="2">                                         <span class="co"># leaving only the predictors</span></a>
-<a class="sourceLine" id="cb306-3" title="3">y =<span class="st"> </span>Hitters <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb306-4" title="4"><span class="st">  </span><span class="kw">select</span>(Salary) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb306-5" title="5"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb306-6" title="6"><span class="st">  </span><span class="kw">as.numeric</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1">x =<span class="st"> </span><span class="kw">model.matrix</span>(Salary<span class="op">~</span>., Hitters)[,<span class="op">-</span><span class="dv">1</span>] <span class="co"># trim off the first column</span></a>
+<a class="sourceLine" id="cb305-2" title="2">                                         <span class="co"># leaving only the predictors</span></a>
+<a class="sourceLine" id="cb305-3" title="3">y =<span class="st"> </span>Hitters <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb305-4" title="4"><span class="st">  </span><span class="kw">select</span>(Salary) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb305-5" title="5"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb305-6" title="6"><span class="st">  </span><span class="kw">as.numeric</span>()</a></code></pre></div>
 <p>The <code>model.matrix()</code> function is particularly useful for creating <span class="math inline">\(x\)</span>; not only
 does it produce a matrix corresponding to the 19 predictors but it also
 automatically transforms any qualitative variables into dummy variables.
@@ -496,8 +496,8 @@ quantitative inputs.</p>
 <p>The <code>glmnet()</code> function has an alpha argument that determines what type
 of model is fit. If <code>alpha = 0</code> then a ridge regression model is fit, and if <code>alpha = 1</code>
 then a lasso model is fit. We first fit a ridge regression model:</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1">grid =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">-2</span>, <span class="dt">length =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb307-2" title="2">ridge_mod =<span class="st"> </span><span class="kw">glmnet</span>(x, y, <span class="dt">alpha =</span> <span class="dv">0</span>, <span class="dt">lambda =</span> grid)</a></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1">grid =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">-2</span>, <span class="dt">length =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb306-2" title="2">ridge_mod =<span class="st"> </span><span class="kw">glmnet</span>(x, y, <span class="dt">alpha =</span> <span class="dv">0</span>, <span class="dt">lambda =</span> grid)</a></code></pre></div>
 <p>By default the <code>glmnet()</code> function performs ridge regression for an automatically
 selected range of <span class="math inline">\(\lambda\)</span> values. However, here we have chosen to implement
 the function over a grid of values ranging from <span class="math inline">\(\lambda = 10^10\)</span> to <span class="math inline">\(\lambda = 10^{-2}\)</span>, essentially covering the full range of scenarios from the null model containing
@@ -511,14 +511,14 @@ use the argument <code>standardize = FALSE</code>.</p>
 stored in a matrix that can be accessed by <code>coef()</code>. In this case, it is a <span class="math inline">\(20 \times 100\)</span>
 matrix, with 20 rows (one for each predictor, plus an intercept) and 100
 columns (one for each value of <span class="math inline">\(\lambda\)</span>).</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" title="1"><span class="kw">dim</span>(<span class="kw">coef</span>(ridge_mod))</a></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1"><span class="kw">dim</span>(<span class="kw">coef</span>(ridge_mod))</a></code></pre></div>
 <pre><code>## [1]  20 100</code></pre>
 <p>We expect the coefficient estimates to be much smaller, in terms of <span class="math inline">\(l_2\)</span> norm,
 when a large value of <span class="math inline">\(\lambda\)</span> is used, as compared to when a small value of <span class="math inline">\(\lambda\)</span> is
 used. These are the coefficients when <span class="math inline">\(\lambda = 11498\)</span>, along with their <span class="math inline">\(l_2\)</span> norm:</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" title="1">ridge_mod<span class="op">$</span>lambda[<span class="dv">50</span>] <span class="co">#Display 50th lambda value</span></a></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" title="1">ridge_mod<span class="op">$</span>lambda[<span class="dv">50</span>] <span class="co">#Display 50th lambda value</span></a></code></pre></div>
 <pre><code>## [1] 11497.57</code></pre>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" title="1"><span class="kw">coef</span>(ridge_mod)[,<span class="dv">50</span>] <span class="co"># Display coefficients associated with 50th lambda value</span></a></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" title="1"><span class="kw">coef</span>(ridge_mod)[,<span class="dv">50</span>] <span class="co"># Display coefficients associated with 50th lambda value</span></a></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs 
 ## 407.356050200   0.036957182   0.138180344   0.524629976   0.230701523 
 ##           RBI         Walks         Years        CAtBat         CHits 
@@ -527,14 +527,14 @@ used. These are the coefficients when <span class="math inline">\(\lambda = 1149
 ##   0.087545670   0.023379882   0.024138320   0.025015421   0.085028114 
 ##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
 ##  -6.215440973   0.016482577   0.002612988  -0.020502690   0.301433531</code></pre>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1"><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">coef</span>(ridge_mod)[<span class="op">-</span><span class="dv">1</span>,<span class="dv">50</span>]<span class="op">^</span><span class="dv">2</span>)) <span class="co"># Calculate l2 norm</span></a></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" title="1"><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">coef</span>(ridge_mod)[<span class="op">-</span><span class="dv">1</span>,<span class="dv">50</span>]<span class="op">^</span><span class="dv">2</span>)) <span class="co"># Calculate l2 norm</span></a></code></pre></div>
 <pre><code>## [1] 6.360612</code></pre>
 <p>In contrast, here are the coefficients when <span class="math inline">\(\lambda = 705\)</span>, along with their <span class="math inline">\(l_2\)</span>
 norm. Note the much larger <span class="math inline">\(l_2\)</span> norm of the coefficients associated with this
 smaller value of <span class="math inline">\(\lambda\)</span>.</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1">ridge_mod<span class="op">$</span>lambda[<span class="dv">60</span>] <span class="co">#Display 60th lambda value</span></a></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" title="1">ridge_mod<span class="op">$</span>lambda[<span class="dv">60</span>] <span class="co">#Display 60th lambda value</span></a></code></pre></div>
 <pre><code>## [1] 705.4802</code></pre>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">coef</span>(ridge_mod)[,<span class="dv">60</span>] <span class="co"># Display coefficients associated with 60th lambda value</span></a></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" title="1"><span class="kw">coef</span>(ridge_mod)[,<span class="dv">60</span>] <span class="co"># Display coefficients associated with 60th lambda value</span></a></code></pre></div>
 <pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
 ##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713   0.84718546 
 ##        Walks        Years       CAtBat        CHits       CHmRun        CRuns 
@@ -543,11 +543,11 @@ smaller value of <span class="math inline">\(\lambda\)</span>.</p>
 ##   0.09780402   0.07189612  13.68370191 -54.65877750   0.11852289   0.01606037 
 ##       Errors   NewLeagueN 
 ##  -0.70358655   8.61181213</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" title="1"><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">coef</span>(ridge_mod)[<span class="op">-</span><span class="dv">1</span>,<span class="dv">60</span>]<span class="op">^</span><span class="dv">2</span>)) <span class="co"># Calculate l2 norm</span></a></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" title="1"><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">coef</span>(ridge_mod)[<span class="op">-</span><span class="dv">1</span>,<span class="dv">60</span>]<span class="op">^</span><span class="dv">2</span>)) <span class="co"># Calculate l2 norm</span></a></code></pre></div>
 <pre><code>## [1] 57.11001</code></pre>
 <p>We can use the <code>predict()</code> function for a number of purposes. For instance,
 we can obtain the ridge regression coefficients for a new value of <span class="math inline">\(\lambda\)</span>, say 50:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" title="1"><span class="kw">predict</span>(ridge_mod, <span class="dt">s=</span><span class="dv">50</span>, <span class="dt">type=</span><span class="st">&quot;coefficients&quot;</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" title="1"><span class="kw">predict</span>(ridge_mod, <span class="dt">s=</span><span class="dv">50</span>, <span class="dt">type=</span><span class="st">&quot;coefficients&quot;</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,]</a></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs 
 ##  4.876610e+01 -3.580999e-01  1.969359e+00 -1.278248e+00  1.145892e+00 
 ##           RBI         Walks         Years        CAtBat         CHits 
@@ -558,44 +558,44 @@ we can obtain the ridge regression coefficients for a new value of <span class="
 ## -1.182011e+02  2.502322e-01  1.215665e-01 -3.278600e+00 -9.496680e+00</code></pre>
 <p>We now split the samples into a training set and a test set in order
 to estimate the test error of ridge regression and the lasso.</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb324-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb324-2" title="2"></a>
-<a class="sourceLine" id="cb324-3" title="3">train =<span class="st"> </span>Hitters <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-4" title="4"><span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb324-5" title="5"></a>
-<a class="sourceLine" id="cb324-6" title="6">test =<span class="st"> </span>Hitters <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-7" title="7"><span class="st">  </span><span class="kw">setdiff</span>(train)</a>
-<a class="sourceLine" id="cb324-8" title="8"></a>
-<a class="sourceLine" id="cb324-9" title="9">x_train =<span class="st"> </span><span class="kw">model.matrix</span>(Salary<span class="op">~</span>., train)[,<span class="op">-</span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb324-10" title="10">x_test =<span class="st"> </span><span class="kw">model.matrix</span>(Salary<span class="op">~</span>., test)[,<span class="op">-</span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb324-11" title="11"></a>
-<a class="sourceLine" id="cb324-12" title="12">y_train =<span class="st"> </span>train <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-13" title="13"><span class="st">  </span><span class="kw">select</span>(Salary) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-14" title="14"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-15" title="15"><span class="st">  </span><span class="kw">as.numeric</span>()</a>
-<a class="sourceLine" id="cb324-16" title="16"></a>
-<a class="sourceLine" id="cb324-17" title="17">y_test =<span class="st"> </span>test <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-18" title="18"><span class="st">  </span><span class="kw">select</span>(Salary) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-19" title="19"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb324-20" title="20"><span class="st">  </span><span class="kw">as.numeric</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb323-2" title="2"></a>
+<a class="sourceLine" id="cb323-3" title="3">train =<span class="st"> </span>Hitters <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb323-4" title="4"><span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb323-5" title="5"></a>
+<a class="sourceLine" id="cb323-6" title="6">test =<span class="st"> </span>Hitters <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb323-7" title="7"><span class="st">  </span><span class="kw">setdiff</span>(train)</a>
+<a class="sourceLine" id="cb323-8" title="8"></a>
+<a class="sourceLine" id="cb323-9" title="9">x_train =<span class="st"> </span><span class="kw">model.matrix</span>(Salary<span class="op">~</span>., train)[,<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb323-10" title="10">x_test =<span class="st"> </span><span class="kw">model.matrix</span>(Salary<span class="op">~</span>., test)[,<span class="op">-</span><span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb323-11" title="11"></a>
+<a class="sourceLine" id="cb323-12" title="12">y_train =<span class="st"> </span>train <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb323-13" title="13"><span class="st">  </span><span class="kw">select</span>(Salary) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb323-14" title="14"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb323-15" title="15"><span class="st">  </span><span class="kw">as.numeric</span>()</a>
+<a class="sourceLine" id="cb323-16" title="16"></a>
+<a class="sourceLine" id="cb323-17" title="17">y_test =<span class="st"> </span>test <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb323-18" title="18"><span class="st">  </span><span class="kw">select</span>(Salary) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb323-19" title="19"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb323-20" title="20"><span class="st">  </span><span class="kw">as.numeric</span>()</a></code></pre></div>
 <p>Next we fit a ridge regression model on the training set, and evaluate
 its MSE on the test set, using <span class="math inline">\(\lambda = 4\)</span>. Note the use of the <code>predict()</code>
 function again: this time we get predictions for a test set, by replacing
 <code>type="coefficients"</code> with the <code>newx</code> argument.</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb325-1" title="1">ridge_mod =<span class="st"> </span><span class="kw">glmnet</span>(x_train, y_train, <span class="dt">alpha=</span><span class="dv">0</span>, <span class="dt">lambda =</span> grid, <span class="dt">thresh =</span> <span class="fl">1e-12</span>)</a>
-<a class="sourceLine" id="cb325-2" title="2">ridge_pred =<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">s =</span> <span class="dv">4</span>, <span class="dt">newx =</span> x_test)</a>
-<a class="sourceLine" id="cb325-3" title="3"><span class="kw">mean</span>((ridge_pred <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb324-1" title="1">ridge_mod =<span class="st"> </span><span class="kw">glmnet</span>(x_train, y_train, <span class="dt">alpha=</span><span class="dv">0</span>, <span class="dt">lambda =</span> grid, <span class="dt">thresh =</span> <span class="fl">1e-12</span>)</a>
+<a class="sourceLine" id="cb324-2" title="2">ridge_pred =<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">s =</span> <span class="dv">4</span>, <span class="dt">newx =</span> x_test)</a>
+<a class="sourceLine" id="cb324-3" title="3"><span class="kw">mean</span>((ridge_pred <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 139858.6</code></pre>
 <p>The test MSE is 101242.7. Note that if we had instead simply fit a model
 with just an intercept, we would have predicted each test observation using
 the mean of the training observations. In that case, we could compute the
 test set MSE like this:</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" title="1"><span class="kw">mean</span>((<span class="kw">mean</span>(y_train) <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" title="1"><span class="kw">mean</span>((<span class="kw">mean</span>(y_train) <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 224692.1</code></pre>
 <p>We could also get the same result by fitting a ridge regression model with
 a very large value of <span class="math inline">\(\lambda\)</span>. Note that <code>1e10</code> means <span class="math inline">\(10^{10}\)</span>.</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" title="1">ridge_pred =<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">s =</span> <span class="fl">1e10</span>, <span class="dt">newx =</span> x_test)</a>
-<a class="sourceLine" id="cb329-2" title="2"><span class="kw">mean</span>((ridge_pred <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" title="1">ridge_pred =<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">s =</span> <span class="fl">1e10</span>, <span class="dt">newx =</span> x_test)</a>
+<a class="sourceLine" id="cb328-2" title="2"><span class="kw">mean</span>((ridge_pred <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 224692.1</code></pre>
 <p>So fitting a ridge regression model with <span class="math inline">\(\lambda = 4\)</span> leads to a much lower test
 MSE than fitting a model with just an intercept. We now check whether
@@ -609,10 +609,10 @@ we use the argument <code>exact=T</code> when calling the <code>predict()</code>
 a slight discrepancy in the third decimal place between the output of <code>glmnet()</code> when
 <span class="math inline">\(\lambda = 0\)</span> and the output of <code>lm()</code>; this is due to numerical approximation on the part of
 <code>glmnet()</code>.</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" title="1">ridge_pred =<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">s =</span> <span class="dv">0</span>, <span class="dt">x =</span> x_train, <span class="dt">y =</span> y_train, <span class="dt">newx =</span> x_test, <span class="dt">exact =</span> T)</a>
-<a class="sourceLine" id="cb331-2" title="2"><span class="kw">mean</span>((ridge_pred <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" title="1">ridge_pred =<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">s =</span> <span class="dv">0</span>, <span class="dt">x =</span> x_train, <span class="dt">y =</span> y_train, <span class="dt">newx =</span> x_test, <span class="dt">exact =</span> T)</a>
+<a class="sourceLine" id="cb330-2" title="2"><span class="kw">mean</span>((ridge_pred <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 175051.7</code></pre>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" title="1"><span class="kw">lm</span>(Salary<span class="op">~</span>., <span class="dt">data =</span> train)</a></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" title="1"><span class="kw">lm</span>(Salary<span class="op">~</span>., <span class="dt">data =</span> train)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Salary ~ ., data = train)
@@ -626,7 +626,7 @@ a slight discrepancy in the third decimal place between the output of <code>glmn
 ##  -7.525e-01    2.347e-01    1.322e+02   -1.346e+02    2.099e-01    6.229e-01  
 ##      Errors   NewLeagueN  
 ##  -4.616e+00   -8.330e+01</code></pre>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" title="1"><span class="kw">predict</span>(ridge_mod, <span class="dt">s =</span> <span class="dv">0</span>, <span class="dt">x =</span> x_train, <span class="dt">y =</span> y_train, <span class="dt">exact =</span> T, <span class="dt">type=</span><span class="st">&quot;coefficients&quot;</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb334-1" title="1"><span class="kw">predict</span>(ridge_mod, <span class="dt">s =</span> <span class="dv">0</span>, <span class="dt">x =</span> x_train, <span class="dt">y =</span> y_train, <span class="dt">exact =</span> T, <span class="dt">type=</span><span class="st">&quot;coefficients&quot;</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,]</a></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs 
 ##  239.83274953   -0.00175359   -2.17853087    6.33694957    0.71369687 
 ##           RBI         Walks         Years        CAtBat         CHits 
@@ -644,25 +644,25 @@ the built-in cross-validation function, <code>cv.glmnet()</code>. By default, th
 performs 10-fold cross-validation, though this can be changed using the
 argument <code>folds</code>. Note that we set a random seed first so our results will be
 reproducible, since the choice of the cross-validation folds is random.</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb337-2" title="2">cv.out =<span class="st"> </span><span class="kw">cv.glmnet</span>(x_train, y_train, <span class="dt">alpha =</span> <span class="dv">0</span>) <span class="co"># Fit ridge regression model on training data</span></a>
-<a class="sourceLine" id="cb337-3" title="3"><span class="kw">plot</span>(cv.out) <span class="co"># Draw plot of training MSE as a function of lambda</span></a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-195-1.png" width="576" /></p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" title="1">bestlam =<span class="st"> </span>cv.out<span class="op">$</span>lambda.min  <span class="co"># Select lamda that minimizes training MSE</span></a>
-<a class="sourceLine" id="cb338-2" title="2">bestlam</a></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb336-2" title="2">cv.out =<span class="st"> </span><span class="kw">cv.glmnet</span>(x_train, y_train, <span class="dt">alpha =</span> <span class="dv">0</span>) <span class="co"># Fit ridge regression model on training data</span></a>
+<a class="sourceLine" id="cb336-3" title="3"><span class="kw">plot</span>(cv.out) <span class="co"># Draw plot of training MSE as a function of lambda</span></a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-193-1.png" width="576" /></p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" title="1">bestlam =<span class="st"> </span>cv.out<span class="op">$</span>lambda.min  <span class="co"># Select lamda that minimizes training MSE</span></a>
+<a class="sourceLine" id="cb337-2" title="2">bestlam</a></code></pre></div>
 <pre><code>## [1] 326.1406</code></pre>
 <p>Therefore, we see that the value of <span class="math inline">\(\lambda\)</span> that results in the smallest cross-validation
 error is 339.1845 What is the test MSE associated with this value of
 <span class="math inline">\(\lambda\)</span>?</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" title="1">ridge_pred =<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">s =</span> bestlam, <span class="dt">newx =</span> x_test) <span class="co"># Use best lambda to predict test data</span></a>
-<a class="sourceLine" id="cb340-2" title="2"><span class="kw">mean</span>((ridge_pred <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>) <span class="co"># Calculate test MSE</span></a></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb339-1" title="1">ridge_pred =<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">s =</span> bestlam, <span class="dt">newx =</span> x_test) <span class="co"># Use best lambda to predict test data</span></a>
+<a class="sourceLine" id="cb339-2" title="2"><span class="kw">mean</span>((ridge_pred <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>) <span class="co"># Calculate test MSE</span></a></code></pre></div>
 <pre><code>## [1] 140056.2</code></pre>
 <p>This represents a further improvement over the test MSE that we got using
 <span class="math inline">\(\lambda = 4\)</span>. Finally, we refit our ridge regression model on the full data set,
 using the value of <span class="math inline">\(\lambda\)</span> chosen by cross-validation, and examine the coefficient
 estimates.</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb342-1" title="1">out =<span class="st"> </span><span class="kw">glmnet</span>(x, y, <span class="dt">alpha =</span> <span class="dv">0</span>) <span class="co"># Fit ridge regression model on full dataset</span></a>
-<a class="sourceLine" id="cb342-2" title="2"><span class="kw">predict</span>(out, <span class="dt">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="dt">s =</span> bestlam)[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,] <span class="co"># Display coefficients using lambda chosen by CV</span></a></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" title="1">out =<span class="st"> </span><span class="kw">glmnet</span>(x, y, <span class="dt">alpha =</span> <span class="dv">0</span>) <span class="co"># Fit ridge regression model on full dataset</span></a>
+<a class="sourceLine" id="cb341-2" title="2"><span class="kw">predict</span>(out, <span class="dt">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="dt">s =</span> bestlam)[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,] <span class="co"># Display coefficients using lambda chosen by CV</span></a></code></pre></div>
 <pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
 ##  15.44835008   0.07716945   0.85906253   0.60120339   1.06366687   0.87936073 
 ##        Walks        Years       CAtBat        CHits       CHmRun        CRuns 
@@ -682,19 +682,19 @@ whether the lasso can yield either a more accurate or a more interpretable
 model than ridge regression. In order to fit a lasso model, we once again
 use the <code>glmnet()</code> function; however, this time we use the argument <code>alpha=1</code>.
 Other than that change, we proceed just as we did in fitting a ridge model:</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" title="1">lasso_mod =<span class="st"> </span><span class="kw">glmnet</span>(x_train, y_train, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> grid) <span class="co"># Fit lasso model on training data</span></a>
-<a class="sourceLine" id="cb344-2" title="2"><span class="kw">plot</span>(lasso_mod)                                          <span class="co"># Draw plot of coefficients</span></a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-198-1.png" width="576" /></p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" title="1">lasso_mod =<span class="st"> </span><span class="kw">glmnet</span>(x_train, y_train, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> grid) <span class="co"># Fit lasso model on training data</span></a>
+<a class="sourceLine" id="cb343-2" title="2"><span class="kw">plot</span>(lasso_mod)                                          <span class="co"># Draw plot of coefficients</span></a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-196-1.png" width="576" /></p>
 <p>Notice that in the coefficient plot that depending on the choice of tuning
 parameter, some of the coefficients are exactly equal to zero. We now
 perform cross-validation and compute the associated test error:</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb345-2" title="2">cv.out =<span class="st"> </span><span class="kw">cv.glmnet</span>(x_train, y_train, <span class="dt">alpha =</span> <span class="dv">1</span>) <span class="co"># Fit lasso model on training data</span></a>
-<a class="sourceLine" id="cb345-3" title="3"><span class="kw">plot</span>(cv.out) <span class="co"># Draw plot of training MSE as a function of lambda</span></a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-199-1.png" width="576" /></p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb346-1" title="1">bestlam =<span class="st"> </span>cv.out<span class="op">$</span>lambda.min <span class="co"># Select lamda that minimizes training MSE</span></a>
-<a class="sourceLine" id="cb346-2" title="2">lasso_pred =<span class="st"> </span><span class="kw">predict</span>(lasso_mod, <span class="dt">s =</span> bestlam, <span class="dt">newx =</span> x_test) <span class="co"># Use best lambda to predict test data</span></a>
-<a class="sourceLine" id="cb346-3" title="3"><span class="kw">mean</span>((lasso_pred <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>) <span class="co"># Calculate test MSE</span></a></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb344-2" title="2">cv.out =<span class="st"> </span><span class="kw">cv.glmnet</span>(x_train, y_train, <span class="dt">alpha =</span> <span class="dv">1</span>) <span class="co"># Fit lasso model on training data</span></a>
+<a class="sourceLine" id="cb344-3" title="3"><span class="kw">plot</span>(cv.out) <span class="co"># Draw plot of training MSE as a function of lambda</span></a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-197-1.png" width="576" /></p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" title="1">bestlam =<span class="st"> </span>cv.out<span class="op">$</span>lambda.min <span class="co"># Select lamda that minimizes training MSE</span></a>
+<a class="sourceLine" id="cb345-2" title="2">lasso_pred =<span class="st"> </span><span class="kw">predict</span>(lasso_mod, <span class="dt">s =</span> bestlam, <span class="dt">newx =</span> x_test) <span class="co"># Use best lambda to predict test data</span></a>
+<a class="sourceLine" id="cb345-3" title="3"><span class="kw">mean</span>((lasso_pred <span class="op">-</span><span class="st"> </span>y_test)<span class="op">^</span><span class="dv">2</span>) <span class="co"># Calculate test MSE</span></a></code></pre></div>
 <pre><code>## [1] 143273</code></pre>
 <p>This is substantially lower than the test set MSE of the null model and of
 least squares, and very similar to the test MSE of ridge regression with <span class="math inline">\(\lambda\)</span>
@@ -702,9 +702,9 @@ chosen by cross-validation.</p>
 <p>However, the lasso has a substantial advantage over ridge regression in
 that the resulting coefficient estimates are sparse. Here we see that 12 of
 the 19 coefficient estimates are exactly zero:</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb348-1" title="1">out =<span class="st"> </span><span class="kw">glmnet</span>(x, y, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> grid) <span class="co"># Fit lasso model on full dataset</span></a>
-<a class="sourceLine" id="cb348-2" title="2">lasso_coef =<span class="st"> </span><span class="kw">predict</span>(out, <span class="dt">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="dt">s =</span> bestlam)[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,] <span class="co"># Display coefficients using lambda chosen by CV</span></a>
-<a class="sourceLine" id="cb348-3" title="3">lasso_coef</a></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" title="1">out =<span class="st"> </span><span class="kw">glmnet</span>(x, y, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> grid) <span class="co"># Fit lasso model on full dataset</span></a>
+<a class="sourceLine" id="cb347-2" title="2">lasso_coef =<span class="st"> </span><span class="kw">predict</span>(out, <span class="dt">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="dt">s =</span> bestlam)[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,] <span class="co"># Display coefficients using lambda chosen by CV</span></a>
+<a class="sourceLine" id="cb347-3" title="3">lasso_coef</a></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs 
 ##    1.27429897   -0.05490834    2.18012455    0.00000000    0.00000000 
 ##           RBI         Walks         Years        CAtBat         CHits 
@@ -715,7 +715,7 @@ the 19 coefficient estimates are exactly zero:</p>
 ## -116.16524424    0.23751978    0.00000000   -0.85604181    0.00000000</code></pre>
 <p>Selecting only the predictors with non-zero coefficients, we see that the lasso model with <span class="math inline">\(\lambda\)</span>
 chosen by cross-validation contains only seven variables:</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" title="1">lasso_coef[lasso_coef<span class="op">!=</span><span class="dv">0</span>] <span class="co"># Display only non-zero coefficients</span></a></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb349-1" title="1">lasso_coef[lasso_coef<span class="op">!=</span><span class="dv">0</span>] <span class="co"># Display only non-zero coefficients</span></a></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         Walks         Years 
 ##    1.27429897   -0.05490834    2.18012455    2.29189433   -0.33767315 
 ##        CHmRun         CRuns          CRBI       LeagueN     DivisionW 

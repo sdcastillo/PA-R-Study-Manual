@@ -46,23 +46,14 @@ R code is organized into libraries.  You want to use the exact same code that wi
 
 ## Download the data
 
-For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called `ExamPAData` by the author.  To access, simply run the below lines of code to download this data.
+For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called `ExamPAData` which is available on CRAN.
 
 ```{r eval = F}
-# Install remotes if it's not yet installed
-install.packages("remotes")
-Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="false")
-remotes::install_github("sdcastillo/ExamPAData", force = TRUE)
-```
-
-Once this has run, you can access the data using `library(ExamPAData)`.  To check that this is installed correctly see if the `insurance` data set has loaded.  If this returns "object not found", then the library was not installed.  If you get an error during the installation, restart your RStudio and then run `Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="false")` and `remotes::install_github("sdcastillo/ExamPAData", force = TRUE)` separately.
-
-```{r}
+install.packages("ExamPAData")
 library(ExamPAData)
-summary(insurance)
 ```
 
-For your convenience, you can use these data sets for your own practice.  They make great candidates for machine learning problems.  
+To get the data dictionary for a data set, use `?dataset_name` such as `?customer_phone_calls`.  For your convenience, you can use these data sets for your own practice.  They make great candidates for machine learning problems. 
 
 | Dataset   |      Description      |
 |----------|-------------|

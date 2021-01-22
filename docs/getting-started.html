@@ -173,7 +173,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.6.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.6.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.6.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😨</a></li>
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.7</b> Exercises</a><ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.7.1</b> Data Exploration Practice</a></li>
@@ -350,29 +350,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="download-the-data" class="section level2">
 <h2><span class="header-section-number">4.3</span> Download the data</h2>
-<p>For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called <code>ExamPAData</code> by the author. To access, simply run the below lines of code to download this data.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Install remotes if it&#39;s not yet installed</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="kw">Sys.setenv</span>(<span class="dt">R_REMOTES_NO_ERRORS_FROM_WARNINGS=</span><span class="st">&quot;false&quot;</span>)</a>
-<a class="sourceLine" id="cb2-4" title="4">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;sdcastillo/ExamPAData&quot;</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p>Once this has run, you can access the data using <code>library(ExamPAData)</code>. To check that this is installed correctly see if the <code>insurance</code> data set has loaded. If this returns “object not found”, then the library was not installed. If you get an error during the installation, restart your RStudio and then run <code>Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="false")</code> and <code>remotes::install_github("sdcastillo/ExamPAData", force = TRUE)</code> separately.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw">summary</span>(insurance)</a></code></pre></div>
-<pre><code>##     district       group               age               holders       
-##  Min.   :1.00   Length:64          Length:64          Min.   :   3.00  
-##  1st Qu.:1.75   Class :character   Class :character   1st Qu.:  46.75  
-##  Median :2.50   Mode  :character   Mode  :character   Median : 136.00  
-##  Mean   :2.50                                         Mean   : 364.98  
-##  3rd Qu.:3.25                                         3rd Qu.: 327.50  
-##  Max.   :4.00                                         Max.   :3582.00  
-##      claims      
-##  Min.   :  0.00  
-##  1st Qu.:  9.50  
-##  Median : 22.00  
-##  Mean   : 49.23  
-##  3rd Qu.: 55.50  
-##  Max.   :400.00</code></pre>
-<p>For your convenience, you can use these data sets for your own practice. They make great candidates for machine learning problems.</p>
+<p>For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called <code>ExamPAData</code> which is available on CRAN.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ExamPAData&quot;</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">library</span>(ExamPAData)</a></code></pre></div>
+<p>To get the data dictionary for a data set, use <code>?dataset_name</code> such as <code>?customer_phone_calls</code>. For your convenience, you can use these data sets for your own practice. They make great candidates for machine learning problems.</p>
 <table>
 <colgroup>
 <col width="43%" />

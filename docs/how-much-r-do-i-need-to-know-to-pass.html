@@ -173,7 +173,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.6.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.6.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.6.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😨</a></li>
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.7</b> Exercises</a><ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.7.1</b> Data Exploration Practice</a></li>
@@ -364,45 +364,45 @@ reflect your decision in Task 7 regarding the PCA variable.</strong></p>
 <li>DATA SET B</li>
 </ul>
 <p>Then ignore everything else!</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Format data as matrices (necessary for glmnet). </span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co"># Uncomment two items that reflect your decision from Task 7.</span></a>
-<a class="sourceLine" id="cb5-3" title="3"></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co">#DATA SET A</span></a>
-<a class="sourceLine" id="cb5-5" title="5">lasso.mat.train &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>PC1, data.train)</a>
-<a class="sourceLine" id="cb5-6" title="6">lasso.mat.test &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>PC1, data.test)</a>
-<a class="sourceLine" id="cb5-7" title="7"></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">#DATA SET B</span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="co"># lasso.mat.train &lt;- model.matrix(days ~ . - num_procs - num_meds - num_ip - num_diags, data.train)</span></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co"># lasso.mat.test &lt;- model.matrix(days ~ . - num_procs - num_meds - num_ip - num_diags, data.test)</span></a>
-<a class="sourceLine" id="cb5-11" title="11"></a>
-<a class="sourceLine" id="cb5-12" title="12"><span class="kw">set.seed</span>(<span class="dv">789</span>)</a>
-<a class="sourceLine" id="cb5-13" title="13"></a>
-<a class="sourceLine" id="cb5-14" title="14">lasso.cv &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(</a>
-<a class="sourceLine" id="cb5-15" title="15">  <span class="dt">x =</span> lasso.mat.train,</a>
-<a class="sourceLine" id="cb5-16" title="16">  <span class="dt">y =</span> data.train<span class="op">$</span>days,</a>
-<a class="sourceLine" id="cb5-17" title="17">  <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, <span class="co"># Do not change.</span></a>
-<a class="sourceLine" id="cb5-18" title="18">  <span class="dt">alpha =</span> <span class="dv">1</span> <span class="co"># alpha = 1 for lasso</span></a>
-<a class="sourceLine" id="cb5-19" title="19">)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Format data as matrices (necessary for glmnet). </span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co"># Uncomment two items that reflect your decision from Task 7.</span></a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">#DATA SET A</span></a>
+<a class="sourceLine" id="cb3-5" title="5">lasso.mat.train &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>PC1, data.train)</a>
+<a class="sourceLine" id="cb3-6" title="6">lasso.mat.test &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>PC1, data.test)</a>
+<a class="sourceLine" id="cb3-7" title="7"></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co">#DATA SET B</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co"># lasso.mat.train &lt;- model.matrix(days ~ . - num_procs - num_meds - num_ip - num_diags, data.train)</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="co"># lasso.mat.test &lt;- model.matrix(days ~ . - num_procs - num_meds - num_ip - num_diags, data.test)</span></a>
+<a class="sourceLine" id="cb3-11" title="11"></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="kw">set.seed</span>(<span class="dv">789</span>)</a>
+<a class="sourceLine" id="cb3-13" title="13"></a>
+<a class="sourceLine" id="cb3-14" title="14">lasso.cv &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(</a>
+<a class="sourceLine" id="cb3-15" title="15">  <span class="dt">x =</span> lasso.mat.train,</a>
+<a class="sourceLine" id="cb3-16" title="16">  <span class="dt">y =</span> data.train<span class="op">$</span>days,</a>
+<a class="sourceLine" id="cb3-17" title="17">  <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, <span class="co"># Do not change.</span></a>
+<a class="sourceLine" id="cb3-18" title="18">  <span class="dt">alpha =</span> <span class="dv">1</span> <span class="co"># alpha = 1 for lasso</span></a>
+<a class="sourceLine" id="cb3-19" title="19">)</a></code></pre></div>
 <p>If you wanted to use data set B, you would just add comments to data set A and uncomment B.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co">#DATA SET A</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co"># lasso.mat.train &lt;- model.matrix(days ~ . - PC1, data.train)</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co"># lasso.mat.test &lt;- model.matrix(days ~ . - PC1, data.test)</span></a>
-<a class="sourceLine" id="cb6-4" title="4"></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#DATA SET B</span></a>
-<a class="sourceLine" id="cb6-6" title="6">lasso.mat.train &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>num_procs <span class="op">-</span><span class="st"> </span>num_meds <span class="op">-</span><span class="st"> </span>num_ip <span class="op">-</span><span class="st"> </span>num_diags, data.train)</a>
-<a class="sourceLine" id="cb6-7" title="7">lasso.mat.test &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>num_procs <span class="op">-</span><span class="st"> </span>num_meds <span class="op">-</span><span class="st"> </span>num_ip <span class="op">-</span><span class="st"> </span>num_diags, data.test)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co">#DATA SET A</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co"># lasso.mat.train &lt;- model.matrix(days ~ . - PC1, data.train)</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co"># lasso.mat.test &lt;- model.matrix(days ~ . - PC1, data.test)</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">#DATA SET B</span></a>
+<a class="sourceLine" id="cb4-6" title="6">lasso.mat.train &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>num_procs <span class="op">-</span><span class="st"> </span>num_meds <span class="op">-</span><span class="st"> </span>num_ip <span class="op">-</span><span class="st"> </span>num_diags, data.train)</a>
+<a class="sourceLine" id="cb4-7" title="7">lasso.mat.test &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(days <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>num_procs <span class="op">-</span><span class="st"> </span>num_meds <span class="op">-</span><span class="st"> </span>num_ip <span class="op">-</span><span class="st"> </span>num_diags, data.test)</a></code></pre></div>
 </div>
 <div id="example-2---data-exploration" class="section level2">
 <h2><span class="header-section-number">5.2</span> Example 2 - Data exploration</h2>
 <p>That last example was easy. They might ask you to do something like the following:</p>
 <p><strong>Template code: </strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># This code takes a continuous variable and creates a binned factor variable. </span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="co"># The code applies it directly to the capital gain variable as an </span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="co"># example. right = FALSE means that the left number is included and </span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co"># the right number excluded. So, in this case, the first bin runs from 0 to </span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="co"># 1000 and includes 0 and excludes 1000. Note that the code creates a new </span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co"># variable, so the original variable is retained.</span></a>
-<a class="sourceLine" id="cb7-7" title="7">df<span class="op">$</span>cap_gain_cut &lt;-<span class="st"> </span><span class="kw">cut</span>(df<span class="op">$</span>cap_gain, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">5000</span>, <span class="ot">Inf</span>), <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;lowcg&quot;</span>, <span class="st">&quot;mediumcg&quot;</span>, <span class="st">&quot;highcg&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># This code takes a continuous variable and creates a binned factor variable. </span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co"># The code applies it directly to the capital gain variable as an </span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co"># example. right = FALSE means that the left number is included and </span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co"># the right number excluded. So, in this case, the first bin runs from 0 to </span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co"># 1000 and includes 0 and excludes 1000. Note that the code creates a new </span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co"># variable, so the original variable is retained.</span></a>
+<a class="sourceLine" id="cb5-7" title="7">df<span class="op">$</span>cap_gain_cut &lt;-<span class="st"> </span><span class="kw">cut</span>(df<span class="op">$</span>cap_gain, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">5000</span>, <span class="ot">Inf</span>), <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;lowcg&quot;</span>, <span class="st">&quot;mediumcg&quot;</span>, <span class="st">&quot;highcg&quot;</span>))</a></code></pre></div>
 <p>To answer this question correctly, you would need to</p>
 <ul>
 <li>Understand that the code is taking the capital gains recorded on investments, <code>cap_gain</code>, and then creating bins so that the new variable is “lowcg” for values between 0 and 1000, “mediumcp” from 1000 to 5000, and “highcg” for all values above 5000.<br />
@@ -411,12 +411,12 @@ reflect your decision in Task 7 regarding the PCA variable.</strong></p>
 <li>Finally, use this result to change these cutoff values so that “low cg” is all values less than 5095.5, “medium cg” is all values from 5095.5 to 7055.5, and so forth. You would need to do this for two data sets, <code>data.train</code>, and <code>data.test</code>.</li>
 </ul>
 <p><strong>Solution code: </strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># This code cuts a continuous variable into buckets. </span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="co"># The process is applied to both the training and test sets. </span></a>
-<a class="sourceLine" id="cb8-3" title="3"></a>
-<a class="sourceLine" id="cb8-4" title="4">data.train<span class="op">$</span>cap_gain_cut &lt;-<span class="st"> </span><span class="kw">cut</span>(data.train<span class="op">$</span>cap_gain, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">5095.5</span>, <span class="fl">7055.5</span>, <span class="ot">Inf</span>), <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;lowcg&quot;</span>, <span class="st">&quot;mediumcg&quot;</span>, <span class="st">&quot;highcg&quot;</span>))</a>
-<a class="sourceLine" id="cb8-5" title="5"></a>
-<a class="sourceLine" id="cb8-6" title="6">data.test<span class="op">$</span>cap_gain_cut &lt;-<span class="st"> </span><span class="kw">cut</span>(data.test<span class="op">$</span>cap_gain, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">5095.5</span>, <span class="fl">7055.5</span>, <span class="ot">Inf</span>), <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;lowcg&quot;</span>, <span class="st">&quot;mediumcg&quot;</span>, <span class="st">&quot;highcg&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># This code cuts a continuous variable into buckets. </span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co"># The process is applied to both the training and test sets. </span></a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4">data.train<span class="op">$</span>cap_gain_cut &lt;-<span class="st"> </span><span class="kw">cut</span>(data.train<span class="op">$</span>cap_gain, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">5095.5</span>, <span class="fl">7055.5</span>, <span class="ot">Inf</span>), <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;lowcg&quot;</span>, <span class="st">&quot;mediumcg&quot;</span>, <span class="st">&quot;highcg&quot;</span>))</a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6">data.test<span class="op">$</span>cap_gain_cut &lt;-<span class="st"> </span><span class="kw">cut</span>(data.test<span class="op">$</span>cap_gain, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">5095.5</span>, <span class="fl">7055.5</span>, <span class="ot">Inf</span>), <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;lowcg&quot;</span>, <span class="st">&quot;mediumcg&quot;</span>, <span class="st">&quot;highcg&quot;</span>))</a></code></pre></div>
 <p>Don’t panic if all of this code is confusing. Just focus on reading the comments. As you can see, this is less of a programming question than it is a “logic and reasoning” question.</p>
 </div>
 </div>

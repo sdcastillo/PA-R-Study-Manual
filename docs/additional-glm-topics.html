@@ -173,7 +173,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.6.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.6.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.6.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😨</a></li>
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.7</b> Exercises</a><ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.7.1</b> Data Exploration Practice</a></li>
@@ -385,7 +385,7 @@ likelihood estimator of the parameters of the model under investigation, <span c
 <li>No obvious pattern?</li>
 </ul>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">3</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-151-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-150-1.png" width="576" /></p>
 <p>The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.</p>
 <p><strong>In a perfect model, all of these assumptions would be met:</strong></p>
 <ul>
@@ -395,7 +395,7 @@ likelihood estimator of the parameters of the model under investigation, <span c
 <li>No sudden “jumps”? This indicates many <span class="math inline">\(Y\)</span>’s which have the same value, such as insurance claims which all have the exact value of $100.00 or $0.00.</li>
 </ul>
 <div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" title="1"><span class="kw">plot</span>(model, <span class="dt">which =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-152-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-151-1.png" width="576" /></p>
 </div>
 <div id="log-transforms-of-predictors" class="section level2">
 <h2><span class="header-section-number">12.3</span> Log transforms of predictors</h2>
@@ -427,7 +427,7 @@ To solve for <span class="math inline">\(\mu\)</span>, take the exponent of both
 ## 10    10  1997
 ## # ... with 26 more rows</code></pre>
 <p>Here are the histograms</p>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-155-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-154-1.png" width="576" /></p>
 <p><strong>Yes</strong>, the SOA’s solution applys the log transform.</p>
 </div>
 <div id="reference-levels" class="section level2">
@@ -461,31 +461,18 @@ By rewriting this we can see that the intercept changes from <span class="math i
 <p><span class="math display">\[
 (\beta_0 + \beta_1) + (\beta_2 + \beta_3 ) x_2 \\
  = \beta_0^* + \beta_1^* x_2
-\]</span></p>
-<p>The SOA’s modules give an example with the using age and gender as below. This is not a very strong interaction, as the slopes are almost identical across <code>gender</code>.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1">interactions <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb264-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, actual, <span class="dt">color =</span> gender)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb264-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb264-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Age vs. Actual by Gender&quot;</span>, </a>
-<a class="sourceLine" id="cb264-5" title="5">       <span class="dt">subtitle =</span> <span class="st">&quot;Interactions imply different slopes&quot;</span>,</a>
-<a class="sourceLine" id="cb264-6" title="6">       <span class="dt">caption=</span> <span class="st">&quot;data: interactions&quot;</span>)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-160"></span>
-<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-160-1.png" alt="Example of weak interaction" width="576" />
+\]</span>
+Here is an example from the <code>auto_claim</code> data. The lines show the slope of a linear model, assuming that only <code>BLUEBOOK</code> and <code>CAR_TYPE</code> were predictors in the model. You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb264-2" title="2"><span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb264-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log</span>(CLM_AMT), <span class="kw">log</span>(BLUEBOOK), <span class="dt">color =</span> CAR_TYPE)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb264-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb264-5" title="5"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb264-6" title="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kelly Bluebook Value vs Claim Amount&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-159"></span>
+<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-159-1.png" alt="Example of strong interaction" width="576" />
 <p class="caption">
-Figure 12.1: Example of weak interaction
-</p>
-</div>
-<p>Here is a clearer example from the <code>auto_claim</code> data. The lines show the slope of a linear model, assuming that only <code>BLUEBOOK</code> and <code>CAR_TYPE</code> were predictors in the model. You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb265-2" title="2"><span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb265-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">log</span>(CLM_AMT), <span class="kw">log</span>(BLUEBOOK), <span class="dt">color =</span> CAR_TYPE)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb265-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb265-5" title="5"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb265-6" title="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Kelly Bluebook Value vs Claim Amount&quot;</span>)</a></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-161"></span>
-<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-161-1.png" alt="Example of strong interaction" width="576" />
-<p class="caption">
-Figure 12.2: Example of strong interaction
+Figure 12.1: Example of strong interaction
 </p>
 </div>
 <p>Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction. We can also use an hypothesis test with a GLM to check this. Simply include an interaction term and see if the coefficient is zero at the desired significance level.</p>
@@ -524,16 +511,16 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 <div id="gaussian-response-with-log-link" class="section level3">
 <h3><span class="header-section-number">12.8.1</span> Gaussian Response with Log Link</h3>
 <p>We create a function that takes in data <span class="math inline">\(x\)</span> and returns a Gaussian random variable that has mean equal to the inverse link, which in the case of a log link is the exponent. We add 10 to <span class="math inline">\(x\)</span> so that the values will always be positive, as will be described later on.</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1">sim_norm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb266-2" title="2">  <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="kw">exp</span>(<span class="dv">10</span> <span class="op">+</span><span class="st"> </span>x), <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb266-3" title="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1">sim_norm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb265-2" title="2">  <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="kw">exp</span>(<span class="dv">10</span> <span class="op">+</span><span class="st"> </span>x), <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb265-3" title="3">}</a></code></pre></div>
 <p>The values of <span class="math inline">\(X\)</span> do not need to be normal. The above assumption is merely that the mean of the response <span class="math inline">\(Y\)</span> is related to <span class="math inline">\(X\)</span> through the link function, <code>mean = exp(10 + x)</code>, and that the distribution is normal. This has been accomplished with <code>rnorm</code> already. For illustration, here we use <span class="math inline">\(X\)</span>’s from a uniform distribution.</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">500</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb267-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">500</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb266-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a></code></pre></div>
 <p>We already know what the answer is: a Gaussian response with a log link. We fit a GLM and see a perfect fit.</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a>
-<a class="sourceLine" id="cb268-2" title="2"></a>
-<a class="sourceLine" id="cb268-3" title="3"><span class="kw">summary</span>(glm)</a></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a>
+<a class="sourceLine" id="cb267-2" title="2"></a>
+<a class="sourceLine" id="cb267-3" title="3"><span class="kw">summary</span>(glm)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x, family = gaussian(link = &quot;log&quot;), data = data)
@@ -556,20 +543,20 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ## AIC: 1452.7
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb270-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-164-1.png" width="576" /></p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb269-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-162-1.png" width="576" /></p>
 </div>
 <div id="gaussian-response-with-inverse-link" class="section level3">
 <h3><span class="header-section-number">12.8.2</span> Gaussian Response with Inverse Link</h3>
 <p>The same steps are repeated except the link function is now the inverse, <code>mean = 1/x</code>. We see that some values of <span class="math inline">\(Y\)</span> are negative, which is ok.</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" title="1">sim_norm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb271-2" title="2">  <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">1</span><span class="op">/</span>x, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb271-3" title="3">}</a>
-<a class="sourceLine" id="cb271-4" title="4"></a>
-<a class="sourceLine" id="cb271-5" title="5">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">500</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb271-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
-<a class="sourceLine" id="cb271-7" title="7"><span class="kw">summary</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1">sim_norm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb270-2" title="2">  <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">1</span><span class="op">/</span>x, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb270-3" title="3">}</a>
+<a class="sourceLine" id="cb270-4" title="4"></a>
+<a class="sourceLine" id="cb270-5" title="5">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">500</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb270-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
+<a class="sourceLine" id="cb270-7" title="7"><span class="kw">summary</span>(data)</a></code></pre></div>
 <pre><code>##        x                  y          
 ##  Min.   :0.002351   Min.   : -1.392  
 ##  1st Qu.:0.278258   1st Qu.:  1.149  
@@ -577,9 +564,9 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ##  Mean   :0.509957   Mean   :  6.875  
 ##  3rd Qu.:0.760526   3rd Qu.:  4.014  
 ##  Max.   :0.999992   Max.   :425.760</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
-<a class="sourceLine" id="cb273-2" title="2"></a>
-<a class="sourceLine" id="cb273-3" title="3"><span class="kw">summary</span>(glm)</a></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
+<a class="sourceLine" id="cb272-2" title="2"></a>
+<a class="sourceLine" id="cb272-3" title="3"><span class="kw">summary</span>(glm)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x, family = gaussian(link = &quot;inverse&quot;), data = data)
@@ -602,23 +589,23 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ## AIC: 1461.6
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb275-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-166-1.png" width="576" /></p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb274-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-164-1.png" width="576" /></p>
 </div>
 <div id="gaussian-response-with-identity-link" class="section level3">
 <h3><span class="header-section-number">12.8.3</span> Gaussian Response with Identity Link</h3>
 <p>And now the link is the identity, <code>mean = x</code>.</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" title="1">sim_norm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb276-2" title="2">  <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> x, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb276-3" title="3">}</a>
-<a class="sourceLine" id="cb276-4" title="4"></a>
-<a class="sourceLine" id="cb276-5" title="5">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">500</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb276-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
-<a class="sourceLine" id="cb276-7" title="7"></a>
-<a class="sourceLine" id="cb276-8" title="8">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;identity&quot;</span>), <span class="dt">data =</span> data)</a>
-<a class="sourceLine" id="cb276-9" title="9"></a>
-<a class="sourceLine" id="cb276-10" title="10"><span class="kw">summary</span>(glm)</a></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1">sim_norm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb275-2" title="2">  <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> x, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb275-3" title="3">}</a>
+<a class="sourceLine" id="cb275-4" title="4"></a>
+<a class="sourceLine" id="cb275-5" title="5">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">500</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb275-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
+<a class="sourceLine" id="cb275-7" title="7"></a>
+<a class="sourceLine" id="cb275-8" title="8">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;identity&quot;</span>), <span class="dt">data =</span> data)</a>
+<a class="sourceLine" id="cb275-9" title="9"></a>
+<a class="sourceLine" id="cb275-10" title="10"><span class="kw">summary</span>(glm)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x, family = gaussian(link = &quot;identity&quot;), data = data)
@@ -641,21 +628,21 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ## AIC: 1429.1
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb278-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-167-1.png" width="576" /></p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb277-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-165-1.png" width="576" /></p>
 </div>
 <div id="gaussian-response-with-log-link-and-negative-values" class="section level3">
 <h3><span class="header-section-number">12.8.4</span> Gaussian Response with Log Link and Negative Values</h3>
 <p>By Gaussian response we say that the <em>mean</em> of the response is Gaussian. The range of a normal random variable is <span class="math inline">\((-\infty, +\infty)\)</span>, which means that negative values are always possible. Now, if the mean is a large positive number, than negative values are much less likely but still possible: about 95% of the observations will be within 2 standard deviations of the mean.</p>
 <p>We see below that there are some <span class="math inline">\(Y\)</span> values which are negative.</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" title="1">sim_norm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb279-2" title="2">  <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="kw">exp</span>(x), <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb279-3" title="3">}</a>
-<a class="sourceLine" id="cb279-4" title="4"></a>
-<a class="sourceLine" id="cb279-5" title="5">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">500</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb279-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
-<a class="sourceLine" id="cb279-7" title="7"><span class="kw">summary</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" title="1">sim_norm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb278-2" title="2">  <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="kw">exp</span>(x), <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb278-3" title="3">}</a>
+<a class="sourceLine" id="cb278-4" title="4"></a>
+<a class="sourceLine" id="cb278-5" title="5">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">500</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb278-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
+<a class="sourceLine" id="cb278-7" title="7"><span class="kw">summary</span>(data)</a></code></pre></div>
 <pre><code>##        x                   y         
 ##  Min.   :0.0002768   Min.   :-1.505  
 ##  1st Qu.:0.2282455   1st Qu.: 0.947  
@@ -664,15 +651,15 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ##  3rd Qu.:0.7499811   3rd Qu.: 2.424  
 ##  Max.   :0.9984118   Max.   : 4.707</code></pre>
 <p>We can also see this from the histogram.</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" title="1">data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>( <span class="dt">fill =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-169-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" title="1">data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>( <span class="dt">fill =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-167-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>If we try to fit a GLM with a log link, there is an error.</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a></code></pre></div>
 <p><code>Error in eval(family$initialize) : cannot find valid starting values: please specify some</code></p>
 <p>This is because the domain of the natural logarithm only includes positive numbers, and we just tried to take the log of negative numbers.</p>
 <p>Our initial reaction might be to add some constant to each <span class="math inline">\(Y\)</span>, say 10 for instance, so that they are all positive. This does produce a model which is a good fit.</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">+</span><span class="st"> </span><span class="dv">10</span> <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a>
-<a class="sourceLine" id="cb283-2" title="2"><span class="kw">summary</span>(glm)</a></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">+</span><span class="st"> </span><span class="dv">10</span> <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a>
+<a class="sourceLine" id="cb282-2" title="2"><span class="kw">summary</span>(glm)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y + 10 ~ x, family = gaussian(link = &quot;log&quot;), data = data)
@@ -695,21 +682,21 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ## AIC: 1431.8
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb285-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-171-1.png" width="576" /></p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb284-2" title="2"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-169-1.png" width="576" /></p>
 <p>We see that on average, the predictions are 10 higher than the target. This is no surprise since <span class="math inline">\(E[Y + 10] = E[Y] + 10\)</span>.</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" title="1">y &lt;-<span class="st"> </span>data<span class="op">$</span>y </a>
-<a class="sourceLine" id="cb286-2" title="2">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(glm, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb286-3" title="3"><span class="kw">mean</span>(y_hat) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)</a></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" title="1">y &lt;-<span class="st"> </span>data<span class="op">$</span>y </a>
+<a class="sourceLine" id="cb285-2" title="2">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(glm, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb285-3" title="3"><span class="kw">mean</span>(y_hat) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)</a></code></pre></div>
 <pre><code>## [1] 9.999967</code></pre>
 <p>But we see that the actual predictions are bad. If we were to loot at the R-squared, MAE, RMSE, or any other metric it would tell us the same story. This is because our GLM assumption is <strong>not</strong> that <span class="math inline">\(Y\)</span> is related to the link function of <span class="math inline">\(X\)</span>, but that the <strong>mean</strong> of <span class="math inline">\(Y\)</span> is.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" title="1"><span class="kw">tibble</span>(<span class="dt">y =</span> y, <span class="dt">y_hat =</span> y_hat <span class="op">-</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(y, y_hat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-173-1.png" width="576" /></p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" title="1"><span class="kw">tibble</span>(<span class="dt">y =</span> y, <span class="dt">y_hat =</span> y_hat <span class="op">-</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(y, y_hat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-171-1.png" width="576" /></p>
 <p>One solution is to adjust the <span class="math inline">\(X\)</span> which the model is based on. Add a constant term to <span class="math inline">\(X\)</span> so that the mean of <span class="math inline">\(Y\)</span> is larger, and hence <span class="math inline">\(Y\)</span> is non zero. While is a viable approach in the case of only one predictor variable, with more predictors this would not be easy to do.</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" title="1">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">500</span>) <span class="op">+</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb289-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
-<a class="sourceLine" id="cb289-3" title="3"><span class="kw">summary</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" title="1">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">500</span>) <span class="op">+</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb288-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
+<a class="sourceLine" id="cb288-3" title="3"><span class="kw">summary</span>(data)</a></code></pre></div>
 <pre><code>##        x               y        
 ##  Min.   :10.00   Min.   :22040  
 ##  1st Qu.:10.27   1st Qu.:28835  
@@ -717,18 +704,18 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ##  Mean   :10.50   Mean   :37838  
 ##  3rd Qu.:10.75   3rd Qu.:46688  
 ##  Max.   :11.00   Max.   :59756</code></pre>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a>
-<a class="sourceLine" id="cb291-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb291-3" title="3"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-1.png" width="576" /></p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a>
+<a class="sourceLine" id="cb290-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb290-3" title="3"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-172-1.png" width="576" /></p>
 <p>A better approach may be to use an inverse link even though the data was generated from a log link. This is a good illustration of the saying “all models are wrong, but some are useful” in that the statistical assumption of the model is not correct but the model still works.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" title="1">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">500</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb292-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
-<a class="sourceLine" id="cb292-3" title="3">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
-<a class="sourceLine" id="cb292-4" title="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb292-5" title="5"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-175-1.png" width="576" /></p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1"><span class="kw">summary</span>(glm)</a></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" title="1">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">500</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb291-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map_dbl</span>(sim_norm))</a>
+<a class="sourceLine" id="cb291-3" title="3">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">gaussian</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
+<a class="sourceLine" id="cb291-4" title="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb291-5" title="5"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-173-1.png" width="576" /></p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" title="1"><span class="kw">summary</span>(glm)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x, family = gaussian(link = &quot;inverse&quot;), data = data)
@@ -758,18 +745,18 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 <p><span class="math display">\[f(y) = \frac{(y/\theta)^\alpha}{x \Gamma(\alpha)}e^{-x/\theta}\]</span></p>
 <p>The mean is <span class="math inline">\(\alpha\theta\)</span>.</p>
 <p>Let’s use a gamma with shape 2 and scale 0.5, which has mean 1.</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" title="1">gammas &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">500</span>, <span class="dt">shape=</span><span class="dv">2</span>, <span class="dt">scale =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb295-2" title="2"><span class="kw">mean</span>(gammas)</a></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" title="1">gammas &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">500</span>, <span class="dt">shape=</span><span class="dv">2</span>, <span class="dt">scale =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb294-2" title="2"><span class="kw">mean</span>(gammas)</a></code></pre></div>
 <pre><code>## [1] 1.018104</code></pre>
 <p>We then generate random gamma values. Because the mean now depends on two parameters instead of one, which was just <span class="math inline">\(\mu\)</span> in the Gaussian case, we need to use a slightly different approach to simulate the random values. The link function here is seen in <code>exp(x)</code>.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" title="1"><span class="co">#random component</span></a>
-<a class="sourceLine" id="cb297-2" title="2">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb297-3" title="3"></a>
-<a class="sourceLine" id="cb297-4" title="4"><span class="co">#relate Y to X with a log link function</span></a>
-<a class="sourceLine" id="cb297-5" title="5">y &lt;-<span class="st"> </span>gammas<span class="op">*</span><span class="kw">exp</span>(x)</a>
-<a class="sourceLine" id="cb297-6" title="6"></a>
-<a class="sourceLine" id="cb297-7" title="7">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y  =</span> y)</a>
-<a class="sourceLine" id="cb297-8" title="8"><span class="kw">summary</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" title="1"><span class="co">#random component</span></a>
+<a class="sourceLine" id="cb296-2" title="2">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb296-3" title="3"></a>
+<a class="sourceLine" id="cb296-4" title="4"><span class="co">#relate Y to X with a log link function</span></a>
+<a class="sourceLine" id="cb296-5" title="5">y &lt;-<span class="st"> </span>gammas<span class="op">*</span><span class="kw">exp</span>(x)</a>
+<a class="sourceLine" id="cb296-6" title="6"></a>
+<a class="sourceLine" id="cb296-7" title="7">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y  =</span> y)</a>
+<a class="sourceLine" id="cb296-8" title="8"><span class="kw">summary</span>(data)</a></code></pre></div>
 <pre><code>##        x                 y            
 ##  Min.   : 0.1447   Min.   :0.000e+00  
 ##  1st Qu.:25.0189   1st Qu.:4.231e+10  
@@ -778,27 +765,27 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ##  3rd Qu.:76.4823   3rd Qu.:8.476e+32  
 ##  Max.   :99.8365   Max.   :2.595e+43</code></pre>
 <p>As expected, the residual plots are all perfect because the model is perfect.</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;log&quot;</span>), <span class="dt">data =</span> data)</a>
+<a class="sourceLine" id="cb298-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb298-3" title="3"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-176-1.png" width="576" /></p>
+<p>If we had tried using an inverse instead of the log, the residual plots would look much worse.</p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
 <a class="sourceLine" id="cb299-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb299-3" title="3"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-178-1.png" width="576" /></p>
-<p>If we had tried using an inverse instead of the log, the residual plots would look much worse.</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
-<a class="sourceLine" id="cb300-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb300-3" title="3"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
 <pre><code>## Warning in sqrt(crit * p * (1 - hh)/hh): NaNs produced
 
 ## Warning in sqrt(crit * p * (1 - hh)/hh): NaNs produced</code></pre>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-179-1.png" width="576" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-177-1.png" width="576" /></p>
 </div>
 <div id="gamma-with-inverse-link" class="section level3">
 <h3><span class="header-section-number">12.8.6</span> Gamma with Inverse Link</h3>
 <p>With the inverse link, the mean has a factor <code>1/(x + 1)</code>. Note that we need to add 1 to x to avoid dividing by zero.</p>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" title="1"><span class="co">#relate Y to X with a log link function</span></a>
-<a class="sourceLine" id="cb302-2" title="2">y &lt;-<span class="st"> </span>gammas<span class="op">*</span><span class="dv">1</span><span class="op">/</span>(x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb302-3" title="3"></a>
-<a class="sourceLine" id="cb302-4" title="4">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y  =</span> y)</a>
-<a class="sourceLine" id="cb302-5" title="5"><span class="kw">summary</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" title="1"><span class="co">#relate Y to X with a log link function</span></a>
+<a class="sourceLine" id="cb301-2" title="2">y &lt;-<span class="st"> </span>gammas<span class="op">*</span><span class="dv">1</span><span class="op">/</span>(x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb301-3" title="3"></a>
+<a class="sourceLine" id="cb301-4" title="4">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y  =</span> y)</a>
+<a class="sourceLine" id="cb301-5" title="5"><span class="kw">summary</span>(data)</a></code></pre></div>
 <pre><code>##        x                 y            
 ##  Min.   : 0.1447   Min.   :0.0005573  
 ##  1st Qu.:25.0189   1st Qu.:0.0095364  
@@ -806,10 +793,10 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ##  Mean   :50.0386   Mean   :0.0454184  
 ##  3rd Qu.:76.4823   3rd Qu.:0.0383153  
 ##  Max.   :99.8365   Max.   :1.5248073</code></pre>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
-<a class="sourceLine" id="cb304-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb304-3" title="3"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-181-1.png" width="576" /></p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1">glm &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="kw">Gamma</span>(<span class="dt">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="dt">data =</span> data)</a>
+<a class="sourceLine" id="cb303-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb303-3" title="3"><span class="kw">plot</span>(glm, <span class="dt">cex =</span> <span class="fl">0.4</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-179-1.png" width="576" /></p>
 </div>
 </div>
 </div>

@@ -92,10 +92,13 @@ library(tidyverse)
 theme_set(theme_bw())
 ```
 
+The `sample_frac` means that only 20% of the data is used.  This makes the visuzlization less cluttered.
 
 ```{r message=F}
 library(ExamPAData)
-p <- insurance %>% ggplot(aes(claims))
+df <- readmission %>% sample_frac(0.05)
+p <- df %>% 
+  ggplot(aes(HCC.Riskscore))
 ```
 
 If we look at `p`, we see that it is nothing but white space with axis for `count` and `income`.
@@ -121,8 +124,8 @@ p + stat_density()
 Create an xy plot by adding and `x` and a `y` argument to `aesthetic`.
 
 ```{r message=F}
-insurance %>% 
-  ggplot(aes(x = holders, y = claims)) + 
+df %>% 
+  ggplot(aes(x = HCC.Riskscore, y = Age)) + 
   geom_point()
 ```
 

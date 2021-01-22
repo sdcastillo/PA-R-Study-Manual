@@ -173,7 +173,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.6.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.6.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.6.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.6.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.6.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="7.6.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.6.5</b> 73.6% of statistics are false 😨</a></li>
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.7</b> Exercises</a><ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.7.1</b> Data Exploration Practice</a></li>
@@ -377,7 +377,7 @@ where <span class="math inline">\(g\)</span> is called the <em>link function</em
 <h2><span class="header-section-number">9.2</span> GLMs for regression</h2>
 <p>For regression problems, we try to match the actual distribution to the model’s distribution being used in the GLM. These are the most likely distributions.</p>
 <p>The choice of target distribution should be similar to the actual distribution of <span class="math inline">\(Y\)</span>. For instance, if <span class="math inline">\(Y\)</span> is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values. If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewed.</p>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-126-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-125-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Notice that the top three distributions are continuous but the bottom two are discrete.</p>
 <p><img src="images/response_distributions.png" width="250%" style="display: block; margin: auto;" /></p>
 <p>There are five link functions for a continuous <span class="math inline">\(Y\)</span>, although the choice of distribution family will typically rule-out several of these immediately. The linear predictor (a.k.a., the <em>systemic component</em>) is <span class="math inline">\(z\)</span> and the link function is how this connects to the expected value of the response.</p>

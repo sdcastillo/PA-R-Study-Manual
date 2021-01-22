@@ -1065,19 +1065,7 @@ $$
 (\beta_0 + \beta_1) + (\beta_2 + \beta_3 ) x_2 \\
  = \beta_0^* + \beta_1^* x_2
 $$
-
-The SOA's modules give an example with the using age and gender as below.  This is not a very strong interaction, as the slopes are almost identical across `gender`.
-
-```{r warning = F,fig.cap="Example of weak interaction"}
-interactions %>% 
-  ggplot(aes(age, actual, color = gender)) + 
-  geom_line() + 
-  labs(title = "Age vs. Actual by Gender", 
-       subtitle = "Interactions imply different slopes",
-       caption= "data: interactions")
-```
-
-Here is a clearer example from the `auto_claim` data. The lines show the slope of a linear model, assuming that only `BLUEBOOK` and `CAR_TYPE` were predictors in the model.  You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.  
+Here is an example from the `auto_claim` data. The lines show the slope of a linear model, assuming that only `BLUEBOOK` and `CAR_TYPE` were predictors in the model.  You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.  
 
 ```{r fig.cap="Example of strong interaction" ,warning = F}
 auto_claim %>% 
