@@ -387,6 +387,52 @@ SELECT CASE WHEN AGE < 50 THEN 0
 FROM health_insurance
 ```
 
+## Missing values
+
+The most recent PA exams have had questions related to missing values.  You need to perform checks before moving on to the model-building phases.  In real-life, man-made data always has missing records.
+
+In R, there are two ways that data can be missing.  The first is the `NA` value.  If you read in a csv file that has blank values, R will translate them into NAs.
+
+```{r}
+df <- tibble(x = c(1,2,NA), y = c(NA, NA, 2))
+```
+
+You can check for `NA` values with `summary` or `sum(is.na(df))`.
+
+```{r}
+summary(df)
+sum(is.na(df))
+```
+
+The second type is for "Not A Number" (`NaN`) or infinity `Inf` values.  Dividing by zero produces `Inf` and taking the square root of a negative number produces `NaN`.  Notice that `NaN` counts as `NA` but `Inf` does not.  R says that there are only two missing values in this table even though there are two values which are infinity.
+
+```{r}
+df <- tibble(x = c(1/0, 4/0, 4, 1), y = c(sqrt(-1), NA, 2, 4))
+
+sum(is.na(df))
+summary(df)
+```
+
+
+### Types of Missing Values
+
+Read the Data Dictionary from the Project Statement and check for these three types of missingness.
+
+- **Missing at random (MAR):** There is no pattern between the missingness and the value of the variable.
+- **Missing not at random (MNAR):**  The value of the variable that is missing is related to the reason it is missing.  Example: A survey with regard to illegal drug use where respondents are reluctant to admit that they have broken the law.
+- **Hidden missingness:** When value is coded incorrectly such as when a numeric variable that has “999” or “0” or a factor doesn’t match the Data Dictionary.
+
+### Missing Value Resolutions:
+
+You can use any of these methods.  Be sure to describe your reasoning in the report.
+
+- **Remove observations:** Use when there are only a few missing values or when they are MAR.
+- **Create new level “missing"**: Use when there are more values or when they are MNAR.  
+- **Impute with the mean**: Use when there are numeric values MAR.
+- **Remove variable altogether**: Use when most observations are missing (≥ 50% of observations) and there is no way to repair the data.
+
+While you are reviewing the data for missingness, you may also decide to remove some variables altogether.  This could be because of racial or ethical concerns, limitations of future availability, instability of the data over time, or inexplicability.  
+
 
 ## Example: SOA PA 12/12/19, Task 1
 
