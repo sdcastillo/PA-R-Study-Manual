@@ -17,7 +17,7 @@ Tree-based models allow for abrupt changes in $Y$.
 
 [![Lecture](images/lesson-decisiontrees.PNG)](https://exampa.net/)
 
-
+Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=143">Practice Exams + Lessons</a>
 
 ## Decision Trees
 
@@ -657,4 +657,4 @@ pdp::partial(gbm, pred.var = "bmi", grid.resolution = 20, plot = T, ice = T, alp
 **Solutions**:
 
 Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=214
-">Self-Study Course</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=165">160-Study Hours Course</a>
+">Practice Exams</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=165">Practice Exams + Lessons</a>

@@ -21,6 +21,10 @@ library(kableExtra)
 format_table <- function(data){data %>% kableExtra::kable("html") %>% kable_styling(bootstrap_options = "striped", full_width = F)}
 ```
 
+[![Lecture](images/data_exploration.png)](https://exampa.net/)
+
+Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=133">Practice Exams + Lessons</a>
+
 Exploration is about making discoveries.  You'll need a strong sense of curiosity coupled with technical skill if you want to be able to make sense of the data.  This chapter will give you the tools to take dirty, unprocessed data and clean it up, discover interesting trends using graphs and summary statistics, and communicate your results to a business audience.  
 
 About 10 - 15% of your grade will be based on data exploration.  Every version of Exam PA such as December 2018, June 2019, and December 2019 have all had questions about data exploration.  Putting in extra practice in this area is garanteed to give you a better score because it will free up time that you can use elsewhere.  
@@ -441,8 +445,8 @@ This chapter is based on the first task of the December 2019 Exam PA.
 <iframe src="https://player.vimeo.com/video/467838183?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=206
-">Self-Study Course</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=157
-">160-Study Hours Course</a>
+">Practice Exams</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=157
+">Practice Exams + Lessons</a>
 
 **TASK 1 (12 points)**
 
