@@ -1,10 +1,16 @@
 # How much R do I need to know to pass?
 
-<span style="color: blue;">**This is a communication exam.**</span>
+<span style="color: blue;">**This is a communication exam **</span>  because 30-40% of the points are based on the quality of your writing and data storytelling.
 
-There is no need to become an R expert for this exam.  They will provide you with a lot of code and the challenging part will be in interpreting what it does.  You won't be expected to do complex tasks from scratch.  The most programming-intensive part is the data exploration, but this is only the first few questions.  Subsequent questions on modeling will ask you to make changes to parameters.
+The actuarial profession is no longer an Excel-only club.  You will need to build basic R programming skills.  The SOA will give you the complex codes, but you will need to write simple programs from scratch.  Prior to December 2020, you could depend on every possible syntax being provided in the Rmd template.  The most programming-intensive part is the data cleaning and visualization.  Subsequent questions on modeling will ask you to make changes to parameters and you can expect to use Excel for one or two questions to create tables of your results.
 
-You will be expected to tweak parts and explore what happens.  A good attention to detail and a close reading of the R documention will go a long ways.  You will spend much more of your time writing in English and explaining what the code is doing than writing it yourself.  You will also be graded based on how well you document your code in the .Rmd file. 
+There is no need to memorize syntax.  You will have two cheat sheets for [data visualization](https://contentpreview.s3.us-east-2.amazonaws.com/Exam+PA+Spring+2021+Simplified+Data+Viz+Cheat+Sheet.pdf) and base R.  We have gone through and removed the parts that you will not need to learn.  You can use this in your study to become familiar with how to find the R code quickly. This cheat sheets that the SOA gives you were designed by the RStudio team for everyone who uses R. You do not need to use everything there. For example, no one will be making new types of ggplot graphs under the "graphical primatives" section and so this has been blocked out.  **Enroll in either of our online courses to get our simplified Base R cheat sheet and tutorial.**
+
+## How to use the PA R cheat sheets
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UVE9Zm6mqvM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+A good attention to detail will carry you far. Expect to spend twice as long explaining what your code is doing as you do writing the code itself.  A few points are based on the organization of your .Rmd file, although you do not need this to read like an essay.  The vast majority of your time will be spent on your Word document.
 
 The June 16 2020 Project Statement has this under "General information for candidates."
 
@@ -19,7 +25,7 @@ In other words, whatever results you have in your report will need to be consist
 
 ## Example: SOA PA 6/16/20, Task 8
 
-This question is from the June 16, 2020 exam.  You can see that very little code changes need to be made!  As you can see in this video, the programming required is very minimal.  The remainder of this question consists of a short-answer response.  This is very typical of Exam PA.  
+This question is from the June 16, 2020 exam.  You can see that very only small code changes need to be made.  The remainder of this question consists of a short-answer response.  This is very typical of Exam PA.  
 
 <iframe src="https://player.vimeo.com/video/467866045?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 

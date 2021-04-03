@@ -21,6 +21,8 @@ The chapters on R-programming cover the foundational concepts with a focus on mo
 
 All of the statistical theory is explained, from linear regression to gradient boosted trees, and examples are provided of each model that you can reproduce.  Following the course materials “An Introduction to Statistical Learning“, we discuss model training, validation, as well as the advantages and disadvantages to each algorithm.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/F2okL4a2YcM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 </br>
 
 ```{block, type='rcorners'}
