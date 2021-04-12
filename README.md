@@ -5,14 +5,6 @@ The chapters on R-programming cover the foundational concepts with a focus on mo
 
 All of the statistical theory is explained, from linear regression to gradient boosted trees, and examples are provided of each model that you can reproduce.  Following the course materials “An Introduction to Statistical Learning“, we discuss model training, validation, as well as the advantages and disadvantages to each algorithm.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F2okL4a2YcM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-</br>
-
-```{block, type='rcorners'}
-<font size="10">**[Join the Online Course](https://www.exampa.net/)**</font>
-```
-
-</br>
+https://www.youtube.com/embed/F2okL4a2YcM
 
 *We are thankful to all of the reviewers, guest editors, and past exam-takers who have helped to improve this book.  Thanks to the following persons who made changes to this book and its past versions: David Hill, Erlan Wheeler, Caden Collier, Peter Shelbe, Abhinav Gadde, Allen Meriken, [Kevin Kuo](https://github.com/kevinykuo), Aamir Ali, Matthew Caseras, and Liu Chang.*
