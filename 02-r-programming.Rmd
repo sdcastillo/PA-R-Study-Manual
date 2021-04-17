@@ -2,9 +2,21 @@
 
 <span style="color: blue;">**This is a communication exam **</span>  because 30-40% of the points are based on the quality of your writing and data storytelling.
 
-The actuarial profession is no longer an Excel-only club.  You will need to build basic R programming skills.  The SOA will give you the complex codes, but you will need to write simple programs from scratch.  Prior to December 2020, you could depend on every possible syntax being provided in the Rmd template.  The most programming-intensive part is the data cleaning and visualization.  Subsequent questions on modeling will ask you to make changes to parameters and you can expect to use Excel for one or two questions to create tables of your results.
+You do not need to become an R expert for this exam.  While you are expected to develop a basic familiarity with R, the RMD template will provide you with the vast majority of the R commands needed.  You will need to get practice taking code templates and adjusting them to the specific variables and formulas that you need.  The most difficult coding questions will be during data exploration.  These will ask you to
 
-There is no need to memorize syntax.  You will have two cheat sheets for [data visualization](https://contentpreview.s3.us-east-2.amazonaws.com/Exam+PA+Spring+2021+Simplified+Data+Viz+Cheat+Sheet.pdf) and base R.  We have gone through and removed the parts that you will not need to learn.  You can use this in your study to become familiar with how to find the R code quickly. This cheat sheets that the SOA gives you were designed by the RStudio team for everyone who uses R. You do not need to use everything there. For example, no one will be making new types of ggplot graphs under the "graphical primatives" section and so this has been blocked out.  **Enroll in either of our online courses to get our simplified Base R cheat sheet and tutorial.**
+- Use basic mathematical operators and functions such as `exp()` and `log()`
+- Select, modify, and summarize data in a dataframe
+- Display data from a dataframe in common types of plots, using ggplot2
+
+When fitting predictive models, you will also need to
+
+- Modify or add a formula or other parameters to model-fitting functions like `glm()` and
+`rpart()`
+- Extract and displaying results from a fitted predictive model
+
+You are **not** expected to construct loops, write functions, or use other programatic techniques with R.  The scope is limited to single-line commands.
+
+You will have two cheat sheets for [data visualization](https://contentpreview.s3.us-east-2.amazonaws.com/Exam+PA+Spring+2021+Simplified+Data+Viz+Cheat+Sheet.pdf) and base R.    You can use this in your study to become familiar with how to find the R code quickly. This cheat sheets that the SOA gives you were designed by the RStudio team for everyone who uses R, and so we have gone through and removed the parts that you will not need to lear.  For example, no one will be making new types of ggplot graphs under the "graphical primatives" section and so this has been blocked out.  **Enroll in either of our online courses to get our simplified Base R cheat sheet and tutorial.**
 
 ## How to use the PA R cheat sheets
 

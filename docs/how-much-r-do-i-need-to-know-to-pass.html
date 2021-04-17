@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 5 How much R do I need to know to pass? | Exam PA Study Guide, Spring 2021</title>
   <meta name="description" content=" 5 How much R do I need to know to pass? | Exam PA Study Guide, Spring 2021" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 5 How much R do I need to know to pass? | Exam PA Study Guide, Spring 2021" />
   <meta property="og:type" content="book" />
@@ -175,10 +175,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a><ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😲</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a><ul>
 <li class="chapter" data-level="7.8.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.8.1</b> Data Exploration Practice</a></li>
@@ -334,8 +334,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="how-much-r-do-i-need-to-know-to-pass" class="section level1">
 <h1><span class="header-section-number"> 5</span> How much R do I need to know to pass?</h1>
 <p><span style="color: blue;"><strong>This is a communication exam </strong></span> because 30-40% of the points are based on the quality of your writing and data storytelling.</p>
-<p>The actuarial profession is no longer an Excel-only club. You will need to build basic R programming skills. The SOA will give you the complex codes, but you will need to write simple programs from scratch. Prior to December 2020, you could depend on every possible syntax being provided in the Rmd template. The most programming-intensive part is the data cleaning and visualization. Subsequent questions on modeling will ask you to make changes to parameters and you can expect to use Excel for one or two questions to create tables of your results.</p>
-<p>There is no need to memorize syntax. You will have two cheat sheets for <a href="https://contentpreview.s3.us-east-2.amazonaws.com/Exam+PA+Spring+2021+Simplified+Data+Viz+Cheat+Sheet.pdf">data visualization</a> and base R. We have gone through and removed the parts that you will not need to learn. You can use this in your study to become familiar with how to find the R code quickly. This cheat sheets that the SOA gives you were designed by the RStudio team for everyone who uses R. You do not need to use everything there. For example, no one will be making new types of ggplot graphs under the “graphical primatives” section and so this has been blocked out. <strong>Enroll in either of our online courses to get our simplified Base R cheat sheet and tutorial.</strong></p>
+<p>You do not need to become an R expert for this exam. While you are expected to develop a basic familiarity with R, the RMD template will provide you with the vast majority of the R commands needed. You will need to get practice taking code templates and adjusting them to the specific variables and formulas that you need. The most difficult coding questions will be during data exploration. These will ask you to</p>
+<ul>
+<li>Use basic mathematical operators and functions such as <code>exp()</code> and <code>log()</code></li>
+<li>Select, modify, and summarize data in a dataframe</li>
+<li>Display data from a dataframe in common types of plots, using ggplot2</li>
+</ul>
+<p>When fitting predictive models, you will also need to</p>
+<ul>
+<li>Modify or add a formula or other parameters to model-fitting functions like <code>glm()</code> and
+<code>rpart()</code></li>
+<li>Extract and displaying results from a fitted predictive model</li>
+</ul>
+<p>You are <strong>not</strong> expected to construct loops, write functions, or use other programatic techniques with R. The scope is limited to single-line commands.</p>
+<p>You will have two cheat sheets for <a href="https://contentpreview.s3.us-east-2.amazonaws.com/Exam+PA+Spring+2021+Simplified+Data+Viz+Cheat+Sheet.pdf">data visualization</a> and base R. You can use this in your study to become familiar with how to find the R code quickly. This cheat sheets that the SOA gives you were designed by the RStudio team for everyone who uses R, and so we have gone through and removed the parts that you will not need to lear. For example, no one will be making new types of ggplot graphs under the “graphical primatives” section and so this has been blocked out. <strong>Enroll in either of our online courses to get our simplified Base R cheat sheet and tutorial.</strong></p>
 <div id="how-to-use-the-pa-r-cheat-sheets" class="section level2">
 <h2><span class="header-section-number">5.1</span> How to use the PA R cheat sheets</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/UVE9Zm6mqvM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>

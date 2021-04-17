@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 11 Classification metrics | Exam PA Study Guide, Spring 2021</title>
   <meta name="description" content=" 11 Classification metrics | Exam PA Study Guide, Spring 2021" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 11 Classification metrics | Exam PA Study Guide, Spring 2021" />
   <meta property="og:type" content="book" />
@@ -175,10 +175,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a><ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😲</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a><ul>
 <li class="chapter" data-level="7.8.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.8.1</b> Data Exploration Practice</a></li>
@@ -341,7 +341,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>No claims but predicted to have claims - <strong>False Positives (FP) = 22</strong></li>
 <li>Had claims but predicted not to - <strong>False Negatives (FN) = 489</strong></li>
 </ul>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))<span class="op">$</span>table</a></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))<span class="op">$</span>table</a></code></pre></div>
 <pre><code>##           Reference
 ## Prediction    0    1
 ##          0 1489  489
@@ -358,7 +358,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[\text{Cost} = (100)(\text{FN}) + (2)(\text{FP})\]</span></p>
 <p>The cutoff value can be tuned in order to find the minimum cost.</p>
 <p>Fortunately, all of this is handled in a single function called <code>confusionMatrix</code>.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" title="1"><span class="kw">confusionMatrix</span>(test<span class="op">$</span>pred_zero_one,<span class="kw">factor</span>(test<span class="op">$</span>target))</a></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -409,7 +409,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/auc_one.PNG" width="50%" style="display: block; margin: auto;" /></p>
 <p>This is a perfect model that predicts the correct class for new data each time. It will have a ROC plot showing the curve approaching the top left corner so that the area of the square is 1.0.</p>
 <p><span class="math display">\[ \text{AUC} = 0.5 \]</span>*</p>
-<p><img src="images/auc_point_five.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/auc_point_five.PNG" width="50%" style="display: block; margin: auto;" /></p>
 <p>When the ROC curve runs along the diagonal then the area is 0.5. This performance is no better than randomly selecting the class for new data such that the proportions of each class matches that of the data.</p>
 <p><span class="math display">\[ \text{AUC} &lt; 0.5 \]</span>
 Any model having an AUC less than 0.5 means it is providing predictions that are worse than random selection, with a near 0 AUC indicating that the model makes the wrong classification almost every time. This can occur in two ways</p>
@@ -421,8 +421,8 @@ Any model having an AUC less than 0.5 means it is providing predictions that are
 <div id="example---auto-claims-1" class="section level2">
 <h2><span class="header-section-number">11.2</span> Example - Auto Claims</h2>
 <p>Let’s create an ROC curve and find the AUC for our logit.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" title="1"><span class="kw">library</span>(pROC)</a>
-<a class="sourceLine" id="cb257-2" title="2"><span class="kw">roc</span>(test<span class="op">$</span>target, preds, <span class="dt">plot =</span> T)</a></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" title="1"><span class="kw">library</span>(pROC)</a>
+<a class="sourceLine" id="cb254-2" title="2"><span class="kw">roc</span>(test<span class="op">$</span>target, preds, <span class="dt">plot =</span> T)</a></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-149"></span>
 <img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-149-1.png" alt="AUC for auto_claim" width="576" />
 <p class="caption">
