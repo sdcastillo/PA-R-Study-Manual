@@ -466,7 +466,7 @@ library(ExamPAData)
 
 To save keystrokes, give the data a short name such as `df` for "data frame".
 
-```{r echo = F}
+```{r echo = T}
 df <- customer_value %>% mutate_if(is.character, as.factor)
 ```
 

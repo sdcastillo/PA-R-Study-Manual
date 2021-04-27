@@ -820,11 +820,12 @@ arrange() -&gt; ORDER BY
 <p>Because the data is already loaded, simply use the below code to access the data.</p>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="kw">library</span>(ExamPAData)</a></code></pre></div>
 <p>To save keystrokes, give the data a short name such as <code>df</code> for “data frame”.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1">df &lt;-<span class="st"> </span>customer_value <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.character, as.factor)</a></code></pre></div>
 <div id="garbage-in-garbage-out" class="section level3">
 <h3><span class="header-section-number">7.7.1</span> Garbage in; garbage out 🗑</h3>
 <p>This is a common saying when working with predictive models. No matter how complex the model, if the data is bad then the entire result will be bad. For this exam, master the art of data manipulation and everything becomes easier!</p>
 <p>Begin by looking at a summary.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1"><span class="kw">summary</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="kw">summary</span>(df)</a></code></pre></div>
 <pre><code>##       age        education_num                 marital_status     occupation   
 ##  Min.   :17.00   Min.   : 1.00   Divorced             : 6633   Group 1 : 7237  
 ##  1st Qu.:28.00   1st Qu.: 9.00   Married-AF-spouse    :   37   Group 2 :10123  
@@ -841,7 +842,7 @@ arrange() -&gt; ORDER BY
 ##  3rd Qu.:    0   3rd Qu.:45.00   3rd Qu.:62.95               
 ##  Max.   :99999   Max.   :99.00   Max.   :76.53               
 ## </code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
 <pre><code>## spec_tbl_df[,8] [48,842 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ age           : num [1:48842] 39 50 38 53 28 37 49 52 31 42 ...
 ##  $ education_num : num [1:48842] 13 13 9 7 13 14 5 9 14 13 ...
@@ -897,20 +898,20 @@ arrange() -&gt; ORDER BY
 <p></br></p>
 <p>The SOA’s solution recommends leaving comments in your Rmd file. This helps to give you partial credit on questions that you may answer incorrectly.</p>
 <p><strong>Good comments</strong></p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1"><span class="co">#I observe that there are no missing values other than those indicated by Group NA for occupation.</span></a>
-<a class="sourceLine" id="cb183-2" title="2"></a>
-<a class="sourceLine" id="cb183-3" title="3"><span class="co">#I removed the code provided by my assistant. It is embedded in later chunks as needed.</span></a>
-<a class="sourceLine" id="cb183-4" title="4"></a>
-<a class="sourceLine" id="cb183-5" title="5"><span class="co">#I excluded people under the age of 25</span></a>
-<a class="sourceLine" id="cb183-6" title="6">df &lt;-<span class="st"> </span>df[df<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span>,]</a>
-<a class="sourceLine" id="cb183-7" title="7"></a>
-<a class="sourceLine" id="cb183-8" title="8"><span class="co">#I convert the target to 0-1.</span></a>
-<a class="sourceLine" id="cb183-9" title="9">df<span class="op">$</span>value_flag &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df<span class="op">$</span>value_flag <span class="op">==</span><span class="st"> &quot;High&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</a></code></pre></div>
-<p><strong>Useless comments</strong></p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="co">#this is a comment</span></a>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="co">#I observe that there are no missing values other than those indicated by Group NA for occupation.</span></a>
 <a class="sourceLine" id="cb184-2" title="2"></a>
-<a class="sourceLine" id="cb184-3" title="3"><span class="co">#this loads a library called ggplot2</span></a>
-<a class="sourceLine" id="cb184-4" title="4"><span class="kw">library</span>(ggplot2)</a></code></pre></div>
+<a class="sourceLine" id="cb184-3" title="3"><span class="co">#I removed the code provided by my assistant. It is embedded in later chunks as needed.</span></a>
+<a class="sourceLine" id="cb184-4" title="4"></a>
+<a class="sourceLine" id="cb184-5" title="5"><span class="co">#I excluded people under the age of 25</span></a>
+<a class="sourceLine" id="cb184-6" title="6">df &lt;-<span class="st"> </span>df[df<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span>,]</a>
+<a class="sourceLine" id="cb184-7" title="7"></a>
+<a class="sourceLine" id="cb184-8" title="8"><span class="co">#I convert the target to 0-1.</span></a>
+<a class="sourceLine" id="cb184-9" title="9">df<span class="op">$</span>value_flag &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df<span class="op">$</span>value_flag <span class="op">==</span><span class="st"> &quot;High&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</a></code></pre></div>
+<p><strong>Useless comments</strong></p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="co">#this is a comment</span></a>
+<a class="sourceLine" id="cb185-2" title="2"></a>
+<a class="sourceLine" id="cb185-3" title="3"><span class="co">#this loads a library called ggplot2</span></a>
+<a class="sourceLine" id="cb185-4" title="4"><span class="kw">library</span>(ggplot2)</a></code></pre></div>
 </div>
 <div id="a-picture-is-worth-a-thousand-words" class="section level3">
 <h3><span class="header-section-number">7.7.3</span> A picture is worth a thousand words 📷</h3>
@@ -920,34 +921,34 @@ arrange() -&gt; ORDER BY
 <p><strong>Don’t waste time trying to make the graphs perfect!</strong></p>
 <p>Only change code that you <strong>need</strong> to change. The SOA is trying to help you save time by giving you templates. That being said, if you can do it faster on your own, then do it your own way.</p>
 <p>This is the code template that they give you. You only need to change the “variable” names.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="co"># This code makes a histogram for a continuous variable.</span></a>
-<a class="sourceLine" id="cb185-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> variable)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb185-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb185-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;variable&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb185-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb185-6" title="6"></a>
-<a class="sourceLine" id="cb185-7" title="7"><span class="co"># This code makes a bar chart for a factor variable.</span></a>
-<a class="sourceLine" id="cb185-8" title="8"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> variable)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb185-9" title="9"><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb185-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;variable&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb185-11" title="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1"><span class="co"># This code makes a histogram for a continuous variable.</span></a>
+<a class="sourceLine" id="cb186-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> variable)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb186-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb186-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;variable&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb186-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb186-6" title="6"></a>
+<a class="sourceLine" id="cb186-7" title="7"><span class="co"># This code makes a bar chart for a factor variable.</span></a>
+<a class="sourceLine" id="cb186-8" title="8"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> variable)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb186-9" title="9"><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb186-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;variable&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb186-11" title="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
 <p>Okay, that wasn’t 100% true. It’s common for the code to require <strong>small</strong> changes. For instance, the histogram that they give you has bins that are too narrow for<code>age</code>, which causes these spikes to show up in the graph.</p>
 <blockquote>
 <p>The best candidates altered the code to create more appropriate plots and summary tables.</p>
 </blockquote>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1"><span class="co"># This code makes a histogram for a continuous variable.</span></a>
-<a class="sourceLine" id="cb186-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> age)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb186-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>) <span class="op">+</span><span class="st"> </span><span class="co">#not the right number of bins</span></a>
-<a class="sourceLine" id="cb186-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;age&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb186-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb186-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bad: Default histogram with spikes&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-94-1.png" width="576" /></p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1"><span class="co">#Histograms of continuous variables</span></a>
-<a class="sourceLine" id="cb187-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> age)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb187-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="fl">24.5</span>,<span class="fl">99.5</span>, <span class="dt">by =</span> <span class="dv">5</span>)) <span class="op">+</span><span class="st">  </span><span class="co">#make bins wider and set range </span></a>
-<a class="sourceLine" id="cb187-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Age&quot;</span>) <span class="op">+</span></a>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1"><span class="co"># This code makes a histogram for a continuous variable.</span></a>
+<a class="sourceLine" id="cb187-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> age)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb187-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>) <span class="op">+</span><span class="st"> </span><span class="co">#not the right number of bins</span></a>
+<a class="sourceLine" id="cb187-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;age&quot;</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb187-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb187-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Good: After adjusting the breaks&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb187-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bad: Default histogram with spikes&quot;</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-94-1.png" width="576" /></p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1"><span class="co">#Histograms of continuous variables</span></a>
+<a class="sourceLine" id="cb188-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> age)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb188-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="fl">24.5</span>,<span class="fl">99.5</span>, <span class="dt">by =</span> <span class="dv">5</span>)) <span class="op">+</span><span class="st">  </span><span class="co">#make bins wider and set range </span></a>
+<a class="sourceLine" id="cb188-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Age&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb188-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb188-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Good: After adjusting the breaks&quot;</span>)</a></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-94-2.png" width="576" /></p>
 <p>How do you know when a variable should a factor and when it should be numeric?</p>
 </div>
@@ -955,7 +956,7 @@ arrange() -&gt; ORDER BY
 <h3><span class="header-section-number">7.7.4</span> Factor or numeric ❓</h3>
 <p>Which variables should be converted to factors and which should be numeric?</p>
 <p>Questions of this sort have come up twice. On Hospital Readmissions, there was a Length of Stay variable that was numeric, but had only a few values and so some candidates treated it as a factor. The <code>education_num</code> variable here is also numeric but only has 16 unique values. So should this be a numeric or a factor?</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1"><span class="kw">table</span>(df<span class="op">$</span>education_num)</a></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1"><span class="kw">table</span>(df<span class="op">$</span>education_num)</a></code></pre></div>
 <pre><code>## 
 ##     1     2     3     4     5     6     7     8     9    10    11    12    13 
 ##    68   231   446   877   618   995  1042   382 13320  7812  1862  1411  7298 
@@ -969,23 +970,23 @@ arrange() -&gt; ORDER BY
 </ul>
 <p>For exmaple, we can say that <code>education_num = 2</code> is less than <code>education_num = 4</code>, which means that there’s a natural order. This is also known as an <strong>ordinal</strong>.</p>
 <p>If the factor is say, <code>color</code>, which can be <code>red</code>, <code>blue</code>, or <code>green</code>, then there is no way of comparing values together. Is <code>red</code> greater than <code>blue</code>? This question has no meaning.</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> education_num)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb190-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb190-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb190-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb190-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Default number of bins (30)&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-96-1.png" width="576" /></p>
 <div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> education_num)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb191-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">16</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb191-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb191-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb191-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb191-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Set number of bins to number of factor levels (16) &quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb191-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Default number of bins (30)&quot;</span>)</a></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-96-1.png" width="576" /></p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> education_num)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb192-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">16</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb192-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb192-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb192-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Set number of bins to number of factor levels (16) &quot;</span>)</a></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-96-2.png" width="576" /></p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1"><span class="co"># Set bins equal to number of levels, could have made bar chart.</span></a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1"><span class="co"># Set bins equal to number of levels, could have made bar chart.</span></a></code></pre></div>
 <p>We could also use a bar plot.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> education_num)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb193-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb193-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bar plot&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> education_num)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb194-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb194-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bar plot&quot;</span>)</a></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-97-1.png" width="576" /></p>
 <p>Lastly, read the Project Statement carefully and only do what it tells you to do.</p>
 <blockquote>
@@ -1003,18 +1004,18 @@ arrange() -&gt; ORDER BY
 <li><strong>Standard Deviation</strong>: The square root of the variance.</li>
 <li><strong>n()</strong>: The number of observations. Always take note of groups that don’t have many observations.</li>
 </ul>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1"><span class="co"># This code provides, for each level of a factor variable, the number for which value_flag is zero, the number for which it is one, the total number of observations, and the proportion of ones.</span></a>
-<a class="sourceLine" id="cb194-2" title="2"><span class="co"># Note that the variable name should not be enclosed in quotation marks.</span></a>
-<a class="sourceLine" id="cb194-3" title="3">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb194-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(variable) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb194-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(</a>
-<a class="sourceLine" id="cb194-6" title="6">    <span class="dt">zeros =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb194-7" title="7">    <span class="dt">ones =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb194-8" title="8">    <span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb194-9" title="9">    <span class="dt">proportion =</span> <span class="kw">mean</span>(value_flag)</a>
-<a class="sourceLine" id="cb194-10" title="10">  )</a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1"><span class="co"># This code provides, for each level of a factor variable, the number for which value_flag is zero, the number for which it is one, the total number of observations, and the proportion of ones.</span></a>
+<a class="sourceLine" id="cb195-2" title="2"><span class="co"># Note that the variable name should not be enclosed in quotation marks.</span></a>
+<a class="sourceLine" id="cb195-3" title="3">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb195-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(variable) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb195-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(</a>
+<a class="sourceLine" id="cb195-6" title="6">    <span class="dt">zeros =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb195-7" title="7">    <span class="dt">ones =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb195-8" title="8">    <span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb195-9" title="9">    <span class="dt">proportion =</span> <span class="kw">mean</span>(value_flag)</a>
+<a class="sourceLine" id="cb195-10" title="10">  )</a></code></pre></div>
 <p>Factors levels should be simplified. If a group has only a few observations then there will be problems with the model. In our data, take a look at the <code>marital_status</code> column. Do you observe anything unusual?</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1"><span class="kw">table</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1"><span class="kw">table</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
 <pre><code>## 
 ##              Divorced     Married-AF-spouse    Married-civ-spouse 
 ##                  6498                    31                 21661 
@@ -1029,20 +1030,20 @@ arrange() -&gt; ORDER BY
 </ul>
 <p>Let’s use the second method.</p>
 <p>First, look at the levels of the factor variable.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1"><span class="kw">levels</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1"><span class="kw">levels</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
 <pre><code>## [1] &quot;Divorced&quot;              &quot;Married-AF-spouse&quot;     &quot;Married-civ-spouse&quot;   
 ## [4] &quot;Married-spouse-absent&quot; &quot;Never-married&quot;         &quot;Separated&quot;            
 ## [7] &quot;Widowed&quot;</code></pre>
 <p>Now look at the profitability across marital status. For <code>Married-AF-spouse</code> and <code>Married-civ-spouse</code> the proportion of high profit customers is <strong>high</strong>, but for <code>Married-spouse-absent</code> it is <strong>low.</strong> Even though these are all “married”, it would be a bad idea to combine them because the profitability is so different.</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1"><span class="co">#Proportion of ones by category of factor variable</span></a>
-<a class="sourceLine" id="cb199-2" title="2">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb199-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(marital_status) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb199-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(</a>
-<a class="sourceLine" id="cb199-5" title="5">    <span class="dt">zeros =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb199-6" title="6">    <span class="dt">ones =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb199-7" title="7">    <span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb199-8" title="8">    <span class="dt">proportion =</span> <span class="kw">mean</span>(value_flag)</a>
-<a class="sourceLine" id="cb199-9" title="9">  )</a></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1"><span class="co">#Proportion of ones by category of factor variable</span></a>
+<a class="sourceLine" id="cb200-2" title="2">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb200-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(marital_status) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb200-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(</a>
+<a class="sourceLine" id="cb200-5" title="5">    <span class="dt">zeros =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb200-6" title="6">    <span class="dt">ones =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb200-7" title="7">    <span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb200-8" title="8">    <span class="dt">proportion =</span> <span class="kw">mean</span>(value_flag)</a>
+<a class="sourceLine" id="cb200-9" title="9">  )</a></code></pre></div>
 <pre><code>## # A tibble: 7 x 5
 ##   marital_status        zeros  ones     n proportion
 ##   &lt;fct&gt;                 &lt;int&gt; &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;
@@ -1054,23 +1055,23 @@ arrange() -&gt; ORDER BY
 ## 6 Separated              1342    96  1438     0.0668
 ## 7 Widowed                1384   128  1512     0.0847</code></pre>
 <p>Then create a vector that has the simpler levels that you want. The order needs to be the same.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">simple_levels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Divorced&quot;</span>, <span class="st">&quot;Married-spouse&quot;</span>, <span class="st">&quot;Married-spouse&quot;</span>, <span class="st">&quot;Married-spuouse-absent&quot;</span>, <span class="st">&quot;Neber-married&quot;</span>, <span class="st">&quot;Separated&quot;</span>, <span class="st">&quot;Widowed&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">simple_levels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Divorced&quot;</span>, <span class="st">&quot;Married-spouse&quot;</span>, <span class="st">&quot;Married-spouse&quot;</span>, <span class="st">&quot;Married-spuouse-absent&quot;</span>, <span class="st">&quot;Neber-married&quot;</span>, <span class="st">&quot;Separated&quot;</span>, <span class="st">&quot;Widowed&quot;</span>)</a></code></pre></div>
 <p>The function <code>mapvalues</code> takes in three arguments. You can read about this by typing <code>?mapvalues</code> into the console.</p>
 <p><code>x</code> : the factor or vector to modify</p>
 <p><code>from</code> : a vector of the items to replace</p>
 <p><code>to</code> : a vector of replacement values</p>
 <p>Then map the old values to the simpler values.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1"><span class="co">#Combine the two marital status levels</span></a>
-<a class="sourceLine" id="cb202-2" title="2">var.levels &lt;-<span class="st"> </span><span class="kw">levels</span>(df<span class="op">$</span>marital_status)</a>
-<a class="sourceLine" id="cb202-3" title="3">df<span class="op">$</span>marital_status &lt;-<span class="st"> </span><span class="kw">mapvalues</span>(<span class="dt">x =</span> df<span class="op">$</span>marital_status,</a>
-<a class="sourceLine" id="cb202-4" title="4">                               <span class="dt">from =</span> var.levels, </a>
-<a class="sourceLine" id="cb202-5" title="5">                               <span class="dt">to =</span> simple_levels) </a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1"><span class="co">#Combine the two marital status levels</span></a>
+<a class="sourceLine" id="cb203-2" title="2">var.levels &lt;-<span class="st"> </span><span class="kw">levels</span>(df<span class="op">$</span>marital_status)</a>
+<a class="sourceLine" id="cb203-3" title="3">df<span class="op">$</span>marital_status &lt;-<span class="st"> </span><span class="kw">mapvalues</span>(<span class="dt">x =</span> df<span class="op">$</span>marital_status,</a>
+<a class="sourceLine" id="cb203-4" title="4">                               <span class="dt">from =</span> var.levels, </a>
+<a class="sourceLine" id="cb203-5" title="5">                               <span class="dt">to =</span> simple_levels) </a></code></pre></div>
 <p>Now, when you look at the <code>marital_status</code> levels, you will see the simpler levels.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1"><span class="kw">levels</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1"><span class="kw">levels</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
 <pre><code>## [1] &quot;Divorced&quot;               &quot;Married-spouse&quot;         &quot;Married-spuouse-absent&quot;
 ## [4] &quot;Neber-married&quot;          &quot;Separated&quot;              &quot;Widowed&quot;</code></pre>
 <p>You can also check that the number of records is what you expect.</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1"><span class="kw">table</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1"><span class="kw">table</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
 <pre><code>## 
 ##               Divorced         Married-spouse Married-spuouse-absent 
 ##                   6498                  21692                    573 
@@ -1089,7 +1090,7 @@ arrange() -&gt; ORDER BY
 <p><a href="https://exampa.net/"><img src="images/lesson-dplyr.png" alt="Lecture" /></a></p>
 <p>Run this code on your computer to answer these exercises.</p>
 <p>The data <code>actuary_salaries</code> contains the salaries of actuaries collected from the DW Simpson survey. Use this data to answer the exercises below.</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1">actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1">actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>()</a></code></pre></div>
 <pre><code>## Rows: 138
 ## Columns: 6
 ## $ industry    &lt;chr&gt; &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;~
@@ -1108,12 +1109,12 @@ arrange() -&gt; ORDER BY
 <li>Create a new column, called <code>n_exams</code>, which is an integer. Use 7 for ASA/ACAS and 10 for FSA/FCAS. Use the code below as a starting point and fill in the <code>_</code> spaces</li>
 <li>Create a column called <code>social_life</code>, which is equal to <code>n_exams</code>/<code>experience</code>. What is the average (mean) <code>social_life</code> by industry? Bonus question: what is wrong with using this as a statistical measure?</li>
 </ol>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">actuary_salaries &lt;-<span class="st"> </span>actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb209-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n_exams =</span> <span class="kw">case_when</span>(exams <span class="op">==</span><span class="st"> &quot;FSA&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb209-3" title="3">                             exams <span class="op">==</span><span class="st"> &quot;ASA&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb209-4" title="4">                             exams <span class="op">==</span><span class="st"> &quot;FCAS&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb209-5" title="5">                             exams <span class="op">==</span><span class="st"> &quot;ACAS&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb209-6" title="6">                             <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">substr</span>(exams,_,_)))) </a></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">actuary_salaries &lt;-<span class="st"> </span>actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb210-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n_exams =</span> <span class="kw">case_when</span>(exams <span class="op">==</span><span class="st"> &quot;FSA&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
+<a class="sourceLine" id="cb210-3" title="3">                             exams <span class="op">==</span><span class="st"> &quot;ASA&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
+<a class="sourceLine" id="cb210-4" title="4">                             exams <span class="op">==</span><span class="st"> &quot;FCAS&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
+<a class="sourceLine" id="cb210-5" title="5">                             exams <span class="op">==</span><span class="st"> &quot;ACAS&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
+<a class="sourceLine" id="cb210-6" title="6">                             <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">substr</span>(exams,_,_)))) </a></code></pre></div>
 <ol start="8" style="list-style-type: decimal">
 <li>Create a column called <code>social_life</code>, which is equal to <code>n_exams</code>/<code>experience</code>. What is the average (mean) <code>social_life</code> by industry? Bonus question: what is wrong with using this as a statistical measure?</li>
 </ol>

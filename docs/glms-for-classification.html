@@ -389,27 +389,27 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="example---auto-claims" class="section level2">
 <h2><span class="header-section-number">10.6</span> Example - Auto Claims</h2>
 <p>Using the <code>auto_claim</code> data, we predict whether or not a policy has a claim. This is also known as the <em>claim frequency</em>.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(CLM_FLAG)</a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(CLM_FLAG)</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   CLM_FLAG     n
 ##   &lt;chr&gt;    &lt;int&gt;
 ## 1 No        7556
 ## 2 Yes       2740</code></pre>
 <p>About 40% do not have a claim while 60% have at least one claim.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb230-2" title="2">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> auto_claim<span class="op">$</span>CLM_FLAG, </a>
-<a class="sourceLine" id="cb230-3" title="3">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()</a>
-<a class="sourceLine" id="cb230-4" title="4">auto_claim &lt;-<span class="st"> </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb230-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">target =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(CLM_FLAG <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)))</a>
-<a class="sourceLine" id="cb230-6" title="6">train &lt;-<span class="st">  </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
-<a class="sourceLine" id="cb230-7" title="7">test &lt;-<span class="st"> </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
-<a class="sourceLine" id="cb230-8" title="8"></a>
-<a class="sourceLine" id="cb230-9" title="9">frequency &lt;-<span class="st"> </span><span class="kw">glm</span>(target <span class="op">~</span><span class="st"> </span>AGE <span class="op">+</span><span class="st"> </span>GENDER <span class="op">+</span><span class="st"> </span>MARRIED <span class="op">+</span><span class="st"> </span>CAR_USE <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb230-10" title="10"><span class="st">                   </span>BLUEBOOK <span class="op">+</span><span class="st"> </span>CAR_TYPE <span class="op">+</span><span class="st"> </span>AREA, </a>
-<a class="sourceLine" id="cb230-11" title="11">                 <span class="dt">data=</span>train, </a>
-<a class="sourceLine" id="cb230-12" title="12">                 <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb231-2" title="2">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> auto_claim<span class="op">$</span>CLM_FLAG, </a>
+<a class="sourceLine" id="cb231-3" title="3">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()</a>
+<a class="sourceLine" id="cb231-4" title="4">auto_claim &lt;-<span class="st"> </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb231-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">target =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(CLM_FLAG <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)))</a>
+<a class="sourceLine" id="cb231-6" title="6">train &lt;-<span class="st">  </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
+<a class="sourceLine" id="cb231-7" title="7">test &lt;-<span class="st"> </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
+<a class="sourceLine" id="cb231-8" title="8"></a>
+<a class="sourceLine" id="cb231-9" title="9">frequency &lt;-<span class="st"> </span><span class="kw">glm</span>(target <span class="op">~</span><span class="st"> </span>AGE <span class="op">+</span><span class="st"> </span>GENDER <span class="op">+</span><span class="st"> </span>MARRIED <span class="op">+</span><span class="st"> </span>CAR_USE <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb231-10" title="10"><span class="st">                   </span>BLUEBOOK <span class="op">+</span><span class="st"> </span>CAR_TYPE <span class="op">+</span><span class="st"> </span>AREA, </a>
+<a class="sourceLine" id="cb231-11" title="11">                 <span class="dt">data=</span>train, </a>
+<a class="sourceLine" id="cb231-12" title="12">                 <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a></code></pre></div>
 <p>All of the variables except for the <code>CAR_TYPE</code> and <code>GENDERM</code> are highly significant. The car types <code>SPORTS CAR</code> and <code>SUV</code> appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for <code>CAR_TYPE == SPORTS CAR</code> and <code>CAR_TYPE == SUV</code>.</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1">frequency <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1">frequency <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = target ~ AGE + GENDER + MARRIED + CAR_USE + BLUEBOOK + 
@@ -455,8 +455,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Certain values of <code>CAR_TYPE</code> are significant but others are not.</li>
 </ul>
 <p>The output is a predicted probability. We can see that this is centered around a probability of about 0.3.</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" title="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(frequency, <span class="dt">newdat=</span>test,<span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb233-2" title="2"><span class="kw">qplot</span>(preds) </a></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(frequency, <span class="dt">newdat=</span>test,<span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb234-2" title="2"><span class="kw">qplot</span>(preds) </a></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-137"></span>
 <img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-137-1.png" alt="Distribution of Predicted Probability" width="480" />
 <p class="caption">
@@ -464,59 +464,59 @@ Figure 10.1: Distribution of Predicted Probability
 </p>
 </div>
 <p>In order to convert these values to predicted 0’s and 1’s, we assign a <em>cutoff</em> value so that if <span class="math inline">\(\hat{y}\)</span> is above this threshold we use a 1 and 0 otherwise. The default cutoff is 0.5. We change this to 0.3 and see that there are 763 policies predicted to have claims.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1">test &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred_zero_one =</span> <span class="kw">as.factor</span>(<span class="dv">1</span><span class="op">*</span>(preds<span class="op">&gt;</span>.<span class="dv">3</span>)))</a>
-<a class="sourceLine" id="cb234-2" title="2"><span class="kw">summary</span>(test<span class="op">$</span>pred_zero_one)</a></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" title="1">test &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred_zero_one =</span> <span class="kw">as.factor</span>(<span class="dv">1</span><span class="op">*</span>(preds<span class="op">&gt;</span>.<span class="dv">3</span>)))</a>
+<a class="sourceLine" id="cb235-2" title="2"><span class="kw">summary</span>(test<span class="op">$</span>pred_zero_one)</a></code></pre></div>
 <pre><code>##    0    1 
 ## 1296  763</code></pre>
 <p>How do we decide on this cutoff value? We need to compare cutoff values based on some evaluation metric. For example, we can use <em>accuracy</em>.</p>
 <p><span class="math display">\[\text{Accuracy} = \frac{\text{Correct Guesses}}{\text{Total Guesses}}\]</span></p>
 <p>This results in an accuracy of 70%. But is this good?</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.699</code></pre>
 <p>Consider what would happen if we just predicted all 0’s. The accuracy is 74%.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(<span class="dv">0</span> <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(<span class="dv">0</span> <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.734</code></pre>
 <p>For policies which experience claims the accuracy is 63%.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb240-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb240-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb241-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb241-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.631</code></pre>
 <p>But for policies that don’t actually experience claims this is 72%.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb242-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb242-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb243-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb243-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.724</code></pre>
 <p>How do we know if this is a good model? We can repeat this process with a different cutoff value and get different accuracy metrics for these groups. Let’s use a cutoff of 0.6.</p>
 <p>75%</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1">test &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred_zero_one =</span> <span class="kw">as.factor</span>(<span class="dv">1</span><span class="op">*</span>(preds<span class="op">&gt;</span>.<span class="dv">6</span>)))</a>
-<a class="sourceLine" id="cb244-2" title="2">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" title="1">test &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred_zero_one =</span> <span class="kw">as.factor</span>(<span class="dv">1</span><span class="op">*</span>(preds<span class="op">&gt;</span>.<span class="dv">6</span>)))</a>
+<a class="sourceLine" id="cb245-2" title="2">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.752</code></pre>
 <p>10% for policies with claims and 98% for policies without claims.</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb246-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb246-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb247-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb247-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.108</code></pre>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb248-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb248-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb249-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb249-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
