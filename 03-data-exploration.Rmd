@@ -32,15 +32,15 @@ About 10 - 15% of your grade will be based on data exploration.  Every version o
 The syllabus divides this into *three* learning objectives, which can make the topic intimidating.  Data Visualization, Data Types and Exploration, and Data Issues and Resolutions, but you will always be doing these things together and so this chapter will cover all three at once.
 
 ```{r echo = F, fig.align="center", warning=F, out.width="400%"}
-knitr::include_graphics("images/learning_obj3.png")
+knitr::include_graphics("images/learning_obj3.PNG")
 ```
 
 ```{r echo = F, fig.align="center", warning=F, out.width="400%"}
-knitr::include_graphics("images/learning_obj4.png")
+knitr::include_graphics("images/learning_obj4.PNG")
 ```
 
 ```{r echo = F, fig.align="center", warning=F, out.width="400%"}
-knitr::include_graphics("images/learning_obj5.png")
+knitr::include_graphics("images/learning_obj5.PNG")
 ```
 
 
