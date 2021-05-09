@@ -188,10 +188,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
 <ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 🤯</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -426,27 +426,27 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="example---auto-claims" class="section level2" number="10.6">
 <h2><span class="header-section-number">10.6</span> Example - Auto Claims</h2>
 <p>Using the <code>auto_claim</code> data, we predict whether or not a policy has a claim. This is also known as the <em>claim frequency</em>.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="glms-for-classification.html#cb228-1" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="sc">%&gt;%</span> <span class="fu">count</span>(CLM_FLAG)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="glms-for-classification.html#cb232-1" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="sc">%&gt;%</span> <span class="fu">count</span>(CLM_FLAG)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   CLM_FLAG     n
 ##   &lt;chr&gt;    &lt;int&gt;
 ## 1 No        7556
 ## 2 Yes       2740</code></pre>
 <p>About 40% do not have a claim while 60% have at least one claim.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="glms-for-classification.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb230-2"><a href="glms-for-classification.html#cb230-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> auto_claim<span class="sc">$</span>CLM_FLAG, </span>
-<span id="cb230-3"><a href="glms-for-classification.html#cb230-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
-<span id="cb230-4"><a href="glms-for-classification.html#cb230-4" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="ot">&lt;-</span> auto_claim <span class="sc">%&gt;%</span> </span>
-<span id="cb230-5"><a href="glms-for-classification.html#cb230-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">target =</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(CLM_FLAG <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)))</span>
-<span id="cb230-6"><a href="glms-for-classification.html#cb230-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span>  auto_claim <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
-<span id="cb230-7"><a href="glms-for-classification.html#cb230-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> auto_claim <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span>
-<span id="cb230-8"><a href="glms-for-classification.html#cb230-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb230-9"><a href="glms-for-classification.html#cb230-9" aria-hidden="true" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> <span class="fu">glm</span>(target <span class="sc">~</span> AGE <span class="sc">+</span> GENDER <span class="sc">+</span> MARRIED <span class="sc">+</span> CAR_USE <span class="sc">+</span> </span>
-<span id="cb230-10"><a href="glms-for-classification.html#cb230-10" aria-hidden="true" tabindex="-1"></a>                   BLUEBOOK <span class="sc">+</span> CAR_TYPE <span class="sc">+</span> AREA, </span>
-<span id="cb230-11"><a href="glms-for-classification.html#cb230-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data=</span>train, </span>
-<span id="cb230-12"><a href="glms-for-classification.html#cb230-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="glms-for-classification.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb234-2"><a href="glms-for-classification.html#cb234-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> auto_claim<span class="sc">$</span>CLM_FLAG, </span>
+<span id="cb234-3"><a href="glms-for-classification.html#cb234-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb234-4"><a href="glms-for-classification.html#cb234-4" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="ot">&lt;-</span> auto_claim <span class="sc">%&gt;%</span> </span>
+<span id="cb234-5"><a href="glms-for-classification.html#cb234-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">target =</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(CLM_FLAG <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)))</span>
+<span id="cb234-6"><a href="glms-for-classification.html#cb234-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span>  auto_claim <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
+<span id="cb234-7"><a href="glms-for-classification.html#cb234-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> auto_claim <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span>
+<span id="cb234-8"><a href="glms-for-classification.html#cb234-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb234-9"><a href="glms-for-classification.html#cb234-9" aria-hidden="true" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> <span class="fu">glm</span>(target <span class="sc">~</span> AGE <span class="sc">+</span> GENDER <span class="sc">+</span> MARRIED <span class="sc">+</span> CAR_USE <span class="sc">+</span> </span>
+<span id="cb234-10"><a href="glms-for-classification.html#cb234-10" aria-hidden="true" tabindex="-1"></a>                   BLUEBOOK <span class="sc">+</span> CAR_TYPE <span class="sc">+</span> AREA, </span>
+<span id="cb234-11"><a href="glms-for-classification.html#cb234-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data=</span>train, </span>
+<span id="cb234-12"><a href="glms-for-classification.html#cb234-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
 <p>All of the variables except for the <code>CAR_TYPE</code> and <code>GENDERM</code> are highly significant. The car types <code>SPORTS CAR</code> and <code>SUV</code> appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for <code>CAR_TYPE == SPORTS CAR</code> and <code>CAR_TYPE == SUV</code>.</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="glms-for-classification.html#cb231-1" aria-hidden="true" tabindex="-1"></a>frequency <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="glms-for-classification.html#cb235-1" aria-hidden="true" tabindex="-1"></a>frequency <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = target ~ AGE + GENDER + MARRIED + CAR_USE + BLUEBOOK + 
@@ -492,8 +492,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Certain values of <code>CAR_TYPE</code> are significant but others are not.</li>
 </ul>
 <p>The output is a predicted probability. We can see that this is centered around a probability of about 0.3.</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="glms-for-classification.html#cb233-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(frequency, <span class="at">newdat=</span>test,<span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb233-2"><a href="glms-for-classification.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(preds) </span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="glms-for-classification.html#cb237-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(frequency, <span class="at">newdat=</span>test,<span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb237-2"><a href="glms-for-classification.html#cb237-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(preds) </span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-137"></span>
 <img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-137-1.png" alt="Distribution of Predicted Probability" width="480" />
 <p class="caption">
@@ -501,59 +501,59 @@ Figure 10.1: Distribution of Predicted Probability
 </p>
 </div>
 <p>In order to convert these values to predicted 0’s and 1’s, we assign a <em>cutoff</em> value so that if <span class="math inline">\(\hat{y}\)</span> is above this threshold we use a 1 and 0 otherwise. The default cutoff is 0.5. We change this to 0.3 and see that there are 763 policies predicted to have claims.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="glms-for-classification.html#cb234-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pred_zero_one =</span> <span class="fu">as.factor</span>(<span class="dv">1</span><span class="sc">*</span>(preds<span class="sc">&gt;</span>.<span class="dv">3</span>)))</span>
-<span id="cb234-2"><a href="glms-for-classification.html#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(test<span class="sc">$</span>pred_zero_one)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="glms-for-classification.html#cb238-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pred_zero_one =</span> <span class="fu">as.factor</span>(<span class="dv">1</span><span class="sc">*</span>(preds<span class="sc">&gt;</span>.<span class="dv">3</span>)))</span>
+<span id="cb238-2"><a href="glms-for-classification.html#cb238-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(test<span class="sc">$</span>pred_zero_one)</span></code></pre></div>
 <pre><code>##    0    1 
 ## 1296  763</code></pre>
 <p>How do we decide on this cutoff value? We need to compare cutoff values based on some evaluation metric. For example, we can use <em>accuracy</em>.</p>
 <p><span class="math display">\[\text{Accuracy} = \frac{\text{Correct Guesses}}{\text{Total Guesses}}\]</span></p>
 <p>This results in an accuracy of 70%. But is this good?</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="glms-for-classification.html#cb236-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="glms-for-classification.html#cb240-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.699</code></pre>
 <p>Consider what would happen if we just predicted all 0’s. The accuracy is 74%.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="glms-for-classification.html#cb238-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(<span class="dv">0</span> <span class="sc">==</span> target))</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="glms-for-classification.html#cb242-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(<span class="dv">0</span> <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.734</code></pre>
 <p>For policies which experience claims the accuracy is 63%.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="glms-for-classification.html#cb240-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
-<span id="cb240-2"><a href="glms-for-classification.html#cb240-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb240-3"><a href="glms-for-classification.html#cb240-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="glms-for-classification.html#cb244-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
+<span id="cb244-2"><a href="glms-for-classification.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb244-3"><a href="glms-for-classification.html#cb244-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.631</code></pre>
 <p>But for policies that don’t actually experience claims this is 72%.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="glms-for-classification.html#cb242-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
-<span id="cb242-2"><a href="glms-for-classification.html#cb242-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb242-3"><a href="glms-for-classification.html#cb242-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="glms-for-classification.html#cb246-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
+<span id="cb246-2"><a href="glms-for-classification.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb246-3"><a href="glms-for-classification.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.724</code></pre>
 <p>How do we know if this is a good model? We can repeat this process with a different cutoff value and get different accuracy metrics for these groups. Let’s use a cutoff of 0.6.</p>
 <p>75%</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="glms-for-classification.html#cb244-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pred_zero_one =</span> <span class="fu">as.factor</span>(<span class="dv">1</span><span class="sc">*</span>(preds<span class="sc">&gt;</span>.<span class="dv">6</span>)))</span>
-<span id="cb244-2"><a href="glms-for-classification.html#cb244-2" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="glms-for-classification.html#cb248-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pred_zero_one =</span> <span class="fu">as.factor</span>(<span class="dv">1</span><span class="sc">*</span>(preds<span class="sc">&gt;</span>.<span class="dv">6</span>)))</span>
+<span id="cb248-2"><a href="glms-for-classification.html#cb248-2" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.752</code></pre>
 <p>10% for policies with claims and 98% for policies without claims.</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="glms-for-classification.html#cb246-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
-<span id="cb246-2"><a href="glms-for-classification.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb246-3"><a href="glms-for-classification.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="glms-for-classification.html#cb250-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
+<span id="cb250-2"><a href="glms-for-classification.html#cb250-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb250-3"><a href="glms-for-classification.html#cb250-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.108</code></pre>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="glms-for-classification.html#cb248-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
-<span id="cb248-2"><a href="glms-for-classification.html#cb248-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb248-3"><a href="glms-for-classification.html#cb248-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="glms-for-classification.html#cb252-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
+<span id="cb252-2"><a href="glms-for-classification.html#cb252-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb252-3"><a href="glms-for-classification.html#cb252-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;

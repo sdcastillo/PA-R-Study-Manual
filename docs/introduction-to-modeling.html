@@ -188,10 +188,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
 <ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 🤯</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -550,13 +550,13 @@ Where <span class="math inline">\(x′=rank(x)\)</span> and <span class="math in
 </table>
 <p>While you can use formulas to create new variables, the exam questions tend to have you do this in the data itself. For example, if taking the log transform of a <code>bmi</code>, you would add a column <code>log_bmi</code> to the data and remove the original <code>bmi</code> column.</p>
 <p>Below we fit a simple linear model to predict charges.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="introduction-to-modeling.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ExamPAData)</span>
-<span id="cb210-2"><a href="introduction-to-modeling.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb210-3"><a href="introduction-to-modeling.html#cb210-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb210-4"><a href="introduction-to-modeling.html#cb210-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> health_insurance, <span class="at">formula =</span> charges <span class="sc">~</span> bmi <span class="sc">+</span> age <span class="sc">+</span> sex)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="introduction-to-modeling.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ExamPAData)</span>
+<span id="cb214-2"><a href="introduction-to-modeling.html#cb214-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb214-3"><a href="introduction-to-modeling.html#cb214-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb214-4"><a href="introduction-to-modeling.html#cb214-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> health_insurance, <span class="at">formula =</span> charges <span class="sc">~</span> bmi <span class="sc">+</span> age <span class="sc">+</span> sex)</span></code></pre></div>
 <p>The <code>summary</code> function gives details about the model. First, the <code>Estimate</code>, gives you the coefficients. The <code>Std. Error</code> is the error of the estimate for the coefficient. Higher standard error means greater uncertainty. This is relative to the average value of that variable. The <code>p value</code> tells you how “big” this error really is based on standard deviations. A small p-value (<code>Pr (&gt;|t|))</code>) means that we can safely reject the null hypothesis that says the coefficient is equal to zero.</p>
 <p>The little <code>*</code>, <code>**</code>, <code>***</code> tell you the significance level. A variable with a <code>***</code> means that the probability of getting a coefficient of that size given that the data was randomly generated is less than 0.001. The <code>**</code> has a significance level of 0.01, and <code>*</code> of 0.05.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="introduction-to-modeling.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="introduction-to-modeling.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = charges ~ bmi + age + sex, data = health_insurance)
@@ -567,10 +567,10 @@ Where <span class="math inline">\(x′=rank(x)\)</span> and <span class="math in
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -5642.35    1779.00  -3.172  0.00155 ** 
+## (Intercept) -6986.82    1761.04  -3.967 7.65e-05 ***
 ## bmi           327.54      51.37   6.377 2.49e-10 ***
 ## age           243.19      22.28  10.917  &lt; 2e-16 ***
-## sexfemale   -1344.46     622.66  -2.159  0.03101 *  
+## sexmale      1344.46     622.66   2.159    0.031 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -582,39 +582,39 @@ Where <span class="math inline">\(x′=rank(x)\)</span> and <span class="math in
 </blockquote>
 <p>When evaluating model performance, you should not rely on the <code>summary</code> alone as this is based on the training data. To look at performance, test the model on validation data. This can be done by either using a hold out set, or using cross-validation, which is even better.</p>
 <p>Let’s create an 80% training set and 20% testing set. You don’t need to worry about understanding this code as the exam will always give this to you.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="introduction-to-modeling.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb213-2"><a href="introduction-to-modeling.html#cb213-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb213-3"><a href="introduction-to-modeling.html#cb213-3" aria-hidden="true" tabindex="-1"></a><span class="co">#create a train/test split</span></span>
-<span id="cb213-4"><a href="introduction-to-modeling.html#cb213-4" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> health_insurance<span class="sc">$</span>charges, </span>
-<span id="cb213-5"><a href="introduction-to-modeling.html#cb213-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
-<span id="cb213-6"><a href="introduction-to-modeling.html#cb213-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span>  health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
-<span id="cb213-7"><a href="introduction-to-modeling.html#cb213-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="introduction-to-modeling.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb217-2"><a href="introduction-to-modeling.html#cb217-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb217-3"><a href="introduction-to-modeling.html#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="co">#create a train/test split</span></span>
+<span id="cb217-4"><a href="introduction-to-modeling.html#cb217-4" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> health_insurance<span class="sc">$</span>charges, </span>
+<span id="cb217-5"><a href="introduction-to-modeling.html#cb217-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb217-6"><a href="introduction-to-modeling.html#cb217-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span>  health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
+<span id="cb217-7"><a href="introduction-to-modeling.html#cb217-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span></code></pre></div>
 <p>Train the model on the <code>train</code> and test on <code>test</code>.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="introduction-to-modeling.html#cb214-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> train, <span class="at">formula =</span> charges <span class="sc">~</span> bmi <span class="sc">+</span> age)</span>
-<span id="cb214-2"><a href="introduction-to-modeling.html#cb214-2" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">=</span> <span class="fu">predict</span>(model, test)</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="introduction-to-modeling.html#cb218-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> train, <span class="at">formula =</span> charges <span class="sc">~</span> bmi <span class="sc">+</span> age)</span>
+<span id="cb218-2"><a href="introduction-to-modeling.html#cb218-2" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">=</span> <span class="fu">predict</span>(model, test)</span></code></pre></div>
 <p>Let’s look at the Root Mean Squared Error (RMSE).</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="introduction-to-modeling.html#cb215-1" aria-hidden="true" tabindex="-1"></a>get_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(y, y_hat){</span>
-<span id="cb215-2"><a href="introduction-to-modeling.html#cb215-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((y <span class="sc">-</span> y_hat)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb215-3"><a href="introduction-to-modeling.html#cb215-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb215-4"><a href="introduction-to-modeling.html#cb215-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb215-5"><a href="introduction-to-modeling.html#cb215-5" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmse</span>(pred, test<span class="sc">$</span>charges)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="introduction-to-modeling.html#cb219-1" aria-hidden="true" tabindex="-1"></a>get_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(y, y_hat){</span>
+<span id="cb219-2"><a href="introduction-to-modeling.html#cb219-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((y <span class="sc">-</span> y_hat)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb219-3"><a href="introduction-to-modeling.html#cb219-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb219-4"><a href="introduction-to-modeling.html#cb219-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb219-5"><a href="introduction-to-modeling.html#cb219-5" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmse</span>(pred, test<span class="sc">$</span>charges)</span></code></pre></div>
 <pre><code>## [1] 11421.96</code></pre>
 <p>And the Mean Absolute Error as well.</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="introduction-to-modeling.html#cb217-1" aria-hidden="true" tabindex="-1"></a>get_mae <span class="ot">&lt;-</span> <span class="cf">function</span>(y, y_hat){</span>
-<span id="cb217-2"><a href="introduction-to-modeling.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>(<span class="fu">abs</span>(y <span class="sc">-</span> y_hat)))</span>
-<span id="cb217-3"><a href="introduction-to-modeling.html#cb217-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb217-4"><a href="introduction-to-modeling.html#cb217-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb217-5"><a href="introduction-to-modeling.html#cb217-5" aria-hidden="true" tabindex="-1"></a><span class="fu">get_mae</span>(pred, test<span class="sc">$</span>charges)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="introduction-to-modeling.html#cb221-1" aria-hidden="true" tabindex="-1"></a>get_mae <span class="ot">&lt;-</span> <span class="cf">function</span>(y, y_hat){</span>
+<span id="cb221-2"><a href="introduction-to-modeling.html#cb221-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>(<span class="fu">abs</span>(y <span class="sc">-</span> y_hat)))</span>
+<span id="cb221-3"><a href="introduction-to-modeling.html#cb221-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb221-4"><a href="introduction-to-modeling.html#cb221-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-5"><a href="introduction-to-modeling.html#cb221-5" aria-hidden="true" tabindex="-1"></a><span class="fu">get_mae</span>(pred, test<span class="sc">$</span>charges)</span></code></pre></div>
 <pre><code>## [1] 94.32336</code></pre>
 <p>The above metrics do not tell us if this is a good model or not by themselves. We need a comparison. The fastest check is to compare against a prediction of the mean. In other words, all values of the <code>y_hat</code> are the average of <code>charges</code>, which is about $13,000.</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="introduction-to-modeling.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmse</span>(<span class="fu">mean</span>(test<span class="sc">$</span>charges), test<span class="sc">$</span>charges)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="introduction-to-modeling.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmse</span>(<span class="fu">mean</span>(test<span class="sc">$</span>charges), test<span class="sc">$</span>charges)</span></code></pre></div>
 <pre><code>## [1] 12574.97</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="introduction-to-modeling.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_mae</span>(<span class="fu">mean</span>(test<span class="sc">$</span>charges), test<span class="sc">$</span>charges)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="introduction-to-modeling.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_mae</span>(<span class="fu">mean</span>(test<span class="sc">$</span>charges), test<span class="sc">$</span>charges)</span></code></pre></div>
 <pre><code>## [1] 96.63604</code></pre>
 <p>The RMSE and MAE are both <strong>higher</strong> (worse) when using just the mean, which is what we expect. <strong>If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.</strong></p>
 <p>The next test is to see if any assumptions have been violated.</p>
 <p>First, is there a pattern in the residuals? If there is, this means that the model is missing key information. For the model below, this is a <strong>yes</strong>, <strong>which means that this is a bad model</strong>. Because this is just for illustration, we are going to continue using it.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="introduction-to-modeling.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="introduction-to-modeling.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-123"></span>
 <img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-123-1.png" alt="Residuals vs. Fitted" width="576" />
 <p class="caption">
@@ -622,7 +622,7 @@ Figure 8.1: Residuals vs. Fitted
 </p>
 </div>
 <p>The normal QQ shows how well the quantiles of the predictions fit to a theoretical normal distribution. If this is true, then the graph is a straight 45-degree line. In this model, you can definitely see that this is not the case. If this were a good model, this distribution would be closer to normal.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="introduction-to-modeling.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="introduction-to-modeling.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-124"></span>
 <img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-124-1.png" alt="Normal Q-Q" width="576" />
 <p class="caption">
@@ -630,10 +630,10 @@ Figure 8.2: Normal Q-Q
 </p>
 </div>
 <p>Once you have chosen your model, you should re-train over the entire data set. This is to make the coefficients more stable because <code>n</code> is larger. Below you can see that the standard error is lower after training over the entire data set.</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="introduction-to-modeling.html#cb225-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> health_insurance, </span>
-<span id="cb225-2"><a href="introduction-to-modeling.html#cb225-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">formula =</span> charges <span class="sc">~</span> bmi <span class="sc">+</span> age)</span>
-<span id="cb225-3"><a href="introduction-to-modeling.html#cb225-3" aria-hidden="true" tabindex="-1"></a>testing <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> test, </span>
-<span id="cb225-4"><a href="introduction-to-modeling.html#cb225-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> charges <span class="sc">~</span> bmi <span class="sc">+</span> age)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="introduction-to-modeling.html#cb229-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> health_insurance, </span>
+<span id="cb229-2"><a href="introduction-to-modeling.html#cb229-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">formula =</span> charges <span class="sc">~</span> bmi <span class="sc">+</span> age)</span>
+<span id="cb229-3"><a href="introduction-to-modeling.html#cb229-3" aria-hidden="true" tabindex="-1"></a>testing <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> test, </span>
+<span id="cb229-4"><a href="introduction-to-modeling.html#cb229-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> charges <span class="sc">~</span> bmi <span class="sc">+</span> age)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -661,7 +661,7 @@ Figure 8.2: Normal Q-Q
 </tbody>
 </table>
 <p>All interpretations should be based on the model which was trained on the entire data set. Obviously, this only makes a difference if you are interpreting the precise values of the coefficients. If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would probably not make a difference.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="introduction-to-modeling.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="introduction-to-modeling.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(model)</span></code></pre></div>
 <pre><code>## (Intercept)         bmi         age 
 ##  -4526.5284    286.8283    228.4372</code></pre>
 <p>Translating the above into an equation we have</p>
