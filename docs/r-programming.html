@@ -188,10 +188,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
 <ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 🤯</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -644,24 +644,32 @@ with dollar sign.</p>
 ## 2  35    TRUE</code></pre>
 <p>You can also work with tibbles, which are data frames but have nicer printing:</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="r-programming.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The tidyverse library has functions for making tibbles</span></span>
-<span id="cb99-2"><a href="r-programming.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
-<span id="cb99-3"><a href="r-programming.html#cb99-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb99-4"><a href="r-programming.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">35</span>), <span class="at">has_fsa =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb99-5"><a href="r-programming.html#cb99-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb99-6"><a href="r-programming.html#cb99-6" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<span id="cb99-2"><a href="r-programming.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span></code></pre></div>
+<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+## ✓ tibble  3.1.0     ✓ dplyr   1.0.2
+## ✓ tidyr   1.1.1     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.5.0</code></pre>
+<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="r-programming.html#cb103-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb103-2"><a href="r-programming.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">35</span>), <span class="at">has_fsa =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb103-3"><a href="r-programming.html#cb103-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb103-4"><a href="r-programming.html#cb103-4" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##     age has_fsa
 ##   &lt;dbl&gt; &lt;lgl&gt;  
 ## 1    25 FALSE  
 ## 2    35 TRUE</code></pre>
 <p>To index columns in a tibble, the same “$” is used as indexing a list.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="r-programming.html#cb101-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="r-programming.html#cb105-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age</span></code></pre></div>
 <pre><code>## [1] 25 35</code></pre>
 <p>To find the number of rows and columns, use <code>dim</code>.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="r-programming.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="r-programming.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
 <pre><code>## [1] 2 2</code></pre>
 <p>To find a summary, use <code>summary</code></p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="r-programming.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="r-programming.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
 <pre><code>##       age        has_fsa       
 ##  Min.   :25.0   Mode :logical  
 ##  1st Qu.:27.5   FALSE:1        
@@ -677,7 +685,7 @@ be written and executed in incremental steps. Those familiar with Python’s Pan
 will be see that <code>%&gt;%</code> is quite similar to “.” This also makes code easier to
 read.</p>
 <p>In five seconds, tell me what the below code is doing.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="r-programming.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">sqrt</span>(<span class="fu">exp</span>(<span class="fu">log2</span>(<span class="fu">sqrt</span>((<span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>))))))))</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="r-programming.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">sqrt</span>(<span class="fu">exp</span>(<span class="fu">log2</span>(<span class="fu">sqrt</span>((<span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>))))))))</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>Getting to the answer of 1 requires starting from the inner-most nested brackets
 and moving outwards from right to left.</p>
@@ -685,19 +693,19 @@ and moving outwards from right to left.</p>
 <p><span class="math display">\[log(\sqrt{e^{log_2(\sqrt{max(3,4,16)})}})\]</span></p>
 <p>Here is the same algebra using the pipe. To read this, replace the <code>%&gt;%</code> with
 the word <code>THEN</code>.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="r-programming.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb109-2"><a href="r-programming.html#cb109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb109-3"><a href="r-programming.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log2</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb109-4"><a href="r-programming.html#cb109-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb109-5"><a href="r-programming.html#cb109-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb109-6"><a href="r-programming.html#cb109-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="r-programming.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb113-2"><a href="r-programming.html#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb113-3"><a href="r-programming.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log2</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb113-4"><a href="r-programming.html#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb113-5"><a href="r-programming.html#cb113-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb113-6"><a href="r-programming.html#cb113-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="r-programming.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># max(c(3, 4, 16) THEN  # The max of 3, 4, and 16 is 16</span></span>
-<span id="cb111-2"><a href="r-programming.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  sqrt() THEN          # The square root of 16 is 4</span></span>
-<span id="cb111-3"><a href="r-programming.html#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  log2() THEN          # The log in base 2 of 4 is 2</span></span>
-<span id="cb111-4"><a href="r-programming.html#cb111-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  exp() THEN           # The exponent of 2 is e^2</span></span>
-<span id="cb111-5"><a href="r-programming.html#cb111-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  sqrt() THEN          # The square root of e^2 is e</span></span>
-<span id="cb111-6"><a href="r-programming.html#cb111-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  log()                # The natural logarithm of e is 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="r-programming.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># max(c(3, 4, 16) THEN  # The max of 3, 4, and 16 is 16</span></span>
+<span id="cb115-2"><a href="r-programming.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  sqrt() THEN          # The square root of 16 is 4</span></span>
+<span id="cb115-3"><a href="r-programming.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  log2() THEN          # The log in base 2 of 4 is 2</span></span>
+<span id="cb115-4"><a href="r-programming.html#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  exp() THEN           # The exponent of 2 is e^2</span></span>
+<span id="cb115-5"><a href="r-programming.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  sqrt() THEN          # The square root of e^2 is e</span></span>
+<span id="cb115-6"><a href="r-programming.html#cb115-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  log()                # The natural logarithm of e is 1</span></span></code></pre></div>
 <p>Pipes are exceptionally useful for data manipulations, which is covered in the
 next chapter.</p>
 </br>
@@ -709,32 +717,32 @@ next chapter.</p>
 <p></br></p>
 <p>By highlighting only certain sections, we can run the code in steps as if we were
 using a debugger. This makes testing out code much faster.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="r-programming.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="r-programming.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>))</span></code></pre></div>
 <pre><code>## [1] 16</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="r-programming.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb114-2"><a href="r-programming.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() </span></code></pre></div>
-<pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="r-programming.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb116-2"><a href="r-programming.html#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb116-3"><a href="r-programming.html#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log2</span>() </span></code></pre></div>
-<pre><code>## [1] 2</code></pre>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="r-programming.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb118-2"><a href="r-programming.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb118-3"><a href="r-programming.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log2</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb118-4"><a href="r-programming.html#cb118-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>()</span></code></pre></div>
-<pre><code>## [1] 7.389056</code></pre>
+<span id="cb118-2"><a href="r-programming.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() </span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="r-programming.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb120-2"><a href="r-programming.html#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb120-3"><a href="r-programming.html#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log2</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb120-4"><a href="r-programming.html#cb120-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb120-5"><a href="r-programming.html#cb120-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() </span></code></pre></div>
-<pre><code>## [1] 2.718282</code></pre>
+<span id="cb120-3"><a href="r-programming.html#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log2</span>() </span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="r-programming.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb122-2"><a href="r-programming.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb122-3"><a href="r-programming.html#cb122-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log2</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb122-4"><a href="r-programming.html#cb122-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb122-5"><a href="r-programming.html#cb122-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb122-6"><a href="r-programming.html#cb122-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span></code></pre></div>
+<span id="cb122-4"><a href="r-programming.html#cb122-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>()</span></code></pre></div>
+<pre><code>## [1] 7.389056</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="r-programming.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-2"><a href="r-programming.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb124-3"><a href="r-programming.html#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log2</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb124-4"><a href="r-programming.html#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb124-5"><a href="r-programming.html#cb124-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() </span></code></pre></div>
+<pre><code>## [1] 2.718282</code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="r-programming.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">16</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-2"><a href="r-programming.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb126-3"><a href="r-programming.html#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log2</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb126-4"><a href="r-programming.html#cb126-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb126-5"><a href="r-programming.html#cb126-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb126-6"><a href="r-programming.html#cb126-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 </div>
 <div id="the-soas-code-doesnt-use-pipes-or-dplyr-so-can-i-skip-learning-this" class="section level2" number="6.7">
