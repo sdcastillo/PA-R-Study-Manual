@@ -188,10 +188,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
 <ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 🤯</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😲</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -439,9 +439,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Of these, only the first two are commonly used. The exam is not going to ask you to calculate either of these. Just know that neither method will work better on all data sets, and so the best practice is to test both and compare the performance.</p>
 <p><strong>Step 2: Continue doing this until a stopping criteria is reached. For example, the minimum number of observations is 5 or less.</strong></p>
 <p>As you can see, this results in a very deep tree.</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="tree-based-models.html#cb364-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="at">formula =</span> charges <span class="sc">~</span>  ., <span class="at">data =</span> health_insurance,</span>
-<span id="cb364-2"><a href="tree-based-models.html#cb364-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">control =</span> <span class="fu">rpart.control</span>(<span class="at">cp =</span> <span class="fl">0.003</span>))</span>
-<span id="cb364-3"><a href="tree-based-models.html#cb364-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree, <span class="at">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="tree-based-models.html#cb360-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="at">formula =</span> charges <span class="sc">~</span>  ., <span class="at">data =</span> health_insurance,</span>
+<span id="cb360-2"><a href="tree-based-models.html#cb360-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">control =</span> <span class="fu">rpart.control</span>(<span class="at">cp =</span> <span class="fl">0.003</span>))</span>
+<span id="cb360-3"><a href="tree-based-models.html#cb360-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree, <span class="at">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-209-1.png" width="576" /></p>
 <p><strong>Step 3: Apply cost comlexity pruning to simplify the tree</strong></p>
 <p>Intuitively, we know that the above model would perform poorly due to overfitting. We want to make it simpler by removing nodes. This is very similar to how in linear models we reduce complexity by reducing the number of coefficients.</p>
@@ -454,13 +454,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Step 4: Use cross-validation to select the best alpha</strong></p>
 <p>The cost is controlled by the <code>CP</code> parameter. In the above example, did you notice the line <code>rpart.control(cp = 0.003)</code>? This is telling <code>rpart</code> to continue growing the tree until the CP reaches 0.003. At each subtree, we can measure the cost <code>CP</code> as well as the cross-validation error <code>xerror</code>.</p>
 <p>This is stored in the <code>cptable</code></p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="tree-based-models.html#cb365-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="at">formula =</span> charges <span class="sc">~</span>  ., <span class="at">data =</span> health_insurance,</span>
-<span id="cb365-2"><a href="tree-based-models.html#cb365-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">control =</span> <span class="fu">rpart.control</span>(<span class="at">cp =</span> <span class="fl">0.0001</span>))</span>
-<span id="cb365-3"><a href="tree-based-models.html#cb365-3" aria-hidden="true" tabindex="-1"></a>cost <span class="ot">&lt;-</span> tree<span class="sc">$</span>cptable <span class="sc">%&gt;%</span> </span>
-<span id="cb365-4"><a href="tree-based-models.html#cb365-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb365-5"><a href="tree-based-models.html#cb365-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(nsplit, CP, xerror) </span>
-<span id="cb365-6"><a href="tree-based-models.html#cb365-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb365-7"><a href="tree-based-models.html#cb365-7" aria-hidden="true" tabindex="-1"></a>cost <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="tree-based-models.html#cb361-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="at">formula =</span> charges <span class="sc">~</span>  ., <span class="at">data =</span> health_insurance,</span>
+<span id="cb361-2"><a href="tree-based-models.html#cb361-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">control =</span> <span class="fu">rpart.control</span>(<span class="at">cp =</span> <span class="fl">0.0001</span>))</span>
+<span id="cb361-3"><a href="tree-based-models.html#cb361-3" aria-hidden="true" tabindex="-1"></a>cost <span class="ot">&lt;-</span> tree<span class="sc">$</span>cptable <span class="sc">%&gt;%</span> </span>
+<span id="cb361-4"><a href="tree-based-models.html#cb361-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb361-5"><a href="tree-based-models.html#cb361-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(nsplit, CP, xerror) </span>
+<span id="cb361-6"><a href="tree-based-models.html#cb361-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb361-7"><a href="tree-based-models.html#cb361-7" aria-hidden="true" tabindex="-1"></a>cost <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##   nsplit      CP xerror
 ##    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
@@ -474,10 +474,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-211-1.png" width="576" /></p>
 <p>To optimize performance, choose the number of splits which has the lowest error. Often, though, the goal of using a decision tree is to create a simple model. In this case, we can err or the side of a lower <code>nsplit</code> so that the tree is shorter and more interpretable. All of the questions on so far have only used decision trees for interpretability, and a different model method has been used when predictive power is needed.</p>
 <p>Once we have selected <span class="math inline">\(\alpha\)</span>, the tree is pruned. This table below shows 6 different trees. The <code>xerror</code> column is the missclassification error. The <code>rel error</code> is the relative error, which is the missclassification error divided by its smallest value. This rescales <code>xerror</code> so that the tree with the smallest error is given a <code>rel error</code> of 1.00.</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="tree-based-models.html#cb367-1" aria-hidden="true" tabindex="-1"></a>tree<span class="sc">$</span>cptable <span class="sc">%&gt;%</span> </span>
-<span id="cb367-2"><a href="tree-based-models.html#cb367-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb367-3"><a href="tree-based-models.html#cb367-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(nsplit, CP, xerror, <span class="st">`</span><span class="at">rel error</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb367-4"><a href="tree-based-models.html#cb367-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="tree-based-models.html#cb363-1" aria-hidden="true" tabindex="-1"></a>tree<span class="sc">$</span>cptable <span class="sc">%&gt;%</span> </span>
+<span id="cb363-2"><a href="tree-based-models.html#cb363-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb363-3"><a href="tree-based-models.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(nsplit, CP, xerror, <span class="st">`</span><span class="at">rel error</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb363-4"><a href="tree-based-models.html#cb363-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   nsplit      CP xerror `rel error`
 ##    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;
@@ -488,8 +488,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5      4 0.00784  0.169       0.163
 ## 6      5 0.00712  0.163       0.155</code></pre>
 <p>The SOA may give you code to find the lowest CP value such as below. You could always find this value yourself by inspecting the CP table and choosing the value of <code>CP</code> which has the lowest <code>xerror</code>.</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="tree-based-models.html#cb369-1" aria-hidden="true" tabindex="-1"></a>pruned_tree <span class="ot">&lt;-</span> <span class="fu">prune</span>(tree,</span>
-<span id="cb369-2"><a href="tree-based-models.html#cb369-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cp =</span> tree<span class="sc">$</span>cptable[<span class="fu">which.min</span>(tree<span class="sc">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]), <span class="st">&quot;CP&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="tree-based-models.html#cb365-1" aria-hidden="true" tabindex="-1"></a>pruned_tree <span class="ot">&lt;-</span> <span class="fu">prune</span>(tree,</span>
+<span id="cb365-2"><a href="tree-based-models.html#cb365-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cp =</span> tree<span class="sc">$</span>cptable[<span class="fu">which.min</span>(tree<span class="sc">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]), <span class="st">&quot;CP&quot;</span>])</span></code></pre></div>
 <p>To make a simple tree, there are a few options</p>
 <ul>
 <li>Set the maximum depth of a tree with <code>maxdepth</code></li>
@@ -498,33 +498,33 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Force a high number of minimum observations per terminal node with <code>minbucket</code></li>
 </ul>
 <p>For instance, using these suggestions allows for a simpler tree to be fit.</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="tree-based-models.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb370-2"><a href="tree-based-models.html#cb370-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb370-3"><a href="tree-based-models.html#cb370-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> health_insurance<span class="sc">$</span>charges, </span>
-<span id="cb370-4"><a href="tree-based-models.html#cb370-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
-<span id="cb370-5"><a href="tree-based-models.html#cb370-5" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
-<span id="cb370-6"><a href="tree-based-models.html#cb370-6" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span>
-<span id="cb370-7"><a href="tree-based-models.html#cb370-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb370-8"><a href="tree-based-models.html#cb370-8" aria-hidden="true" tabindex="-1"></a>simple_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="at">formula =</span> charges <span class="sc">~</span>  ., </span>
-<span id="cb370-9"><a href="tree-based-models.html#cb370-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> train,</span>
-<span id="cb370-10"><a href="tree-based-models.html#cb370-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">control =</span> <span class="fu">rpart.control</span>(<span class="at">cp =</span> <span class="fl">0.0001</span>, </span>
-<span id="cb370-11"><a href="tree-based-models.html#cb370-11" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">minbucket =</span> <span class="dv">200</span>,</span>
-<span id="cb370-12"><a href="tree-based-models.html#cb370-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">maxdepth =</span> <span class="dv">10</span>))</span>
-<span id="cb370-13"><a href="tree-based-models.html#cb370-13" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(simple_tree, <span class="at">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="tree-based-models.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb366-2"><a href="tree-based-models.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb366-3"><a href="tree-based-models.html#cb366-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> health_insurance<span class="sc">$</span>charges, </span>
+<span id="cb366-4"><a href="tree-based-models.html#cb366-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
+<span id="cb366-5"><a href="tree-based-models.html#cb366-5" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
+<span id="cb366-6"><a href="tree-based-models.html#cb366-6" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span>
+<span id="cb366-7"><a href="tree-based-models.html#cb366-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb366-8"><a href="tree-based-models.html#cb366-8" aria-hidden="true" tabindex="-1"></a>simple_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="at">formula =</span> charges <span class="sc">~</span>  ., </span>
+<span id="cb366-9"><a href="tree-based-models.html#cb366-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> train,</span>
+<span id="cb366-10"><a href="tree-based-models.html#cb366-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">control =</span> <span class="fu">rpart.control</span>(<span class="at">cp =</span> <span class="fl">0.0001</span>, </span>
+<span id="cb366-11"><a href="tree-based-models.html#cb366-11" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">minbucket =</span> <span class="dv">200</span>,</span>
+<span id="cb366-12"><a href="tree-based-models.html#cb366-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">maxdepth =</span> <span class="dv">10</span>))</span>
+<span id="cb366-13"><a href="tree-based-models.html#cb366-13" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(simple_tree, <span class="at">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-214-1.png" width="576" /></p>
 <p>We evaluate the performance on the test set. Because the target variable <code>charges</code> is highly skewed, we use the Root Mean Squared Log Error (RMSLE). We see that the complex tree has the best (lowest) error, but also has 8 terminal nodes. The simple tree with only three terminal nodes has worse (higher) error, but this is still an improvement over the mean prediction.</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="tree-based-models.html#cb371-1" aria-hidden="true" tabindex="-1"></a>tree_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree, test)</span>
-<span id="cb371-2"><a href="tree-based-models.html#cb371-2" aria-hidden="true" tabindex="-1"></a>simple_tree_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(simple_tree, test)</span>
-<span id="cb371-3"><a href="tree-based-models.html#cb371-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb371-4"><a href="tree-based-models.html#cb371-4" aria-hidden="true" tabindex="-1"></a>get_rmsle <span class="ot">&lt;-</span> <span class="cf">function</span>(y, y_hat){</span>
-<span id="cb371-5"><a href="tree-based-models.html#cb371-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((<span class="fu">log</span>(y) <span class="sc">-</span> <span class="fu">log</span>(y_hat))<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb371-6"><a href="tree-based-models.html#cb371-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb371-7"><a href="tree-based-models.html#cb371-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb371-8"><a href="tree-based-models.html#cb371-8" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, tree_pred)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="tree-based-models.html#cb367-1" aria-hidden="true" tabindex="-1"></a>tree_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree, test)</span>
+<span id="cb367-2"><a href="tree-based-models.html#cb367-2" aria-hidden="true" tabindex="-1"></a>simple_tree_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(simple_tree, test)</span>
+<span id="cb367-3"><a href="tree-based-models.html#cb367-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb367-4"><a href="tree-based-models.html#cb367-4" aria-hidden="true" tabindex="-1"></a>get_rmsle <span class="ot">&lt;-</span> <span class="cf">function</span>(y, y_hat){</span>
+<span id="cb367-5"><a href="tree-based-models.html#cb367-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((<span class="fu">log</span>(y) <span class="sc">-</span> <span class="fu">log</span>(y_hat))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb367-6"><a href="tree-based-models.html#cb367-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb367-7"><a href="tree-based-models.html#cb367-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb367-8"><a href="tree-based-models.html#cb367-8" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, tree_pred)</span></code></pre></div>
 <pre><code>## [1] 0.3920546</code></pre>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="tree-based-models.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, simple_tree_pred)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="tree-based-models.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, simple_tree_pred)</span></code></pre></div>
 <pre><code>## [1] 0.5678457</code></pre>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="tree-based-models.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, <span class="fu">mean</span>(train<span class="sc">$</span>charges))</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="tree-based-models.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, <span class="fu">mean</span>(train<span class="sc">$</span>charges))</span></code></pre></div>
 <pre><code>## [1] 0.9996513</code></pre>
 <div id="example-soa-pa-6182020-task-6" class="section level3" number="15.1.1">
 <h3><span class="header-section-number">15.1.1</span> Example: SOA PA 6/18/2020, Task 6</h3>
@@ -629,16 +629,16 @@ Unable to predict beyond the range of the training data for regression (because 
 <h3><span class="header-section-number">15.3.1</span> Example</h3>
 <p>Using the basic <code>randomForest</code> package we fit a model with 500 trees.</p>
 <p>This expects only numeric values. We create dummy (indicator) columns.</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="tree-based-models.html#cb377-1" aria-hidden="true" tabindex="-1"></a>rf_data <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> </span>
-<span id="cb377-2"><a href="tree-based-models.html#cb377-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_frac</span>(<span class="fl">0.2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb377-3"><a href="tree-based-models.html#cb377-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">ifelse</span>(sex <span class="sc">==</span> <span class="st">&quot;male&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb377-4"><a href="tree-based-models.html#cb377-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">smoker =</span> <span class="fu">ifelse</span>(smoker <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb377-5"><a href="tree-based-models.html#cb377-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_ne =</span> <span class="fu">ifelse</span>(region <span class="sc">==</span> <span class="st">&quot;northeast&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb377-6"><a href="tree-based-models.html#cb377-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_nw =</span> <span class="fu">ifelse</span>(region <span class="sc">==</span> <span class="st">&quot;northwest&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb377-7"><a href="tree-based-models.html#cb377-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_se =</span> <span class="fu">ifelse</span>(region <span class="sc">==</span> <span class="st">&quot;southeast&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb377-8"><a href="tree-based-models.html#cb377-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_sw =</span> <span class="fu">ifelse</span>(region <span class="sc">==</span> <span class="st">&quot;southwest&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb377-9"><a href="tree-based-models.html#cb377-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>region)</span>
-<span id="cb377-10"><a href="tree-based-models.html#cb377-10" aria-hidden="true" tabindex="-1"></a>rf_data <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>(<span class="dv">50</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="tree-based-models.html#cb373-1" aria-hidden="true" tabindex="-1"></a>rf_data <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb373-2"><a href="tree-based-models.html#cb373-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_frac</span>(<span class="fl">0.2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb373-3"><a href="tree-based-models.html#cb373-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">ifelse</span>(sex <span class="sc">==</span> <span class="st">&quot;male&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb373-4"><a href="tree-based-models.html#cb373-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">smoker =</span> <span class="fu">ifelse</span>(smoker <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb373-5"><a href="tree-based-models.html#cb373-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_ne =</span> <span class="fu">ifelse</span>(region <span class="sc">==</span> <span class="st">&quot;northeast&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb373-6"><a href="tree-based-models.html#cb373-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_nw =</span> <span class="fu">ifelse</span>(region <span class="sc">==</span> <span class="st">&quot;northwest&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb373-7"><a href="tree-based-models.html#cb373-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_se =</span> <span class="fu">ifelse</span>(region <span class="sc">==</span> <span class="st">&quot;southeast&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb373-8"><a href="tree-based-models.html#cb373-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_sw =</span> <span class="fu">ifelse</span>(region <span class="sc">==</span> <span class="st">&quot;southwest&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb373-9"><a href="tree-based-models.html#cb373-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>region)</span>
+<span id="cb373-10"><a href="tree-based-models.html#cb373-10" aria-hidden="true" tabindex="-1"></a>rf_data <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>(<span class="dv">50</span>)</span></code></pre></div>
 <pre><code>## Rows: 268
 ## Columns: 10
 ## $ age       &lt;dbl&gt; 42, 44, 31, 36, 64, 28, 45, 27…
@@ -651,24 +651,24 @@ Unable to predict beyond the range of the training data for regression (because 
 ## $ region_nw &lt;dbl&gt; 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, …
 ## $ region_se &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, …
 ## $ region_sw &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</code></pre>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="tree-based-models.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb379-2"><a href="tree-based-models.html#cb379-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb379-3"><a href="tree-based-models.html#cb379-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> rf_data<span class="sc">$</span>charges, </span>
-<span id="cb379-4"><a href="tree-based-models.html#cb379-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
-<span id="cb379-5"><a href="tree-based-models.html#cb379-5" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> rf_data <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
-<span id="cb379-6"><a href="tree-based-models.html#cb379-6" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> rf_data <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span></code></pre></div>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="tree-based-models.html#cb380-1" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(charges <span class="sc">~</span> ., <span class="at">data =</span> train, <span class="at">ntree =</span> <span class="dv">400</span>)</span>
-<span id="cb380-2"><a href="tree-based-models.html#cb380-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rf)</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="tree-based-models.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb375-2"><a href="tree-based-models.html#cb375-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb375-3"><a href="tree-based-models.html#cb375-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> rf_data<span class="sc">$</span>charges, </span>
+<span id="cb375-4"><a href="tree-based-models.html#cb375-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
+<span id="cb375-5"><a href="tree-based-models.html#cb375-5" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> rf_data <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
+<span id="cb375-6"><a href="tree-based-models.html#cb375-6" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> rf_data <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="tree-based-models.html#cb376-1" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(charges <span class="sc">~</span> ., <span class="at">data =</span> train, <span class="at">ntree =</span> <span class="dv">400</span>)</span>
+<span id="cb376-2"><a href="tree-based-models.html#cb376-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rf)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-219-1.png" width="576" /></p>
 <p>We again use RMSLE. This is lower (better) than a model that uses the average as a baseline.</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="tree-based-models.html#cb381-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf, test)</span>
-<span id="cb381-2"><a href="tree-based-models.html#cb381-2" aria-hidden="true" tabindex="-1"></a>get_rmsle <span class="ot">&lt;-</span> <span class="cf">function</span>(y, y_hat){</span>
-<span id="cb381-3"><a href="tree-based-models.html#cb381-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((<span class="fu">log</span>(y) <span class="sc">-</span> <span class="fu">log</span>(y_hat))<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb381-4"><a href="tree-based-models.html#cb381-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb381-5"><a href="tree-based-models.html#cb381-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb381-6"><a href="tree-based-models.html#cb381-6" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, pred)</span></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="tree-based-models.html#cb377-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf, test)</span>
+<span id="cb377-2"><a href="tree-based-models.html#cb377-2" aria-hidden="true" tabindex="-1"></a>get_rmsle <span class="ot">&lt;-</span> <span class="cf">function</span>(y, y_hat){</span>
+<span id="cb377-3"><a href="tree-based-models.html#cb377-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((<span class="fu">log</span>(y) <span class="sc">-</span> <span class="fu">log</span>(y_hat))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb377-4"><a href="tree-based-models.html#cb377-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb377-5"><a href="tree-based-models.html#cb377-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb377-6"><a href="tree-based-models.html#cb377-6" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, pred)</span></code></pre></div>
 <pre><code>## [1] 0.5252518</code></pre>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="tree-based-models.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, <span class="fu">mean</span>(train<span class="sc">$</span>charges))</span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="tree-based-models.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, <span class="fu">mean</span>(train<span class="sc">$</span>charges))</span></code></pre></div>
 <pre><code>## [1] 1.118947</code></pre>
 </div>
 <div id="variable-importance" class="section level3" number="15.3.2">
@@ -679,7 +679,7 @@ Unable to predict beyond the range of the training data for regression (because 
 <li><p>Use the total decrease in node impurities from splitting on the variable, averaged over all trees. For classification, the node impurity is measured by the Gini index; for regression, it is measured by the residual sum of squares <span class="math inline">\(\text{RSS}\)</span>. This is <code>type = 2</code>.</p></li>
 </ol>
 <p><code>smoker</code>, <code>bmi</code>, and <code>age</code> are the most importance predictors of charges. As you can imagine, variable importance is a highly useful tool for building models. We could use this to test out newly engineered features, or perform feature selection by taking the top-n features and use them in a different model. Random forests can handle very high dimensional data which allows for many tests to be run at once.</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="tree-based-models.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(<span class="at">x =</span> rf)</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="tree-based-models.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(<span class="at">x =</span> rf)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-221-1.png" width="576" /></p>
 </div>
 <div id="partial-dependence" class="section level3" number="15.3.3">
@@ -688,9 +688,9 @@ Unable to predict beyond the range of the training data for regression (because 
 <p>Although this is commonly used for trees, this approach is model-agnostic in that any model could be used.</p>
 <p>Take a model of two predictors, <span class="math inline">\(\hat{\mathbf{y}} = f(\mathbf{X}_1, \mathbf{X_2})\)</span>. For simplicity, say that <span class="math inline">\(f(x_1, x_2) = 2x_1 + 3x_2\)</span>.</p>
 <p>The data looks like this</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="tree-based-models.html#cb386-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x1 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">x2 =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb386-2"><a href="tree-based-models.html#cb386-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">f =</span> <span class="dv">2</span><span class="sc">*</span>x1 <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>x2)</span>
-<span id="cb386-3"><a href="tree-based-models.html#cb386-3" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="tree-based-models.html#cb382-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x1 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">x2 =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb382-2"><a href="tree-based-models.html#cb382-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">f =</span> <span class="dv">2</span><span class="sc">*</span>x1 <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>x2)</span>
+<span id="cb382-3"><a href="tree-based-models.html#cb382-3" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##      x1    x2     f
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -699,7 +699,7 @@ Unable to predict beyond the range of the training data for regression (because 
 ## 3     2     5    19
 ## 4     2     6    22</code></pre>
 <p>Here is the partial dependence of <code>x1</code> on to <code>f</code>.</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="tree-based-models.html#cb388-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(x1) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">f =</span> <span class="fu">mean</span>(f))</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="tree-based-models.html#cb384-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(x1) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">f =</span> <span class="fu">mean</span>(f))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##      x1     f
 ##   &lt;dbl&gt; &lt;dbl&gt;
@@ -707,15 +707,15 @@ Unable to predict beyond the range of the training data for regression (because 
 ## 2     2  20.5</code></pre>
 <p>This method of using the mean is know as the <em>Monte Carlo</em> method. There are other methods for partial dependence that are not on the syllabus.</p>
 <p>For the Random Forest, this is done with <code>pdp::partial()</code>.</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="tree-based-models.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdp)</span>
-<span id="cb390-2"><a href="tree-based-models.html#cb390-2" aria-hidden="true" tabindex="-1"></a>bmi <span class="ot">&lt;-</span> pdp<span class="sc">::</span><span class="fu">partial</span>(rf, <span class="at">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, </span>
-<span id="cb390-3"><a href="tree-based-models.html#cb390-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">grid.resolution =</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb390-4"><a href="tree-based-models.html#cb390-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb390-5"><a href="tree-based-models.html#cb390-5" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> pdp<span class="sc">::</span><span class="fu">partial</span>(rf, <span class="at">pred.var =</span> <span class="st">&quot;age&quot;</span>, </span>
-<span id="cb390-6"><a href="tree-based-models.html#cb390-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">grid.resolution =</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb390-7"><a href="tree-based-models.html#cb390-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb390-8"><a href="tree-based-models.html#cb390-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb390-9"><a href="tree-based-models.html#cb390-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(bmi, age)</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="tree-based-models.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdp)</span>
+<span id="cb386-2"><a href="tree-based-models.html#cb386-2" aria-hidden="true" tabindex="-1"></a>bmi <span class="ot">&lt;-</span> pdp<span class="sc">::</span><span class="fu">partial</span>(rf, <span class="at">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, </span>
+<span id="cb386-3"><a href="tree-based-models.html#cb386-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">grid.resolution =</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb386-4"><a href="tree-based-models.html#cb386-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb386-5"><a href="tree-based-models.html#cb386-5" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> pdp<span class="sc">::</span><span class="fu">partial</span>(rf, <span class="at">pred.var =</span> <span class="st">&quot;age&quot;</span>, </span>
+<span id="cb386-6"><a href="tree-based-models.html#cb386-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">grid.resolution =</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb386-7"><a href="tree-based-models.html#cb386-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb386-8"><a href="tree-based-models.html#cb386-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb386-9"><a href="tree-based-models.html#cb386-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(bmi, age)</span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-224"></span>
 <img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-224-1.png" alt="Partial Dependence" width="576" />
 <p class="caption">
@@ -812,18 +812,18 @@ Figure 15.1: Partial Dependence
 <div id="example-2" class="section level3" number="15.4.4">
 <h3><span class="header-section-number">15.4.4</span> Example</h3>
 <p>We fit a gbm below without tuning the parameters for the sake of example.</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="tree-based-models.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
-<span id="cb391-2"><a href="tree-based-models.html#cb391-2" aria-hidden="true" tabindex="-1"></a>gbm <span class="ot">&lt;-</span> <span class="fu">gbm</span>(charges <span class="sc">~</span> ., <span class="at">data =</span> train,</span>
-<span id="cb391-3"><a href="tree-based-models.html#cb391-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">n.trees =</span> <span class="dv">100</span>,</span>
-<span id="cb391-4"><a href="tree-based-models.html#cb391-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">interaction.depth =</span> <span class="dv">2</span>,</span>
-<span id="cb391-5"><a href="tree-based-models.html#cb391-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">n.minobsinnode =</span> <span class="dv">50</span>,</span>
-<span id="cb391-6"><a href="tree-based-models.html#cb391-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">shrinkage =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="tree-based-models.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
+<span id="cb387-2"><a href="tree-based-models.html#cb387-2" aria-hidden="true" tabindex="-1"></a>gbm <span class="ot">&lt;-</span> <span class="fu">gbm</span>(charges <span class="sc">~</span> ., <span class="at">data =</span> train,</span>
+<span id="cb387-3"><a href="tree-based-models.html#cb387-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">n.trees =</span> <span class="dv">100</span>,</span>
+<span id="cb387-4"><a href="tree-based-models.html#cb387-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">interaction.depth =</span> <span class="dv">2</span>,</span>
+<span id="cb387-5"><a href="tree-based-models.html#cb387-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">n.minobsinnode =</span> <span class="dv">50</span>,</span>
+<span id="cb387-6"><a href="tree-based-models.html#cb387-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">shrinkage =</span> <span class="fl">0.1</span>)</span></code></pre></div>
 <pre><code>## Distribution not specified, assuming gaussian ...</code></pre>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="tree-based-models.html#cb393-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(gbm, test, <span class="at">n.trees =</span> <span class="dv">100</span>)</span>
-<span id="cb393-2"><a href="tree-based-models.html#cb393-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb393-3"><a href="tree-based-models.html#cb393-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, pred)</span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="tree-based-models.html#cb389-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(gbm, test, <span class="at">n.trees =</span> <span class="dv">100</span>)</span>
+<span id="cb389-2"><a href="tree-based-models.html#cb389-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb389-3"><a href="tree-based-models.html#cb389-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, pred)</span></code></pre></div>
 <pre><code>## [1] 1.052716</code></pre>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="tree-based-models.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, <span class="fu">mean</span>(train<span class="sc">$</span>charges))</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="tree-based-models.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmsle</span>(test<span class="sc">$</span>charges, <span class="fu">mean</span>(train<span class="sc">$</span>charges))</span></code></pre></div>
 <pre><code>## [1] 1.118947</code></pre>
 </div>
 <div id="advantages-and-disadvantages-4" class="section level3" number="15.4.5">
@@ -861,78 +861,78 @@ Can overfit if not tuned correctly</li>
 </div>
 <div id="exercises-1" class="section level2" number="15.5">
 <h2><span class="header-section-number">15.5</span> Exercises</h2>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="tree-based-models.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ExamPAData)</span>
-<span id="cb397-2"><a href="tree-based-models.html#cb397-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="tree-based-models.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ExamPAData)</span>
+<span id="cb393-2"><a href="tree-based-models.html#cb393-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Run this code on your computer to answer these exercises.</p>
 <div id="rf-tuning-with-caret" class="section level3" number="15.5.1">
 <h3><span class="header-section-number">15.5.1</span> 1. RF tuning with <code>caret</code></h3>
 <p>The best practice of tuning a model is with cross-validation. This can only be done in the <code>caret</code> library. If the SOA asks you to use <code>caret</code>, they will likely ask you a question related to cross validation as below.</p>
 <p>An actuary has trained a predictive model and chosen the best hyperparameters, cleaned the data, and performed feature engineering. They have one problem, however: the error on the training data is far lower than on new, unseen test data. Read the code below and determine their problem. Find a way to lower the error on the test data <em>without changing the model or the data.</em> Explain the rational behind your method.</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="tree-based-models.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb398-2"><a href="tree-based-models.html#cb398-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Take only 250 records </span></span>
-<span id="cb398-3"><a href="tree-based-models.html#cb398-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Uncomment this when completing this exercise</span></span>
-<span id="cb398-4"><a href="tree-based-models.html#cb398-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">sample_n</span>(<span class="dv">250</span>) </span>
-<span id="cb398-5"><a href="tree-based-models.html#cb398-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb398-6"><a href="tree-based-models.html#cb398-6" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(</span>
-<span id="cb398-7"><a href="tree-based-models.html#cb398-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> data<span class="sc">$</span>charges, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F) <span class="sc">%&gt;%</span> </span>
-<span id="cb398-8"><a href="tree-based-models.html#cb398-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span>
-<span id="cb398-9"><a href="tree-based-models.html#cb398-9" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span>  health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
-<span id="cb398-10"><a href="tree-based-models.html#cb398-10" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span>
-<span id="cb398-11"><a href="tree-based-models.html#cb398-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb398-12"><a href="tree-based-models.html#cb398-12" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(</span>
-<span id="cb398-13"><a href="tree-based-models.html#cb398-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">method=</span><span class="st">&#39;boot&#39;</span>, </span>
-<span id="cb398-14"><a href="tree-based-models.html#cb398-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">number=</span><span class="dv">2</span>, </span>
-<span id="cb398-15"><a href="tree-based-models.html#cb398-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="fl">0.2</span>)</span>
-<span id="cb398-16"><a href="tree-based-models.html#cb398-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb398-17"><a href="tree-based-models.html#cb398-17" aria-hidden="true" tabindex="-1"></a>tunegrid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">.mtry=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>))</span>
-<span id="cb398-18"><a href="tree-based-models.html#cb398-18" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">train</span>(charges <span class="sc">~</span> .,</span>
-<span id="cb398-19"><a href="tree-based-models.html#cb398-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> train,</span>
-<span id="cb398-20"><a href="tree-based-models.html#cb398-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">method=</span><span class="st">&#39;rf&#39;</span>, </span>
-<span id="cb398-21"><a href="tree-based-models.html#cb398-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">tuneGrid=</span>tunegrid, </span>
-<span id="cb398-22"><a href="tree-based-models.html#cb398-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">trControl=</span>control)</span>
-<span id="cb398-23"><a href="tree-based-models.html#cb398-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb398-24"><a href="tree-based-models.html#cb398-24" aria-hidden="true" tabindex="-1"></a>pred_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf, train)</span>
-<span id="cb398-25"><a href="tree-based-models.html#cb398-25" aria-hidden="true" tabindex="-1"></a>pred_test <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf, test)</span>
-<span id="cb398-26"><a href="tree-based-models.html#cb398-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb398-27"><a href="tree-based-models.html#cb398-27" aria-hidden="true" tabindex="-1"></a>get_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(y, y_hat){</span>
-<span id="cb398-28"><a href="tree-based-models.html#cb398-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((y <span class="sc">-</span> y_hat)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb398-29"><a href="tree-based-models.html#cb398-29" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb398-30"><a href="tree-based-models.html#cb398-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb398-31"><a href="tree-based-models.html#cb398-31" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmse</span>(pred_train, train<span class="sc">$</span>charges)</span>
-<span id="cb398-32"><a href="tree-based-models.html#cb398-32" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmse</span>(pred_test, test<span class="sc">$</span>charges)</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="tree-based-models.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb394-2"><a href="tree-based-models.html#cb394-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Take only 250 records </span></span>
+<span id="cb394-3"><a href="tree-based-models.html#cb394-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Uncomment this when completing this exercise</span></span>
+<span id="cb394-4"><a href="tree-based-models.html#cb394-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">sample_n</span>(<span class="dv">250</span>) </span>
+<span id="cb394-5"><a href="tree-based-models.html#cb394-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb394-6"><a href="tree-based-models.html#cb394-6" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(</span>
+<span id="cb394-7"><a href="tree-based-models.html#cb394-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> data<span class="sc">$</span>charges, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F) <span class="sc">%&gt;%</span> </span>
+<span id="cb394-8"><a href="tree-based-models.html#cb394-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span>
+<span id="cb394-9"><a href="tree-based-models.html#cb394-9" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span>  health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
+<span id="cb394-10"><a href="tree-based-models.html#cb394-10" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span>
+<span id="cb394-11"><a href="tree-based-models.html#cb394-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb394-12"><a href="tree-based-models.html#cb394-12" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(</span>
+<span id="cb394-13"><a href="tree-based-models.html#cb394-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">method=</span><span class="st">&#39;boot&#39;</span>, </span>
+<span id="cb394-14"><a href="tree-based-models.html#cb394-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">number=</span><span class="dv">2</span>, </span>
+<span id="cb394-15"><a href="tree-based-models.html#cb394-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="fl">0.2</span>)</span>
+<span id="cb394-16"><a href="tree-based-models.html#cb394-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb394-17"><a href="tree-based-models.html#cb394-17" aria-hidden="true" tabindex="-1"></a>tunegrid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">.mtry=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>))</span>
+<span id="cb394-18"><a href="tree-based-models.html#cb394-18" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">train</span>(charges <span class="sc">~</span> .,</span>
+<span id="cb394-19"><a href="tree-based-models.html#cb394-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> train,</span>
+<span id="cb394-20"><a href="tree-based-models.html#cb394-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">method=</span><span class="st">&#39;rf&#39;</span>, </span>
+<span id="cb394-21"><a href="tree-based-models.html#cb394-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">tuneGrid=</span>tunegrid, </span>
+<span id="cb394-22"><a href="tree-based-models.html#cb394-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">trControl=</span>control)</span>
+<span id="cb394-23"><a href="tree-based-models.html#cb394-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb394-24"><a href="tree-based-models.html#cb394-24" aria-hidden="true" tabindex="-1"></a>pred_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf, train)</span>
+<span id="cb394-25"><a href="tree-based-models.html#cb394-25" aria-hidden="true" tabindex="-1"></a>pred_test <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf, test)</span>
+<span id="cb394-26"><a href="tree-based-models.html#cb394-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb394-27"><a href="tree-based-models.html#cb394-27" aria-hidden="true" tabindex="-1"></a>get_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(y, y_hat){</span>
+<span id="cb394-28"><a href="tree-based-models.html#cb394-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((y <span class="sc">-</span> y_hat)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb394-29"><a href="tree-based-models.html#cb394-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb394-30"><a href="tree-based-models.html#cb394-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb394-31"><a href="tree-based-models.html#cb394-31" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmse</span>(pred_train, train<span class="sc">$</span>charges)</span>
+<span id="cb394-32"><a href="tree-based-models.html#cb394-32" aria-hidden="true" tabindex="-1"></a><span class="fu">get_rmse</span>(pred_test, test<span class="sc">$</span>charges)</span></code></pre></div>
 </div>
 <div id="tuning-a-gbm-with-caret" class="section level3" number="15.5.2">
 <h3><span class="header-section-number">15.5.2</span> 2. Tuning a GBM with <code>caret</code></h3>
 <p>If the SOA asks you to tune a GBM, they will need to give you starting hyperparameters which are close to the “best” values due to how slow the Prometric computers are. Another possibility is that they pre-train a GBM model object and ask that you use it.</p>
 <p>This example looks at 135 combinations of hyper parameters.</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="tree-based-models.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb399-2"><a href="tree-based-models.html#cb399-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> health_insurance<span class="sc">$</span>charges, </span>
-<span id="cb399-3"><a href="tree-based-models.html#cb399-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
-<span id="cb399-4"><a href="tree-based-models.html#cb399-4" aria-hidden="true" tabindex="-1"></a><span class="co">#To make this run faster, only take 50% sample</span></span>
-<span id="cb399-5"><a href="tree-based-models.html#cb399-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">sample_frac</span>(<span class="fl">0.50</span>) </span>
-<span id="cb399-6"><a href="tree-based-models.html#cb399-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index) </span>
-<span id="cb399-7"><a href="tree-based-models.html#cb399-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">sample_frac</span>(<span class="fl">0.05</span>)<span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span>
-<span id="cb399-8"><a href="tree-based-models.html#cb399-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb399-9"><a href="tree-based-models.html#cb399-9" aria-hidden="true" tabindex="-1"></a>tunegrid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb399-10"><a href="tree-based-models.html#cb399-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">interaction.depth =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>, <span class="dv">10</span>),</span>
-<span id="cb399-11"><a href="tree-based-models.html#cb399-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.trees =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>), </span>
-<span id="cb399-12"><a href="tree-based-models.html#cb399-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">shrinkage =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.1</span>, <span class="fl">0.0001</span>),</span>
-<span id="cb399-13"><a href="tree-based-models.html#cb399-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.minobsinnode =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">100</span>)</span>
-<span id="cb399-14"><a href="tree-based-models.html#cb399-14" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb399-15"><a href="tree-based-models.html#cb399-15" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(tunegrid)</span>
-<span id="cb399-16"><a href="tree-based-models.html#cb399-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb399-17"><a href="tree-based-models.html#cb399-17" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(</span>
-<span id="cb399-18"><a href="tree-based-models.html#cb399-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">method=</span><span class="st">&#39;repeatedcv&#39;</span>, </span>
-<span id="cb399-19"><a href="tree-based-models.html#cb399-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">number=</span><span class="dv">5</span>, </span>
-<span id="cb399-20"><a href="tree-based-models.html#cb399-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="fl">0.8</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="tree-based-models.html#cb400-1" aria-hidden="true" tabindex="-1"></a>gbm <span class="ot">&lt;-</span> <span class="fu">train</span>(charges <span class="sc">~</span> .,</span>
-<span id="cb400-2"><a href="tree-based-models.html#cb400-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> train,</span>
-<span id="cb400-3"><a href="tree-based-models.html#cb400-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">method=</span><span class="st">&#39;gbm&#39;</span>, </span>
-<span id="cb400-4"><a href="tree-based-models.html#cb400-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">tuneGrid=</span>tunegrid, </span>
-<span id="cb400-5"><a href="tree-based-models.html#cb400-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">trControl=</span>control,</span>
-<span id="cb400-6"><a href="tree-based-models.html#cb400-6" aria-hidden="true" tabindex="-1"></a>            <span class="co">#Show detailed output</span></span>
-<span id="cb400-7"><a href="tree-based-models.html#cb400-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb400-8"><a href="tree-based-models.html#cb400-8" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="tree-based-models.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb395-2"><a href="tree-based-models.html#cb395-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> health_insurance<span class="sc">$</span>charges, </span>
+<span id="cb395-3"><a href="tree-based-models.html#cb395-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F)</span>
+<span id="cb395-4"><a href="tree-based-models.html#cb395-4" aria-hidden="true" tabindex="-1"></a><span class="co">#To make this run faster, only take 50% sample</span></span>
+<span id="cb395-5"><a href="tree-based-models.html#cb395-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">sample_frac</span>(<span class="fl">0.50</span>) </span>
+<span id="cb395-6"><a href="tree-based-models.html#cb395-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index) </span>
+<span id="cb395-7"><a href="tree-based-models.html#cb395-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">sample_frac</span>(<span class="fl">0.05</span>)<span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span>
+<span id="cb395-8"><a href="tree-based-models.html#cb395-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb395-9"><a href="tree-based-models.html#cb395-9" aria-hidden="true" tabindex="-1"></a>tunegrid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb395-10"><a href="tree-based-models.html#cb395-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">interaction.depth =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>, <span class="dv">10</span>),</span>
+<span id="cb395-11"><a href="tree-based-models.html#cb395-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.trees =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>), </span>
+<span id="cb395-12"><a href="tree-based-models.html#cb395-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">shrinkage =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.1</span>, <span class="fl">0.0001</span>),</span>
+<span id="cb395-13"><a href="tree-based-models.html#cb395-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.minobsinnode =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">100</span>)</span>
+<span id="cb395-14"><a href="tree-based-models.html#cb395-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb395-15"><a href="tree-based-models.html#cb395-15" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(tunegrid)</span>
+<span id="cb395-16"><a href="tree-based-models.html#cb395-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb395-17"><a href="tree-based-models.html#cb395-17" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(</span>
+<span id="cb395-18"><a href="tree-based-models.html#cb395-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">method=</span><span class="st">&#39;repeatedcv&#39;</span>, </span>
+<span id="cb395-19"><a href="tree-based-models.html#cb395-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">number=</span><span class="dv">5</span>, </span>
+<span id="cb395-20"><a href="tree-based-models.html#cb395-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="tree-based-models.html#cb396-1" aria-hidden="true" tabindex="-1"></a>gbm <span class="ot">&lt;-</span> <span class="fu">train</span>(charges <span class="sc">~</span> .,</span>
+<span id="cb396-2"><a href="tree-based-models.html#cb396-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> train,</span>
+<span id="cb396-3"><a href="tree-based-models.html#cb396-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">method=</span><span class="st">&#39;gbm&#39;</span>, </span>
+<span id="cb396-4"><a href="tree-based-models.html#cb396-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">tuneGrid=</span>tunegrid, </span>
+<span id="cb396-5"><a href="tree-based-models.html#cb396-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">trControl=</span>control,</span>
+<span id="cb396-6"><a href="tree-based-models.html#cb396-6" aria-hidden="true" tabindex="-1"></a>            <span class="co">#Show detailed output</span></span>
+<span id="cb396-7"><a href="tree-based-models.html#cb396-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb396-8"><a href="tree-based-models.html#cb396-8" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
 <p>The output shows the RMSE for each of the 135 models tested.</p>
 <p>(Part 1 of 3)</p>
 <p>Identify the hyperpameter combination that has the lowest training error.</p>
@@ -940,19 +940,19 @@ Can overfit if not tuned correctly</li>
 <ol start="2" style="list-style-type: decimal">
 <li>Suppose that the optimization measure was RMSE. The below table shows the results from three models. Explain why some sets of parameters have better RMSE than the others.</li>
 </ol>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="tree-based-models.html#cb401-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> gbm<span class="sc">$</span>results <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(RMSE)</span>
-<span id="cb401-2"><a href="tree-based-models.html#cb401-2" aria-hidden="true" tabindex="-1"></a>top_result <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span>)<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">param_rank =</span> <span class="dv">1</span>)</span>
-<span id="cb401-3"><a href="tree-based-models.html#cb401-3" aria-hidden="true" tabindex="-1"></a>tenth_result <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">10</span>)<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">param_rank =</span> <span class="dv">10</span>)</span>
-<span id="cb401-4"><a href="tree-based-models.html#cb401-4" aria-hidden="true" tabindex="-1"></a>twenty_seventh_result <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">135</span>)<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">param_rank =</span> <span class="dv">135</span>)</span>
-<span id="cb401-5"><a href="tree-based-models.html#cb401-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb401-6"><a href="tree-based-models.html#cb401-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(top_result, tenth_result, twenty_seventh_result) <span class="sc">%&gt;%</span> </span>
-<span id="cb401-7"><a href="tree-based-models.html#cb401-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(param_rank, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="tree-based-models.html#cb397-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> gbm<span class="sc">$</span>results <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(RMSE)</span>
+<span id="cb397-2"><a href="tree-based-models.html#cb397-2" aria-hidden="true" tabindex="-1"></a>top_result <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span>)<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">param_rank =</span> <span class="dv">1</span>)</span>
+<span id="cb397-3"><a href="tree-based-models.html#cb397-3" aria-hidden="true" tabindex="-1"></a>tenth_result <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">10</span>)<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">param_rank =</span> <span class="dv">10</span>)</span>
+<span id="cb397-4"><a href="tree-based-models.html#cb397-4" aria-hidden="true" tabindex="-1"></a>twenty_seventh_result <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">135</span>)<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">param_rank =</span> <span class="dv">135</span>)</span>
+<span id="cb397-5"><a href="tree-based-models.html#cb397-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb397-6"><a href="tree-based-models.html#cb397-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(top_result, tenth_result, twenty_seventh_result) <span class="sc">%&gt;%</span> </span>
+<span id="cb397-7"><a href="tree-based-models.html#cb397-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(param_rank, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>The partial dependence of <code>bmi</code> onto <code>charges</code> makes it appear as if <code>charges</code> increases monotonically as <code>bmi</code> increases.</li>
 </ol>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="tree-based-models.html#cb402-1" aria-hidden="true" tabindex="-1"></a>pdp<span class="sc">::</span><span class="fu">partial</span>(gbm, <span class="at">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, <span class="at">grid.resolution =</span> <span class="dv">15</span>, <span class="at">plot =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="tree-based-models.html#cb398-1" aria-hidden="true" tabindex="-1"></a>pdp<span class="sc">::</span><span class="fu">partial</span>(gbm, <span class="at">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, <span class="at">grid.resolution =</span> <span class="dv">15</span>, <span class="at">plot =</span> T)</span></code></pre></div>
 <p>However, when we add in the <code>ice</code> curves, we see that there is something else going on. Explain this graph. Why are there two groups of lines?</p>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="tree-based-models.html#cb403-1" aria-hidden="true" tabindex="-1"></a>pdp<span class="sc">::</span><span class="fu">partial</span>(gbm, <span class="at">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, <span class="at">grid.resolution =</span> <span class="dv">20</span>, <span class="at">plot =</span> T, <span class="at">ice =</span> T, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">palette =</span> <span class="st">&quot;viridis&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="tree-based-models.html#cb399-1" aria-hidden="true" tabindex="-1"></a>pdp<span class="sc">::</span><span class="fu">partial</span>(gbm, <span class="at">pred.var =</span> <span class="st">&quot;bmi&quot;</span>, <span class="at">grid.resolution =</span> <span class="dv">20</span>, <span class="at">plot =</span> T, <span class="at">ice =</span> T, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">palette =</span> <span class="st">&quot;viridis&quot;</span>)</span></code></pre></div>
 <p><strong>Solutions</strong>:</p>
 <p>Already enrolled? Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=214
 ">Practice Exams</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=165">Practice Exams + Lessons</a></p>

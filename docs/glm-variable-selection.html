@@ -188,10 +188,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
 <ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 🤯</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😲</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -521,15 +521,15 @@ encountered thus far in this book. In particular, we must pass in an <span class
 matrix as well as a <span class="math inline">\(y\)</span> vector, and we do not use the <span class="math inline">\(y \sim x\)</span> syntax.</p>
 <p>Before proceeding, let’s first ensure that the missing values have
 been removed from the data, as described in the previous lab.</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="glm-variable-selection.html#cb317-1" aria-hidden="true" tabindex="-1"></a>Hitters <span class="ot">=</span> <span class="fu">na.omit</span>(Hitters)</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="glm-variable-selection.html#cb313-1" aria-hidden="true" tabindex="-1"></a>Hitters <span class="ot">=</span> <span class="fu">na.omit</span>(Hitters)</span></code></pre></div>
 <p>We will now perform ridge regression and the lasso in order to predict <code>Salary</code> on
 the <code>Hitters</code> data. Let’s set up our data:</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="glm-variable-selection.html#cb318-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">model.matrix</span>(Salary<span class="sc">~</span>., Hitters)[,<span class="sc">-</span><span class="dv">1</span>] <span class="co"># trim off the first column</span></span>
-<span id="cb318-2"><a href="glm-variable-selection.html#cb318-2" aria-hidden="true" tabindex="-1"></a>                                         <span class="co"># leaving only the predictors</span></span>
-<span id="cb318-3"><a href="glm-variable-selection.html#cb318-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> Hitters <span class="sc">%&gt;%</span></span>
-<span id="cb318-4"><a href="glm-variable-selection.html#cb318-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Salary) <span class="sc">%&gt;%</span></span>
-<span id="cb318-5"><a href="glm-variable-selection.html#cb318-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb318-6"><a href="glm-variable-selection.html#cb318-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="glm-variable-selection.html#cb314-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">model.matrix</span>(Salary<span class="sc">~</span>., Hitters)[,<span class="sc">-</span><span class="dv">1</span>] <span class="co"># trim off the first column</span></span>
+<span id="cb314-2"><a href="glm-variable-selection.html#cb314-2" aria-hidden="true" tabindex="-1"></a>                                         <span class="co"># leaving only the predictors</span></span>
+<span id="cb314-3"><a href="glm-variable-selection.html#cb314-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> Hitters <span class="sc">%&gt;%</span></span>
+<span id="cb314-4"><a href="glm-variable-selection.html#cb314-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Salary) <span class="sc">%&gt;%</span></span>
+<span id="cb314-5"><a href="glm-variable-selection.html#cb314-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb314-6"><a href="glm-variable-selection.html#cb314-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code></pre></div>
 <p>The <code>model.matrix()</code> function is particularly useful for creating <span class="math inline">\(x\)</span>; not only
 does it produce a matrix corresponding to the 19 predictors but it also
 automatically transforms any qualitative variables into dummy variables.
@@ -538,8 +538,8 @@ quantitative inputs.</p>
 <p>The <code>glmnet()</code> function has an alpha argument that determines what type
 of model is fit. If <code>alpha = 0</code> then a ridge regression model is fit, and if <code>alpha = 1</code>
 then a lasso model is fit. We first fit a ridge regression model:</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="glm-variable-selection.html#cb319-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="dv">10</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
-<span id="cb319-2"><a href="glm-variable-selection.html#cb319-2" aria-hidden="true" tabindex="-1"></a>ridge_mod <span class="ot">=</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda =</span> grid)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="glm-variable-selection.html#cb315-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="dv">10</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb315-2"><a href="glm-variable-selection.html#cb315-2" aria-hidden="true" tabindex="-1"></a>ridge_mod <span class="ot">=</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda =</span> grid)</span></code></pre></div>
 <p>By default the <code>glmnet()</code> function performs ridge regression for an automatically
 selected range of <span class="math inline">\(\lambda\)</span> values. However, here we have chosen to implement
 the function over a grid of values ranging from <span class="math inline">\(\lambda = 10^10\)</span> to <span class="math inline">\(\lambda = 10^{-2}\)</span>, essentially covering the full range of scenarios from the null model containing
@@ -553,39 +553,39 @@ use the argument <code>standardize = FALSE</code>.</p>
 stored in a matrix that can be accessed by <code>coef()</code>. In this case, it is a <span class="math inline">\(20 \times 100\)</span>
 matrix, with 20 rows (one for each predictor, plus an intercept) and 100
 columns (one for each value of <span class="math inline">\(\lambda\)</span>).</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="glm-variable-selection.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">coef</span>(ridge_mod))</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="glm-variable-selection.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">coef</span>(ridge_mod))</span></code></pre></div>
 <pre><code>## [1]  20 100</code></pre>
 <p>We expect the coefficient estimates to be much smaller, in terms of <span class="math inline">\(l_2\)</span> norm,
 when a large value of <span class="math inline">\(\lambda\)</span> is used, as compared to when a small value of <span class="math inline">\(\lambda\)</span> is
 used. These are the coefficients when <span class="math inline">\(\lambda = 11498\)</span>, along with their <span class="math inline">\(l_2\)</span> norm:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="glm-variable-selection.html#cb322-1" aria-hidden="true" tabindex="-1"></a>ridge_mod<span class="sc">$</span>lambda[<span class="dv">50</span>] <span class="co">#Display 50th lambda value</span></span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="glm-variable-selection.html#cb318-1" aria-hidden="true" tabindex="-1"></a>ridge_mod<span class="sc">$</span>lambda[<span class="dv">50</span>] <span class="co">#Display 50th lambda value</span></span></code></pre></div>
 <pre><code>## [1] 11497.57</code></pre>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="glm-variable-selection.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(ridge_mod)[,<span class="dv">50</span>] <span class="co"># Display coefficients associated with 50th lambda value</span></span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="glm-variable-selection.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(ridge_mod)[,<span class="dv">50</span>] <span class="co"># Display coefficients associated with 50th lambda value</span></span></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI         Walks 
 ## 407.356050200   0.036957182   0.138180344   0.524629976   0.230701523   0.239841459   0.289618741 
 ##         Years        CAtBat         CHits        CHmRun         CRuns          CRBI        CWalks 
 ##   1.107702929   0.003131815   0.011653637   0.087545670   0.023379882   0.024138320   0.025015421 
 ##       LeagueN     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
 ##   0.085028114  -6.215440973   0.016482577   0.002612988  -0.020502690   0.301433531</code></pre>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="glm-variable-selection.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">coef</span>(ridge_mod)[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">50</span>]<span class="sc">^</span><span class="dv">2</span>)) <span class="co"># Calculate l2 norm</span></span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="glm-variable-selection.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">coef</span>(ridge_mod)[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">50</span>]<span class="sc">^</span><span class="dv">2</span>)) <span class="co"># Calculate l2 norm</span></span></code></pre></div>
 <pre><code>## [1] 6.360612</code></pre>
 <p>In contrast, here are the coefficients when <span class="math inline">\(\lambda = 705\)</span>, along with their <span class="math inline">\(l_2\)</span>
 norm. Note the much larger <span class="math inline">\(l_2\)</span> norm of the coefficients associated with this
 smaller value of <span class="math inline">\(\lambda\)</span>.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="glm-variable-selection.html#cb328-1" aria-hidden="true" tabindex="-1"></a>ridge_mod<span class="sc">$</span>lambda[<span class="dv">60</span>] <span class="co">#Display 60th lambda value</span></span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="glm-variable-selection.html#cb324-1" aria-hidden="true" tabindex="-1"></a>ridge_mod<span class="sc">$</span>lambda[<span class="dv">60</span>] <span class="co">#Display 60th lambda value</span></span></code></pre></div>
 <pre><code>## [1] 705.4802</code></pre>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="glm-variable-selection.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(ridge_mod)[,<span class="dv">60</span>] <span class="co"># Display coefficients associated with 60th lambda value</span></span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="glm-variable-selection.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(ridge_mod)[,<span class="dv">60</span>] <span class="co"># Display coefficients associated with 60th lambda value</span></span></code></pre></div>
 <pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI        Walks 
 ##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713   0.84718546   1.31987948 
 ##        Years       CAtBat        CHits       CHmRun        CRuns         CRBI       CWalks 
 ##   2.59640425   0.01083413   0.04674557   0.33777318   0.09355528   0.09780402   0.07189612 
 ##      LeagueN    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
 ##  13.68370191 -54.65877750   0.11852289   0.01606037  -0.70358655   8.61181213</code></pre>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="glm-variable-selection.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">coef</span>(ridge_mod)[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">60</span>]<span class="sc">^</span><span class="dv">2</span>)) <span class="co"># Calculate l2 norm</span></span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="glm-variable-selection.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">coef</span>(ridge_mod)[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">60</span>]<span class="sc">^</span><span class="dv">2</span>)) <span class="co"># Calculate l2 norm</span></span></code></pre></div>
 <pre><code>## [1] 57.11001</code></pre>
 <p>We can use the <code>predict()</code> function for a number of purposes. For instance,
 we can obtain the ridge regression coefficients for a new value of <span class="math inline">\(\lambda\)</span>, say 50:</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="glm-variable-selection.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridge_mod, <span class="at">s=</span><span class="dv">50</span>, <span class="at">type=</span><span class="st">&quot;coefficients&quot;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="glm-variable-selection.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridge_mod, <span class="at">s=</span><span class="dv">50</span>, <span class="at">type=</span><span class="st">&quot;coefficients&quot;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,]</span></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI         Walks 
 ##  4.876610e+01 -3.580999e-01  1.969359e+00 -1.278248e+00  1.145892e+00  8.038292e-01  2.716186e+00 
 ##         Years        CAtBat         CHits        CHmRun         CRuns          CRBI        CWalks 
@@ -594,44 +594,44 @@ we can obtain the ridge regression coefficients for a new value of <span class="
 ##  4.592589e+01 -1.182011e+02  2.502322e-01  1.215665e-01 -3.278600e+00 -9.496680e+00</code></pre>
 <p>We now split the samples into a training set and a test set in order
 to estimate the test error of ridge regression and the lasso.</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="glm-variable-selection.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb336-2"><a href="glm-variable-selection.html#cb336-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb336-3"><a href="glm-variable-selection.html#cb336-3" aria-hidden="true" tabindex="-1"></a>train <span class="ot">=</span> Hitters <span class="sc">%&gt;%</span></span>
-<span id="cb336-4"><a href="glm-variable-selection.html#cb336-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_frac</span>(<span class="fl">0.5</span>)</span>
-<span id="cb336-5"><a href="glm-variable-selection.html#cb336-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb336-6"><a href="glm-variable-selection.html#cb336-6" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> Hitters <span class="sc">%&gt;%</span></span>
-<span id="cb336-7"><a href="glm-variable-selection.html#cb336-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setdiff</span>(train)</span>
-<span id="cb336-8"><a href="glm-variable-selection.html#cb336-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb336-9"><a href="glm-variable-selection.html#cb336-9" aria-hidden="true" tabindex="-1"></a>x_train <span class="ot">=</span> <span class="fu">model.matrix</span>(Salary<span class="sc">~</span>., train)[,<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb336-10"><a href="glm-variable-selection.html#cb336-10" aria-hidden="true" tabindex="-1"></a>x_test <span class="ot">=</span> <span class="fu">model.matrix</span>(Salary<span class="sc">~</span>., test)[,<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb336-11"><a href="glm-variable-selection.html#cb336-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb336-12"><a href="glm-variable-selection.html#cb336-12" aria-hidden="true" tabindex="-1"></a>y_train <span class="ot">=</span> train <span class="sc">%&gt;%</span></span>
-<span id="cb336-13"><a href="glm-variable-selection.html#cb336-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Salary) <span class="sc">%&gt;%</span></span>
-<span id="cb336-14"><a href="glm-variable-selection.html#cb336-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb336-15"><a href="glm-variable-selection.html#cb336-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span>
-<span id="cb336-16"><a href="glm-variable-selection.html#cb336-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb336-17"><a href="glm-variable-selection.html#cb336-17" aria-hidden="true" tabindex="-1"></a>y_test <span class="ot">=</span> test <span class="sc">%&gt;%</span></span>
-<span id="cb336-18"><a href="glm-variable-selection.html#cb336-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Salary) <span class="sc">%&gt;%</span></span>
-<span id="cb336-19"><a href="glm-variable-selection.html#cb336-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb336-20"><a href="glm-variable-selection.html#cb336-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="glm-variable-selection.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb332-2"><a href="glm-variable-selection.html#cb332-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-3"><a href="glm-variable-selection.html#cb332-3" aria-hidden="true" tabindex="-1"></a>train <span class="ot">=</span> Hitters <span class="sc">%&gt;%</span></span>
+<span id="cb332-4"><a href="glm-variable-selection.html#cb332-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_frac</span>(<span class="fl">0.5</span>)</span>
+<span id="cb332-5"><a href="glm-variable-selection.html#cb332-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-6"><a href="glm-variable-selection.html#cb332-6" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> Hitters <span class="sc">%&gt;%</span></span>
+<span id="cb332-7"><a href="glm-variable-selection.html#cb332-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setdiff</span>(train)</span>
+<span id="cb332-8"><a href="glm-variable-selection.html#cb332-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-9"><a href="glm-variable-selection.html#cb332-9" aria-hidden="true" tabindex="-1"></a>x_train <span class="ot">=</span> <span class="fu">model.matrix</span>(Salary<span class="sc">~</span>., train)[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb332-10"><a href="glm-variable-selection.html#cb332-10" aria-hidden="true" tabindex="-1"></a>x_test <span class="ot">=</span> <span class="fu">model.matrix</span>(Salary<span class="sc">~</span>., test)[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb332-11"><a href="glm-variable-selection.html#cb332-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-12"><a href="glm-variable-selection.html#cb332-12" aria-hidden="true" tabindex="-1"></a>y_train <span class="ot">=</span> train <span class="sc">%&gt;%</span></span>
+<span id="cb332-13"><a href="glm-variable-selection.html#cb332-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Salary) <span class="sc">%&gt;%</span></span>
+<span id="cb332-14"><a href="glm-variable-selection.html#cb332-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb332-15"><a href="glm-variable-selection.html#cb332-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span>
+<span id="cb332-16"><a href="glm-variable-selection.html#cb332-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-17"><a href="glm-variable-selection.html#cb332-17" aria-hidden="true" tabindex="-1"></a>y_test <span class="ot">=</span> test <span class="sc">%&gt;%</span></span>
+<span id="cb332-18"><a href="glm-variable-selection.html#cb332-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Salary) <span class="sc">%&gt;%</span></span>
+<span id="cb332-19"><a href="glm-variable-selection.html#cb332-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb332-20"><a href="glm-variable-selection.html#cb332-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code></pre></div>
 <p>Next we fit a ridge regression model on the training set, and evaluate
 its MSE on the test set, using <span class="math inline">\(\lambda = 4\)</span>. Note the use of the <code>predict()</code>
 function again: this time we get predictions for a test set, by replacing
 <code>type="coefficients"</code> with the <code>newx</code> argument.</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="glm-variable-selection.html#cb337-1" aria-hidden="true" tabindex="-1"></a>ridge_mod <span class="ot">=</span> <span class="fu">glmnet</span>(x_train, y_train, <span class="at">alpha=</span><span class="dv">0</span>, <span class="at">lambda =</span> grid, <span class="at">thresh =</span> <span class="fl">1e-12</span>)</span>
-<span id="cb337-2"><a href="glm-variable-selection.html#cb337-2" aria-hidden="true" tabindex="-1"></a>ridge_pred <span class="ot">=</span> <span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> <span class="dv">4</span>, <span class="at">newx =</span> x_test)</span>
-<span id="cb337-3"><a href="glm-variable-selection.html#cb337-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge_pred <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="glm-variable-selection.html#cb333-1" aria-hidden="true" tabindex="-1"></a>ridge_mod <span class="ot">=</span> <span class="fu">glmnet</span>(x_train, y_train, <span class="at">alpha=</span><span class="dv">0</span>, <span class="at">lambda =</span> grid, <span class="at">thresh =</span> <span class="fl">1e-12</span>)</span>
+<span id="cb333-2"><a href="glm-variable-selection.html#cb333-2" aria-hidden="true" tabindex="-1"></a>ridge_pred <span class="ot">=</span> <span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> <span class="dv">4</span>, <span class="at">newx =</span> x_test)</span>
+<span id="cb333-3"><a href="glm-variable-selection.html#cb333-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge_pred <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 139858.6</code></pre>
 <p>The test MSE is 101242.7. Note that if we had instead simply fit a model
 with just an intercept, we would have predicted each test observation using
 the mean of the training observations. In that case, we could compute the
 test set MSE like this:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="glm-variable-selection.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((<span class="fu">mean</span>(y_train) <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="glm-variable-selection.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((<span class="fu">mean</span>(y_train) <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 224692.1</code></pre>
 <p>We could also get the same result by fitting a ridge regression model with
 a very large value of <span class="math inline">\(\lambda\)</span>. Note that <code>1e10</code> means <span class="math inline">\(10^{10}\)</span>.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="glm-variable-selection.html#cb341-1" aria-hidden="true" tabindex="-1"></a>ridge_pred <span class="ot">=</span> <span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> <span class="fl">1e10</span>, <span class="at">newx =</span> x_test)</span>
-<span id="cb341-2"><a href="glm-variable-selection.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge_pred <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="glm-variable-selection.html#cb337-1" aria-hidden="true" tabindex="-1"></a>ridge_pred <span class="ot">=</span> <span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> <span class="fl">1e10</span>, <span class="at">newx =</span> x_test)</span>
+<span id="cb337-2"><a href="glm-variable-selection.html#cb337-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge_pred <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 224692.1</code></pre>
 <p>So fitting a ridge regression model with <span class="math inline">\(\lambda = 4\)</span> leads to a much lower test
 MSE than fitting a model with just an intercept. We now check whether
@@ -645,10 +645,10 @@ we use the argument <code>exact=T</code> when calling the <code>predict()</code>
 a slight discrepancy in the third decimal place between the output of <code>glmnet()</code> when
 <span class="math inline">\(\lambda = 0\)</span> and the output of <code>lm()</code>; this is due to numerical approximation on the part of
 <code>glmnet()</code>.</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="glm-variable-selection.html#cb343-1" aria-hidden="true" tabindex="-1"></a>ridge_pred <span class="ot">=</span> <span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> <span class="dv">0</span>, <span class="at">x =</span> x_train, <span class="at">y =</span> y_train, <span class="at">newx =</span> x_test, <span class="at">exact =</span> T)</span>
-<span id="cb343-2"><a href="glm-variable-selection.html#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge_pred <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="glm-variable-selection.html#cb339-1" aria-hidden="true" tabindex="-1"></a>ridge_pred <span class="ot">=</span> <span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> <span class="dv">0</span>, <span class="at">x =</span> x_train, <span class="at">y =</span> y_train, <span class="at">newx =</span> x_test, <span class="at">exact =</span> T)</span>
+<span id="cb339-2"><a href="glm-variable-selection.html#cb339-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge_pred <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 175051.7</code></pre>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="glm-variable-selection.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(Salary<span class="sc">~</span>., <span class="at">data =</span> train)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="glm-variable-selection.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(Salary<span class="sc">~</span>., <span class="at">data =</span> train)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Salary ~ ., data = train)
@@ -660,7 +660,7 @@ a slight discrepancy in the third decimal place between the output of <code>glmn
 ##  -1.309e+01   -7.136e-01    3.316e+00    3.407e+00   -5.671e-01   -7.525e-01    2.347e-01  
 ##     LeagueN    DivisionW      PutOuts      Assists       Errors   NewLeagueN  
 ##   1.322e+02   -1.346e+02    2.099e-01    6.229e-01   -4.616e+00   -8.330e+01</code></pre>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="glm-variable-selection.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> <span class="dv">0</span>, <span class="at">x =</span> x_train, <span class="at">y =</span> y_train, <span class="at">exact =</span> T, <span class="at">type=</span><span class="st">&quot;coefficients&quot;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="glm-variable-selection.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> <span class="dv">0</span>, <span class="at">x =</span> x_train, <span class="at">y =</span> y_train, <span class="at">exact =</span> T, <span class="at">type=</span><span class="st">&quot;coefficients&quot;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,]</span></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI         Walks 
 ##  239.83274953   -0.00175359   -2.17853087    6.33694957    0.71369687    0.87329878    3.59421378 
 ##         Years        CAtBat         CHits        CHmRun         CRuns          CRBI        CWalks 
@@ -676,25 +676,25 @@ the built-in cross-validation function, <code>cv.glmnet()</code>. By default, th
 performs 10-fold cross-validation, though this can be changed using the
 argument <code>folds</code>. Note that we set a random seed first so our results will be
 reproducible, since the choice of the cross-validation folds is random.</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="glm-variable-selection.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb349-2"><a href="glm-variable-selection.html#cb349-2" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">=</span> <span class="fu">cv.glmnet</span>(x_train, y_train, <span class="at">alpha =</span> <span class="dv">0</span>) <span class="co"># Fit ridge regression model on training data</span></span>
-<span id="cb349-3"><a href="glm-variable-selection.html#cb349-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.out) <span class="co"># Draw plot of training MSE as a function of lambda</span></span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="glm-variable-selection.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb345-2"><a href="glm-variable-selection.html#cb345-2" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">=</span> <span class="fu">cv.glmnet</span>(x_train, y_train, <span class="at">alpha =</span> <span class="dv">0</span>) <span class="co"># Fit ridge regression model on training data</span></span>
+<span id="cb345-3"><a href="glm-variable-selection.html#cb345-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.out) <span class="co"># Draw plot of training MSE as a function of lambda</span></span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-196-1.png" width="576" /></p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="glm-variable-selection.html#cb350-1" aria-hidden="true" tabindex="-1"></a>bestlam <span class="ot">=</span> cv.out<span class="sc">$</span>lambda.min  <span class="co"># Select lamda that minimizes training MSE</span></span>
-<span id="cb350-2"><a href="glm-variable-selection.html#cb350-2" aria-hidden="true" tabindex="-1"></a>bestlam</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="glm-variable-selection.html#cb346-1" aria-hidden="true" tabindex="-1"></a>bestlam <span class="ot">=</span> cv.out<span class="sc">$</span>lambda.min  <span class="co"># Select lamda that minimizes training MSE</span></span>
+<span id="cb346-2"><a href="glm-variable-selection.html#cb346-2" aria-hidden="true" tabindex="-1"></a>bestlam</span></code></pre></div>
 <pre><code>## [1] 326.1406</code></pre>
 <p>Therefore, we see that the value of <span class="math inline">\(\lambda\)</span> that results in the smallest cross-validation
 error is 339.1845 What is the test MSE associated with this value of
 <span class="math inline">\(\lambda\)</span>?</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="glm-variable-selection.html#cb352-1" aria-hidden="true" tabindex="-1"></a>ridge_pred <span class="ot">=</span> <span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> bestlam, <span class="at">newx =</span> x_test) <span class="co"># Use best lambda to predict test data</span></span>
-<span id="cb352-2"><a href="glm-variable-selection.html#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge_pred <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>) <span class="co"># Calculate test MSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="glm-variable-selection.html#cb348-1" aria-hidden="true" tabindex="-1"></a>ridge_pred <span class="ot">=</span> <span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> bestlam, <span class="at">newx =</span> x_test) <span class="co"># Use best lambda to predict test data</span></span>
+<span id="cb348-2"><a href="glm-variable-selection.html#cb348-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge_pred <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>) <span class="co"># Calculate test MSE</span></span></code></pre></div>
 <pre><code>## [1] 140056.2</code></pre>
 <p>This represents a further improvement over the test MSE that we got using
 <span class="math inline">\(\lambda = 4\)</span>. Finally, we refit our ridge regression model on the full data set,
 using the value of <span class="math inline">\(\lambda\)</span> chosen by cross-validation, and examine the coefficient
 estimates.</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="glm-variable-selection.html#cb354-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">0</span>) <span class="co"># Fit ridge regression model on full dataset</span></span>
-<span id="cb354-2"><a href="glm-variable-selection.html#cb354-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,] <span class="co"># Display coefficients using lambda chosen by CV</span></span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="glm-variable-selection.html#cb350-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">0</span>) <span class="co"># Fit ridge regression model on full dataset</span></span>
+<span id="cb350-2"><a href="glm-variable-selection.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,] <span class="co"># Display coefficients using lambda chosen by CV</span></span></code></pre></div>
 <pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI        Walks 
 ##  15.44835008   0.07716945   0.85906253   0.60120339   1.06366687   0.87936073   1.62437580 
 ##        Years       CAtBat        CHits       CHmRun        CRuns         CRBI       CWalks 
@@ -712,19 +712,19 @@ whether the lasso can yield either a more accurate or a more interpretable
 model than ridge regression. In order to fit a lasso model, we once again
 use the <code>glmnet()</code> function; however, this time we use the argument <code>alpha=1</code>.
 Other than that change, we proceed just as we did in fitting a ridge model:</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="glm-variable-selection.html#cb356-1" aria-hidden="true" tabindex="-1"></a>lasso_mod <span class="ot">=</span> <span class="fu">glmnet</span>(x_train, y_train, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid) <span class="co"># Fit lasso model on training data</span></span>
-<span id="cb356-2"><a href="glm-variable-selection.html#cb356-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lasso_mod)                                          <span class="co"># Draw plot of coefficients</span></span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="glm-variable-selection.html#cb352-1" aria-hidden="true" tabindex="-1"></a>lasso_mod <span class="ot">=</span> <span class="fu">glmnet</span>(x_train, y_train, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid) <span class="co"># Fit lasso model on training data</span></span>
+<span id="cb352-2"><a href="glm-variable-selection.html#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lasso_mod)                                          <span class="co"># Draw plot of coefficients</span></span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-199-1.png" width="576" /></p>
 <p>Notice that in the coefficient plot that depending on the choice of tuning
 parameter, some of the coefficients are exactly equal to zero. We now
 perform cross-validation and compute the associated test error:</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="glm-variable-selection.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb357-2"><a href="glm-variable-selection.html#cb357-2" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">=</span> <span class="fu">cv.glmnet</span>(x_train, y_train, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="co"># Fit lasso model on training data</span></span>
-<span id="cb357-3"><a href="glm-variable-selection.html#cb357-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.out) <span class="co"># Draw plot of training MSE as a function of lambda</span></span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="glm-variable-selection.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb353-2"><a href="glm-variable-selection.html#cb353-2" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">=</span> <span class="fu">cv.glmnet</span>(x_train, y_train, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="co"># Fit lasso model on training data</span></span>
+<span id="cb353-3"><a href="glm-variable-selection.html#cb353-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.out) <span class="co"># Draw plot of training MSE as a function of lambda</span></span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-200-1.png" width="576" /></p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="glm-variable-selection.html#cb358-1" aria-hidden="true" tabindex="-1"></a>bestlam <span class="ot">=</span> cv.out<span class="sc">$</span>lambda.min <span class="co"># Select lamda that minimizes training MSE</span></span>
-<span id="cb358-2"><a href="glm-variable-selection.html#cb358-2" aria-hidden="true" tabindex="-1"></a>lasso_pred <span class="ot">=</span> <span class="fu">predict</span>(lasso_mod, <span class="at">s =</span> bestlam, <span class="at">newx =</span> x_test) <span class="co"># Use best lambda to predict test data</span></span>
-<span id="cb358-3"><a href="glm-variable-selection.html#cb358-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((lasso_pred <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>) <span class="co"># Calculate test MSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="glm-variable-selection.html#cb354-1" aria-hidden="true" tabindex="-1"></a>bestlam <span class="ot">=</span> cv.out<span class="sc">$</span>lambda.min <span class="co"># Select lamda that minimizes training MSE</span></span>
+<span id="cb354-2"><a href="glm-variable-selection.html#cb354-2" aria-hidden="true" tabindex="-1"></a>lasso_pred <span class="ot">=</span> <span class="fu">predict</span>(lasso_mod, <span class="at">s =</span> bestlam, <span class="at">newx =</span> x_test) <span class="co"># Use best lambda to predict test data</span></span>
+<span id="cb354-3"><a href="glm-variable-selection.html#cb354-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((lasso_pred <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>) <span class="co"># Calculate test MSE</span></span></code></pre></div>
 <pre><code>## [1] 143273</code></pre>
 <p>This is substantially lower than the test set MSE of the null model and of
 least squares, and very similar to the test MSE of ridge regression with <span class="math inline">\(\lambda\)</span>
@@ -732,9 +732,9 @@ chosen by cross-validation.</p>
 <p>However, the lasso has a substantial advantage over ridge regression in
 that the resulting coefficient estimates are sparse. Here we see that 12 of
 the 19 coefficient estimates are exactly zero:</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="glm-variable-selection.html#cb360-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid) <span class="co"># Fit lasso model on full dataset</span></span>
-<span id="cb360-2"><a href="glm-variable-selection.html#cb360-2" aria-hidden="true" tabindex="-1"></a>lasso_coef <span class="ot">=</span> <span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,] <span class="co"># Display coefficients using lambda chosen by CV</span></span>
-<span id="cb360-3"><a href="glm-variable-selection.html#cb360-3" aria-hidden="true" tabindex="-1"></a>lasso_coef</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="glm-variable-selection.html#cb356-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid) <span class="co"># Fit lasso model on full dataset</span></span>
+<span id="cb356-2"><a href="glm-variable-selection.html#cb356-2" aria-hidden="true" tabindex="-1"></a>lasso_coef <span class="ot">=</span> <span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,] <span class="co"># Display coefficients using lambda chosen by CV</span></span>
+<span id="cb356-3"><a href="glm-variable-selection.html#cb356-3" aria-hidden="true" tabindex="-1"></a>lasso_coef</span></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI         Walks 
 ##    1.27429897   -0.05490834    2.18012455    0.00000000    0.00000000    0.00000000    2.29189433 
 ##         Years        CAtBat         CHits        CHmRun         CRuns          CRBI        CWalks 
@@ -743,7 +743,7 @@ the 19 coefficient estimates are exactly zero:</p>
 ##   20.28190194 -116.16524424    0.23751978    0.00000000   -0.85604181    0.00000000</code></pre>
 <p>Selecting only the predictors with non-zero coefficients, we see that the lasso model with <span class="math inline">\(\lambda\)</span>
 chosen by cross-validation contains only seven variables:</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="glm-variable-selection.html#cb362-1" aria-hidden="true" tabindex="-1"></a>lasso_coef[lasso_coef<span class="sc">!=</span><span class="dv">0</span>] <span class="co"># Display only non-zero coefficients</span></span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="glm-variable-selection.html#cb358-1" aria-hidden="true" tabindex="-1"></a>lasso_coef[lasso_coef<span class="sc">!=</span><span class="dv">0</span>] <span class="co"># Display only non-zero coefficients</span></span></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         Walks         Years        CHmRun         CRuns 
 ##    1.27429897   -0.05490834    2.18012455    2.29189433   -0.33767315    0.02822467    0.21627609 
 ##          CRBI       LeagueN     DivisionW       PutOuts        Errors 

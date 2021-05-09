@@ -188,10 +188,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
 <ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 🤯</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😲</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -402,22 +402,22 @@ likelihood estimator of the parameters of the model under investigation, <span c
 <div id="example" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> Example</h2>
 <p>Just as with OLS, there is a <code>formula</code> and <code>data argument</code>. In addition, we need to specify the target distribution and link function.</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="additional-glm-topics.html#cb260-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">glm</span>(<span class="at">formula =</span> charges <span class="sc">~</span> age <span class="sc">+</span> sex <span class="sc">+</span> smoker, </span>
-<span id="cb260-2"><a href="additional-glm-topics.html#cb260-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb260-3"><a href="additional-glm-topics.html#cb260-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> health_insurance)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="additional-glm-topics.html#cb256-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">glm</span>(<span class="at">formula =</span> charges <span class="sc">~</span> age <span class="sc">+</span> sex <span class="sc">+</span> smoker, </span>
+<span id="cb256-2"><a href="additional-glm-topics.html#cb256-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb256-3"><a href="additional-glm-topics.html#cb256-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> health_insurance)</span></code></pre></div>
 <p>We see that <code>age</code>, <code>sex</code>, and <code>smoker</code> are all significant (p &lt;0.01). Reading off the coefficient signs, we see that claims</p>
 <ul>
 <li>Increase as age increases</li>
 <li>Are higher for women</li>
 <li>Are higher for smokers</li>
 </ul>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="additional-glm-topics.html#cb261-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">tidy</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="additional-glm-topics.html#cb257-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">tidy</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 5
 ##   term        estimate std.error statistic   p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1 (Intercept)   7.82     0.0600     130.   0        
+## 1 (Intercept)   7.77     0.0597     130.   0        
 ## 2 age           0.0290   0.00134     21.6  3.40e- 89
-## 3 sexmale      -0.0468   0.0377      -1.24 2.15e-  1
+## 3 sexfemale     0.0468   0.0377       1.24 2.15e-  1
 ## 4 smokeryes     1.50     0.0467      32.1  3.25e-168</code></pre>
 <p>Below you can see graph of deviance residuals vs. the predicted values.</p>
 <p><strong>If this were a perfect model, all of these below assumptions would be met:</strong></p>
@@ -426,7 +426,7 @@ likelihood estimator of the parameters of the model under investigation, <span c
 <li>Constant variance?</li>
 <li>No obvious pattern?</li>
 </ul>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="additional-glm-topics.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model, <span class="at">which =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="additional-glm-topics.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model, <span class="at">which =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-153-1.png" width="576" /></p>
 <p>The quantile-quantile (QQ) plot shows the quantiles of the deviance residuals (i.e., after adjusting for the Gamma distribution) against theoretical Gaussian quantiles.</p>
 <p><strong>In a perfect model, all of these assumptions would be met:</strong></p>
@@ -436,7 +436,7 @@ likelihood estimator of the parameters of the model under investigation, <span c
 <li>Tails are not significantly above or below line? Some tail deviation is ok.</li>
 <li>No sudden “jumps?” This indicates many <span class="math inline">\(Y\)</span>’s which have the same value, such as insurance claims which all have the exact value of $100.00 or $0.00.</li>
 </ul>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="additional-glm-topics.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="additional-glm-topics.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-154-1.png" width="576" /></p>
 </div>
 <div id="log-transforms-of-predictors" class="section level2" number="12.3">
@@ -449,11 +449,11 @@ To solve for <span class="math inline">\(\mu\)</span>, take the exponent of both
 <p><span class="math display">\[\mu = e^{\beta_1} e^{\beta_1 log(X)} = e^{\beta_0} X^{\beta_1}\]</span>
 ### Example</p>
 <p>In the Hospital Readmission sample project, one of the predictor variables, “Length of stay,” is the number of days since a person has been readmitted to the hospital. You can tell that it’s right-skewd because the median is higher than the mean.</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="additional-glm-topics.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(readmission<span class="sc">$</span>LOS)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="additional-glm-topics.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(readmission<span class="sc">$</span>LOS)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   1.000   3.000   5.000   6.693   8.000  36.000</code></pre>
 <p>But it could also be thought of as a discrete variable because it only takes on 36 values. <strong>Should you still apply a log transform?</strong></p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="additional-glm-topics.html#cb267-1" aria-hidden="true" tabindex="-1"></a>readmission <span class="sc">%&gt;%</span> <span class="fu">count</span>(LOS)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="additional-glm-topics.html#cb263-1" aria-hidden="true" tabindex="-1"></a>readmission <span class="sc">%&gt;%</span> <span class="fu">count</span>(LOS)</span></code></pre></div>
 <pre><code>## # A tibble: 36 x 2
 ##      LOS     n
 ##    &lt;dbl&gt; &lt;int&gt;
@@ -475,17 +475,17 @@ To solve for <span class="math inline">\(\mu\)</span>, take the exponent of both
 <div id="reference-levels" class="section level2" number="12.4">
 <h2><span class="header-section-number">12.4</span> Reference levels</h2>
 <p>When a categorical variable is used in a GLM, the model actually uses indicator variables for each level. The default reference level is the order of the R factors. For the <code>sex</code> variable, the order is <code>female</code> and then <code>male</code>. This means that the base level is <code>female</code> by default.</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="additional-glm-topics.html#cb269-1" aria-hidden="true" tabindex="-1"></a>health_insurance<span class="sc">$</span>sex <span class="sc">%&gt;%</span> <span class="fu">as.factor</span>() <span class="sc">%&gt;%</span> <span class="fu">levels</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;female&quot; &quot;male&quot;</code></pre>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="additional-glm-topics.html#cb265-1" aria-hidden="true" tabindex="-1"></a>health_insurance<span class="sc">$</span>sex <span class="sc">%&gt;%</span> <span class="fu">as.factor</span>() <span class="sc">%&gt;%</span> <span class="fu">levels</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;male&quot;   &quot;female&quot;</code></pre>
 <p>Why does this matter? Statistically, the coefficients are most stable when there are more observations.</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="additional-glm-topics.html#cb271-1" aria-hidden="true" tabindex="-1"></a>health_insurance<span class="sc">$</span>sex <span class="sc">%&gt;%</span> <span class="fu">as.factor</span>() <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
-<pre><code>## female   male 
-##    662    676</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="additional-glm-topics.html#cb267-1" aria-hidden="true" tabindex="-1"></a>health_insurance<span class="sc">$</span>sex <span class="sc">%&gt;%</span> <span class="fu">as.factor</span>() <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##   male female 
+##    676    662</code></pre>
 <p>There is already a function to do this in the <code>tidyverse</code> called <code>fct_infreq</code>. Let’s quickly fix the <code>sex</code> column so that these factor levels are in order of frequency.</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="additional-glm-topics.html#cb273-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> </span>
-<span id="cb273-2"><a href="additional-glm-topics.html#cb273-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">fct_infreq</span>(sex))</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="additional-glm-topics.html#cb269-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb269-2"><a href="additional-glm-topics.html#cb269-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">fct_infreq</span>(sex))</span></code></pre></div>
 <p>Now <code>male</code> is the base level.</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="additional-glm-topics.html#cb274-1" aria-hidden="true" tabindex="-1"></a>health_insurance<span class="sc">$</span>sex <span class="sc">%&gt;%</span> <span class="fu">as.factor</span>() <span class="sc">%&gt;%</span> <span class="fu">levels</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="additional-glm-topics.html#cb270-1" aria-hidden="true" tabindex="-1"></a>health_insurance<span class="sc">$</span>sex <span class="sc">%&gt;%</span> <span class="fu">as.factor</span>() <span class="sc">%&gt;%</span> <span class="fu">levels</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;male&quot;   &quot;female&quot;</code></pre>
 </div>
 <div id="interactions" class="section level2" number="12.5">
@@ -505,12 +505,12 @@ By rewriting this we can see that the intercept changes from <span class="math i
  = \beta_0^* + \beta_1^* x_2
 \]</span>
 Here is an example from the <code>auto_claim</code> data. The lines show the slope of a linear model, assuming that only <code>BLUEBOOK</code> and <code>CAR_TYPE</code> were predictors in the model. You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="additional-glm-topics.html#cb276-1" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="sc">%&gt;%</span> </span>
-<span id="cb276-2"><a href="additional-glm-topics.html#cb276-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_frac</span>(<span class="fl">0.2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb276-3"><a href="additional-glm-topics.html#cb276-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">log</span>(CLM_AMT), <span class="fu">log</span>(BLUEBOOK), <span class="at">color =</span> CAR_TYPE)) <span class="sc">+</span> </span>
-<span id="cb276-4"><a href="additional-glm-topics.html#cb276-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
-<span id="cb276-5"><a href="additional-glm-topics.html#cb276-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> F) <span class="sc">+</span> </span>
-<span id="cb276-6"><a href="additional-glm-topics.html#cb276-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Kelly Bluebook Value vs Claim Amount&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="additional-glm-topics.html#cb272-1" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="sc">%&gt;%</span> </span>
+<span id="cb272-2"><a href="additional-glm-topics.html#cb272-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_frac</span>(<span class="fl">0.2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb272-3"><a href="additional-glm-topics.html#cb272-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">log</span>(CLM_AMT), <span class="fu">log</span>(BLUEBOOK), <span class="at">color =</span> CAR_TYPE)) <span class="sc">+</span> </span>
+<span id="cb272-4"><a href="additional-glm-topics.html#cb272-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
+<span id="cb272-5"><a href="additional-glm-topics.html#cb272-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> F) <span class="sc">+</span> </span>
+<span id="cb272-6"><a href="additional-glm-topics.html#cb272-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Kelly Bluebook Value vs Claim Amount&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure"><span id="fig:unnamed-chunk-162"></span>
 <img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-162-1.png" alt="Example of strong interaction" width="576" />
@@ -554,16 +554,16 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 <div id="gaussian-response-with-log-link" class="section level3" number="12.8.1">
 <h3><span class="header-section-number">12.8.1</span> Gaussian Response with Log Link</h3>
 <p>We create a function that takes in data <span class="math inline">\(x\)</span> and returns a Gaussian random variable that has mean equal to the inverse link, which in the case of a log link is the exponent. We add 10 to <span class="math inline">\(x\)</span> so that the values will always be positive, as will be described later on.</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="additional-glm-topics.html#cb278-1" aria-hidden="true" tabindex="-1"></a>sim_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb278-2"><a href="additional-glm-topics.html#cb278-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="fu">exp</span>(<span class="dv">10</span> <span class="sc">+</span> x), <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb278-3"><a href="additional-glm-topics.html#cb278-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="additional-glm-topics.html#cb274-1" aria-hidden="true" tabindex="-1"></a>sim_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb274-2"><a href="additional-glm-topics.html#cb274-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="fu">exp</span>(<span class="dv">10</span> <span class="sc">+</span> x), <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb274-3"><a href="additional-glm-topics.html#cb274-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>The values of <span class="math inline">\(X\)</span> do not need to be normal. The above assumption is merely that the mean of the response <span class="math inline">\(Y\)</span> is related to <span class="math inline">\(X\)</span> through the link function, <code>mean = exp(10 + x)</code>, and that the distribution is normal. This has been accomplished with <code>rnorm</code> already. For illustration, here we use <span class="math inline">\(X\)</span>’s from a uniform distribution.</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="additional-glm-topics.html#cb279-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">500</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb279-2"><a href="additional-glm-topics.html#cb279-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="additional-glm-topics.html#cb275-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">500</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb275-2"><a href="additional-glm-topics.html#cb275-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span></code></pre></div>
 <p>We already know what the answer is: a Gaussian response with a log link. We fit a GLM and see a perfect fit.</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="additional-glm-topics.html#cb280-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> data)</span>
-<span id="cb280-2"><a href="additional-glm-topics.html#cb280-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb280-3"><a href="additional-glm-topics.html#cb280-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="additional-glm-topics.html#cb276-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> data)</span>
+<span id="cb276-2"><a href="additional-glm-topics.html#cb276-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb276-3"><a href="additional-glm-topics.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x, family = gaussian(link = &quot;log&quot;), data = data)
@@ -586,20 +586,20 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ## AIC: 1452.7
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="additional-glm-topics.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb282-2"><a href="additional-glm-topics.html#cb282-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="additional-glm-topics.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb278-2"><a href="additional-glm-topics.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-165-1.png" width="576" /></p>
 </div>
 <div id="gaussian-response-with-inverse-link" class="section level3" number="12.8.2">
 <h3><span class="header-section-number">12.8.2</span> Gaussian Response with Inverse Link</h3>
 <p>The same steps are repeated except the link function is now the inverse, <code>mean = 1/x</code>. We see that some values of <span class="math inline">\(Y\)</span> are negative, which is ok.</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="additional-glm-topics.html#cb283-1" aria-hidden="true" tabindex="-1"></a>sim_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb283-2"><a href="additional-glm-topics.html#cb283-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">1</span><span class="sc">/</span>x, <span class="dv">1</span>)</span>
-<span id="cb283-3"><a href="additional-glm-topics.html#cb283-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb283-4"><a href="additional-glm-topics.html#cb283-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb283-5"><a href="additional-glm-topics.html#cb283-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">500</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb283-6"><a href="additional-glm-topics.html#cb283-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span>
-<span id="cb283-7"><a href="additional-glm-topics.html#cb283-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="additional-glm-topics.html#cb279-1" aria-hidden="true" tabindex="-1"></a>sim_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb279-2"><a href="additional-glm-topics.html#cb279-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">1</span><span class="sc">/</span>x, <span class="dv">1</span>)</span>
+<span id="cb279-3"><a href="additional-glm-topics.html#cb279-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb279-4"><a href="additional-glm-topics.html#cb279-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb279-5"><a href="additional-glm-topics.html#cb279-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">500</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb279-6"><a href="additional-glm-topics.html#cb279-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span>
+<span id="cb279-7"><a href="additional-glm-topics.html#cb279-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
 <pre><code>##        x                  y          
 ##  Min.   :0.002351   Min.   : -1.392  
 ##  1st Qu.:0.278258   1st Qu.:  1.149  
@@ -607,9 +607,9 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ##  Mean   :0.509957   Mean   :  6.875  
 ##  3rd Qu.:0.760526   3rd Qu.:  4.014  
 ##  Max.   :0.999992   Max.   :425.760</code></pre>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="additional-glm-topics.html#cb285-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="at">data =</span> data)</span>
-<span id="cb285-2"><a href="additional-glm-topics.html#cb285-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb285-3"><a href="additional-glm-topics.html#cb285-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="additional-glm-topics.html#cb281-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="at">data =</span> data)</span>
+<span id="cb281-2"><a href="additional-glm-topics.html#cb281-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb281-3"><a href="additional-glm-topics.html#cb281-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x, family = gaussian(link = &quot;inverse&quot;), data = data)
@@ -632,23 +632,23 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ## AIC: 1461.6
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="additional-glm-topics.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb287-2"><a href="additional-glm-topics.html#cb287-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="additional-glm-topics.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb283-2"><a href="additional-glm-topics.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-167-1.png" width="576" /></p>
 </div>
 <div id="gaussian-response-with-identity-link" class="section level3" number="12.8.3">
 <h3><span class="header-section-number">12.8.3</span> Gaussian Response with Identity Link</h3>
 <p>And now the link is the identity, <code>mean = x</code>.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="additional-glm-topics.html#cb288-1" aria-hidden="true" tabindex="-1"></a>sim_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb288-2"><a href="additional-glm-topics.html#cb288-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> x, <span class="dv">1</span>)</span>
-<span id="cb288-3"><a href="additional-glm-topics.html#cb288-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb288-4"><a href="additional-glm-topics.html#cb288-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb288-5"><a href="additional-glm-topics.html#cb288-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">500</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb288-6"><a href="additional-glm-topics.html#cb288-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span>
-<span id="cb288-7"><a href="additional-glm-topics.html#cb288-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb288-8"><a href="additional-glm-topics.html#cb288-8" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;identity&quot;</span>), <span class="at">data =</span> data)</span>
-<span id="cb288-9"><a href="additional-glm-topics.html#cb288-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb288-10"><a href="additional-glm-topics.html#cb288-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="additional-glm-topics.html#cb284-1" aria-hidden="true" tabindex="-1"></a>sim_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb284-2"><a href="additional-glm-topics.html#cb284-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> x, <span class="dv">1</span>)</span>
+<span id="cb284-3"><a href="additional-glm-topics.html#cb284-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb284-4"><a href="additional-glm-topics.html#cb284-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-5"><a href="additional-glm-topics.html#cb284-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">500</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb284-6"><a href="additional-glm-topics.html#cb284-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span>
+<span id="cb284-7"><a href="additional-glm-topics.html#cb284-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-8"><a href="additional-glm-topics.html#cb284-8" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;identity&quot;</span>), <span class="at">data =</span> data)</span>
+<span id="cb284-9"><a href="additional-glm-topics.html#cb284-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-10"><a href="additional-glm-topics.html#cb284-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x, family = gaussian(link = &quot;identity&quot;), data = data)
@@ -671,21 +671,21 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ## AIC: 1429.1
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="additional-glm-topics.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb290-2"><a href="additional-glm-topics.html#cb290-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="additional-glm-topics.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb286-2"><a href="additional-glm-topics.html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-168-1.png" width="576" /></p>
 </div>
 <div id="gaussian-response-with-log-link-and-negative-values" class="section level3" number="12.8.4">
 <h3><span class="header-section-number">12.8.4</span> Gaussian Response with Log Link and Negative Values</h3>
 <p>By Gaussian response we say that the <em>mean</em> of the response is Gaussian. The range of a normal random variable is <span class="math inline">\((-\infty, +\infty)\)</span>, which means that negative values are always possible. Now, if the mean is a large positive number, than negative values are much less likely but still possible: about 95% of the observations will be within 2 standard deviations of the mean.</p>
 <p>We see below that there are some <span class="math inline">\(Y\)</span> values which are negative.</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="additional-glm-topics.html#cb291-1" aria-hidden="true" tabindex="-1"></a>sim_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb291-2"><a href="additional-glm-topics.html#cb291-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="fu">exp</span>(x), <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb291-3"><a href="additional-glm-topics.html#cb291-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb291-4"><a href="additional-glm-topics.html#cb291-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb291-5"><a href="additional-glm-topics.html#cb291-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">500</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb291-6"><a href="additional-glm-topics.html#cb291-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span>
-<span id="cb291-7"><a href="additional-glm-topics.html#cb291-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="additional-glm-topics.html#cb287-1" aria-hidden="true" tabindex="-1"></a>sim_norm <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb287-2"><a href="additional-glm-topics.html#cb287-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="fu">exp</span>(x), <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb287-3"><a href="additional-glm-topics.html#cb287-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb287-4"><a href="additional-glm-topics.html#cb287-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-5"><a href="additional-glm-topics.html#cb287-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">500</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb287-6"><a href="additional-glm-topics.html#cb287-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span>
+<span id="cb287-7"><a href="additional-glm-topics.html#cb287-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
 <pre><code>##        x                   y         
 ##  Min.   :0.0002768   Min.   :-1.505  
 ##  1st Qu.:0.2282455   1st Qu.: 0.947  
@@ -694,15 +694,15 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ##  3rd Qu.:0.7499811   3rd Qu.: 2.424  
 ##  Max.   :0.9984118   Max.   : 4.707</code></pre>
 <p>We can also see this from the histogram.</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="additional-glm-topics.html#cb293-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(y)) <span class="sc">+</span> <span class="fu">geom_density</span>( <span class="at">fill =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="additional-glm-topics.html#cb289-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(y)) <span class="sc">+</span> <span class="fu">geom_density</span>( <span class="at">fill =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-170-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>If we try to fit a GLM with a log link, there is an error.</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="additional-glm-topics.html#cb294-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> data)</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="additional-glm-topics.html#cb290-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> data)</span></code></pre></div>
 <p><code>Error in eval(family$initialize) : cannot find valid starting values: please specify some</code></p>
 <p>This is because the domain of the natural logarithm only includes positive numbers, and we just tried to take the log of negative numbers.</p>
 <p>Our initial reaction might be to add some constant to each <span class="math inline">\(Y\)</span>, say 10 for instance, so that they are all positive. This does produce a model which is a good fit.</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="additional-glm-topics.html#cb295-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">+</span> <span class="dv">10</span> <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> data)</span>
-<span id="cb295-2"><a href="additional-glm-topics.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="additional-glm-topics.html#cb291-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">+</span> <span class="dv">10</span> <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> data)</span>
+<span id="cb291-2"><a href="additional-glm-topics.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y + 10 ~ x, family = gaussian(link = &quot;log&quot;), data = data)
@@ -725,21 +725,21 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ## AIC: 1431.8
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="additional-glm-topics.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb297-2"><a href="additional-glm-topics.html#cb297-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="additional-glm-topics.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb293-2"><a href="additional-glm-topics.html#cb293-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-172-1.png" width="576" /></p>
 <p>We see that on average, the predictions are 10 higher than the target. This is no surprise since <span class="math inline">\(E[Y + 10] = E[Y] + 10\)</span>.</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="additional-glm-topics.html#cb298-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> data<span class="sc">$</span>y </span>
-<span id="cb298-2"><a href="additional-glm-topics.html#cb298-2" aria-hidden="true" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb298-3"><a href="additional-glm-topics.html#cb298-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y_hat) <span class="sc">-</span> <span class="fu">mean</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="additional-glm-topics.html#cb294-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> data<span class="sc">$</span>y </span>
+<span id="cb294-2"><a href="additional-glm-topics.html#cb294-2" aria-hidden="true" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb294-3"><a href="additional-glm-topics.html#cb294-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y_hat) <span class="sc">-</span> <span class="fu">mean</span>(y)</span></code></pre></div>
 <pre><code>## [1] 9.999967</code></pre>
 <p>But we see that the actual predictions are bad. If we were to loot at the R-squared, MAE, RMSE, or any other metric it would tell us the same story. This is because our GLM assumption is <strong>not</strong> that <span class="math inline">\(Y\)</span> is related to the link function of <span class="math inline">\(X\)</span>, but that the <strong>mean</strong> of <span class="math inline">\(Y\)</span> is.</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="additional-glm-topics.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">y =</span> y, <span class="at">y_hat =</span> y_hat <span class="sc">-</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(y, y_hat)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="additional-glm-topics.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">y =</span> y, <span class="at">y_hat =</span> y_hat <span class="sc">-</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(y, y_hat)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-1.png" width="576" /></p>
 <p>One solution is to adjust the <span class="math inline">\(X\)</span> which the model is based on. Add a constant term to <span class="math inline">\(X\)</span> so that the mean of <span class="math inline">\(Y\)</span> is larger, and hence <span class="math inline">\(Y\)</span> is non zero. While is a viable approach in the case of only one predictor variable, with more predictors this would not be easy to do.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="additional-glm-topics.html#cb301-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">500</span>) <span class="sc">+</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb301-2"><a href="additional-glm-topics.html#cb301-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span>
-<span id="cb301-3"><a href="additional-glm-topics.html#cb301-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="additional-glm-topics.html#cb297-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">500</span>) <span class="sc">+</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb297-2"><a href="additional-glm-topics.html#cb297-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span>
+<span id="cb297-3"><a href="additional-glm-topics.html#cb297-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
 <pre><code>##        x               y        
 ##  Min.   :10.00   Min.   :22040  
 ##  1st Qu.:10.27   1st Qu.:28835  
@@ -747,18 +747,18 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ##  Mean   :10.50   Mean   :37838  
 ##  3rd Qu.:10.75   3rd Qu.:46688  
 ##  Max.   :11.00   Max.   :59756</code></pre>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="additional-glm-topics.html#cb303-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> data)</span>
-<span id="cb303-2"><a href="additional-glm-topics.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb303-3"><a href="additional-glm-topics.html#cb303-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="additional-glm-topics.html#cb299-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> data)</span>
+<span id="cb299-2"><a href="additional-glm-topics.html#cb299-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb299-3"><a href="additional-glm-topics.html#cb299-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-175-1.png" width="576" /></p>
 <p>A better approach may be to use an inverse link even though the data was generated from a log link. This is a good illustration of the saying “all models are wrong, but some are useful” in that the statistical assumption of the model is not correct but the model still works.</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="additional-glm-topics.html#cb304-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">500</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb304-2"><a href="additional-glm-topics.html#cb304-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span>
-<span id="cb304-3"><a href="additional-glm-topics.html#cb304-3" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="at">data =</span> data)</span>
-<span id="cb304-4"><a href="additional-glm-topics.html#cb304-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb304-5"><a href="additional-glm-topics.html#cb304-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="additional-glm-topics.html#cb300-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">500</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb300-2"><a href="additional-glm-topics.html#cb300-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> x <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sim_norm))</span>
+<span id="cb300-3"><a href="additional-glm-topics.html#cb300-3" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="at">data =</span> data)</span>
+<span id="cb300-4"><a href="additional-glm-topics.html#cb300-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb300-5"><a href="additional-glm-topics.html#cb300-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-176-1.png" width="576" /></p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="additional-glm-topics.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="additional-glm-topics.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x, family = gaussian(link = &quot;inverse&quot;), data = data)
@@ -788,18 +788,18 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 <p><span class="math display">\[f(y) = \frac{(y/\theta)^\alpha}{x \Gamma(\alpha)}e^{-x/\theta}\]</span></p>
 <p>The mean is <span class="math inline">\(\alpha\theta\)</span>.</p>
 <p>Let’s use a gamma with shape 2 and scale 0.5, which has mean 1.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="additional-glm-topics.html#cb307-1" aria-hidden="true" tabindex="-1"></a>gammas <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(<span class="dv">500</span>, <span class="at">shape=</span><span class="dv">2</span>, <span class="at">scale =</span> <span class="fl">0.5</span>)</span>
-<span id="cb307-2"><a href="additional-glm-topics.html#cb307-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(gammas)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="additional-glm-topics.html#cb303-1" aria-hidden="true" tabindex="-1"></a>gammas <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(<span class="dv">500</span>, <span class="at">shape=</span><span class="dv">2</span>, <span class="at">scale =</span> <span class="fl">0.5</span>)</span>
+<span id="cb303-2"><a href="additional-glm-topics.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(gammas)</span></code></pre></div>
 <pre><code>## [1] 1.018104</code></pre>
 <p>We then generate random gamma values. Because the mean now depends on two parameters instead of one, which was just <span class="math inline">\(\mu\)</span> in the Gaussian case, we need to use a slightly different approach to simulate the random values. The link function here is seen in <code>exp(x)</code>.</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="additional-glm-topics.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="co">#random component</span></span>
-<span id="cb309-2"><a href="additional-glm-topics.html#cb309-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="at">min=</span><span class="dv">0</span>, <span class="at">max=</span><span class="dv">100</span>)</span>
-<span id="cb309-3"><a href="additional-glm-topics.html#cb309-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb309-4"><a href="additional-glm-topics.html#cb309-4" aria-hidden="true" tabindex="-1"></a><span class="co">#relate Y to X with a log link function</span></span>
-<span id="cb309-5"><a href="additional-glm-topics.html#cb309-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> gammas<span class="sc">*</span><span class="fu">exp</span>(x)</span>
-<span id="cb309-6"><a href="additional-glm-topics.html#cb309-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb309-7"><a href="additional-glm-topics.html#cb309-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> x, <span class="at">y  =</span> y)</span>
-<span id="cb309-8"><a href="additional-glm-topics.html#cb309-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="additional-glm-topics.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="co">#random component</span></span>
+<span id="cb305-2"><a href="additional-glm-topics.html#cb305-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="at">min=</span><span class="dv">0</span>, <span class="at">max=</span><span class="dv">100</span>)</span>
+<span id="cb305-3"><a href="additional-glm-topics.html#cb305-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb305-4"><a href="additional-glm-topics.html#cb305-4" aria-hidden="true" tabindex="-1"></a><span class="co">#relate Y to X with a log link function</span></span>
+<span id="cb305-5"><a href="additional-glm-topics.html#cb305-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> gammas<span class="sc">*</span><span class="fu">exp</span>(x)</span>
+<span id="cb305-6"><a href="additional-glm-topics.html#cb305-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb305-7"><a href="additional-glm-topics.html#cb305-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> x, <span class="at">y  =</span> y)</span>
+<span id="cb305-8"><a href="additional-glm-topics.html#cb305-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
 <pre><code>##        x                 y            
 ##  Min.   : 0.1447   Min.   :0.000e+00  
 ##  1st Qu.:25.0189   1st Qu.:4.231e+10  
@@ -808,14 +808,14 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ##  3rd Qu.:76.4823   3rd Qu.:8.476e+32  
 ##  Max.   :99.8365   Max.   :2.595e+43</code></pre>
 <p>As expected, the residual plots are all perfect because the model is perfect.</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="additional-glm-topics.html#cb311-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> data)</span>
-<span id="cb311-2"><a href="additional-glm-topics.html#cb311-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb311-3"><a href="additional-glm-topics.html#cb311-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="additional-glm-topics.html#cb307-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> data)</span>
+<span id="cb307-2"><a href="additional-glm-topics.html#cb307-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb307-3"><a href="additional-glm-topics.html#cb307-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-179-1.png" width="576" /></p>
 <p>If we had tried using an inverse instead of the log, the residual plots would look much worse.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="additional-glm-topics.html#cb312-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="at">data =</span> data)</span>
-<span id="cb312-2"><a href="additional-glm-topics.html#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb312-3"><a href="additional-glm-topics.html#cb312-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="additional-glm-topics.html#cb308-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="at">data =</span> data)</span>
+<span id="cb308-2"><a href="additional-glm-topics.html#cb308-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb308-3"><a href="additional-glm-topics.html#cb308-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <pre><code>## Warning in sqrt(crit * p * (1 - hh)/hh): NaNs produced
 
 ## Warning in sqrt(crit * p * (1 - hh)/hh): NaNs produced</code></pre>
@@ -824,11 +824,11 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 <div id="gamma-with-inverse-link" class="section level3" number="12.8.6">
 <h3><span class="header-section-number">12.8.6</span> Gamma with Inverse Link</h3>
 <p>With the inverse link, the mean has a factor <code>1/(x + 1)</code>. Note that we need to add 1 to x to avoid dividing by zero.</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="additional-glm-topics.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="co">#relate Y to X with a log link function</span></span>
-<span id="cb314-2"><a href="additional-glm-topics.html#cb314-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> gammas<span class="sc">*</span><span class="dv">1</span><span class="sc">/</span>(x <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb314-3"><a href="additional-glm-topics.html#cb314-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb314-4"><a href="additional-glm-topics.html#cb314-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> x, <span class="at">y  =</span> y)</span>
-<span id="cb314-5"><a href="additional-glm-topics.html#cb314-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="additional-glm-topics.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="co">#relate Y to X with a log link function</span></span>
+<span id="cb310-2"><a href="additional-glm-topics.html#cb310-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> gammas<span class="sc">*</span><span class="dv">1</span><span class="sc">/</span>(x <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb310-3"><a href="additional-glm-topics.html#cb310-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb310-4"><a href="additional-glm-topics.html#cb310-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> x, <span class="at">y  =</span> y)</span>
+<span id="cb310-5"><a href="additional-glm-topics.html#cb310-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div>
 <pre><code>##        x                 y            
 ##  Min.   : 0.1447   Min.   :0.0005573  
 ##  1st Qu.:25.0189   1st Qu.:0.0095364  
@@ -836,9 +836,9 @@ Then you can use the property of the log where <span class="math inline">\(log(\
 ##  Mean   :50.0386   Mean   :0.0454184  
 ##  3rd Qu.:76.4823   3rd Qu.:0.0383153  
 ##  Max.   :99.8365   Max.   :1.5248073</code></pre>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="additional-glm-topics.html#cb316-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="at">data =</span> data)</span>
-<span id="cb316-2"><a href="additional-glm-topics.html#cb316-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb316-3"><a href="additional-glm-topics.html#cb316-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="additional-glm-topics.html#cb312-1" aria-hidden="true" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>), <span class="at">data =</span> data)</span>
+<span id="cb312-2"><a href="additional-glm-topics.html#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb312-3"><a href="additional-glm-topics.html#cb312-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(glm, <span class="at">cex =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-182-1.png" width="576" /></p>
 </div>
 </div>
