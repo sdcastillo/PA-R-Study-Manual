@@ -122,7 +122,7 @@ You might be wondering: why does this need to be the squared error? Why not the 
 
 >What does it mean when a log transform is applied to $Y$?  I remember from my statistics course on regression that this was done.  
 
-This is done so that the variance is closer to being constant. For example, if the units are in dollars, it is very common for the values to fluctuate more for higher values than for lower values. 
+This is done so that the variance is closer to being constant. For example, if the units are in dollars, it is very common for the values to fluctuate more for higher values than for lower values. Other types of transformations can correct for skewness.
 
 Consider a stock price, for instance. If the stock is $50 per share, it will go up or down less than $1000 per share. However, the log of 50 is about 3.9, and the log of 1000 is only 6.9, so this difference is smaller. In other words, the variance is smaller.
 
@@ -999,8 +999,6 @@ plot(model, which = 2)
 
 When a log link is used, taking the natural logs of continuous variables allows for the scale of each predictor to match the scale of the thing that they are predicting, the log of the mean of the response. In addition, when the distribution of the continuous variable is skewed, taking the log helps to make it more symmetric.
 
-After taking the log of a predictor, the interpretation becomes a power transform of the original variable.
-
 
 For $\mu$ the mean response,
 
@@ -1008,7 +1006,8 @@ $$log(\mu) = \beta_0 + \beta_1 log(X)$$
 To solve for $\mu$, take the exponent of both sides
 
 $$\mu = e^{\beta_1} e^{\beta_1 log(X)} = e^{\beta_0} X^{\beta_1}$$
-### Example
+
+## Example
 
 In the Hospital Readmission sample project, one of the predictor variables, “Length of stay”, is the number of days since a person has been readmitted to the hospital. You can tell that it is right-skewd because the median is higher than the mean.
 

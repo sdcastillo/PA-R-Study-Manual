@@ -590,6 +590,7 @@ If the SOA asks you to tune a GBM, they will need to give you starting hyperpara
 This example looks at 135 combinations of hyper parameters.
 
 ```{r, eval = F}
+library(caret)
 set.seed(42)
 index <- createDataPartition(y = health_insurance$charges, 
                              p = 0.8, list = F)

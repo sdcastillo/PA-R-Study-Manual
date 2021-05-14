@@ -65,11 +65,11 @@ health_insurance %>%
 Pipes allow for data manipulations to be chained with visualizations.
 
 ```{r message=F}
-termlife %>% 
-  filter(FACE > 0) %>% 
-  mutate(INCOME_AGE_RATIO = INCOME/AGE) %>% 
-  ggplot(aes(INCOME_AGE_RATIO, FACE)) + 
-  geom_point() + 
+health_insurance %>% 
+  filter(age>10) %>% 
+  mutate(charges_age_ratio = charges/age) %>% 
+  ggplot(aes(charges_age_ratio, bmi)) + 
+  geom_point()+
   theme_bw()
 ```
 
