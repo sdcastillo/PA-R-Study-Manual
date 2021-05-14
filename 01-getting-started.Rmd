@@ -9,11 +9,13 @@ This chapter tells you how to install the necessary software on your computer.
 
 ## Installing R
 
-To begin, you will need to install R.  This is the engine that *runs* the code.  You need to install two versions - the newest version **(v4)** as well as an older version **(v3.6.2)**.  The older version will be used when running the code from the SOA's modules, which needs to be consistent with what will be installed on the Prometric computers.  This course uses the newest version so that you will not have as many errors during practice.
+To begin, you will need to install R. This is the engine that runs the code. You need to install the newest version **(v4)** as well as an older version **(v3.6.2)**. 
+
+The older version will be used when running the code from the modules of SOA, which needs to be consistent with what will be installed on the Prometric computers. This course uses the newest version so that you will not have as many errors during practice.
 
 Download it from here: https://cran.r-project.org/mirrors.html
 
-Once both have been installed, switching between the two is easy.
+You can easily switch between both of them after installation.
 
 ```{r echo = F, fig.align="center", warning=F, out.width="50%"}
 knitr::include_graphics("images/rversion1.png")
@@ -26,19 +28,17 @@ knitr::include_graphics("images/rversion2.png")
 
 Remember: 
 
-**For this course, use a version later than 4.0.2.**
+For this course, use a version later than 4.0.2.
 
-**For the SOA's modules, use version 3.6.2.**
+For the module of SOA, use version 3.6.2.
 
 ## Installing RStudio
 
-This is the tool that helps you to *write* the code.  Just as MS Word creates documents, RStudio creates R scripts and other documents.  Download RStudio Desktop (the free edition) and choose a place on your computer to install it.
+Just as MS Word creates documents, RStudio creates R scripts and other documents. This is the tool that helps you to *write* the code. Download the free edition of RStudio Desktop and instal it at your selected location.
 
 Download it from here: https://rstudio.com/products/rstudio/download/
 
-Then you need to set the R library.
-
-R code is organized into libraries.  You want to use the exact same code that will be on the Prometric Computers.  This requires installing older versions of libraries.  Change your R library to the one which was included within the SOA's modules.
+Next you need to set the R library. R code is organized into libraries. You want to use the same code that will be on the Prometric Computers. It would require installing older versions of libraries. Change your R library to the one which was included within the Modules of SOA.
 
 ```{r eval = F}
 .libPaths("PATH_TO_SOAS_LIBRARY/PAlibrary")
@@ -53,7 +53,7 @@ install.packages("ExamPAData")
 library(ExamPAData)
 ```
 
-To get the data dictionary for a data set, use `?dataset_name` such as `?customer_phone_calls`.  For your convenience, you can use these data sets for your own practice.  They make great candidates for machine learning problems. 
+To get the data dictionary for a data set, use `?dataset_name` such as `?customer_phone_calls`. For your convenience, you can use these data sets for your practice. They make great candidates for machine learning problems.
 
 | Dataset   |      Description      |
 |----------|-------------|
@@ -75,7 +75,7 @@ To get the data dictionary for a data set, use `?dataset_name` such as `?custome
 
 ## Download ISLR
 
-This book references the publically-avialable textbook "An Introduction to Statistical Learning", which can be downloaded for free
+This book references the publically-available textbook “An Introduction to Statistical Learning,” which can be downloaded for free
 
 http://faculty.marshall.usc.edu/gareth-james/ISL/
 
