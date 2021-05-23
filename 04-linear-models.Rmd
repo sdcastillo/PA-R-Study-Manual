@@ -13,25 +13,29 @@ theme_set(theme_bw())
 
 # Introduction to modeling
 
-About 40-50% of the exam grade is based on modeling.  The goal is to be able to predict an unknown quantity.  In actuarial applications, this tends to be claims that occur in the future, death, injury, accidents, policy lapse, hurricanes, or some other insurable event.
+About 40-50% of the exam grade is based on modeling. The goal is to be able to predict an unknown quantity. In actuarial applications, this tends to claim that occur in the future, death, injury, accidents, policy lapse, hurricanes, or some other insurable event.
 
 The next few chapters will cover the following learning objectives.
+
 
 ```{r echo = F, fig.align="center", warning=F, out.width="400%"}
 knitr::include_graphics("images/learning_obj6.png")
 ```
 
 ## Modeling vocabulary
+Modeling notation is sloppy because many words mean the same thing.
 
-Modeling notation is sloppy because there are many words that mean the same thing.
-
-The number of observations will be denoted by $n$.  When we refer to the size of a data set, we are referring to $n$.  Each row of the data is called an *observation* or *record*.  Observations tend to be people, cars, buildings, or other insurable things.  These are always independent in that they do not influence one another.  Because the Prometric computers have limited power, $n$ tends to be less than 100,000.
+The number of observations will be denoted by  $n$.  When we refer to the size of a data set, we are referring to $n$.  Each row of the data is called an observation or record. Observations tend to be people, cars, buildings, or other insurable things. These are always independent in that they do not influence one another. Because the Prometric computers have limited power, $n$ tends to be less than 100,000.
 
 Each observation has known attributes called *variables*, *features*, or *predictors*.  We use $p$ to refer the number of input variables that are used in the model.  
 
-The *target*, *response*, *label*, *dependent variable*, or *outcome* variable is the unknown quantity that is being predicted.  We use $Y$ for this.  This can be either a whole number, in which case we are performing *regression*, or a category, in which case we are performing *classification*.  
+The *target*, *response*, *label*, *dependent variable*, or *outcome* variable is the unknown quantity that is being predicted.  We use $Y$ for this.  This can be either a whole number, in which case we are performing regression, or a category, in which case we perform classification.
 
-For example, say that you are a health insurance company that wants to set the premiums for a group of people.  The premiums for people who are likely to incur high health costs need to be higher than those who are likely to be low-cost.  Older people tend to use more of their health benefits than younger people, but there are always exceptions for those who are very physically active and healthy.  Those who have an unhealthy Body Mass Index (BMI) tend to have higher costs than those who have a healthy BMI, but this has less of an impact on younger people.  **In short, we want to be able to predict a person's future health costs by taking into account many of their attributes at once**.
+For example, say that you are a health insurance company that wants to set the premiums for a group of people. The premiums for people who are likely to incur high health costs need to be higher than those likely to be low-cost. 
+
+Older people tend to use more of their health benefits than younger people, but there are always exceptions for those who are very physically active and healthy. Those who have an unhealthy Body Mass Index (BMI) tend to have higher costs than those who have a healthy BMI, but this has less impact on younger people. 
+
+In short, we want to predict the future health costs of a person by taking into account many of their attributes at once.
 
 This can be done in the `health_insurance` data by fitting a model to predict the annual health costs of a person.  The target variable is `y = charges`, and the predictor variables are `age`, `sex`, `bmi`, `children`, `smoker` and `region`.  These six variables mean that $p = 6$.  The data is collected from 1,338 patients, which means that $n = 1,338$.   
 
@@ -62,9 +66,9 @@ $$
 \hat{Y} + \epsilon = f(X) + \epsilon
 $$
 
-In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict a person's health care costs, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
+In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict the health care costs of a person, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
 
-Another way of saying this is in terms of expected value: the model $f(X)$ estimates the expected value of the target $E[Y|X]$.  That is, once we condition on the data $X$, we can make a guess as to what we expect $Y$ to be "close to".  There are many ways of measuring "closeness", as we will see.  
+Another way of saying this is in terms of expected value: the model $f(X)$ estimates the expected value of the target $E[Y|X]$.  That is, once we condition on the data $X$, we can make a guess as to what we expect $Y$ to be "close to". We will see that there are many ways of measuring "closeness." 
 
 ## Ordinary Least Squares (OLS)
 
@@ -82,7 +86,7 @@ $$
 
 Each $y_i$ is a *linear combination* of $x_{i1}, ..., x_{ip}$, plus a constant $\beta_0$ which is called the *intercept* term.  
 
-In the one-dimensional case, this creates a line connecting the points.  In higher dimensions, this creates a hyper-plane.
+In the one-dimensional case, this creates a line connecting the observations.  In higher dimensions, this creates a hyper-plane.
 
 ```{r message = F, echo = F,caption = "Linear Regression for 1-dimensional model"}
 library(tidyverse)
@@ -95,7 +99,7 @@ tibble(y = rnorm(10, 0, 1),
   theme(legend.position = "top")
 ```
 
-The red line shows the *expected value* of the target, as the target $\hat{Y}$ is actually a random variable.  For each of the data points, the model assumes a Gaussian distribution. If there is just a single predictor, $x$, then the mean is $\beta_0 + \beta_1 x$.
+The red line shows the *expected value* of the target, as the target $\hat{Y}$ is actually a random variable.  For each observation, the model assumes a Gaussian distribution. If there is just a single predictor, $x$, then the mean is $\beta_0 + \beta_1 x$.
 
 ```{r echo = F, fig.align="center", message=F, warning = F, out.width="200%"}
 knitr::include_graphics("images/conditional_response.jpg")
@@ -103,7 +107,7 @@ knitr::include_graphics("images/conditional_response.jpg")
 
 The question then is **how can we choose the best values of** $\beta?$  First of all, we need to define what we mean by "best".  Ideally, we will choose these values which will create close predictions of $Y$ on new, unseen data.  
 
-To solve for $\mathbf{\beta}$, we first need to define a *loss function*.  This allows us to compare how well a model is fitting the data.  The most commonly used loss function is the residual sum of squares (RSS), also called the *squared error loss* or the L2 norm.  When RSS is small, then the predictions are close to the actual values and the model is a good fit.  When RSS is large, the model is a poor fit.
+To solve for $\mathbf{\beta}$, we first need to define a **loss function**. This would let us compare how well a model fits the data. The most commonly used loss function is the residual sum of squares (RSS), also called the **squared error loss or the L2 norm**. When RSS is small, then the predictions are close to the actual values, and the model is a good fit. When RSS is large, the model is a poor fit.
 
 $$\text{RSS} = \sum_i(y_i - \hat{y})^2$$
 
@@ -111,27 +115,34 @@ When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 +
 
 You will also see the term **Root Mean Squared Error** (RMSE) which is just the average of the square root of the $\text{RSS}$, or just **Mean Squared Error** (MSE).
 
-You might be asking: why does this need to be the squared error?  Why not the absolute error, or the cubed error?  Technically, these could be used as well but the betas would not be the maximum likelihood parameters.  In fact, using the absolute error results in the model predicting the *median* as opposed to the *mean*.  Two reasons why RSS is popular are:  
+You might be wondering: why does this need to be the squared error? Why not the absolute error or the cubed error? Technically, these could be used, but the betas would not be the maximum likelihood parameters. Using the absolute error results in the model predicting the median as opposed to the mean. Two reasons behind the popularity of RSS are:  
 
 - It provides the same solution if we assume that the distribution of $Y|X$ is Gaussian and maximize the likelihood function.  This method is used for GLMs, in the next chapter.
-- It is computationally easier, and computers used to have a difficult time optimizing for MAE
+- It is computationally easier, and computers used to have a difficult time optimizing for MAE.
 
 >What does it mean when a log transform is applied to $Y$?  I remember from my statistics course on regression that this was done.  
 
-This is done so that the variance is closer to being constant.  For example, if the units are in dollars, then it is very common for the values to fluctuate more for higher values than for lower values.  Consider a stock price, for instance.  If the stock is \$50 per share, then it will go up or down less than if it is \$1000 per share.  The log of 50, however, is about 3.9 and the log of 1000 is only 6.9, and so this difference is smaller.  In other words, the variance is smaller.
+This is done so that the variance is closer to being constant. For example, if the units are in dollars, it is very common for the values to fluctuate more for higher values than for lower values. Other types of transformations can correct for skewness.
+
+Consider a stock price, for instance. If the stock is $50 per share, it will go up or down less than $1000 per share. However, the log of 50 is about 3.9, and the log of 1000 is only 6.9, so this difference is smaller. In other words, the variance is smaller.
 
 Transforming the target means that instead of the model predicting $E[Y]$, it predicts $E[log(Y)]$.  A common mistake is to then the take the exponent in an attempt to "undo" this transform, but $e^{E[log(Y)]}$ is not the same as $E[Y]$.
 
 
 ## R^2 Statistic
+One of the most common ways of measuring model fit is the “R-Squared” statistic. The RSS provides an absolute measure of fit because it can be any positive value, but it is not always clear what a “good” RSS is because it is measured in units of $Y$.  
 
-One of the most common ways of measuring model fit, which you may be familiar with from a course on linear regression, is the "R-Squared" statistic.  The *RSS* provides an absolute measure of fit, because the number can be any positive value, but it's not always clear what a "good" RSS is because it's measured in units of $Y$.  The $R^2$ statistic provides an alternative measure of fit.  It takes the proportion of variance explained - so that it's always a value between 0 and 1, and is independent of the scale of $Y$.
+The $R^2$ statistic provides an alternative measure of fit. It takes the proportion of variance explained - so that it is always a value between 0 and 1 and is independent of the scale of $Y$.
 
 $$R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}}$$
 
-Where $\text{TSS} = \sum(y_i - \hat{y})^2$ is the total sum of squares.  TSS measures the total variance in the response $Y$ and can be thought of as the amount of variability inherent in the response before the regression is performed.  In contrast, RSS measures the amount of variability that is left unexplained after performing the regression.  Hench, $\text{TSS} - \text{RSS}$ measures the amount of variability in the response that is explained (or removed) be performing the regression, and R^2 measures the proportion of variability in $Y$ that can be explained using $X$.  A value near 1 indicates that a large proportion of the variability in the response has been explained by the regression.  A number near 0 indicates that the regression did not explain much of the variability in the response; this might occur because the linear model is wrong.
+Where $\text{TSS} = \sum(y_i - \hat{y})^2$ is the total sum of squares. TSS measures the total variance in the response YY and can be considered the amount of variability inherent in the response before the regression is performed. In contrast, RSS measures the amount of variability that is left unexplained after performing the regression. 
 
-The $R^2$ statistic has an interpretational advantage over the RSE.  In actuarial applications, it is useful to use an absolute measure of model fit, such as RSS, to train the model, and then use $R^2$ when you are explaining it to your clients so that it is easier to communicate.
+Hench, $\text{TSS} - \text{RSS}$ measures the amount of variability in the response that is explained (or removed) by performing the regression, and R^2 measures the proportion of variability in $Y$ that can be explained using $X$. 
+
+A value near 1 indicates that the regression has explained a large proportion of the variability in the response, whereas, a number near 0 indicates that the regression did not explain much of the variability in the response. This might occur because the linear model is wrong.
+
+The $R^2$ sstatistic has an interpretational advantage over the RSE. In actuarial applications, it is useful to use an absolute measure of model fit, such as RSS, to train the model, and then use $R^2$ when explaining it to your clients so that it is easier to communicate.
 
 This chapter was based on Chapter 3, *Linear Regression*, of *An Introduction to Statistical Learning.*
 
@@ -139,7 +150,7 @@ This chapter was based on Chapter 3, *Linear Regression*, of *An Introduction to
 
 *Correlation does not imply causation.*
 
-This is a common saying.  Just because two things are correlated does not necessarily mean that one casues the other.  Just because most actuaries work remotely when there it is cold and snowing does not mean that cold and snow cause anti-social, introverted work habits.  A more likely explanation is that actuaries are concerned about driving safely on icy roads and avoiding being involved in a car accident.
+This is a common saying. Just because two things are correlated does not necessarily mean that one causes the other. Just because most actuaries work remotely when there is cold and snowing does not mean that cold and snow cause anti-social, introverted work habits. A more likely explanation is that actuaries are concerned about driving safely on icy roads and avoiding being involved in a car accident.
 
 ### Pearson's correlation
 
@@ -158,19 +169,22 @@ and this is also a measure of the linear relationship between two vectors, $X$ a
 $$rho = \frac{\sum(x' - m_{x'})(y'_i - m_{y'})}{\sqrt{\sum(x' - m_{x'})^2 \sum(y' - m_{y'})^2}}$$
 Where $x′=rank(x)$ and $y′=rank(y)$
 
-Most questions on Exam PA will ask you about Pearson's correlation.  One advantage to Spearman over Pearson is that Spearman works for *ordinal* variables.  See Chapter 6 for the difference between *ordinal* and *numeric* variables.
+Most questions on Exam PA will ask you about Pearson’s correlation. One advantage to Spearman over Pearson is that Spearman works for ordinal variables. See Chapter 6 for the difference between **ordinal** and **numeric** variables.
 
 ## Regression vs. classification
 
-Regression modeling is when the target is a number.  Binary classification is when there are two outcomes, such as "Yes/No", "True/False", or "0/1".  Multi-class regression is when there are more than two categories such as "Red, Yellow, Green" or "A, B, C, D, E".  There are many other types of regression that are not covered on this exam such as ordinal regression, where the outcome is an ordered category, or time-series regression, where the data is time-dependent.
+Regression modeling is when a target is a number. Binary classification is when there are two outcomes, such as “Yes/No,” “True/False,” or “0/1”. Multi-class regression is when there are more than two categories such as “Red, Yellow, Green” or “A, B, C, D, E.” There are many other types of regression that are not covered on this exam, such as ordinal regression, where the outcome is an ordered category, or time-series regression, where the data is time-dependent.
 
 ## Regression metrics
 
-For any model, the goal is always to reduce an error metric.  This is a way of measuring how well the model can explain the target.  The phrases "reducing error", "improving performance", or "making a better fit" are synonymous with reducing the error.  The word "better" means "lower error" and "worse" means "higher error".
+For any model, the goal is always to reduce an error metric. This is a way of measuring how well the model can explain the target. 
 
-The choice of error metric has a big difference on the outcome.  When explaining a model to a businessperson, using simpler metrics such as R-Squared and Accuracy is convenient.  When training the model, however, using a more nuanced metric is almost always better.
+The phrases “reducing error,” “improving performance,” or “making a better fit” are synonymous with reducing the error. The word “better” means “lower error,” and “worse” means “higher error.”
 
-These are the regression metrics that are most likely to appear on Exam PA.  Memorizing these formulas for AIC and BIC is not necessary as they are in the R documentation by typing `?AIC` or `?BIC` into the R console.
+The choice of error metric has a big difference in the outcome. When explaining a model to a businessperson, using simpler metrics such as R-Squared and Accuracy is convenient. When training the model, however, using a more nuanced metric is almost always better.
+
+These are the regression metrics that are most likely to appear on Exam PA. Memorizing these formulas for AIC and BIC is unnecessary as they are in the R documentation by typing
+ `?AIC` or `?BIC` into the R console.
 
 ```{r echo = F, fig.align="center", warning=F, message = F, out.width="1300%"}
 knitr::include_graphics("images/regression_metrics.png")
@@ -179,14 +193,11 @@ knitr::include_graphics("images/regression_metrics.png")
 </br>
 
 ```{block, type='studytip'}
-**Don't forget** the most important metric: **"usefullness!"**.  A model which has high predictive accuracy but which does not meet the needs of the business problem has low usefulness.  A model which is easy to explain to the PA exam graders has high usefulness.  
+Do not forget the most important metric: “usefulness!”. A model with high predictive accuracy but does not meet the needs of the business problem has low usefulness. A model which is easy to explain to the PA exam graders has high usefulness.
 
->"Some candidates did not consider both predictive power and applicability to the business
-problem, and others gave justifications based on one of these but then chose a model based on
-the other." - SOA PA 6/18/20, Task 12 Solution
+>"Some candidates did not consider both predictive power and applicability to the business problem and others gave justifications based on one of these but then chose a model based on the other.” - SOA PA 6/18/20, Task 12 Solution
 
-> "Which of the three models would you recommend for this analysis? Do not
-base your recommendation solely on the mean squared errors (RMSE) from each model." - SOA PA 6/13/19, Task 9 Project Statement
+> "Which of the three models would you recommend for this analysis? Do not base your recommendation solely on the mean squared errors (RMSE) from each model.” - SOA PA 6/13/19, Task 9 Project Statement
 
 ```
 
@@ -195,7 +206,7 @@ base your recommendation solely on the mean squared errors (RMSE) from each mode
 
 ### Example: SOA PA 6/18/20, Task 4
 
-> (3 points) Investigate correlations.
+> Three points of Investigate correlations.
 
 >1) Create a correlation coefficient matrix for all the numeric variables in the dataset.
 
@@ -207,7 +218,7 @@ base your recommendation solely on the mean squared errors (RMSE) from each mode
 
 ## Example: Health Costs
 
-In our health insurance data, we can predict a person's health costs based on their age, body mass index, and gender.  Intuitively, we expect that these costs would increase as a person's age increases, would be different for men than for women, and would be higher for those who have a less healthy BMI.  We create a linear model using `bmi`, `age`, and `sex` as an inputs.
+In our health insurance data, we can predict the health costs of a person based on their age, body mass index and gender. Intuitively, we expect that these costs would increase with the increase in the age of the person, be different for men than for women, and be higher for those who have a less healthy BMI. We create a linear model using `bmi`, `age`, and `sex` as an inputs.
 
 The `formula` controls which variables are included.  There are a few shortcuts for using R formulas.  
 
@@ -239,11 +250,12 @@ The little `*`, `**`, `***` tell you the significance level.  A variable with a 
 summary(model)
 ```
 
->For this exam, variable selection tends to be based on the 0.05 significance level (single star `*`).
+>For this exam, variable selection tends to be based on the 0.05 significance level (single star *).
 
-When evaluating model performance, you should not rely on the `summary` alone as this is based on the training data.  To look at performance, test the model on validation data.  This can be done by either using a hold out set, or using cross-validation, which is even better.
+When evaluating model performance, you should not rely on the  `summary` alone, based on the training data. To look at performance, test the model on validation data. This can be done by either using a hold-out set or cross-validation, which is even better.
 
-Let's create an 80% training set and 20% testing set.  You don't need to worry about understanding this code as the exam will always give this to you.
+Let us create an 80% training set and 20% testing set. You do not need to worry about understanding this code as the exam will always give this to you.
+
 
 ```{r message = F}
 set.seed(1)
@@ -282,30 +294,32 @@ get_mae <- function(y, y_hat){
 get_mae(pred, test$charges)
 ```
 
-The above metrics do not tell us if this is a good model or not by themselves.  We need a comparison.  The fastest check is to compare against a prediction of the mean.  In other words, all values of the `y_hat` are the average of `charges`, which is about \$13,000.
+The above metrics do not tell us if this is a good model or not by itself. We need a comparison. The fastest check is to compare against a prediction of the mean. In other words, all values of the `y_hat` are the average of `charges`, which is about \$13,000.
 
 ```{r}
 get_rmse(mean(test$charges), test$charges)
 get_mae(mean(test$charges), test$charges)
 ```
 
-The RMSE and MAE are both **higher** (worse) when using just the mean, which is what we expect.  **If you ever fit a model and get an error which is worse than the average prediction, something must be wrong.**
+The RMSE and MAE are both higher (worse) when using just the mean, which we expect. If you ever fit a model and get an error that is worse than the average prediction, something must be wrong.
 
-The next test is to see if any assumptions have been violated.  
+The next test is to see if any assumptions have been violated.
 
-First, is there a pattern in the residuals?  If there is, this means that the model is missing key information.  For the model below, this is a **yes**, **which means that this is a bad model**.  Because this is just for illustration, we are going to continue using it.  
+First, is there a pattern in the residuals? If there is, this means that the model is missing key information. 
+
+For the model below, this is a yes, which means that this is a bad model. Because this is just for illustration, we are going to continue using it.
+  
 
 ```{r fig.cap="Residuals vs. Fitted"}
 plot(model, which = 1)
 ```
-
-The normal QQ shows how well the quantiles of the predictions fit to a theoretical normal distribution.  If this is true, then the graph is a straight 45-degree line.  In this model, you can definitely see that this is not the case.  If this were a good model, this distribution would be closer to normal.
+The normal QQ shows how well the quantiles of the predictions fit a theoretical normal distribution. If this is true, then the graph is a straight 45-degree line. In this model, you can see that this is not the case. If this were a good model, this distribution would be closer to normal.
 
 ```{r fig.cap="Normal Q-Q"}
 plot(model, which = 2)
 ```
 
-Once you have chosen your model, you should re-train over the entire data set.  This is to make the coefficients more stable because `n` is larger.  Below you can see that the standard error is lower after training over the entire data set.
+Once you have chosen your model, you should re-train over the entire data set. This is to make the coefficients more stable because `n` is larger. Below you can see that the standard error is lower after training over the entire data set.
 
 ```{r }
 all_data <- lm(data = health_insurance, 
@@ -326,7 +340,7 @@ all_data %>%
   kableExtra::kable("markdown")
 ```
 
-All interpretations should be based on the model which was trained on the entire data set.  Obviously, this only makes a difference if you are interpreting the precise values of the coefficients.  If you are just looking at which variables are included, or at the size and sign of the coefficients, then this would probably not make a difference.
+All interpretations should be based on the model which was trained on the entire data set. This only makes a difference if you are interpreting the precise values of the coefficients. If you are just looking at which variables are included or at the size and sign of the coefficients, then this would probably not make a difference.
 
 ```{r}
 coefficients(model)
@@ -354,17 +368,17 @@ This model structure implies that each of the variables $x_1, ..., x_p$ each cha
 
 Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=136">Practice Exams + Lessons</a>
 
-GLMs are a broad category of models.  Ordinary Least Squares and Logistic Regression are both examples of GLMs.
+GLMs are a broad category of models. Ordinary Least Squares and Logistic Regression are both examples of GLMs.
 
 ### Assumptions of OLS
 
-We assume that the target is Gaussian with mean equal to the linear predictor.  This can be broken down into two parts:
+We assume that the target is Gaussian with a mean equal to the linear predictor. This can be broken down into two parts:
 
 1. A *random component*: The target variable $Y|X$ is normally distributed with mean $\mu = \mu(X) = E(Y|X)$
 
 2. A link between the target and the covariates (also known as the systemic component) $\mu(X) = X\beta$
 
-This says that each observation follows a normal distribution which has a mean that is equal to the linear predictor.  Another way of saying this is that "after we adjust for the data, the error is normally distributed and the variance is constant."  If $I$ is an n-by-in identity matrix, and $\sigma^2 I$ is the covariance matrix, then
+This says that each observation follows a normal distribution that has a mean that is equal to the linear predictor. Another way of saying this is that “after we adjust for the data, the error is normally distributed and the variance is constant.” If $I$ is an n-by-in identity matrix, and $\sigma^2 I$ is the covariance matrix, then
 
 $$
 \mathbf{Y|X} \sim N( \mathbf{X \beta}, \mathbf{\sigma^2} I)
@@ -372,7 +386,7 @@ $$
 
 ### Assumptions of GLMs
 
-Just as the name implies, GLMs are more *general* in that they are more flexible.  We relax these two assumptions by saying that the model is defined by 
+GLMs are more general which eludes that they are more flexible. We relax these two assumptions by saying that the model is defined by
 
 1. A random component: $Y|X \sim \text{some exponential family distribution}$
 
@@ -381,11 +395,11 @@ Just as the name implies, GLMs are more *general* in that they are more flexible
 $$g(\mu(X)) = X\beta$$
 where $g$ is called the *link function* and $\mu = E[Y|X]$.
 
-Each observation follows *some type of exponential distribution* (Gamma, Inverse Gaussian, Poisson, Binomial, etc.) and that distribution has a mean which is related to the linear predictor through the link function.  Additionally, there is a *dispersion* parameter, but that is more info that is needed here.  For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://contentpreview.s3.us-east-2.amazonaws.com/CAS+Monograph+5+-+Generalized+Linear+Models+for+Insurance+Ratemaking.pdf).
+Each observation follows some type of exponential distribution (Gamma, Inverse Gaussian, Poisson, Binomial, etc.), and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a dispersion parameter, but that is more info is needed here. For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://contentpreview.s3.us-east-2.amazonaws.com/CAS+Monograph+5+-+Generalized+Linear+Models+for+Insurance+Ratemaking.pdf).
 
 ## Advantages and disadvantages
 
-There is usually at least one question on the PA exam which asks you to "list some of the advantages and disadvantages of using this particular model", and so here is one such list.  It is unlikely that the grader will take off points for including too many comments and so a good strategy is to include everything that comes to mind.
+There is usually at least one question on the PA exam which asks you to “list some of the advantages and disadvantages of using this particular model,” and so here is one such list. It is unlikely that the grader will take off points for including too many comments and so a good strategy is to include everything that comes to mind.
 
 **GLM Advantages**
 
@@ -405,9 +419,9 @@ There is usually at least one question on the PA exam which asks you to "list so
 
 ## GLMs for regression
 
-For regression problems, we try to match the actual distribution to the model's distribution being used in the GLM.  These are the most likely distributions.
+For regression problems, we try to match the actual distribution to the distribution of the model being used in the GLM. These are the most likely distributions.
 
-The choice of target distribution should be similar to the actual distribution of $Y$.  For instance, if $Y$ is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values.  If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewed. 
+The choice of target distribution should be similar to the actual distribution of $Y$.  For instance, if $Y$ is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values. If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewed. 
 
 ```{r fig.height = 4, message = F, echo = F, warning = F, fig.align="center"}
 library(mgcv)
@@ -441,7 +455,7 @@ Notice that the top three distributions are continuous but the bottom two are di
 knitr::include_graphics("images/response_distributions.png")
 ```
 
-There are five link functions for a continuous $Y$, although the choice of distribution family will typically rule-out several of these immediately.  The linear predictor (a.k.a., the *systemic component*) is $z$ and the link function is how this connects to the expected value of the response.
+There are five link functions for a continuous $Y$, , although the choice of distribution family will typically rule out several of these immediately. The linear predictor (a.k.a., the systemic component) is $z$ and the link function is how this connects to the expected value of the response.
 
 $$z = X\beta = g(\mu)$$
 
@@ -449,7 +463,7 @@ $$z = X\beta = g(\mu)$$
 knitr::include_graphics("images/link_functions.png")
 ```
 
-If the target distribution *must* have a positive mean, such as in the case of the Inverse Gaussian or Gamma, then the Identity or Inverse links are poor choices because they allow for negative values; the range of the mean is $(-\infty, \infty)$.  The other link functions force the mean to be positive. 
+If the target distribution must have a positive mean, such as in the Inverse Gaussian or Gamma, then the Identity or Inverse links are poor choices because they allow for negative values; the mean range is $(-\infty, \infty)$.  The other link functions force the mean to be positive. 
 
 ## Interpretation of coefficients
 
@@ -475,9 +489,9 @@ e^{\beta_0} e^{\beta_1 X_{i1}}e^{\beta_2 X_{i2}} ...  e^{\beta_p X_{ip}} =
 R_{i0} R_{i2} R_{i3} ... R_{ip}
 $$
 
-$R_{ik}$ is known as the *relativity* of the kth variable.  This terminology is from insurance ratemaking where actuaries need to be able to explain the impact of each variable to insurance regulators.
+$R_{ik}$ is known as the *relativity* is known as the relativity of the kth variable. This terminology is from insurance ratemaking, where actuaries need to explain the impact of each variable to insurance regulators.
 
-Another advantage to the log link is that the coefficients can be interpreted as having a percentage change on the target.  Here is an example for a GLM with variables $X_1$ and $X_2$ and a log link function. This holds any continuous target distribution.
+Another advantage to the log link is that the coefficients can be interpreted as having a percentage change on the target. Here is an example for a GLM with variables $X_1$ and $X_2$ and a log link function. This holds any continuous target distribution.
 
 | Variable    | $\beta_j$ | $e^{\beta_j} - 1$ | Interpretation                                    | 
 |-------------|-------------|----------------------|---------------------------------------------------| 
@@ -486,7 +500,7 @@ Another advantage to the log link is that the coefficients can be interpreted as
 | $X_2$          | -0.500      | -0.393               | 39% decrease in $E[Y]$ for each unit increase in $X_2$* | 
 
 
-If categorical predictors are used, then the interpretation is very similar.  Say that there is one predictor, `COLOR`, which takes on values of `YELLO` (reference level), `RED`, and `BLUE`.  
+If categorical predictors are used, then the interpretation is very similar.  Say that there is one predictor, `COLOR`, which takes on values of `YELLOW` (reference level), `RED`, and `BLUE`.  
 
 
 | Variable    | $\beta_j$ | $e^{\beta_j} - 1$  | Interpretation                                          | 
@@ -501,13 +515,13 @@ If categorical predictors are used, then the interpretation is very similar.  Sa
 </br>
 
 ```{block, type='studytip'}
-**Warning:** Never take the log of Y with a GLM!  This is a common mistake because that's how we handled skewness for multiple linear regression models, but that was before we had the GLM in our toolbox.  Don't move on until you understand the difference between these two models: 
+**Warning:** Never take the log of Y with a GLM! This is a common mistake because we handled skewness for multiple linear regression models, but that was before we had the GLM in our toolbox. Do not move on until you understand the difference between these two models: 
 
 `glm(y ~ x, family = gaussian(link = "log"), data = data)` 
 
 `glm(log(y) ~ x, family = gaussian(link = "identity"), data = data)`
 
-The first says that the target has a Gaussian distribution which has a mean equal to the log of the linear predictor.  The second says that the **log of the target** has a Guassian distribution has a mean exactly equal to the linear predictor.  You'll remember from Exam P that when you apply a transform to a random variable, the distribution changes completely.  Try running the above examples on real data and see if you can spot the differences in the results.
+The first says that the target has a Gaussian distribution which has a mean equal to the log of the linear predictor. The second says that the target's log has a Guassian distribution that is exactly equal to the linear predictor. You will remember from Exam P that when you apply a transform to a random variable, the distribution changes completely. Try running the above examples on real data and see if you can spot the differences in the results.
 ```
 
 </br>
@@ -515,38 +529,39 @@ The first says that the target has a Gaussian distribution which has a mean equa
 
 ## Other links
 
-The other link functions are not straight-forward to interpret using math.  One solution is to use the **model-demo-method.**  See the example at the end of this next chapter.
+The other link functions are not straightforward to interpret using math. One solution is to use the **model-demo-method**. See the example at the end of this next chapter.
 
 
 # GLMs for classification
 
-For classification, the predicted values need to be a category instead of a number.  Using a discrete target distribution ensures that this will be the case.  The probability of an event occurring is $E[Y] = p$.  Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability. 
+For classification, the predicted values need to be a category instead of a number. Using a discrete target distribution ensures that this will be the case. The probability of an event occurring is $E[Y] = p$. Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability.
 
 These StatQuest videos explain the most common type of GLM classification model: Logistic regression.
+
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=yIYKR4sgzI8,vN5cNN2-HWE,BfKanl1aSG0,xxFYro8QuXA,C4N3_XJJ-jU" frameborder="0" allowfullscreen></iframe>
 
 
 ## Binary target
 
-When $Y$ is binary, then the Binomial distribution is the only choice.  If there are multiple categories, then the Multinomial should be used.
+When $Y$ is binary, then the Binomial distribution is the only choice. If there are multiple categories, then the Multinomial should be used.
 
 ## Count target 
 
-When $Y$ is a count, the Poisson distribution is the only choice.  Two examples are counting the number of claims which a policy has in a given year or counting the number of people visiting the ER in a given month.  The key ingredients are 1) some event, and 2) some fixed period of time.
+When $Y$ is a count, the Poisson distribution is the only choice. Two examples are counting the number of claims a policy has in a given year or counting the number of people visiting the ER in a given month. The key ingredients are 1) some events and 2) some fixed periods.
 
-Statistically, the name for this is a Poisson Process, which is a way of describing a serious of discrete events where the average time between events is known, called the "rate" $\lambda$, but the exact timing of events is unknown. For a time interval of length $m$, the expected number of events is $\lambda m$.  
+Statistically, the name for this is a Poisson Process, which describes a series of discrete events where the average time between events is known, called the "rate" $\lambda$, but the exact timing of events is unknown. For a time interval of length $m$, the expected number of events is $\lambda m$.  
 
-By using a GLM, we can fit a different rate for each observation. In the ER example, each patient would have a different rate.  Those who are unhealthy or who work in risky environments would have a higher rate of ER visits than those are healthy and work in offices.
+By using a GLM, we can fit a different rate for each observation. In the ER example, each patient would have a different rate. Those who are unhealthy or who work in risky environments would have a higher rate of ER visits than those who are healthy and work in offices.
 
 $$Y_i|X_i \sim \text{Poisson}(\lambda_i m_i)$$
 
 
-When all observations have the same exposure, $m = 1$.  When the mean of the data is far from the variance, an additional parameter known as the *dispersion parameter* is used.  A classic example is when modeling insurance claim counts which have a lot of zero claims.  Then the model is said to be an "over-dispersed Poisson" or "zero-inflated" model.  
+When all observations have the same exposure, $m = 1$.  When the mean of the data is far from the variance, an additional parameter known as the dispersion parameter is used. A classic example is when modeling insurance claim counts, which have a lot of zero claims. Then the model is said to be an “over-dispersed Poisson” or “zero-inflated” model.  
 
 ## Link functions
 
-There are four link functions.  The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the SOA's Hospital Readmissions practice exam in 2019.  The identity link does not make sense for classification because it would result in predictions being outside of $(0,1)$
+There are four link functions. The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the Hospital Readmissions practice exam of SOA in 2019. The identity link does not make sense for classification because it would result in predictions being outside of $(0,1)$
 
 ```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
 knitr::include_graphics("images/discrete_link_functions.png")
@@ -586,25 +601,27 @@ Interpreting the coefficients in classification is trickier than in classificati
 
 ### Logit
 
-The link function $log(\frac{p}{1-p})$ is known as the log-odds, where the odds are $\frac{p}{1-p}$.  These come up in gambling, where bets are placed on the odds of some event occurring.  For example: if the probability of a claim is $p = 0.8$, then the probability of no claim is 0.2 and the odds of a claim occurring are 0.8/0.2 = 4.  
+The link function $log(\frac{p}{1-p})$ is known as the log-odds, where the odds are $\frac{p}{1-p}$.  These come up in gambling, where bets are placed on the odds of some event occurring. For example: if the probability of a claim is $p = 0.8$, then the probability of no claim is 0.2 and the odds of a claim occurring are 0.8/0.2 = 4.  
 
 The transformation from probability to odds is monotonic.  This is a fancy way of saying that if $p$ increases, then the odds of $p$ increases as well, and vice versa if $p$ decreases.  The log transform is monotonic as well.  
 
-The net result is that when a variable increases the linear predictor, this increases the log odds, and this increases the log of the odds, and vice versa if the linear predictor decreases.  In other words, the signs of the coefficients indicate whether the variable increases or decreases the probability of the event.
+The net result is that when a variable increases the linear predictor, this increases the log odds, increasing the log of the odds, and vice versa if the linear predictor decreases. In other words, the signs of the coefficients indicate whether the variable increases or decreases the probability of the event.
 
 ### Probit, Cauchit, Cloglog
 
-These link functions are still monotonic and so the signs of the coefficients can be interpreted to mean that the variable has a positive or negative impact on the target. 
+These link functions are still monotonic, so the sign of the coefficients can be interpreted to mean that the variable has a positive or negative impact on the target.
 
-More extensive interpretation is not straight-forward.  In the case of the Probit, instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1).  There is no way of taking this inverse directly.  
+More extensive interpretation is not straightforward. In the case of the Probit, instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1). There is no way of taking this inverse directly.
+
 
 ## Demo the model for interpretation
 
-For uglier link functions, we can rely on trial-and-error to interpret the result.  We'll call this the **"model-demo method"**, which as the name implies, involes running example cases through and seeing how the results change.
+For uglier link functions, we can rely on trial-and-error to interpret the result. We will call this the **“model-demo method**, " which, as the name implies, involves running example cases and seeing how the results change.
 
-This method works not only for categorical GLMs, but **any other type of model** such as a continuous GLM, GBM, or random forest.
+This method works not only for categorical GLMs, but any other type of models such as a continuous GLM, GBM, or random forest.
 
 See the example from **SOA PA 12/12/19** below to learn how this works.
+
 
 
 ## Example - Auto Claims
@@ -638,7 +655,7 @@ All of the variables except for the `CAR_TYPE` and `GENDERM` are highly signific
 frequency %>% summary()
 ```
 
-The signs of the coefficients tell if the probability of having a claim is either increasing or decreasing by each variable.  For example, the likelihood of an accident 
+The signs of the coefficients tell if the probability of having a claim is either increasing or decreasing by each variable. For example, the likelihood of an accident
 
 * Decreases as the age of the car increases
 * Is lower for men 
@@ -656,14 +673,14 @@ preds <- predict(frequency, newdat=test,type="response")
 qplot(preds) 
 ```
 
-In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 otherwise.  The default cutoff is 0.5.  We change this to 0.3 and see that there are 763 policies predicted to have claims.
+In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 otherwise. The default cutoff is 0.5. We change this to 0.3 and see that there are 763 policies predicted to have claims.
 
 ```{r}
 test <- test %>% mutate(pred_zero_one = as.factor(1*(preds>.3)))
 summary(test$pred_zero_one)
 ```
 
-How do we decide on this cutoff value?  We need to compare cutoff values based on some evaluation metric.  For example, we can use *accuracy*.
+How do we decide on this cutoff value? We need to compare cutoff values based on some evaluation metrics. For example, we can use *accuracy*.
 
 $$\text{Accuracy} = \frac{\text{Correct Guesses}}{\text{Total Guesses}}$$
 
@@ -695,7 +712,7 @@ test %>%
   summarise(accuracy = mean(pred_zero_one == target))
 ```
 
-How do we know if this is a good model?  We can repeat this process with a different cutoff value and get different accuracy metrics for these groups.  Let's use a cutoff of 0.6.
+How do we know if this is a good model? We can repeat this process with a different cutoff value and get different accuracy metrics for these groups. Let us use a cutoff of 0.6.
 
 75%
 
@@ -716,7 +733,7 @@ test %>%
   summarise(accuracy = mean(pred_zero_one == target))
 ```
 
-The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accuracy for the "true = 1" classes (policies with actual claims) vs. the "false = 0" classes (policies without claims).
+The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accurate for the “true = 1” classes (policies with actual claims) vs. the “false = 0” classes (policies without claims).
 
 # Classification metrics
 
@@ -743,13 +760,16 @@ $$\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}$$
 
 $$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}$$
 
-The choice of using precision vs. recall depends on the relative cost of making a FP or a FN error.  If FP errors are expensive, then use precision; if FN errors are expensive, then use recall.  
+The choice of using precision vs. recall depends on the relative cost of making an FP or an FN error. If FP errors are expensive, then use precision; if FN errors are expensive, then use recall.
 
-**Example A:** the model trying to detect a deadly disease, which only 1 out of every 1,000 patient's survive without early detection.  Then the goal should be to optimize *recall*, because we would want every patient that has the disease to get detected.  
+**Example A:** the model is trying to detect a deadly disease, which only 1 out of every 1,000 patients survives without early detection. Then the goal should be to optimize **recall** because we would want every patient that has the disease to get detected.
 
-**Example B:** the model is detecting which emails are spam or not.  If an important email is flagged as spam incorrectly, the cost is 5 hours of lost productivity.  In this case, *precision* is the main concern.
+**Example B:** the model is detecting which emails are spam or not. If an important email is flagged as spam incorrectly, the cost is 5 hours of lost productivity. In this case, **precision** is the main concern.
 
-In some cases we can compare this "cost" in actual values.  For example, if a federal court is predicting if a criminal will recommit or not, they can agree that "1 out of every 20 guilty individuals going free" in exchange for "90% of those who are guilty being convicted".  When money is involved, a dollar amount can be used: flagging non-spam as spam may cost \$100 whereas missing a spam email may cost \$2.  Then the cost-weighted accuracy is
+In some cases, we can compare this “cost” in actual values. For example, if a federal court is predicting if a criminal will recommit or not, they can agree that “1 out of every 20 guilty individuals going free” in exchange for “90% of those who are guilty being convicted”. 
+
+A dollar amount can be used when money is involved: flagging non-spam as spam may cost $100, whereas missing a spam email may cost $2. Then the cost-weighted accuracy is
+
 
 $$\text{Cost} = (100)(\text{FN}) + (2)(\text{FP})$$
 
@@ -763,7 +783,7 @@ confusionMatrix(test$pred_zero_one,factor(test$target))
 
 ## Area Under the ROC Curve (AUC)
 
-What if we look at both the true-positive rate (TPR) and false positive rate (FPR) simultaneously?  That is, for each value of the cutoff, we can calculate the TPR and TNR.  
+What if we look at both the true-positive rate (TPR) and false-positive rate (FPR) simultaneously? That is, for each value of the cutoff, we can calculate the TPR and TNR. 
 
 For example, say that we have 10 cutoff values, $\{k_1, k_2, ..., k_{10}\}$.  Then for each value of $k$ we calculate both the true positive rates
 
@@ -777,11 +797,11 @@ Then we set `x = TPR` and `y = FNR` and graph x against y. The resulting plot is
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4jRBRDbJemM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-You can also think of AUC as being a **probability.**  Unlike a conventional probability, this ranges between 0.5 and 1 instead of 0 and 1.  In the Logit example, we were predicting whether or not an auto policy would file a claim.  Then you can interpret the AUC as
+You can also think of AUC as being a **probability.**  Unlike a conventional probability, this ranges between 0.5 and 1 instead of 0 and 1. In the Logit example, we were predicting whether or not an auto policy would file a claim. Then you can interpret the AUC as
 
 - The expected proportion of positives ranked before a uniformly drawn random negative
 
-- The probability that a model prediction for a policy which actually filed a claim is greater than the model prediction for a policy which did not file a claim
+- The probability that a model prediction for a policy that filed a claim is greater than the model prediction for a policy that did not file a claim
 
 - The expected true positive rate if the ranking is split just before a uniformly drawn random negative.
 
@@ -798,7 +818,7 @@ knitr::include_graphics("images/auc_one.png")
 ```
 
 
-This is a perfect model that predicts the correct class for new data each time.  It will have a ROC plot showing the curve approaching the top left corner so that the area of the square is 1.0.
+This is a perfect model that predicts the correct class for new data each time. It will have a ROC plot showing the curve approaching the top left corner so that the square area is 1.0.
 
 $$ \text{AUC} = 0.5 $$*
 
@@ -806,14 +826,15 @@ $$ \text{AUC} = 0.5 $$*
 knitr::include_graphics("images/auc_point_five.png")
 ```
 
-When the ROC curve runs along the diagonal then the area is 0.5.  This performance is no better than randomly selecting the class for new data such that the proportions of each class matches that of the data.
+When the ROC curve runs along the diagonal, then the area is 0.5. This performance is no better than randomly selecting the class for new data such that the proportions of each class match that of the data.
 
 $$ \text{AUC} < 0.5 $$
-Any model having an AUC less than 0.5 means it is providing predictions that are worse than random selection, with a near 0 AUC indicating that the model makes the wrong classification almost every time.  This can occur in two ways
+Any model having an AUC less than 0.5 means providing predictions that are worse than random selection, with a near 0 AUC indicating that the model makes the wrong classification almost every time. This can occur in two ways
 
-1) The model is overfitting.  For example, the AUC on the train data set may be higher than 0.8 but only 0.2 on the test data set.  This indicates that you need to adjust your model's parameters.  See the chapter on the Bias-Variance Tradeoff.
+1)	The model is overfitting. For example, the AUC on the train data set may be higher than 0.8 but only 0.2 on the test data set. This indicates that you need to adjust the parameters of your model. See the chapter on the Bias-Variance Tradeoff.
 
-2) There is an error in the AUC calculation or model prediction.
+2)	There is an error in the AUC calculation or model prediction.
+
 
 ## Example - Auto Claims
 
@@ -824,11 +845,11 @@ library(pROC)
 roc(test$target, preds, plot = T)
 ```
 
-If we just randomly guess, the AUC would be 0.5, which is represented by the 45-degree line.  A perfect model would maximize the curve to the upper-left corner.
+If we just randomly guess, the AUC would be 0.5, represented by the 45-degree line. A perfect model would maximize the curve to the upper-left corner.
 
-The AUC of 0.76 is decent.  If we had multiple models we could compare them based on the AUC.  
+The AUC of 0.76 is decent. If we had multiple models, we could compare them based on the AUC.  
 
-In general, AUC is preferred over Accuracy when there are a lot more "true" classes than "false" classes, which is known as having *class imbalance*.  An example is bank fraud detection: 99.99% of bank transactions are "false" or "0" classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
+In general, AUC is preferred over Accuracy when there are many more “true” classes than “false” classes, which is known as having *class imbalance*. An example is bank fraud detection: 99.99% of bank transactions are “false” or “0” classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
 
 
 ## Example: SOA HR, Task 5
@@ -841,7 +862,7 @@ Already enrolled?  Watch the full video: <a target="_parent" href="https://cours
 ">Practice Exams</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=153
 ">Practice Exams + Lessons</a>
 
->"With the target variable being only 0 or 1, the binomial distribution is the only reasonable choice.  your assistant has done some research and learned that for the glm package in R there are five link functions that can be used with the binomial distribution.  They are shown below (the inverse of the link function is presented here as it represents how the linear predictor is transformed into the actual response), where $\nu$ is the linear predictor and $\p$ is the response.
+>"With the target variable being only 0 or 1, the binomial distribution is the only reasonable choice. Your assistant has done some research and learned that for the glm package in R, five link functions could be used with the binomial distribution. They are shown below (the inverse of the link function is presented here as it represents how the linear predictor is transformed into the actual response), where $\nu$ is the linear predictor and $\p$ is the response.
 
 ```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
 knitr::include_graphics("images/hospital_readmissions_link.png")
@@ -855,15 +876,15 @@ Already enrolled?  Watch the full video: <a target="_parent" href="https://cours
 ">Practice Exams</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=157
 ">Practice Exams + Lessons</a>
 
->Marketing has asked for a demonstration of how your model is to be used with examples of cases that predict high value and cases that predict low value. Your assistant has prepared some sample cases that can be run through your model. You may need to adjust some of them to obtain illustrative examples that would be of interest to marketing.
+>Marketing has asked to demonstrate how your model is to be used with examples of cases that predict high value and cases that predict low value. Your assistant has prepared some sample cases that can be run through your model. You may need to adjust some of them to obtain illustrative examples of interest in marketing.
 
->Write, in language appropriate for marketing, the illustration and demonstration they are looking for. This demonstration should be more detailed than what will go into your executive summary (which could include an example).
+>Write, in language appropriate for marketing, the illustration and demonstration they are looking for. This demonstration should be more detailed than what will go into your executive summary (including an example).
 
->The sample cases are provided here and in your report template in case you wish to include them in your report.
+>The sample cases are provided here and in your report template if you wish to include them in your report.
 
-The answer asks you to run the example cases through your model to calculate the predicted probability of each case.  You need to create the column **Prob of high** using your GLM.  Then you assign each case as being "High" or "Low" depending on if this value is above the cutoff.
+probability of each case. You need to create the column **Prob of high** using your GLM. Then you assign each case as being “High” or “Low” depending on if this value is above the cutoff.
 
-The values that change are in **bold.**
+The values that change are in bold.
 
 |age|education num|marital status    |occupation|cap_ga in|hours_per week|score|**Prob of high**|**Value**|
 |---|-------------|------------------|----------|---------|--------------|-----|------------|-----|
@@ -881,12 +902,11 @@ You can interpret this as:
 - Being in Group 5 increases profitability.  You can see this because `Prob of high` increases to 0.8.
 - Working fewer than 40 hours per week decreases profitability
 
-This was a difficult question.  Don't be afraid to be assertive and think creatively or to change the values that they give you.  The SOA's solutions says
+This was a difficult question. “Do not be afraid to be assertive and think creatively or to change the values that they give you,” the solution of SOA say.
 
->Many candidates struggled with this task. Candidates needed to include sample cases that resulted in low and high value predictions and clearly describe the analysis for the marketing team. 
+>Many candidates struggled with this task. Candidates needed to include sample cases that resulted in low and high-value predictions and clearly describe the analysis for the marketing team.
 
 >Candidates were encouraged to modify the supplied cases. Few elected to test changes in both directions from the base case.
-
 
 ## Additional reading
 
@@ -903,28 +923,25 @@ As you can tell, PA has a lot of small topics related to GLMs.  This chapter com
 
 ## Residuals
 
-Learning from mistakes is the path to improvement.  For GLMs, residual analysis looks for patterns in the errors in order to find ways of improving the model.
+Learning from mistakes is the path to improvement. For GLMs, the residual analysis looks for patterns in the errors to find ways of improving the model.
 
 <iframe width="563" height="383" src="https://www.youtube.com/embed/9T0wlKdew6I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Raw residuals
 
-The word "residual" by itself actually means the "raw residual" in GLM language.  This is the difference in actual vs. predicted values.
+The word “residual” by itself means the “raw residual” in GLM language. This is the difference in actual vs. predicted values.
 
 $$\text{Raw Residual} = y_i - \hat{y_i}$$
 
 ### Deviance residuals
 
-This is not meaningful for GLMs with non-Gaussian distributions.  To adjust for other distributions, we need the concept of *deviance residuals*.
+This is not meant for GLMs with non-Gaussian distributions. To adjust for other distributions, we need the concept of deviance residuals.
 
 <iframe width="563" height="383" src="https://www.youtube.com/embed/JC56jS2gVUE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Deviance is a way of assessing the adequacy of a model by comparing it with a more general
-model with the maximum number of parameters that can be estimated. It is referred to
-as the saturated model. In the saturated model there is basically one parameter per
-observation. The deviance assesses the goodness of fit for the model by looking at the
-difference between the log-likelihood functions of the saturated model and the model
-under investigation, i.e. $l(b_{sat},y) - l(b,y)$. Here sat $b_{sat}$ denotes the maximum likelihood
+Deviance is a way of assessing the adequacy of a model by comparing it with a more general model with the maximum number of parameters that can be estimated. It is referred to as the saturated model and it has one parameter per observation. 
+
+The deviance assesses the goodness of fit for the model by looking at the difference between the log-likelihood functions of the saturated model and the model under investigation, i.e. $l(b_{sat},y) - l(b,y)$. Here sat $b_{sat}$ denotes the maximum likelihood
 estimator of the parameter vector of the saturated model, $\beta_{sat}$ , and $b$ is the maximum
 likelihood estimator of the parameters of the model under investigation, $\beta$. The maximum likelihood estimator is the estimator that maximizes the likelihood function.  **The deviance is defined as**
 
@@ -954,7 +971,7 @@ We see that `age`, `sex`, and `smoker` are all significant (p <0.01).  Reading o
 model %>% tidy()
 ```
 
-Below you can see graph of deviance residuals vs. the predicted values. 
+Below you can see graph of deviance residuals vs. the predicted values.
 
 **If this were a perfect model, all of these below assumptions would be met:**
 
@@ -980,9 +997,8 @@ plot(model, which = 2)
 
 ## Log transforms of predictors
 
-When a log link is used, taking the natural logs of continuous variables allows for the scale of each predictor to match the scale of the thing that they are predicting, the log of the mean of the response.  In addition, when the distribution of the continuous variable is skewed, taking the log helps to make it more symmetric.
+When a log link is used, taking the natural logs of continuous variables allows for the scale of each predictor to match the scale of the thing that they are predicting, the log of the mean of the response. In addition, when the distribution of the continuous variable is skewed, taking the log helps to make it more symmetric.
 
-After taking the log of a predictor, the interpretation becomes a *power transform* of the original variable.  
 
 For $\mu$ the mean response,
 
@@ -990,9 +1006,10 @@ $$log(\mu) = \beta_0 + \beta_1 log(X)$$
 To solve for $\mu$, take the exponent of both sides
 
 $$\mu = e^{\beta_1} e^{\beta_1 log(X)} = e^{\beta_0} X^{\beta_1}$$
-### Example
 
-In the Hospital Readmission sample project, one of the predictor variables, "Length of stay", is the number of days since a person has been readmitted to the hospital.  You can tell that it's right-skewd because the median is higher than the mean.
+## Example
+
+In the Hospital Readmission sample project, one of the predictor variables, “Length of stay”, is the number of days since a person has been readmitted to the hospital. You can tell that it is right-skewd because the median is higher than the mean.
 
 ```{r}
 summary(readmission$LOS)
@@ -1048,6 +1065,7 @@ An interaction occurs when the effect of a variable on the response is different
 
 Consider this model:
 
+
 Let $x_2$ be an indicator variable, which is 1 for some observations and 0 otherwise.  
 
 $$\hat{y_i} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 x_2$$
@@ -1078,12 +1096,12 @@ auto_claim %>%
   labs(title = "Kelly Bluebook Value vs Claim Amount")
 ```
 
-Any time that the effect that one variable has on the response is different depending on the value of other variables we say that there is an interaction.  We can also use an hypothesis test with a GLM to check this.  Simply include an interaction term and see if the coefficient is zero at the desired significance level.
+Any time that effect of one variable on the response is different depending on the value of other variables, we say that there is an interaction. We can also use a hypothesis test with a GLM to check this. Simply include an interaction term and see if the coefficient is zero at the desired significance level.
 
 
 ## Offsets
 
-In certain situations, it is convenient to include a constant term in the linear predictor.  This is the same as including a variable that has a coefficient equal to 1.  We call this an *offset*.
+In certain situations, it is convenient to include a constant term in the linear predictor. This is the same as including a variable that has a coefficient equal to 1. We call this an *offset*.
 
 
 $$g(\mu) = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \text{offset}$$
@@ -1093,11 +1111,12 @@ On Exam PA, offsets will only be used for one special case:
 2) With a log link function
 3) As a measure of exposure (usually length of policy period)
 
-While it's technically possible to use offsets in other ways, this is not likely to appear on PA.
+While it is technically possible to use offsets in other ways, this is not likely to appear on PA.
 
-If modeling the spread of COVID, the exposure would be the number of people who were exposed to the virus and the response would be the number of people who were infected.
+If modeling the spread of COVID, the exposure would be the number of people exposed to the virus and the response would be the number of people infected.
 
-In auto insurance, the exposure might be the number of months of coverage and the response would be the claims incurred.  Consider a very simple model which only uses the year that the car was manufactured as a predictor.  This expected value of the claims, the target variable, would be
+In auto insurance, the exposure might be the number of months of coverage, and the response would be the claims incurred. Consider a very simple model which only uses the year that the car was manufactured as a predictor. This expected value of the claims, the target variable, would be
+
 
 $$log(E[\frac{\text{Claims}}{\text{Months}}]) = \beta_0 + \beta_1  \text{Year}$$
 Then you can use the property of the log where $log(\frac{A}{B}) = log(A) - log(B)$ to move things around.  Because $\text{Months}$ is known, you can remove the expected value.  This is the offset term.
@@ -1107,15 +1126,18 @@ $$log(E[\text{Claims}]) = \beta_0 + \beta_1  \text{Year} + \text{Months}$$
 
 ## Tweedie regression
 
-While this topic is briefly mentioned on the modules, the only R libraries which support Tweedie Regression (`statmod` and `tweedie`) are not on the syllabus, and so there is no way that the SOA could ask you to build a tweedie model. This means that you can be safely skip this section.
+While this topic is briefly mentioned in the modules, the only R libraries which support Tweedie Regression (`statmod` and `tweedie`) are not on the syllabus, and so there is no way that the SOA could ask you to build a tweedie model. This means that you can safely skip this section.
 
 ## Combinations of Link Functions and Target Distributions
 
-What is an example of when to use a log link with a Gaussian response?  What about a Gamma family with an inverse link?  What about an inverse Gaussian response and an inverse square link?  As these questions illustrate, there are many combinations of link and response family.  In the real world, a model never fits perfectly, and so often these choices come down to the judgement of the modeler - which model is the best fit and meets the business objectives?
+What is an example of when to use a log link with a Gaussian response? What about a Gamma family with an inverse link? What about an inverse 
 
-However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves.  
+Gaussian response and an inverse square link? As these questions illustrate, there are many combinations of link and response families. In the real world, a model never fits perfectly, and so often, these choices come down to the judgment of the modeler - which model is the best fit and meets the business objectives?
+
+However, there is one way that we can know for certain which link and response family is the best, and that is if we generate the data ourselves.
 
 Recall that a GLM has two parts:
+
 
 1. A **random component**: $Y|X \sim \text{some exponential family distribution}$
 
@@ -1193,7 +1215,7 @@ plot(glm, cex = 0.4)
 
 ### Gaussian Response with Log Link and Negative Values
 
-By Gaussian response we say that the *mean* of the response is Gaussian.  The range of a normal random variable is $(-\infty, +\infty)$, which means that negative values are always possible.  Now, if the mean is a large positive number, than negative values are much less likely but still possible:  about 95% of the observations will be within 2 standard deviations of the mean.
+By Gaussian response we say that the *mean* of the response is Gaussian.  The range of a normal random variable is $(-\infty, +\infty)$, which means that negative values are always possible. If the mean is a large positive number, then negative values are much less likely but still possible: about 95% of the observations will be within 2 standard deviations of the mean.
 
 We see below that there are some $Y$ values which are negative.
 
@@ -1223,7 +1245,8 @@ glm <- glm(y ~ x, family = gaussian(link = "log"), data = data)
 
 This is because the domain of the natural logarithm only includes positive numbers, and we just tried to take the log of negative numbers.
 
-Our initial reaction might be to add some constant to each $Y$, say 10 for instance, so that they are all positive.  This does produce a model which is a good fit.
+Our initial reaction might be to add some constant to each $Y$, say 10, for instance, so that they are all positive. This does produce a model which is a good fit.
+
 
 ```{r}
 glm <- glm(y + 10 ~ x, family = gaussian(link = "log"), data = data)
@@ -1240,7 +1263,7 @@ y_hat <- predict(glm, type = "response")
 mean(y_hat) - mean(y)
 ```
 
-But we see that the actual predictions are bad.  If we were to loot at the R-squared, MAE, RMSE, or any other metric it would tell us the same story.  This is because our GLM assumption is **not** that $Y$ is related to the link function of $X$, but that the **mean** of $Y$ is.
+However, we see that the actual predictions are bad. If we were to look at the R-squared, MAE, RMSE, or any other metric, it would tell us the same story. This is because our GLM assumption **not** that $Y$ is related to the link function of $X$, but that the **mean** of $Y$ is.
 
 ```{r}
 tibble(y = y, y_hat = y_hat - 10) %>% ggplot(aes(y, y_hat)) + geom_point()
@@ -1257,7 +1280,7 @@ par(mfrow = c(2,2))
 plot(glm, cex = 0.4)
 ```
 
-A better approach may be to use an inverse link even though the data was generated from a log link.  This is a good illustration of the saying "all models are wrong, but some are useful" in that the statistical assumption of the model is not correct but the model still works.
+A better approach may be to use an inverse link even though the data was generated from a log link. This is a good illustration of the saying “all models are wrong, but some are useful” in that the statistical assumption of the model is not correct but the model still works.
 
 ```{r}
 data <- tibble(x = runif(500)) %>% 
@@ -1283,7 +1306,7 @@ gammas <- rgamma(500, shape=2, scale = 0.5)
 mean(gammas)
 ```
 
-We then generate random gamma values.  Because the mean now depends on two parameters instead of one, which was just $\mu$ in the Gaussian case, we need to use a slightly different approach to simulate the random values.  The link function here is seen in `exp(x)`.
+We then generate random gamma values. Because the mean now depends on two parameters instead of one, which was just $\mu$ in the Gaussian case, we need to use a slightly different approach to simulate the random values. The link function here is seen in `exp(x)`.
 
 ```{r}
 #random component
@@ -1333,15 +1356,15 @@ plot(glm, cex = 0.4)
 
 # GLM variable selection
 
-Predictive Analytics is about using results to solve business problems.  Complex models are almost useless if they cannot be explained.  In this chapter, we will learn how to make GLMs easier to explain by either removing variables entirely or lessening their impact.
+Predictive Analytics is about using results to solve business problems. Complex models are almost useless if they cannot be explained. This chapter will explain how to make GLMs easier to explain by either removing variables entirely or lessening their impact.
 
 ## Stepwise subset selection
 
-In theory, we could test all possible combinations of variables and interaction terms.  This includes all $p$ models with one predictor, all p-choose-2 models with two predictors, all p-choose-3 models with three predictors, and so forth.  Then we take whichever model has the best performance as the final model.
+In theory, we could test all possible combinations of variables and interaction terms. This includes all $p$ models with one predictor, all p-choose-2 models with two predictors, all p-choose-3 models with three predictors, and so on. Then we take whichever model has the best performance as the final model.
 
-This "brute force" approach is statistically ineffective: the more variables which are searched, the higher the chance of finding models that over fit.
-
-A subtler method, known as *stepwise selection*, reduces the chances of over-fitting by only looking at the most promising models.  
+This “brute force” approach is statistically ineffective: the more searched, the higher the chance of finding models that overfit.
+A subtler method, known as the stepwise selection, reduces the chances of over-fitting by only looking at the most promising models.
+  
 
 **Forward Stepwise Selection:**
 
@@ -1361,7 +1384,9 @@ A subtler method, known as *stepwise selection*, reduces the chances of over-fit
 
 **Both Forward & Backward Selection:**
 
-A hybrid approach is to consider use both forward and backward selection.  This is done by creating two lists of variables at each step, one from forward and one from backward selection.  Then variables from *both* lists are tested to see if adding or subtracting from the current model would improve the fit or not.  ISLR does not mention this directly, however, by default the `stepAIC` function uses a default of `both`.
+A hybrid approach is to consider using both forward and backward selection. This is done by creating two lists of variables at each step, one from forward and backward selection. 
+
+Then variables from both lists are tested to see if adding or subtracting from the current model would improve the fit or not. ISLR does not mention this directly. However, by default, the `stepAIC` function uses a default of `both`.
 
 >**Tip**: Always load the `MASS` library before `dplyr` or `tidyverse`.  Otherwise there will be conflicts as there are functions named `select()` and `filter()` in both.  Alternatively, specify the library in the function call with `dplyr::select()`.
 
@@ -1377,27 +1402,21 @@ Already enrolled?  Watch the full video: <a target="_parent" href="https://cours
 ">Practice Exams</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=155
 ">Practice Exams + Lessons</a>
 
-> AIC and BIC are among the available techniques for feature selection. Briefly describe them and
-outline the differences in the two criteria. Make a recommendation as to which one should be
-used for this problem. Use only your recommended criterion when completing this task.
+> AIC and BIC are among the available techniques for feature selection. Briefly describe them and outline the differences in the two criteria. Make a recommendation as to which one should be used for this problem. Use only your recommended criterion when completing this task.
 
->Some of the features may lack predictive power and lead to overfitting. Determine which
-features should be retained. Use the stepAIC function (from the MASS package) to make this
-determination. When using this function, there are two decisions to make. Make each decision
-based on the business problem. Use ?stepAIC to learn more about these parameters (note that
-the MASS package must be loaded before help on this function can be accessed).
+>Some of the features may lack predictive power and lead to overfitting. Determine which features should be retained. Use the stepAIC function (from the MASS package) to make this determination. When using this function, there are two decisions to make. Make each decision based on the business problem. Use ?stepAIC to learn more about these parameters (note that the MASS package must be loaded before help on this function can be accessed).
 
-> Use direction = “backward” or direction = “forward”
-> Use AIC (k = 2) or BIC (k=log(nrow(train)))
+>Use direction = “backward” or direction = “forward” Use AIC (k = 2) or BIC (k=log(nrow(train)))
 
 
 ## Penalized Linear Models
 
-One of the main weaknesses of the GLM, including all linear models in this chapter, is that the features need to be selected by hand.  Stepwise selection helps to improve this process, but fails when the inputs are correlated and often has a strong dependence on seemingly arbitrary choices of evaluation metrics such as using AIC or BIC and forward or backward directions.  
+One of the main weaknesses of the GLM, including all linear models in this chapter, is that the features need to be selected by hand. Stepwise selection helps to improve this process but fails when the inputs are correlated and often has a strong dependence on seemingly arbitrary choices of evaluation metrics such as using AIC or BIC and forward or backward directions.
 
-The **Bias Variance Trade-off** is about finding the lowest error by changing the flexibility of the model. Penalization methods use a parameter to control for this flexibility directly.  
+The Bias Variance Trade-off is about finding the lowest error by changing the flexibility of the model. Penalization methods use a parameter to control for this flexibility directly.
 
-Earlier on we said that the linear model minimizes the sum of square terms, known as the residual sum of squares (RSS)
+Earlier on, we said that the linear model minimizes the sum of square terms, known as the residual sum of squares (RSS)
+
 
 $$
 \text{RSS} = \sum_i(y_i - \hat{y})^2 = \sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2
@@ -1419,9 +1438,12 @@ This $\lambda$ controls how much of a penalty is imposed on the size of the coef
 
 ## Lasso
 
-The official name is the Least Absolute Shrinkage and Selection Operator, but the common name is just "the lasso".  Just as with Ridge regression, we want to favor simpler models; however, we also want to *select* variables.  This is the same as forcing some coefficients to be equal to 0.
+The official name is the Least Absolute Shrinkage and Selection Operator, but the common name is just “the lasso.” 
 
-Instead of taking the square of the coefficients (L2 norm), we take the absolute value (L1 norm).  
+Just as with Ridge regression, we want to favor simpler models; however, we also want to select variables. This is the same as forcing some coefficients to be equal to 0.
+
+Instead of taking the square of the coefficients (L2 norm), we take the absolute value (L1 norm).
+  
 
 $$
 \sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2 + \lambda \sum_{j = 1}^p|\beta_j|
@@ -1480,14 +1502,11 @@ library(tidyr)
 ```
 
 We will use the `glmnet` package in order to perform ridge regression and
-the lasso. The main function in this package is `glmnet()`, which can be used
-to fit ridge regression models, lasso models, and more. This function has
-slightly different syntax from other model-fitting functions that we have
-encountered thus far in this book. In particular, we must pass in an $x$
-matrix as well as a $y$ vector, and we do not use the $y \sim x$ syntax.
+the lasso. The main function in this package is `glmnet()`,which can be used to fit ridge regression models, lasso models, and more. 
 
-Before proceeding, let's first ensure that the missing values have
-been removed from the data, as described in the previous lab.
+This function has a slightly different syntax from other model-fitting functions that we have encountered thus far in this book. In particular, we must pass in an $x$ matrix as well as a $y$ vector, and we do not use the $y \sim x$ syntax.
+
+Before proceeding, let us first ensure that the missing values have been removed from the data described in the previous lab.
 
 ```{r}
 Hitters = na.omit(Hitters)
@@ -1506,36 +1525,27 @@ y = Hitters %>%
   as.numeric()
 ```
 
-The `model.matrix()` function is particularly useful for creating $x$; not only
-does it produce a matrix corresponding to the 19 predictors but it also
-automatically transforms any qualitative variables into dummy variables.
+The `model.matrix()` function is particularly useful for creating $x$; not only does it produce a matrix corresponding to the 19 predictors but it also automatically transforms any qualitative variables into dummy variables.
+
 The latter property is important because `glmnet()` can only take numerical,
 quantitative inputs.
 
-The `glmnet()` function has an alpha argument that determines what type
-of model is fit. If `alpha = 0` then a ridge regression model is fit, and if `alpha = 1`
-then a lasso model is fit. We first fit a ridge regression model:
+The `glmnet()` function has an alpha argument that determines what type of model is fit. If `alpha = 0` then a ridge regression model is fit, and if `alpha = 1` then a lasso model is fit. We first fit a ridge regression model:
 
 ```{r}
 grid = 10^seq(10, -2, length = 100)
 ridge_mod = glmnet(x, y, alpha = 0, lambda = grid)
 ```
 
-By default the `glmnet()` function performs ridge regression for an automatically
-selected range of $\lambda$ values. However, here we have chosen to implement
-the function over a grid of values ranging from $\lambda = 10^10$ to $\lambda = 10^{-2}$, essentially covering the full range of scenarios from the null model containing
+By default the `glmnet()` function performs ridge regression for an automatically selected range of $\lambda$ values. However, here we have chosen to implement the function over a grid of values ranging from $\lambda = 10^10$ to $\lambda = 10^{-2}$, essentially covering the full range of scenarios from the null model containing
 only the intercept, to the least squares fit. 
 
-As we will see, we can also compute
-model fits for a particular value of $\lambda$ that is not one of the original
-grid values. Note that by default, the `glmnet()` function standardizes the
-variables so that they are on the same scale. To turn off this default setting,
-use the argument `standardize = FALSE`.
+As we will see, we can also compute model fits for a particular value of $\lambda$ that is not one of the original grid values. Note that by default, the `glmnet()` function standardizes the
+variables so that they are on the same scale. To turn off this default setting, use the argument `standardize = FALSE`.
 
 Associated with each value of $\lambda$ is a vector of ridge regression coefficients,
 stored in a matrix that can be accessed by `coef()`. In this case, it is a $20 \times 100$
-matrix, with 20 rows (one for each predictor, plus an intercept) and 100
-columns (one for each value of $\lambda$).
+matrix, with 20 rows (one for each predictor, plus an intercept) and 100 columns (one for each value of $\lambda$).
 
 ```{r}
 dim(coef(ridge_mod))
@@ -1568,8 +1578,7 @@ we can obtain the ridge regression coefficients for a new value of $\lambda$, sa
 predict(ridge_mod, s=50, type="coefficients")[1:20,]
 ```
 
-We now split the samples into a training set and a test set in order
-to estimate the test error of ridge regression and the lasso.
+We now split the samples into a training set and a test set in order to estimate the test error of ridge regression and the lasso.
 
 ```{r}
 set.seed(1)
@@ -1594,9 +1603,7 @@ y_test = test %>%
   as.numeric()
 ```
 
-Next we fit a ridge regression model on the training set, and evaluate
-its MSE on the test set, using $\lambda = 4$. Note the use of the `predict()`
-function again: this time we get predictions for a test set, by replacing
+Next we fit a ridge regression model on the training set, and evaluate its MSE on the test set, using $\lambda = 4$. Note the use of the `predict()` function again: this time we get predictions for a test set, by replacing
 `type="coefficients"` with the `newx` argument.
 
 ```{r}
@@ -1605,31 +1612,23 @@ ridge_pred = predict(ridge_mod, s = 4, newx = x_test)
 mean((ridge_pred - y_test)^2)
 ```
 
-The test MSE is 101242.7. Note that if we had instead simply fit a model
-with just an intercept, we would have predicted each test observation using
-the mean of the training observations. In that case, we could compute the
-test set MSE like this:
+The test MSE is 101242.7. If we had instead simply fit a model with just an intercept, we would have predicted each test observation using the mean of the training observations. In that case, we could compute the test set MSE like this:
 
 ```{r}
 mean((mean(y_train) - y_test)^2)
 ```
 
-We could also get the same result by fitting a ridge regression model with
-a very large value of $\lambda$. Note that `1e10` means $10^{10}$.
+We could also get the same result by fitting a ridge regression model with a very large value of $\lambda$. Note that `1e10` means $10^{10}$.
 
 ```{r}
 ridge_pred = predict(ridge_mod, s = 1e10, newx = x_test)
 mean((ridge_pred - y_test)^2)
 ```
 
-So fitting a ridge regression model with $\lambda = 4$ leads to a much lower test
-MSE than fitting a model with just an intercept. We now check whether
-there is any benefit to performing ridge regression with $\lambda = 4$ instead of
-just performing least squares regression. Recall that least squares is simply
-ridge regression with $\lambda = 0$.
+So fitting a ridge regression model with $\lambda = 4$ leads to a much lower test MSE than fitting a model with just an intercept. We now check whether
+there is any benefit to performing ridge regression with $\lambda = 4$ instead of just performing least squares regression. Recall that least squares is simply ridge regression with $\lambda = 0$.
 
-\* Note: In order for `glmnet()` to yield the **exact** least squares coefficients when $\lambda = 0$,
-we use the argument `exact=T` when calling the `predict()` function. Otherwise, the
+\* Note: In order for `glmnet()` to yield the **exact** least squares coefficients when $\lambda = 0$, we use the argument `exact=T` when calling the `predict()` function. Otherwise, the
 `predict()` function will interpolate over the grid of $\lambda$ values used in fitting the
 `glmnet()` model, yielding approximate results. Even when we use `exact = T`, there remains
 a slight discrepancy in the third decimal place between the output of `glmnet()` when
@@ -1644,15 +1643,10 @@ lm(Salary~., data = train)
 predict(ridge_mod, s = 0, x = x_train, y = y_train, exact = T, type="coefficients")[1:20,]
 ```
 
-It looks like we are indeed improving over regular least-squares! Side note: in general, if we want to fit a (unpenalized) least squares model, then
-we should use the `lm()` function, since that function provides more useful
-outputs, such as standard errors and $p$-values for the coefficients.
+IIt looks like we are indeed improving over regular least-squares! Side note: in general, if we want to fit a (unpenalized) least squares model, then we should use the 'lm()' function, since that function provides more useful outputs, such as standard errors and $p$-values for the coefficients.
 
-Instead of arbitrarily choosing $\lambda = 4$, it would be better to
-use cross-validation to choose the tuning parameter $\lambda$. We can do this using
-the built-in cross-validation function, `cv.glmnet()`. By default, the function
-performs 10-fold cross-validation, though this can be changed using the
-argument `folds`. Note that we set a random seed first so our results will be
+Instead of arbitrarily choosing $\lambda = 4$, it would be better to use cross-validation to choose the tuning parameter $\lambda$. We can do this using the built-in cross-validation function, `cv.glmnet()`. By default, the function
+performs 10-fold cross-validation, though this can be changed using the argument `folds`. Note that we set a random seed first so our results will be
 reproducible, since the choice of the cross-validation folds is random.
 
 ```{r}
@@ -1682,26 +1676,18 @@ out = glmnet(x, y, alpha = 0) # Fit ridge regression model on full dataset
 predict(out, type = "coefficients", s = bestlam)[1:20,] # Display coefficients using lambda chosen by CV
 ```
 
-As expected, none of the coefficients are exactly zero - ridge regression does not
-perform variable selection!
+As expected, none of the coefficients are exactly zero - ridge regression does not perform variable selection!
 
 ## Example: The Lasso
 
-We saw that ridge regression with a wise choice of $\lambda$ can outperform least
-squares as well as the null model on the Hitters data set. We now ask
-whether the lasso can yield either a more accurate or a more interpretable
-model than ridge regression. In order to fit a lasso model, we once again
-use the `glmnet()` function; however, this time we use the argument `alpha=1`.
-Other than that change, we proceed just as we did in fitting a ridge model:
+We saw that ridge regression with a wise choice of $\lambda$ can outperform least squares and the null model on the Hitters data set. We now ask whether the lasso can yield either a more accurate or a more interpretable model than ridge regression. In order to fit a lasso model, we once again use the `glmnet()` function; however, this time we use the argument `alpha=1`. Other than that change, we proceed just as we did in fitting a ridge model:
 
 ```{r}
 lasso_mod = glmnet(x_train, y_train, alpha = 1, lambda = grid) # Fit lasso model on training data
 plot(lasso_mod)                                          # Draw plot of coefficients
 ```
 
-Notice that in the coefficient plot that depending on the choice of tuning
-parameter, some of the coefficients are exactly equal to zero. We now
-perform cross-validation and compute the associated test error:
+Notice that some of the coefficients are exactly equal to zero in the coefficient plot depending on the choice of the tuning parameter. We now perform cross-validation and compute the associated test error:
 
 ```{r}
 set.seed(1)
@@ -1712,13 +1698,9 @@ lasso_pred = predict(lasso_mod, s = bestlam, newx = x_test) # Use best lambda to
 mean((lasso_pred - y_test)^2) # Calculate test MSE
 ```
 
-This is substantially lower than the test set MSE of the null model and of
-least squares, and very similar to the test MSE of ridge regression with $\lambda$
-chosen by cross-validation.
+This is substantially lower than the test set MSE of the null model and least squares and very similar to the test MSE of ridge regression with  $\lambda$ chosen by cross-validation.
 
-However, the lasso has a substantial advantage over ridge regression in
-that the resulting coefficient estimates are sparse. Here we see that 12 of
-the 19 coefficient estimates are exactly zero:
+However, the lasso has a substantial advantage over ridge regression in that the resulting coefficient estimates are sparse. Here we see that 12 of the 19 coefficient estimates are exactly zero:
 
 ```{r}
 out = glmnet(x, y, alpha = 1, lambda = grid) # Fit lasso model on full dataset
@@ -1726,8 +1708,7 @@ lasso_coef = predict(out, type = "coefficients", s = bestlam)[1:20,] # Display c
 lasso_coef
 ```
 
-Selecting only the predictors with non-zero coefficients, we see that the lasso model with $\lambda$
-chosen by cross-validation contains only seven variables:
+Selecting only the predictors with non-zero coefficients, we see that the lasso model with $\lambda$ chosen by cross-validation contains only seven variables:
 
 ```{r}
 lasso_coef[lasso_coef!=0] # Display only non-zero coefficients
@@ -1740,7 +1721,7 @@ Practice questions:
  
 # Bias-variance trade-off
 
-This is a big topic in machine learning in general but only has had a handful of questions on PA.  Without stating this explicitly as "the bias-variance tradeoff", you have already been using this concept.  We first need some definitions:
+This is a big topic in machine learning in general but only has had a handful of questions on PA. Without stating this explicitly as “the bias-variance tradeoff,” you have already been using this concept. We first need some definitions:
 
 **Mean Squared Error (MSE):**
 
@@ -1752,7 +1733,7 @@ The variance of the parameters, $var(f(X))$.  When variance is high, the model i
 
 **Bias:**
 
-The difference between the expected value of the estimate and the actual expected value.  When bias is high, the model is underfitting and is not complex enough to capture signal in the data.
+The difference between the expected value of the estimate and the actual expected value. When the bias is high, the model is under fitting and is not complex enough to capture the signal in the data.
 
 $$\text{Model Bias} = E(Y) - f(X)$$
 
@@ -1763,31 +1744,38 @@ knitr::include_graphics("images/over-under-fitting.PNG")
 
 **Irreducible Error:**
 
-Random noise in the data that can never be understood.  This is "irreducible" meaning that the *model* is unable reduce it, but you can reduce it by cleaning the data, transforming variables, and engineering additional features.
+Random noise in the data that can never be understood. This is “irreducible,” meaning that the model cannot reduce it, but you can reduce it by cleaning the data, transforming variables, and engineering additional features.
 
-The **Bias-variance trade-off** says that when the bias of the parameter estimates increases, the variance decreases and vice versa as the bias decreases.  
+The Bias-variance trade-off says that when the bias of the parameter estimates increases, the variance decreases, and vice versa as the bias decreases.
+ 
 
 $$\text{MSE} = \text{Variance of model} + \text{Bias}^2 + \text{Irreducible Error}$$
-Your goal is to make the MSE as small as possible.  When you test different models, tune parameters, and perform shrinkage or variable selection, you are changing the bias and the variance.
+Your goal is to make the MSE as small as possible. When you test different models, tune parameters, and perform shrinkage or variable selection, you change the bias and the variance.
 
-A helpful way to remember this relationship is with the following picture.  Imagine that you are at a shooting range and am firing a pistol at a target.  Your goal is to get as close to the center of the bullseye as possible.
+A helpful way to remember this relationship is with the following picture. Imagine that you are at a shooting range and am firing a pistol at a target. Your goal is to get as close to the center of the bullseye as possible.
 
-Ideally, your bullets would have low bias and low variance (upper left).  This would mean that you consistently hit the center of the target.  In the worst case, your bullets would have high bias and high variance (lower right).  You would be changing your aim between shots and would not be centered at the bullseye.  
+Ideally, your bullets would have low bias and low variance (upper left). This would mean that you consistently hit the center of the target. In the worst case, your bullets would have high bias and high variance (lower right). You would be changing your aim between shots and would not be centered at the bullseye.
 
-The other diagnoals (lower left and upper right) are the more common outcomes.  Either you keep your arm steady and don't change your aim between shots but miss the center, or you move around too much and have high variance.  
+The other diagonals (lower left and upper right) are the more common outcomes. Either you keep your arm steady and do not change your aim between shots but miss the center, or you move around too much and have high variance.
+  
 
 ```{r echo = F, fig.align="center", warning=F, out.width="100%"}
 knitr::include_graphics("images/bias-variance-target.PNG")
 ```
 
-You can decrease the variance by using more data.  From Exam P, you may remember that the variance of the sample mean decreases as as the square root of $N$, the sample size, increases.  To decrease the bias, you can change the type of model being used.
+You can decrease the variance by using more data. From Exam P, you may remember that the variance of the sample means decreases as the square root of $N$, the sample size, increases.  To decrease the bias, you can change the type of model being used.
 
-Model **flexibility** is the amount that the model can change.  The easiest way to understand flexiblity is in the case of the linear model.  A GLM with 1 predictor has low flexibility.  A GLM with 100 predictors has high flexibility.  This is a general definition because you technically need to consider the size of the coefficients as well.  It's easy to confuse flexibility with the model's variance, but the two concepts are different.  In this GLM example, the variance would be determined by the standard errors on the coefficients.  A model with high variance would have large p-values, but this could still be inflexible if only a few predictors are included.  Conversely, a model could have high flexibility by having many predictor variables and interaction terms but have low variance if all of the p-values were small.
+Model **flexibility** is the amount that the model can change. The easiest way to understand flexibility is in the case of the linear model. A GLM with 1 predictor has low flexibility. 
 
-Your goal of PA is to solve a business problem.  There is a constant balance between making a model that is interpretable and one that has good performance.  Highly flexible models, which are often called **black boxes**, are only useful for making predictions.  
+A GLM with 100 predictors has high flexibility. This is a general definition because you technically need to consider the size of the coefficients as well. It is easy to confuse flexibility with the variance of model, but the two concepts are different. In this GLM example, the variance would be determined by the standard errors on the coefficients. 
+
+A model with high variance would have large p-values, but this could still be inflexible if only a few predictors are included. Conversely, a model could have high flexibility by having many predictor variables and interaction terms but have low variance if all of the p-values were small.
+
+Your goal of PA is to solve a business problem. There is a constant balance between making an interpretable model and one that has good performance. Highly flexible models, which are often called black boxes, are only useful for making predictions.
+  
 
 ```{r echo = F, fig.align="center", warning=F, out.width="100%"}
 knitr::include_graphics("images/flexibility vs interpretability.png")
 ```
 
-The parameters that you change also have an impact.  In the case of the lasso or ridge regression, by increasing $\lambda$ you can decrease the flexibility.  For stepwise selection, the value of `k` controls the amount by which the log likelihood is adjusted based on the number of parameters.  As you will see in the next chapter on trees, decision trees have flexibility adjusted by `CP` and random forests (RFs) and gradient boosted machines (GBMs) have their own parameters.
+The parameters that you change also have an impact.  In the case of the lasso or ridge regression, by increasing $\lambda$ you can decrease the flexibility. For stepwise selection, the value of k controls the amount by which the log-likelihood is adjusted based on the number of parameters. As you will see in the next chapter on trees, decision trees have flexibility adjusted by CP, and random forests (RFs) and gradient boosted machines (GBMs) have their parameters.

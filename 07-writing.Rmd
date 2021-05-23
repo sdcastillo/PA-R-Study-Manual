@@ -6,7 +6,7 @@ output:
 
 # Writing and Communication
 
-30-40% of the points on this exam are from communication.  In all prior sittings of this exam, candidates did the majority of their writing at the end of the report.  This was called an Executive Summary.  As of 4/3/21, the writing questions were moved into the specific tasks with instructions to write "for a general audience."  In these cases, we will teach you how to use non-technical language and other communication techniques previously used in the executive summary.
+30-40% of the points on this exam are from communication. In all prior sittings of this exam, candidates did most of their writing at the end of the report. This was called an Executive Summary. As of 4/3/21, the writing questions were moved into the specific tasks with instructions to write “for a general audience.” In these cases, we will teach you how to use non-technical language and other communication techniques previously used in the executive summary.
 
 ## Spelling and Grammar
 

@@ -4,8 +4,8 @@ fig:unnamed-chunk-124
 fig:unnamed-chunk-137
 fig:unnamed-chunk-149
 fig:unnamed-chunk-162
-fig:unnamed-chunk-224
-fig:unnamed-chunk-236
+fig:unnamed-chunk-231
+fig:unnamed-chunk-243
 faq-frequently-asked-questions
 the-exam
 prometric-demo
@@ -26,7 +26,7 @@ lists
 functions
 data-frames
 pipes
-the-soas-code-doesnt-use-pipes-or-dplyr-so-can-i-skip-learning-this
+the-code-of-soa-does-not-use-pipes-or-dplyr-so-can-i-skip-learning-this
 data-exploration
 how-to-make-graphs-in-r
 add-a-plot
@@ -94,6 +94,7 @@ raw-residuals
 deviance-residuals
 example
 log-transforms-of-predictors
+example-1
 reference-levels
 interactions
 offsets
@@ -116,6 +117,17 @@ advantages-and-disadvantages-1
 example-ridge-regression
 example-the-lasso
 bias-variance-trade-off
+visualization
+learning-outcomes
+how-to-make-graphs-in-r-1
+add-a-plot-1
+data-manipulation-chaining-1
+the-different-graph-types-1
+histogram-1
+box-plot-1
+scatterplot-1
+boxplot-univariate
+barplot-bivariate
 tree-based-models
 decision-trees
 example-soa-pa-6182020-task-6
@@ -124,7 +136,7 @@ ensemble-learning
 bagging
 boosting
 random-forests
-example-1
+example-2
 variable-importance
 partial-dependence
 advantages-and-disadvantages-3
@@ -132,7 +144,7 @@ gradient-boosted-trees
 gradient-boosting
 notation
 parameters
-example-2
+example-3
 advantages-and-disadvantages-4
 exercises-1
 rf-tuning-with-caret
