@@ -31,6 +31,7 @@
   <link rel="shortcut icon" href="images/artificial_actuary_logo_favicon.png" type="image/x-icon" />
 <link rel="prev" href="r-programming.html"/>
 <link rel="next" href="introduction-to-modeling.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,25 +52,27 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -78,9 +81,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -128,110 +131,129 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Exam PA Study Manual</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#faq-frequently-asked-questions"><i class="fa fa-check"></i><b>0.1</b> FAQ: Frequently Asked Questions</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>1</b> The exam</a></li>
 <li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
 <li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
-<li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a><ul>
+<li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.1</b> Installing R</a></li>
 <li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.2</b> Installing RStudio</a></li>
 <li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.3</b> Download the data</a></li>
 <li class="chapter" data-level="4.4" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.4</b> Download ISLR</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html"><i class="fa fa-check"></i><b>5</b> How much R do I need to know to pass?</a><ul>
+<li class="chapter" data-level="5" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html"><i class="fa fa-check"></i><b>5</b> How much R do I need to know to pass?</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#how-to-use-the-pa-r-cheat-sheets"><i class="fa fa-check"></i><b>5.1</b> How to use the PA R cheat sheets?</a></li>
 <li class="chapter" data-level="5.2" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#example-soa-pa-61620-task-8"><i class="fa fa-check"></i><b>5.2</b> Example: SOA PA 6/16/20, Task 8</a></li>
 <li class="chapter" data-level="5.3" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#example-2---data-exploration"><i class="fa fa-check"></i><b>5.3</b> Example 2 - Data exploration</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>6</b> R programming</a><ul>
+<li class="chapter" data-level="6" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>6</b> R programming</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="r-programming.html"><a href="r-programming.html#notebook-chunks"><i class="fa fa-check"></i><b>6.1</b> Notebook chunks</a></li>
 <li class="chapter" data-level="6.2" data-path="r-programming.html"><a href="r-programming.html#basic-operations"><i class="fa fa-check"></i><b>6.2</b> Basic operations</a></li>
 <li class="chapter" data-level="6.3" data-path="r-programming.html"><a href="r-programming.html#lists"><i class="fa fa-check"></i><b>6.3</b> Lists</a></li>
 <li class="chapter" data-level="6.4" data-path="r-programming.html"><a href="r-programming.html#functions"><i class="fa fa-check"></i><b>6.4</b> Functions</a></li>
 <li class="chapter" data-level="6.5" data-path="r-programming.html"><a href="r-programming.html#data-frames"><i class="fa fa-check"></i><b>6.5</b> Data frames</a></li>
-<li class="chapter" data-level="6.6" data-path="r-programming.html"><a href="r-programming.html#pipes"><i class="fa fa-check"></i><b>6.6</b> Pipes</a></li>
-<li class="chapter" data-level="6.7" data-path="r-programming.html"><a href="r-programming.html#the-code-of-soa-does-not-use-pipes-or-dplyr-so-can-i-skip-learning-this"><i class="fa fa-check"></i><b>6.7</b> The code of SOA does not use pipes or dplyr, so can I skip learning this?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>7</b> Data exploration</a><ul>
-<li class="chapter" data-level="7.1" data-path="data-exploration.html"><a href="data-exploration.html#how-to-make-graphs-in-r"><i class="fa fa-check"></i><b>7.1</b> How to make graphs in R?</a><ul>
+<li class="chapter" data-level="7" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>7</b> Data exploration</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-exploration.html"><a href="data-exploration.html#how-to-make-graphs-in-r"><i class="fa fa-check"></i><b>7.1</b> How to make graphs in R?</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="data-exploration.html"><a href="data-exploration.html#add-a-plot"><i class="fa fa-check"></i><b>7.1.1</b> Add a plot</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="data-exploration.html"><a href="data-exploration.html#the-different-graph-types"><i class="fa fa-check"></i><b>7.2</b> The different graph types</a><ul>
+<li class="chapter" data-level="7.2" data-path="data-exploration.html"><a href="data-exploration.html#the-different-graph-types"><i class="fa fa-check"></i><b>7.2</b> The different graph types</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="data-exploration.html"><a href="data-exploration.html#histogram"><i class="fa fa-check"></i><b>7.2.1</b> Histogram</a></li>
 <li class="chapter" data-level="7.2.2" data-path="data-exploration.html"><a href="data-exploration.html#box-plot"><i class="fa fa-check"></i><b>7.2.2</b> Box plot</a></li>
 <li class="chapter" data-level="7.2.3" data-path="data-exploration.html"><a href="data-exploration.html#scatterplot"><i class="fa fa-check"></i><b>7.2.3</b> Scatterplot</a></li>
 <li class="chapter" data-level="7.2.4" data-path="data-exploration.html"><a href="data-exploration.html#bar-charts"><i class="fa fa-check"></i><b>7.2.4</b> Bar charts</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="data-exploration.html"><a href="data-exploration.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>7.3</b> How to save time with dplyr?</a><ul>
+<li class="chapter" data-level="7.3" data-path="data-exploration.html"><a href="data-exploration.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>7.3</b> How to save time with dplyr?</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="data-exploration.html"><a href="data-exploration.html#data-manipulation-chaining"><i class="fa fa-check"></i><b>7.3.1</b> Data manipulation chaining</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="data-exploration.html"><a href="data-exploration.html#how-to-explore-the-data"><i class="fa fa-check"></i><b>7.4</b> How to explore the data?</a></li>
 <li class="chapter" data-level="7.5" data-path="data-exploration.html"><a href="data-exploration.html#how-to-transform-the-data"><i class="fa fa-check"></i><b>7.5</b> How to transform the data?</a></li>
-<li class="chapter" data-level="7.6" data-path="data-exploration.html"><a href="data-exploration.html#missing-values"><i class="fa fa-check"></i><b>7.6</b> Missing values</a><ul>
+<li class="chapter" data-level="7.6" data-path="data-exploration.html"><a href="data-exploration.html#missing-values"><i class="fa fa-check"></i><b>7.6</b> Missing values</a>
+<ul>
 <li class="chapter" data-level="7.6.1" data-path="data-exploration.html"><a href="data-exploration.html#types-of-missing-values"><i class="fa fa-check"></i><b>7.6.1</b> Types of Missing Values</a></li>
 <li class="chapter" data-level="7.6.2" data-path="data-exploration.html"><a href="data-exploration.html#missing-value-resolutions"><i class="fa fa-check"></i><b>7.6.2</b> Missing Value Resolutions:</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a><ul>
+<li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
+<ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
 <li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
 </ul></li>
-<li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a><ul>
+<li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
+<ul>
 <li class="chapter" data-level="7.8.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.8.1</b> Data Exploration Practice</a></li>
 <li class="chapter" data-level="7.8.2" data-path="data-exploration.html"><a href="data-exploration.html#dplyr-practice"><i class="fa fa-check"></i><b>7.8.2</b> Dplyr Practice</a></li>
 </ul></li>
 <li class="chapter" data-level="7.9" data-path="data-exploration.html"><a href="data-exploration.html#answers-to-exercises"><i class="fa fa-check"></i><b>7.9</b> Answers to exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html"><i class="fa fa-check"></i><b>8</b> Introduction to modeling</a><ul>
+<li class="chapter" data-level="8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html"><i class="fa fa-check"></i><b>8</b> Introduction to modeling</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-vocabulary"><i class="fa fa-check"></i><b>8.1</b> Modeling vocabulary</a></li>
 <li class="chapter" data-level="8.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-notation"><i class="fa fa-check"></i><b>8.2</b> Modeling notation</a></li>
 <li class="chapter" data-level="8.3" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#ordinary-least-squares-ols"><i class="fa fa-check"></i><b>8.3</b> Ordinary Least Squares (OLS)</a></li>
 <li class="chapter" data-level="8.4" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#r2-statistic"><i class="fa fa-check"></i><b>8.4</b> R^2 Statistic</a></li>
-<li class="chapter" data-level="8.5" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#correlation"><i class="fa fa-check"></i><b>8.5</b> Correlation</a><ul>
+<li class="chapter" data-level="8.5" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#correlation"><i class="fa fa-check"></i><b>8.5</b> Correlation</a>
+<ul>
 <li class="chapter" data-level="8.5.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#pearsons-correlation"><i class="fa fa-check"></i><b>8.5.1</b> Pearson’s correlation</a></li>
 <li class="chapter" data-level="8.5.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#spearman-rank-correlation"><i class="fa fa-check"></i><b>8.5.2</b> Spearman (rank) correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="8.6" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-vs.-classification"><i class="fa fa-check"></i><b>8.6</b> Regression vs. classification</a></li>
-<li class="chapter" data-level="8.7" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-metrics"><i class="fa fa-check"></i><b>8.7</b> Regression metrics</a><ul>
+<li class="chapter" data-level="8.7" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-metrics"><i class="fa fa-check"></i><b>8.7</b> Regression metrics</a>
+<ul>
 <li class="chapter" data-level="8.7.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#example-soa-pa-61820-task-4"><i class="fa fa-check"></i><b>8.7.1</b> Example: SOA PA 6/18/20, Task 4</a></li>
 </ul></li>
 <li class="chapter" data-level="8.8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#example-health-costs"><i class="fa fa-check"></i><b>8.8</b> Example: Health Costs</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html"><i class="fa fa-check"></i><b>9</b> Generalized linear Models (GLMs)</a><ul>
+<li class="chapter" data-level="9" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html"><i class="fa fa-check"></i><b>9</b> Generalized linear Models (GLMs)</a>
+<ul>
 <li class="chapter" data-level="9.0.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#assumptions-of-ols"><i class="fa fa-check"></i><b>9.0.1</b> Assumptions of OLS</a></li>
 <li class="chapter" data-level="9.0.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#assumptions-of-glms"><i class="fa fa-check"></i><b>9.0.2</b> Assumptions of GLMs</a></li>
 <li class="chapter" data-level="9.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>9.1</b> Advantages and disadvantages</a></li>
 <li class="chapter" data-level="9.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#glms-for-regression"><i class="fa fa-check"></i><b>9.2</b> GLMs for regression</a></li>
-<li class="chapter" data-level="9.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>9.3</b> Interpretation of coefficients</a><ul>
+<li class="chapter" data-level="9.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>9.3</b> Interpretation of coefficients</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#identity-link"><i class="fa fa-check"></i><b>9.3.1</b> Identity link</a></li>
 <li class="chapter" data-level="9.3.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#log-link"><i class="fa fa-check"></i><b>9.3.2</b> Log link</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#other-links"><i class="fa fa-check"></i><b>9.4</b> Other links</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="glms-for-classification.html"><a href="glms-for-classification.html"><i class="fa fa-check"></i><b>10</b> GLMs for classification</a><ul>
+<li class="chapter" data-level="10" data-path="glms-for-classification.html"><a href="glms-for-classification.html"><i class="fa fa-check"></i><b>10</b> GLMs for classification</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#binary-target"><i class="fa fa-check"></i><b>10.1</b> Binary target</a></li>
 <li class="chapter" data-level="10.2" data-path="glms-for-classification.html"><a href="glms-for-classification.html#count-target"><i class="fa fa-check"></i><b>10.2</b> Count target</a></li>
 <li class="chapter" data-level="10.3" data-path="glms-for-classification.html"><a href="glms-for-classification.html#link-functions"><i class="fa fa-check"></i><b>10.3</b> Link functions</a></li>
-<li class="chapter" data-level="10.4" data-path="glms-for-classification.html"><a href="glms-for-classification.html#interpretation-of-coefficients-1"><i class="fa fa-check"></i><b>10.4</b> Interpretation of coefficients</a><ul>
+<li class="chapter" data-level="10.4" data-path="glms-for-classification.html"><a href="glms-for-classification.html#interpretation-of-coefficients-1"><i class="fa fa-check"></i><b>10.4</b> Interpretation of coefficients</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#logit"><i class="fa fa-check"></i><b>10.4.1</b> Logit</a></li>
 <li class="chapter" data-level="10.4.2" data-path="glms-for-classification.html"><a href="glms-for-classification.html#probit-cauchit-cloglog"><i class="fa fa-check"></i><b>10.4.2</b> Probit, Cauchit, Cloglog</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="glms-for-classification.html"><a href="glms-for-classification.html#demo-the-model-for-interpretation"><i class="fa fa-check"></i><b>10.5</b> Demo the model for interpretation</a></li>
 <li class="chapter" data-level="10.6" data-path="glms-for-classification.html"><a href="glms-for-classification.html#example---auto-claims"><i class="fa fa-check"></i><b>10.6</b> Example - Auto Claims</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="classification-metrics.html"><a href="classification-metrics.html"><i class="fa fa-check"></i><b>11</b> Classification metrics</a><ul>
+<li class="chapter" data-level="11" data-path="classification-metrics.html"><a href="classification-metrics.html"><i class="fa fa-check"></i><b>11</b> Classification metrics</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="classification-metrics.html"><a href="classification-metrics.html#area-under-the-roc-curve-auc"><i class="fa fa-check"></i><b>11.1</b> Area Under the ROC Curve (AUC)</a></li>
 <li class="chapter" data-level="11.2" data-path="classification-metrics.html"><a href="classification-metrics.html#example---auto-claims-1"><i class="fa fa-check"></i><b>11.2</b> Example - Auto Claims</a></li>
 <li class="chapter" data-level="11.3" data-path="classification-metrics.html"><a href="classification-metrics.html#example-soa-hr-task-5"><i class="fa fa-check"></i><b>11.3</b> Example: SOA HR, Task 5</a></li>
 <li class="chapter" data-level="11.4" data-path="classification-metrics.html"><a href="classification-metrics.html#example-soa-pa-121219-task-11"><i class="fa fa-check"></i><b>11.4</b> Example: SOA PA 12/12/19, Task 11</a></li>
 <li class="chapter" data-level="11.5" data-path="classification-metrics.html"><a href="classification-metrics.html#additional-reading"><i class="fa fa-check"></i><b>11.5</b> Additional reading</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html"><i class="fa fa-check"></i><b>12</b> Additional GLM topics</a><ul>
-<li class="chapter" data-level="12.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#residuals"><i class="fa fa-check"></i><b>12.1</b> Residuals</a><ul>
+<li class="chapter" data-level="12" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html"><i class="fa fa-check"></i><b>12</b> Additional GLM topics</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#residuals"><i class="fa fa-check"></i><b>12.1</b> Residuals</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#raw-residuals"><i class="fa fa-check"></i><b>12.1.1</b> Raw residuals</a></li>
 <li class="chapter" data-level="12.1.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#deviance-residuals"><i class="fa fa-check"></i><b>12.1.2</b> Deviance residuals</a></li>
 </ul></li>
@@ -242,7 +264,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#interactions"><i class="fa fa-check"></i><b>12.6</b> Interactions</a></li>
 <li class="chapter" data-level="12.7" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#offsets"><i class="fa fa-check"></i><b>12.7</b> Offsets</a></li>
 <li class="chapter" data-level="12.8" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#tweedie-regression"><i class="fa fa-check"></i><b>12.8</b> Tweedie regression</a></li>
-<li class="chapter" data-level="12.9" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#combinations-of-link-functions-and-target-distributions"><i class="fa fa-check"></i><b>12.9</b> Combinations of Link Functions and Target Distributions</a><ul>
+<li class="chapter" data-level="12.9" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#combinations-of-link-functions-and-target-distributions"><i class="fa fa-check"></i><b>12.9</b> Combinations of Link Functions and Target Distributions</a>
+<ul>
 <li class="chapter" data-level="12.9.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-log-link"><i class="fa fa-check"></i><b>12.9.1</b> Gaussian Response with Log Link</a></li>
 <li class="chapter" data-level="12.9.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-inverse-link"><i class="fa fa-check"></i><b>12.9.2</b> Gaussian Response with Inverse Link</a></li>
 <li class="chapter" data-level="12.9.3" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-identity-link"><i class="fa fa-check"></i><b>12.9.3</b> Gaussian Response with Identity Link</a></li>
@@ -251,7 +274,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.9.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gamma-with-inverse-link"><i class="fa fa-check"></i><b>12.9.6</b> Gamma with Inverse Link</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html"><i class="fa fa-check"></i><b>13</b> GLM variable selection</a><ul>
+<li class="chapter" data-level="13" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html"><i class="fa fa-check"></i><b>13</b> GLM variable selection</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#stepwise-subset-selection"><i class="fa fa-check"></i><b>13.1</b> Stepwise subset selection</a></li>
 <li class="chapter" data-level="13.2" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-soa-pa-61219-task-6"><i class="fa fa-check"></i><b>13.2</b> Example: SOA PA 6/12/19, Task 6</a></li>
 <li class="chapter" data-level="13.3" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#penalized-linear-models"><i class="fa fa-check"></i><b>13.3</b> Penalized Linear Models</a></li>
@@ -263,12 +287,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.9" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-the-lasso"><i class="fa fa-check"></i><b>13.9</b> Example: The Lasso</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="bias-variance-trade-off.html"><a href="bias-variance-trade-off.html"><i class="fa fa-check"></i><b>14</b> Bias-variance trade-off</a></li>
-<li class="chapter" data-level="15" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>15</b> Visualization</a><ul>
+<li class="chapter" data-level="15" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>15</b> Visualization</a>
+<ul>
 <li class="chapter" data-level="15.1" data-path="visualization.html"><a href="visualization.html#learning-outcomes"><i class="fa fa-check"></i><b>15.1</b> Learning Outcomes</a></li>
 <li class="chapter" data-level="15.2" data-path="visualization.html"><a href="visualization.html#how-to-make-graphs-in-r-1"><i class="fa fa-check"></i><b>15.2</b> How to make graphs in R</a></li>
 <li class="chapter" data-level="15.3" data-path="visualization.html"><a href="visualization.html#add-a-plot-1"><i class="fa fa-check"></i><b>15.3</b> Add a plot</a></li>
 <li class="chapter" data-level="15.4" data-path="visualization.html"><a href="visualization.html#data-manipulation-chaining-1"><i class="fa fa-check"></i><b>15.4</b> Data manipulation chaining</a></li>
-<li class="chapter" data-level="15.5" data-path="visualization.html"><a href="visualization.html#the-different-graph-types-1"><i class="fa fa-check"></i><b>15.5</b> The different graph types</a><ul>
+<li class="chapter" data-level="15.5" data-path="visualization.html"><a href="visualization.html#the-different-graph-types-1"><i class="fa fa-check"></i><b>15.5</b> The different graph types</a>
+<ul>
 <li class="chapter" data-level="15.5.1" data-path="visualization.html"><a href="visualization.html#histogram-1"><i class="fa fa-check"></i><b>15.5.1</b> Histogram</a></li>
 <li class="chapter" data-level="15.5.2" data-path="visualization.html"><a href="visualization.html#box-plot-1"><i class="fa fa-check"></i><b>15.5.2</b> Box plot</a></li>
 <li class="chapter" data-level="15.5.3" data-path="visualization.html"><a href="visualization.html#scatterplot-1"><i class="fa fa-check"></i><b>15.5.3</b> Scatterplot</a></li>
@@ -276,51 +302,62 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.5.5" data-path="visualization.html"><a href="visualization.html#barplot-bivariate"><i class="fa fa-check"></i><b>15.5.5</b> Barplot (Bivariate)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="tree-based-models.html"><a href="tree-based-models.html"><i class="fa fa-check"></i><b>16</b> Tree-based models</a><ul>
-<li class="chapter" data-level="16.1" data-path="tree-based-models.html"><a href="tree-based-models.html#decision-trees"><i class="fa fa-check"></i><b>16.1</b> Decision Trees</a><ul>
+<li class="chapter" data-level="16" data-path="tree-based-models.html"><a href="tree-based-models.html"><i class="fa fa-check"></i><b>16</b> Tree-based models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="tree-based-models.html"><a href="tree-based-models.html#decision-trees"><i class="fa fa-check"></i><b>16.1</b> Decision Trees</a>
+<ul>
 <li class="chapter" data-level="16.1.1" data-path="tree-based-models.html"><a href="tree-based-models.html#example-soa-pa-6182020-task-6"><i class="fa fa-check"></i><b>16.1.1</b> Example: SOA PA 6/18/2020, Task 6</a></li>
 <li class="chapter" data-level="16.1.2" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-and-disadvantages-2"><i class="fa fa-check"></i><b>16.1.2</b> Advantages and disadvantages</a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="tree-based-models.html"><a href="tree-based-models.html#ensemble-learning"><i class="fa fa-check"></i><b>16.2</b> Ensemble learning</a><ul>
+<li class="chapter" data-level="16.2" data-path="tree-based-models.html"><a href="tree-based-models.html#ensemble-learning"><i class="fa fa-check"></i><b>16.2</b> Ensemble learning</a>
+<ul>
 <li class="chapter" data-level="16.2.1" data-path="tree-based-models.html"><a href="tree-based-models.html#bagging"><i class="fa fa-check"></i><b>16.2.1</b> Bagging</a></li>
 <li class="chapter" data-level="16.2.2" data-path="tree-based-models.html"><a href="tree-based-models.html#boosting"><i class="fa fa-check"></i><b>16.2.2</b> Boosting</a></li>
 </ul></li>
-<li class="chapter" data-level="16.3" data-path="tree-based-models.html"><a href="tree-based-models.html#random-forests"><i class="fa fa-check"></i><b>16.3</b> Random Forests</a><ul>
+<li class="chapter" data-level="16.3" data-path="tree-based-models.html"><a href="tree-based-models.html#random-forests"><i class="fa fa-check"></i><b>16.3</b> Random Forests</a>
+<ul>
 <li class="chapter" data-level="16.3.1" data-path="tree-based-models.html"><a href="tree-based-models.html#example-2"><i class="fa fa-check"></i><b>16.3.1</b> Example</a></li>
 <li class="chapter" data-level="16.3.2" data-path="tree-based-models.html"><a href="tree-based-models.html#variable-importance"><i class="fa fa-check"></i><b>16.3.2</b> Variable Importance</a></li>
 <li class="chapter" data-level="16.3.3" data-path="tree-based-models.html"><a href="tree-based-models.html#partial-dependence"><i class="fa fa-check"></i><b>16.3.3</b> Partial dependence</a></li>
 <li class="chapter" data-level="16.3.4" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-and-disadvantages-3"><i class="fa fa-check"></i><b>16.3.4</b> Advantages and disadvantages</a></li>
 </ul></li>
-<li class="chapter" data-level="16.4" data-path="tree-based-models.html"><a href="tree-based-models.html#gradient-boosted-trees"><i class="fa fa-check"></i><b>16.4</b> Gradient Boosted Trees</a><ul>
+<li class="chapter" data-level="16.4" data-path="tree-based-models.html"><a href="tree-based-models.html#gradient-boosted-trees"><i class="fa fa-check"></i><b>16.4</b> Gradient Boosted Trees</a>
+<ul>
 <li class="chapter" data-level="16.4.1" data-path="tree-based-models.html"><a href="tree-based-models.html#gradient-boosting"><i class="fa fa-check"></i><b>16.4.1</b> Gradient Boosting</a></li>
 <li class="chapter" data-level="16.4.2" data-path="tree-based-models.html"><a href="tree-based-models.html#notation"><i class="fa fa-check"></i><b>16.4.2</b> Notation</a></li>
 <li class="chapter" data-level="16.4.3" data-path="tree-based-models.html"><a href="tree-based-models.html#parameters"><i class="fa fa-check"></i><b>16.4.3</b> Parameters</a></li>
 <li class="chapter" data-level="16.4.4" data-path="tree-based-models.html"><a href="tree-based-models.html#example-3"><i class="fa fa-check"></i><b>16.4.4</b> Example</a></li>
 <li class="chapter" data-level="16.4.5" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-and-disadvantages-4"><i class="fa fa-check"></i><b>16.4.5</b> Advantages and disadvantages</a></li>
 </ul></li>
-<li class="chapter" data-level="16.5" data-path="tree-based-models.html"><a href="tree-based-models.html#exercises-1"><i class="fa fa-check"></i><b>16.5</b> Exercises</a><ul>
+<li class="chapter" data-level="16.5" data-path="tree-based-models.html"><a href="tree-based-models.html#exercises-1"><i class="fa fa-check"></i><b>16.5</b> Exercises</a>
+<ul>
 <li class="chapter" data-level="16.5.1" data-path="tree-based-models.html"><a href="tree-based-models.html#rf-tuning-with-caret"><i class="fa fa-check"></i><b>16.5.1</b> 1. RF tuning with <code>caret</code></a></li>
 <li class="chapter" data-level="16.5.2" data-path="tree-based-models.html"><a href="tree-based-models.html#tuning-a-gbm-with-caret"><i class="fa fa-check"></i><b>16.5.2</b> 2. Tuning a GBM with <code>caret</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>17</b> Unsupervised Learning</a><ul>
+<li class="chapter" data-level="17" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>17</b> Unsupervised Learning</a>
+<ul>
 <li class="chapter" data-level="17.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#types-of-learning"><i class="fa fa-check"></i><b>17.1</b> Types of Learning</a></li>
-<li class="chapter" data-level="17.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#correlation-analysis"><i class="fa fa-check"></i><b>17.2</b> Correlation Analysis</a><ul>
+<li class="chapter" data-level="17.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#correlation-analysis"><i class="fa fa-check"></i><b>17.2</b> Correlation Analysis</a>
+<ul>
 <li class="chapter" data-level="17.2.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#correlation-does-not-equal-causation"><i class="fa fa-check"></i><b>17.2.1</b> Correlation does not equal causation</a></li>
 </ul></li>
-<li class="chapter" data-level="17.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>17.3</b> Principal Component Analysis (PCA)</a><ul>
+<li class="chapter" data-level="17.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>17.3</b> Principal Component Analysis (PCA)</a>
+<ul>
 <li class="chapter" data-level="17.3.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-us-arrests"><i class="fa fa-check"></i><b>17.3.1</b> Example: US Arrests</a></li>
 <li class="chapter" data-level="17.3.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-soa-pa-61219-task-3"><i class="fa fa-check"></i><b>17.3.2</b> Example: SOA PA 6/12/19, Task 3</a></li>
 <li class="chapter" data-level="17.3.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-pca-on-cancel-cells"><i class="fa fa-check"></i><b>17.3.3</b> Example: PCA on Cancel Cells</a></li>
 </ul></li>
 <li class="chapter" data-level="17.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#clustering"><i class="fa fa-check"></i><b>17.4</b> Clustering</a></li>
 <li class="chapter" data-level="17.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#k-means-clustering"><i class="fa fa-check"></i><b>17.5</b> K-Means Clustering</a></li>
-<li class="chapter" data-level="17.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#hierarchical-clustering"><i class="fa fa-check"></i><b>17.6</b> Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="17.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#hierarchical-clustering"><i class="fa fa-check"></i><b>17.6</b> Hierarchical Clustering</a>
+<ul>
 <li class="chapter" data-level="17.6.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-clustering-cancel-cells"><i class="fa fa-check"></i><b>17.6.1</b> Example: Clustering Cancel Cells</a></li>
 <li class="chapter" data-level="17.6.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#references"><i class="fa fa-check"></i><b>17.6.2</b> References</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>18</b> Writing and Communication</a><ul>
+<li class="chapter" data-level="18" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>18</b> Writing and Communication</a>
+<ul>
 <li class="chapter" data-level="18.1" data-path="writing-and-communication.html"><a href="writing-and-communication.html#spelling-and-grammar"><i class="fa fa-check"></i><b>18.1</b> Spelling and Grammar</a></li>
 <li class="chapter" data-level="18.2" data-path="writing-and-communication.html"><a href="writing-and-communication.html#how-to-write-for-pa"><i class="fa fa-check"></i><b>18.2</b> How to Write for PA</a></li>
 </ul></li>
@@ -345,7 +382,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-exploration" class="section level1">
+<div id="data-exploration" class="section level1" number="7">
 <h1><span class="header-section-number"> 7</span> Data exploration</h1>
 <p><a href="https://exampa.net/"><img src="images/data_exploration.png" alt="Lecture" /></a></p>
 <p>Already enrolled? Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=133">Practice Exams + Lessons</a></p>
@@ -356,8 +393,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/learning_obj4.PNG" width="400%" style="display: block; margin: auto;" /></p>
 <p><img src="images/learning_obj5.PNG" width="400%" style="display: block; margin: auto;" /></p>
 <p>Exploratory Data Analysis (EDA) is usually the first phase of an analytics project. This is as much of an art as it is a science because everyone has their style. If you ask two actuaries to perform EDA on the same data set, they will likely use different methods. These can be broken down into phases.</p>
-<div class="figure"><span id="fig:unnamed-chunk-55"></span>
-<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-55-1.png" alt="Data Exploration Phases - From *R for Data Science*" width="700" />
+<div class="figure"><span id="fig:unnamed-chunk-45"></span>
+<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-45-1.png" alt="Data Exploration Phases - From *R for Data Science*" width="700" />
 <p class="caption">
 Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 </p>
@@ -395,69 +432,69 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 <ul>
 <li>Write the report</li>
 </ul>
-<div id="how-to-make-graphs-in-r" class="section level2">
+<div id="how-to-make-graphs-in-r" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> How to make graphs in R?</h2>
 <p>Let us create a histogram of the claims. The first step is to create a blank canvas that holds the columns that are needed. The library to make this is called <a href="https://ggplot2.tidyverse.org/">ggplot2</a>.</p>
 <p>The <code>aesthetic</code> argument, <code>aes</code>, means that the variable shown will the the claims.</p>
 <p>The <code>sample_frac</code> means that only 20% of the data is used. This makes the visuzlization less cluttered.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1"><span class="kw">library</span>(ExamPAData)</a>
-<a class="sourceLine" id="cb128-2" title="2">df &lt;-<span class="st"> </span>readmission <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_frac</span>(<span class="fl">0.05</span>)</a>
-<a class="sourceLine" id="cb128-3" title="3">p &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb128-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(HCC.Riskscore))</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="data-exploration.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ExamPAData)</span>
+<span id="cb105-2"><a href="data-exploration.html#cb105-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readmission <span class="sc">%&gt;%</span> <span class="fu">sample_frac</span>(<span class="fl">0.05</span>)</span>
+<span id="cb105-3"><a href="data-exploration.html#cb105-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb105-4"><a href="data-exploration.html#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(HCC.Riskscore))</span></code></pre></div>
 <p>If we look at <code>p</code>, we see that it is nothing but white space with axis for <code>count</code> and <code>income</code>.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1">p</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-58-1.png" width="576" /></p>
-<div id="add-a-plot" class="section level3">
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="data-exploration.html#cb106-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-48-1.png" width="576" /></p>
+<div id="add-a-plot" class="section level3" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Add a plot</h3>
 <p>We add a histogram</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-59-1.png" width="576" /></p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="data-exploration.html#cb107-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-49-1.png" width="576" /></p>
 <p>Different plots are called “geoms” for “geometric objects.” Geometry = Geo (space) + meter (measure), and graphs measure data. For instance, instead of creating a histogram, we can draw a gamma distribution with <code>stat_density</code>.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1">p <span class="op">+</span><span class="st"> </span><span class="kw">stat_density</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-60-1.png" width="576" /></p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="data-exploration.html#cb108-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_density</span>()</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-50-1.png" width="576" /></p>
 <p>Create an xy plot by adding and <code>x</code> and a <code>y</code> argument to <code>aesthetic</code>.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb132-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> HCC.Riskscore, <span class="dt">y =</span> Age)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb132-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-61-1.png" width="576" /></p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="data-exploration.html#cb109-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb109-2"><a href="data-exploration.html#cb109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> HCC.Riskscore, <span class="at">y =</span> Age)) <span class="sc">+</span> </span>
+<span id="cb109-3"><a href="data-exploration.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-51-1.png" width="576" /></p>
 </div>
 </div>
-<div id="the-different-graph-types" class="section level2">
+<div id="the-different-graph-types" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> The different graph types</h2>
 <p>Only four types of graphs are used for data exploration. You will only need to understand how to interpret them. The SOA will provide you with the code needed to create them. There will not be enough time for you to make your graphs.</p>
-<div id="histogram" class="section level3">
+<div id="histogram" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Histogram</h3>
 <p>The <a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">histogram</a> is used when you want to look at the probability distribution of a continuous variable.</p>
 <p>The template code in your .Rmd file will look like this. Just change “variable” to the name without quotes of the variable and then copy and paste.</p>
 </div>
-<div id="box-plot" class="section level3">
+<div id="box-plot" class="section level3" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Box plot</h3>
 <p>The <a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">boxplot</a> compactly displays the distribution of a continuous variable. It visualizes five summary statistics (the median, two hinges, and two whiskers) and all “outlying” observations individually.</p>
 </div>
-<div id="scatterplot" class="section level3">
+<div id="scatterplot" class="section level3" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> Scatterplot</h3>
 <p>The <a href="https://ggplot2.tidyverse.org/reference/geom_point.html">point geom</a> is used to create scatterplots. The scatterplot is most useful for displaying the relationship between two continuous variables. It can be used to compare one continuous and one categorical variable or two categorical variables.</p>
 </div>
-<div id="bar-charts" class="section level3">
+<div id="bar-charts" class="section level3" number="7.2.4">
 <h3><span class="header-section-number">7.2.4</span> Bar charts</h3>
 <p>There are two types of <a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">bar charts</a>: geom_bar() (Univariate) and geom_col() (Bivatiate). geom_bar() makes the height of the bar proportional to the number of cases in each group (or if the weight aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use geom_col() instead. geom_bar() uses stat_count() by default: it counts the number of cases at each x position.</p>
 </div>
 </div>
-<div id="how-to-save-time-with-dplyr" class="section level2">
+<div id="how-to-save-time-with-dplyr" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> How to save time with dplyr?</h2>
 <p>You may have noticed that writing code for data manipulation can be slow. Fortunately, there is a faster, 100%-legal way of doing data manipulation that has worked for hundreds of exam candidates (the author included) who have taken Exam PA.</p>
 <p>Up to this point, we have been using old R libraries. By making use of newer R libraries, we can save ourselves time. These will all be provided for you at Prometric within the <a href="https://www.tidyverse.org/">tidyverse</a> library.</p>
-<div id="data-manipulation-chaining" class="section level3">
+<div id="data-manipulation-chaining" class="section level3" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> Data manipulation chaining</h3>
 <p>Pipes allow for data manipulations to be chained with visualizations. The possibilities are nearly limitless.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb133-2" title="2">iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb133-3" title="3"><span class="st">  </span><span class="kw">select_if</span>(is.numeric) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb133-4" title="4"><span class="st">  </span><span class="kw">gather</span>(feature,value) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb133-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb133-6" title="6"><span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb133-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(feature))</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-62-1.png" width="576" /></p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="data-exploration.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb110-2"><a href="data-exploration.html#cb110-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb110-3"><a href="data-exploration.html#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span></span>
+<span id="cb110-4"><a href="data-exploration.html#cb110-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(feature,value) <span class="sc">%&gt;%</span></span>
+<span id="cb110-5"><a href="data-exploration.html#cb110-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value)) <span class="sc">+</span></span>
+<span id="cb110-6"><a href="data-exploration.html#cb110-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb110-7"><a href="data-exploration.html#cb110-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(feature))</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-52-1.png" width="576" /></p>
 <p>Suggested reading of <em>R for Data Science</em> (<a href="https://r4ds.had.co.nz/index.html" class="uri">https://r4ds.had.co.nz/index.html</a>):</p>
 <table>
 <thead>
@@ -503,7 +540,7 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 </table>
 </div>
 </div>
-<div id="how-to-explore-the-data" class="section level2">
+<div id="how-to-explore-the-data" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> How to explore the data?</h2>
 <p>Let us look at the health insurance data set that contains information on patients along with their annual health care costs.</p>
 <p>The descriptions of the columns are below.</p>
@@ -517,7 +554,7 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 <li><code>charges</code>: Annual health care costs.</li>
 </ul>
 <p><code>head()</code> shows the top n rows. <code>head(20)</code> shows the top 20 rows.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1"><span class="kw">head</span>(health_insurance)</a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="data-exploration.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(health_insurance)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 7
 ##     age sex      bmi children smoker region    charges
 ##   &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt;
@@ -528,7 +565,7 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 ## 5    32 male    28.9        0 no     northwest   3867.
 ## 6    31 female  25.7        0 no     southeast   3757.</code></pre>
 <p>Using a pipe is an alternative way of doing this.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="data-exploration.html#cb113-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <p></br></p>
 <div class="studytip">
 <p>
@@ -537,18 +574,18 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 </div>
 <p></br></p>
 <p>The <code>glimpse</code> function is similar to <code>str()</code>.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="data-exploration.html#cb114-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 1,338
 ## Columns: 7
-## $ age      &lt;dbl&gt; 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 56, 27, 1~
-## $ sex      &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;female&quot;, &quot;female&quot;,~
-## $ bmi      &lt;dbl&gt; 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.440, 27.74~
-## $ children &lt;dbl&gt; 0, 1, 3, 0, 0, 0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0~
-## $ smoker   &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, ~
-## $ region   &lt;chr&gt; &quot;southwest&quot;, &quot;southeast&quot;, &quot;southeast&quot;, &quot;northwest&quot;, &quot;northwes~
-## $ charges  &lt;dbl&gt; 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3756.622,~</code></pre>
+## $ age      &lt;dbl&gt; 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 56, 27, 19, 52, 23, 5…
+## $ sex      &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;…
+## $ bmi      &lt;dbl&gt; 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.440, 27.740, 29.830, 2…
+## $ children &lt;dbl&gt; 0, 1, 3, 0, 0, 0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 2…
+## $ smoker   &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;,…
+## $ region   &lt;chr&gt; &quot;southwest&quot;, &quot;southeast&quot;, &quot;southeast&quot;, &quot;northwest&quot;, &quot;northwest&quot;, &quot;southea…
+## $ charges  &lt;dbl&gt; 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3756.622, 8240.590, 7…</code></pre>
 <p>One of the most useful data science tools is counting things. The function <code>count()</code> gives the number of observations by a categorical feature.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">count</span>(children)</a></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="data-exploration.html#cb116-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>(children)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##   children     n
 ##      &lt;dbl&gt; &lt;int&gt;
@@ -559,7 +596,7 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 ## 5        4    25
 ## 6        5    18</code></pre>
 <p>Two categories can be counted at once. This creates a table with all combinations of <code>region</code> and <code>sex</code> and shows the number ofobservations in each category.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(region, sex)</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="data-exploration.html#cb118-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> <span class="fu">count</span>(region, sex)</span></code></pre></div>
 <pre><code>## # A tibble: 8 x 3
 ##   region    sex        n
 ##   &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;
@@ -573,42 +610,42 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 ## 8 southwest male     163</code></pre>
 <p>The <code>summary()</code> function is shows a statistical summary. One caveat is that each column needs to be in its appropriate type. For example, <code>smoker</code>, <code>region</code>, and <code>sex</code> are all listed as characters when if they were factors, <code>summary</code> would give you count info.</p>
 <p><strong>With incorrect data types</strong></p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
-<pre><code>##       age            sex                 bmi           children    
-##  Min.   :18.00   Length:1338        Min.   :15.96   Min.   :0.000  
-##  1st Qu.:27.00   Class :character   1st Qu.:26.30   1st Qu.:0.000  
-##  Median :39.00   Mode  :character   Median :30.40   Median :1.000  
-##  Mean   :39.21                      Mean   :30.66   Mean   :1.095  
-##  3rd Qu.:51.00                      3rd Qu.:34.69   3rd Qu.:2.000  
-##  Max.   :64.00                      Max.   :53.13   Max.   :5.000  
-##     smoker             region             charges     
-##  Length:1338        Length:1338        Min.   : 1122  
-##  Class :character   Class :character   1st Qu.: 4740  
-##  Mode  :character   Mode  :character   Median : 9382  
-##                                        Mean   :13270  
-##                                        3rd Qu.:16640  
-##                                        Max.   :63770</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="data-exploration.html#cb120-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##       age            sex                 bmi           children        smoker         
+##  Min.   :18.00   Length:1338        Min.   :15.96   Min.   :0.000   Length:1338       
+##  1st Qu.:27.00   Class :character   1st Qu.:26.30   1st Qu.:0.000   Class :character  
+##  Median :39.00   Mode  :character   Median :30.40   Median :1.000   Mode  :character  
+##  Mean   :39.21                      Mean   :30.66   Mean   :1.095                     
+##  3rd Qu.:51.00                      3rd Qu.:34.69   3rd Qu.:2.000                     
+##  Max.   :64.00                      Max.   :53.13   Max.   :5.000                     
+##     region             charges     
+##  Length:1338        Min.   : 1122  
+##  Class :character   1st Qu.: 4740  
+##  Mode  :character   Median : 9382  
+##                     Mean   :13270  
+##                     3rd Qu.:16640  
+##                     Max.   :63770</code></pre>
 <p><strong>With correct data types</strong></p>
 <p>This tells you that there are 324 patients in the northeast, 325 in the northwest, 364 in the southeast, etc.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" title="1">health_insurance &lt;-<span class="st"> </span>health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb145-2" title="2"><span class="st">  </span><span class="kw">mutate_if</span>(is.character, as.factor)</a>
-<a class="sourceLine" id="cb145-3" title="3"></a>
-<a class="sourceLine" id="cb145-4" title="4">health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb145-5" title="5"><span class="st">  </span><span class="kw">summary</span>()</a></code></pre></div>
-<pre><code>##       age            sex           bmi           children     smoker    
-##  Min.   :18.00   female:662   Min.   :15.96   Min.   :0.000   no :1064  
-##  1st Qu.:27.00   male  :676   1st Qu.:26.30   1st Qu.:0.000   yes: 274  
-##  Median :39.00                Median :30.40   Median :1.000             
-##  Mean   :39.21                Mean   :30.66   Mean   :1.095             
-##  3rd Qu.:51.00                3rd Qu.:34.69   3rd Qu.:2.000             
-##  Max.   :64.00                Max.   :53.13   Max.   :5.000             
-##        region       charges     
-##  northeast:324   Min.   : 1122  
-##  northwest:325   1st Qu.: 4740  
-##  southeast:364   Median : 9382  
-##  southwest:325   Mean   :13270  
-##                  3rd Qu.:16640  
-##                  Max.   :63770</code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="data-exploration.html#cb122-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb122-2"><a href="data-exploration.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, as.factor)</span>
+<span id="cb122-3"><a href="data-exploration.html#cb122-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="data-exploration.html#cb122-4" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb122-5"><a href="data-exploration.html#cb122-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##       age            sex           bmi           children     smoker           region   
+##  Min.   :18.00   female:662   Min.   :15.96   Min.   :0.000   no :1064   northeast:324  
+##  1st Qu.:27.00   male  :676   1st Qu.:26.30   1st Qu.:0.000   yes: 274   northwest:325  
+##  Median :39.00                Median :30.40   Median :1.000              southeast:364  
+##  Mean   :39.21                Mean   :30.66   Mean   :1.095              southwest:325  
+##  3rd Qu.:51.00                3rd Qu.:34.69   3rd Qu.:2.000                             
+##  Max.   :64.00                Max.   :53.13   Max.   :5.000                             
+##     charges     
+##  Min.   : 1122  
+##  1st Qu.: 4740  
+##  Median : 9382  
+##  Mean   :13270  
+##  3rd Qu.:16640  
+##  Max.   :63770</code></pre>
 <p></br></p>
 <div class="studytip">
 <p>
@@ -617,7 +654,7 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 </div>
 <p></br></p>
 </div>
-<div id="how-to-transform-the-data" class="section level2">
+<div id="how-to-transform-the-data" class="section level2" number="7.5">
 <h2><span class="header-section-number">7.5</span> How to transform the data?</h2>
 <p>Transforming, manipulating, querying, and wrangling are synonyms in data terminology.</p>
 <p>R syntax is designed to be similar to SQL. They begin with a <code>SELECT</code>, use <code>GROUP BY</code> to aggregate, and have a <code>WHERE</code> to remove observations. Unlike SQL, the ordering of these does not matter. <code>SELECT</code> can come after a <code>WHERE</code>.</p>
@@ -631,9 +668,9 @@ group_by() -&gt; GROUP BY
 filter() -&gt; HAVING
 arrange() -&gt; ORDER BY
 </code></pre>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb148-2" title="2"><span class="st">  </span><span class="kw">select</span>(age, region) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb148-3" title="3"><span class="st">  </span><span class="kw">head</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="data-exploration.html#cb125-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb125-2"><a href="data-exploration.html#cb125-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, region) <span class="sc">%&gt;%</span> </span>
+<span id="cb125-3"><a href="data-exploration.html#cb125-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##     age region   
 ##   &lt;dbl&gt; &lt;fct&gt;    
@@ -644,10 +681,10 @@ arrange() -&gt; ORDER BY
 ## 5    32 northwest
 ## 6    31 southeast</code></pre>
 <p>Let us look at only those in the southeast region. Instead of <code>WHERE</code>, use <code>filter</code>.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb150-2" title="2"><span class="st">  </span><span class="kw">filter</span>(region <span class="op">==</span><span class="st"> &quot;southeast&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb150-3" title="3"><span class="st">  </span><span class="kw">select</span>(age, region) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb150-4" title="4"><span class="st">  </span><span class="kw">head</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="data-exploration.html#cb127-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb127-2"><a href="data-exploration.html#cb127-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">&quot;southeast&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb127-3"><a href="data-exploration.html#cb127-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, region) <span class="sc">%&gt;%</span> </span>
+<span id="cb127-4"><a href="data-exploration.html#cb127-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##     age region   
 ##   &lt;dbl&gt; &lt;fct&gt;    
@@ -658,14 +695,14 @@ arrange() -&gt; ORDER BY
 ## 5    62 southeast
 ## 6    56 southeast</code></pre>
 <p>The SQL translation is</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb152-1" title="1"><span class="kw">SELECT</span> age, region</a>
-<a class="sourceLine" id="cb152-2" title="2"><span class="kw">FROM</span> health_insurance</a>
-<a class="sourceLine" id="cb152-3" title="3"><span class="kw">WHERE</span> region <span class="op">=</span> <span class="st">&#39;southeast&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb129-1"><a href="data-exploration.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> age, region</span>
+<span id="cb129-2"><a href="data-exploration.html#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> health_insurance</span>
+<span id="cb129-3"><a href="data-exploration.html#cb129-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> region <span class="op">=</span> <span class="st">&#39;southeast&#39;</span></span></code></pre></div>
 <p>Instead of <code>ORDER BY</code>, use <code>arrange</code>. Unlike SQL, the order does not matter and <code>ORDER BY</code> doesn’t need to be last.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb153-2" title="2"><span class="st">  </span><span class="kw">arrange</span>(age) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb153-3" title="3"><span class="st">  </span><span class="kw">select</span>(age, region) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb153-4" title="4"><span class="st">  </span><span class="kw">head</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="data-exploration.html#cb130-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb130-2"><a href="data-exploration.html#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(age) <span class="sc">%&gt;%</span> </span>
+<span id="cb130-3"><a href="data-exploration.html#cb130-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, region) <span class="sc">%&gt;%</span> </span>
+<span id="cb130-4"><a href="data-exploration.html#cb130-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##     age region   
 ##   &lt;dbl&gt; &lt;fct&gt;    
@@ -676,9 +713,10 @@ arrange() -&gt; ORDER BY
 ## 5    18 northeast
 ## 6    18 southeast</code></pre>
 <p>The <code>group_by</code> comes before the aggregation, unlike in SQL where the <code>GROUP BY</code> comes last.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb155-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(region) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb155-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_age =</span> <span class="kw">mean</span>(age))</a></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="data-exploration.html#cb132-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb132-2"><a href="data-exploration.html#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span> </span>
+<span id="cb132-3"><a href="data-exploration.html#cb132-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_age =</span> <span class="fu">mean</span>(age))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 4 x 2
 ##   region    avg_age
 ##   &lt;fct&gt;       &lt;dbl&gt;
@@ -687,17 +725,18 @@ arrange() -&gt; ORDER BY
 ## 3 southeast    38.9
 ## 4 southwest    39.5</code></pre>
 <p>In SQL, this would be</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb157-1" title="1"><span class="kw">SELECT</span> region, </a>
-<a class="sourceLine" id="cb157-2" title="2">       <span class="fu">AVG</span>(age) <span class="kw">as</span> avg_age</a>
-<a class="sourceLine" id="cb157-3" title="3"><span class="kw">FROM</span> health_insurance</a>
-<a class="sourceLine" id="cb157-4" title="4"><span class="kw">GROUP</span> <span class="kw">BY</span> region</a></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb135-1"><a href="data-exploration.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> region, </span>
+<span id="cb135-2"><a href="data-exploration.html#cb135-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(age) <span class="kw">as</span> avg_age</span>
+<span id="cb135-3"><a href="data-exploration.html#cb135-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> health_insurance</span>
+<span id="cb135-4"><a href="data-exploration.html#cb135-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> region</span></code></pre></div>
 <p>Just like in SQL, many different aggregate functions can be used such as <code>SUM</code>, <code>MEAN</code>, <code>MIN</code>, <code>MAX</code>, and so forth.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb158-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(region) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb158-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_age =</span> <span class="kw">mean</span>(age),</a>
-<a class="sourceLine" id="cb158-4" title="4">            <span class="dt">max_age =</span> <span class="kw">max</span>(age),</a>
-<a class="sourceLine" id="cb158-5" title="5">            <span class="dt">median_charges =</span> <span class="kw">median</span>(charges),</a>
-<a class="sourceLine" id="cb158-6" title="6">            <span class="dt">bmi_std_dev =</span> <span class="kw">sd</span>(bmi))</a></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="data-exploration.html#cb136-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb136-2"><a href="data-exploration.html#cb136-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span> </span>
+<span id="cb136-3"><a href="data-exploration.html#cb136-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb136-4"><a href="data-exploration.html#cb136-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_age =</span> <span class="fu">max</span>(age),</span>
+<span id="cb136-5"><a href="data-exploration.html#cb136-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_charges =</span> <span class="fu">median</span>(charges),</span>
+<span id="cb136-6"><a href="data-exploration.html#cb136-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">bmi_std_dev =</span> <span class="fu">sd</span>(bmi))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 4 x 5
 ##   region    avg_age max_age median_charges bmi_std_dev
 ##   &lt;fct&gt;       &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;
@@ -706,10 +745,10 @@ arrange() -&gt; ORDER BY
 ## 3 southeast    38.9      64          9294.        6.48
 ## 4 southwest    39.5      64          8799.        5.69</code></pre>
 <p>To create new columns, the <code>mutate</code> function is used. For example, if we wanted a column of the annual charges of a person divided by their age</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb160-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">charges_over_age =</span> charges<span class="op">/</span>age) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb160-3" title="3"><span class="st">  </span><span class="kw">select</span>(age, charges, charges_over_age) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb160-4" title="4"><span class="st">  </span><span class="kw">head</span>(<span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="data-exploration.html#cb139-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb139-2"><a href="data-exploration.html#cb139-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">charges_over_age =</span> charges<span class="sc">/</span>age) <span class="sc">%&gt;%</span> </span>
+<span id="cb139-3"><a href="data-exploration.html#cb139-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, charges, charges_over_age) <span class="sc">%&gt;%</span> </span>
+<span id="cb139-4"><a href="data-exploration.html#cb139-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
 ##     age charges charges_over_age
 ##   &lt;dbl&gt;   &lt;dbl&gt;            &lt;dbl&gt;
@@ -719,26 +758,25 @@ arrange() -&gt; ORDER BY
 ## 4    33  21984.            666. 
 ## 5    32   3867.            121.</code></pre>
 <p>We can create as many new columns as we want.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb162-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">age_squared  =</span> age<span class="op">^</span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb162-3" title="3">         <span class="dt">age_cubed =</span> age<span class="op">^</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb162-4" title="4">         <span class="dt">age_fourth =</span> age<span class="op">^</span><span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb162-5" title="5"><span class="st">  </span><span class="kw">head</span>(<span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="data-exploration.html#cb141-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb141-2"><a href="data-exploration.html#cb141-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_squared  =</span> age<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb141-3"><a href="data-exploration.html#cb141-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">age_cubed =</span> age<span class="sc">^</span><span class="dv">3</span>,</span>
+<span id="cb141-4"><a href="data-exploration.html#cb141-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">age_fourth =</span> age<span class="sc">^</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb141-5"><a href="data-exploration.html#cb141-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 10
-##     age sex      bmi children smoker region    charges age_squared age_cubed
-##   &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
-## 1    19 female  27.9        0 yes    southwest  16885.         361      6859
-## 2    18 male    33.8        1 no     southeast   1726.         324      5832
-## 3    28 male    33          3 no     southeast   4449.         784     21952
-## 4    33 male    22.7        0 no     northwest  21984.        1089     35937
-## 5    32 male    28.9        0 no     northwest   3867.        1024     32768
-## # ... with 1 more variable: age_fourth &lt;dbl&gt;</code></pre>
+##     age sex      bmi children smoker region    charges age_squared age_cubed age_fourth
+##   &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1    19 female  27.9        0 yes    southwest  16885.         361      6859     130321
+## 2    18 male    33.8        1 no     southeast   1726.         324      5832     104976
+## 3    28 male    33          3 no     southeast   4449.         784     21952     614656
+## 4    33 male    22.7        0 no     northwest  21984.        1089     35937    1185921
+## 5    32 male    28.9        0 no     northwest   3867.        1024     32768    1048576</code></pre>
 <p>The <code>CASE WHEN</code> function is quite similar to SQL. For example, we can create a column which is <code>0</code> when <code>age &lt; 50</code>, <code>1</code> when <code>50 &lt;= age &lt;= 70</code>, and <code>2</code> when <code>age &gt; 70</code>.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1">health_insurance <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb164-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">age_bucket =</span> <span class="kw">case_when</span>(age <span class="op">&lt;</span><span class="st"> </span><span class="dv">50</span> <span class="op">~</span><span class="st"> </span><span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb164-3" title="3">                                age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">70</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb164-4" title="4">                                age <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span> <span class="op">~</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb164-5" title="5"><span class="st">  </span><span class="kw">select</span>(age, age_bucket)</a></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="data-exploration.html#cb143-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb143-2"><a href="data-exploration.html#cb143-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_bucket =</span> <span class="fu">case_when</span>(age <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb143-3"><a href="data-exploration.html#cb143-3" aria-hidden="true" tabindex="-1"></a>                                age <span class="sc">&lt;=</span> <span class="dv">70</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb143-4"><a href="data-exploration.html#cb143-4" aria-hidden="true" tabindex="-1"></a>                                age <span class="sc">&gt;</span> <span class="dv">70</span> <span class="sc">~</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb143-5"><a href="data-exploration.html#cb143-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, age_bucket)</span></code></pre></div>
 <pre><code>## # A tibble: 1,338 x 2
 ##      age age_bucket
 ##    &lt;dbl&gt;      &lt;dbl&gt;
@@ -752,20 +790,20 @@ arrange() -&gt; ORDER BY
 ##  8    37          0
 ##  9    37          0
 ## 10    60          1
-## # ... with 1,328 more rows</code></pre>
+## # … with 1,328 more rows</code></pre>
 <p>SQL translation:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb166-1" title="1"><span class="kw">SELECT</span> <span class="cf">CASE</span> <span class="cf">WHEN</span> AGE <span class="op">&lt;</span> <span class="dv">50</span> <span class="cf">THEN</span> <span class="dv">0</span></a>
-<a class="sourceLine" id="cb166-2" title="2">       <span class="cf">ELSE</span> <span class="cf">WHEN</span> AGE <span class="op">&lt;=</span> <span class="dv">70</span> <span class="cf">THEN</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb166-3" title="3">       <span class="cf">ELSE</span> <span class="dv">2</span></a>
-<a class="sourceLine" id="cb166-4" title="4"><span class="kw">FROM</span> health_insurance</a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb145-1"><a href="data-exploration.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="cf">CASE</span> <span class="cf">WHEN</span> AGE <span class="op">&lt;</span> <span class="dv">50</span> <span class="cf">THEN</span> <span class="dv">0</span></span>
+<span id="cb145-2"><a href="data-exploration.html#cb145-2" aria-hidden="true" tabindex="-1"></a>       <span class="cf">ELSE</span> <span class="cf">WHEN</span> AGE <span class="op">&lt;=</span> <span class="dv">70</span> <span class="cf">THEN</span> <span class="dv">1</span></span>
+<span id="cb145-3"><a href="data-exploration.html#cb145-3" aria-hidden="true" tabindex="-1"></a>       <span class="cf">ELSE</span> <span class="dv">2</span></span>
+<span id="cb145-4"><a href="data-exploration.html#cb145-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> health_insurance</span></code></pre></div>
 </div>
-<div id="missing-values" class="section level2">
+<div id="missing-values" class="section level2" number="7.6">
 <h2><span class="header-section-number">7.6</span> Missing values</h2>
 <p>The most recent PA exams have had questions related to missing values. You need to perform checks before moving on to the model-building phases. In real life, man-made data always have missing observations.</p>
 <p>In R, there are two ways that data can be missing. The first is the <code>NA</code> value. If you read in a csv file that has blank values, R will translate them into NAs.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="ot">NA</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="data-exploration.html#cb146-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="cn">NA</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">2</span>))</span></code></pre></div>
 <p>You can check for <code>NA</code> values with <code>summary</code> or <code>sum(is.na(df))</code>.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1"><span class="kw">summary</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="data-exploration.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
 <pre><code>##        x              y    
 ##  Min.   :1.00   Min.   :2  
 ##  1st Qu.:1.25   1st Qu.:2  
@@ -774,14 +812,14 @@ arrange() -&gt; ORDER BY
 ##  3rd Qu.:1.75   3rd Qu.:2  
 ##  Max.   :2.00   Max.   :2  
 ##  NA&#39;s   :1      NA&#39;s   :2</code></pre>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="kw">sum</span>(<span class="kw">is.na</span>(df))</a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="data-exploration.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(df))</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>The second type is for “Not A Number” (<code>NaN</code>) or infinity <code>Inf</code> values. Dividing by zero produces <code>Inf</code> and taking the square root of a negative number produces <code>NaN</code>. Notice that <code>NaN</code> counts as <code>NA</code> but <code>Inf</code> does not. R says that there are only two missing values in this table even though there are two values which are infinity.</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">0</span>, <span class="dv">4</span><span class="op">/</span><span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">1</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="kw">sqrt</span>(<span class="op">-</span><span class="dv">1</span>), <span class="ot">NA</span>, <span class="dv">2</span>, <span class="dv">4</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="data-exploration.html#cb151-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">0</span>, <span class="dv">4</span><span class="sc">/</span><span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="fu">sqrt</span>(<span class="sc">-</span><span class="dv">1</span>), <span class="cn">NA</span>, <span class="dv">2</span>, <span class="dv">4</span>))</span></code></pre></div>
 <pre><code>## Warning in sqrt(-1): NaNs produced</code></pre>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="kw">sum</span>(<span class="kw">is.na</span>(df))</a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="data-exploration.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(df))</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1"><span class="kw">summary</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="data-exploration.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
 <pre><code>##        x              y      
 ##  Min.   :1.00   Min.   :2.0  
 ##  1st Qu.:3.25   1st Qu.:2.5  
@@ -790,7 +828,7 @@ arrange() -&gt; ORDER BY
 ##  3rd Qu.: Inf   3rd Qu.:3.5  
 ##  Max.   : Inf   Max.   :4.0  
 ##                 NA&#39;s   :2</code></pre>
-<div id="types-of-missing-values" class="section level3">
+<div id="types-of-missing-values" class="section level3" number="7.6.1">
 <h3><span class="header-section-number">7.6.1</span> Types of Missing Values</h3>
 <p>Read the Data Dictionary from the Project Statement and check for these three types of missingness.</p>
 <ul>
@@ -799,7 +837,7 @@ arrange() -&gt; ORDER BY
 <li><strong>Hidden missingness:</strong> When a value is coded incorrectly, such as when a numeric variable with “999” or “0” or a factor does not match the Data Dictionary.</li>
 </ul>
 </div>
-<div id="missing-value-resolutions" class="section level3">
+<div id="missing-value-resolutions" class="section level3" number="7.6.2">
 <h3><span class="header-section-number">7.6.2</span> Missing Value Resolutions:</h3>
 <p>You can use any of these methods but make sure that you describe your reasoning in the report.</p>
 <ul>
@@ -812,7 +850,7 @@ arrange() -&gt; ORDER BY
 <p>While you are reviewing the data for missingness, you may also decide to remove some variables altogether. This could be because of racial or ethical concerns, limitations of future availability, instability of the data over time, or inexplicability.</p>
 </div>
 </div>
-<div id="example-soa-pa-121219-task-1" class="section level2">
+<div id="example-soa-pa-121219-task-1" class="section level2" number="7.7">
 <h2><span class="header-section-number">7.7</span> Example: SOA PA 12/12/19, Task 1</h2>
 <p>This chapter is based on the first task of the December 2019 Exam PA.</p>
 <iframe src="https://player.vimeo.com/video/467838183?title=0&amp;byline=0&amp;portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
@@ -832,14 +870,14 @@ arrange() -&gt; ORDER BY
 </blockquote>
 <p>As a reminder, all data for this book can be accessed from the package <code>ExamPAData</code>. In the actual exam, you will read the file from the Prometric computer.</p>
 <p>Because the data is already loaded, use the below code to access the data.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="kw">library</span>(ExamPAData)</a></code></pre></div>
-<p>To save keystrokes, give the data a short name such as <code>df</code> for “data frame”.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1">df &lt;-<span class="st"> </span>customer_value <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.character, as.factor)</a></code></pre></div>
-<div id="garbage-in-garbage-out" class="section level3">
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="data-exploration.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ExamPAData)</span></code></pre></div>
+<p>To save keystrokes, give the data a short name such as <code>df</code> for “data frame.”</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="data-exploration.html#cb158-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> customer_value <span class="sc">%&gt;%</span> <span class="fu">mutate_if</span>(is.character, as.factor)</span></code></pre></div>
+<div id="garbage-in-garbage-out" class="section level3" number="7.7.1">
 <h3><span class="header-section-number">7.7.1</span> Garbage in; garbage out 🗑</h3>
 <p>This is a common saying when working with predictive models. No matter how complex the model, the actual result will be wrong if the data is terrible. For this exam, master the art of data manipulation, and everything becomes easier!</p>
 <p>Begin by looking at a summary.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="kw">summary</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="data-exploration.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
 <pre><code>##       age        education_num                 marital_status     occupation   
 ##  Min.   :17.00   Min.   : 1.00   Divorced             : 6633   Group 1 : 7237  
 ##  1st Qu.:28.00   1st Qu.: 9.00   Married-AF-spouse    :   37   Group 2 :10123  
@@ -856,8 +894,8 @@ arrange() -&gt; ORDER BY
 ##  3rd Qu.:    0   3rd Qu.:45.00   3rd Qu.:62.95               
 ##  Max.   :99999   Max.   :99.00   Max.   :76.53               
 ## </code></pre>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
-<pre><code>## spec_tbl_df[,8] [48,842 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="data-exploration.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre><code>## spec_tbl_df[,8] [48,842 × 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ age           : num [1:48842] 39 50 38 53 28 37 49 52 31 42 ...
 ##  $ education_num : num [1:48842] 13 13 9 7 13 14 5 9 14 13 ...
 ##  $ marital_status: Factor w/ 7 levels &quot;Divorced&quot;,&quot;Married-AF-spouse&quot;,..: 5 3 1 3 3 3 4 3 5 3 ...
@@ -878,7 +916,7 @@ arrange() -&gt; ORDER BY
 ##   ..   value_flag = col_character()
 ##   .. )</code></pre>
 </div>
-<div id="be-a-detective" class="section level3">
+<div id="be-a-detective" class="section level3" number="7.7.2">
 <h3><span class="header-section-number">7.7.2</span> Be a detective 🔎</h3>
 <p>Sherlock Holmes is famous for saying, “You see, Watson, but you do not observe!”</p>
 <p>Just like detectives, actuaries need to collect data and make observations. Each exam has a few “anomalies” in the data, which they expect candidates to mention. These could be</p>
@@ -912,22 +950,22 @@ arrange() -&gt; ORDER BY
 <p></br></p>
 <p>The solution of SOA recommends leaving comments in your .Rmd file. This helps to give you partial credit on questions that you may answer incorrectly.</p>
 <p><strong>Good comments</strong></p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="co">#I observe that there are no missing values other than those indicated by Group NA for occupation.</span></a>
-<a class="sourceLine" id="cb184-2" title="2"></a>
-<a class="sourceLine" id="cb184-3" title="3"><span class="co">#I removed the code provided by my assistant. It is embedded in later chunks as needed.</span></a>
-<a class="sourceLine" id="cb184-4" title="4"></a>
-<a class="sourceLine" id="cb184-5" title="5"><span class="co">#I excluded people under the age of 25</span></a>
-<a class="sourceLine" id="cb184-6" title="6">df &lt;-<span class="st"> </span>df[df<span class="op">$</span>age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">25</span>,]</a>
-<a class="sourceLine" id="cb184-7" title="7"></a>
-<a class="sourceLine" id="cb184-8" title="8"><span class="co">#I convert the target to 0-1.</span></a>
-<a class="sourceLine" id="cb184-9" title="9">df<span class="op">$</span>value_flag &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df<span class="op">$</span>value_flag <span class="op">==</span><span class="st"> &quot;High&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="data-exploration.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I observe that there are no missing values other than those indicated by Group NA for occupation.</span></span>
+<span id="cb163-2"><a href="data-exploration.html#cb163-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-3"><a href="data-exploration.html#cb163-3" aria-hidden="true" tabindex="-1"></a><span class="co">#I removed the code provided by my assistant. It is embedded in later chunks as needed.</span></span>
+<span id="cb163-4"><a href="data-exploration.html#cb163-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-5"><a href="data-exploration.html#cb163-5" aria-hidden="true" tabindex="-1"></a><span class="co">#I excluded people under the age of 25</span></span>
+<span id="cb163-6"><a href="data-exploration.html#cb163-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>age <span class="sc">&gt;=</span> <span class="dv">25</span>,]</span>
+<span id="cb163-7"><a href="data-exploration.html#cb163-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-8"><a href="data-exploration.html#cb163-8" aria-hidden="true" tabindex="-1"></a><span class="co">#I convert the target to 0-1.</span></span>
+<span id="cb163-9"><a href="data-exploration.html#cb163-9" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>value_flag <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>value_flag <span class="sc">==</span> <span class="st">&quot;High&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div>
 <p><strong>Useless comments</strong></p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="co">#this is a comment</span></a>
-<a class="sourceLine" id="cb185-2" title="2"></a>
-<a class="sourceLine" id="cb185-3" title="3"><span class="co">#this loads a library called ggplot2</span></a>
-<a class="sourceLine" id="cb185-4" title="4"><span class="kw">library</span>(ggplot2)</a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="data-exploration.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co">#this is a comment</span></span>
+<span id="cb164-2"><a href="data-exploration.html#cb164-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-3"><a href="data-exploration.html#cb164-3" aria-hidden="true" tabindex="-1"></a><span class="co">#this loads a library called ggplot2</span></span>
+<span id="cb164-4"><a href="data-exploration.html#cb164-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 </div>
-<div id="a-picture-is-worth-a-thousand-words" class="section level3">
+<div id="a-picture-is-worth-a-thousand-words" class="section level3" number="7.7.3">
 <h3><span class="header-section-number">7.7.3</span> A picture is worth a thousand words 📷</h3>
 <p>What is your favorite type of graph? Mine is a radar chart. This is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point.</p>
 <p>That is pretty, right?</p>
@@ -935,47 +973,47 @@ arrange() -&gt; ORDER BY
 <p><strong>Do not waste time trying to make the graphs perfect!</strong></p>
 <p>Only change code that you <strong>need</strong> to change. If you need assistance to do it faster then SOA can help you save time by giving you templates.</p>
 <p>This is the code template that they give you. You only need to change the “variable” names.</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1"><span class="co"># This code makes a histogram for a continuous variable.</span></a>
-<a class="sourceLine" id="cb186-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> variable)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb186-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb186-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;variable&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb186-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb186-6" title="6"></a>
-<a class="sourceLine" id="cb186-7" title="7"><span class="co"># This code makes a bar chart for a factor variable.</span></a>
-<a class="sourceLine" id="cb186-8" title="8"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> variable)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb186-9" title="9"><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb186-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;variable&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb186-11" title="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="data-exploration.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code makes a histogram for a continuous variable.</span></span>
+<span id="cb165-2"><a href="data-exploration.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> variable)) <span class="sc">+</span> </span>
+<span id="cb165-3"><a href="data-exploration.html#cb165-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb165-4"><a href="data-exploration.html#cb165-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;variable&quot;</span>) <span class="sc">+</span></span>
+<span id="cb165-5"><a href="data-exploration.html#cb165-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb165-6"><a href="data-exploration.html#cb165-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-7"><a href="data-exploration.html#cb165-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This code makes a bar chart for a factor variable.</span></span>
+<span id="cb165-8"><a href="data-exploration.html#cb165-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> variable)) <span class="sc">+</span></span>
+<span id="cb165-9"><a href="data-exploration.html#cb165-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb165-10"><a href="data-exploration.html#cb165-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;variable&quot;</span>) <span class="sc">+</span></span>
+<span id="cb165-11"><a href="data-exploration.html#cb165-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
 <p>Okay, that was not 100% true. It is common for the code to require <strong>small</strong> changes. changes. For instance, the histogram that they give you has bins that are too narrow for <code>age</code>, which causes these spikes to show up in the graph.</p>
 <blockquote>
 <p>The best candidates altered the code to create more appropriate plots and summary tables.</p>
 </blockquote>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1"><span class="co"># This code makes a histogram for a continuous variable.</span></a>
-<a class="sourceLine" id="cb187-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> age)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb187-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>) <span class="op">+</span><span class="st"> </span><span class="co">#not the right number of bins</span></a>
-<a class="sourceLine" id="cb187-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;age&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb187-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb187-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bad: Default histogram with spikes&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-94-1.png" width="576" /></p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1"><span class="co">#Histograms of continuous variables</span></a>
-<a class="sourceLine" id="cb188-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> age)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb188-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="fl">24.5</span>,<span class="fl">99.5</span>, <span class="dt">by =</span> <span class="dv">5</span>)) <span class="op">+</span><span class="st">  </span><span class="co">#make bins wider and set range </span></a>
-<a class="sourceLine" id="cb188-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Age&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb188-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb188-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Good: After adjusting the breaks&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-94-2.png" width="576" /></p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="data-exploration.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code makes a histogram for a continuous variable.</span></span>
+<span id="cb166-2"><a href="data-exploration.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span> </span>
+<span id="cb166-3"><a href="data-exploration.html#cb166-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span> <span class="co">#not the right number of bins</span></span>
+<span id="cb166-4"><a href="data-exploration.html#cb166-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;age&quot;</span>) <span class="sc">+</span></span>
+<span id="cb166-5"><a href="data-exploration.html#cb166-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb166-6"><a href="data-exploration.html#cb166-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Bad: Default histogram with spikes&quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-84-1.png" width="576" /></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="data-exploration.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histograms of continuous variables</span></span>
+<span id="cb167-2"><a href="data-exploration.html#cb167-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb167-3"><a href="data-exploration.html#cb167-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">24.5</span>,<span class="fl">99.5</span>, <span class="at">by =</span> <span class="dv">5</span>)) <span class="sc">+</span>  <span class="co">#make bins wider and set range </span></span>
+<span id="cb167-4"><a href="data-exploration.html#cb167-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>) <span class="sc">+</span></span>
+<span id="cb167-5"><a href="data-exploration.html#cb167-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb167-6"><a href="data-exploration.html#cb167-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Good: After adjusting the breaks&quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-84-2.png" width="576" /></p>
 <p>How do you know when a variable should a factor and when it should be numeric?</p>
 </div>
-<div id="factor-or-numeric" class="section level3">
+<div id="factor-or-numeric" class="section level3" number="7.7.4">
 <h3><span class="header-section-number">7.7.4</span> Factor or numeric ❓</h3>
 <p>Which variables should be converted to factors and which should be numeric?</p>
 <p>Questions of this sort have come up twice. On Hospital Readmissions, a Length of Stay variable was numeric but had only a few values, so some candidates treated it as a factor. The <code>education_num</code> variable here is also numeric but only has 16 unique values. So should this be a numeric or a factor?</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1"><span class="kw">table</span>(df<span class="op">$</span>education_num)</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="data-exploration.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>education_num)</span></code></pre></div>
 <pre><code>## 
-##     1     2     3     4     5     6     7     8     9    10    11    12    13 
-##    68   231   446   877   618   995  1042   382 13320  7812  1862  1411  7298 
-##    14    15    16 
-##  2621   834   593</code></pre>
+##     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15 
+##    68   231   446   877   618   995  1042   382 13320  7812  1862  1411  7298  2621   834 
+##    16 
+##   593</code></pre>
 <p>Ask yourself this question: is there a way of comparing two values of the variable together?</p>
 <ul>
 <li>If yes, then use numeric<br />
@@ -984,31 +1022,31 @@ arrange() -&gt; ORDER BY
 </ul>
 <p>For exmaple, we can say that <code>education_num = 2</code> is less than <code>education_num = 4</code>, which means there is a natural order. This is also known as an <strong>ordinal</strong>.</p>
 <p>If the factor is say, <code>color</code>, which can be <code>red</code>, <code>blue</code>, or <code>green</code>, then there is no way of comparing values together. Is <code>red</code> greater than <code>blue</code>? This question has no meaning.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> education_num)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb191-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb191-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb191-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb191-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Default number of bins (30)&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-96-1.png" width="576" /></p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> education_num)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb192-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">16</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb192-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb192-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb192-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Set number of bins to number of factor levels (16) &quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-96-2.png" width="576" /></p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1"><span class="co"># Set bins equal to number of levels, could have made bar chart.</span></a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="data-exploration.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> education_num)) <span class="sc">+</span></span>
+<span id="cb170-2"><a href="data-exploration.html#cb170-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb170-3"><a href="data-exploration.html#cb170-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="sc">+</span></span>
+<span id="cb170-4"><a href="data-exploration.html#cb170-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb170-5"><a href="data-exploration.html#cb170-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Default number of bins (30)&quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-86-1.png" width="576" /></p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="data-exploration.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> education_num)) <span class="sc">+</span></span>
+<span id="cb171-2"><a href="data-exploration.html#cb171-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb171-3"><a href="data-exploration.html#cb171-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="sc">+</span></span>
+<span id="cb171-4"><a href="data-exploration.html#cb171-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb171-5"><a href="data-exploration.html#cb171-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Set number of bins to number of factor levels (16) &quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-86-2.png" width="576" /></p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="data-exploration.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set bins equal to number of levels, could have made bar chart.</span></span></code></pre></div>
 <p>We could also use a bar plot.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> education_num)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb194-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb194-3" title="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bar plot&quot;</span>)</a></code></pre></div>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-97-1.png" width="576" /></p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="data-exploration.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> education_num)) <span class="sc">+</span> </span>
+<span id="cb173-2"><a href="data-exploration.html#cb173-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb173-3"><a href="data-exploration.html#cb173-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Bar plot&quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-87-1.png" width="576" /></p>
 <p>Lastly, read the Project Statement carefully and only do what it tells you to do.</p>
 <blockquote>
 <p>Candidates were not required to make a plot for cap_gain. This solution has the plot made here rather than in Task 6.</p>
 </blockquote>
 </div>
-<div id="of-statistics-are-false" class="section level3">
-<h3><span class="header-section-number">7.7.5</span> 73.6% of statistics are false 😲</h3>
+<div id="of-statistics-are-false" class="section level3" number="7.7.5">
+<h3><span class="header-section-number">7.7.5</span> 73.6% of statistics are false 😱</h3>
 <p>Really? No, but statistics can help you see patterns that data visualization by itself can miss. Along with the ggplot codes, there will be code to look at summary statistics. Here is a refresher on what these statistics mean (no pun intended).</p>
 <ul>
 <li><strong>Mean</strong>: The average. This gets skewed by outliers easily. If the mean is greater than the median, then the distribution is right-skewed.</li>
@@ -1018,25 +1056,23 @@ arrange() -&gt; ORDER BY
 <li><strong>Standard Deviation</strong>: The square root of the variance.</li>
 <li><strong>n()</strong>: The number of observations. Always take note of groups that do not have many observations.</li>
 </ul>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1"><span class="co"># This code provides, for each level of a factor variable, the number for which value_flag is zero, the number for which it is one, the total number of observations, and the proportion of ones.</span></a>
-<a class="sourceLine" id="cb195-2" title="2"><span class="co"># Note that the variable name should not be enclosed in quotation marks.</span></a>
-<a class="sourceLine" id="cb195-3" title="3">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb195-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(variable) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb195-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(</a>
-<a class="sourceLine" id="cb195-6" title="6">    <span class="dt">zeros =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb195-7" title="7">    <span class="dt">ones =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb195-8" title="8">    <span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb195-9" title="9">    <span class="dt">proportion =</span> <span class="kw">mean</span>(value_flag)</a>
-<a class="sourceLine" id="cb195-10" title="10">  )</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="data-exploration.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code provides, for each level of a factor variable, the number for which value_flag is zero, the number for which it is one, the total number of observations, and the proportion of ones.</span></span>
+<span id="cb174-2"><a href="data-exploration.html#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that the variable name should not be enclosed in quotation marks.</span></span>
+<span id="cb174-3"><a href="data-exploration.html#cb174-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb174-4"><a href="data-exploration.html#cb174-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span></span>
+<span id="cb174-5"><a href="data-exploration.html#cb174-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb174-6"><a href="data-exploration.html#cb174-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">zeros =</span> <span class="fu">sum</span>(value_flag <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb174-7"><a href="data-exploration.html#cb174-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ones =</span> <span class="fu">sum</span>(value_flag <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb174-8"><a href="data-exploration.html#cb174-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb174-9"><a href="data-exploration.html#cb174-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">proportion =</span> <span class="fu">mean</span>(value_flag)</span>
+<span id="cb174-10"><a href="data-exploration.html#cb174-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Factors levels should be simplified. If a group has only a few observations, then there will be problems with the model. In our data, take a look at the <code>marital_status</code> column. Do you observe anything unusual?</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1"><span class="kw">table</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="data-exploration.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
 <pre><code>## 
-##              Divorced     Married-AF-spouse    Married-civ-spouse 
-##                  6498                    31                 21661 
-## Married-spouse-absent         Never-married             Separated 
-##                   573                  8697                  1438 
-##               Widowed 
-##                  1512</code></pre>
+##              Divorced     Married-AF-spouse    Married-civ-spouse Married-spouse-absent 
+##                  6498                    31                 21661                   573 
+##         Never-married             Separated               Widowed 
+##                  8697                  1438                  1512</code></pre>
 <p>Only 31 observations have <code>Married-AF-spouse</code>. This is because the sample size <code>n = 31</code> is too small. In modeling jargon, this is “statistical insignificant” and will cause the p-value on <code>marital_status</code> to be large. You can fix this in a few different ways</p>
 <ul>
 <li>Delete these observations (Not recommended)</li>
@@ -1044,20 +1080,21 @@ arrange() -&gt; ORDER BY
 </ul>
 <p>Let us use the second method.</p>
 <p>First, look at the levels of the factor variable.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1"><span class="kw">levels</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="data-exploration.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
 <pre><code>## [1] &quot;Divorced&quot;              &quot;Married-AF-spouse&quot;     &quot;Married-civ-spouse&quot;   
 ## [4] &quot;Married-spouse-absent&quot; &quot;Never-married&quot;         &quot;Separated&quot;            
 ## [7] &quot;Widowed&quot;</code></pre>
-<p>Now look at the profitability across marital status. For <code>Married-AF-spouse</code> and <code>Married-civ-spouse</code> the proportion of high profit customers is <strong>high</strong>, but for <code>Married-spouse-absent</code> it is <strong>low.</strong> Even though these are all “married”, it would be a bad idea to combine them because the profitability is so different.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1"><span class="co">#Proportion of ones by category of factor variable</span></a>
-<a class="sourceLine" id="cb200-2" title="2">df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb200-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(marital_status) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb200-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(</a>
-<a class="sourceLine" id="cb200-5" title="5">    <span class="dt">zeros =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb200-6" title="6">    <span class="dt">ones =</span> <span class="kw">sum</span>(value_flag <span class="op">==</span><span class="st"> </span><span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb200-7" title="7">    <span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb200-8" title="8">    <span class="dt">proportion =</span> <span class="kw">mean</span>(value_flag)</a>
-<a class="sourceLine" id="cb200-9" title="9">  )</a></code></pre></div>
+<p>Now look at the profitability across marital status. For <code>Married-AF-spouse</code> and <code>Married-civ-spouse</code> the proportion of high profit customers is <strong>high</strong>, but for <code>Married-spouse-absent</code> it is <strong>low.</strong> Even though these are all “married,” it would be a bad idea to combine them because the profitability is so different.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="data-exploration.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of ones by category of factor variable</span></span>
+<span id="cb179-2"><a href="data-exploration.html#cb179-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb179-3"><a href="data-exploration.html#cb179-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(marital_status) <span class="sc">%&gt;%</span></span>
+<span id="cb179-4"><a href="data-exploration.html#cb179-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb179-5"><a href="data-exploration.html#cb179-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">zeros =</span> <span class="fu">sum</span>(value_flag <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb179-6"><a href="data-exploration.html#cb179-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ones =</span> <span class="fu">sum</span>(value_flag <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb179-7"><a href="data-exploration.html#cb179-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb179-8"><a href="data-exploration.html#cb179-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">proportion =</span> <span class="fu">mean</span>(value_flag)</span>
+<span id="cb179-9"><a href="data-exploration.html#cb179-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 7 x 5
 ##   marital_status        zeros  ones     n proportion
 ##   &lt;fct&gt;                 &lt;int&gt; &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;
@@ -1069,50 +1106,50 @@ arrange() -&gt; ORDER BY
 ## 6 Separated              1342    96  1438     0.0668
 ## 7 Widowed                1384   128  1512     0.0847</code></pre>
 <p>Then create a vector that has the simpler levels that you want. The order needs to be the same.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">simple_levels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Divorced&quot;</span>, <span class="st">&quot;Married-spouse&quot;</span>, <span class="st">&quot;Married-spouse&quot;</span>, <span class="st">&quot;Married-spuouse-absent&quot;</span>, <span class="st">&quot;Neber-married&quot;</span>, <span class="st">&quot;Separated&quot;</span>, <span class="st">&quot;Widowed&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="data-exploration.html#cb182-1" aria-hidden="true" tabindex="-1"></a>simple_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Divorced&quot;</span>, <span class="st">&quot;Married-spouse&quot;</span>, <span class="st">&quot;Married-spouse&quot;</span>, <span class="st">&quot;Married-spuouse-absent&quot;</span>, <span class="st">&quot;Neber-married&quot;</span>, <span class="st">&quot;Separated&quot;</span>, <span class="st">&quot;Widowed&quot;</span>)</span></code></pre></div>
 <p>The function <code>mapvalues</code> takes in three arguments. You can read about this by typing <code>?mapvalues</code> into the console.</p>
 <p><code>x</code> : the factor or vector to modify</p>
 <p><code>from</code> : a vector of the items to replace</p>
 <p><code>to</code> : a vector of replacement values</p>
 <p>Then map the old values to the simpler values.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1"><span class="co">#Combine the two marital status levels</span></a>
-<a class="sourceLine" id="cb203-2" title="2">var.levels &lt;-<span class="st"> </span><span class="kw">levels</span>(df<span class="op">$</span>marital_status)</a>
-<a class="sourceLine" id="cb203-3" title="3">df<span class="op">$</span>marital_status &lt;-<span class="st"> </span><span class="kw">mapvalues</span>(<span class="dt">x =</span> df<span class="op">$</span>marital_status,</a>
-<a class="sourceLine" id="cb203-4" title="4">                               <span class="dt">from =</span> var.levels, </a>
-<a class="sourceLine" id="cb203-5" title="5">                               <span class="dt">to =</span> simple_levels) </a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="data-exploration.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Combine the two marital status levels</span></span>
+<span id="cb183-2"><a href="data-exploration.html#cb183-2" aria-hidden="true" tabindex="-1"></a>var.levels <span class="ot">&lt;-</span> <span class="fu">levels</span>(df<span class="sc">$</span>marital_status)</span>
+<span id="cb183-3"><a href="data-exploration.html#cb183-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>marital_status <span class="ot">&lt;-</span> <span class="fu">mapvalues</span>(<span class="at">x =</span> df<span class="sc">$</span>marital_status,</span>
+<span id="cb183-4"><a href="data-exploration.html#cb183-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">from =</span> var.levels, </span>
+<span id="cb183-5"><a href="data-exploration.html#cb183-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">to =</span> simple_levels) </span></code></pre></div>
 <p>Now, when you look at the <code>marital_status</code> levels, you will see the simpler levels.</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1"><span class="kw">levels</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="data-exploration.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
 <pre><code>## [1] &quot;Divorced&quot;               &quot;Married-spouse&quot;         &quot;Married-spuouse-absent&quot;
 ## [4] &quot;Neber-married&quot;          &quot;Separated&quot;              &quot;Widowed&quot;</code></pre>
 <p>You can also check that the number of observations is what you expect.</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1"><span class="kw">table</span>(df<span class="op">$</span>marital_status)</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="data-exploration.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
 <pre><code>## 
-##               Divorced         Married-spouse Married-spuouse-absent 
-##                   6498                  21692                    573 
-##          Neber-married              Separated                Widowed 
-##                   8697                   1438                   1512</code></pre>
+##               Divorced         Married-spouse Married-spuouse-absent          Neber-married 
+##                   6498                  21692                    573                   8697 
+##              Separated                Widowed 
+##                   1438                   1512</code></pre>
 </div>
 </div>
-<div id="exercises" class="section level2">
+<div id="exercises" class="section level2" number="7.8">
 <h2><span class="header-section-number">7.8</span> Exercises</h2>
-<div id="data-exploration-practice" class="section level3">
+<div id="data-exploration-practice" class="section level3" number="7.8.1">
 <h3><span class="header-section-number">7.8.1</span> Data Exploration Practice</h3>
 <p><a href="https://exampa.net/"><img src="images/tutorial-data-exploration.PNG" alt="Lecture" /></a></p>
 </div>
-<div id="dplyr-practice" class="section level3">
+<div id="dplyr-practice" class="section level3" number="7.8.2">
 <h3><span class="header-section-number">7.8.2</span> Dplyr Practice</h3>
-<p><a href="https://exampa.net/"><img src="images/lesson-dplyr.png" alt="Lecture" /></a></p>
+<p><a href="https://exampa.net/"><img src="images/lesson-dplyr.PNG" alt="Lecture" /></a></p>
 <p>Run this code on your computer to answer these exercises.</p>
 <p>The data <code>actuary_salaries</code> contains the salaries of actuaries collected from the DW Simpson survey. Use this data to answer the exercises below.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1">actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="data-exploration.html#cb188-1" aria-hidden="true" tabindex="-1"></a>actuary_salaries <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 138
 ## Columns: 6
-## $ industry    &lt;chr&gt; &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;~
-## $ exams       &lt;chr&gt; &quot;1 Exam&quot;, &quot;2 Exams&quot;, &quot;3 Exams&quot;, &quot;4 Exams&quot;, &quot;1 Exam&quot;, &quot;2 Ex~
-## $ experience  &lt;dbl&gt; 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5~
-## $ salary      &lt;chr&gt; &quot;48 - 65&quot;, &quot;50 - 71&quot;, &quot;54 - 77&quot;, &quot;58 - 82&quot;, &quot;54 - 72&quot;, &quot;57~
-## $ salary_low  &lt;dbl&gt; 48, 50, 54, 58, 54, 57, 62, 63, 65, 70, 72, 85, 55, 58, 66~
-## $ salary_high &lt;chr&gt; &quot;65&quot;, &quot;71&quot;, &quot;77&quot;, &quot;82&quot;, &quot;72&quot;, &quot;81&quot;, &quot;87&quot;, &quot;91&quot;, &quot;95&quot;, &quot;97&quot;~</code></pre>
+## $ industry    &lt;chr&gt; &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;…
+## $ exams       &lt;chr&gt; &quot;1 Exam&quot;, &quot;2 Exams&quot;, &quot;3 Exams&quot;, &quot;4 Exams&quot;, &quot;1 Exam&quot;, &quot;2 Exams&quot;, &quot;3 Exa…
+## $ experience  &lt;dbl&gt; 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 7, 7…
+## $ salary      &lt;chr&gt; &quot;48 - 65&quot;, &quot;50 - 71&quot;, &quot;54 - 77&quot;, &quot;58 - 82&quot;, &quot;54 - 72&quot;, &quot;57 - 81&quot;, &quot;62 …
+## $ salary_low  &lt;dbl&gt; 48, 50, 54, 58, 54, 57, 62, 63, 65, 70, 72, 85, 55, 58, 66, 71, 73, 76…
+## $ salary_high &lt;chr&gt; &quot;65&quot;, &quot;71&quot;, &quot;77&quot;, &quot;82&quot;, &quot;72&quot;, &quot;81&quot;, &quot;87&quot;, &quot;91&quot;, &quot;95&quot;, &quot;97&quot;, &quot;99&quot;, &quot;112…</code></pre>
 <ol style="list-style-type: decimal">
 <li>How many industries are represented?</li>
 <li>The <code>salary_high</code> column is a character type when it should be numeric. Change this column to numeric.</li>
@@ -1125,18 +1162,18 @@ arrange() -&gt; ORDER BY
 <li>Create a new column, called <code>n_exams</code>, which is an integer. Use 7 for ASA/ACAS and 10 for FSA/FCAS. Use the code below as a starting point and fill in the <code>_</code> spaces</li>
 <li>Create a column called <code>social_life</code>, which is equal to <code>n_exams</code>/<code>experience</code>. What is the average (mean) <code>social_life</code> by industry? Bonus question: what is wrong with using this as a statistical measure?</li>
 </ol>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">actuary_salaries &lt;-<span class="st"> </span>actuary_salaries <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb210-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n_exams =</span> <span class="kw">case_when</span>(exams <span class="op">==</span><span class="st"> &quot;FSA&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb210-3" title="3">                             exams <span class="op">==</span><span class="st"> &quot;ASA&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb210-4" title="4">                             exams <span class="op">==</span><span class="st"> &quot;FCAS&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb210-5" title="5">                             exams <span class="op">==</span><span class="st"> &quot;ACAS&quot;</span> <span class="op">~</span><span class="st"> </span>_,</a>
-<a class="sourceLine" id="cb210-6" title="6">                             <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">substr</span>(exams,_,_)))) </a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="data-exploration.html#cb190-1" aria-hidden="true" tabindex="-1"></a>actuary_salaries <span class="ot">&lt;-</span> actuary_salaries <span class="sc">%&gt;%</span> </span>
+<span id="cb190-2"><a href="data-exploration.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_exams =</span> <span class="fu">case_when</span>(exams <span class="sc">==</span> <span class="st">&quot;FSA&quot;</span> <span class="sc">~</span> _,</span>
+<span id="cb190-3"><a href="data-exploration.html#cb190-3" aria-hidden="true" tabindex="-1"></a>                             exams <span class="sc">==</span> <span class="st">&quot;ASA&quot;</span> <span class="sc">~</span> _,</span>
+<span id="cb190-4"><a href="data-exploration.html#cb190-4" aria-hidden="true" tabindex="-1"></a>                             exams <span class="sc">==</span> <span class="st">&quot;FCAS&quot;</span> <span class="sc">~</span> _,</span>
+<span id="cb190-5"><a href="data-exploration.html#cb190-5" aria-hidden="true" tabindex="-1"></a>                             exams <span class="sc">==</span> <span class="st">&quot;ACAS&quot;</span> <span class="sc">~</span> _,</span>
+<span id="cb190-6"><a href="data-exploration.html#cb190-6" aria-hidden="true" tabindex="-1"></a>                             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(exams,_,_)))) </span></code></pre></div>
 <ol start="8" style="list-style-type: decimal">
 <li>Create a column called <code>social_life</code>, which is equal to <code>n_exams</code>/<code>experience</code>. What is the average (mean) <code>social_life</code> by industry? Bonus question: what is wrong with using this as a statistical measure?</li>
 </ol>
 </div>
 </div>
-<div id="answers-to-exercises" class="section level2">
+<div id="answers-to-exercises" class="section level2" number="7.9">
 <h2><span class="header-section-number">7.9</span> Answers to exercises</h2>
 <p>Answers to these exercises, along with a video tutorial, are available at <a href="https://exampa.net/">ExamPA.net</a>.</p>
 

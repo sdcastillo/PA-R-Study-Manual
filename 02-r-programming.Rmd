@@ -418,18 +418,7 @@ df <- data.frame(
 df
 ```
 
-You can also work with tibbles, which are data frames but have nicer printing:
-
-```{r}
-# The tidyverse library has functions for making tibbles
-library(tidyverse) 
-df <- tibble(
-  age = c(25, 35), has_fsa = c(FALSE, TRUE)
-)
-df
-```
-
-To index columns in a tibble, the same "$" is used as indexing a list.
+To index columns in a data frame, the same "$" is used as indexing a list.
 
 ```{r}
 df$age
@@ -446,103 +435,4 @@ To find a summary, use `summary`
 ```{r}
 summary(df)
 ```
-
-## Pipes
-
-The pipe operator `%>%` is a way of making code *modular*, meaning that it can be written and executed in incremental steps. Those familiar with Python's Pandaswill be see that `%>%` is quite similar to ".".  This also makes code easier to 
-read.
-
-In five seconds, tell me what the below code is doing.
-
-```{r}
-log(sqrt(exp(log2(sqrt((max(c(3, 4, 16))))))))
-```
-
-Getting to the answer of 1 requires starting from the inner-most nested brackets and moving outwards from right to left.
-
-The math notation would be slightly easier to read, but still painful.
-
-$$log(\sqrt{e^{log_2(\sqrt{max(3,4,16)})}})$$
-
-Here is the same algebra using the pipe.  To read this, replace the `%>%` with 
-the word `THEN`.
-
-```{r message = F, warning = F}
-
-max(c(3, 4, 16)) %>% 
-  sqrt() %>% 
-  log2() %>% 
-  exp() %>% 
-  sqrt() %>% 
-  log()
-
-# max(c(3, 4, 16) THEN  # The max of 3, 4, and 16 is 16
-#  sqrt() THEN          # The square root of 16 is 4
-#  log2() THEN          # The log in base 2 of 4 is 2
-#  exp() THEN           # The exponent of 2 is e^2
-#  sqrt() THEN          # The square root of e^2 is e
-#  log()                # The natural logarithm of e is 1
-
-```
-
-Pipes are exceptionally useful for data manipulations, which is covered in the next chapter.
-
-</br>
-```{block, type='studytip'}
-**Shortcut:** To quickly produce pipes, use `CTRL + SHIFT + M`. 
-```
-</br>
-
-By highlighting only certain sections, we can run the code in steps as if we were using a debugger. This makes testing out code much faster.
-
-```{r}
-max(c(3, 4, 16))
-```
-
-```{r}
-max(c(3, 4, 16)) %>% 
-  sqrt() 
-```
-
-```{r}
-max(c(3, 4, 16)) %>% 
-  sqrt() %>% 
-  log2() 
-```
-
-```{r}
-max(c(3, 4, 16)) %>% 
-  sqrt() %>% 
-  log2() %>% 
-  exp()
-```
-
-```{r}
-max(c(3, 4, 16)) %>% 
-  sqrt() %>% 
-  log2() %>% 
-  exp() %>% 
-  sqrt() 
-```
-
-```{r}
-max(c(3, 4, 16)) %>% 
-  sqrt() %>% 
-  log2() %>% 
-  exp() %>% 
-  sqrt() %>% 
-  log()
-```
-
-## The code of SOA does not use pipes or dplyr, so can I skip learning this?
-
-Yes, if you really want to.  
-
-The advantages to learning pipes, and the reason why this manual uses them are
-
-1) It saves you time. 
-2) It will help you in real life data science projects.
-3) The majority of the R community uses this style.
-4) The SOA actuaries who create the Exam PA content will eventually catch on.
-5) 5.	Most modern R software is designed around them. The overall trend is towards greater adoption, as seen from the CRAN download statistics [here](https://hadley.shinyapps.io/cran-downloads/) after filtering to "magrittr" which is the library where the pipe comes from. 
 
