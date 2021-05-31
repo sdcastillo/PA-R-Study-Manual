@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 15 Visualization | Exam PA Study Guide, Spring 2021</title>
   <meta name="description" content=" 15 Visualization | Exam PA Study Guide, Spring 2021" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 15 Visualization | Exam PA Study Guide, Spring 2021" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   <link rel="shortcut icon" href="images/artificial_actuary_logo_favicon.png" type="image/x-icon" />
 <link rel="prev" href="bias-variance-trade-off.html"/>
 <link rel="next" href="tree-based-models.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,6 +49,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -114,6 +116,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -186,10 +189,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
 <ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😨</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -405,36 +408,36 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">15.2</span> How to make graphs in R</h2>
 <p>Let us create a histogram of the claims. The first step is to create a blank canvas that holds the columns that are needed. The library to make this is called (ggplot2)[<a href="https://ggplot2.tidyverse.org/" class="uri">https://ggplot2.tidyverse.org/</a>].</p>
 <p>The <code>aesthetic</code> argument, <code>aes</code>, means that the variable shown will the the claims.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="visualization.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ExamPAData)</span>
-<span id="cb341-2"><a href="visualization.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb341-3"><a href="visualization.html#cb341-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(charges))</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="visualization.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ExamPAData)</span>
+<span id="cb338-2"><a href="visualization.html#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb338-3"><a href="visualization.html#cb338-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(charges))</span></code></pre></div>
 <p>If we look at <code>p</code>, we see that it is nothing but white space with axis for <code>count</code> and <code>income</code>.</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="visualization.html#cb342-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="visualization.html#cb339-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-198-1.png" width="576" /></p>
 </div>
 <div id="add-a-plot-1" class="section level2" number="15.3">
 <h2><span class="header-section-number">15.3</span> Add a plot</h2>
 <p>We add a histogram</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="visualization.html#cb343-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="visualization.html#cb340-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-199-1.png" width="576" /></p>
 <p>Different plots are called “geoms” for “geometric objects.” Geometry = Geo (space) + meter (measure), and graphs measure data. For instance, instead of creating a histogram, we can draw a gamma distribution with <code>stat_density</code>.</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="visualization.html#cb344-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_density</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="visualization.html#cb341-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_density</span>()</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-200-1.png" width="576" /></p>
 <p>Create an xy plot by adding and <code>x</code> and a <code>y</code> argument to <code>aesthetic</code>.</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="visualization.html#cb345-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
-<span id="cb345-2"><a href="visualization.html#cb345-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bmi, <span class="at">y =</span> charges)) <span class="sc">+</span> </span>
-<span id="cb345-3"><a href="visualization.html#cb345-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="visualization.html#cb342-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb342-2"><a href="visualization.html#cb342-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bmi, <span class="at">y =</span> charges)) <span class="sc">+</span> </span>
+<span id="cb342-3"><a href="visualization.html#cb342-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-201-1.png" width="576" /></p>
 </div>
 <div id="data-manipulation-chaining-1" class="section level2" number="15.4">
 <h2><span class="header-section-number">15.4</span> Data manipulation chaining</h2>
 <p>Pipes allow for data manipulations to be chained with visualizations.</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="visualization.html#cb346-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
-<span id="cb346-2"><a href="visualization.html#cb346-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age<span class="sc">&gt;</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb346-3"><a href="visualization.html#cb346-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">charges_age_ratio =</span> charges<span class="sc">/</span>age) <span class="sc">%&gt;%</span> </span>
-<span id="cb346-4"><a href="visualization.html#cb346-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(charges_age_ratio, bmi)) <span class="sc">+</span> </span>
-<span id="cb346-5"><a href="visualization.html#cb346-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb346-6"><a href="visualization.html#cb346-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="visualization.html#cb343-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
+<span id="cb343-2"><a href="visualization.html#cb343-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age<span class="sc">&gt;</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb343-3"><a href="visualization.html#cb343-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">charges_age_ratio =</span> charges<span class="sc">/</span>age) <span class="sc">%&gt;%</span> </span>
+<span id="cb343-4"><a href="visualization.html#cb343-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(charges_age_ratio, bmi)) <span class="sc">+</span> </span>
+<span id="cb343-5"><a href="visualization.html#cb343-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb343-6"><a href="visualization.html#cb343-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-202-1.png" width="576" /></p>
 </div>
 <div id="the-different-graph-types-1" class="section level2" number="15.5">
@@ -487,6 +490,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
