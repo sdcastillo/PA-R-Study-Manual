@@ -67,11 +67,11 @@ The step-by-step process of building a tree is
 
 This variable could be any one of `age`, `children`, `charges`, `sex`, `smoker`, `age_bucket`, `bmi`, or `region`.
 
-The split observation which best separates observations out based on the value of $y$.  A good split is one where the $y$'s are very different. * **
+The split point which best separates observations out based on the value of $y$.  A good split is one where the $y$'s are very different. * **
 
 In this case, `smoker` was chosen.  Then it can be only split in one way: `smoker = "yes"` or `smoker = "no"`.  Notice that although this is a categorical variable, the tree does not need to binanize the variables. Instead, like the table above shows, the data gets partitioned by the categories directly.
 
-Then, for each of these groups, smokers and non-smokers find the next variable and split observation that best separates the claims. In this case, for no-smokers, age was chosen. To find the best cut point of age, look at all possible age cut points from 18, 19, 20, 21, …, 64 and choose the one which best separates the data.
+Then, for each of these groups, smokers and non-smokers find the next variable and split point that best separates the claims. In this case, for no-smokers, age was chosen. To find the best cut point of age, look at all possible age cut points from 18, 19, 20, 21, …, 64 and choose the one which best separates the data.
 
 There are three ways of deciding where to split
 

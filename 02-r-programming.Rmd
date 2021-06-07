@@ -22,7 +22,7 @@ You will have two cheat sheets for [data visualization](https://contentpreview.s
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/UVE9Zm6mqvM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Be observant and expect to spend twice as long explaining what your code is doing as you write the code itself. A few observations are based on the organization your .Rmd file, although you do not need this to read like an essay. The vast majority of your time will be spent on your Word document.
+Be observant and expect to spend twice as long explaining what your code is doing as you write the code itself. A few points are based on the organization your .Rmd file, although you do not need this to read like an essay. The vast majority of your time will be spent on your Word document.
 
 The June 16 2020 Project Statement has this under "General information for candidates."
 
