@@ -192,7 +192,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😨</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -429,9 +429,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>The step-by-step process of building a tree is</p>
 <p><strong>Step 1: Find the best predictor-split-point combination</strong></p>
 <p>This variable could be any one of <code>age</code>, <code>children</code>, <code>charges</code>, <code>sex</code>, <code>smoker</code>, <code>age_bucket</code>, <code>bmi</code>, or <code>region</code>.</p>
-<p>The split observation which best separates observations out based on the value of <span class="math inline">\(y\)</span>. A good split is one where the <span class="math inline">\(y\)</span>’s are very different. * **</p>
+<p>The split point which best separates observations out based on the value of <span class="math inline">\(y\)</span>. A good split is one where the <span class="math inline">\(y\)</span>’s are very different. * **</p>
 <p>In this case, <code>smoker</code> was chosen. Then it can be only split in one way: <code>smoker = "yes"</code> or <code>smoker = "no"</code>. Notice that although this is a categorical variable, the tree does not need to binanize the variables. Instead, like the table above shows, the data gets partitioned by the categories directly.</p>
-<p>Then, for each of these groups, smokers and non-smokers find the next variable and split observation that best separates the claims. In this case, for no-smokers, age was chosen. To find the best cut point of age, look at all possible age cut points from 18, 19, 20, 21, …, 64 and choose the one which best separates the data.</p>
+<p>Then, for each of these groups, smokers and non-smokers find the next variable and split point that best separates the claims. In this case, for no-smokers, age was chosen. To find the best cut point of age, look at all possible age cut points from 18, 19, 20, 21, …, 64 and choose the one which best separates the data.</p>
 <p>There are three ways of deciding where to split</p>
 <ul>
 <li><em>Entropy</em> (aka, information gain)</li>
