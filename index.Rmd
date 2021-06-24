@@ -1,5 +1,5 @@
 --- 
-title: "Exam PA Study Guide, Spring 2021"
+title: "Exam PA Study Guide, Fall 2021"
 github-repo: 
 site: bookdown::bookdown_site
 output: bookdown::gitbook
