@@ -16,6 +16,25 @@ output:
 
 [![Lecture](images/lesson-executive-summary.PNG)](https://exampa.net/)
 
+## Writing Effectively Webinar
 
+This webinar teaches you how to write effectively. Learn how to organize your writing, explain concepts to difference audiences, describe predictive models, and to get maximum scores on the short-answer questions. The second half answers questions from people who took this course such as
 
+- How are exam questions graded?
+- When should I upload my documents?
+- How do you interpret a logit/probit link function?
+
+And many more!
+
+I do apologize for the first 2 minutes of this webinar not being recorded. I did not press the "record" button on Zoom until after I had given the introduction.
+
+**Speaker Bio**
+
+Howard Steven Friedman is a data scientist, health economist, and writer. He teaches at Columbia University and has decades of experience in the public sector, private sector and academia.
+
+Friedman was a director at Capital One where he led teams of data scientists, statisticians, analysts and programmers in various areas of operations and marketing. He later formed private companies that provided consulting services in areas of designing, developing and modeling data touching on industries as diverse as teleco, healthcare, retail and real estate.
+
+He has authored/co-authored about 100 scientific articles and book chapters in areas of data science, applied statistics, health economics and politics.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/05Mc94aBV5U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

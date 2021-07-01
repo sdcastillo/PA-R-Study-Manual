@@ -189,10 +189,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
 <ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😨</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😲</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -348,6 +348,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="17.1" data-path="writing-and-communication.html"><a href="writing-and-communication.html#spelling-and-grammar"><i class="fa fa-check"></i><b>17.1</b> Spelling and Grammar</a></li>
 <li class="chapter" data-level="17.2" data-path="writing-and-communication.html"><a href="writing-and-communication.html#how-to-write-for-pa"><i class="fa fa-check"></i><b>17.2</b> How to Write for PA</a></li>
+<li class="chapter" data-level="17.3" data-path="writing-and-communication.html"><a href="writing-and-communication.html#writing-effectively-webinar"><i class="fa fa-check"></i><b>17.3</b> Writing Effectively Webinar</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
 <li class="divider"></li>
@@ -565,13 +566,13 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="data-exploration.html#cb114-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 1,338
 ## Columns: 7
-## $ age      &lt;dbl&gt; 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 56, 27, 19, 52, 23, 56, 30, 60, 30, 18, 34, 37, 59, 63,…
-## $ sex      &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;female&quot;,…
-## $ bmi      &lt;dbl&gt; 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.440, 27.740, 29.830, 25.840, 26.220, 26.290, 34.400, 39.…
-## $ children &lt;dbl&gt; 0, 1, 3, 0, 0, 0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 2, 3, 0, 2, 1, 2, 0, 0, 5, 0, 1, 0,…
-## $ smoker   &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;n…
-## $ region   &lt;chr&gt; &quot;southwest&quot;, &quot;southeast&quot;, &quot;southeast&quot;, &quot;northwest&quot;, &quot;northwest&quot;, &quot;southeast&quot;, &quot;southeast&quot;, &quot;northwest&quot;, &quot;no…
-## $ charges  &lt;dbl&gt; 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3756.622, 8240.590, 7281.506, 6406.411, 28923.137, 2721…</code></pre>
+## $ age      &lt;dbl&gt; 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 56, 27, 19, 52, 23, 56, 30, 60, 30, 18, 34, 37, 59, 63, 55, 23, 31, 22, 18, 19, 63, 28,…
+## $ sex      &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male…
+## $ bmi      &lt;dbl&gt; 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.440, 27.740, 29.830, 25.840, 26.220, 26.290, 34.400, 39.820, 42.130, 24.600, 30.780, 23.…
+## $ children &lt;dbl&gt; 0, 1, 3, 0, 0, 0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 2, 3, 0, 2, 1, 2, 0, 0, 5, 0, 1, 0, 3, 0, 1, 0, 0, 2, 1, 2, 1, 0, 2…
+## $ smoker   &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no…
+## $ region   &lt;chr&gt; &quot;southwest&quot;, &quot;southeast&quot;, &quot;southeast&quot;, &quot;northwest&quot;, &quot;northwest&quot;, &quot;southeast&quot;, &quot;southeast&quot;, &quot;northwest&quot;, &quot;northeast&quot;, &quot;northwest&quot;, &quot;northeas…
+## $ charges  &lt;dbl&gt; 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3756.622, 8240.590, 7281.506, 6406.411, 28923.137, 2721.321, 27808.725, 1826.843, 11090…</code></pre>
 <p>One of the most useful data science tools is counting things. The function <code>count()</code> gives the number of observations by a categorical feature.</p>
 <div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="data-exploration.html#cb116-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>(children)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
@@ -850,22 +851,14 @@ arrange() -&gt; ORDER BY
 <p>This is a common saying when working with predictive models. No matter how complex the model, the actual result will be wrong if the data is terrible. For this exam, master the art of data manipulation, and everything becomes easier!</p>
 <p>Begin by looking at a summary.</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="data-exploration.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
-<pre><code>##       age        education_num                 marital_status     occupation       cap_gain     hours_per_week 
-##  Min.   :17.00   Min.   : 1.00   Divorced             : 6633   Group 1 : 7237   Min.   :    0   Min.   : 1.00  
-##  1st Qu.:28.00   1st Qu.: 9.00   Married-AF-spouse    :   37   Group 2 :10123   1st Qu.:    0   1st Qu.:40.00  
-##  Median :37.00   Median :10.00   Married-civ-spouse   :22379   Group 3 :13971   Median :    0   Median :40.00  
-##  Mean   :38.64   Mean   :10.08   Married-spouse-absent:  628   Group 4 : 2444   Mean   : 1079   Mean   :40.42  
-##  3rd Qu.:48.00   3rd Qu.:12.00   Never-married        :16117   Group 5 :12258   3rd Qu.:    0   3rd Qu.:45.00  
-##  Max.   :90.00   Max.   :16.00   Separated            : 1530   Group NA: 2809   Max.   :99999   Max.   :99.00  
-##                                  Widowed              : 1518                                                   
-##      score       value_flag  
-##  Min.   :43.94   High:11687  
-##  1st Qu.:57.50   Low :37155  
-##  Median :60.24               
-##  Mean   :60.23               
-##  3rd Qu.:62.95               
-##  Max.   :76.53               
-## </code></pre>
+<pre><code>##       age        education_num                 marital_status     occupation       cap_gain     hours_per_week      score       value_flag  
+##  Min.   :17.00   Min.   : 1.00   Divorced             : 6633   Group 1 : 7237   Min.   :    0   Min.   : 1.00   Min.   :43.94   High:11687  
+##  1st Qu.:28.00   1st Qu.: 9.00   Married-AF-spouse    :   37   Group 2 :10123   1st Qu.:    0   1st Qu.:40.00   1st Qu.:57.50   Low :37155  
+##  Median :37.00   Median :10.00   Married-civ-spouse   :22379   Group 3 :13971   Median :    0   Median :40.00   Median :60.24               
+##  Mean   :38.64   Mean   :10.08   Married-spouse-absent:  628   Group 4 : 2444   Mean   : 1079   Mean   :40.42   Mean   :60.23               
+##  3rd Qu.:48.00   3rd Qu.:12.00   Never-married        :16117   Group 5 :12258   3rd Qu.:    0   3rd Qu.:45.00   3rd Qu.:62.95               
+##  Max.   :90.00   Max.   :16.00   Separated            : 1530   Group NA: 2809   Max.   :99999   Max.   :99.00   Max.   :76.53               
+##                                  Widowed              : 1518</code></pre>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="data-exploration.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre><code>## spec_tbl_df [48,842 × 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ age           : num [1:48842] 39 50 38 53 28 37 49 52 31 42 ...
@@ -889,7 +882,7 @@ arrange() -&gt; ORDER BY
 ##   .. )</code></pre>
 </div>
 <div id="be-a-detective" class="section level3" number="7.7.2">
-<h3><span class="header-section-number">7.7.2</span> Be a detective 🔎</h3>
+<h3><span class="header-section-number">7.7.2</span> Be a detective 🔍</h3>
 <p>Sherlock Holmes is famous for saying, “You see, Watson, but you do not observe!”</p>
 <p>Just like detectives, actuaries need to collect data and make observations. Each exam has a few “anomalies” in the data, which they expect candidates to mention. These could be</p>
 <ul>
@@ -1016,7 +1009,7 @@ arrange() -&gt; ORDER BY
 </blockquote>
 </div>
 <div id="of-statistics-are-false" class="section level3" number="7.7.5">
-<h3><span class="header-section-number">7.7.5</span> 73.6% of statistics are false 😨</h3>
+<h3><span class="header-section-number">7.7.5</span> 73.6% of statistics are false 😲</h3>
 <p>Really? No, but statistics can help you see patterns that data visualization by itself can miss. Along with the ggplot codes, there will be code to look at summary statistics. Here is a refresher on what these statistics mean (no pun intended).</p>
 <ul>
 <li><strong>Mean</strong>: The average. This gets skewed by outliers easily. If the mean is greater than the median, then the distribution is right-skewed.</li>
@@ -1039,10 +1032,8 @@ arrange() -&gt; ORDER BY
 <p>Factors levels should be simplified. If a group has only a few observations, then there will be problems with the model. In our data, take a look at the <code>marital_status</code> column. Do you observe anything unusual?</p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="data-exploration.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
 <pre><code>## 
-##              Divorced     Married-AF-spouse    Married-civ-spouse Married-spouse-absent         Never-married 
-##                  6498                    31                 21661                   573                  8697 
-##             Separated               Widowed 
-##                  1438                  1512</code></pre>
+##              Divorced     Married-AF-spouse    Married-civ-spouse Married-spouse-absent         Never-married             Separated               Widowed 
+##                  6498                    31                 21661                   573                  8697                  1438                  1512</code></pre>
 <p>Only 31 observations have <code>Married-AF-spouse</code>. This is because the sample size <code>n = 31</code> is too small. In modeling jargon, this is “statistical insignificant” and will cause the p-value on <code>marital_status</code> to be large. You can fix this in a few different ways</p>
 <ul>
 <li>Delete these observations (Not recommended)</li>
@@ -1051,8 +1042,8 @@ arrange() -&gt; ORDER BY
 <p>Let us use the second method.</p>
 <p>First, look at the levels of the factor variable.</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="data-exploration.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
-<pre><code>## [1] &quot;Divorced&quot;              &quot;Married-AF-spouse&quot;     &quot;Married-civ-spouse&quot;    &quot;Married-spouse-absent&quot; &quot;Never-married&quot;        
-## [6] &quot;Separated&quot;             &quot;Widowed&quot;</code></pre>
+<pre><code>## [1] &quot;Divorced&quot;              &quot;Married-AF-spouse&quot;     &quot;Married-civ-spouse&quot;    &quot;Married-spouse-absent&quot; &quot;Never-married&quot;         &quot;Separated&quot;            
+## [7] &quot;Widowed&quot;</code></pre>
 <p>Now look at the profitability across marital status. For <code>Married-AF-spouse</code> and <code>Married-civ-spouse</code> the proportion of high profit customers is <strong>high</strong>, but for <code>Married-spouse-absent</code> it is <strong>low.</strong> Even though these are all “married,” it would be a bad idea to combine them because the profitability is so different.</p>
 <div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="data-exploration.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of ones by category of factor variable</span></span>
 <span id="cb177-2"><a href="data-exploration.html#cb177-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
@@ -1087,15 +1078,12 @@ arrange() -&gt; ORDER BY
 <span id="cb180-5"><a href="data-exploration.html#cb180-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">to =</span> simple_levels) </span></code></pre></div>
 <p>Now, when you look at the <code>marital_status</code> levels, you will see the simpler levels.</p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="data-exploration.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
-<pre><code>## [1] &quot;Divorced&quot;               &quot;Married-spouse&quot;         &quot;Married-spuouse-absent&quot; &quot;Neber-married&quot;         
-## [5] &quot;Separated&quot;              &quot;Widowed&quot;</code></pre>
+<pre><code>## [1] &quot;Divorced&quot;               &quot;Married-spouse&quot;         &quot;Married-spuouse-absent&quot; &quot;Neber-married&quot;          &quot;Separated&quot;              &quot;Widowed&quot;</code></pre>
 <p>You can also check that the number of observations is what you expect.</p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="data-exploration.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
 <pre><code>## 
-##               Divorced         Married-spouse Married-spuouse-absent          Neber-married              Separated 
-##                   6498                  21692                    573                   8697                   1438 
-##                Widowed 
-##                   1512</code></pre>
+##               Divorced         Married-spouse Married-spuouse-absent          Neber-married              Separated                Widowed 
+##                   6498                  21692                    573                   8697                   1438                   1512</code></pre>
 </div>
 </div>
 <div id="exercises" class="section level2" number="7.8">
@@ -1112,12 +1100,12 @@ arrange() -&gt; ORDER BY
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="data-exploration.html#cb185-1" aria-hidden="true" tabindex="-1"></a>actuary_salaries <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 138
 ## Columns: 6
-## $ industry    &lt;chr&gt; &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualt…
-## $ exams       &lt;chr&gt; &quot;1 Exam&quot;, &quot;2 Exams&quot;, &quot;3 Exams&quot;, &quot;4 Exams&quot;, &quot;1 Exam&quot;, &quot;2 Exams&quot;, &quot;3 Exams&quot;, &quot;4 Exams&quot;, &quot;5 Exams&quot;, &quot;6 Exam…
-## $ experience  &lt;dbl&gt; 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 7, 7, 7, 7, 7, 7, 7, 10, 10, 10, 10, 1…
-## $ salary      &lt;chr&gt; &quot;48 - 65&quot;, &quot;50 - 71&quot;, &quot;54 - 77&quot;, &quot;58 - 82&quot;, &quot;54 - 72&quot;, &quot;57 - 81&quot;, &quot;62 - 87&quot;, &quot;63 - 91&quot;, &quot;65 - 95&quot;, &quot;70 -…
-## $ salary_low  &lt;dbl&gt; 48, 50, 54, 58, 54, 57, 62, 63, 65, 70, 72, 85, 55, 58, 66, 71, 73, 76, 85, 90, 11, 60, 79, 82, 84, 88, …
-## $ salary_high &lt;chr&gt; &quot;65&quot;, &quot;71&quot;, &quot;77&quot;, &quot;82&quot;, &quot;72&quot;, &quot;81&quot;, &quot;87&quot;, &quot;91&quot;, &quot;95&quot;, &quot;97&quot;, &quot;99&quot;, &quot;112&quot;, &quot;80&quot;, &quot;83&quot;, &quot;100&quot;, &quot;07&quot;, &quot;11&quot;, …</code></pre>
+## $ industry    &lt;chr&gt; &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Cas…
+## $ exams       &lt;chr&gt; &quot;1 Exam&quot;, &quot;2 Exams&quot;, &quot;3 Exams&quot;, &quot;4 Exams&quot;, &quot;1 Exam&quot;, &quot;2 Exams&quot;, &quot;3 Exams&quot;, &quot;4 Exams&quot;, &quot;5 Exams&quot;, &quot;6 Exams&quot;, &quot;7 Exams&quot;, &quot;ACAS&quot;, &quot;1 Exam&quot;,…
+## $ experience  &lt;dbl&gt; 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 7, 7, 7, 7, 7, 7, 7, 10, 10, 10, 10, 10, 10, 10, 10, 15, 15, 15, 15, 1…
+## $ salary      &lt;chr&gt; &quot;48 - 65&quot;, &quot;50 - 71&quot;, &quot;54 - 77&quot;, &quot;58 - 82&quot;, &quot;54 - 72&quot;, &quot;57 - 81&quot;, &quot;62 - 87&quot;, &quot;63 - 91&quot;, &quot;65 - 95&quot;, &quot;70 - 97&quot;, &quot;72 - 99&quot;, &quot;85 - 112&quot;, &quot;55…
+## $ salary_low  &lt;dbl&gt; 48, 50, 54, 58, 54, 57, 62, 63, 65, 70, 72, 85, 55, 58, 66, 71, 73, 76, 85, 90, 11, 60, 79, 82, 84, 88, 94, 98, 116, 60, 79, 82, 84, 88,…
+## $ salary_high &lt;chr&gt; &quot;65&quot;, &quot;71&quot;, &quot;77&quot;, &quot;82&quot;, &quot;72&quot;, &quot;81&quot;, &quot;87&quot;, &quot;91&quot;, &quot;95&quot;, &quot;97&quot;, &quot;99&quot;, &quot;112&quot;, &quot;80&quot;, &quot;83&quot;, &quot;100&quot;, &quot;07&quot;, &quot;11&quot;, &quot;16&quot;, &quot;18&quot;, &quot;38&quot;, &quot;66&quot;, &quot;92&quot;, &quot;0…</code></pre>
 <ol style="list-style-type: decimal">
 <li>How many industries are represented?</li>
 <li>The <code>salary_high</code> column is a character type when it should be numeric. Change this column to numeric.</li>
