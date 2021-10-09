@@ -21,7 +21,7 @@ library(kableExtra)
 format_table <- function(data){data %>% kableExtra::kable("html") %>% kable_styling(bootstrap_options = "striped", full_width = F)}
 ```
 
-[![Lecture](images/data_exploration.png)](https://exampa.net/)
+[![Lecture](images/data_exploration.png)](https://course.exampa.net/mod/page/view.php?id=133)
 
 Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=133">Practice Exams + Lessons</a>
 
@@ -754,11 +754,11 @@ table(df$marital_status)
 
 ### Data Exploration Practice
 
-[![Lecture](images/data-exploration.PNG)](https://course.exampa.net/mod/page/view.php?id=133)
+[![Lecture](images/data_exploration.png)](https://course.exampa.net/mod/page/view.php?id=133)
 
 ### Dplyr Practice
 
-[![Lecture](images/dplyr.PNG)](https://course.exampa.net/mod/page/view.php?id=134)
+[![Lecture](images/dplyr.png)](https://course.exampa.net/mod/page/view.php?id=134)
 
 Run this code on your computer to answer these exercises.
 

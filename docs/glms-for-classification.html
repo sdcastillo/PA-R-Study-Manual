@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 10 GLMs for classification | Exam PA Study Guide, Fall 2021</title>
   <meta name="description" content=" 10 GLMs for classification | Exam PA Study Guide, Fall 2021" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 10 GLMs for classification | Exam PA Study Guide, Fall 2021" />
   <meta property="og:type" content="book" />
@@ -31,6 +31,7 @@
   <link rel="shortcut icon" href="images/artificial_actuary_logo_favicon.png" type="image/x-icon" />
 <link rel="prev" href="generalized-linear-models-glms.html"/>
 <link rel="next" href="classification-metrics.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -48,28 +49,32 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -78,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -112,6 +117,7 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -128,108 +134,129 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Exam PA Study Manual</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#faq-frequently-asked-questions"><i class="fa fa-check"></i><b>0.1</b> FAQ: Frequently Asked Questions</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>1</b> The exam</a></li>
 <li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
 <li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
-<li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a><ul>
+<li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.1</b> Installing R</a></li>
 <li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.2</b> Installing RStudio</a></li>
 <li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#download-the-data"><i class="fa fa-check"></i><b>4.3</b> Download the data</a></li>
 <li class="chapter" data-level="4.4" data-path="getting-started.html"><a href="getting-started.html#download-islr"><i class="fa fa-check"></i><b>4.4</b> Download ISLR</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html"><i class="fa fa-check"></i><b>5</b> How much R do I need to know to pass?</a><ul>
+<li class="chapter" data-level="5" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html"><i class="fa fa-check"></i><b>5</b> How much R do I need to know to pass?</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#how-to-use-the-pa-r-cheat-sheets"><i class="fa fa-check"></i><b>5.1</b> How to use the PA R cheat sheets?</a></li>
 <li class="chapter" data-level="5.2" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#example-soa-pa-61620-task-8"><i class="fa fa-check"></i><b>5.2</b> Example: SOA PA 6/16/20, Task 8</a></li>
 <li class="chapter" data-level="5.3" data-path="how-much-r-do-i-need-to-know-to-pass.html"><a href="how-much-r-do-i-need-to-know-to-pass.html#example-2---data-exploration"><i class="fa fa-check"></i><b>5.3</b> Example 2 - Data exploration</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>6</b> R programming</a><ul>
+<li class="chapter" data-level="6" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>6</b> R programming</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="r-programming.html"><a href="r-programming.html#notebook-chunks"><i class="fa fa-check"></i><b>6.1</b> Notebook chunks</a></li>
 <li class="chapter" data-level="6.2" data-path="r-programming.html"><a href="r-programming.html#basic-operations"><i class="fa fa-check"></i><b>6.2</b> Basic operations</a></li>
 <li class="chapter" data-level="6.3" data-path="r-programming.html"><a href="r-programming.html#lists"><i class="fa fa-check"></i><b>6.3</b> Lists</a></li>
 <li class="chapter" data-level="6.4" data-path="r-programming.html"><a href="r-programming.html#functions"><i class="fa fa-check"></i><b>6.4</b> Functions</a></li>
 <li class="chapter" data-level="6.5" data-path="r-programming.html"><a href="r-programming.html#data-frames"><i class="fa fa-check"></i><b>6.5</b> Data frames</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>7</b> Data exploration</a><ul>
-<li class="chapter" data-level="7.1" data-path="data-exploration.html"><a href="data-exploration.html#how-to-make-graphs-in-r"><i class="fa fa-check"></i><b>7.1</b> How to make graphs in R?</a><ul>
+<li class="chapter" data-level="7" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>7</b> Data exploration</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-exploration.html"><a href="data-exploration.html#how-to-make-graphs-in-r"><i class="fa fa-check"></i><b>7.1</b> How to make graphs in R?</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="data-exploration.html"><a href="data-exploration.html#add-a-plot"><i class="fa fa-check"></i><b>7.1.1</b> Add a plot</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="data-exploration.html"><a href="data-exploration.html#the-different-graph-types"><i class="fa fa-check"></i><b>7.2</b> The different graph types</a><ul>
+<li class="chapter" data-level="7.2" data-path="data-exploration.html"><a href="data-exploration.html#the-different-graph-types"><i class="fa fa-check"></i><b>7.2</b> The different graph types</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="data-exploration.html"><a href="data-exploration.html#histogram"><i class="fa fa-check"></i><b>7.2.1</b> Histogram</a></li>
 <li class="chapter" data-level="7.2.2" data-path="data-exploration.html"><a href="data-exploration.html#box-plot"><i class="fa fa-check"></i><b>7.2.2</b> Box plot</a></li>
 <li class="chapter" data-level="7.2.3" data-path="data-exploration.html"><a href="data-exploration.html#scatterplot"><i class="fa fa-check"></i><b>7.2.3</b> Scatterplot</a></li>
 <li class="chapter" data-level="7.2.4" data-path="data-exploration.html"><a href="data-exploration.html#bar-charts"><i class="fa fa-check"></i><b>7.2.4</b> Bar charts</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="data-exploration.html"><a href="data-exploration.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>7.3</b> How to save time with dplyr?</a><ul>
+<li class="chapter" data-level="7.3" data-path="data-exploration.html"><a href="data-exploration.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>7.3</b> How to save time with dplyr?</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="data-exploration.html"><a href="data-exploration.html#data-manipulation-chaining"><i class="fa fa-check"></i><b>7.3.1</b> Data manipulation chaining</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="data-exploration.html"><a href="data-exploration.html#how-to-explore-the-data"><i class="fa fa-check"></i><b>7.4</b> How to explore the data?</a></li>
 <li class="chapter" data-level="7.5" data-path="data-exploration.html"><a href="data-exploration.html#how-to-transform-the-data"><i class="fa fa-check"></i><b>7.5</b> How to transform the data?</a></li>
-<li class="chapter" data-level="7.6" data-path="data-exploration.html"><a href="data-exploration.html#missing-values"><i class="fa fa-check"></i><b>7.6</b> Missing values</a><ul>
+<li class="chapter" data-level="7.6" data-path="data-exploration.html"><a href="data-exploration.html#missing-values"><i class="fa fa-check"></i><b>7.6</b> Missing values</a>
+<ul>
 <li class="chapter" data-level="7.6.1" data-path="data-exploration.html"><a href="data-exploration.html#types-of-missing-values"><i class="fa fa-check"></i><b>7.6.1</b> Types of Missing Values</a></li>
 <li class="chapter" data-level="7.6.2" data-path="data-exploration.html"><a href="data-exploration.html#missing-value-resolutions"><i class="fa fa-check"></i><b>7.6.2</b> Missing Value Resolutions:</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a><ul>
+<li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
+<ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😲</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
 </ul></li>
-<li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a><ul>
+<li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
+<ul>
 <li class="chapter" data-level="7.8.1" data-path="data-exploration.html"><a href="data-exploration.html#data-exploration-practice"><i class="fa fa-check"></i><b>7.8.1</b> Data Exploration Practice</a></li>
 <li class="chapter" data-level="7.8.2" data-path="data-exploration.html"><a href="data-exploration.html#dplyr-practice"><i class="fa fa-check"></i><b>7.8.2</b> Dplyr Practice</a></li>
 </ul></li>
 <li class="chapter" data-level="7.9" data-path="data-exploration.html"><a href="data-exploration.html#answers-to-exercises"><i class="fa fa-check"></i><b>7.9</b> Answers to exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html"><i class="fa fa-check"></i><b>8</b> Introduction to modeling</a><ul>
+<li class="chapter" data-level="8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html"><i class="fa fa-check"></i><b>8</b> Introduction to modeling</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-vocabulary"><i class="fa fa-check"></i><b>8.1</b> Modeling vocabulary</a></li>
 <li class="chapter" data-level="8.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-notation"><i class="fa fa-check"></i><b>8.2</b> Modeling notation</a></li>
 <li class="chapter" data-level="8.3" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#ordinary-least-squares-ols"><i class="fa fa-check"></i><b>8.3</b> Ordinary Least Squares (OLS)</a></li>
 <li class="chapter" data-level="8.4" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#r2-statistic"><i class="fa fa-check"></i><b>8.4</b> R^2 Statistic</a></li>
-<li class="chapter" data-level="8.5" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#correlation"><i class="fa fa-check"></i><b>8.5</b> Correlation</a><ul>
+<li class="chapter" data-level="8.5" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#correlation"><i class="fa fa-check"></i><b>8.5</b> Correlation</a>
+<ul>
 <li class="chapter" data-level="8.5.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#pearsons-correlation"><i class="fa fa-check"></i><b>8.5.1</b> Pearson’s correlation</a></li>
 <li class="chapter" data-level="8.5.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#spearman-rank-correlation"><i class="fa fa-check"></i><b>8.5.2</b> Spearman (rank) correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="8.6" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-vs.-classification"><i class="fa fa-check"></i><b>8.6</b> Regression vs. classification</a></li>
-<li class="chapter" data-level="8.7" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-metrics"><i class="fa fa-check"></i><b>8.7</b> Regression metrics</a><ul>
+<li class="chapter" data-level="8.7" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-metrics"><i class="fa fa-check"></i><b>8.7</b> Regression metrics</a>
+<ul>
 <li class="chapter" data-level="8.7.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#example-soa-pa-61820-task-4"><i class="fa fa-check"></i><b>8.7.1</b> Example: SOA PA 6/18/20, Task 4</a></li>
 </ul></li>
 <li class="chapter" data-level="8.8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#example-health-costs"><i class="fa fa-check"></i><b>8.8</b> Example: Health Costs</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html"><i class="fa fa-check"></i><b>9</b> Generalized linear Models (GLMs)</a><ul>
+<li class="chapter" data-level="9" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html"><i class="fa fa-check"></i><b>9</b> Generalized linear Models (GLMs)</a>
+<ul>
 <li class="chapter" data-level="9.0.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#assumptions-of-ols"><i class="fa fa-check"></i><b>9.0.1</b> Assumptions of OLS</a></li>
 <li class="chapter" data-level="9.0.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#assumptions-of-glms"><i class="fa fa-check"></i><b>9.0.2</b> Assumptions of GLMs</a></li>
 <li class="chapter" data-level="9.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>9.1</b> Advantages and disadvantages</a></li>
 <li class="chapter" data-level="9.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#glms-for-regression"><i class="fa fa-check"></i><b>9.2</b> GLMs for regression</a></li>
-<li class="chapter" data-level="9.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>9.3</b> Interpretation of coefficients</a><ul>
+<li class="chapter" data-level="9.3" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>9.3</b> Interpretation of coefficients</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#identity-link"><i class="fa fa-check"></i><b>9.3.1</b> Identity link</a></li>
 <li class="chapter" data-level="9.3.2" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#log-link"><i class="fa fa-check"></i><b>9.3.2</b> Log link</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="generalized-linear-models-glms.html"><a href="generalized-linear-models-glms.html#other-links"><i class="fa fa-check"></i><b>9.4</b> Other links</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="glms-for-classification.html"><a href="glms-for-classification.html"><i class="fa fa-check"></i><b>10</b> GLMs for classification</a><ul>
+<li class="chapter" data-level="10" data-path="glms-for-classification.html"><a href="glms-for-classification.html"><i class="fa fa-check"></i><b>10</b> GLMs for classification</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#binary-target"><i class="fa fa-check"></i><b>10.1</b> Binary target</a></li>
 <li class="chapter" data-level="10.2" data-path="glms-for-classification.html"><a href="glms-for-classification.html#count-target"><i class="fa fa-check"></i><b>10.2</b> Count target</a></li>
 <li class="chapter" data-level="10.3" data-path="glms-for-classification.html"><a href="glms-for-classification.html#link-functions"><i class="fa fa-check"></i><b>10.3</b> Link functions</a></li>
-<li class="chapter" data-level="10.4" data-path="glms-for-classification.html"><a href="glms-for-classification.html#interpretation-of-coefficients-1"><i class="fa fa-check"></i><b>10.4</b> Interpretation of coefficients</a><ul>
+<li class="chapter" data-level="10.4" data-path="glms-for-classification.html"><a href="glms-for-classification.html#interpretation-of-coefficients-1"><i class="fa fa-check"></i><b>10.4</b> Interpretation of coefficients</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#logit"><i class="fa fa-check"></i><b>10.4.1</b> Logit</a></li>
 <li class="chapter" data-level="10.4.2" data-path="glms-for-classification.html"><a href="glms-for-classification.html#probit-cauchit-cloglog"><i class="fa fa-check"></i><b>10.4.2</b> Probit, Cauchit, Cloglog</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="glms-for-classification.html"><a href="glms-for-classification.html#demo-the-model-for-interpretation"><i class="fa fa-check"></i><b>10.5</b> Demo the model for interpretation</a></li>
 <li class="chapter" data-level="10.6" data-path="glms-for-classification.html"><a href="glms-for-classification.html#example---auto-claims"><i class="fa fa-check"></i><b>10.6</b> Example - Auto Claims</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="classification-metrics.html"><a href="classification-metrics.html"><i class="fa fa-check"></i><b>11</b> Classification metrics</a><ul>
+<li class="chapter" data-level="11" data-path="classification-metrics.html"><a href="classification-metrics.html"><i class="fa fa-check"></i><b>11</b> Classification metrics</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="classification-metrics.html"><a href="classification-metrics.html#area-under-the-roc-curve-auc"><i class="fa fa-check"></i><b>11.1</b> Area Under the ROC Curve (AUC)</a></li>
 <li class="chapter" data-level="11.2" data-path="classification-metrics.html"><a href="classification-metrics.html#example---auto-claims-1"><i class="fa fa-check"></i><b>11.2</b> Example - Auto Claims</a></li>
 <li class="chapter" data-level="11.3" data-path="classification-metrics.html"><a href="classification-metrics.html#example-soa-hr-task-5"><i class="fa fa-check"></i><b>11.3</b> Example: SOA HR, Task 5</a></li>
 <li class="chapter" data-level="11.4" data-path="classification-metrics.html"><a href="classification-metrics.html#example-soa-pa-121219-task-11"><i class="fa fa-check"></i><b>11.4</b> Example: SOA PA 12/12/19, Task 11</a></li>
 <li class="chapter" data-level="11.5" data-path="classification-metrics.html"><a href="classification-metrics.html#additional-reading"><i class="fa fa-check"></i><b>11.5</b> Additional reading</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html"><i class="fa fa-check"></i><b>12</b> Additional GLM topics</a><ul>
-<li class="chapter" data-level="12.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#residuals"><i class="fa fa-check"></i><b>12.1</b> Residuals</a><ul>
+<li class="chapter" data-level="12" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html"><i class="fa fa-check"></i><b>12</b> Additional GLM topics</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#residuals"><i class="fa fa-check"></i><b>12.1</b> Residuals</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#raw-residuals"><i class="fa fa-check"></i><b>12.1.1</b> Raw residuals</a></li>
 <li class="chapter" data-level="12.1.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#deviance-residuals"><i class="fa fa-check"></i><b>12.1.2</b> Deviance residuals</a></li>
 </ul></li>
@@ -240,7 +267,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#interactions"><i class="fa fa-check"></i><b>12.6</b> Interactions</a></li>
 <li class="chapter" data-level="12.7" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#offsets"><i class="fa fa-check"></i><b>12.7</b> Offsets</a></li>
 <li class="chapter" data-level="12.8" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#tweedie-regression"><i class="fa fa-check"></i><b>12.8</b> Tweedie regression</a></li>
-<li class="chapter" data-level="12.9" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#combinations-of-link-functions-and-target-distributions"><i class="fa fa-check"></i><b>12.9</b> Combinations of Link Functions and Target Distributions</a><ul>
+<li class="chapter" data-level="12.9" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#combinations-of-link-functions-and-target-distributions"><i class="fa fa-check"></i><b>12.9</b> Combinations of Link Functions and Target Distributions</a>
+<ul>
 <li class="chapter" data-level="12.9.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-log-link"><i class="fa fa-check"></i><b>12.9.1</b> Gaussian Response with Log Link</a></li>
 <li class="chapter" data-level="12.9.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-inverse-link"><i class="fa fa-check"></i><b>12.9.2</b> Gaussian Response with Inverse Link</a></li>
 <li class="chapter" data-level="12.9.3" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-identity-link"><i class="fa fa-check"></i><b>12.9.3</b> Gaussian Response with Identity Link</a></li>
@@ -249,7 +277,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.9.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gamma-with-inverse-link"><i class="fa fa-check"></i><b>12.9.6</b> Gamma with Inverse Link</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html"><i class="fa fa-check"></i><b>13</b> GLM variable selection</a><ul>
+<li class="chapter" data-level="13" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html"><i class="fa fa-check"></i><b>13</b> GLM variable selection</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#stepwise-subset-selection"><i class="fa fa-check"></i><b>13.1</b> Stepwise subset selection</a></li>
 <li class="chapter" data-level="13.2" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-soa-pa-61219-task-6"><i class="fa fa-check"></i><b>13.2</b> Example: SOA PA 6/12/19, Task 6</a></li>
 <li class="chapter" data-level="13.3" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#penalized-linear-models"><i class="fa fa-check"></i><b>13.3</b> Penalized Linear Models</a></li>
@@ -261,51 +290,62 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.9" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-the-lasso"><i class="fa fa-check"></i><b>13.9</b> Example: The Lasso</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="bias-variance-trade-off.html"><a href="bias-variance-trade-off.html"><i class="fa fa-check"></i><b>14</b> Bias-variance trade-off</a></li>
-<li class="chapter" data-level="15" data-path="tree-based-models.html"><a href="tree-based-models.html"><i class="fa fa-check"></i><b>15</b> Tree-based models</a><ul>
-<li class="chapter" data-level="15.1" data-path="tree-based-models.html"><a href="tree-based-models.html#decision-trees"><i class="fa fa-check"></i><b>15.1</b> Decision Trees</a><ul>
+<li class="chapter" data-level="15" data-path="tree-based-models.html"><a href="tree-based-models.html"><i class="fa fa-check"></i><b>15</b> Tree-based models</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="tree-based-models.html"><a href="tree-based-models.html#decision-trees"><i class="fa fa-check"></i><b>15.1</b> Decision Trees</a>
+<ul>
 <li class="chapter" data-level="15.1.1" data-path="tree-based-models.html"><a href="tree-based-models.html#example-soa-pa-6182020-task-6"><i class="fa fa-check"></i><b>15.1.1</b> Example: SOA PA 6/18/2020, Task 6</a></li>
 <li class="chapter" data-level="15.1.2" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-and-disadvantages-2"><i class="fa fa-check"></i><b>15.1.2</b> Advantages and disadvantages</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="tree-based-models.html"><a href="tree-based-models.html#ensemble-learning"><i class="fa fa-check"></i><b>15.2</b> Ensemble learning</a><ul>
+<li class="chapter" data-level="15.2" data-path="tree-based-models.html"><a href="tree-based-models.html#ensemble-learning"><i class="fa fa-check"></i><b>15.2</b> Ensemble learning</a>
+<ul>
 <li class="chapter" data-level="15.2.1" data-path="tree-based-models.html"><a href="tree-based-models.html#bagging"><i class="fa fa-check"></i><b>15.2.1</b> Bagging</a></li>
 <li class="chapter" data-level="15.2.2" data-path="tree-based-models.html"><a href="tree-based-models.html#boosting"><i class="fa fa-check"></i><b>15.2.2</b> Boosting</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="tree-based-models.html"><a href="tree-based-models.html#random-forests"><i class="fa fa-check"></i><b>15.3</b> Random Forests</a><ul>
+<li class="chapter" data-level="15.3" data-path="tree-based-models.html"><a href="tree-based-models.html#random-forests"><i class="fa fa-check"></i><b>15.3</b> Random Forests</a>
+<ul>
 <li class="chapter" data-level="15.3.1" data-path="tree-based-models.html"><a href="tree-based-models.html#example-2"><i class="fa fa-check"></i><b>15.3.1</b> Example</a></li>
 <li class="chapter" data-level="15.3.2" data-path="tree-based-models.html"><a href="tree-based-models.html#variable-importance"><i class="fa fa-check"></i><b>15.3.2</b> Variable Importance</a></li>
 <li class="chapter" data-level="15.3.3" data-path="tree-based-models.html"><a href="tree-based-models.html#partial-dependence"><i class="fa fa-check"></i><b>15.3.3</b> Partial dependence</a></li>
 <li class="chapter" data-level="15.3.4" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-and-disadvantages-3"><i class="fa fa-check"></i><b>15.3.4</b> Advantages and disadvantages</a></li>
 </ul></li>
-<li class="chapter" data-level="15.4" data-path="tree-based-models.html"><a href="tree-based-models.html#gradient-boosted-trees"><i class="fa fa-check"></i><b>15.4</b> Gradient Boosted Trees</a><ul>
+<li class="chapter" data-level="15.4" data-path="tree-based-models.html"><a href="tree-based-models.html#gradient-boosted-trees"><i class="fa fa-check"></i><b>15.4</b> Gradient Boosted Trees</a>
+<ul>
 <li class="chapter" data-level="15.4.1" data-path="tree-based-models.html"><a href="tree-based-models.html#gradient-boosting"><i class="fa fa-check"></i><b>15.4.1</b> Gradient Boosting</a></li>
 <li class="chapter" data-level="15.4.2" data-path="tree-based-models.html"><a href="tree-based-models.html#notation"><i class="fa fa-check"></i><b>15.4.2</b> Notation</a></li>
 <li class="chapter" data-level="15.4.3" data-path="tree-based-models.html"><a href="tree-based-models.html#parameters"><i class="fa fa-check"></i><b>15.4.3</b> Parameters</a></li>
 <li class="chapter" data-level="15.4.4" data-path="tree-based-models.html"><a href="tree-based-models.html#example-3"><i class="fa fa-check"></i><b>15.4.4</b> Example</a></li>
 <li class="chapter" data-level="15.4.5" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-and-disadvantages-4"><i class="fa fa-check"></i><b>15.4.5</b> Advantages and disadvantages</a></li>
 </ul></li>
-<li class="chapter" data-level="15.5" data-path="tree-based-models.html"><a href="tree-based-models.html#exercises-1"><i class="fa fa-check"></i><b>15.5</b> Exercises</a><ul>
+<li class="chapter" data-level="15.5" data-path="tree-based-models.html"><a href="tree-based-models.html#exercises-1"><i class="fa fa-check"></i><b>15.5</b> Exercises</a>
+<ul>
 <li class="chapter" data-level="15.5.1" data-path="tree-based-models.html"><a href="tree-based-models.html#rf-tuning-with-caret"><i class="fa fa-check"></i><b>15.5.1</b> 1. RF tuning with <code>caret</code></a></li>
 <li class="chapter" data-level="15.5.2" data-path="tree-based-models.html"><a href="tree-based-models.html#tuning-a-gbm-with-caret"><i class="fa fa-check"></i><b>15.5.2</b> 2. Tuning a GBM with <code>caret</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>16</b> Unsupervised Learning</a><ul>
+<li class="chapter" data-level="16" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>16</b> Unsupervised Learning</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#types-of-learning"><i class="fa fa-check"></i><b>16.1</b> Types of Learning</a></li>
-<li class="chapter" data-level="16.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#correlation-analysis"><i class="fa fa-check"></i><b>16.2</b> Correlation Analysis</a><ul>
+<li class="chapter" data-level="16.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#correlation-analysis"><i class="fa fa-check"></i><b>16.2</b> Correlation Analysis</a>
+<ul>
 <li class="chapter" data-level="16.2.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#correlation-does-not-equal-causation"><i class="fa fa-check"></i><b>16.2.1</b> Correlation does not equal causation</a></li>
 </ul></li>
-<li class="chapter" data-level="16.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>16.3</b> Principal Component Analysis (PCA)</a><ul>
+<li class="chapter" data-level="16.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>16.3</b> Principal Component Analysis (PCA)</a>
+<ul>
 <li class="chapter" data-level="16.3.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-us-arrests"><i class="fa fa-check"></i><b>16.3.1</b> Example: US Arrests</a></li>
 <li class="chapter" data-level="16.3.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-soa-pa-61219-task-3"><i class="fa fa-check"></i><b>16.3.2</b> Example: SOA PA 6/12/19, Task 3</a></li>
 <li class="chapter" data-level="16.3.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-pca-on-cancel-cells"><i class="fa fa-check"></i><b>16.3.3</b> Example: PCA on Cancel Cells</a></li>
 </ul></li>
 <li class="chapter" data-level="16.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#clustering"><i class="fa fa-check"></i><b>16.4</b> Clustering</a></li>
 <li class="chapter" data-level="16.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#k-means-clustering"><i class="fa fa-check"></i><b>16.5</b> K-Means Clustering</a></li>
-<li class="chapter" data-level="16.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#hierarchical-clustering"><i class="fa fa-check"></i><b>16.6</b> Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="16.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#hierarchical-clustering"><i class="fa fa-check"></i><b>16.6</b> Hierarchical Clustering</a>
+<ul>
 <li class="chapter" data-level="16.6.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#example-clustering-cancel-cells"><i class="fa fa-check"></i><b>16.6.1</b> Example: Clustering Cancel Cells</a></li>
 <li class="chapter" data-level="16.6.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#references"><i class="fa fa-check"></i><b>16.6.2</b> References</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>17</b> Writing and Communication</a><ul>
+<li class="chapter" data-level="17" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>17</b> Writing and Communication</a>
+<ul>
 <li class="chapter" data-level="17.1" data-path="writing-and-communication.html"><a href="writing-and-communication.html#spelling-and-grammar"><i class="fa fa-check"></i><b>17.1</b> Spelling and Grammar</a></li>
 <li class="chapter" data-level="17.2" data-path="writing-and-communication.html"><a href="writing-and-communication.html#how-to-write-for-pa"><i class="fa fa-check"></i><b>17.2</b> How to Write for PA</a></li>
 <li class="chapter" data-level="17.3" data-path="writing-and-communication.html"><a href="writing-and-communication.html#writing-effectively-webinar"><i class="fa fa-check"></i><b>17.3</b> Writing Effectively Webinar</a></li>
@@ -331,17 +371,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="glms-for-classification" class="section level1">
+<div id="glms-for-classification" class="section level1" number="10">
 <h1><span class="header-section-number"> 10</span> GLMs for classification</h1>
 <p>For classification, the predicted values need to be a category instead of a number. Using a discrete target distribution ensures that this will be the case. The probability of an event occurring is <span class="math inline">\(E[Y] = p\)</span>. Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability.</p>
 <p>These StatQuest videos explain the most common type of GLM classification model: Logistic regression.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&amp;showinfo=1&amp;playlist=yIYKR4sgzI8,vN5cNN2-HWE,BfKanl1aSG0,xxFYro8QuXA,C4N3_XJJ-jU" frameborder="0" allowfullscreen>
 </iframe>
-<div id="binary-target" class="section level2">
+<div id="binary-target" class="section level2" number="10.1">
 <h2><span class="header-section-number">10.1</span> Binary target</h2>
 <p>When <span class="math inline">\(Y\)</span> is binary, then the Binomial distribution is the only choice. If there are multiple categories, then the Multinomial should be used.</p>
 </div>
-<div id="count-target" class="section level2">
+<div id="count-target" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> Count target</h2>
 <p>When <span class="math inline">\(Y\)</span> is a count, the Poisson distribution is the only choice. Two examples are counting the number of claims a policy has in a given year or counting the number of people visiting the ER in a given month. The key ingredients are 1) some events and 2) some fixed periods.</p>
 <p>Statistically, the name for this is a Poisson Process, which describes a series of discrete events where the average time between events is known, called the “rate” <span class="math inline">\(\lambda\)</span>, but the exact timing of events is unknown. For a time interval of length <span class="math inline">\(m\)</span>, the expected number of events is <span class="math inline">\(\lambda m\)</span>.</p>
@@ -349,7 +389,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[Y_i|X_i \sim \text{Poisson}(\lambda_i m_i)\]</span></p>
 <p>When all observations have the same exposure, <span class="math inline">\(m = 1\)</span>. When the mean of the data is far from the variance, an additional parameter known as the dispersion parameter is used. A classic example is when modeling insurance claim counts, which have a lot of zero claims. Then the model is said to be an “over-dispersed Poisson” or “zero-inflated” model.</p>
 </div>
-<div id="link-functions" class="section level2">
+<div id="link-functions" class="section level2" number="10.3">
 <h2><span class="header-section-number">10.3</span> Link functions</h2>
 <p>There are four link functions. The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the Hospital Readmissions practice exam of SOA in 2019. The identity link does not make sense for classification because it would result in predictions being outside of <span class="math inline">\((0,1)\)</span></p>
 <p><img src="images/discrete_link_functions.png" width="1200%" style="display: block; margin: auto;" /></p>
@@ -365,51 +405,51 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><span style="color:green">Complimentary Log-Log (cloglog)</span> Asymmetric; Important in survival analysis (not on this exam).</li>
 </ul>
 </div>
-<div id="interpretation-of-coefficients-1" class="section level2">
+<div id="interpretation-of-coefficients-1" class="section level2" number="10.4">
 <h2><span class="header-section-number">10.4</span> Interpretation of coefficients</h2>
 <p>Interpreting the coefficients in classification is trickier than in classification because the result must always be within <span class="math inline">\((0,1)\)</span>.</p>
-<div id="logit" class="section level3">
+<div id="logit" class="section level3" number="10.4.1">
 <h3><span class="header-section-number">10.4.1</span> Logit</h3>
 <p>The link function <span class="math inline">\(log(\frac{p}{1-p})\)</span> is known as the log-odds, where the odds are <span class="math inline">\(\frac{p}{1-p}\)</span>. These come up in gambling, where bets are placed on the odds of some event occurring. For example: if the probability of a claim is <span class="math inline">\(p = 0.8\)</span>, then the probability of no claim is 0.2 and the odds of a claim occurring are 0.8/0.2 = 4.</p>
 <p>The transformation from probability to odds is monotonic. This is a fancy way of saying that if <span class="math inline">\(p\)</span> increases, then the odds of <span class="math inline">\(p\)</span> increases as well, and vice versa if <span class="math inline">\(p\)</span> decreases. The log transform is monotonic as well.</p>
 <p>The net result is that when a variable increases the linear predictor, this increases the log odds, increasing the log of the odds, and vice versa if the linear predictor decreases. In other words, the signs of the coefficients indicate whether the variable increases or decreases the probability of the event.</p>
 </div>
-<div id="probit-cauchit-cloglog" class="section level3">
+<div id="probit-cauchit-cloglog" class="section level3" number="10.4.2">
 <h3><span class="header-section-number">10.4.2</span> Probit, Cauchit, Cloglog</h3>
 <p>These link functions are still monotonic, so the sign of the coefficients can be interpreted to mean that the variable has a positive or negative impact on the target.</p>
 <p>More extensive interpretation is not straightforward. In the case of the Probit, instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1). There is no way of taking this inverse directly.</p>
 </div>
 </div>
-<div id="demo-the-model-for-interpretation" class="section level2">
+<div id="demo-the-model-for-interpretation" class="section level2" number="10.5">
 <h2><span class="header-section-number">10.5</span> Demo the model for interpretation</h2>
 <p>For uglier link functions, we can rely on trial-and-error to interpret the result. We will call this the <strong>“model-demo method</strong>, " which, as the name implies, involves running example cases and seeing how the results change.</p>
 <p>This method works not only for categorical GLMs, but any other type of models such as a continuous GLM, GBM, or random forest.</p>
 <p>See the example from <strong>SOA PA 12/12/19</strong> below to learn how this works.</p>
 </div>
-<div id="example---auto-claims" class="section level2">
+<div id="example---auto-claims" class="section level2" number="10.6">
 <h2><span class="header-section-number">10.6</span> Example - Auto Claims</h2>
 <p>Using the <code>auto_claim</code> data, we predict whether or not a policy has a claim. This is also known as the <em>claim frequency</em>.</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1">auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(CLM_FLAG)</a></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="glms-for-classification.html#cb206-1" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="sc">%&gt;%</span> <span class="fu">count</span>(CLM_FLAG)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   CLM_FLAG     n
 ##   &lt;chr&gt;    &lt;int&gt;
 ## 1 No        7556
 ## 2 Yes       2740</code></pre>
 <p>About 40% do not have a claim while 60% have at least one claim.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb208-2" title="2">index &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> auto_claim<span class="op">$</span>CLM_FLAG, </a>
-<a class="sourceLine" id="cb208-3" title="3">                             <span class="dt">p =</span> <span class="fl">0.8</span>, <span class="dt">list =</span> F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()</a>
-<a class="sourceLine" id="cb208-4" title="4">auto_claim &lt;-<span class="st"> </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb208-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">target =</span> <span class="kw">as.factor</span>(<span class="kw">ifelse</span>(CLM_FLAG <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)))</a>
-<a class="sourceLine" id="cb208-6" title="6">train &lt;-<span class="st">  </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(index)</a>
-<a class="sourceLine" id="cb208-7" title="7">test &lt;-<span class="st"> </span>auto_claim <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="op">-</span>index)</a>
-<a class="sourceLine" id="cb208-8" title="8"></a>
-<a class="sourceLine" id="cb208-9" title="9">frequency &lt;-<span class="st"> </span><span class="kw">glm</span>(target <span class="op">~</span><span class="st"> </span>AGE <span class="op">+</span><span class="st"> </span>GENDER <span class="op">+</span><span class="st"> </span>MARRIED <span class="op">+</span><span class="st"> </span>CAR_USE <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb208-10" title="10"><span class="st">                   </span>BLUEBOOK <span class="op">+</span><span class="st"> </span>CAR_TYPE <span class="op">+</span><span class="st"> </span>AREA, </a>
-<a class="sourceLine" id="cb208-11" title="11">                 <span class="dt">data=</span>train, </a>
-<a class="sourceLine" id="cb208-12" title="12">                 <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="glms-for-classification.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb208-2"><a href="glms-for-classification.html#cb208-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> auto_claim<span class="sc">$</span>CLM_FLAG, </span>
+<span id="cb208-3"><a href="glms-for-classification.html#cb208-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb208-4"><a href="glms-for-classification.html#cb208-4" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="ot">&lt;-</span> auto_claim <span class="sc">%&gt;%</span> </span>
+<span id="cb208-5"><a href="glms-for-classification.html#cb208-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">target =</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(CLM_FLAG <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)))</span>
+<span id="cb208-6"><a href="glms-for-classification.html#cb208-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span>  auto_claim <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
+<span id="cb208-7"><a href="glms-for-classification.html#cb208-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> auto_claim <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span>
+<span id="cb208-8"><a href="glms-for-classification.html#cb208-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb208-9"><a href="glms-for-classification.html#cb208-9" aria-hidden="true" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> <span class="fu">glm</span>(target <span class="sc">~</span> AGE <span class="sc">+</span> GENDER <span class="sc">+</span> MARRIED <span class="sc">+</span> CAR_USE <span class="sc">+</span> </span>
+<span id="cb208-10"><a href="glms-for-classification.html#cb208-10" aria-hidden="true" tabindex="-1"></a>                   BLUEBOOK <span class="sc">+</span> CAR_TYPE <span class="sc">+</span> AREA, </span>
+<span id="cb208-11"><a href="glms-for-classification.html#cb208-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data=</span>train, </span>
+<span id="cb208-12"><a href="glms-for-classification.html#cb208-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
 <p>All of the variables except for the <code>CAR_TYPE</code> and <code>GENDERM</code> are highly significant. The car types <code>SPORTS CAR</code> and <code>SUV</code> appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for <code>CAR_TYPE == SPORTS CAR</code> and <code>CAR_TYPE == SUV</code>.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">frequency <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="glms-for-classification.html#cb209-1" aria-hidden="true" tabindex="-1"></a>frequency <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = target ~ AGE + GENDER + MARRIED + CAR_USE + BLUEBOOK + 
@@ -455,8 +495,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Certain values of <code>CAR_TYPE</code> are significant but others are not.</li>
 </ul>
 <p>The output is a predicted probability. We can see that this is centered around a probability of about 0.3.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(frequency, <span class="dt">newdat=</span>test,<span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb211-2" title="2"><span class="kw">qplot</span>(preds) </a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="glms-for-classification.html#cb211-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(frequency, <span class="at">newdat=</span>test,<span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb211-2"><a href="glms-for-classification.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(preds) </span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-127"></span>
 <img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-127-1.png" alt="Distribution of Predicted Probability" width="480" />
 <p class="caption">
@@ -464,59 +504,59 @@ Figure 10.1: Distribution of Predicted Probability
 </p>
 </div>
 <p>In order to convert these values to predicted 0’s and 1’s, we assign a <em>cutoff</em> value so that if <span class="math inline">\(\hat{y}\)</span> is above this threshold we use a 1 and 0 otherwise. The default cutoff is 0.5. We change this to 0.3 and see that there are 763 policies predicted to have claims.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">test &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred_zero_one =</span> <span class="kw">as.factor</span>(<span class="dv">1</span><span class="op">*</span>(preds<span class="op">&gt;</span>.<span class="dv">3</span>)))</a>
-<a class="sourceLine" id="cb212-2" title="2"><span class="kw">summary</span>(test<span class="op">$</span>pred_zero_one)</a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="glms-for-classification.html#cb212-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pred_zero_one =</span> <span class="fu">as.factor</span>(<span class="dv">1</span><span class="sc">*</span>(preds<span class="sc">&gt;</span>.<span class="dv">3</span>)))</span>
+<span id="cb212-2"><a href="glms-for-classification.html#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(test<span class="sc">$</span>pred_zero_one)</span></code></pre></div>
 <pre><code>##    0    1 
 ## 1296  763</code></pre>
 <p>How do we decide on this cutoff value? We need to compare cutoff values based on some evaluation metrics. For example, we can use <em>accuracy</em>.</p>
 <p><span class="math display">\[\text{Accuracy} = \frac{\text{Correct Guesses}}{\text{Total Guesses}}\]</span></p>
 <p>This results in an accuracy of 70%. But is this good?</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="glms-for-classification.html#cb214-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.699</code></pre>
 <p>Consider what would happen if we just predicted all 0’s. The accuracy is 74%.</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(<span class="dv">0</span> <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="glms-for-classification.html#cb216-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(<span class="dv">0</span> <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.734</code></pre>
 <p>For policies which experience claims the accuracy is 63%.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb218-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb218-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="glms-for-classification.html#cb218-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
+<span id="cb218-2"><a href="glms-for-classification.html#cb218-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb218-3"><a href="glms-for-classification.html#cb218-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.631</code></pre>
 <p>But for policies that don’t actually experience claims this is 72%.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb220-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb220-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="glms-for-classification.html#cb220-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
+<span id="cb220-2"><a href="glms-for-classification.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb220-3"><a href="glms-for-classification.html#cb220-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.724</code></pre>
 <p>How do we know if this is a good model? We can repeat this process with a different cutoff value and get different accuracy metrics for these groups. Let us use a cutoff of 0.6.</p>
 <p>75%</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1">test &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred_zero_one =</span> <span class="kw">as.factor</span>(<span class="dv">1</span><span class="op">*</span>(preds<span class="op">&gt;</span>.<span class="dv">6</span>)))</a>
-<a class="sourceLine" id="cb222-2" title="2">test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="glms-for-classification.html#cb222-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pred_zero_one =</span> <span class="fu">as.factor</span>(<span class="dv">1</span><span class="sc">*</span>(preds<span class="sc">&gt;</span>.<span class="dv">6</span>)))</span>
+<span id="cb222-2"><a href="glms-for-classification.html#cb222-2" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.752</code></pre>
 <p>10% for policies with claims and 98% for policies without claims.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb224-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb224-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="glms-for-classification.html#cb224-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
+<span id="cb224-2"><a href="glms-for-classification.html#cb224-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb224-3"><a href="glms-for-classification.html#cb224-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.108</code></pre>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1">test <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb226-2" title="2"><span class="st">  </span><span class="kw">filter</span>(target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb226-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">accuracy =</span> <span class="kw">mean</span>(pred_zero_one <span class="op">==</span><span class="st"> </span>target))</a></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="glms-for-classification.html#cb226-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
+<span id="cb226-2"><a href="glms-for-classification.html#cb226-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb226-3"><a href="glms-for-classification.html#cb226-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   accuracy
 ##      &lt;dbl&gt;
@@ -553,6 +593,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
