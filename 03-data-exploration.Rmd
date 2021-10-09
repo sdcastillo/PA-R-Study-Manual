@@ -754,11 +754,11 @@ table(df$marital_status)
 
 ### Data Exploration Practice
 
-[![Lecture](images/tutorial-data-exploration.PNG)](https://exampa.net/)
+[![Lecture](images/data-exploration.png)](https://course.exampa.net/mod/page/view.php?id=133)
 
 ### Dplyr Practice
 
-[![Lecture](images/lesson-dplyr.PNG)](https://exampa.net/)
+[![Lecture](images/dplyr.PNG)](https://course.exampa.net/mod/page/view.php?id=134)
 
 Run this code on your computer to answer these exercises.
 
