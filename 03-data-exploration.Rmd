@@ -754,7 +754,7 @@ table(df$marital_status)
 
 ### Data Exploration Practice
 
-[![Lecture](images/data-exploration.png)](https://course.exampa.net/mod/page/view.php?id=133)
+[![Lecture](images/data-exploration.PNG)](https://course.exampa.net/mod/page/view.php?id=133)
 
 ### Dplyr Practice
 
