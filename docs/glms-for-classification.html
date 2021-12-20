@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 10 GLMs for classification | Exam PA Study Guide, Fall 2021</title>
-  <meta name="description" content=" 10 GLMs for classification | Exam PA Study Guide, Fall 2021" />
+  <title> 10 GLMs for classification | Exam PA Study Guide, Spring 2022</title>
+  <meta name="description" content=" 10 GLMs for classification | Exam PA Study Guide, Spring 2022" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 10 GLMs for classification | Exam PA Study Guide, Fall 2021" />
+  <meta property="og:title" content=" 10 GLMs for classification | Exam PA Study Guide, Spring 2022" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 10 GLMs for classification | Exam PA Study Guide, Fall 2021" />
+  <meta name="twitter:title" content=" 10 GLMs for classification | Exam PA Study Guide, Spring 2022" />
   
   
   
@@ -192,7 +192,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 🤯</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -347,8 +347,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>17</b> Writing and Communication</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="writing-and-communication.html"><a href="writing-and-communication.html#spelling-and-grammar"><i class="fa fa-check"></i><b>17.1</b> Spelling and Grammar</a></li>
-<li class="chapter" data-level="17.2" data-path="writing-and-communication.html"><a href="writing-and-communication.html#how-to-write-for-pa"><i class="fa fa-check"></i><b>17.2</b> How to Write for PA</a></li>
-<li class="chapter" data-level="17.3" data-path="writing-and-communication.html"><a href="writing-and-communication.html#writing-effectively-webinar"><i class="fa fa-check"></i><b>17.3</b> Writing Effectively Webinar</a></li>
+<li class="chapter" data-level="17.2" data-path="writing-and-communication.html"><a href="writing-and-communication.html#final-review-webinar"><i class="fa fa-check"></i><b>17.2</b> Final Review Webinar</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
 <li class="divider"></li>
@@ -363,7 +362,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Exam PA Study Guide, Fall 2021</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Exam PA Study Guide, Spring 2022</a>
           </h1>
         </div>
 
@@ -430,7 +429,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">10.6</span> Example - Auto Claims</h2>
 <p>Using the <code>auto_claim</code> data, we predict whether or not a policy has a claim. This is also known as the <em>claim frequency</em>.</p>
 <div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="glms-for-classification.html#cb206-1" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="sc">%&gt;%</span> <span class="fu">count</span>(CLM_FLAG)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ##   CLM_FLAG     n
 ##   &lt;chr&gt;    &lt;int&gt;
 ## 1 No        7556
@@ -512,13 +511,13 @@ Figure 10.1: Distribution of Predicted Probability
 <p><span class="math display">\[\text{Accuracy} = \frac{\text{Correct Guesses}}{\text{Total Guesses}}\]</span></p>
 <p>This results in an accuracy of 70%. But is this good?</p>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="glms-for-classification.html#cb214-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.699</code></pre>
 <p>Consider what would happen if we just predicted all 0’s. The accuracy is 74%.</p>
 <div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="glms-for-classification.html#cb216-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(<span class="dv">0</span> <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.734</code></pre>
@@ -526,7 +525,7 @@ Figure 10.1: Distribution of Predicted Probability
 <div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="glms-for-classification.html#cb218-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
 <span id="cb218-2"><a href="glms-for-classification.html#cb218-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb218-3"><a href="glms-for-classification.html#cb218-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.631</code></pre>
@@ -534,7 +533,7 @@ Figure 10.1: Distribution of Predicted Probability
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="glms-for-classification.html#cb220-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
 <span id="cb220-2"><a href="glms-for-classification.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb220-3"><a href="glms-for-classification.html#cb220-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.724</code></pre>
@@ -542,7 +541,7 @@ Figure 10.1: Distribution of Predicted Probability
 <p>75%</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="glms-for-classification.html#cb222-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pred_zero_one =</span> <span class="fu">as.factor</span>(<span class="dv">1</span><span class="sc">*</span>(preds<span class="sc">&gt;</span>.<span class="dv">6</span>)))</span>
 <span id="cb222-2"><a href="glms-for-classification.html#cb222-2" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.752</code></pre>
@@ -550,14 +549,14 @@ Figure 10.1: Distribution of Predicted Probability
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="glms-for-classification.html#cb224-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
 <span id="cb224-2"><a href="glms-for-classification.html#cb224-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb224-3"><a href="glms-for-classification.html#cb224-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.108</code></pre>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="glms-for-classification.html#cb226-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
 <span id="cb226-2"><a href="glms-for-classification.html#cb226-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb226-3"><a href="glms-for-classification.html#cb226-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##   accuracy
 ##      &lt;dbl&gt;
 ## 1    0.985</code></pre>

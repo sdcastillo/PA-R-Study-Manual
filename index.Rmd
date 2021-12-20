@@ -1,5 +1,5 @@
 --- 
-title: "Exam PA Study Guide, Fall 2021"
+title: "Exam PA Study Guide, Spring 2022"
 github-repo: 
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -32,7 +32,6 @@ All of the statistical theory is explained, from linear regression to gradient b
 
 </br>
 
-*We are thankful to all of the reviewers, guest editors, and past exam-takers who have helped to improve this book.  Thanks to the following persons who made changes to this book and its past versions: David Hill, Erlan Wheeler, Caden Collier, Peter Shelbe, Abhinav Gadde, Allen Meriken, [Kevin Kuo](https://github.com/kevinykuo), Aamir Ali, Matthew Caseras, and Liu Chang.*
 
 ## FAQ: Frequently Asked Questions
 

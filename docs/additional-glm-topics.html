@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 12 Additional GLM topics | Exam PA Study Guide, Fall 2021</title>
-  <meta name="description" content=" 12 Additional GLM topics | Exam PA Study Guide, Fall 2021" />
+  <title> 12 Additional GLM topics | Exam PA Study Guide, Spring 2022</title>
+  <meta name="description" content=" 12 Additional GLM topics | Exam PA Study Guide, Spring 2022" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 12 Additional GLM topics | Exam PA Study Guide, Fall 2021" />
+  <meta property="og:title" content=" 12 Additional GLM topics | Exam PA Study Guide, Spring 2022" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 12 Additional GLM topics | Exam PA Study Guide, Fall 2021" />
+  <meta name="twitter:title" content=" 12 Additional GLM topics | Exam PA Study Guide, Spring 2022" />
   
   
   
@@ -192,7 +192,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😱</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 🤯</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -347,8 +347,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>17</b> Writing and Communication</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="writing-and-communication.html"><a href="writing-and-communication.html#spelling-and-grammar"><i class="fa fa-check"></i><b>17.1</b> Spelling and Grammar</a></li>
-<li class="chapter" data-level="17.2" data-path="writing-and-communication.html"><a href="writing-and-communication.html#how-to-write-for-pa"><i class="fa fa-check"></i><b>17.2</b> How to Write for PA</a></li>
-<li class="chapter" data-level="17.3" data-path="writing-and-communication.html"><a href="writing-and-communication.html#writing-effectively-webinar"><i class="fa fa-check"></i><b>17.3</b> Writing Effectively Webinar</a></li>
+<li class="chapter" data-level="17.2" data-path="writing-and-communication.html"><a href="writing-and-communication.html#final-review-webinar"><i class="fa fa-check"></i><b>17.2</b> Final Review Webinar</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
 <li class="divider"></li>
@@ -363,7 +362,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Exam PA Study Guide, Fall 2021</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Exam PA Study Guide, Spring 2022</a>
           </h1>
         </div>
 
@@ -411,12 +410,12 @@ likelihood estimator of the parameters of the model under investigation, <span c
 <li>Are higher for smokers</li>
 </ul>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="additional-glm-topics.html#cb235-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">tidy</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 5
+<pre><code>## # A tibble: 4 × 5
 ##   term        estimate std.error statistic   p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1 (Intercept)   7.77     0.0597     130.   0        
+## 1 (Intercept)   7.82     0.0600     130.   0        
 ## 2 age           0.0290   0.00134     21.6  3.40e- 89
-## 3 sexfemale     0.0468   0.0377       1.24 2.15e-  1
+## 3 sexmale      -0.0468   0.0377      -1.24 2.15e-  1
 ## 4 smokeryes     1.50     0.0467      32.1  3.25e-168</code></pre>
 <p>Below you can see graph of deviance residuals vs. the predicted values.</p>
 <p><strong>If this were a perfect model, all of these below assumptions would be met:</strong></p>
@@ -454,7 +453,7 @@ To solve for <span class="math inline">\(\mu\)</span>, take the exponent of both
 ##   1.000   3.000   5.000   6.693   8.000  36.000</code></pre>
 <p>But it could also be thought of as a discrete variable because it only takes on 36 values. <strong>Should you still apply a log transform?</strong></p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="additional-glm-topics.html#cb241-1" aria-hidden="true" tabindex="-1"></a>readmission <span class="sc">%&gt;%</span> <span class="fu">count</span>(LOS)</span></code></pre></div>
-<pre><code>## # A tibble: 36 x 2
+<pre><code>## # A tibble: 36 × 2
 ##      LOS     n
 ##    &lt;dbl&gt; &lt;int&gt;
 ##  1     1   986
@@ -476,11 +475,11 @@ To solve for <span class="math inline">\(\mu\)</span>, take the exponent of both
 <h2><span class="header-section-number">12.5</span> Reference levels</h2>
 <p>When a categorical variable is used in a GLM, the model actually uses indicator variables for each level. The default reference level is the order of the R factors. For the <code>sex</code> variable, the order is <code>female</code> and then <code>male</code>. This means that the base level is <code>female</code> by default.</p>
 <div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="additional-glm-topics.html#cb243-1" aria-hidden="true" tabindex="-1"></a>health_insurance<span class="sc">$</span>sex <span class="sc">%&gt;%</span> <span class="fu">as.factor</span>() <span class="sc">%&gt;%</span> <span class="fu">levels</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;male&quot;   &quot;female&quot;</code></pre>
+<pre><code>## [1] &quot;female&quot; &quot;male&quot;</code></pre>
 <p>Why does this matter? Statistically, the coefficients are most stable when there are more observations.</p>
 <div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="additional-glm-topics.html#cb245-1" aria-hidden="true" tabindex="-1"></a>health_insurance<span class="sc">$</span>sex <span class="sc">%&gt;%</span> <span class="fu">as.factor</span>() <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
-<pre><code>##   male female 
-##    676    662</code></pre>
+<pre><code>## female   male 
+##    662    676</code></pre>
 <p>There is already a function to do this in the <code>tidyverse</code> called <code>fct_infreq</code>. Let’s quickly fix the <code>sex</code> column so that these factor levels are in order of frequency.</p>
 <div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="additional-glm-topics.html#cb247-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> </span>
 <span id="cb247-2"><a href="additional-glm-topics.html#cb247-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">fct_infreq</span>(sex))</span></code></pre></div>

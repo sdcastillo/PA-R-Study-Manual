@@ -152,6 +152,5 @@ example-clustering-cancel-cells
 references
 writing-and-communication
 spelling-and-grammar
-how-to-write-for-pa
-writing-effectively-webinar
+final-review-webinar
 references-1
