@@ -12,29 +12,17 @@ output:
 
 [![Lecture](images/lesson-writing.PNG)](https://exampa.net/)
 
-## How to Write for PA
+## Final Review Webinar
 
-[![Lecture](images/lesson-executive-summary.PNG)](https://exampa.net/)
+Here we go. The last week. Your months of hard work are about to be put to the test. How are you feeling? Nervous? Confident?
 
-## Writing Effectively Webinar
+This webinar is for you!
 
-This webinar teaches you how to write effectively. Learn how to organize your writing, explain concepts to difference audiences, describe predictive models, and to get maximum scores on the short-answer questions. The second half answers questions from people who took this course such as
+In this water-cooler-style discussion, you can bring all of your awkward or "stupid" questions. Really, though, the only stupid question is the one that never gets asked.
 
-- How are exam questions graded?
-- When should I upload my documents?
-- How do you interpret a logit/probit link function?
+**Review the core concepts**
 
-And many more!
+You will get a double-dose of PA material as I review the most critical topics, talk about the topics and questions which are most likely to appear in the June exam, and offer a collection of strategies and advice for succeeding on this exam. You will be able to take a break, gather your thoughts, and gear up for the days leading up to PA. So start now! This is your "checkpoint" before the exam, so don't worry about being too aggressive with your study schedule. In fact, try to be. Learn faster than you ever have. And when you have gaps in your knowledge, then ask them in this webinar and review them the days leading up to your exam.
 
-I do apologize for the first 2 minutes of this webinar not being recorded. I did not press the "record" button on Zoom until after I had given the introduction.
-
-**Speaker Bio**
-
-Howard Steven Friedman is a data scientist, health economist, and writer. He teaches at Columbia University and has decades of experience in the public sector, private sector and academia.
-
-Friedman was a director at Capital One where he led teams of data scientists, statisticians, analysts and programmers in various areas of operations and marketing. He later formed private companies that provided consulting services in areas of designing, developing and modeling data touching on industries as diverse as teleco, healthcare, retail and real estate.
-
-He has authored/co-authored about 100 scientific articles and book chapters in areas of data science, applied statistics, health economics and politics.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/05Mc94aBV5U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Taking your exam webinar](images/take_your_exam_webinar.png)](https://exampa.net/#enrollment)
 
