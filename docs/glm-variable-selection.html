@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 13 GLM variable selection | Exam PA Study Guide, Spring 2022</title>
   <meta name="description" content=" 13 GLM variable selection | Exam PA Study Guide, Spring 2022" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 13 GLM variable selection | Exam PA Study Guide, Spring 2022" />
   <meta property="og:type" content="book" />
@@ -31,8 +31,9 @@
   <link rel="shortcut icon" href="images/artificial_actuary_logo_favicon.png" type="image/x-icon" />
 <link rel="prev" href="additional-glm-topics.html"/>
 <link rel="next" href="bias-variance-trade-off.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -189,7 +189,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
 <ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
 <li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 🤯</a></li>
@@ -544,12 +544,14 @@ used. These are the coefficients when <span class="math inline">\(\lambda = 1149
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="glm-variable-selection.html#cb296-1" aria-hidden="true" tabindex="-1"></a>ridge_mod<span class="sc">$</span>lambda[<span class="dv">50</span>] <span class="co">#Display 50th lambda value</span></span></code></pre></div>
 <pre><code>## [1] 11497.57</code></pre>
 <div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="glm-variable-selection.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(ridge_mod)[,<span class="dv">50</span>] <span class="co"># Display coefficients associated with 50th lambda value</span></span></code></pre></div>
-<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI         Walks         Years 
-## 407.356050200   0.036957182   0.138180344   0.524629976   0.230701523   0.239841459   0.289618741   1.107702929 
-##        CAtBat         CHits        CHmRun         CRuns          CRBI        CWalks       LeagueN     DivisionW 
-##   0.003131815   0.011653637   0.087545670   0.023379882   0.024138320   0.025015421   0.085028114  -6.215440973 
-##       PutOuts       Assists        Errors    NewLeagueN 
-##   0.016482577   0.002612988  -0.020502690   0.301433531</code></pre>
+<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI 
+## 407.356050200   0.036957182   0.138180344   0.524629976   0.230701523   0.239841459 
+##         Walks         Years        CAtBat         CHits        CHmRun         CRuns 
+##   0.289618741   1.107702929   0.003131815   0.011653637   0.087545670   0.023379882 
+##          CRBI        CWalks       LeagueN     DivisionW       PutOuts       Assists 
+##   0.024138320   0.025015421   0.085028114  -6.215440973   0.016482577   0.002612988 
+##        Errors    NewLeagueN 
+##  -0.020502690   0.301433531</code></pre>
 <div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="glm-variable-selection.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">coef</span>(ridge_mod)[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">50</span>]<span class="sc">^</span><span class="dv">2</span>)) <span class="co"># Calculate l2 norm</span></span></code></pre></div>
 <pre><code>## [1] 6.360612</code></pre>
 <p>In contrast, here are the coefficients when <span class="math inline">\(\lambda = 705\)</span>, along with their <span class="math inline">\(l_2\)</span>
@@ -558,10 +560,12 @@ smaller value of <span class="math inline">\(\lambda\)</span>.</p>
 <div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="glm-variable-selection.html#cb302-1" aria-hidden="true" tabindex="-1"></a>ridge_mod<span class="sc">$</span>lambda[<span class="dv">60</span>] <span class="co">#Display 60th lambda value</span></span></code></pre></div>
 <pre><code>## [1] 705.4802</code></pre>
 <div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="glm-variable-selection.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(ridge_mod)[,<span class="dv">60</span>] <span class="co"># Display coefficients associated with 60th lambda value</span></span></code></pre></div>
-<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI        Walks        Years       CAtBat 
-##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713   0.84718546   1.31987948   2.59640425   0.01083413 
-##        CHits       CHmRun        CRuns         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
-##   0.04674557   0.33777318   0.09355528   0.09780402   0.07189612  13.68370191 -54.65877750   0.11852289   0.01606037 
+<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713   0.84718546 
+##        Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+##   1.31987948   2.59640425   0.01083413   0.04674557   0.33777318   0.09355528 
+##         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+##   0.09780402   0.07189612  13.68370191 -54.65877750   0.11852289   0.01606037 
 ##       Errors   NewLeagueN 
 ##  -0.70358655   8.61181213</code></pre>
 <div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="glm-variable-selection.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">coef</span>(ridge_mod)[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">60</span>]<span class="sc">^</span><span class="dv">2</span>)) <span class="co"># Calculate l2 norm</span></span></code></pre></div>
@@ -569,12 +573,14 @@ smaller value of <span class="math inline">\(\lambda\)</span>.</p>
 <p>We can use the <code>predict()</code> function for a number of purposes. For instance,
 we can obtain the ridge regression coefficients for a new value of <span class="math inline">\(\lambda\)</span>, say 50:</p>
 <div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="glm-variable-selection.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridge_mod, <span class="at">s=</span><span class="dv">50</span>, <span class="at">type=</span><span class="st">&quot;coefficients&quot;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,]</span></code></pre></div>
-<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI         Walks         Years 
-##  4.876610e+01 -3.580999e-01  1.969359e+00 -1.278248e+00  1.145892e+00  8.038292e-01  2.716186e+00 -6.218319e+00 
-##        CAtBat         CHits        CHmRun         CRuns          CRBI        CWalks       LeagueN     DivisionW 
-##  5.447837e-03  1.064895e-01  6.244860e-01  2.214985e-01  2.186914e-01 -1.500245e-01  4.592589e+01 -1.182011e+02 
-##       PutOuts       Assists        Errors    NewLeagueN 
-##  2.502322e-01  1.215665e-01 -3.278600e+00 -9.496680e+00</code></pre>
+<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI 
+##  4.876610e+01 -3.580999e-01  1.969359e+00 -1.278248e+00  1.145892e+00  8.038292e-01 
+##         Walks         Years        CAtBat         CHits        CHmRun         CRuns 
+##  2.716186e+00 -6.218319e+00  5.447837e-03  1.064895e-01  6.244860e-01  2.214985e-01 
+##          CRBI        CWalks       LeagueN     DivisionW       PutOuts       Assists 
+##  2.186914e-01 -1.500245e-01  4.592589e+01 -1.182011e+02  2.502322e-01  1.215665e-01 
+##        Errors    NewLeagueN 
+## -3.278600e+00 -9.496680e+00</code></pre>
 <p>We now split the samples into a training set and a test set in order to estimate the test error of ridge regression and the lasso.</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="glm-variable-selection.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb310-2"><a href="glm-variable-selection.html#cb310-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -626,19 +632,23 @@ a slight discrepancy in the third decimal place between the output of <code>glmn
 ## lm(formula = Salary ~ ., data = train)
 ## 
 ## Coefficients:
-## (Intercept)        AtBat         Hits        HmRun         Runs          RBI        Walks        Years       CAtBat  
-##   2.398e+02   -1.639e-03   -2.179e+00    6.337e+00    7.139e-01    8.735e-01    3.594e+00   -1.309e+01   -7.136e-01  
-##       CHits       CHmRun        CRuns         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists  
-##   3.316e+00    3.407e+00   -5.671e-01   -7.525e-01    2.347e-01    1.322e+02   -1.346e+02    2.099e-01    6.229e-01  
+## (Intercept)        AtBat         Hits        HmRun         Runs          RBI  
+##   2.398e+02   -1.639e-03   -2.179e+00    6.337e+00    7.139e-01    8.735e-01  
+##       Walks        Years       CAtBat        CHits       CHmRun        CRuns  
+##   3.594e+00   -1.309e+01   -7.136e-01    3.316e+00    3.407e+00   -5.671e-01  
+##        CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists  
+##  -7.525e-01    2.347e-01    1.322e+02   -1.346e+02    2.099e-01    6.229e-01  
 ##      Errors   NewLeagueN  
 ##  -4.616e+00   -8.330e+01</code></pre>
 <div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="glm-variable-selection.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridge_mod, <span class="at">s =</span> <span class="dv">0</span>, <span class="at">x =</span> x_train, <span class="at">y =</span> y_train, <span class="at">exact =</span> T, <span class="at">type=</span><span class="st">&quot;coefficients&quot;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,]</span></code></pre></div>
-<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI         Walks         Years 
-##  239.83274953   -0.00175359   -2.17853087    6.33694957    0.71369687    0.87329878    3.59421378  -13.09231408 
-##        CAtBat         CHits        CHmRun         CRuns          CRBI        CWalks       LeagueN     DivisionW 
-##   -0.71351092    3.31523605    3.40701392   -0.56709530   -0.75240961    0.23467433  132.15949536 -134.58503816 
-##       PutOuts       Assists        Errors    NewLeagueN 
-##    0.20992473    0.62288126   -4.61583857  -83.29432536</code></pre>
+<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI 
+##  239.83274953   -0.00175359   -2.17853087    6.33694957    0.71369687    0.87329878 
+##         Walks         Years        CAtBat         CHits        CHmRun         CRuns 
+##    3.59421378  -13.09231408   -0.71351092    3.31523605    3.40701392   -0.56709530 
+##          CRBI        CWalks       LeagueN     DivisionW       PutOuts       Assists 
+##   -0.75240961    0.23467433  132.15949536 -134.58503816    0.20992473    0.62288126 
+##        Errors    NewLeagueN 
+##   -4.61583857  -83.29432536</code></pre>
 <p>IIt looks like we are indeed improving over regular least-squares! Side note: in general, if we want to fit a (unpenalized) least squares model, then we should use the ‘lm()’ function, since that function provides more useful outputs, such as standard errors and <span class="math inline">\(p\)</span>-values for the coefficients.</p>
 <p>Instead of arbitrarily choosing <span class="math inline">\(\lambda = 4\)</span>, it would be better to use cross-validation to choose the tuning parameter <span class="math inline">\(\lambda\)</span>. We can do this using the built-in cross-validation function, <code>cv.glmnet()</code>. By default, the function
 performs 10-fold cross-validation, though this can be changed using the argument <code>folds</code>. Note that we set a random seed first so our results will be
@@ -662,10 +672,12 @@ using the value of <span class="math inline">\(\lambda\)</span> chosen by cross-
 estimates.</p>
 <div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="glm-variable-selection.html#cb328-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">0</span>) <span class="co"># Fit ridge regression model on full dataset</span></span>
 <span id="cb328-2"><a href="glm-variable-selection.html#cb328-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,] <span class="co"># Display coefficients using lambda chosen by CV</span></span></code></pre></div>
-<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI        Walks        Years       CAtBat 
-##  15.44835008   0.07716945   0.85906253   0.60120339   1.06366687   0.87936073   1.62437580   1.35296287   0.01134998 
-##        CHits       CHmRun        CRuns         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
-##   0.05746377   0.40678422   0.11455696   0.12115916   0.05299953  22.08942749 -79.03490973   0.16618830   0.02941513 
+<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+##  15.44835008   0.07716945   0.85906253   0.60120339   1.06366687   0.87936073 
+##        Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+##   1.62437580   1.35296287   0.01134998   0.05746377   0.40678422   0.11455696 
+##         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+##   0.12115916   0.05299953  22.08942749 -79.03490973   0.16618830   0.02941513 
 ##       Errors   NewLeagueN 
 ##  -1.36075644   9.12528398</code></pre>
 <p>As expected, none of the coefficients are exactly zero - ridge regression does not perform variable selection!</p>
@@ -690,18 +702,20 @@ estimates.</p>
 <div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="glm-variable-selection.html#cb334-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid) <span class="co"># Fit lasso model on full dataset</span></span>
 <span id="cb334-2"><a href="glm-variable-selection.html#cb334-2" aria-hidden="true" tabindex="-1"></a>lasso_coef <span class="ot">=</span> <span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,] <span class="co"># Display coefficients using lambda chosen by CV</span></span>
 <span id="cb334-3"><a href="glm-variable-selection.html#cb334-3" aria-hidden="true" tabindex="-1"></a>lasso_coef</span></code></pre></div>
-<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI         Walks         Years 
-##    1.27429897   -0.05490834    2.18012455    0.00000000    0.00000000    0.00000000    2.29189433   -0.33767315 
-##        CAtBat         CHits        CHmRun         CRuns          CRBI        CWalks       LeagueN     DivisionW 
-##    0.00000000    0.00000000    0.02822467    0.21627609    0.41713051    0.00000000   20.28190194 -116.16524424 
-##       PutOuts       Assists        Errors    NewLeagueN 
-##    0.23751978    0.00000000   -0.85604181    0.00000000</code></pre>
+<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs           RBI 
+##    1.27429897   -0.05490834    2.18012455    0.00000000    0.00000000    0.00000000 
+##         Walks         Years        CAtBat         CHits        CHmRun         CRuns 
+##    2.29189433   -0.33767315    0.00000000    0.00000000    0.02822467    0.21627609 
+##          CRBI        CWalks       LeagueN     DivisionW       PutOuts       Assists 
+##    0.41713051    0.00000000   20.28190194 -116.16524424    0.23751978    0.00000000 
+##        Errors    NewLeagueN 
+##   -0.85604181    0.00000000</code></pre>
 <p>Selecting only the predictors with non-zero coefficients, we see that the lasso model with <span class="math inline">\(\lambda\)</span> chosen by cross-validation contains only seven variables:</p>
 <div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="glm-variable-selection.html#cb336-1" aria-hidden="true" tabindex="-1"></a>lasso_coef[lasso_coef<span class="sc">!=</span><span class="dv">0</span>] <span class="co"># Display only non-zero coefficients</span></span></code></pre></div>
-<pre><code>##   (Intercept)         AtBat          Hits         Walks         Years        CHmRun         CRuns          CRBI 
-##    1.27429897   -0.05490834    2.18012455    2.29189433   -0.33767315    0.02822467    0.21627609    0.41713051 
-##       LeagueN     DivisionW       PutOuts        Errors 
-##   20.28190194 -116.16524424    0.23751978   -0.85604181</code></pre>
+<pre><code>##   (Intercept)         AtBat          Hits         Walks         Years        CHmRun 
+##    1.27429897   -0.05490834    2.18012455    2.29189433   -0.33767315    0.02822467 
+##         CRuns          CRBI       LeagueN     DivisionW       PutOuts        Errors 
+##    0.21627609    0.41713051   20.28190194 -116.16524424    0.23751978   -0.85604181</code></pre>
 <p>Practice questions:</p>
 <ul>
 <li>How do ridge regression and the lasso improve on simple least squares?</li>
@@ -719,7 +733,6 @@ estimates.</p>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -759,6 +772,10 @@ gitbook.start({
 "text": null
 },
 "download": ["Exam-PA-Study-Manual.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

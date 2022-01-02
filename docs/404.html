@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 10 GLMs for classification | Exam PA Study Guide, Spring 2022</title>
-  <meta name="description" content=" 10 GLMs for classification | Exam PA Study Guide, Spring 2022" />
+  <title>Page not found | Exam PA Study Guide, Spring 2022</title>
+  <meta name="description" content="Page not found | Exam PA Study Guide, Spring 2022" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 10 GLMs for classification | Exam PA Study Guide, Spring 2022" />
+  <meta property="og:title" content="Page not found | Exam PA Study Guide, Spring 2022" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 10 GLMs for classification | Exam PA Study Guide, Spring 2022" />
+  <meta name="twitter:title" content="Page not found | Exam PA Study Guide, Spring 2022" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/artificial_actuary_logo_favicon.png" type="image/x-icon" />
-<link rel="prev" href="generalized-linear-models-glms.html"/>
-<link rel="next" href="classification-metrics.html"/>
+
+
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -370,206 +370,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="glms-for-classification" class="section level1" number="10">
-<h1><span class="header-section-number"> 10</span> GLMs for classification</h1>
-<p>For classification, the predicted values need to be a category instead of a number. Using a discrete target distribution ensures that this will be the case. The probability of an event occurring is <span class="math inline">\(E[Y] = p\)</span>. Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability.</p>
-<p>These StatQuest videos explain the most common type of GLM classification model: Logistic regression.</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&amp;showinfo=1&amp;playlist=yIYKR4sgzI8,vN5cNN2-HWE,BfKanl1aSG0,xxFYro8QuXA,C4N3_XJJ-jU" frameborder="0" allowfullscreen>
-</iframe>
-<div id="binary-target" class="section level2" number="10.1">
-<h2><span class="header-section-number">10.1</span> Binary target</h2>
-<p>When <span class="math inline">\(Y\)</span> is binary, then the Binomial distribution is the only choice. If there are multiple categories, then the Multinomial should be used.</p>
-</div>
-<div id="count-target" class="section level2" number="10.2">
-<h2><span class="header-section-number">10.2</span> Count target</h2>
-<p>When <span class="math inline">\(Y\)</span> is a count, the Poisson distribution is the only choice. Two examples are counting the number of claims a policy has in a given year or counting the number of people visiting the ER in a given month. The key ingredients are 1) some events and 2) some fixed periods.</p>
-<p>Statistically, the name for this is a Poisson Process, which describes a series of discrete events where the average time between events is known, called the “rate” <span class="math inline">\(\lambda\)</span>, but the exact timing of events is unknown. For a time interval of length <span class="math inline">\(m\)</span>, the expected number of events is <span class="math inline">\(\lambda m\)</span>.</p>
-<p>By using a GLM, we can fit a different rate for each observation. In the ER example, each patient would have a different rate. Those who are unhealthy or who work in risky environments would have a higher rate of ER visits than those who are healthy and work in offices.</p>
-<p><span class="math display">\[Y_i|X_i \sim \text{Poisson}(\lambda_i m_i)\]</span></p>
-<p>When all observations have the same exposure, <span class="math inline">\(m = 1\)</span>. When the mean of the data is far from the variance, an additional parameter known as the dispersion parameter is used. A classic example is when modeling insurance claim counts, which have a lot of zero claims. Then the model is said to be an “over-dispersed Poisson” or “zero-inflated” model.</p>
-</div>
-<div id="link-functions" class="section level2" number="10.3">
-<h2><span class="header-section-number">10.3</span> Link functions</h2>
-<p>There are four link functions. The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the Hospital Readmissions practice exam of SOA in 2019. The identity link does not make sense for classification because it would result in predictions being outside of <span class="math inline">\((0,1)\)</span></p>
-<p><img src="images/discrete_link_functions.png" width="1200%" style="display: block; margin: auto;" /></p>
-<blockquote>
-<p>The <em>logit</em> is also known as the <em>standard logistic function</em> or <em>sigmoid</em> and is also used in deep learning.</p>
-</blockquote>
-<p>Below we see how the linear predictor (x-axis) gets converted to a probability (y-axis).</p>
-<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-123-1.png" width="576" style="display: block; margin: auto;" /></p>
-<ul>
-<li><span style="color:#85C1E9 ">Logit: </span> Most commonly used; default in R; canonical link for the binomial distribution.</li>
-<li><span style="color:purple ">Probit: </span> Sharper curves than the other links which may have best performance for certain data; Inverse CDF of a standard normal distribution makes it easy to explain.</li>
-<li><span style="color:red ">Cauchit: </span> Very gradual curves may be best for certain data; CDF for the standard Cauchy distribution which is a t distribution with one degree of freedom.</li>
-<li><span style="color:green">Complimentary Log-Log (cloglog)</span> Asymmetric; Important in survival analysis (not on this exam).</li>
-</ul>
-</div>
-<div id="interpretation-of-coefficients-1" class="section level2" number="10.4">
-<h2><span class="header-section-number">10.4</span> Interpretation of coefficients</h2>
-<p>Interpreting the coefficients in classification is trickier than in classification because the result must always be within <span class="math inline">\((0,1)\)</span>.</p>
-<div id="logit" class="section level3" number="10.4.1">
-<h3><span class="header-section-number">10.4.1</span> Logit</h3>
-<p>The link function <span class="math inline">\(log(\frac{p}{1-p})\)</span> is known as the log-odds, where the odds are <span class="math inline">\(\frac{p}{1-p}\)</span>. These come up in gambling, where bets are placed on the odds of some event occurring. For example: if the probability of a claim is <span class="math inline">\(p = 0.8\)</span>, then the probability of no claim is 0.2 and the odds of a claim occurring are 0.8/0.2 = 4.</p>
-<p>The transformation from probability to odds is monotonic. This is a fancy way of saying that if <span class="math inline">\(p\)</span> increases, then the odds of <span class="math inline">\(p\)</span> increases as well, and vice versa if <span class="math inline">\(p\)</span> decreases. The log transform is monotonic as well.</p>
-<p>The net result is that when a variable increases the linear predictor, this increases the log odds, increasing the log of the odds, and vice versa if the linear predictor decreases. In other words, the signs of the coefficients indicate whether the variable increases or decreases the probability of the event.</p>
-</div>
-<div id="probit-cauchit-cloglog" class="section level3" number="10.4.2">
-<h3><span class="header-section-number">10.4.2</span> Probit, Cauchit, Cloglog</h3>
-<p>These link functions are still monotonic, so the sign of the coefficients can be interpreted to mean that the variable has a positive or negative impact on the target.</p>
-<p>More extensive interpretation is not straightforward. In the case of the Probit, instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1). There is no way of taking this inverse directly.</p>
-</div>
-</div>
-<div id="demo-the-model-for-interpretation" class="section level2" number="10.5">
-<h2><span class="header-section-number">10.5</span> Demo the model for interpretation</h2>
-<p>For uglier link functions, we can rely on trial-and-error to interpret the result. We will call this the <strong>“model-demo method</strong>, " which, as the name implies, involves running example cases and seeing how the results change.</p>
-<p>This method works not only for categorical GLMs, but any other type of models such as a continuous GLM, GBM, or random forest.</p>
-<p>See the example from <strong>SOA PA 12/12/19</strong> below to learn how this works.</p>
-</div>
-<div id="example---auto-claims" class="section level2" number="10.6">
-<h2><span class="header-section-number">10.6</span> Example - Auto Claims</h2>
-<p>Using the <code>auto_claim</code> data, we predict whether or not a policy has a claim. This is also known as the <em>claim frequency</em>.</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="glms-for-classification.html#cb206-1" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="sc">%&gt;%</span> <span class="fu">count</span>(CLM_FLAG)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 2
-##   CLM_FLAG     n
-##   &lt;chr&gt;    &lt;int&gt;
-## 1 No        7556
-## 2 Yes       2740</code></pre>
-<p>About 40% do not have a claim while 60% have at least one claim.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="glms-for-classification.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb208-2"><a href="glms-for-classification.html#cb208-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(<span class="at">y =</span> auto_claim<span class="sc">$</span>CLM_FLAG, </span>
-<span id="cb208-3"><a href="glms-for-classification.html#cb208-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> F) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
-<span id="cb208-4"><a href="glms-for-classification.html#cb208-4" aria-hidden="true" tabindex="-1"></a>auto_claim <span class="ot">&lt;-</span> auto_claim <span class="sc">%&gt;%</span> </span>
-<span id="cb208-5"><a href="glms-for-classification.html#cb208-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">target =</span> <span class="fu">as.factor</span>(<span class="fu">ifelse</span>(CLM_FLAG <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>, <span class="dv">1</span>,<span class="dv">0</span>)))</span>
-<span id="cb208-6"><a href="glms-for-classification.html#cb208-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span>  auto_claim <span class="sc">%&gt;%</span> <span class="fu">slice</span>(index)</span>
-<span id="cb208-7"><a href="glms-for-classification.html#cb208-7" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> auto_claim <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="sc">-</span>index)</span>
-<span id="cb208-8"><a href="glms-for-classification.html#cb208-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb208-9"><a href="glms-for-classification.html#cb208-9" aria-hidden="true" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> <span class="fu">glm</span>(target <span class="sc">~</span> AGE <span class="sc">+</span> GENDER <span class="sc">+</span> MARRIED <span class="sc">+</span> CAR_USE <span class="sc">+</span> </span>
-<span id="cb208-10"><a href="glms-for-classification.html#cb208-10" aria-hidden="true" tabindex="-1"></a>                   BLUEBOOK <span class="sc">+</span> CAR_TYPE <span class="sc">+</span> AREA, </span>
-<span id="cb208-11"><a href="glms-for-classification.html#cb208-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data=</span>train, </span>
-<span id="cb208-12"><a href="glms-for-classification.html#cb208-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
-<p>All of the variables except for the <code>CAR_TYPE</code> and <code>GENDERM</code> are highly significant. The car types <code>SPORTS CAR</code> and <code>SUV</code> appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for <code>CAR_TYPE == SPORTS CAR</code> and <code>CAR_TYPE == SUV</code>.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="glms-for-classification.html#cb209-1" aria-hidden="true" tabindex="-1"></a>frequency <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = target ~ AGE + GENDER + MARRIED + CAR_USE + BLUEBOOK + 
-##     CAR_TYPE + AREA, family = binomial(link = &quot;logit&quot;), data = train)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.8431  -0.8077  -0.5331   0.9575   3.0441  
-## 
-## Coefficients:
-##                      Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)        -3.523e-01  2.517e-01  -1.400  0.16160    
-## AGE                -2.289e-02  3.223e-03  -7.102 1.23e-12 ***
-## GENDERM            -1.124e-02  9.304e-02  -0.121  0.90383    
-## MARRIEDYes         -6.028e-01  5.445e-02 -11.071  &lt; 2e-16 ***
-## CAR_USEPrivate     -1.008e+00  6.569e-02 -15.350  &lt; 2e-16 ***
-## BLUEBOOK           -4.025e-05  4.699e-06  -8.564  &lt; 2e-16 ***
-## CAR_TYPEPickup     -6.687e-02  1.390e-01  -0.481  0.63048    
-## CAR_TYPESedan      -3.689e-01  1.383e-01  -2.667  0.00765 ** 
-## CAR_TYPESports Car  6.159e-01  1.891e-01   3.256  0.00113 ** 
-## CAR_TYPESUV         2.982e-01  1.772e-01   1.683  0.09240 .  
-## CAR_TYPEVan        -8.983e-03  1.319e-01  -0.068  0.94569    
-## AREAUrban           2.128e+00  1.064e-01  19.993  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 9544.3  on 8236  degrees of freedom
-## Residual deviance: 8309.6  on 8225  degrees of freedom
-## AIC: 8333.6
-## 
-## Number of Fisher Scoring iterations: 5</code></pre>
-<p>The signs of the coefficients tell if the probability of having a claim is either increasing or decreasing by each variable. For example, the likelihood of an accident</p>
-<ul>
-<li>Decreases as the age of the car increases</li>
-<li>Is lower for men</li>
-<li>Is higher for sports cars and SUVs</li>
-</ul>
-<p>The p-values tell us if the variable is significant.</p>
-<ul>
-<li><code>Age</code>, <code>MarriedYes</code>, <code>CAR_USEPrivate</code>, <code>BLUEBOOK</code>, and <code>AreaUrban</code> are significant.</li>
-<li>Certain values of <code>CAR_TYPE</code> are significant but others are not.</li>
-</ul>
-<p>The output is a predicted probability. We can see that this is centered around a probability of about 0.3.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="glms-for-classification.html#cb211-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(frequency, <span class="at">newdat=</span>test,<span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb211-2"><a href="glms-for-classification.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(preds) </span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-127"></span>
-<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-127-1.png" alt="Distribution of Predicted Probability" width="480" />
-<p class="caption">
-Figure 10.1: Distribution of Predicted Probability
-</p>
-</div>
-<p>In order to convert these values to predicted 0’s and 1’s, we assign a <em>cutoff</em> value so that if <span class="math inline">\(\hat{y}\)</span> is above this threshold we use a 1 and 0 otherwise. The default cutoff is 0.5. We change this to 0.3 and see that there are 763 policies predicted to have claims.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="glms-for-classification.html#cb212-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pred_zero_one =</span> <span class="fu">as.factor</span>(<span class="dv">1</span><span class="sc">*</span>(preds<span class="sc">&gt;</span>.<span class="dv">3</span>)))</span>
-<span id="cb212-2"><a href="glms-for-classification.html#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(test<span class="sc">$</span>pred_zero_one)</span></code></pre></div>
-<pre><code>##    0    1 
-## 1296  763</code></pre>
-<p>How do we decide on this cutoff value? We need to compare cutoff values based on some evaluation metrics. For example, we can use <em>accuracy</em>.</p>
-<p><span class="math display">\[\text{Accuracy} = \frac{\text{Correct Guesses}}{\text{Total Guesses}}\]</span></p>
-<p>This results in an accuracy of 70%. But is this good?</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="glms-for-classification.html#cb214-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
-##   accuracy
-##      &lt;dbl&gt;
-## 1    0.699</code></pre>
-<p>Consider what would happen if we just predicted all 0’s. The accuracy is 74%.</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="glms-for-classification.html#cb216-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(<span class="dv">0</span> <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
-##   accuracy
-##      &lt;dbl&gt;
-## 1    0.734</code></pre>
-<p>For policies which experience claims the accuracy is 63%.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="glms-for-classification.html#cb218-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
-<span id="cb218-2"><a href="glms-for-classification.html#cb218-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb218-3"><a href="glms-for-classification.html#cb218-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
-##   accuracy
-##      &lt;dbl&gt;
-## 1    0.631</code></pre>
-<p>But for policies that don’t actually experience claims this is 72%.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="glms-for-classification.html#cb220-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
-<span id="cb220-2"><a href="glms-for-classification.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb220-3"><a href="glms-for-classification.html#cb220-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
-##   accuracy
-##      &lt;dbl&gt;
-## 1    0.724</code></pre>
-<p>How do we know if this is a good model? We can repeat this process with a different cutoff value and get different accuracy metrics for these groups. Let us use a cutoff of 0.6.</p>
-<p>75%</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="glms-for-classification.html#cb222-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pred_zero_one =</span> <span class="fu">as.factor</span>(<span class="dv">1</span><span class="sc">*</span>(preds<span class="sc">&gt;</span>.<span class="dv">6</span>)))</span>
-<span id="cb222-2"><a href="glms-for-classification.html#cb222-2" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
-##   accuracy
-##      &lt;dbl&gt;
-## 1    0.752</code></pre>
-<p>10% for policies with claims and 98% for policies without claims.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="glms-for-classification.html#cb224-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
-<span id="cb224-2"><a href="glms-for-classification.html#cb224-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb224-3"><a href="glms-for-classification.html#cb224-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
-##   accuracy
-##      &lt;dbl&gt;
-## 1    0.108</code></pre>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="glms-for-classification.html#cb226-1" aria-hidden="true" tabindex="-1"></a>test <span class="sc">%&gt;%</span> </span>
-<span id="cb226-2"><a href="glms-for-classification.html#cb226-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb226-3"><a href="glms-for-classification.html#cb226-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">accuracy =</span> <span class="fu">mean</span>(pred_zero_one <span class="sc">==</span> target))</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
-##   accuracy
-##      &lt;dbl&gt;
-## 1    0.985</code></pre>
-<p>The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accurate for the “true = 1” classes (policies with actual claims) vs. the “false = 0” classes (policies without claims).</p>
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="generalized-linear-models-glms.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="classification-metrics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -600,7 +413,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/04-linear-models.Rmd",
+"link": "https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/%s",
 "text": "Edit"
 },
 "history": {
