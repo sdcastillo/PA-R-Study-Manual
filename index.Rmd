@@ -45,8 +45,6 @@ All of the statistical theory is explained, from linear regression to gradient b
 
 The main challenge  of this exam is in communication: both understanding what they want you to do as well as telling the grader what it is that you did.
 
-The main challenge of this exam is in communication: both understanding what they expect and telling the grader what was done.
-
 You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on a Prometric computer. The syllabus uses fancy language to describe the topics covered on the exam, making it sound more complicated than it should be. A good analogy is a job description that has many complex-sounding tasks when in reality, the day-to-day operations of the employees are far more straightforward.
 
 
