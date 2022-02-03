@@ -192,7 +192,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 🤯</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😨</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -565,13 +565,13 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="data-exploration.html#cb114-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 1,338
 ## Columns: 7
-## $ age      &lt;dbl&gt; 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 56, 27, 19, 52, 23…
-## $ sex      &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;…
-## $ bmi      &lt;dbl&gt; 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.440, 27.740, 29.830…
-## $ children &lt;dbl&gt; 0, 1, 3, 0, 0, 0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1…
-## $ smoker   &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;ye…
-## $ region   &lt;chr&gt; &quot;southwest&quot;, &quot;southeast&quot;, &quot;southeast&quot;, &quot;northwest&quot;, &quot;northwest&quot;, &quot;sout…
-## $ charges  &lt;dbl&gt; 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3756.622, 8240.590…</code></pre>
+## $ age      &lt;dbl&gt; 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 56, 27, 1…
+## $ sex      &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;female&quot;, &quot;female&quot;,…
+## $ bmi      &lt;dbl&gt; 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.440, 27.74…
+## $ children &lt;dbl&gt; 0, 1, 3, 0, 0, 0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0…
+## $ smoker   &lt;chr&gt; &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, …
+## $ region   &lt;chr&gt; &quot;southwest&quot;, &quot;southeast&quot;, &quot;southeast&quot;, &quot;northwest&quot;, &quot;northwes…
+## $ charges  &lt;dbl&gt; 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3756.622,…</code></pre>
 <p>One of the most useful data science tools is counting things. The function <code>count()</code> gives the number of observations by a categorical feature.</p>
 <div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="data-exploration.html#cb116-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>(children)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
@@ -599,20 +599,20 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 <p>The <code>summary()</code> function is shows a statistical summary. One caveat is that each column needs to be in its appropriate type. For example, <code>smoker</code>, <code>region</code>, and <code>sex</code> are all listed as characters when if they were factors, <code>summary</code> would give you count info.</p>
 <p><strong>With incorrect data types</strong></p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="data-exploration.html#cb120-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
-<pre><code>##       age            sex                 bmi           children        smoker         
-##  Min.   :18.00   Length:1338        Min.   :15.96   Min.   :0.000   Length:1338       
-##  1st Qu.:27.00   Class :character   1st Qu.:26.30   1st Qu.:0.000   Class :character  
-##  Median :39.00   Mode  :character   Median :30.40   Median :1.000   Mode  :character  
-##  Mean   :39.21                      Mean   :30.66   Mean   :1.095                     
-##  3rd Qu.:51.00                      3rd Qu.:34.69   3rd Qu.:2.000                     
-##  Max.   :64.00                      Max.   :53.13   Max.   :5.000                     
-##     region             charges     
-##  Length:1338        Min.   : 1122  
-##  Class :character   1st Qu.: 4740  
-##  Mode  :character   Median : 9382  
-##                     Mean   :13270  
-##                     3rd Qu.:16640  
-##                     Max.   :63770</code></pre>
+<pre><code>##       age            sex                 bmi           children    
+##  Min.   :18.00   Length:1338        Min.   :15.96   Min.   :0.000  
+##  1st Qu.:27.00   Class :character   1st Qu.:26.30   1st Qu.:0.000  
+##  Median :39.00   Mode  :character   Median :30.40   Median :1.000  
+##  Mean   :39.21                      Mean   :30.66   Mean   :1.095  
+##  3rd Qu.:51.00                      3rd Qu.:34.69   3rd Qu.:2.000  
+##  Max.   :64.00                      Max.   :53.13   Max.   :5.000  
+##     smoker             region             charges     
+##  Length:1338        Length:1338        Min.   : 1122  
+##  Class :character   Class :character   1st Qu.: 4740  
+##  Mode  :character   Mode  :character   Median : 9382  
+##                                        Mean   :13270  
+##                                        3rd Qu.:16640  
+##                                        Max.   :63770</code></pre>
 <p><strong>With correct data types</strong></p>
 <p>This tells you that there are 324 patients in the northeast, 325 in the northwest, 364 in the southeast, etc.</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="data-exploration.html#cb122-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="ot">&lt;-</span> health_insurance <span class="sc">%&gt;%</span> </span>
@@ -620,20 +620,20 @@ Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
 <span id="cb122-3"><a href="data-exploration.html#cb122-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb122-4"><a href="data-exploration.html#cb122-4" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
 <span id="cb122-5"><a href="data-exploration.html#cb122-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
-<pre><code>##       age            sex           bmi           children     smoker           region   
-##  Min.   :18.00   female:662   Min.   :15.96   Min.   :0.000   no :1064   northeast:324  
-##  1st Qu.:27.00   male  :676   1st Qu.:26.30   1st Qu.:0.000   yes: 274   northwest:325  
-##  Median :39.00                Median :30.40   Median :1.000              southeast:364  
-##  Mean   :39.21                Mean   :30.66   Mean   :1.095              southwest:325  
-##  3rd Qu.:51.00                3rd Qu.:34.69   3rd Qu.:2.000                             
-##  Max.   :64.00                Max.   :53.13   Max.   :5.000                             
-##     charges     
-##  Min.   : 1122  
-##  1st Qu.: 4740  
-##  Median : 9382  
-##  Mean   :13270  
-##  3rd Qu.:16640  
-##  Max.   :63770</code></pre>
+<pre><code>##       age            sex           bmi           children     smoker    
+##  Min.   :18.00   female:662   Min.   :15.96   Min.   :0.000   no :1064  
+##  1st Qu.:27.00   male  :676   1st Qu.:26.30   1st Qu.:0.000   yes: 274  
+##  Median :39.00                Median :30.40   Median :1.000             
+##  Mean   :39.21                Mean   :30.66   Mean   :1.095             
+##  3rd Qu.:51.00                3rd Qu.:34.69   3rd Qu.:2.000             
+##  Max.   :64.00                Max.   :53.13   Max.   :5.000             
+##        region       charges     
+##  northeast:324   Min.   : 1122  
+##  northwest:325   1st Qu.: 4740  
+##  southeast:364   Median : 9382  
+##  southwest:325   Mean   :13270  
+##                  3rd Qu.:16640  
+##                  Max.   :63770</code></pre>
 <p></br></p>
 <div class="studytip">
 <p>
@@ -750,13 +750,14 @@ arrange() -&gt; ORDER BY
 <span id="cb139-4"><a href="data-exploration.html#cb139-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">age_fourth =</span> age<span class="sc">^</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb139-5"><a href="data-exploration.html#cb139-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 10
-##     age sex      bmi children smoker region    charges age_squared age_cubed age_fourth
-##   &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-## 1    19 female  27.9        0 yes    southwest  16885.         361      6859     130321
-## 2    18 male    33.8        1 no     southeast   1726.         324      5832     104976
-## 3    28 male    33          3 no     southeast   4449.         784     21952     614656
-## 4    33 male    22.7        0 no     northwest  21984.        1089     35937    1185921
-## 5    32 male    28.9        0 no     northwest   3867.        1024     32768    1048576</code></pre>
+##     age sex      bmi children smoker region    charges age_squared age_cubed
+##   &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+## 1    19 female  27.9        0 yes    southwest  16885.         361      6859
+## 2    18 male    33.8        1 no     southeast   1726.         324      5832
+## 3    28 male    33          3 no     southeast   4449.         784     21952
+## 4    33 male    22.7        0 no     northwest  21984.        1089     35937
+## 5    32 male    28.9        0 no     northwest   3867.        1024     32768
+## # … with 1 more variable: age_fourth &lt;dbl&gt;</code></pre>
 <p>The <code>CASE WHEN</code> function is quite similar to SQL. For example, we can create a column which is <code>0</code> when <code>age &lt; 50</code>, <code>1</code> when <code>50 &lt;= age &lt;= 70</code>, and <code>2</code> when <code>age &gt; 70</code>.</p>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="data-exploration.html#cb141-1" aria-hidden="true" tabindex="-1"></a>health_insurance <span class="sc">%&gt;%</span> </span>
 <span id="cb141-2"><a href="data-exploration.html#cb141-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_bucket =</span> <span class="fu">case_when</span>(age <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
@@ -996,10 +997,10 @@ arrange() -&gt; ORDER BY
 <p>Questions of this sort have come up twice. On Hospital Readmissions, a Length of Stay variable was numeric but had only a few values, so some candidates treated it as a factor. The <code>education_num</code> variable here is also numeric but only has 16 unique values. So should this be a numeric or a factor?</p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="data-exploration.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>education_num)</span></code></pre></div>
 <pre><code>## 
-##     1     2     3     4     5     6     7     8     9    10    11    12    13    14 
-##    68   231   446   877   618   995  1042   382 13320  7812  1862  1411  7298  2621 
-##    15    16 
-##   834   593</code></pre>
+##     1     2     3     4     5     6     7     8     9    10    11    12    13 
+##    68   231   446   877   618   995  1042   382 13320  7812  1862  1411  7298 
+##    14    15    16 
+##  2621   834   593</code></pre>
 <p>Ask yourself this question: is there a way of comparing two values of the variable together?</p>
 <ul>
 <li>If yes, then use numeric<br />
@@ -1032,7 +1033,7 @@ arrange() -&gt; ORDER BY
 </blockquote>
 </div>
 <div id="of-statistics-are-false" class="section level3" number="7.7.5">
-<h3><span class="header-section-number">7.7.5</span> 73.6% of statistics are false 🤯</h3>
+<h3><span class="header-section-number">7.7.5</span> 73.6% of statistics are false 😨</h3>
 <p>Really? No, but statistics can help you see patterns that data visualization by itself can miss. Along with the ggplot codes, there will be code to look at summary statistics. Here is a refresher on what these statistics mean (no pun intended).</p>
 <ul>
 <li><strong>Mean</strong>: The average. This gets skewed by outliers easily. If the mean is greater than the median, then the distribution is right-skewed.</li>
@@ -1055,10 +1056,12 @@ arrange() -&gt; ORDER BY
 <p>Factors levels should be simplified. If a group has only a few observations, then there will be problems with the model. In our data, take a look at the <code>marital_status</code> column. Do you observe anything unusual?</p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="data-exploration.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
 <pre><code>## 
-##              Divorced     Married-AF-spouse    Married-civ-spouse Married-spouse-absent 
-##                  6498                    31                 21661                   573 
-##         Never-married             Separated               Widowed 
-##                  8697                  1438                  1512</code></pre>
+##              Divorced     Married-AF-spouse    Married-civ-spouse 
+##                  6498                    31                 21661 
+## Married-spouse-absent         Never-married             Separated 
+##                   573                  8697                  1438 
+##               Widowed 
+##                  1512</code></pre>
 <p>Only 31 observations have <code>Married-AF-spouse</code>. This is because the sample size <code>n = 31</code> is too small. In modeling jargon, this is “statistical insignificant” and will cause the p-value on <code>marital_status</code> to be large. You can fix this in a few different ways</p>
 <ul>
 <li>Delete these observations (Not recommended)</li>
@@ -1129,12 +1132,12 @@ arrange() -&gt; ORDER BY
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="data-exploration.html#cb185-1" aria-hidden="true" tabindex="-1"></a>actuary_salaries <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 138
 ## Columns: 6
-## $ industry    &lt;chr&gt; &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casual…
-## $ exams       &lt;chr&gt; &quot;1 Exam&quot;, &quot;2 Exams&quot;, &quot;3 Exams&quot;, &quot;4 Exams&quot;, &quot;1 Exam&quot;, &quot;2 Exams&quot;, &quot;3 …
-## $ experience  &lt;dbl&gt; 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 7…
-## $ salary      &lt;chr&gt; &quot;48 - 65&quot;, &quot;50 - 71&quot;, &quot;54 - 77&quot;, &quot;58 - 82&quot;, &quot;54 - 72&quot;, &quot;57 - 81&quot;, &quot;…
-## $ salary_low  &lt;dbl&gt; 48, 50, 54, 58, 54, 57, 62, 63, 65, 70, 72, 85, 55, 58, 66, 71, 73,…
-## $ salary_high &lt;chr&gt; &quot;65&quot;, &quot;71&quot;, &quot;77&quot;, &quot;82&quot;, &quot;72&quot;, &quot;81&quot;, &quot;87&quot;, &quot;91&quot;, &quot;95&quot;, &quot;97&quot;, &quot;99&quot;, &quot;…</code></pre>
+## $ industry    &lt;chr&gt; &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;, &quot;Casualty&quot;…
+## $ exams       &lt;chr&gt; &quot;1 Exam&quot;, &quot;2 Exams&quot;, &quot;3 Exams&quot;, &quot;4 Exams&quot;, &quot;1 Exam&quot;, &quot;2 Ex…
+## $ experience  &lt;dbl&gt; 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5…
+## $ salary      &lt;chr&gt; &quot;48 - 65&quot;, &quot;50 - 71&quot;, &quot;54 - 77&quot;, &quot;58 - 82&quot;, &quot;54 - 72&quot;, &quot;57…
+## $ salary_low  &lt;dbl&gt; 48, 50, 54, 58, 54, 57, 62, 63, 65, 70, 72, 85, 55, 58, 66…
+## $ salary_high &lt;chr&gt; &quot;65&quot;, &quot;71&quot;, &quot;77&quot;, &quot;82&quot;, &quot;72&quot;, &quot;81&quot;, &quot;87&quot;, &quot;91&quot;, &quot;95&quot;, &quot;97&quot;…</code></pre>
 <ol style="list-style-type: decimal">
 <li>How many industries are represented?</li>
 <li>The <code>salary_high</code> column is a character type when it should be numeric. Change this column to numeric.</li>
