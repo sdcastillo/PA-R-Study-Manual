@@ -27,7 +27,7 @@ All of the statistical theory is explained, from linear regression to gradient b
 </br>
 
 ```{block, type='rcorners'}
-<font size="10">**[Join the Online Course](https://www.exampa.net/)**</font>
+<font size="10">**[Get Started](https://exampa.net/#enrollment)**</font>
 ```
 
 </br>
@@ -75,6 +75,12 @@ https://www.soa.org/education/exam-req/edu-exam-pa-detail/
 The exam pass rates are about 50%.
 
 http://www.actuarial-lookup.com/exams/pa
+
+Since the December sitting, the [SOA released two updates](https://www.soa.org/education/exam-req/syllabus-study-materials/edu-updates-exam-pa/):
+
+**No more printed Project Statement**: throw those hard copies into the trash can and get used to ALT + Tabbing. Test your knowledge under exam conditions using our 12 practice exams. You can see every keystroke and click on my screen. Is English not your native language? Writing templates save you time.
+
+**One Document Format**: Preview the new format with example questions such as chapter 11.4 of this manual. The update says "While all tasks refer to the same business problem and dataset, each will be answered independently... and allows the tasks to be answered in any order." Also, it says that additional information on the business problem may be included in specific tasks - where additional information is provided, including variations in the target variable, it applies only to that task and not to other tasks." To summarize, you can complete tasks in any order and there won't be those little paragraphs that start with "Additional information for task X and beyond" but rather all of the information you need for a task will be provided within said task.
 
 # Prometric Demo
 

@@ -189,10 +189,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="data-exploration.html"><a href="data-exploration.html#example-soa-pa-121219-task-1"><i class="fa fa-check"></i><b>7.7</b> Example: SOA PA 12/12/19, Task 1</a>
 <ul>
 <li class="chapter" data-level="7.7.1" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.7.1</b> Garbage in; garbage out 🗑</a></li>
-<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔎</a></li>
+<li class="chapter" data-level="7.7.2" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.7.2</b> Be a detective 🔍</a></li>
 <li class="chapter" data-level="7.7.3" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.7.3</b> A picture is worth a thousand words 📷</a></li>
 <li class="chapter" data-level="7.7.4" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.7.4</b> Factor or numeric ❓</a></li>
-<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😨</a></li>
+<li class="chapter" data-level="7.7.5" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.7.5</b> 73.6% of statistics are false 😲</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="data-exploration.html"><a href="data-exploration.html#exercises"><i class="fa fa-check"></i><b>7.8</b> Exercises</a>
 <ul>
@@ -473,24 +473,27 @@ alphabetical order:</p>
 <div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="unsupervised-learning.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb378-2"><a href="unsupervised-learning.html#cb378-2" aria-hidden="true" tabindex="-1"></a>states<span class="ot">=</span><span class="fu">row.names</span>(USArrests)</span>
 <span id="cb378-3"><a href="unsupervised-learning.html#cb378-3" aria-hidden="true" tabindex="-1"></a>states</span></code></pre></div>
-<pre><code>##  [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Arizona&quot;        &quot;Arkansas&quot;       &quot;California&quot;    
-##  [6] &quot;Colorado&quot;       &quot;Connecticut&quot;    &quot;Delaware&quot;       &quot;Florida&quot;        &quot;Georgia&quot;       
-## [11] &quot;Hawaii&quot;         &quot;Idaho&quot;          &quot;Illinois&quot;       &quot;Indiana&quot;        &quot;Iowa&quot;          
-## [16] &quot;Kansas&quot;         &quot;Kentucky&quot;       &quot;Louisiana&quot;      &quot;Maine&quot;          &quot;Maryland&quot;      
-## [21] &quot;Massachusetts&quot;  &quot;Michigan&quot;       &quot;Minnesota&quot;      &quot;Mississippi&quot;    &quot;Missouri&quot;      
-## [26] &quot;Montana&quot;        &quot;Nebraska&quot;       &quot;Nevada&quot;         &quot;New Hampshire&quot;  &quot;New Jersey&quot;    
-## [31] &quot;New Mexico&quot;     &quot;New York&quot;       &quot;North Carolina&quot; &quot;North Dakota&quot;   &quot;Ohio&quot;          
-## [36] &quot;Oklahoma&quot;       &quot;Oregon&quot;         &quot;Pennsylvania&quot;   &quot;Rhode Island&quot;   &quot;South Carolina&quot;
-## [41] &quot;South Dakota&quot;   &quot;Tennessee&quot;      &quot;Texas&quot;          &quot;Utah&quot;           &quot;Vermont&quot;       
-## [46] &quot;Virginia&quot;       &quot;Washington&quot;     &quot;West Virginia&quot;  &quot;Wisconsin&quot;      &quot;Wyoming&quot;</code></pre>
+<pre><code>##  [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Arizona&quot;        &quot;Arkansas&quot;      
+##  [5] &quot;California&quot;     &quot;Colorado&quot;       &quot;Connecticut&quot;    &quot;Delaware&quot;      
+##  [9] &quot;Florida&quot;        &quot;Georgia&quot;        &quot;Hawaii&quot;         &quot;Idaho&quot;         
+## [13] &quot;Illinois&quot;       &quot;Indiana&quot;        &quot;Iowa&quot;           &quot;Kansas&quot;        
+## [17] &quot;Kentucky&quot;       &quot;Louisiana&quot;      &quot;Maine&quot;          &quot;Maryland&quot;      
+## [21] &quot;Massachusetts&quot;  &quot;Michigan&quot;       &quot;Minnesota&quot;      &quot;Mississippi&quot;   
+## [25] &quot;Missouri&quot;       &quot;Montana&quot;        &quot;Nebraska&quot;       &quot;Nevada&quot;        
+## [29] &quot;New Hampshire&quot;  &quot;New Jersey&quot;     &quot;New Mexico&quot;     &quot;New York&quot;      
+## [33] &quot;North Carolina&quot; &quot;North Dakota&quot;   &quot;Ohio&quot;           &quot;Oklahoma&quot;      
+## [37] &quot;Oregon&quot;         &quot;Pennsylvania&quot;   &quot;Rhode Island&quot;   &quot;South Carolina&quot;
+## [41] &quot;South Dakota&quot;   &quot;Tennessee&quot;      &quot;Texas&quot;          &quot;Utah&quot;          
+## [45] &quot;Vermont&quot;        &quot;Virginia&quot;       &quot;Washington&quot;     &quot;West Virginia&quot; 
+## [49] &quot;Wisconsin&quot;      &quot;Wyoming&quot;</code></pre>
 <p>The columns of the data set contain four variables relating to various crimes:</p>
 <div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="unsupervised-learning.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(USArrests)</span></code></pre></div>
 <pre><code>## Rows: 50
 ## Columns: 4
-## $ Murder   &lt;dbl&gt; 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 17.4, 5.3, 2.6, 10.4, 7.2, 2.2, 6.0,…
-## $ Assault  &lt;int&gt; 236, 263, 294, 190, 276, 204, 110, 238, 335, 211, 46, 120, 249, 113, 56, 115, 109, 2…
-## $ UrbanPop &lt;int&gt; 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 83, 65, 57, 66, 52, 66, 51, 67, 85, …
-## $ Rape     &lt;dbl&gt; 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 31.9, 25.8, 20.2, 14.2, 24.0, 21.0, …</code></pre>
+## $ Murder   &lt;dbl&gt; 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 17.4, 5.3, 2.…
+## $ Assault  &lt;int&gt; 236, 263, 294, 190, 276, 204, 110, 238, 335, 211, 46, 120, 24…
+## $ UrbanPop &lt;int&gt; 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 83, 65, 57, 6…
+## $ Rape     &lt;dbl&gt; 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 31.9, 25.8, 2…</code></pre>
 <p>Let us start by taking a quick look at the column means of the data.</p>
 <div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="unsupervised-learning.html#cb382-1" aria-hidden="true" tabindex="-1"></a>USArrests <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(mean)</span></code></pre></div>
 <pre><code>##   Murder Assault UrbanPop   Rape
@@ -597,34 +600,46 @@ these:</p>
 <p>We can obtain a summary of the proportion of variance explained (PVE) of the first few principal components using the (PVE) of the first few principal components using the <code>summary()</code> method for a <code>prcomp</code> object:</p>
 <div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="unsupervised-learning.html#cb412-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca)</span></code></pre></div>
 <pre><code>## Importance of components:
-##                            PC1      PC2      PC3      PC4      PC5      PC6      PC7      PC8      PC9
-## Standard deviation     27.8535 21.48136 19.82046 17.03256 15.97181 15.72108 14.47145 13.54427 13.14400
-## Proportion of Variance  0.1136  0.06756  0.05752  0.04248  0.03735  0.03619  0.03066  0.02686  0.02529
-## Cumulative Proportion   0.1136  0.18115  0.23867  0.28115  0.31850  0.35468  0.38534  0.41220  0.43750
-##                            PC10     PC11     PC12     PC13     PC14     PC15     PC16     PC17
-## Standard deviation     12.73860 12.68672 12.15769 11.83019 11.62554 11.43779 11.00051 10.65666
-## Proportion of Variance  0.02376  0.02357  0.02164  0.02049  0.01979  0.01915  0.01772  0.01663
-## Cumulative Proportion   0.46126  0.48482  0.50646  0.52695  0.54674  0.56590  0.58361  0.60024
-##                            PC18     PC19    PC20     PC21    PC22    PC23    PC24    PC25    PC26
-## Standard deviation     10.48880 10.43518 10.3219 10.14608 10.0544 9.90265 9.64766 9.50764 9.33253
-## Proportion of Variance  0.01611  0.01594  0.0156  0.01507  0.0148 0.01436 0.01363 0.01324 0.01275
-## Cumulative Proportion   0.61635  0.63229  0.6479  0.66296  0.6778 0.69212 0.70575 0.71899 0.73174
-##                           PC27   PC28    PC29    PC30    PC31    PC32    PC33    PC34    PC35    PC36
-## Standard deviation     9.27320 9.0900 8.98117 8.75003 8.59962 8.44738 8.37305 8.21579 8.15731 7.97465
-## Proportion of Variance 0.01259 0.0121 0.01181 0.01121 0.01083 0.01045 0.01026 0.00988 0.00974 0.00931
-## Cumulative Proportion  0.74433 0.7564 0.76824 0.77945 0.79027 0.80072 0.81099 0.82087 0.83061 0.83992
-##                           PC37    PC38    PC39    PC40    PC41   PC42    PC43   PC44    PC45   PC46
-## Standard deviation     7.90446 7.82127 7.72156 7.58603 7.45619 7.3444 7.10449 7.0131 6.95839 6.8663
-## Proportion of Variance 0.00915 0.00896 0.00873 0.00843 0.00814 0.0079 0.00739 0.0072 0.00709 0.0069
-## Cumulative Proportion  0.84907 0.85803 0.86676 0.87518 0.88332 0.8912 0.89861 0.9058 0.91290 0.9198
-##                           PC47    PC48    PC49    PC50    PC51    PC52    PC53    PC54    PC55    PC56
-## Standard deviation     6.80744 6.64763 6.61607 6.40793 6.21984 6.20326 6.06706 5.91805 5.91233 5.73539
-## Proportion of Variance 0.00678 0.00647 0.00641 0.00601 0.00566 0.00563 0.00539 0.00513 0.00512 0.00482
-## Cumulative Proportion  0.92659 0.93306 0.93947 0.94548 0.95114 0.95678 0.96216 0.96729 0.97241 0.97723
-##                           PC57   PC58    PC59    PC60    PC61    PC62    PC63      PC64
-## Standard deviation     5.47261 5.2921 5.02117 4.68398 4.17567 4.08212 4.04124 2.148e-14
-## Proportion of Variance 0.00438 0.0041 0.00369 0.00321 0.00255 0.00244 0.00239 0.000e+00
-## Cumulative Proportion  0.98161 0.9857 0.98940 0.99262 0.99517 0.99761 1.00000 1.000e+00</code></pre>
+##                            PC1      PC2      PC3      PC4      PC5      PC6
+## Standard deviation     27.8535 21.48136 19.82046 17.03256 15.97181 15.72108
+## Proportion of Variance  0.1136  0.06756  0.05752  0.04248  0.03735  0.03619
+## Cumulative Proportion   0.1136  0.18115  0.23867  0.28115  0.31850  0.35468
+##                             PC7      PC8      PC9     PC10     PC11     PC12
+## Standard deviation     14.47145 13.54427 13.14400 12.73860 12.68672 12.15769
+## Proportion of Variance  0.03066  0.02686  0.02529  0.02376  0.02357  0.02164
+## Cumulative Proportion   0.38534  0.41220  0.43750  0.46126  0.48482  0.50646
+##                            PC13     PC14     PC15     PC16     PC17     PC18
+## Standard deviation     11.83019 11.62554 11.43779 11.00051 10.65666 10.48880
+## Proportion of Variance  0.02049  0.01979  0.01915  0.01772  0.01663  0.01611
+## Cumulative Proportion   0.52695  0.54674  0.56590  0.58361  0.60024  0.61635
+##                            PC19    PC20     PC21    PC22    PC23    PC24
+## Standard deviation     10.43518 10.3219 10.14608 10.0544 9.90265 9.64766
+## Proportion of Variance  0.01594  0.0156  0.01507  0.0148 0.01436 0.01363
+## Cumulative Proportion   0.63229  0.6479  0.66296  0.6778 0.69212 0.70575
+##                           PC25    PC26    PC27   PC28    PC29    PC30    PC31
+## Standard deviation     9.50764 9.33253 9.27320 9.0900 8.98117 8.75003 8.59962
+## Proportion of Variance 0.01324 0.01275 0.01259 0.0121 0.01181 0.01121 0.01083
+## Cumulative Proportion  0.71899 0.73174 0.74433 0.7564 0.76824 0.77945 0.79027
+##                           PC32    PC33    PC34    PC35    PC36    PC37    PC38
+## Standard deviation     8.44738 8.37305 8.21579 8.15731 7.97465 7.90446 7.82127
+## Proportion of Variance 0.01045 0.01026 0.00988 0.00974 0.00931 0.00915 0.00896
+## Cumulative Proportion  0.80072 0.81099 0.82087 0.83061 0.83992 0.84907 0.85803
+##                           PC39    PC40    PC41   PC42    PC43   PC44    PC45
+## Standard deviation     7.72156 7.58603 7.45619 7.3444 7.10449 7.0131 6.95839
+## Proportion of Variance 0.00873 0.00843 0.00814 0.0079 0.00739 0.0072 0.00709
+## Cumulative Proportion  0.86676 0.87518 0.88332 0.8912 0.89861 0.9058 0.91290
+##                          PC46    PC47    PC48    PC49    PC50    PC51    PC52
+## Standard deviation     6.8663 6.80744 6.64763 6.61607 6.40793 6.21984 6.20326
+## Proportion of Variance 0.0069 0.00678 0.00647 0.00641 0.00601 0.00566 0.00563
+## Cumulative Proportion  0.9198 0.92659 0.93306 0.93947 0.94548 0.95114 0.95678
+##                           PC53    PC54    PC55    PC56    PC57   PC58    PC59
+## Standard deviation     6.06706 5.91805 5.91233 5.73539 5.47261 5.2921 5.02117
+## Proportion of Variance 0.00539 0.00513 0.00512 0.00482 0.00438 0.0041 0.00369
+## Cumulative Proportion  0.96216 0.96729 0.97241 0.97723 0.98161 0.9857 0.98940
+##                           PC60    PC61    PC62    PC63      PC64
+## Standard deviation     4.68398 4.17567 4.08212 4.04124 2.148e-14
+## Proportion of Variance 0.00321 0.00255 0.00244 0.00239 0.000e+00
+## Cumulative Proportion  0.99262 0.99517 0.99761 1.00000 1.000e+00</code></pre>
 <p>Using the <code>plot()</code> function, we can also plot the variance explained by the first few principal components:</p>
 <div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="unsupervised-learning.html#cb414-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-248-1.png" width="576" /></p>
@@ -667,8 +682,8 @@ these:</p>
 <p>The cluster assignments of the 50 observations are contained in
 <code>km_out$cluster</code>:</p>
 <div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="unsupervised-learning.html#cb418-1" aria-hidden="true" tabindex="-1"></a>km_out<span class="sc">$</span>cluster</span></code></pre></div>
-<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-## [50] 2</code></pre>
+<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [39] 2 2 2 2 2 2 2 2 2 2 2 2</code></pre>
 <p>The K-means clustering perfectly separated the observations into two clusters even though we did not supply any group information to <code>kmeans()</code>. We can plot the data, with each observation colored according to its cluster assignment:</p>
 <div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="unsupervised-learning.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">col =</span> (km_out<span class="sc">$</span>cluster<span class="sc">+</span><span class="dv">1</span>), <span class="at">main =</span> <span class="st">&quot;K-Means Clustering Results with K = 2&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-254-1.png" width="576" /></p>
@@ -686,8 +701,8 @@ In this example, we knew that there were two clusters because we generated the d
 ## 3  2.3001545 -2.69622023
 ## 
 ## Clustering vector:
-##  [1] 1 3 1 3 1 1 1 3 1 3 1 3 1 3 1 3 1 1 1 1 1 3 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 2 2 2
-## [50] 2
+##  [1] 1 3 1 3 1 1 1 3 1 3 1 3 1 3 1 3 1 1 1 1 1 3 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [39] 2 2 2 2 2 3 2 3 2 2 2 2
 ## 
 ## Within cluster sum of squares by cluster:
 ## [1] 25.74089 52.67700 19.56137
@@ -695,8 +710,8 @@ In this example, we knew that there were two clusters because we generated the d
 ## 
 ## Available components:
 ## 
-## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot; &quot;betweenss&quot;   
-## [7] &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
 <div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="unsupervised-learning.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">col =</span> (km_out<span class="sc">$</span>cluster<span class="sc">+</span><span class="dv">1</span>), <span class="at">main =</span> <span class="st">&quot;K-Means Clustering Results with K = 3&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-255-1.png" width="576" /></p>
 <p>To run the <code>kmeans()</code> function in R with multiple initial cluster assignments, we use the nstart argument. If a value of <code>nstart</code> greater than one is used, then K-means clustering will be performed using multiple random assignments, and the <code>kmeans()</code> function will report only the best results. Here we compare using <code>nstart = 1</code>:</p>
@@ -740,18 +755,18 @@ The numbers at the bottom of the plot identify each observation:</p>
 <p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-261-1.png" width="576" /></p>
 <p>To determine the cluster labels for each observation associated with a given cut of the dendrogram, we can use the <code>cutree()</code> function:</p>
 <div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="unsupervised-learning.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cutree</span>(hc_complete, <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-## [50] 2</code></pre>
+<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [39] 2 2 2 2 2 2 2 2 2 2 2 2</code></pre>
 <div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="unsupervised-learning.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cutree</span>(hc_average, <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 1 2 1 2 2 2
-## [50] 2</code></pre>
+<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 1 2 2 2 2 2
+## [39] 2 2 2 2 2 1 2 1 2 2 2 2</code></pre>
 <div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="unsupervised-learning.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cutree</span>(hc_single, <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-## [50] 1</code></pre>
+<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+## [39] 1 1 1 1 1 1 1 1 1 1 1 1</code></pre>
 <p>For this data, complete and average linkage generally separate the observations into their correct groups. However, single linkage identifies one observation as belonging to its own cluster. A more sensible answer is obtained when four clusters are selected, although there are still two singletons:</p>
 <div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="unsupervised-learning.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cutree</span>(hc_single, <span class="dv">4</span>)</span></code></pre></div>
-<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 4 3 3 3 3 3 3 3
-## [50] 3</code></pre>
+<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3
+## [39] 3 3 3 4 3 3 3 3 3 3 3 3</code></pre>
 <p>To scale the variables before performing hierarchical clustering of the
 observations, we can use the <code>scale()</code> function:</p>
 <div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="unsupervised-learning.html#cb439-1" aria-hidden="true" tabindex="-1"></a>xsc <span class="ot">=</span> <span class="fu">scale</span>(x)</span>
@@ -776,10 +791,12 @@ observations, we can use the <code>scale()</code> function:</p>
 <p>Let’s take a look at the cancer types for the cell lines:</p>
 <div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="unsupervised-learning.html#cb444-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(nci_labels)</span></code></pre></div>
 <pre><code>## nci_labels
-##      BREAST         CNS       COLON K562A-repro K562B-repro    LEUKEMIA MCF7A-repro MCF7D-repro 
-##           7           5           7           1           1           6           1           1 
-##    MELANOMA       NSCLC     OVARIAN    PROSTATE       RENAL     UNKNOWN 
-##           8           9           6           2           9           1</code></pre>
+##      BREAST         CNS       COLON K562A-repro K562B-repro    LEUKEMIA 
+##           7           5           7           1           1           6 
+## MCF7A-repro MCF7D-repro    MELANOMA       NSCLC     OVARIAN    PROSTATE 
+##           1           1           8           9           6           2 
+##       RENAL     UNKNOWN 
+##           9           1</code></pre>
 <p>We now proceed to hierarchically cluster the cell lines in the <code>NCI60</code> data to determine whether or not the observations cluster into distinct types of cancer. To begin, we standardize the variables to have mean zero and standard deviation one. This step is optional and needs only be performed if we want each gene to be on the same scale:</p>
 <div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="unsupervised-learning.html#cb446-1" aria-hidden="true" tabindex="-1"></a>sd_data <span class="ot">=</span> <span class="fu">scale</span>(nci_data)</span></code></pre></div>
 <p>We now perform hierarchical clustering of the observations using complete, single, and average linkage. We will use standard Euclidean distance as the dissimilarity measure:</p>
@@ -795,17 +812,17 @@ observations, we can use the <code>scale()</code> function:</p>
 <span id="cb448-2"><a href="unsupervised-learning.html#cb448-2" aria-hidden="true" tabindex="-1"></a>hc_clusters <span class="ot">=</span> <span class="fu">cutree</span>(hc_out,<span class="dv">4</span>)</span>
 <span id="cb448-3"><a href="unsupervised-learning.html#cb448-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(hc_clusters,nci_labels)</span></code></pre></div>
 <pre><code>##            nci_labels
-## hc_clusters BREAST CNS COLON K562A-repro K562B-repro LEUKEMIA MCF7A-repro MCF7D-repro MELANOMA NSCLC
-##           1      2   3     2           0           0        0           0           0        8     8
-##           2      3   2     0           0           0        0           0           0        0     1
-##           3      0   0     0           1           1        6           0           0        0     0
-##           4      2   0     5           0           0        0           1           1        0     0
+## hc_clusters BREAST CNS COLON K562A-repro K562B-repro LEUKEMIA MCF7A-repro
+##           1      2   3     2           0           0        0           0
+##           2      3   2     0           0           0        0           0
+##           3      0   0     0           1           1        6           0
+##           4      2   0     5           0           0        0           1
 ##            nci_labels
-## hc_clusters OVARIAN PROSTATE RENAL UNKNOWN
-##           1       6        2     8       1
-##           2       0        0     1       0
-##           3       0        0     0       0
-##           4       0        0     0       0</code></pre>
+## hc_clusters MCF7D-repro MELANOMA NSCLC OVARIAN PROSTATE RENAL UNKNOWN
+##           1           0        8     8       6        2     8       1
+##           2           0        0     1       0        0     1       0
+##           3           0        0     0       0        0     0       0
+##           4           1        0     0       0        0     0       0</code></pre>
 <p>There are some clear patterns. All the leukemia cell lines fall in cluster 3, while the breast cancer cell lines are spread out over three different clusters. We can plot the cut on the dendrogram that produces these four clusters using the <code>abline()</code> function, which draws a straight line on top of any existing plot in R:</p>
 <div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="unsupervised-learning.html#cb450-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb450-2"><a href="unsupervised-learning.html#cb450-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hc_out, <span class="at">labels =</span> nci_labels)</span>
