@@ -39,7 +39,7 @@ All of the statistical theory is explained, from linear regression to gradient b
 
 **Why is this free when other study manuals cost hundreds of dollars?** We are making this available to everyone to study for PA and try out our study materials. We are so confident of the benefits from our hands-on teaching style that everyone will want to join our online course after getting a taste of this textbook.  
 
-**How many study hours are needed?**  [Here is a study template](https://exampa.net/study-schedule/) that allocates 160 hours for this course and the modules of SOA. The exact number of hours needed varies by individual. Is English your native language? Have you taken SRM? Do you have prior R experience? Are you a confident communicator? All of these factors play a role. Planning a study schedule for PA is not different from any of the other exams. Important deadlines, travel plans, or other obligations must be accommodated.  
+**How many study hours are needed?**  [Here is a study template](https://exampa.net/study-schedule/) that allocates 160 hours for this course and the modules of SOA. The exact number of hours needed varies by individual. Is English your native language? Have you taken SRM? Do you have prior R experience? Are you a confident communicator? All of these factors play a role. Pgetting lanning a study schedule for PA is not different from any of the other exams. Important deadlines, travel plans, or other obligations must be accommodated.  
 
 # The exam
 
