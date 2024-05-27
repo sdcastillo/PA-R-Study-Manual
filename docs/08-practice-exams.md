@@ -6,5 +6,5 @@ output:
 
 # Practice Exams
 
-Practice exams are available at [ExamPA.net](https://www.exampa.net/pricing).
+Practice exams are available at [futuroinsight.com](https://www.futuroinsight.com/pricing).
 

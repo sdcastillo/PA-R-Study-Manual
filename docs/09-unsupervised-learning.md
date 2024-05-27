@@ -6,5 +6,5 @@ output:
 
 # Unsupervised Learning
 
-The chapter on unsuporvised learning, topics from module 8, clustering and PCA, are available at [ExamPA.net](https://www.exampa.net/pricing).
+The chapter on unsuporvised learning, topics from module 8, clustering and PCA, are available at [futuroinsight.com](https://www.futuroinsight.com/pricing).
 
