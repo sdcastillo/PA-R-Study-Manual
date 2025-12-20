@@ -1,6 +1,10 @@
+
+
 [Click Here for my Online Data Science Study Manual](https://sdcastillo.github.io/PA-R-Study-Manual/)
 
 This is the study guide for [Predictive Analyst](https://www.futuroinsight.com/), which began as the online course for the SOA's Predictive Analytics exam and has expanded to the industry of analytics. While meeting all of the learning requirements of Exam PA, this **250-page study guide** gives you data science and machine learning training. You will learn how to get your data into R, clean it, visualize it, and use models to derive business value.  Just as a scientist sets up lab experiments to form and test hypothesis, you’ll build models and then test them on holdout sets.
+
+This manuscript is continuously improved using generative AI to enhance content quality
 
 The chapters on R-programming cover the foundational concepts with a focus on modern data science applications.  We give you time-saving coding tips and ways of checking your answers within RStudio.
 
