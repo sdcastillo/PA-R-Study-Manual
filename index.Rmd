@@ -1,6 +1,6 @@
 --- 
-title: "Exam PA Study Guide, Spring 2022"
-github-repo: 
+title: "Exam PA Study Guide, 2026 Edition"
+github-repo: https://github.com/sdcastillo
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -9,25 +9,29 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 favicon: images/artificial_actuary_logo_favicon.png
+description: "Exam PA study guide for predictive analytics with R, modeling, and communication."
+keywords: ["Exam PA study guide","predictive analytics","R","modeling","communication"]
 ---
 
 # Welcome {-}
 
 <hr>
 
-<img src="images/book_cover_2021_fall.png" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />This is the study guide for [ExamPA.net](https://exampa.net), the online course for the Predictive Analytics exam of SOA. While meeting all of the learning requirements of Exam PA, this 250-page study guide gives data science and machine learning training. It would be taught how to get data into R, clean it, visualize it, and use models to derive business value. Just as scientists set up lab experiments to form and test hypotheses, it would be required to build models and test them on holdout sets.
+<img src="images/book_cover_2021_fall.png" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />This is the study guide for [https://PredictiveInsightsAI.com](https://exampa.net), the online course for the Predictive Analytics exam of SOA. While meeting all of the learning requirements of Exam PA, this 250-page study guide gives data science and machine learning training. It would be taught how to get data into R, clean it, visualize it, and use models to derive business value. Just as scientists set up lab experiments to form and test hypotheses, it would be required to build models and test them on holdout sets.
+
+For updates, new resources, and companion materials, visit [PredictiveInsightsAI.com](https://PredictiveInsightsAI.com). Follow on X: [@SamCast65215624](https://x.com/SamCast65215624). Buy the PDF: [Amazon](https://a.co/d/cpy7RSx).
 
 The chapters on R-programming cover the foundational concepts with a focus on modern data science applications. Time-saving coding tips along with ways of checking answers within RStudio will be taught.
 
 All of the statistical theory is explained, from linear regression to gradient boosted trees, and examples are provided of each model that can be reproduced. Following the course materials “An Introduction to Statistical Learning, “we discuss model training, validation, and the advantages and disadvantages of each algorithm.
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F2okL4a2YcM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/F2okL4a2YcM?rel=0&modestbranding=1&playsinline=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 </br>
 
 ```{block, type='rcorners'}
-<font size="10">**[Get Started](https://exampa.net/#enrollment)**</font>
+<font size="10">**[Get Started](https://PredictiveInsightsAI.com/#enrollment)**</font>
 ```
 
 </br>
@@ -39,31 +43,31 @@ All of the statistical theory is explained, from linear regression to gradient b
 
 **Why is this free when other study manuals cost hundreds of dollars?** We are making this available to everyone to study for PA and try out our study materials. We are so confident of the benefits from our hands-on teaching style that everyone will want to join our online course after getting a taste of this textbook.  
 
-**How many study hours are needed?**  [Here is a study template](https://exampa.net/study-schedule/) that allocates 160 hours for this course and the modules of SOA. The exact number of hours needed varies by individual. Is English your native language? Have you taken SRM? Do you have prior R experience? Are you a confident communicator? All of these factors play a role. Pgetting lanning a study schedule for PA is not different from any of the other exams. Important deadlines, travel plans, or other obligations must be accommodated.  
+**How many study hours are needed?**  [Here is a study template](https://PredictiveInsightsAI.com/study-schedule/) that allocates 160 hours for this course and the modules of SOA. The exact number of hours needed varies by individual. Is English your native language? Have you taken SRM? Do you have prior R experience? Are you a confident communicator? All of these factors play a role. Planning a study schedule for PA is not different from any of the other exams. Important deadlines, travel plans, or other obligations must be accommodated.  
 
 # The exam
 
 The main challenge  of this exam is in communication: both understanding what they want you to do as well as telling the grader what it is that you did.
 
-You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on a Prometric computer. The syllabus uses fancy language to describe the topics covered on the exam, making it sound more complicated than it should be. A good analogy is a job description that has many complex-sounding tasks when in reality, the day-to-day operations of the employees are far more straightforward.
+You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on an exam center computer. The syllabus uses fancy language to describe the topics covered on the exam, making it sound more complicated than it should be. A good analogy is a job description that has many complex-sounding tasks when in reality, the day-to-day operations of the employees are far more straightforward.
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F2okL4a2YcM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/F2okL4a2YcM?rel=0&modestbranding=1&playsinline=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 A non-technical translation is as follows:
 
-**Writing in Microsoft Word (30-40%)**
+**Writing in Microsoft Word (30-40\%)**
 
 - Write in professional language
 - Type more than 50 words-per-minute
 
-**Manipulating Data in R (15-25%)**
+**Manipulating Data in R (15-25\%)**
 
 - Quickly clean data sets
 - Find data errors planted by the SOA
 - Perform queries (aggregations, summaries, transformations)
 
-**Machine learning and statistics (40-50%)**
+**Machine learning and statistics (40-50\%)**
 
 - Interpret results within a business context
 - Change model parameters
@@ -76,7 +80,7 @@ The exam pass rates are about 50%.
 
 http://www.actuarial-lookup.com/exams/pa
 
-Since the December sitting, the [SOA released two updates](https://www.soa.org/education/exam-req/syllabus-study-materials/edu-updates-exam-pa/):
+Since the most recent sitting, the [SOA released two updates](https://www.soa.org/education/exam-req/syllabus-study-materials/edu-updates-exam-pa/):
 
 **No more printed Project Statement**: throw those hard copies into the trash can and get used to ALT + Tabbing. Test your knowledge under exam conditions using our 12 practice exams. You can see every keystroke and click on my screen. Is English not your native language? Writing templates save you time.
 
@@ -84,16 +88,15 @@ Since the December sitting, the [SOA released two updates](https://www.soa.org/e
 
 # Prometric Demo
 
-The following video from Prometric shows what the computer setup will look like. You will have 9 minutes to complete the tutorial before starting the 5-hours and 15-minute timer and then 5 minutes at the end of the exam to upload your files.
+The test is conducted on Prometric computers, and it is unclear what the setup will look like. You will have 9 minutes to complete the tutorial before starting the 5-hours and 15-minute timer and then 5 minutes at the end of the exam to upload your files.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/TBATFFsHa7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-In the past, candidates have been given out a printed Project Statement, which they were allowed to read during the 15-minute tutorial before the timer started; however, as of [Fall 2020](https://www.soa.org/globalassets/assets/files/edu/2020/fall/soa-exams-additional-details.pdf), this may no longer be the case, and all files will be given to you on the computer. This announcement by the SOA may be referring to only those exams which used to be on paper but are transferring to computer-based testing, in which case PA candidates would still get the printed statement. It may be best to practice assuming that you will need to work on a single monitor. We will update this once we confirm with the SOA.
+In the past, candidates have been given out a printed Project Statement, which they were allowed to read during the 15-minute tutorial before the timer started; however, based on the latest SOA guidance this may no longer be the case, and all files may be given to you on the computer. This announcement by the SOA may be referring to only those exams which used to be on paper but are transferring to computer-based testing, in which case PA candidates would still get the printed statement. It may be best to practice assuming that you will need to work on a single monitor. Check the SOA updates page for the latest details.
 
 </br>
 
 ```{block, type='studytip'}
-**Are you a lefty?** Prometric computers will be set up with the mouse on the right side. Arrive a few minutes early and request the change. Many lefties also switch the configuration so that the right button, which is hit with the index finger, is a normal click. The left button, hit with the middle finger, is what you think of as a “right-click.” Unfortunately, if you use this configuration, then you will need to suffer through the exam anyways. Just be sure to practice with the same setup which you will use.
+**Are you a lefty?** Prometric computers will be set up with the mouse on the right side. Arrive a few minutes early and request the change. Many lefties also switch the configuration so that the right button, which is hit with the index finger, is a normal click. The left button, hit with the middle finger, is what you think of as a “right-click.” Unfortunately, if you use this configuration, then you will need to practice with it ahead of time. Just be sure to practice with the same setup which you will use.
 ```
 
 </br>
@@ -106,7 +109,7 @@ In the past, candidates have been given out a printed Project Statement, which t
 
 # Introduction
 
-[![Lecture](images/lesson-whatispa.png)](https://exampa.net/)
+[![Lecture](images/lesson-whatispa.png)](https://PredictiveInsightsAI.com/)
 
 
 While “machine learning” is relatively new, the process of learning itself is not. All of us are already familiar with how to learn - by improving from our mistakes. By repeating what is successful and avoiding what fails, we learn by doing, by experience, or trial-and-error. Machines learn similarly.

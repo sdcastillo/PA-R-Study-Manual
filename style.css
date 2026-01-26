@@ -1,16 +1,32 @@
 p.caption {
-  color: rgb(119, 119, 119);
+  color: #6b6b6b;
   margin-top: 10px;
+  font-size: 0.95rem;
 }
 p code {
   white-space: inherit;
 }
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  line-height: 1.6;
+  color: #1f1f1f;
+  background: #fbfbfb;
+}
 pre {
   word-break: normal;
   word-wrap: normal;
+  background: #f4f6f8;
+  border-radius: 8px;
+  padding: 12px 14px;
+  border: 1px solid #e2e6ea;
 }
 pre code {
   white-space: inherit;
+}
+code {
+  background: #f1f3f5;
+  border-radius: 4px;
+  padding: 0 4px;
 }
 
 div.FOO {
@@ -21,8 +37,9 @@ div.FOO {
 .rmdcomment {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
-  background: #f5f5f5;
-  position:relative;
+  background: #f6f2ea;
+  border-left: 4px solid #d9c9a8;
+  position: relative;
 }
 
 .rmdcomment:before {
@@ -30,25 +47,29 @@ div.FOO {
     font-family: FontAwesome;
     left:10px;
     position:absolute;
-    top:0px;
-    font-size: 45px;
+    top:4px;
+    font-size: 40px;
  }
 
  .rcorners {
-  border-radius: 25px;
-  border: 3px solid #1D3557;
-  padding: 10px;
-  width: 60; 
-  height: 100px;  
+  border-radius: 18px;
+  border: 2px solid #1d3557;
+  padding: 12px 16px;
+  width: 100%;
+  max-width: 720px;
+  min-height: 90px;
   text-align: center;
   font-size: 16px;
   vertical-align: middle;
+  background: #f7f9fb;
 }
 
 .studytip {
-  border-radius: 25px;
-  border: 2px solid #1D3557;
-  padding: 10px; 
-  width: 600px;
-  text-align: left
+  border-radius: 18px;
+  border: 2px solid #1d3557;
+  padding: 12px 16px;
+  width: 100%;
+  max-width: 720px;
+  text-align: left;
+  background: #f7f9fb;
 }

@@ -1,3 +1,9 @@
+---
+title: "Data exploration"
+description: "Exploratory data analysis, visualization, and data cleaning for Exam PA."
+keywords: ["data exploration","EDA","ggplot2","dplyr","missing values"]
+---
+
 # Data exploration
 
 ```{r warning = F, echo = F, message = F}
@@ -27,7 +33,7 @@ Already enrolled?  Watch the full video: <a target="_parent" href="https://cours
 
 Exploration is about making discoveries and you should have a curious mind and strong technical skills to make sense of the data. This chapter will give you the tools to take dirty, unprocessed data, clean it up, discover interesting trends using graphs and summary statistics, and communicate your results to a business audience.
 
-About 10 - 15% of your grade will be based on data exploration. Every version of Exam PA, such as December 2018, June 2019, and December 2019, have all had questions about data exploration. Putting in extra practice in this area is guaranteed to give you a better score because it will free up time that you can use elsewhere.
+About 10 - 15\% of your grade will be based on data exploration. Recent Exam PA administrations have included questions about data exploration. Putting in extra practice in this area is guaranteed to give you a better score because it will free up time that you can use elsewhere. For curated practice sets, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
 The syllabus divides this into three learning objectives, which can make the topic intimidating. Data Visualization, Data Types and Exploration, and Data Issues and Resolutions, but you will always be doing these things together, and so this chapter will cover all three at once.
 
@@ -51,7 +57,7 @@ Exploratory Data Analysis (EDA) is usually the first phase of an analytics proje
 image_read('images/hadley_data_lifecycle.png') %>% image_trim() %>% image_scale("1400")
 ```
 
-From the language on the December 2020 Syllabus, these are
+From the current syllabus language, these are
 
 **Import:** 
 
@@ -160,7 +166,7 @@ There are two types of [bar charts](https://ggplot2.tidyverse.org/reference/geom
 
 You may have noticed that writing code for data manipulation can be slow. Fortunately, there is a faster, 100%-legal way of doing data manipulation that has worked for hundreds of exam candidates (the author included) who have taken Exam PA.
 
-Up to this point, we have been using old R libraries. By making use of newer R libraries, we can save ourselves time. These will all be provided for you at Prometric within the [tidyverse](https://www.tidyverse.org/) library.
+Up to this point, we have been using old R libraries. By making use of newer R libraries, we can save ourselves time. These will all be provided for you at the exam center within the [tidyverse](https://www.tidyverse.org/) library.
 
 ### Data manipulation chaining
 
@@ -169,8 +175,8 @@ Pipes allow for data manipulations to be chained with visualizations.  The possi
 ```{r message=F}
 library(tidyverse)
 iris %>%
-  select_if(is.numeric) %>%
-  gather(feature,value) %>%
+  select(where(is.numeric)) %>%
+  pivot_longer(cols = everything(), names_to = "feature", values_to = "value") %>%
   ggplot(aes(value)) +
   geom_histogram() +
   facet_wrap(vars(feature))
@@ -245,7 +251,7 @@ Two categories can be counted at once.  This creates a table with all combinatio
 health_insurance %>% count(region, sex)
 ```
 
-The `summary()` function is shows a statistical summary.  One caveat is that each column needs to be in its appropriate type.  For example, `smoker`, `region`, and `sex` are all listed as characters when if they were factors, `summary` would give you count info.
+The `summary()` function is shows a statistical summary.  One caveat is that each column needs to be in its appropriate type.  For example, `smoker`, `region`, and `sex` are all listed as characters when if they were factors, `summary` would give you count info. In notation, a quick category proportion can be written as $\\hat{p} = \\frac{k}{n}$.
 
 **With incorrect data types**
 
@@ -259,7 +265,7 @@ This tells you that there are 324 patients in the northeast, 325 in the northwes
 
 ```{r}
 health_insurance <- health_insurance %>% 
-  mutate_if(is.character, as.factor)
+  mutate(across(where(is.character), as.factor))
 
 health_insurance %>% 
   summary()
@@ -395,7 +401,7 @@ FROM health_insurance
 
 ## Missing values
 
-The most recent PA exams have had questions related to missing values. You need to perform checks before moving on to the model-building phases. In real life, man-made data always have missing observations.
+The most recent PA exams have had questions related to missing values. You need to perform checks before moving on to the model-building phases. In real life, human-generated data always have missing observations.
 
 In R, there are two ways that data can be missing.  The first is the `NA` value.  If you read in a csv file that has blank values, R will translate them into NAs.
 
@@ -442,7 +448,7 @@ While you are reviewing the data for missingness, you may also decide to remove 
 
 ## Example: SOA PA 12/12/19, Task 1
 
-This chapter is based on the first task of the December 2019 Exam PA.
+This chapter is based on the first task of a recent Exam PA.
 
 <iframe src="https://player.vimeo.com/video/467838183?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
@@ -458,7 +464,7 @@ Already enrolled?  Watch the full video: <a target="_parent" href="https://cours
 
 > There should be no further variable adjustments unless specifically requested.
 
-As a reminder, all data for this book can be accessed from the package `ExamPAData`.  In the actual exam, you will read the file from the Prometric computer.
+As a reminder, all data for this book can be accessed from the package `ExamPAData`.  In the actual exam, you will read the file from the exam computer.
 
 Because the data is already loaded, use the below code to access the data.
 
@@ -470,7 +476,7 @@ library(ExamPAData)
 To save keystrokes, give the data a short name such as `df` for "data frame".
 
 ```{r echo = T}
-df <- customer_value %>% mutate_if(is.character, as.factor)
+df <- customer_value %>% mutate(across(where(is.character), as.factor))
 ```
 
 ### Garbage in; garbage out `r emo::ji("trash")`
@@ -791,4 +797,4 @@ actuary_salaries <- actuary_salaries %>%
 
 ## Answers to exercises
 
-Answers to these exercises, along with a video tutorial, are available at [ExamPA.net](https://exampa.net/).
+Answers to these exercises, along with a video tutorial, are available at [https://PredictiveInsightsAI.com](https://PredictiveInsightsAI.com/).

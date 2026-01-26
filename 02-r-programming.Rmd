@@ -1,6 +1,12 @@
+---
+title: "How much R do I need to know to pass?"
+description: "R programming essentials for Exam PA, R Markdown workflows, and core data manipulation."
+keywords: ["R programming","Exam PA","R Markdown","dplyr","ggplot2"]
+---
+
 # How much R do I need to know to pass?
 
-<span style="color: blue;">**This is a communication exam **</span>  because 30-40% of the points are based on your writing and data storytelling quality.
+<span style="color: blue;">**This is a communication exam **</span>  because 30-40\% of the points are based on your writing and data storytelling quality. For supplemental examples, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
 You do not need to become an R expert for this exam. While you are expected to develop a basic familiarity with R, the .Rmd template will provide you with the vast majority of the R commands needed. You will need to practice taking code templates and adjusting them to the specific variables and formulas you need. The most difficult coding questions will be during data exploration. These will ask you to
 
@@ -14,17 +20,16 @@ When fitting predictive models, you will also need to
 `rpart()`
 - Extract and displaying results from a fitted predictive model
 
-You are **not** expected to construct loops, write functions, or use other programmatic techniques with R. The scope is limited to single-line commands.
+You are **not** expected to construct loops, write functions, or use other programmatic techniques with R. The scope is limited to single-line commands and short, auditable transformations.
 
-You will have two cheat sheets for [data visualization](https://contentpreview.s3.us-east-2.amazonaws.com/Exam+PA+Spring+2021+Simplified+Data+Viz+Cheat+Sheet.pdf) and base R. You can use this in your study to become familiar with how to find the R code quickly. These cheat sheets that the SOA gives you were designed by the RStudio team for everyone who uses R, and so we have gone through and removed the parts that you will not need to learn. For example, no one will be making new types of ggplot graphs under the “graphical primitives” section, which has been blocked out. **Enroll in either of our online courses to get our simplified Base R cheat sheet and tutorial.**
+You will have two cheat sheets for [data visualization] and base R. You can use this in your study to become familiar with how to find the R code quickly. These cheat sheets that the SOA gives you were designed by the RStudio team for everyone who uses R, and so we have gone through and removed the parts that you will not need to learn. For example, no one will be making new types of ggplot graphs under the “graphical primitives” section, which has been blocked out. **Enroll in either of our online courses to get our simplified Base R cheat sheet and tutorial.**
 
 ## How to use the PA R cheat sheets?
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/UVE9Zm6mqvM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OUkC6vVJeQA?si=YlWkawrpnLL1fqqT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Be observant and expect to spend twice as long explaining what your code is doing as you write the code itself. A few points are based on the organization your .Rmd file, although you do not need this to read like an essay. The vast majority of your time will be spent on your Word document.
 
-The June 16 2020 Project Statement has this under "General information for candidates."
+A recent Project Statement has this under "General information for candidates."
 
 >Each task will be graded on the quality of your thought process, **added or modified code**, and conclusions
 
@@ -32,9 +37,9 @@ The June 16 2020 Project Statement has this under "General information for candi
 
 In other words, the results of your report must be consistent with what the grading team finds when they run your .Rmd file.
 
-## Example: SOA PA 6/16/20, Task 8
+## Example: SOA PA Task 8
 
-This question is from the June 16, 2020 exam. You can see that significantly only minor code changes need to be made. The remainder of this question consists of a short-answer response. This is very typical of Exam PA.  
+This question is from a recent exam. You can see that significantly only minor code changes need to be made. The remainder of this question consists of a short-answer response. This is very typical of Exam PA.  
 
 <iframe src="https://player.vimeo.com/video/467866045?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
@@ -435,4 +440,3 @@ To find a summary, use `summary`
 ```{r}
 summary(df)
 ```
-

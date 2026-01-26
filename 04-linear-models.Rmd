@@ -2,6 +2,8 @@
 output:
   html_document: default
   pdf_document: default
+description: "Linear models, GLMs, and penalized regression for Exam PA."
+keywords: ["linear regression","GLM","logistic regression","glmnet","ridge","lasso"]
 ---
 
 ```{r echo = F, message = F}
@@ -13,7 +15,7 @@ theme_set(theme_bw())
 
 # Introduction to modeling
 
-About 40-50% of the exam grade is based on modeling. The goal is to be able to predict an unknown quantity. In actuarial applications, this tends to claim that occur in the future, death, injury, accidents, policy lapse, hurricanes, or some other insurable event.
+About 40-50\% of the exam grade is based on modeling. The goal is to be able to predict an unknown quantity. In actuarial applications, this tends to claim that occur in the future, death, injury, accidents, policy lapse, hurricanes, or some other insurable event. For model walkthroughs and updates, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
 The next few chapters will cover the following learning objectives.
 
@@ -25,7 +27,7 @@ knitr::include_graphics("images/learning_obj6.png")
 ## Modeling vocabulary
 Modeling notation is sloppy because many words mean the same thing.
 
-The number of observations will be denoted by  $n$.  When we refer to the size of a data set, we are referring to $n$.  Each row of the data is called an observation or record. Observations tend to be people, cars, buildings, or other insurable things. These are always independent in that they do not influence one another. Because the Prometric computers have limited power, $n$ tends to be less than 100,000.
+The number of observations will be denoted by  $n$.  When we refer to the size of a data set, we are referring to $n$.  Each row of the data is called an observation or record. Observations tend to be people, cars, buildings, or other insurable things. These are always independent in that they do not influence one another. Because the exam center computers have limited power, $n$ tends to be less than 100,000.
 
 Each observation has known attributes called *variables*, *features*, or *predictors*.  We use $p$ to refer the number of input variables that are used in the model.  
 
@@ -74,7 +76,7 @@ Another way of saying this is in terms of expected value: the model $f(X)$ estim
 
 Also known as *simple linear regression*, OLS predicts the target as a weighted sum of the variables.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=nk2CQITm_eo,u1cc1r_Y7M0" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/PaFPbb66DxQ?rel=0&modestbranding=1&playsinline=1" frameborder="0" allowfullscreen></iframe>
 
 </br>
 
@@ -150,7 +152,7 @@ This chapter was based on Chapter 3, *Linear Regression*, of *An Introduction to
 
 *Correlation does not imply causation.*
 
-This is a common saying. Just because two things are correlated does not necessarily mean that one causes the other. Just because most actuaries work remotely when there is cold and snowing does not mean that cold and snow cause anti-social, introverted work habits. A more likely explanation is that actuaries are concerned about driving safely on icy roads and avoiding being involved in a car accident.
+This is a common saying. Just because two things are correlated does not necessarily mean that one causes the other. Just because most actuaries work remotely when there is cold and snowing does not mean that cold and snow cause less social work habits. A more likely explanation is that actuaries are concerned about driving safely on icy roads and avoiding being involved in a car accident.
 
 ### Pearson's correlation
 
@@ -336,7 +338,7 @@ all_data %>%
   select(term, std.error) %>% 
   left_join(testing %>% tidy() %>% select(term, std.error), by = "term") %>% 
   rename(full_data_std_error = std.error.x, test_data_std_error = std.error.y) %>% 
-  mutate_if(is.numeric, ~round(.x, 1)) %>% 
+  mutate(across(where(is.numeric), ~round(.x, 1))) %>% 
   kableExtra::kable("markdown")
 ```
 
@@ -364,7 +366,7 @@ This model structure implies that each of the variables $x_1, ..., x_p$ each cha
 
 # Generalized linear Models (GLMs)
 
-[![Lecture](images/glms lesson.png)](https://exampa.net/)
+[![Lecture](images/glms lesson.png)](https://PredictiveInsightsAI.com/)
 
 Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=136">Practice Exams + Lessons</a>
 
@@ -430,7 +432,7 @@ sample_size = 3000
 p1 <- tibble(gaussian = rnorm(sample_size),
        gamma = rgamma(sample_size, 1, 1/2),
        inverse_gaussian = rig(sample_size, 1, 2)) %>% 
-  gather(distribution, values) %>% 
+  pivot_longer(cols = everything(), names_to = "distribution", values_to = "values") %>% 
   ggplot(aes(values)) + 
   geom_density(fill = "blue", alpha = 0.2) + 
   facet_wrap(vars(distribution), scales = "free") + 
@@ -439,7 +441,7 @@ p1 <- tibble(gaussian = rnorm(sample_size),
 
 p2 <- tibble(poisson = rpois(sample_size, 1),
        binomial = rbinom(sample_size, 10, 0.5)) %>% 
-  gather(distribution, values) %>% 
+  pivot_longer(cols = everything(), names_to = "distribution", values_to = "values") %>% 
   ggplot(aes(values)) + 
   geom_histogram(fill = "blue", alpha = 0.2) + 
   facet_wrap(vars(distribution), scales = "free") + 
@@ -539,7 +541,7 @@ For classification, the predicted values need to be a category instead of a numb
 These StatQuest videos explain the most common type of GLM classification model: Logistic regression.
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=yIYKR4sgzI8,vN5cNN2-HWE,BfKanl1aSG0,xxFYro8QuXA,C4N3_XJJ-jU" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/PaFPbb66DxQ?rel=0&modestbranding=1&playsinline=1" frameborder="0" allowfullscreen></iframe>
 
 
 ## Binary target
@@ -561,7 +563,7 @@ When all observations have the same exposure, $m = 1$.  When the mean of the dat
 
 ## Link functions
 
-There are four link functions. The most common are the Logit and Probit, but the Cauchit and Cloglog did appear on the Hospital Readmissions practice exam of SOA in 2019. The identity link does not make sense for classification because it would result in predictions being outside of $(0,1)$
+There are four link functions. The most common are the Logit and Probit, but the Cauchit and Cloglog have appeared on the Hospital Readmissions practice exam. The identity link does not make sense for classification because it would result in predictions being outside of $(0,1)$
 
 ```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
 knitr::include_graphics("images/discrete_link_functions.png")
@@ -580,7 +582,7 @@ tibble(z = seq(-9, 9, 0.01)) %>%
     cauchit = 1/3.14*atan(z) + 1/2,
     cloglog = 1 - exp(-exp(z))
          ) %>% 
-  gather(link_function, mean_target, -z) %>% 
+  pivot_longer(cols = -z, names_to = "link_function", values_to = "mean_target") %>% 
   ggplot(aes(z, mean_target, color = link_function)) +
   geom_line() + 
   theme_bw() + 
@@ -670,7 +672,8 @@ The output is a predicted probability.  We can see that this is centered around 
 
 ```{r fig.cap="Distribution of Predicted Probability", fig.width=5, fig.height=3, message = F}
 preds <- predict(frequency, newdat=test,type="response")
-qplot(preds) 
+ggplot(tibble(preds = preds), aes(preds)) +
+  geom_histogram(bins = 30) 
 ```
 
 In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 otherwise. The default cutoff is 0.5. We change this to 0.3 and see that there are 763 policies predicted to have claims.
@@ -795,7 +798,7 @@ $$\{\text{FNR} = \{\text{FNR}(k_1), \text{FNR}(k_2), .., \text{FNR}(k_{10})\}$$
 
 Then we set `x = TPR` and `y = FNR` and graph x against y. The resulting plot is called the **Receiver Operator Curve (ROC)** and the the Area Under the Curve is called the AUC.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4jRBRDbJemM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4jRBRDbJemM?rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 You can also think of AUC as being a **probability.**  Unlike a conventional probability, this ranges between 0.5 and 1 instead of 0 and 1. In the Logit example, we were predicting whether or not an auto policy would file a claim. Then you can interpret the AUC as
 
@@ -854,7 +857,7 @@ In general, AUC is preferred over Accuracy when there are many more “true” c
 
 ## Example: SOA HR, Task 5
 
-The following question is from the Hospital Readmissions sample project from 2018.
+The following question is from a Hospital Readmissions sample project.
 
 <iframe src="https://player.vimeo.com/video/467845050?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
@@ -925,7 +928,7 @@ As you can tell, PA has a lot of small topics related to GLMs.  This chapter com
 
 Learning from mistakes is the path to improvement. For GLMs, the residual analysis looks for patterns in the errors to find ways of improving the model.
 
-<iframe width="563" height="383" src="https://www.youtube.com/embed/9T0wlKdew6I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="563" height="383" src="https://www.youtube-nocookie.com/embed/9T0wlKdew6I?rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Raw residuals
 
@@ -937,7 +940,7 @@ $$\text{Raw Residual} = y_i - \hat{y_i}$$
 
 This is not meant for GLMs with non-Gaussian distributions. To adjust for other distributions, we need the concept of deviance residuals.
 
-<iframe width="563" height="383" src="https://www.youtube.com/embed/JC56jS2gVUE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="563" height="383" src="https://www.youtube-nocookie.com/embed/JC56jS2gVUE?rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Deviance is a way of assessing the adequacy of a model by comparing it with a more general model with the maximum number of parameters that can be estimated. It is referred to as the saturated model and it has one parameter per observation. 
 
@@ -1126,7 +1129,7 @@ $$log(E[\text{Claims}]) = \beta_0 + \beta_1  \text{Year} + \text{Months}$$
 
 ## Tweedie regression
 
-While this topic is briefly mentioned in the modules, the only R libraries which support Tweedie Regression (`statmod` and `tweedie`) are not on the syllabus, and so there is no way that the SOA could ask you to build a tweedie model. This means that you can safely skip this section.
+While this topic is briefly mentioned in the modules, the only R libraries which support Tweedie Regression (`statmod` and `tweedie`) are not in the current syllabus, and so there is no way that the SOA could ask you to build a tweedie model. This means that you can safely skip this section.
 
 ## Combinations of Link Functions and Target Distributions
 
@@ -1432,7 +1435,7 @@ $$
 \sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2 + \lambda \sum_{j = 1}^p\beta_j^2
 $$
 
-<iframe width="563" height="383" src="https://www.youtube.com/embed/Q81RR3yKn30" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="563" height="383" src="https://www.youtube-nocookie.com/embed/Q81RR3yKn30?rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 This $\lambda$ controls how much of a penalty is imposed on the size of the coefficients.  When $\lambda$ is high, simpler models are treated more favorably because the $\sum_{j = 1}^p\beta_j^2$ carries more weight.  Conversely, then $\lambda$ is low, complex models are more favored.  When $\lambda = 0$, we have an ordinary GLM.
 
@@ -1449,7 +1452,7 @@ $$
 \sum_i(y_i - \beta_0 - \sum_{j = 1}^p\beta_j x_{ij})^2 + \lambda \sum_{j = 1}^p|\beta_j|
 $$
 
-<iframe width="563" height="383" src="https://www.youtube.com/embed/NGf0voTMlcs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="563" height="383" src="https://www.youtube-nocookie.com/embed/NGf0voTMlcs?rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 In ISLR, Hastie et al show that this results in coefficients being forced to be exactly 0.  This is extremely useful because it means that by changing $\lambda$, we can select how many variables to use in the model.
 
@@ -1462,7 +1465,7 @@ The Elastic Net uses a penalty term which is between the L1 and L2 norms. The pe
 $$\text{RSS} + (1 - \alpha) \sum_{j = 1}^{p}\beta_j^2 + \alpha \sum_{j = 1}^p |\beta_j|$$
 When $\alpha = 1$, the model is known as the Lasso, and when $\alpha = 0$, the model is known as Ridge Regression. 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PaFPbb66DxQ?rel=0&showinfo=1&playlist=1dKRdX9bfIo,ctmNq7FgbvI" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/PaFPbb66DxQ?rel=0&modestbranding=1&playsinline=1" frameborder="0" allowfullscreen></iframe>
 
 
 Luckily, none of this needs to be memorized.  On the exam, read the documentation in R to refresh your memory.  For the Elastic Net, the function is `glmnet`, and so running `?glmnet` will give you this info.
@@ -1771,7 +1774,7 @@ A GLM with 100 predictors has high flexibility. This is a general definition bec
 
 A model with high variance would have large p-values, but this could still be inflexible if only a few predictors are included. Conversely, a model could have high flexibility by having many predictor variables and interaction terms but have low variance if all of the p-values were small.
 
-Your goal of PA is to solve a business problem. There is a constant balance between making an interpretable model and one that has good performance. Highly flexible models, which are often called black boxes, are only useful for making predictions.
+Your goal of PA is to solve a business problem. There is a constant balance between making an interpretable model and one that has good performance. Highly flexible models, which are often called opaque models, are only useful for making predictions.
   
 
 ```{r echo = F, fig.align="center", warning=F, out.width="100%"}

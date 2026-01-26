@@ -2,14 +2,16 @@
 output:
   html_document: default
   pdf_document: default
+description: "Unsupervised learning methods including PCA, k-means, and clustering."
+keywords: ["unsupervised learning","PCA","k-means","hierarchical clustering","correlation analysis"]
 ---
 
 # Unsupervised Learning
 
-This chapter covers the eighth learning objective along with one additional topic of correlation analysis.
+This chapter covers the eighth learning objective along with one additional topic of correlation analysis. For supplemental notes, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
 
-[![Lecture](images/lesson-unsupervised-learning.PNG)](https://exampa.net/)
+[![Lecture](images/lesson-unsupervised-learning.PNG)](https://PredictiveInsightsAI.com/)
 
 Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=147">Practice Exams + Lessons</a>
 
@@ -17,7 +19,7 @@ Already enrolled?  Watch the full video: <a target="_parent" href="https://cours
 knitr::include_graphics("images/learning_obj8.png")
 ```
 
-As of the fall of 2020, there have been eight different PA exams. The table below shows the types of questions in each. Your exam in December will likely have a question on either k-means or hierarchical clustering because these topics have not frequently been tested. The Hospital Readmissions sample project did have one question related to k-means, but that was in 2018. Our ExamPA.net practice exams contain questions on both topics.
+As of the current syllabus, there have been multiple PA exams. The table below shows the types of questions in each. Your upcoming sitting will likely have a question on either k-means or hierarchical clustering because these topics have not frequently been tested. The Hospital Readmissions sample project includes a question related to k-means. Our https://PredictiveInsightsAI.com practice exams contain questions on both topics.
 
 ```{r echo = F, fig.align="center", warning=F, out.width="400%"}
 knitr::include_graphics("images/prior_unsupervised_qs.png")
@@ -66,7 +68,7 @@ Examples:
 
 Often there are variables that contain redundant information.  PCA is one method of simplifying them.
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FgakZw6K1QQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FgakZw6K1QQ?rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 StatQuest. “Principal Component Analysis (PCA), Step-by-Step” YouTube, Joshua Starmer, 2 Apr 2018, https://www.youtube.com/watch?v=FgakZw6K1QQ
 
@@ -109,13 +111,13 @@ glimpse(USArrests)
 Let us start by taking a quick look at the column means of the data. 
 
 ```{r}
-USArrests %>% summarise_all(mean)
+USArrests %>% summarise(across(everything(), mean))
 ```
 
 We see right away the the data have **vastly** different means. We can also examine the variances of the four variables.
 
 ```{r}
-USArrests %>% summarise_all(var)
+USArrests %>% summarise(across(everything(), var))
 ```
 
 Not surprisingly, the variables also have vastly different variances: the `UrbanPop` variable measures the percentage of the population in each state living in an urban area, which is not comparable to the number of crimes committed in each state per 100,000 individuals. If we failed to scale the variables before performing PCA, then most of the principal components we observed would be driven by the `Assault` variable, since it has by far the largest mean and variance. 
@@ -212,7 +214,7 @@ cumsum(a)
 
 Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=204">Practice Exams</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=155">Practice Exams + Lessons</a>
 
-### Example: PCA on Cancel Cells
+### Example: PCA on Cancer Cells
 
 The data  `NCI60` contains expression levels of 6,830 genes from 64 cancel cell lines. Cancer type is also recorded.
 
@@ -284,7 +286,7 @@ Clustering algorithms look for groups of observations that are similar to one an
 
 Kmeans takes continuous data and assigns observations into k clusters or groups. In the two-dimensional example, this is the same as drawing lines around points. 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4b5d3muPQmA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4b5d3muPQmA?rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 StatQuest. “ K-means clustering” YouTube, Joshua Starmer, 2 Apr 2018, https://www.youtube.com/watch?v=4b5d3muPQmA&t=268s
 
@@ -366,7 +368,7 @@ When performing K-means clustering and using multiple initial cluster assignment
 
 Kmeans required that we choose the number of clusters, k. Hierarchical clustering is an alternative that does not require that we choose only one value of k.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7xHsRkOdVwo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/7xHsRkOdVwo?rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 StatQuest. “ Hierarchical Clustering” YouTube, Joshua Starmer, 20 Jun, 2017, https://www.youtube.com/watch?v=7xHsRkOdVwo&t=137s
 

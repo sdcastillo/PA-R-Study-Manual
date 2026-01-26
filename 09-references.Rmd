@@ -2,6 +2,8 @@
 output:
   html_document: default
   pdf_document: default
+description: "References for predictive analytics, machine learning, and Exam PA."
+keywords: ["references","predictive analytics","machine learning","statistics","Exam PA"]
 ---
 
 # References
@@ -21,7 +23,7 @@ Rigollet, Philippe (2017).  *Lecture 21: Generalized Linear Models*.  Video.  ht
 
 Wickham, Hadley. 2019.  *R for Data Science*.  https://r4ds.had.co.nz/
 
-"Complimentary Log Log Model".  University of Alberta.  Accessed 2020.  http://www.stat.ualberta.ca/~kcarrier/STAT562/comp_log_log.pdf
+"Complimentary Log Log Model".  University of Alberta.  Accessed 2026.  http://www.stat.ualberta.ca/~kcarrier/STAT562/comp_log_log.pdf
 
 The examples of the Ridge and Lasso are an adaptation of p. 251-255 of "Introduction to
 Statistical Learning with Applications in R" by Gareth James, Daniela Witten, Trevor Hastie and Robert
@@ -35,6 +37,5 @@ Used with permission from Jordan Crouser at Smith College.  Additional Thanks to
 * github.com/rudeboybert
 * github.com/ijlyttle
 
-
-
+For updated references and companion materials, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
