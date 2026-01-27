@@ -7,7 +7,7 @@ documentclass: book
 classoption: openany
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
-link-citations: yes
+link-citations: true
 favicon: images/artificial_actuary_logo_favicon.png
 description: "Exam PA study guide for predictive analytics with R, modeling, and communication."
 keywords: ["Exam PA study guide","predictive analytics","R","modeling","communication"]
@@ -17,7 +17,7 @@ keywords: ["Exam PA study guide","predictive analytics","R","modeling","communic
 
 <hr>
 
-<img src="images/book_cover_2021_fall.png" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />This is the study guide for [https://PredictiveInsightsAI.com](https://exampa.net), the online course for the Predictive Analytics exam of SOA. While meeting all of the learning requirements of Exam PA, this 250-page study guide gives data science and machine learning training. It would be taught how to get data into R, clean it, visualize it, and use models to derive business value. Just as scientists set up lab experiments to form and test hypotheses, it would be required to build models and test them on holdout sets.
+<img src="images/book_cover_2021_fall.png" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />This is the study guide for [https://PredictiveInsightsAI.com](Predictive Insights), the online course for the Predictive Analytics exam of SOA. While meeting all of the learning requirements of Exam PA, this 250-page study guide gives data science and machine learning training. It would be taught how to get data into R, clean it, visualize it, and use models to derive business value. Just as scientists set up lab experiments to form and test hypotheses, it would be required to build models and test them on holdout sets.
 
 For updates, new resources, and companion materials, visit [PredictiveInsightsAI.com](https://PredictiveInsightsAI.com). Follow on X: [@SamCast65215624](https://x.com/SamCast65215624). Buy the PDF: [Amazon](https://a.co/d/cpy7RSx).
 
