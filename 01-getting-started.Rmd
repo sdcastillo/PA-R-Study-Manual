@@ -38,6 +38,14 @@ ds <- datasets$load_dataset("supersam7/health_insurance")
 
 This chapter tells you how to install the necessary software on your computer. For updates and curated resources, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
+## Central Limit Theorem (interactive)
+
+Explore the Central Limit Theorem with this embedded Shiny app.
+
+<iframe src="https://019b3dd0-3020-c090-9e63-fce06a1e928b.share.connect.posit.cloud/" width="100%" height="760" style="border:0;" loading="lazy" allowfullscreen></iframe>
+
+Open in a new tab: <https://019b3dd0-3020-c090-9e63-fce06a1e928b.share.connect.posit.cloud/>
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/OUkC6vVJeQA?rel=0&modestbranding=1&playsinline=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 yout

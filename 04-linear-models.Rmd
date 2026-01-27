@@ -17,6 +17,14 @@ theme_set(theme_bw())
 
 About 40-50\% of the exam grade is based on modeling. The goal is to be able to predict an unknown quantity. In actuarial applications, this tends to claim that occur in the future, death, injury, accidents, policy lapse, hurricanes, or some other insurable event. For model walkthroughs and updates, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
+## Motivating example: Stock Analytics Dashboard
+
+This Shiny app demonstrates how models support anomaly detection and dividend analysis in real-world stock analytics.
+
+<iframe src="https://019b3e00-a6ca-37b0-0ab4-a5b8356251b4.share.connect.posit.cloud/" width="100%" height="760" style="border:0;" loading="lazy" allowfullscreen></iframe>
+
+Open in a new tab: <https://019b3e00-a6ca-37b0-0ab4-a5b8356251b4.share.connect.posit.cloud/>
+
 The next few chapters will cover the following learning objectives.
 
 

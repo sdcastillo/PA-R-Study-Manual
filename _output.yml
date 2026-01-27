@@ -1,6 +1,8 @@
 bookdown::gitbook:
   css: style.css
   highlight: tango
+  self_contained: true
+  lib_dir: libs
   config:
     sharing:
       github: no
@@ -24,4 +26,3 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
 bookdown::epub_book: default
-output_dir: "docs"
