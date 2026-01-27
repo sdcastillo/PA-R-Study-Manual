@@ -19,7 +19,7 @@ keywords: ["Exam PA study guide","predictive analytics","R","modeling","communic
 
 <img src="images/book_cover_2021_fall.png" width="250" height="340" alt="Cover image" align="right" style="margin: 0 1em 0 1em" />This is the study guide for [https://PredictiveInsightsAI.com](Predictive Insights), the online course for the Predictive Analytics exam of SOA. While meeting all of the learning requirements of Exam PA, this 250-page study guide gives data science and machine learning training. It would be taught how to get data into R, clean it, visualize it, and use models to derive business value. Just as scientists set up lab experiments to form and test hypotheses, it would be required to build models and test them on holdout sets.
 
-For updates, new resources, and companion materials, visit [PredictiveInsightsAI.com](https://PredictiveInsightsAI.com). Follow on X: [@SamCast65215624](https://x.com/SamCast65215624). Buy the PDF: [Amazon](https://a.co/d/cpy7RSx).
+For updates, new resources, and companion materials, visit [PredictiveInsightsAI.com](https://PredictiveInsightsAI.com). Follow on X: [\@SamCast65215624](https://x.com/SamCast65215624). Buy the PDF: [Amazon](https://a.co/d/cpy7RSx).
 
 The chapters on R-programming cover the foundational concepts with a focus on modern data science applications. Time-saving coding tips along with ways of checking answers within RStudio will be taught.
 
