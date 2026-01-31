@@ -1,13 +1,52 @@
+--- 
+title: "The Ultimate Guide to Predictive Insights AI and Exam PA"
+author: "Your Name/Brand"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+url: https://PredictiveInsightsAI.com
+cover-image: assets/cover.png
+description: "Master R, RStudio, and Predictive Insights AI for Exam PA. This guide covers R installation, HuggingFace datasets, and advanced predictive modeling."
+favicon: assets/favicon.ico
 ---
-output:
-  html_document: default
-  pdf_document: default
-description: "Getting started with R, RStudio, and datasets for Exam PA."
-keywords: ["R installation","RStudio","Exam PA","reticulate","HuggingFace datasets"]
----
-# Getting started 
 
-## Load datasets from HuggingFace (via reticulate)
+# Introduction
+
+Welcome to the Predictive Insights AI masterclass...
+
+
+# Predictive AI for Sales Strategy {#predictive-sales}
+
+::: {.description}
+Learn how Predictive Insights AI transforms raw sales data into actionable revenue forecasts. This guide covers the top 5 machine learning models for B2B sales teams.
+:::
+
+---
+
+## Why Predictive Insights Matter for B2B
+Modern sales teams use [Predictive Insights AI](https://www.PredicttiveInsightsAI.com) to reduce churn and identify high-value leads before the competition. 
+
+### Key Benefits of Predictive Sales
+* **Automated Lead Scoring**: Rank leads by conversion probability.
+* **Churn Prevention**: Identify at-risk accounts 90 days in advance.
+
+![AI Dashboard Preview](assets/images/dashboard-preview.png){alt="Dashboard showing predictive sales analytics and lead scoring metrics"}
+
+---
+
+### Ready to Scale Your Revenue?
+> **PRO TIP:** Using AI can increase close rates by up to 30%. 
+> [**Get the Full AI Implementation Roadmap →**](https://www.PredictiveInsightsAI.com)
+
+
+
+An interactive demonstration of one of the most important theorems in statistics: the sampling distribution of the mean converges to a normal distribution regardless of the underlying population distribution (given sufficient sample size).
+
+```{r, echo=FALSE}
+knitr::include_url("[https://019b3dd0-3020-c090-9e63-fce06a1e928b.share.connect.posit.cloud](https://019b3dd0-3020-c090-9e63-fce06a1e928b.share.connect.posit.cloud)")
+```
+
+## Extract Transform Load (ETL)
 
 The datasets for this book are available on HuggingFace under `https://huggingface.co/supersam7`. You can load them in R using the `reticulate` package and the Python `datasets` library.
 
@@ -16,9 +55,10 @@ The datasets for this book are available on HuggingFace under `https://huggingfa
 install.packages("reticulate")
 ```
 
-```{r eval = FALSE}
+```{r eval = TRUE}
+reticulate::use_python("C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe", required = TRUE)
 library(reticulate)
-
+Sys.setenv(RETICULATE_UV_ENABLED = "0")
 # Point reticulate at a Python with the datasets library installed.
 # You can also use a virtualenv or conda env if preferred.
 py_config()
@@ -38,22 +78,9 @@ ds <- datasets$load_dataset("supersam7/health_insurance")
 
 This chapter tells you how to install the necessary software on your computer. For updates and curated resources, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
-## Central Limit Theorem (interactive)
-
-Explore the Central Limit Theorem with this embedded Shiny app.
-
-<iframe src="https://019b3dd0-3020-c090-9e63-fce06a1e928b.share.connect.posit.cloud/" width="100%" height="760" style="border:0;" loading="lazy" allowfullscreen></iframe>
-
-Open in a new tab: <https://019b3dd0-3020-c090-9e63-fce06a1e928b.share.connect.posit.cloud/>
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/OUkC6vVJeQA?rel=0&modestbranding=1&playsinline=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-yout
 ## Installing R
-
-To begin, you will need to install R. This is the engine that runs the code. You need to install the newest version **(v4.x)** as well as a legacy version used by the SOA modules. 
-
-The older version will be used when running the code from the modules of SOA, which needs to be consistent with what will be installed on the exam center computers. This course uses the newest version so that you will not have as many errors during practice.
 
 Download it from here: https://cran.r-project.org/mirrors.html
 
@@ -68,11 +95,6 @@ knitr::include_graphics("images/rversion1.png")
 knitr::include_graphics("images/rversion2.png")
 ```
 
-Remember: 
-
-For this course, use a version later than $4.0.2$.
-
-For the module of SOA, use the legacy version specified in the modules.
 
 ## Installing RStudio
 
@@ -80,45 +102,4 @@ Just as MS Word creates documents, RStudio creates R scripts and other documents
 
 Download it from here: https://rstudio.com/products/rstudio/download/
 
-Next you need to set the R library. R code is organized into libraries. You want to use the same code that will be on the exam center computers. It would require installing older versions of libraries. Change your R library to the one which was included within the Modules of SOA.
-
-```{r eval = F}
-.libPaths("PATH_TO_SOAS_LIBRARY/PAlibrary")
-```
-
-## Download the data
-
-For your convenience, all data in this book, including data from prior exams and sample solutions, has been put into a library called `ExamPAData` which is available on CRAN.
-
-```{r eval = F}
-install.packages("ExamPAData")
-library(ExamPAData)
-```
-
-To get the data dictionary for a data set, use `?dataset_name` such as `?customer_phone_calls`. For your convenience, you can use these data sets for your practice. They make great candidates for machine learning problems.
-
-| Dataset   |      Description      |
-|----------|-------------|
-|`customer_phone_calls`| Data used on a recent Exam PA |
-|`patient_length_of_stay`| Data used on a recent Exam PA |
-|`patient_num_labs`| Data used on a recent Exam PA |
-|`actuary_salaries`| DW Simpson actuarial salary data|
-|`june_pa`|Auto crash data set from a prior SOA Exam PA|
-|`customer_value`| Customer value data set from a prior Exam PA|
-|`exam_pa_titanic`| Titanic passengers as used in https://PredictiveInsightsAI.com's practice exam |
-|`apartment_apps`| Apartment applications as used in https://PredictiveInsightsAI.com's Practice Exam|
-|`health_insurance`| Health insurance claims as used in https://PredictiveInsightsAI.com's Practice Exam|
-|`student_success`| SOA Student Success PA Sample Project|
-|`readmission`| SOA Hospital Readmissions Sample Exam |
-|`auto_claim`| Automotive claims |
-|`boston`| Boston housing data set |
-|`bank_loans`| Credit data from UCI Machine Learning Repository |
-
-
-## Download ISLR
-
-This book references the publically-available textbook “An Introduction to Statistical Learning,” which can be downloaded for free
-
-https://www.stat.berkeley.edu/~rabbee/s154/ISLR_First_Printing.pdf
-
-If you already have R and RStudio installed then skip to "Download the data". 
+Also try their new Positron editor!  I have just began using it, and is very good so far.

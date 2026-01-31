@@ -1,22 +1,20 @@
 bookdown::gitbook:
-  css: style.css
+  css: ["style.css", "assets/css/space-vibe.css"]
   highlight: tango
-  self_contained: true
-  lib_dir: libs
   config:
     sharing:
-      github: no
-      facebook: no
-      twitter: no
+      github: yes
+      facebook: yes
+      twitter: yes
+      linkedin: yes
     toc:
       collapse: subsection
-      before: |
-        <li><a href="./">Exam PA Study Manual</a></li>
+            before: |
+        <li><a href="https://www.PredictiveInsightsAI.com"><b>Predictive Insights AI</b></a></li>
+        <center><li><a href="https://www.PredictiveInsightsAI.com" class="btn btn-primary" style="margin:10px; color:white; background-color:#007bff; padding:5px 10px; border-radius:5px; text-decoration:none;">Contact Sales</a></li></center>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/%s
-    download: ["pdf"]
-bookdown::pdf_book:
+        <li><a href="https://www.PredictiveInsightsAI.com">Visit My Main Site</a></li>
+      bookdown::pdf_book:
   dev: "cairo_pdf"
   toc_unnumbered: yes
   toc_depth: 2
@@ -26,3 +24,4 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
 bookdown::epub_book: default
+output_dir: "docs"

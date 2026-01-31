@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 18 Robocalls Consumer Protections | Data exploration</title>
+  <meta name="description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 18 Robocalls Consumer Protections | Data exploration" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/pitch-deck-cover.jpg" />
+  <meta property="og:description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="github-repo" content="sdcastillo/PA-R-Study-Manual" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 18 Robocalls Consumer Protections | Data exploration" />
+  
+  <meta name="twitter:description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="twitter:image" content="/images/pitch-deck-cover.jpg" />
+
+<meta name="author" content="Samuel Castillo" />
+
+
+<meta name="date" content="2026-01-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="loan-risk-modeling.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="assets/css/space-vibe.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Exam PA Study Manual</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#faq-frequently-asked-questions"><i class="fa fa-check"></i><b>0.1</b> FAQ: Frequently Asked Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>1</b> The exam</a></li>
+<li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
+<li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
+<li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#extract-transform-load-etl"><i class="fa fa-check"></i><b>4.1</b> Extract Transform Load (ETL)</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.2</b> Installing R</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.3</b> Installing RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="learning-to-code.html"><a href="learning-to-code.html"><i class="fa fa-check"></i><b>5</b> Learning to Code</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="learning-to-code.html"><a href="learning-to-code.html#how-to-use-the-pa-r-cheat-sheets"><i class="fa fa-check"></i><b>5.1</b> How to use the PA R cheat sheets?</a></li>
+<li class="chapter" data-level="5.2" data-path="learning-to-code.html"><a href="learning-to-code.html#example-soa-pa-task-8"><i class="fa fa-check"></i><b>5.2</b> Example: SOA PA Task 8</a></li>
+<li class="chapter" data-level="5.3" data-path="learning-to-code.html"><a href="learning-to-code.html#example-2---data-exploration"><i class="fa fa-check"></i><b>5.3</b> Example 2 - Data exploration</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>6</b> R programming</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-programming.html"><a href="r-programming.html#notebook-chunks"><i class="fa fa-check"></i><b>6.1</b> Notebook chunks</a></li>
+<li class="chapter" data-level="6.2" data-path="r-programming.html"><a href="r-programming.html#basic-operations"><i class="fa fa-check"></i><b>6.2</b> Basic operations</a></li>
+<li class="chapter" data-level="6.3" data-path="r-programming.html"><a href="r-programming.html#lists"><i class="fa fa-check"></i><b>6.3</b> Lists</a></li>
+<li class="chapter" data-level="6.4" data-path="r-programming.html"><a href="r-programming.html#functions"><i class="fa fa-check"></i><b>6.4</b> Functions</a></li>
+<li class="chapter" data-level="6.5" data-path="r-programming.html"><a href="r-programming.html#data-frames"><i class="fa fa-check"></i><b>6.5</b> Data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>7</b> Data exploration</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-exploration.html"><a href="data-exploration.html#how-to-make-graphs-in-r"><i class="fa fa-check"></i><b>7.1</b> How to make graphs in R?</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="data-exploration.html"><a href="data-exploration.html#add-a-plot"><i class="fa fa-check"></i><b>7.1.1</b> Add a plot</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="data-exploration.html"><a href="data-exploration.html#the-different-graph-types"><i class="fa fa-check"></i><b>7.2</b> The different graph types</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="data-exploration.html"><a href="data-exploration.html#histogram"><i class="fa fa-check"></i><b>7.2.1</b> Histogram</a></li>
+<li class="chapter" data-level="7.2.2" data-path="data-exploration.html"><a href="data-exploration.html#box-plot"><i class="fa fa-check"></i><b>7.2.2</b> Box plot</a></li>
+<li class="chapter" data-level="7.2.3" data-path="data-exploration.html"><a href="data-exploration.html#scatterplot"><i class="fa fa-check"></i><b>7.2.3</b> Scatterplot</a></li>
+<li class="chapter" data-level="7.2.4" data-path="data-exploration.html"><a href="data-exploration.html#bar-charts"><i class="fa fa-check"></i><b>7.2.4</b> Bar charts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="data-exploration.html"><a href="data-exploration.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>7.3</b> How to save time with dplyr?</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="data-exploration.html"><a href="data-exploration.html#data-manipulation-chaining"><i class="fa fa-check"></i><b>7.3.1</b> Data manipulation chaining</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-exploration.html"><a href="data-exploration.html#types-of-missing-values"><i class="fa fa-check"></i><b>7.3.2</b> Types of Missing Values</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-exploration.html"><a href="data-exploration.html#missing-value-resolutions"><i class="fa fa-check"></i><b>7.3.3</b> Missing Value Resolutions:</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.3.4</b> Garbage in; garbage out 🗑</a></li>
+<li class="chapter" data-level="7.3.5" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.3.5</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="7.3.6" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.3.6</b> A picture is worth a thousand words 📷</a></li>
+<li class="chapter" data-level="7.3.7" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.3.7</b> Factor or numeric ❓</a></li>
+<li class="chapter" data-level="7.3.8" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.3.8</b> 73.6% of statistics are false 😨</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html"><i class="fa fa-check"></i><b>8</b> Introduction to modeling</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-vocabulary"><i class="fa fa-check"></i><b>8.1</b> Modeling vocabulary</a></li>
+<li class="chapter" data-level="8.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-notation"><i class="fa fa-check"></i><b>8.2</b> Modeling notation</a></li>
+<li class="chapter" data-level="8.3" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#ordinary-least-squares-ols"><i class="fa fa-check"></i><b>8.3</b> Ordinary Least Squares (OLS)</a></li>
+<li class="chapter" data-level="8.4" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#r2-statistic"><i class="fa fa-check"></i><b>8.4</b> R^2 Statistic</a></li>
+<li class="chapter" data-level="8.5" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#correlation"><i class="fa fa-check"></i><b>8.5</b> Correlation</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#pearsons-correlation"><i class="fa fa-check"></i><b>8.5.1</b> Pearson’s correlation</a></li>
+<li class="chapter" data-level="8.5.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#spearman-rank-correlation"><i class="fa fa-check"></i><b>8.5.2</b> Spearman (rank) correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-vs.-classification"><i class="fa fa-check"></i><b>8.6</b> Regression vs. classification</a></li>
+<li class="chapter" data-level="8.7" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-metrics"><i class="fa fa-check"></i><b>8.7</b> Regression metrics</a></li>
+<li class="chapter" data-level="8.8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#load-dataset"><i class="fa fa-check"></i><b>8.8</b> Load Dataset</a></li>
+<li class="chapter" data-level="8.9" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#simple-linear-model"><i class="fa fa-check"></i><b>8.9</b> Simple Linear Model</a></li>
+<li class="chapter" data-level="8.10" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.10</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.10.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#assumptions-of-ols"><i class="fa fa-check"></i><b>8.10.1</b> Assumptions of OLS</a></li>
+<li class="chapter" data-level="8.10.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#assumptions-of-glms"><i class="fa fa-check"></i><b>8.10.2</b> Assumptions of GLMs</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>8.11</b> Interpretation of coefficients</a>
+<ul>
+<li class="chapter" data-level="8.11.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#identity-link"><i class="fa fa-check"></i><b>8.11.1</b> Identity link</a></li>
+<li class="chapter" data-level="8.11.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#log-link"><i class="fa fa-check"></i><b>8.11.2</b> Log link</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>8.12</b> Advantages and disadvantages</a></li>
+<li class="chapter" data-level="8.13" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#glms-for-regression"><i class="fa fa-check"></i><b>8.13</b> GLMs for regression</a></li>
+<li class="chapter" data-level="8.14" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#other-links"><i class="fa fa-check"></i><b>8.14</b> Other links</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="glms-for-classification.html"><a href="glms-for-classification.html"><i class="fa fa-check"></i><b>9</b> GLMs for classification</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#binary-target"><i class="fa fa-check"></i><b>9.1</b> Binary target</a></li>
+<li class="chapter" data-level="9.2" data-path="glms-for-classification.html"><a href="glms-for-classification.html#count-target"><i class="fa fa-check"></i><b>9.2</b> Count target</a></li>
+<li class="chapter" data-level="9.3" data-path="glms-for-classification.html"><a href="glms-for-classification.html#link-functions"><i class="fa fa-check"></i><b>9.3</b> Link functions</a></li>
+<li class="chapter" data-level="9.4" data-path="glms-for-classification.html"><a href="glms-for-classification.html#glm-poisson-gamma-for-claims"><i class="fa fa-check"></i><b>9.4</b> GLM – Poisson / Gamma for Claims</a></li>
+<li class="chapter" data-level="9.5" data-path="glms-for-classification.html"><a href="glms-for-classification.html#penalized-regression-ridge-lasso"><i class="fa fa-check"></i><b>9.5</b> Penalized Regression – Ridge / Lasso</a></li>
+<li class="chapter" data-level="9.6" data-path="glms-for-classification.html"><a href="glms-for-classification.html#interpretation-of-coefficients-1"><i class="fa fa-check"></i><b>9.6</b> Interpretation of coefficients</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#logit"><i class="fa fa-check"></i><b>9.6.1</b> Logit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="classification-metrics.html"><a href="classification-metrics.html"><i class="fa fa-check"></i><b>10</b> Classification metrics</a>
+<ul>
+<li class="chapter" data-level="10.0.1" data-path="classification-metrics.html"><a href="classification-metrics.html#probit-cauchit-cloglog"><i class="fa fa-check"></i><b>10.0.1</b> Probit, Cauchit, Cloglog</a></li>
+<li class="chapter" data-level="10.1" data-path="classification-metrics.html"><a href="classification-metrics.html#area-under-the-roc-curve-auc"><i class="fa fa-check"></i><b>10.1</b> Area Under the ROC Curve (AUC)</a></li>
+<li class="chapter" data-level="10.2" data-path="classification-metrics.html"><a href="classification-metrics.html#demo-the-model-for-interpretation"><i class="fa fa-check"></i><b>10.2</b> Demo the model for interpretation</a></li>
+<li class="chapter" data-level="10.3" data-path="classification-metrics.html"><a href="classification-metrics.html#video-walkthrough"><i class="fa fa-check"></i><b>10.3</b> Video Walkthrough</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html"><i class="fa fa-check"></i><b>11</b> Additional GLM topics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#residuals"><i class="fa fa-check"></i><b>11.1</b> Residuals</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#raw-residuals"><i class="fa fa-check"></i><b>11.1.1</b> Raw residuals</a></li>
+<li class="chapter" data-level="11.1.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#deviance-residuals"><i class="fa fa-check"></i><b>11.1.2</b> Deviance residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#example"><i class="fa fa-check"></i><b>11.2</b> Example</a></li>
+<li class="chapter" data-level="11.3" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#log-transforms-of-predictors"><i class="fa fa-check"></i><b>11.3</b> Log transforms of predictors</a></li>
+<li class="chapter" data-level="11.4" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#example-1"><i class="fa fa-check"></i><b>11.4</b> Example</a></li>
+<li class="chapter" data-level="11.5" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#reference-levels"><i class="fa fa-check"></i><b>11.5</b> Reference levels</a></li>
+<li class="chapter" data-level="11.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#interactions"><i class="fa fa-check"></i><b>11.6</b> Interactions</a></li>
+<li class="chapter" data-level="11.7" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#offsets"><i class="fa fa-check"></i><b>11.7</b> Offsets</a></li>
+<li class="chapter" data-level="11.8" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#tweedie-regression"><i class="fa fa-check"></i><b>11.8</b> Tweedie regression</a></li>
+<li class="chapter" data-level="11.9" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#combinations-of-link-functions-and-target-distributions"><i class="fa fa-check"></i><b>11.9</b> Combinations of Link Functions and Target Distributions</a>
+<ul>
+<li class="chapter" data-level="11.9.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-log-link"><i class="fa fa-check"></i><b>11.9.1</b> Gaussian Response with Log Link</a></li>
+<li class="chapter" data-level="11.9.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-inverse-link"><i class="fa fa-check"></i><b>11.9.2</b> Gaussian Response with Inverse Link</a></li>
+<li class="chapter" data-level="11.9.3" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-identity-link"><i class="fa fa-check"></i><b>11.9.3</b> Gaussian Response with Identity Link</a></li>
+<li class="chapter" data-level="11.9.4" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-log-link-and-negative-values"><i class="fa fa-check"></i><b>11.9.4</b> Gaussian Response with Log Link and Negative Values</a></li>
+<li class="chapter" data-level="11.9.5" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gamma-response-with-log-link"><i class="fa fa-check"></i><b>11.9.5</b> Gamma Response with Log Link</a></li>
+<li class="chapter" data-level="11.9.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gamma-with-inverse-link"><i class="fa fa-check"></i><b>11.9.6</b> Gamma with Inverse Link</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html"><i class="fa fa-check"></i><b>12</b> GLM variable selection</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#stepwise-subset-selection"><i class="fa fa-check"></i><b>12.1</b> Stepwise subset selection</a></li>
+<li class="chapter" data-level="12.2" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-soa-pa-61219-task-6"><i class="fa fa-check"></i><b>12.2</b> Example: SOA PA 6/12/19, Task 6</a></li>
+<li class="chapter" data-level="12.3" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#penalized-linear-models"><i class="fa fa-check"></i><b>12.3</b> Penalized Linear Models</a></li>
+<li class="chapter" data-level="12.4" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#ridge-regression"><i class="fa fa-check"></i><b>12.4</b> Ridge Regression</a></li>
+<li class="chapter" data-level="12.5" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#lasso"><i class="fa fa-check"></i><b>12.5</b> Lasso</a></li>
+<li class="chapter" data-level="12.6" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#elastic-net"><i class="fa fa-check"></i><b>12.6</b> Elastic Net</a></li>
+<li class="chapter" data-level="12.7" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#advantages-and-disadvantages-1"><i class="fa fa-check"></i><b>12.7</b> Advantages and disadvantages</a></li>
+<li class="chapter" data-level="12.8" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-ridge-regression"><i class="fa fa-check"></i><b>12.8</b> Example: Ridge Regression</a></li>
+<li class="chapter" data-level="12.9" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-the-lasso"><i class="fa fa-check"></i><b>12.9</b> Example: The Lasso</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="bias-variance-trade-off.html"><a href="bias-variance-trade-off.html"><i class="fa fa-check"></i><b>13</b> Bias-variance trade-off</a></li>
+<li class="chapter" data-level="14" data-path="tree-based-models.html"><a href="tree-based-models.html"><i class="fa fa-check"></i><b>14</b> Tree-Based Models</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tree-based-models.html"><a href="tree-based-models.html#overview-of-models-on-exam-pa"><i class="fa fa-check"></i><b>14.1</b> Overview of Models on Exam PA</a></li>
+<li class="chapter" data-level="14.2" data-path="tree-based-models.html"><a href="tree-based-models.html#bootstrap-cross-validation-for-hyperparameter-tuning"><i class="fa fa-check"></i><b>14.2</b> Bootstrap &amp; Cross-Validation for Hyperparameter Tuning</a></li>
+<li class="chapter" data-level="14.3" data-path="tree-based-models.html"><a href="tree-based-models.html#decision-trees-core-idea"><i class="fa fa-check"></i><b>14.3</b> Decision Trees – Core Idea</a></li>
+<li class="chapter" data-level="14.4" data-path="tree-based-models.html"><a href="tree-based-models.html#how-trees-choose-splits"><i class="fa fa-check"></i><b>14.4</b> How Trees Choose Splits</a></li>
+<li class="chapter" data-level="14.5" data-path="tree-based-models.html"><a href="tree-based-models.html#complexity-parameter-pruning"><i class="fa fa-check"></i><b>14.5</b> Complexity Parameter &amp; Pruning</a></li>
+<li class="chapter" data-level="14.6" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-disadvantages-of-single-trees"><i class="fa fa-check"></i><b>14.6</b> Advantages &amp; Disadvantages of Single Trees</a></li>
+<li class="chapter" data-level="14.7" data-path="tree-based-models.html"><a href="tree-based-models.html#bagging-random-forests"><i class="fa fa-check"></i><b>14.7</b> Bagging &amp; Random Forests</a></li>
+<li class="chapter" data-level="14.8" data-path="tree-based-models.html"><a href="tree-based-models.html#boosted-trees-gbm"><i class="fa fa-check"></i><b>14.8</b> Boosted Trees (GBM)</a></li>
+<li class="chapter" data-level="14.9" data-path="tree-based-models.html"><a href="tree-based-models.html#partial-dependence-plots"><i class="fa fa-check"></i><b>14.9</b> Partial Dependence Plots</a></li>
+<li class="chapter" data-level="14.10" data-path="tree-based-models.html"><a href="tree-based-models.html#final-exam-tips"><i class="fa fa-check"></i><b>14.10</b> Final Exam Tips</a></li>
+<li class="chapter" data-level="14.11" data-path="tree-based-models.html"><a href="tree-based-models.html#load-dataset-1"><i class="fa fa-check"></i><b>14.11</b> Load Dataset</a></li>
+<li class="chapter" data-level="14.12" data-path="tree-based-models.html"><a href="tree-based-models.html#single-decision-tree"><i class="fa fa-check"></i><b>14.12</b> Single Decision Tree</a></li>
+<li class="chapter" data-level="14.13" data-path="tree-based-models.html"><a href="tree-based-models.html#random-forest"><i class="fa fa-check"></i><b>14.13</b> Random Forest</a></li>
+<li class="chapter" data-level="14.14" data-path="tree-based-models.html"><a href="tree-based-models.html#gradient-boosting-gbm"><i class="fa fa-check"></i><b>14.14</b> Gradient Boosting (gbm)</a></li>
+<li class="chapter" data-level="14.15" data-path="tree-based-models.html"><a href="tree-based-models.html#xgboost"><i class="fa fa-check"></i><b>14.15</b> XGBoost</a></li>
+<li class="chapter" data-level="14.16" data-path="tree-based-models.html"><a href="tree-based-models.html#direct-lightgbm"><i class="fa fa-check"></i><b>14.16</b> Direct lightgbm</a></li>
+<li class="chapter" data-level="14.17" data-path="tree-based-models.html"><a href="tree-based-models.html#variable-importance-from-direct-lightgbm"><i class="fa fa-check"></i><b>14.17</b> Variable Importance (from direct LightGBM)</a></li>
+<li class="chapter" data-level="14.18" data-path="tree-based-models.html"><a href="tree-based-models.html#video-walkthrough-1"><i class="fa fa-check"></i><b>14.18</b> Video Walkthrough</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>15</b> Writing and Communication</a></li>
+<li class="chapter" data-level="16" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html"><i class="fa fa-check"></i><b>16</b> Bank Loans Case Study</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-1---examine-the-target-variable"><i class="fa fa-check"></i><b>16.1</b> Task 1 - Examine the Target Variable</a></li>
+<li class="chapter" data-level="16.2" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-2---decide-on-which-variables-to-discard"><i class="fa fa-check"></i><b>16.2</b> Task 2 - Decide on which variables to discard</a></li>
+<li class="chapter" data-level="16.3" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-3---examine-the-numeric-variables"><i class="fa fa-check"></i><b>16.3</b> Task 3 - Examine the numeric variables</a></li>
+<li class="chapter" data-level="16.4" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-4---examine-the-factor-variables"><i class="fa fa-check"></i><b>16.4</b> Task 4 - Examine the factor variables</a></li>
+<li class="chapter" data-level="16.5" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-5---fit-a-glm"><i class="fa fa-check"></i><b>16.5</b> Task 5 - Fit a GLM</a></li>
+<li class="chapter" data-level="16.6" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-6---use-aic-to-select-features"><i class="fa fa-check"></i><b>16.6</b> Task 6 - Use AIC to select features</a></li>
+<li class="chapter" data-level="16.7" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-8---create-a-bagged-tree-model"><i class="fa fa-check"></i><b>16.7</b> Task 8 - Create a bagged tree model</a></li>
+<li class="chapter" data-level="16.8" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-9---measure-the-variable-importance-with-a-random-forest"><i class="fa fa-check"></i><b>16.8</b> Task 9 - Measure the variable importance with a Random Forest</a></li>
+<li class="chapter" data-level="16.9" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#save-final-model"><i class="fa fa-check"></i><b>16.9</b> Save Final Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html"><i class="fa fa-check"></i><b>17</b> Loan Risk Modeling</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#data-load"><i class="fa fa-check"></i><b>17.1</b> Data Load</a></li>
+<li class="chapter" data-level="17.2" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-1-explore-variables"><i class="fa fa-check"></i><b>17.2</b> Task 1: Explore Variables</a></li>
+<li class="chapter" data-level="17.3" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-2-reduce-factor-levels"><i class="fa fa-check"></i><b>17.3</b> Task 2: Reduce Factor Levels</a></li>
+<li class="chapter" data-level="17.4" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-3-modify-hour-temperature"><i class="fa fa-check"></i><b>17.4</b> Task 3: Modify Hour &amp; Temperature</a></li>
+<li class="chapter" data-level="17.5" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-4-target-transformation"><i class="fa fa-check"></i><b>17.5</b> Task 4: Target Transformation</a></li>
+<li class="chapter" data-level="17.6" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-5-trees-original-transformed"><i class="fa fa-check"></i><b>17.6</b> Task 5: Trees (Original &amp; Transformed)</a></li>
+<li class="chapter" data-level="17.7" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-7-glm-poisson-gamma"><i class="fa fa-check"></i><b>17.7</b> Task 7: GLM (Poisson &amp; Gamma)</a></li>
+<li class="chapter" data-level="17.8" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-8-interaction-hour_dist-weather"><i class="fa fa-check"></i><b>17.8</b> Task 8: Interaction (hour_dist * weather)</a></li>
+<li class="chapter" data-level="17.9" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-9-feature-selection-bic-backward"><i class="fa fa-check"></i><b>17.9</b> Task 9: Feature Selection (BIC backward)</a></li>
+<li class="chapter" data-level="17.10" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-10-11-final-model-validation"><i class="fa fa-check"></i><b>17.10</b> Task 10-11: Final Model &amp; Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html"><i class="fa fa-check"></i><b>18</b> Robocalls Consumer Protections</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html#gdpr-section"><i class="fa fa-check"></i><b>18.1</b> GDPR Section</a></li>
+<li class="chapter" data-level="18.2" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html#deepfake-concerns"><i class="fa fa-check"></i><b>18.2</b> Deepfake Concerns</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>19</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data exploration</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="robocalls-consumer-protections" class="section level1 hasAnchor" number="18">
+<h1><span class="header-section-number"> 18</span> Robocalls Consumer Protections<a href="robocalls-consumer-protections.html#robocalls-consumer-protections" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Simulates a dataset to educate on safe customer phone services, raise awareness against AI/robocall harassment by corporations, and help optimize compliant calling practices. Based on adult dataset stats with added legal/compliance features. Features</p>
+<p>Customer demographics (age, education, marital, occupation, etc.) Economic indicators (CPI, CCI, irate, employment) Call details (robot/human calls, 800 number) Location/legal (countries, cities, states, GDPR) Purchase outcome with correlations
+Usage</p>
+<p>Run simulation.py to generate simulated_customer_robocall_dataset.csv. Load in data analysis tools (e.g., R/Python) for modeling.
+Data Generation</p>
+<p>Size: ~48k rows Correlations: Purchase influenced by age, education, cap_gain, robot_calling (negative) Missing values: Simulated in edu_years, housing, job, marital</p>
+<div id="gdpr-section" class="section level2 hasAnchor" number="18.1">
+<h2><span class="header-section-number">18.1</span> GDPR Section<a href="robocalls-consumer-protections.html#gdpr-section" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>GDPR (General Data Protection Regulation) applies to personal data processing for EU residents or by EU-based entities. For robocalls, it requires explicit consent for automated marketing calls. Non-compliance can lead to fines up to 4% of global turnover. In this dataset, ‘GDPR_applies’ flags cases where GDPR rules must be followed, helping model compliant practices vs. potential harassment in non-regulated areas.</p>
+</div>
+<div id="deepfake-concerns" class="section level2 hasAnchor" number="18.2">
+<h2><span class="header-section-number">18.2</span> Deepfake Concerns<a href="robocalls-consumer-protections.html#deepfake-concerns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Modern robocalls may use deepfake AI voices, mimicking humans so convincingly that recipients can’t tell if it’s automated. This blurs lines between robot/human calls, enabling manipulation/scams. The dataset’s ‘robot_calling’ flag simulates this; in reality, detection tools are needed. Awareness helps consumers report suspicious calls to authorities like FCC/FTC.</p>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="robocalls-consumer-protections.html#cb394-1" tabindex="-1"></a><span class="co"># Load needed libraries.</span></span>
+<span id="cb394-2"><a href="robocalls-consumer-protections.html#cb394-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb394-3"><a href="robocalls-consumer-protections.html#cb394-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb394-4"><a href="robocalls-consumer-protections.html#cb394-4" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb394-5"><a href="robocalls-consumer-protections.html#cb394-5" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb394-6"><a href="robocalls-consumer-protections.html#cb394-6" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">fig.width =</span> <span class="dv">10</span>, <span class="at">fig.height =</span> <span class="dv">6</span>)</span>
+<span id="cb394-7"><a href="robocalls-consumer-protections.html#cb394-7" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">use_python</span>(<span class="st">&quot;C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe&quot;</span>, <span class="at">required =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb394-8"><a href="robocalls-consumer-protections.html#cb394-8" tabindex="-1"></a><span class="co"># 3. Restart R session inside RStudio</span></span>
+<span id="cb394-9"><a href="robocalls-consumer-protections.html#cb394-9" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_UV_ENABLED =</span> <span class="st">&quot;0&quot;</span>)</span>
+<span id="cb394-10"><a href="robocalls-consumer-protections.html#cb394-10" tabindex="-1"></a></span>
+<span id="cb394-11"><a href="robocalls-consumer-protections.html#cb394-11" tabindex="-1"></a><span class="co">#.rs.restartR()</span></span>
+<span id="cb394-12"><a href="robocalls-consumer-protections.html#cb394-12" tabindex="-1"></a></span>
+<span id="cb394-13"><a href="robocalls-consumer-protections.html#cb394-13" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb394-14"><a href="robocalls-consumer-protections.html#cb394-14" tabindex="-1"></a>datasets <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">&quot;datasets&quot;</span>)</span>
+<span id="cb394-15"><a href="robocalls-consumer-protections.html#cb394-15" tabindex="-1"></a>ds <span class="ot">&lt;-</span> datasets<span class="sc">$</span><span class="fu">load_dataset</span>(<span class="st">&quot;supersam7/robocalls_consumer_protections&quot;</span>)</span>
+<span id="cb394-16"><a href="robocalls-consumer-protections.html#cb394-16" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(ds[<span class="st">&quot;train&quot;</span>]<span class="sc">$</span><span class="fu">to_pandas</span>())</span>
+<span id="cb394-17"><a href="robocalls-consumer-protections.html#cb394-17" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre><code>##       age        education_num   marital_status      occupation       
+##  Min.   :17.00   Min.   : 1.00   Length:48842       Length:48842      
+##  1st Qu.:31.00   1st Qu.: 8.00   Class :character   Class :character  
+##  Median :39.00   Median :10.00   Mode  :character   Mode  :character  
+##  Mean   :39.82   Mean   : 9.51                                        
+##  3rd Qu.:48.00   3rd Qu.:11.00                                        
+##  Max.   :89.00   Max.   :15.00                                        
+##     cap_gain     hours_per_week      score        value_flag       
+##  Min.   :    0   Min.   : 1.00   Min.   :44.89   Length:48842      
+##  1st Qu.:  310   1st Qu.:31.00   1st Qu.:57.55   Class :character  
+##  Median :  744   Median :40.00   Median :60.23   Mode  :character  
+##  Mean   : 1075   Mean   :39.93   Mean   :60.24                     
+##  3rd Qu.: 1488   3rd Qu.:48.00   3rd Qu.:62.95                     
+##  Max.   :11599   Max.   :98.00   Max.   :75.37                     
+##  country_of_business country_of_customer state_of_customer  city_of_customer  
+##  Length:48842        Length:48842        Length:48842       Length:48842      
+##  Class :character    Class :character    Class :character   Class :character  
+##  Mode  :character    Mode  :character    Mode  :character   Mode  :character  
+##                                                                               
+##                                                                               
+##                                                                               
+##   GDPR_applies    robot_calling   number_of_robot_calls number_of_human_calls
+##  Min.   :0.0000   Min.   :0.000   Min.   : 0.0000       Min.   : 0.000       
+##  1st Qu.:1.0000   1st Qu.:0.000   1st Qu.: 0.0000       1st Qu.: 2.000       
+##  Median :1.0000   Median :0.000   Median : 0.0000       Median : 3.000       
+##  Mean   :0.7518   Mean   :0.296   Mean   : 0.8822       Mean   : 2.993       
+##  3rd Qu.:1.0000   3rd Qu.:1.000   3rd Qu.: 2.0000       3rd Qu.: 4.000       
+##  Max.   :1.0000   Max.   :1.000   Max.   :10.0000       Max.   :12.000       
+##  800_number_or_not   housing              loan            phone_type       
+##  Min.   :0.0000    Length:48842       Length:48842       Length:48842      
+##  1st Qu.:0.0000    Class :character   Class :character   Class :character  
+##  Median :1.0000    Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :0.7028                                                            
+##  3rd Qu.:1.0000                                                            
+##  Max.   :1.0000                                                            
+##     month             weekday               CPI             CCI        
+##  Length:48842       Length:48842       Min.   :92.20   Min.   :-50.80  
+##  Class :character   Class :character   1st Qu.:93.18   1st Qu.:-43.65  
+##  Mode  :character   Mode  :character   Median :93.57   Median :-40.39  
+##                                        Mean   :93.56   Mean   :-40.32  
+##                                        3rd Qu.:93.96   3rd Qu.:-37.11  
+##                                        Max.   :94.77   Max.   :-26.91  
+##      irate          employment      purchase     
+##  Min.   :0.6481   Min.   :4969   Min.   :0.0000  
+##  1st Qu.:2.8917   1st Qu.:5128   1st Qu.:0.0000  
+##  Median :3.5226   Median :5159   Median :0.0000  
+##  Mean   :3.4693   Mean   :5156   Mean   :0.3425  
+##  3rd Qu.:4.1209   3rd Qu.:5188   3rd Qu.:1.0000  
+##  Max.   :5.0450   Max.   :5227   Max.   :1.0000</code></pre>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="robocalls-consumer-protections.html#cb396-1" tabindex="-1"></a><span class="co"># Fixed and improved plots for robot calls</span></span>
+<span id="cb396-2"><a href="robocalls-consumer-protections.html#cb396-2" tabindex="-1"></a></span>
+<span id="cb396-3"><a href="robocalls-consumer-protections.html#cb396-3" tabindex="-1"></a></span>
+<span id="cb396-4"><a href="robocalls-consumer-protections.html#cb396-4" tabindex="-1"></a><span class="co"># 1. Scatterplot of robot calls vs human calls (with transparency for density)</span></span>
+<span id="cb396-5"><a href="robocalls-consumer-protections.html#cb396-5" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb396-6"><a href="robocalls-consumer-protections.html#cb396-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> number_of_robot_calls, <span class="at">y =</span> number_of_human_calls)) <span class="sc">+</span> </span>
+<span id="cb396-7"><a href="robocalls-consumer-protections.html#cb396-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">color =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb396-8"><a href="robocalls-consumer-protections.html#cb396-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb396-9"><a href="robocalls-consumer-protections.html#cb396-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Robot Calls vs Human Calls&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Number of Robot Calls&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Number of Human Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb396-10"><a href="robocalls-consumer-protections.html#cb396-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>))</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-1.png" width="960" /></p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="robocalls-consumer-protections.html#cb397-1" tabindex="-1"></a><span class="co"># 2. Histogram of number of robot calls (fixed syntax, added bins)</span></span>
+<span id="cb397-2"><a href="robocalls-consumer-protections.html#cb397-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb397-3"><a href="robocalls-consumer-protections.html#cb397-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> number_of_robot_calls)) <span class="sc">+</span> </span>
+<span id="cb397-4"><a href="robocalls-consumer-protections.html#cb397-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">&quot;#007bff&quot;</span>, <span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb397-5"><a href="robocalls-consumer-protections.html#cb397-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb397-6"><a href="robocalls-consumer-protections.html#cb397-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribution of Number of Robot Calls&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Number of Robot Calls&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb397-7"><a href="robocalls-consumer-protections.html#cb397-7" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>))</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-2.png" width="960" /></p>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="robocalls-consumer-protections.html#cb398-1" tabindex="-1"></a><span class="co"># 3. % Robot Calling by Purchase (enhanced legend)</span></span>
+<span id="cb398-2"><a href="robocalls-consumer-protections.html#cb398-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb398-3"><a href="robocalls-consumer-protections.html#cb398-3" tabindex="-1"></a>  <span class="fu">group_by</span>(purchase) <span class="sc">|&gt;</span> </span>
+<span id="cb398-4"><a href="robocalls-consumer-protections.html#cb398-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_robot_calling =</span> <span class="fu">mean</span>(robot_calling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb398-5"><a href="robocalls-consumer-protections.html#cb398-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(purchase, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>)), <span class="at">y =</span> pct_robot_calling)) <span class="sc">+</span> </span>
+<span id="cb398-6"><a href="robocalls-consumer-protections.html#cb398-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb398-7"><a href="robocalls-consumer-protections.html#cb398-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb398-8"><a href="robocalls-consumer-protections.html#cb398-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;% Robot Calling by Purchase Outcome&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Purchase&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion Robot Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb398-9"><a href="robocalls-consumer-protections.html#cb398-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb398-10"><a href="robocalls-consumer-protections.html#cb398-10" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-3.png" width="960" /></p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="robocalls-consumer-protections.html#cb399-1" tabindex="-1"></a><span class="co"># 4. % Robot Calling by Marital Status (enhanced legend)</span></span>
+<span id="cb399-2"><a href="robocalls-consumer-protections.html#cb399-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb399-3"><a href="robocalls-consumer-protections.html#cb399-3" tabindex="-1"></a>  <span class="fu">group_by</span>(marital_status) <span class="sc">|&gt;</span> </span>
+<span id="cb399-4"><a href="robocalls-consumer-protections.html#cb399-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_robot_calling =</span> <span class="fu">mean</span>(robot_calling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb399-5"><a href="robocalls-consumer-protections.html#cb399-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital_status, <span class="at">y =</span> pct_robot_calling)) <span class="sc">+</span> </span>
+<span id="cb399-6"><a href="robocalls-consumer-protections.html#cb399-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb399-7"><a href="robocalls-consumer-protections.html#cb399-7" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb399-8"><a href="robocalls-consumer-protections.html#cb399-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb399-9"><a href="robocalls-consumer-protections.html#cb399-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;% Robot Calling by Marital Status&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Marital Status&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion Robot Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb399-10"><a href="robocalls-consumer-protections.html#cb399-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb399-11"><a href="robocalls-consumer-protections.html#cb399-11" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-4.png" width="960" /></p>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="robocalls-consumer-protections.html#cb400-1" tabindex="-1"></a><span class="co"># 5. % Robot Calling by Occupation (enhanced legend)</span></span>
+<span id="cb400-2"><a href="robocalls-consumer-protections.html#cb400-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb400-3"><a href="robocalls-consumer-protections.html#cb400-3" tabindex="-1"></a>  <span class="fu">group_by</span>(occupation) <span class="sc">|&gt;</span> </span>
+<span id="cb400-4"><a href="robocalls-consumer-protections.html#cb400-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_robot_calling =</span> <span class="fu">mean</span>(robot_calling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb400-5"><a href="robocalls-consumer-protections.html#cb400-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> occupation, <span class="at">y =</span> pct_robot_calling)) <span class="sc">+</span> </span>
+<span id="cb400-6"><a href="robocalls-consumer-protections.html#cb400-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb400-7"><a href="robocalls-consumer-protections.html#cb400-7" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb400-8"><a href="robocalls-consumer-protections.html#cb400-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb400-9"><a href="robocalls-consumer-protections.html#cb400-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;% Robot Calling by Occupation Group&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Occupation&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion Robot Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb400-10"><a href="robocalls-consumer-protections.html#cb400-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb400-11"><a href="robocalls-consumer-protections.html#cb400-11" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-5.png" width="960" /></p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="robocalls-consumer-protections.html#cb401-1" tabindex="-1"></a><span class="co"># 6. Boxplot of Robot Calls by Purchase (enhanced legend)</span></span>
+<span id="cb401-2"><a href="robocalls-consumer-protections.html#cb401-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb401-3"><a href="robocalls-consumer-protections.html#cb401-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(purchase, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>)), <span class="at">y =</span> number_of_robot_calls)) <span class="sc">+</span> </span>
+<span id="cb401-4"><a href="robocalls-consumer-protections.html#cb401-4" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb401-5"><a href="robocalls-consumer-protections.html#cb401-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb401-6"><a href="robocalls-consumer-protections.html#cb401-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Number of Robot Calls by Purchase Outcome&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Purchase&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Number of Robot Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb401-7"><a href="robocalls-consumer-protections.html#cb401-7" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb401-8"><a href="robocalls-consumer-protections.html#cb401-8" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-6.png" width="960" /></p>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="robocalls-consumer-protections.html#cb402-1" tabindex="-1"></a><span class="co"># 7. % Robot Calling by GDPR (enhanced legend)</span></span>
+<span id="cb402-2"><a href="robocalls-consumer-protections.html#cb402-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb402-3"><a href="robocalls-consumer-protections.html#cb402-3" tabindex="-1"></a>  <span class="fu">group_by</span>(GDPR_applies) <span class="sc">|&gt;</span> </span>
+<span id="cb402-4"><a href="robocalls-consumer-protections.html#cb402-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_robot_calling =</span> <span class="fu">mean</span>(robot_calling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb402-5"><a href="robocalls-consumer-protections.html#cb402-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(GDPR_applies, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>)), <span class="at">y =</span> pct_robot_calling)) <span class="sc">+</span> </span>
+<span id="cb402-6"><a href="robocalls-consumer-protections.html#cb402-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#dc3545&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb402-7"><a href="robocalls-consumer-protections.html#cb402-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb402-8"><a href="robocalls-consumer-protections.html#cb402-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;% Robot Calling by GDPR Applicability&quot;</span>, <span class="at">x =</span> <span class="st">&quot;GDPR Applies&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion Robot Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb402-9"><a href="robocalls-consumer-protections.html#cb402-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb402-10"><a href="robocalls-consumer-protections.html#cb402-10" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-7.png" width="960" /></p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="robocalls-consumer-protections.html#cb403-1" tabindex="-1"></a><span class="co"># 8. % Robot Calling by Age Group (enhanced legend)</span></span>
+<span id="cb403-2"><a href="robocalls-consumer-protections.html#cb403-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb403-3"><a href="robocalls-consumer-protections.html#cb403-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_bin =</span> <span class="fu">cut</span>(age, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">15</span>, <span class="dv">95</span>, <span class="at">by =</span> <span class="dv">10</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb403-4"><a href="robocalls-consumer-protections.html#cb403-4" tabindex="-1"></a>  <span class="fu">group_by</span>(age_bin) <span class="sc">|&gt;</span> </span>
+<span id="cb403-5"><a href="robocalls-consumer-protections.html#cb403-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_robot_calling =</span> <span class="fu">mean</span>(robot_calling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb403-6"><a href="robocalls-consumer-protections.html#cb403-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_bin, <span class="at">y =</span> pct_robot_calling)) <span class="sc">+</span> </span>
+<span id="cb403-7"><a href="robocalls-consumer-protections.html#cb403-7" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb403-8"><a href="robocalls-consumer-protections.html#cb403-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb403-9"><a href="robocalls-consumer-protections.html#cb403-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;% Robot Calling by Age Group&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Age Group&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion Robot Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb403-10"><a href="robocalls-consumer-protections.html#cb403-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb403-11"><a href="robocalls-consumer-protections.html#cb403-11" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-8.png" width="960" /></p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="robocalls-consumer-protections.html#cb404-1" tabindex="-1"></a><span class="co"># New: % Robot Calling by Housing (added categorical)</span></span>
+<span id="cb404-2"><a href="robocalls-consumer-protections.html#cb404-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb404-3"><a href="robocalls-consumer-protections.html#cb404-3" tabindex="-1"></a>  <span class="fu">group_by</span>(housing) <span class="sc">|&gt;</span> </span>
+<span id="cb404-4"><a href="robocalls-consumer-protections.html#cb404-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_robot_calling =</span> <span class="fu">mean</span>(robot_calling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb404-5"><a href="robocalls-consumer-protections.html#cb404-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> housing, <span class="at">y =</span> pct_robot_calling)) <span class="sc">+</span> </span>
+<span id="cb404-6"><a href="robocalls-consumer-protections.html#cb404-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb404-7"><a href="robocalls-consumer-protections.html#cb404-7" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb404-8"><a href="robocalls-consumer-protections.html#cb404-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb404-9"><a href="robocalls-consumer-protections.html#cb404-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;% Robot Calling by Housing Loan&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Housing Loan&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion Robot Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb404-10"><a href="robocalls-consumer-protections.html#cb404-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb404-11"><a href="robocalls-consumer-protections.html#cb404-11" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-9.png" width="960" /></p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="robocalls-consumer-protections.html#cb405-1" tabindex="-1"></a><span class="co"># New: % Robot Calling by Loan (added categorical)</span></span>
+<span id="cb405-2"><a href="robocalls-consumer-protections.html#cb405-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb405-3"><a href="robocalls-consumer-protections.html#cb405-3" tabindex="-1"></a>  <span class="fu">group_by</span>(loan) <span class="sc">|&gt;</span> </span>
+<span id="cb405-4"><a href="robocalls-consumer-protections.html#cb405-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_robot_calling =</span> <span class="fu">mean</span>(robot_calling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb405-5"><a href="robocalls-consumer-protections.html#cb405-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> loan, <span class="at">y =</span> pct_robot_calling)) <span class="sc">+</span> </span>
+<span id="cb405-6"><a href="robocalls-consumer-protections.html#cb405-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb405-7"><a href="robocalls-consumer-protections.html#cb405-7" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb405-8"><a href="robocalls-consumer-protections.html#cb405-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb405-9"><a href="robocalls-consumer-protections.html#cb405-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;% Robot Calling by Consumer Loan&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Consumer Loan&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion Robot Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb405-10"><a href="robocalls-consumer-protections.html#cb405-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb405-11"><a href="robocalls-consumer-protections.html#cb405-11" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-10.png" width="960" /></p>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="robocalls-consumer-protections.html#cb406-1" tabindex="-1"></a><span class="co"># New: % Robot Calling by Phone Type (added categorical)</span></span>
+<span id="cb406-2"><a href="robocalls-consumer-protections.html#cb406-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb406-3"><a href="robocalls-consumer-protections.html#cb406-3" tabindex="-1"></a>  <span class="fu">group_by</span>(phone_type) <span class="sc">|&gt;</span> </span>
+<span id="cb406-4"><a href="robocalls-consumer-protections.html#cb406-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_robot_calling =</span> <span class="fu">mean</span>(robot_calling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb406-5"><a href="robocalls-consumer-protections.html#cb406-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> phone_type, <span class="at">y =</span> pct_robot_calling)) <span class="sc">+</span> </span>
+<span id="cb406-6"><a href="robocalls-consumer-protections.html#cb406-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb406-7"><a href="robocalls-consumer-protections.html#cb406-7" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb406-8"><a href="robocalls-consumer-protections.html#cb406-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb406-9"><a href="robocalls-consumer-protections.html#cb406-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;% Robot Calling by Phone Type&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Phone Type&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion Robot Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb406-10"><a href="robocalls-consumer-protections.html#cb406-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb406-11"><a href="robocalls-consumer-protections.html#cb406-11" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-11.png" width="960" /></p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="robocalls-consumer-protections.html#cb407-1" tabindex="-1"></a><span class="co"># New: % Robot Calling by Weekday (added categorical)</span></span>
+<span id="cb407-2"><a href="robocalls-consumer-protections.html#cb407-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb407-3"><a href="robocalls-consumer-protections.html#cb407-3" tabindex="-1"></a>  <span class="fu">group_by</span>(weekday) <span class="sc">|&gt;</span> </span>
+<span id="cb407-4"><a href="robocalls-consumer-protections.html#cb407-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_robot_calling =</span> <span class="fu">mean</span>(robot_calling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb407-5"><a href="robocalls-consumer-protections.html#cb407-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weekday, <span class="at">y =</span> pct_robot_calling)) <span class="sc">+</span> </span>
+<span id="cb407-6"><a href="robocalls-consumer-protections.html#cb407-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb407-7"><a href="robocalls-consumer-protections.html#cb407-7" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb407-8"><a href="robocalls-consumer-protections.html#cb407-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb407-9"><a href="robocalls-consumer-protections.html#cb407-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;% Robot Calling by Weekday&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Weekday&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Proportion Robot Calls&quot;</span>) <span class="sc">+</span></span>
+<span id="cb407-10"><a href="robocalls-consumer-protections.html#cb407-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb407-11"><a href="robocalls-consumer-protections.html#cb407-11" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-12.png" width="960" /></p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="robocalls-consumer-protections.html#cb408-1" tabindex="-1"></a><span class="co"># For months: Pct purchase as fill/color</span></span>
+<span id="cb408-2"><a href="robocalls-consumer-protections.html#cb408-2" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb408-3"><a href="robocalls-consumer-protections.html#cb408-3" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">|&gt;</span> </span>
+<span id="cb408-4"><a href="robocalls-consumer-protections.html#cb408-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_purchase =</span> <span class="fu">mean</span>(purchase, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb408-5"><a href="robocalls-consumer-protections.html#cb408-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> <span class="dv">1</span>, <span class="at">fill =</span> pct_purchase)) <span class="sc">+</span> </span>
+<span id="cb408-6"><a href="robocalls-consumer-protections.html#cb408-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb408-7"><a href="robocalls-consumer-protections.html#cb408-7" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#6c757d&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#007bff&quot;</span>) <span class="sc">+</span>  <span class="co"># Gray to blue</span></span>
+<span id="cb408-8"><a href="robocalls-consumer-protections.html#cb408-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb408-9"><a href="robocalls-consumer-protections.html#cb408-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;% Purchase by Month (Fill by Pct Purchase)&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Month&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count (Fixed)&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;% Purchase&quot;</span>) <span class="sc">+</span></span>
+<span id="cb408-10"><a href="robocalls-consumer-protections.html#cb408-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;#0056b3&quot;</span>),</span>
+<span id="cb408-11"><a href="robocalls-consumer-protections.html#cb408-11" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-174-13.png" width="960" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="loan-risk-modeling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/10-costomer-robot-calls.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Exam-PA-Study-Manual.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

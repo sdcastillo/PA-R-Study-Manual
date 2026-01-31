@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 8 Introduction to modeling | Data exploration</title>
+  <meta name="description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 8 Introduction to modeling | Data exploration" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/pitch-deck-cover.jpg" />
+  <meta property="og:description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="github-repo" content="sdcastillo/PA-R-Study-Manual" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 8 Introduction to modeling | Data exploration" />
+  
+  <meta name="twitter:description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="twitter:image" content="/images/pitch-deck-cover.jpg" />
+
+<meta name="author" content="Samuel Castillo" />
+
+
+<meta name="date" content="2026-01-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-exploration.html"/>
+<link rel="next" href="glms-for-classification.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="assets/css/space-vibe.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Exam PA Study Manual</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#faq-frequently-asked-questions"><i class="fa fa-check"></i><b>0.1</b> FAQ: Frequently Asked Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>1</b> The exam</a></li>
+<li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
+<li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
+<li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#extract-transform-load-etl"><i class="fa fa-check"></i><b>4.1</b> Extract Transform Load (ETL)</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.2</b> Installing R</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.3</b> Installing RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="learning-to-code.html"><a href="learning-to-code.html"><i class="fa fa-check"></i><b>5</b> Learning to Code</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="learning-to-code.html"><a href="learning-to-code.html#how-to-use-the-pa-r-cheat-sheets"><i class="fa fa-check"></i><b>5.1</b> How to use the PA R cheat sheets?</a></li>
+<li class="chapter" data-level="5.2" data-path="learning-to-code.html"><a href="learning-to-code.html#example-soa-pa-task-8"><i class="fa fa-check"></i><b>5.2</b> Example: SOA PA Task 8</a></li>
+<li class="chapter" data-level="5.3" data-path="learning-to-code.html"><a href="learning-to-code.html#example-2---data-exploration"><i class="fa fa-check"></i><b>5.3</b> Example 2 - Data exploration</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>6</b> R programming</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-programming.html"><a href="r-programming.html#notebook-chunks"><i class="fa fa-check"></i><b>6.1</b> Notebook chunks</a></li>
+<li class="chapter" data-level="6.2" data-path="r-programming.html"><a href="r-programming.html#basic-operations"><i class="fa fa-check"></i><b>6.2</b> Basic operations</a></li>
+<li class="chapter" data-level="6.3" data-path="r-programming.html"><a href="r-programming.html#lists"><i class="fa fa-check"></i><b>6.3</b> Lists</a></li>
+<li class="chapter" data-level="6.4" data-path="r-programming.html"><a href="r-programming.html#functions"><i class="fa fa-check"></i><b>6.4</b> Functions</a></li>
+<li class="chapter" data-level="6.5" data-path="r-programming.html"><a href="r-programming.html#data-frames"><i class="fa fa-check"></i><b>6.5</b> Data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>7</b> Data exploration</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-exploration.html"><a href="data-exploration.html#how-to-make-graphs-in-r"><i class="fa fa-check"></i><b>7.1</b> How to make graphs in R?</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="data-exploration.html"><a href="data-exploration.html#add-a-plot"><i class="fa fa-check"></i><b>7.1.1</b> Add a plot</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="data-exploration.html"><a href="data-exploration.html#the-different-graph-types"><i class="fa fa-check"></i><b>7.2</b> The different graph types</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="data-exploration.html"><a href="data-exploration.html#histogram"><i class="fa fa-check"></i><b>7.2.1</b> Histogram</a></li>
+<li class="chapter" data-level="7.2.2" data-path="data-exploration.html"><a href="data-exploration.html#box-plot"><i class="fa fa-check"></i><b>7.2.2</b> Box plot</a></li>
+<li class="chapter" data-level="7.2.3" data-path="data-exploration.html"><a href="data-exploration.html#scatterplot"><i class="fa fa-check"></i><b>7.2.3</b> Scatterplot</a></li>
+<li class="chapter" data-level="7.2.4" data-path="data-exploration.html"><a href="data-exploration.html#bar-charts"><i class="fa fa-check"></i><b>7.2.4</b> Bar charts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="data-exploration.html"><a href="data-exploration.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>7.3</b> How to save time with dplyr?</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="data-exploration.html"><a href="data-exploration.html#data-manipulation-chaining"><i class="fa fa-check"></i><b>7.3.1</b> Data manipulation chaining</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-exploration.html"><a href="data-exploration.html#types-of-missing-values"><i class="fa fa-check"></i><b>7.3.2</b> Types of Missing Values</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-exploration.html"><a href="data-exploration.html#missing-value-resolutions"><i class="fa fa-check"></i><b>7.3.3</b> Missing Value Resolutions:</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.3.4</b> Garbage in; garbage out 🗑</a></li>
+<li class="chapter" data-level="7.3.5" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.3.5</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="7.3.6" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.3.6</b> A picture is worth a thousand words 📷</a></li>
+<li class="chapter" data-level="7.3.7" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.3.7</b> Factor or numeric ❓</a></li>
+<li class="chapter" data-level="7.3.8" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.3.8</b> 73.6% of statistics are false 😨</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html"><i class="fa fa-check"></i><b>8</b> Introduction to modeling</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-vocabulary"><i class="fa fa-check"></i><b>8.1</b> Modeling vocabulary</a></li>
+<li class="chapter" data-level="8.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-notation"><i class="fa fa-check"></i><b>8.2</b> Modeling notation</a></li>
+<li class="chapter" data-level="8.3" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#ordinary-least-squares-ols"><i class="fa fa-check"></i><b>8.3</b> Ordinary Least Squares (OLS)</a></li>
+<li class="chapter" data-level="8.4" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#r2-statistic"><i class="fa fa-check"></i><b>8.4</b> R^2 Statistic</a></li>
+<li class="chapter" data-level="8.5" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#correlation"><i class="fa fa-check"></i><b>8.5</b> Correlation</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#pearsons-correlation"><i class="fa fa-check"></i><b>8.5.1</b> Pearson’s correlation</a></li>
+<li class="chapter" data-level="8.5.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#spearman-rank-correlation"><i class="fa fa-check"></i><b>8.5.2</b> Spearman (rank) correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-vs.-classification"><i class="fa fa-check"></i><b>8.6</b> Regression vs. classification</a></li>
+<li class="chapter" data-level="8.7" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-metrics"><i class="fa fa-check"></i><b>8.7</b> Regression metrics</a></li>
+<li class="chapter" data-level="8.8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#load-dataset"><i class="fa fa-check"></i><b>8.8</b> Load Dataset</a></li>
+<li class="chapter" data-level="8.9" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#simple-linear-model"><i class="fa fa-check"></i><b>8.9</b> Simple Linear Model</a></li>
+<li class="chapter" data-level="8.10" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.10</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.10.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#assumptions-of-ols"><i class="fa fa-check"></i><b>8.10.1</b> Assumptions of OLS</a></li>
+<li class="chapter" data-level="8.10.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#assumptions-of-glms"><i class="fa fa-check"></i><b>8.10.2</b> Assumptions of GLMs</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>8.11</b> Interpretation of coefficients</a>
+<ul>
+<li class="chapter" data-level="8.11.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#identity-link"><i class="fa fa-check"></i><b>8.11.1</b> Identity link</a></li>
+<li class="chapter" data-level="8.11.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#log-link"><i class="fa fa-check"></i><b>8.11.2</b> Log link</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>8.12</b> Advantages and disadvantages</a></li>
+<li class="chapter" data-level="8.13" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#glms-for-regression"><i class="fa fa-check"></i><b>8.13</b> GLMs for regression</a></li>
+<li class="chapter" data-level="8.14" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#other-links"><i class="fa fa-check"></i><b>8.14</b> Other links</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="glms-for-classification.html"><a href="glms-for-classification.html"><i class="fa fa-check"></i><b>9</b> GLMs for classification</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#binary-target"><i class="fa fa-check"></i><b>9.1</b> Binary target</a></li>
+<li class="chapter" data-level="9.2" data-path="glms-for-classification.html"><a href="glms-for-classification.html#count-target"><i class="fa fa-check"></i><b>9.2</b> Count target</a></li>
+<li class="chapter" data-level="9.3" data-path="glms-for-classification.html"><a href="glms-for-classification.html#link-functions"><i class="fa fa-check"></i><b>9.3</b> Link functions</a></li>
+<li class="chapter" data-level="9.4" data-path="glms-for-classification.html"><a href="glms-for-classification.html#glm-poisson-gamma-for-claims"><i class="fa fa-check"></i><b>9.4</b> GLM – Poisson / Gamma for Claims</a></li>
+<li class="chapter" data-level="9.5" data-path="glms-for-classification.html"><a href="glms-for-classification.html#penalized-regression-ridge-lasso"><i class="fa fa-check"></i><b>9.5</b> Penalized Regression – Ridge / Lasso</a></li>
+<li class="chapter" data-level="9.6" data-path="glms-for-classification.html"><a href="glms-for-classification.html#interpretation-of-coefficients-1"><i class="fa fa-check"></i><b>9.6</b> Interpretation of coefficients</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#logit"><i class="fa fa-check"></i><b>9.6.1</b> Logit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="classification-metrics.html"><a href="classification-metrics.html"><i class="fa fa-check"></i><b>10</b> Classification metrics</a>
+<ul>
+<li class="chapter" data-level="10.0.1" data-path="classification-metrics.html"><a href="classification-metrics.html#probit-cauchit-cloglog"><i class="fa fa-check"></i><b>10.0.1</b> Probit, Cauchit, Cloglog</a></li>
+<li class="chapter" data-level="10.1" data-path="classification-metrics.html"><a href="classification-metrics.html#area-under-the-roc-curve-auc"><i class="fa fa-check"></i><b>10.1</b> Area Under the ROC Curve (AUC)</a></li>
+<li class="chapter" data-level="10.2" data-path="classification-metrics.html"><a href="classification-metrics.html#demo-the-model-for-interpretation"><i class="fa fa-check"></i><b>10.2</b> Demo the model for interpretation</a></li>
+<li class="chapter" data-level="10.3" data-path="classification-metrics.html"><a href="classification-metrics.html#video-walkthrough"><i class="fa fa-check"></i><b>10.3</b> Video Walkthrough</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html"><i class="fa fa-check"></i><b>11</b> Additional GLM topics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#residuals"><i class="fa fa-check"></i><b>11.1</b> Residuals</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#raw-residuals"><i class="fa fa-check"></i><b>11.1.1</b> Raw residuals</a></li>
+<li class="chapter" data-level="11.1.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#deviance-residuals"><i class="fa fa-check"></i><b>11.1.2</b> Deviance residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#example"><i class="fa fa-check"></i><b>11.2</b> Example</a></li>
+<li class="chapter" data-level="11.3" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#log-transforms-of-predictors"><i class="fa fa-check"></i><b>11.3</b> Log transforms of predictors</a></li>
+<li class="chapter" data-level="11.4" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#example-1"><i class="fa fa-check"></i><b>11.4</b> Example</a></li>
+<li class="chapter" data-level="11.5" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#reference-levels"><i class="fa fa-check"></i><b>11.5</b> Reference levels</a></li>
+<li class="chapter" data-level="11.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#interactions"><i class="fa fa-check"></i><b>11.6</b> Interactions</a></li>
+<li class="chapter" data-level="11.7" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#offsets"><i class="fa fa-check"></i><b>11.7</b> Offsets</a></li>
+<li class="chapter" data-level="11.8" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#tweedie-regression"><i class="fa fa-check"></i><b>11.8</b> Tweedie regression</a></li>
+<li class="chapter" data-level="11.9" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#combinations-of-link-functions-and-target-distributions"><i class="fa fa-check"></i><b>11.9</b> Combinations of Link Functions and Target Distributions</a>
+<ul>
+<li class="chapter" data-level="11.9.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-log-link"><i class="fa fa-check"></i><b>11.9.1</b> Gaussian Response with Log Link</a></li>
+<li class="chapter" data-level="11.9.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-inverse-link"><i class="fa fa-check"></i><b>11.9.2</b> Gaussian Response with Inverse Link</a></li>
+<li class="chapter" data-level="11.9.3" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-identity-link"><i class="fa fa-check"></i><b>11.9.3</b> Gaussian Response with Identity Link</a></li>
+<li class="chapter" data-level="11.9.4" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-log-link-and-negative-values"><i class="fa fa-check"></i><b>11.9.4</b> Gaussian Response with Log Link and Negative Values</a></li>
+<li class="chapter" data-level="11.9.5" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gamma-response-with-log-link"><i class="fa fa-check"></i><b>11.9.5</b> Gamma Response with Log Link</a></li>
+<li class="chapter" data-level="11.9.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gamma-with-inverse-link"><i class="fa fa-check"></i><b>11.9.6</b> Gamma with Inverse Link</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html"><i class="fa fa-check"></i><b>12</b> GLM variable selection</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#stepwise-subset-selection"><i class="fa fa-check"></i><b>12.1</b> Stepwise subset selection</a></li>
+<li class="chapter" data-level="12.2" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-soa-pa-61219-task-6"><i class="fa fa-check"></i><b>12.2</b> Example: SOA PA 6/12/19, Task 6</a></li>
+<li class="chapter" data-level="12.3" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#penalized-linear-models"><i class="fa fa-check"></i><b>12.3</b> Penalized Linear Models</a></li>
+<li class="chapter" data-level="12.4" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#ridge-regression"><i class="fa fa-check"></i><b>12.4</b> Ridge Regression</a></li>
+<li class="chapter" data-level="12.5" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#lasso"><i class="fa fa-check"></i><b>12.5</b> Lasso</a></li>
+<li class="chapter" data-level="12.6" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#elastic-net"><i class="fa fa-check"></i><b>12.6</b> Elastic Net</a></li>
+<li class="chapter" data-level="12.7" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#advantages-and-disadvantages-1"><i class="fa fa-check"></i><b>12.7</b> Advantages and disadvantages</a></li>
+<li class="chapter" data-level="12.8" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-ridge-regression"><i class="fa fa-check"></i><b>12.8</b> Example: Ridge Regression</a></li>
+<li class="chapter" data-level="12.9" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-the-lasso"><i class="fa fa-check"></i><b>12.9</b> Example: The Lasso</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="bias-variance-trade-off.html"><a href="bias-variance-trade-off.html"><i class="fa fa-check"></i><b>13</b> Bias-variance trade-off</a></li>
+<li class="chapter" data-level="14" data-path="tree-based-models.html"><a href="tree-based-models.html"><i class="fa fa-check"></i><b>14</b> Tree-Based Models</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tree-based-models.html"><a href="tree-based-models.html#overview-of-models-on-exam-pa"><i class="fa fa-check"></i><b>14.1</b> Overview of Models on Exam PA</a></li>
+<li class="chapter" data-level="14.2" data-path="tree-based-models.html"><a href="tree-based-models.html#bootstrap-cross-validation-for-hyperparameter-tuning"><i class="fa fa-check"></i><b>14.2</b> Bootstrap &amp; Cross-Validation for Hyperparameter Tuning</a></li>
+<li class="chapter" data-level="14.3" data-path="tree-based-models.html"><a href="tree-based-models.html#decision-trees-core-idea"><i class="fa fa-check"></i><b>14.3</b> Decision Trees – Core Idea</a></li>
+<li class="chapter" data-level="14.4" data-path="tree-based-models.html"><a href="tree-based-models.html#how-trees-choose-splits"><i class="fa fa-check"></i><b>14.4</b> How Trees Choose Splits</a></li>
+<li class="chapter" data-level="14.5" data-path="tree-based-models.html"><a href="tree-based-models.html#complexity-parameter-pruning"><i class="fa fa-check"></i><b>14.5</b> Complexity Parameter &amp; Pruning</a></li>
+<li class="chapter" data-level="14.6" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-disadvantages-of-single-trees"><i class="fa fa-check"></i><b>14.6</b> Advantages &amp; Disadvantages of Single Trees</a></li>
+<li class="chapter" data-level="14.7" data-path="tree-based-models.html"><a href="tree-based-models.html#bagging-random-forests"><i class="fa fa-check"></i><b>14.7</b> Bagging &amp; Random Forests</a></li>
+<li class="chapter" data-level="14.8" data-path="tree-based-models.html"><a href="tree-based-models.html#boosted-trees-gbm"><i class="fa fa-check"></i><b>14.8</b> Boosted Trees (GBM)</a></li>
+<li class="chapter" data-level="14.9" data-path="tree-based-models.html"><a href="tree-based-models.html#partial-dependence-plots"><i class="fa fa-check"></i><b>14.9</b> Partial Dependence Plots</a></li>
+<li class="chapter" data-level="14.10" data-path="tree-based-models.html"><a href="tree-based-models.html#final-exam-tips"><i class="fa fa-check"></i><b>14.10</b> Final Exam Tips</a></li>
+<li class="chapter" data-level="14.11" data-path="tree-based-models.html"><a href="tree-based-models.html#load-dataset-1"><i class="fa fa-check"></i><b>14.11</b> Load Dataset</a></li>
+<li class="chapter" data-level="14.12" data-path="tree-based-models.html"><a href="tree-based-models.html#single-decision-tree"><i class="fa fa-check"></i><b>14.12</b> Single Decision Tree</a></li>
+<li class="chapter" data-level="14.13" data-path="tree-based-models.html"><a href="tree-based-models.html#random-forest"><i class="fa fa-check"></i><b>14.13</b> Random Forest</a></li>
+<li class="chapter" data-level="14.14" data-path="tree-based-models.html"><a href="tree-based-models.html#gradient-boosting-gbm"><i class="fa fa-check"></i><b>14.14</b> Gradient Boosting (gbm)</a></li>
+<li class="chapter" data-level="14.15" data-path="tree-based-models.html"><a href="tree-based-models.html#xgboost"><i class="fa fa-check"></i><b>14.15</b> XGBoost</a></li>
+<li class="chapter" data-level="14.16" data-path="tree-based-models.html"><a href="tree-based-models.html#direct-lightgbm"><i class="fa fa-check"></i><b>14.16</b> Direct lightgbm</a></li>
+<li class="chapter" data-level="14.17" data-path="tree-based-models.html"><a href="tree-based-models.html#variable-importance-from-direct-lightgbm"><i class="fa fa-check"></i><b>14.17</b> Variable Importance (from direct LightGBM)</a></li>
+<li class="chapter" data-level="14.18" data-path="tree-based-models.html"><a href="tree-based-models.html#video-walkthrough-1"><i class="fa fa-check"></i><b>14.18</b> Video Walkthrough</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>15</b> Writing and Communication</a></li>
+<li class="chapter" data-level="16" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html"><i class="fa fa-check"></i><b>16</b> Bank Loans Case Study</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-1---examine-the-target-variable"><i class="fa fa-check"></i><b>16.1</b> Task 1 - Examine the Target Variable</a></li>
+<li class="chapter" data-level="16.2" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-2---decide-on-which-variables-to-discard"><i class="fa fa-check"></i><b>16.2</b> Task 2 - Decide on which variables to discard</a></li>
+<li class="chapter" data-level="16.3" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-3---examine-the-numeric-variables"><i class="fa fa-check"></i><b>16.3</b> Task 3 - Examine the numeric variables</a></li>
+<li class="chapter" data-level="16.4" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-4---examine-the-factor-variables"><i class="fa fa-check"></i><b>16.4</b> Task 4 - Examine the factor variables</a></li>
+<li class="chapter" data-level="16.5" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-5---fit-a-glm"><i class="fa fa-check"></i><b>16.5</b> Task 5 - Fit a GLM</a></li>
+<li class="chapter" data-level="16.6" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-6---use-aic-to-select-features"><i class="fa fa-check"></i><b>16.6</b> Task 6 - Use AIC to select features</a></li>
+<li class="chapter" data-level="16.7" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-8---create-a-bagged-tree-model"><i class="fa fa-check"></i><b>16.7</b> Task 8 - Create a bagged tree model</a></li>
+<li class="chapter" data-level="16.8" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-9---measure-the-variable-importance-with-a-random-forest"><i class="fa fa-check"></i><b>16.8</b> Task 9 - Measure the variable importance with a Random Forest</a></li>
+<li class="chapter" data-level="16.9" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#save-final-model"><i class="fa fa-check"></i><b>16.9</b> Save Final Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html"><i class="fa fa-check"></i><b>17</b> Loan Risk Modeling</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#data-load"><i class="fa fa-check"></i><b>17.1</b> Data Load</a></li>
+<li class="chapter" data-level="17.2" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-1-explore-variables"><i class="fa fa-check"></i><b>17.2</b> Task 1: Explore Variables</a></li>
+<li class="chapter" data-level="17.3" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-2-reduce-factor-levels"><i class="fa fa-check"></i><b>17.3</b> Task 2: Reduce Factor Levels</a></li>
+<li class="chapter" data-level="17.4" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-3-modify-hour-temperature"><i class="fa fa-check"></i><b>17.4</b> Task 3: Modify Hour &amp; Temperature</a></li>
+<li class="chapter" data-level="17.5" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-4-target-transformation"><i class="fa fa-check"></i><b>17.5</b> Task 4: Target Transformation</a></li>
+<li class="chapter" data-level="17.6" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-5-trees-original-transformed"><i class="fa fa-check"></i><b>17.6</b> Task 5: Trees (Original &amp; Transformed)</a></li>
+<li class="chapter" data-level="17.7" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-7-glm-poisson-gamma"><i class="fa fa-check"></i><b>17.7</b> Task 7: GLM (Poisson &amp; Gamma)</a></li>
+<li class="chapter" data-level="17.8" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-8-interaction-hour_dist-weather"><i class="fa fa-check"></i><b>17.8</b> Task 8: Interaction (hour_dist * weather)</a></li>
+<li class="chapter" data-level="17.9" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-9-feature-selection-bic-backward"><i class="fa fa-check"></i><b>17.9</b> Task 9: Feature Selection (BIC backward)</a></li>
+<li class="chapter" data-level="17.10" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-10-11-final-model-validation"><i class="fa fa-check"></i><b>17.10</b> Task 10-11: Final Model &amp; Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html"><i class="fa fa-check"></i><b>18</b> Robocalls Consumer Protections</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html#gdpr-section"><i class="fa fa-check"></i><b>18.1</b> GDPR Section</a></li>
+<li class="chapter" data-level="18.2" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html#deepfake-concerns"><i class="fa fa-check"></i><b>18.2</b> Deepfake Concerns</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>19</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data exploration</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-modeling" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number"> 8</span> Introduction to modeling<a href="introduction-to-modeling.html#introduction-to-modeling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>About 40-50% of the exam grade was, when this was first written, based on modeling. The goal is to be able to predict an unknown quantity. Reality can never be predicted with perfect certainty. Here is a motivating example of what you will be able to build after acquiring these skills. This Stock Analytics Dashboard is made with the tech stack of all open-source code.</p>
+<p>This Shiny app demonstrates how models support anomaly detection and dividend analysis in real-world stock analytics.</p>
+<iframe src="https://019b3e00-a6ca-37b0-0ab4-a5b8356251b4.share.connect.posit.cloud/" width="100%" height="760" style="border:0;" loading="lazy" allowfullscreen>
+</iframe>
+<p>Open in a new tab: <a href="https://019b3e00-a6ca-37b0-0ab4-a5b8356251b4.share.connect.posit.cloud/" class="uri">https://019b3e00-a6ca-37b0-0ab4-a5b8356251b4.share.connect.posit.cloud/</a></p>
+<p>The next few chapters will cover the following learning objectives.</p>
+<p><img src="images/learning_obj6.png" width="400%" style="display: block; margin: auto;" /></p>
+<div id="modeling-vocabulary" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Modeling vocabulary<a href="introduction-to-modeling.html#modeling-vocabulary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Modeling notation is sloppy because many words mean the same thing.</p>
+<p>The number of observations will be denoted by <span class="math inline">\(n\)</span>. When we refer to the size of a data set, we are referring to <span class="math inline">\(n\)</span>. Each row of the data is called an observation or record. Observations tend to be people, cars, buildings, or other insurable things. These are always independent in that they do not influence one another. Because the exam center computers have limited power, <span class="math inline">\(n\)</span> tends to be less than 100,000.</p>
+<p>Each observation has known attributes called <em>variables</em>, <em>features</em>, or <em>predictors</em>. We use <span class="math inline">\(p\)</span> to refer the number of input variables that are used in the model.</p>
+<p>The <em>target</em>, <em>response</em>, <em>label</em>, <em>dependent variable</em>, or <em>outcome</em> variable is the unknown quantity that is being predicted. We use <span class="math inline">\(Y\)</span> for this. This can be either a whole number, in which case we are performing regression, or a category, in which case we perform classification.</p>
+<p>For example, say that you are a health insurance company that wants to set the premiums for a group of people. The premiums for people who are likely to incur high health costs need to be higher than those likely to be low-cost.</p>
+<p>Older people tend to use more of their health benefits than younger people, but there are always exceptions for those who are very physically active and healthy. Those who have an unhealthy Body Mass Index (BMI) tend to have higher costs than those who have a healthy BMI, but this has less impact on younger people.</p>
+<p>In short, we want to predict the future health costs of a person by taking into account many of their attributes at once.</p>
+<p>This can be done in the <code>health_insurance</code> data by fitting a model to predict the annual health costs of a person. The target variable is <code>y = charges</code>, and the predictor variables are <code>age</code>, <code>sex</code>, <code>bmi</code>, <code>children</code>, <code>smoker</code> and <code>region</code>. These six variables mean that <span class="math inline">\(p = 6\)</span>. The data is collected from 1,338 patients, which means that <span class="math inline">\(n = 1,338\)</span>.</p>
+</div>
+<div id="modeling-notation" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Modeling notation<a href="introduction-to-modeling.html#modeling-notation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Scalar numbers are denoted by ordinary variables (i.e., <span class="math inline">\(x = 2\)</span>, <span class="math inline">\(z = 4\)</span>), and vectors are denoted by bold-faced letters</p>
+<p><span class="math display">\[\mathbf{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}\]</span></p>
+<p>We organize these variables into matrices. Take an example with <span class="math inline">\(p\)</span> = 2 columns and 3 observations. The matrix is said to be <span class="math inline">\(3 \times 2\)</span> (read as “3-by-2”) matrix.</p>
+<p><span class="math display">\[
+\mathbf{X} = \begin{pmatrix}x_{11} &amp; x_{21}\\
+x_{21} &amp; x_{22}\\
+x_{31} &amp; x_{32}
+\end{pmatrix}
+\]</span></p>
+<p>In the health care costs example, <span class="math inline">\(y_1\)</span> would be the costs of the first patient, <span class="math inline">\(y_2\)</span> the costs of the second patient, and so forth. The variables <span class="math inline">\(x_{11}\)</span> and <span class="math inline">\(x_{12}\)</span> might represent the first patient’s age and sex respectively, where <span class="math inline">\(x_{i1}\)</span> is the patient’s age, and <span class="math inline">\(x_{i2} = 1\)</span> if the ith patient is male and 0 if female.</p>
+<p>Modeling is about using <span class="math inline">\(X\)</span> to predict <span class="math inline">\(Y\)</span>. We call this “y-hat”, or simply the <em>prediction</em>. This is based on a function of the data <span class="math inline">\(X\)</span>.</p>
+<p><span class="math display">\[\hat{Y} = f(X)\]</span></p>
+<p>This is almost never going to happen perfectly, and so there is always an error term, <span class="math inline">\(\epsilon\)</span>. This can be made smaller, but is never exactly zero.</p>
+<p><span class="math display">\[
+\hat{Y} + \epsilon = f(X) + \epsilon
+\]</span></p>
+<p>In other words, <span class="math inline">\(\epsilon = y - \hat{y}\)</span>. We call this the <em>residual</em>. When we predict the health care costs of a person, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).</p>
+<p>Another way of saying this is in terms of expected value: the model <span class="math inline">\(f(X)\)</span> estimates the expected value of the target <span class="math inline">\(E[Y|X]\)</span>. That is, once we condition on the data <span class="math inline">\(X\)</span>, we can make a guess as to what we expect <span class="math inline">\(Y\)</span> to be “close to”. We will see that there are many ways of measuring “closeness.”</p>
+</div>
+<div id="ordinary-least-squares-ols" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Ordinary Least Squares (OLS)<a href="introduction-to-modeling.html#ordinary-least-squares-ols" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Also known as <em>simple linear regression</em>, OLS predicts the target as a weighted sum of the variables.</p>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/PaFPbb66DxQ?rel=0&amp;modestbranding=1&amp;playsinline=1" frameborder="0" allowfullscreen>
+</iframe>
+<p></br></p>
+<p>We find a <span class="math inline">\(\mathbf{\beta}\)</span> so that</p>
+<p><span class="math display">\[
+\hat{Y} = E[Y] =  \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p
+\]</span></p>
+<p>Each <span class="math inline">\(y_i\)</span> is a <em>linear combination</em> of <span class="math inline">\(x_{i1}, ..., x_{ip}\)</span>, plus a constant <span class="math inline">\(\beta_0\)</span> which is called the <em>intercept</em> term.</p>
+<p>In the one-dimensional case, this creates a line connecting the observations. In higher dimensions, this creates a hyper-plane.</p>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<p>The red line shows the <em>expected value</em> of the target, as the target <span class="math inline">\(\hat{Y}\)</span> is actually a random variable. For each observation, the model assumes a Gaussian distribution. If there is just a single predictor, <span class="math inline">\(x\)</span>, then the mean is <span class="math inline">\(\beta_0 + \beta_1 x\)</span>.</p>
+<p><img src="images/conditional_response.jpg" width="200%" style="display: block; margin: auto;" /></p>
+<p>The question then is <strong>how can we choose the best values of</strong> <span class="math inline">\(\beta?\)</span> First of all, we need to define what we mean by “best”. Ideally, we will choose these values which will create close predictions of <span class="math inline">\(Y\)</span> on new, unseen data.</p>
+<p>To solve for <span class="math inline">\(\mathbf{\beta}\)</span>, we first need to define a <strong>loss function</strong>. This would let us compare how well a model fits the data. The most commonly used loss function is the residual sum of squares (RSS), also called the <strong>squared error loss or the L2 norm</strong>. When RSS is small, then the predictions are close to the actual values, and the model is a good fit. When RSS is large, the model is a poor fit.</p>
+<p><span class="math display">\[\text{RSS} = \sum_i(y_i - \hat{y})^2\]</span></p>
+<p>When you replace <span class="math inline">\(\hat{y_i}\)</span> in the above equation with <span class="math inline">\(\beta_0 + \beta_1 x_1 + ... + \beta_p x_p\)</span>, take the derivative with respect to <span class="math inline">\(\beta\)</span>, set equal to zero, and solve, we can find the optimal values. This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.</p>
+<p>You will also see the term <strong>Root Mean Squared Error</strong> (RMSE) which is just the average of the square root of the <span class="math inline">\(\text{RSS}\)</span>, or just <strong>Mean Squared Error</strong> (MSE).</p>
+<p>You might be wondering: why does this need to be the squared error? Why not the absolute error or the cubed error? Technically, these could be used, but the betas would not be the maximum likelihood parameters. Using the absolute error results in the model predicting the median as opposed to the mean. Two reasons behind the popularity of RSS are:</p>
+<ul>
+<li>It provides the same solution if we assume that the distribution of <span class="math inline">\(Y|X\)</span> is Gaussian and maximize the likelihood function. This method is used for GLMs, in the next chapter.</li>
+<li>It is computationally easier, and computers used to have a difficult time optimizing for MAE.</li>
+</ul>
+<blockquote>
+<p>What does it mean when a log transform is applied to <span class="math inline">\(Y\)</span>? I remember from my statistics course on regression that this was done.</p>
+</blockquote>
+<p>This is done so that the variance is closer to being constant. For example, if the units are in dollars, it is very common for the values to fluctuate more for higher values than for lower values. Other types of transformations can correct for skewness.</p>
+<p>Consider a stock price, for instance. If the stock is $50 per share, it will go up or down less than $1000 per share. However, the log of 50 is about 3.9, and the log of 1000 is only 6.9, so this difference is smaller. In other words, the variance is smaller.</p>
+<p>Transforming the target means that instead of the model predicting <span class="math inline">\(E[Y]\)</span>, it predicts <span class="math inline">\(E[log(Y)]\)</span>. A common mistake is to then the take the exponent in an attempt to “undo” this transform, but <span class="math inline">\(e^{E[log(Y)]}\)</span> is not the same as <span class="math inline">\(E[Y]\)</span>.</p>
+</div>
+<div id="r2-statistic" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> R^2 Statistic<a href="introduction-to-modeling.html#r2-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One of the most common ways of measuring model fit is the “R-Squared” statistic. The RSS provides an absolute measure of fit because it can be any positive value, but it is not always clear what a “good” RSS is because it is measured in units of <span class="math inline">\(Y\)</span>.</p>
+<p>The <span class="math inline">\(R^2\)</span> statistic provides an alternative measure of fit. It takes the proportion of variance explained - so that it is always a value between 0 and 1 and is independent of the scale of <span class="math inline">\(Y\)</span>.</p>
+<p><span class="math display">\[R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}}\]</span></p>
+<p>Where <span class="math inline">\(\text{TSS} = \sum(y_i - \hat{y})^2\)</span> is the total sum of squares. TSS measures the total variance in the response YY and can be considered the amount of variability inherent in the response before the regression is performed. In contrast, RSS measures the amount of variability that is left unexplained after performing the regression.</p>
+<p>Hench, <span class="math inline">\(\text{TSS} - \text{RSS}\)</span> measures the amount of variability in the response that is explained (or removed) by performing the regression, and R^2 measures the proportion of variability in <span class="math inline">\(Y\)</span> that can be explained using <span class="math inline">\(X\)</span>.</p>
+<p>A value near 1 indicates that the regression has explained a large proportion of the variability in the response, whereas, a number near 0 indicates that the regression did not explain much of the variability in the response. This might occur because the linear model is wrong.</p>
+<p>The <span class="math inline">\(R^2\)</span> sstatistic has an interpretational advantage over the RSE. In actuarial applications, it is useful to use an absolute measure of model fit, such as RSS, to train the model, and then use <span class="math inline">\(R^2\)</span> when explaining it to your clients so that it is easier to communicate.</p>
+<p>This chapter was based on Chapter 3, <em>Linear Regression</em>, of <em>An Introduction to Statistical Learning.</em></p>
+</div>
+<div id="correlation" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Correlation<a href="introduction-to-modeling.html#correlation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>Correlation does not imply causation.</em></p>
+<p>This is a common saying. Just because two things are correlated does not necessarily mean that one causes the other. Just because most actuaries work remotely when there is cold and snowing does not mean that cold and snow cause less social work habits. A more likely explanation is that actuaries are concerned about driving safely on icy roads and avoiding being involved in a car accident.</p>
+<div id="pearsons-correlation" class="section level3 hasAnchor" number="8.5.1">
+<h3><span class="header-section-number">8.5.1</span> Pearson’s correlation<a href="introduction-to-modeling.html#pearsons-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Pearson correlation:</strong> Measures a linear dependence between two variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. This is the most commonly used correlation method.</p>
+<p>The <em>correlation</em> is defined by <span class="math inline">\(r\)</span>,</p>
+<p><span class="math display">\[r = Cor(X,Y) = \frac{\sum(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum(x_i - \bar{x})^2}\sqrt{(y_i - \bar{y})^2}}\]</span></p>
+<p>and this is also a measure of the linear relationship between two vectors, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. This suggests that we might be able to use <span class="math inline">\(r = Cor(X,Y)\)</span> instead of <span class="math inline">\(R^2\)</span> to assess the model fit. In the case of simple linear regression, where there is only one predictor variable, it is tree that <span class="math inline">\(R^2 = r^2\)</span>; however, this relationship does not extend automatically when there are more than one predictor variable. This is because <span class="math inline">\(X\)</span> becomes a <em>matrix</em> instead of a single <em>vector.</em></p>
+</div>
+<div id="spearman-rank-correlation" class="section level3 hasAnchor" number="8.5.2">
+<h3><span class="header-section-number">8.5.2</span> Spearman (rank) correlation<a href="introduction-to-modeling.html#spearman-rank-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Spearman correlation:</strong> Computes the correlation between the rank of x and the rank of y variables.</p>
+<p><span class="math display">\[rho = \frac{\sum(x&#39; - m_{x&#39;})(y&#39;_i - m_{y&#39;})}{\sqrt{\sum(x&#39; - m_{x&#39;})^2 \sum(y&#39; - m_{y&#39;})^2}}\]</span>
+Where <span class="math inline">\(x′=rank(x)\)</span> and <span class="math inline">\(y′=rank(y)\)</span></p>
+<p>Most questions on Exam PA will ask you about Pearson’s correlation. One advantage to Spearman over Pearson is that Spearman works for ordinal variables. See Chapter 6 for the difference between <strong>ordinal</strong> and <strong>numeric</strong> variables.</p>
+</div>
+</div>
+<div id="regression-vs.-classification" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Regression vs. classification<a href="introduction-to-modeling.html#regression-vs.-classification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Regression modeling is when a target is a number. Binary classification is when there are two outcomes, such as “Yes/No,” “True/False,” or “0/1”. Multi-class regression is when there are more than two categories such as “Red, Yellow, Green” or “A, B, C, D, E.” There are many other types of regression that are not covered on this exam, such as ordinal regression, where the outcome is an ordered category, or time-series regression, where the data is time-dependent.</p>
+</div>
+<div id="regression-metrics" class="section level2 hasAnchor" number="8.7">
+<h2><span class="header-section-number">8.7</span> Regression metrics<a href="introduction-to-modeling.html#regression-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For any model, the goal is always to reduce an error metric. This is a way of measuring how well the model can explain the target.</p>
+<p>The phrases “reducing error,” “improving performance,” or “making a better fit” are synonymous with reducing the error. The word “better” means “lower error,” and “worse” means “higher error.”</p>
+<p>The choice of error metric has a big difference in the outcome. When explaining a model to a businessperson, using simpler metrics such as R-Squared and Accuracy is convenient. When training the model, however, using a more nuanced metric is almost always better.</p>
+<p>These are the regression metrics that are most likely to appear on Exam PA. Memorizing these formulas for AIC and BIC is unnecessary as they are in the R documentation by typing
+<code>?AIC</code> or <code>?BIC</code> into the R console.</p>
+<p><img src="images/regression_metrics.png" width="1300%" style="display: block; margin: auto;" /></p>
+<p>In our health insurance data, we can predict the health costs of a person based on their age, body mass index and gender. Intuitively, we expect that these costs would increase with the increase in the age of the person, be different for men than for women, and be higher for those who have a less healthy BMI. We create a linear model using <code>bmi</code>, <code>age</code>, and <code>sex</code> as an inputs.</p>
+<p>The <code>formula</code> controls which variables are included. There are a few shortcuts for using R formulas.</p>
+<table>
+<colgroup>
+<col width="43%" />
+<col width="56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Formula</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>charges</code> ~ <code>bmi</code> + <code>age</code></td>
+<td>Use <code>age</code> and <code>bmi</code> to predict <code>charges</code></td>
+</tr>
+<tr class="even">
+<td><code>charges</code> ~ <code>bmi</code> + <code>age</code> + <code>bmi</code>*<code>age</code></td>
+<td>Use <code>age</code>,<code>bmi</code> as well as an interaction to predict <code>charges</code></td>
+</tr>
+<tr class="odd">
+<td><code>charges</code> ~ (<code>bmi &gt; 20</code>) + <code>age</code></td>
+<td>Use an indicator variable for <code>bmi &gt; 20</code> <code>age</code> to predict <code>charges</code></td>
+</tr>
+<tr class="even">
+<td>log(<code>charges</code>) ~ log(<code>bmi</code>) + log(<code>age</code>)</td>
+<td>Use the logs of <code>age</code> and <code>bmi</code> to predict log(<code>charges</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>charges</code> ~ .</td>
+<td>Use all variables to predict <code>charges</code></td>
+</tr>
+</tbody>
+</table>
+<p>While you can use formulas to create new variables, the exam questions tend to have you do this in the data itself. For example, if taking the log transform of a <code>bmi</code>, you would add a column <code>log_bmi</code> to the data and remove the original <code>bmi</code> column.</p>
+<p>The <code>summary</code> function gives details about the model. First, the <code>Estimate</code>, gives you the coefficients. The <code>Std. Error</code> is the error of the estimate for the coefficient. Higher standard error means greater uncertainty. This is relative to the average value of that variable. The <code>p value</code> tells you how “big” this error really is based on standard deviations. A small p-value (<code>Pr (&gt;|t|))</code>) means that we can safely reject the null hypothesis that says the coefficient is equal to zero.</p>
+<p>The little <code>*</code>, <code>**</code>, <code>***</code> tell you the significance level. A variable with a <code>***</code> means that the probability of getting a coefficient of that size given that the data was randomly generated is less than 0.001. The <code>**</code> has a significance level of 0.01, and <code>*</code> of 0.05.</p>
+</div>
+<div id="load-dataset" class="section level2 hasAnchor" number="8.8">
+<h2><span class="header-section-number">8.8</span> Load Dataset<a href="introduction-to-modeling.html#load-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="introduction-to-modeling.html#cb151-1" tabindex="-1"></a>datasets <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">&quot;datasets&quot;</span>)</span>
+<span id="cb151-2"><a href="introduction-to-modeling.html#cb151-2" tabindex="-1"></a>ds <span class="ot">&lt;-</span> datasets<span class="sc">$</span><span class="fu">load_dataset</span>(<span class="st">&quot;supersam7/health_insurance&quot;</span>)</span>
+<span id="cb151-3"><a href="introduction-to-modeling.html#cb151-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(ds<span class="sc">$</span>train)</span>
+<span id="cb151-4"><a href="introduction-to-modeling.html#cb151-4" tabindex="-1"></a></span>
+<span id="cb151-5"><a href="introduction-to-modeling.html#cb151-5" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code></pre></div>
+</div>
+<div id="simple-linear-model" class="section level2 hasAnchor" number="8.9">
+<h2><span class="header-section-number">8.9</span> Simple Linear Model<a href="introduction-to-modeling.html#simple-linear-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="introduction-to-modeling.html#cb152-1" tabindex="-1"></a>lm_age <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age, <span class="at">data =</span> df)</span>
+<span id="cb152-2"><a href="introduction-to-modeling.html#cb152-2" tabindex="-1"></a><span class="fu">summary</span>(lm_age)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="introduction-to-modeling.html#cb153-1" tabindex="-1"></a><span class="fu">tidy</span>(lm_age) <span class="sc">%&gt;%</span> </span>
+<span id="cb153-2"><a href="introduction-to-modeling.html#cb153-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">&quot;(Intercept)&quot;</span>, <span class="st">&quot;Intercept&quot;</span>, term)) <span class="sc">%&gt;%</span></span>
+<span id="cb153-3"><a href="introduction-to-modeling.html#cb153-3" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb153-4"><a href="introduction-to-modeling.html#cb153-4" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">&quot;striped&quot;</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="multiple-linear-regression" class="section level2 hasAnchor" number="8.10">
+<h2><span class="header-section-number">8.10</span> Multiple Linear Regression<a href="introduction-to-modeling.html#multiple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="assumptions-of-ols" class="section level3 hasAnchor" number="8.10.1">
+<h3><span class="header-section-number">8.10.1</span> Assumptions of OLS<a href="introduction-to-modeling.html#assumptions-of-ols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We assume that the target is Gaussian with a mean equal to the linear predictor. This can be broken down into two parts:</p>
+<ol style="list-style-type: decimal">
+<li><p>A <em>random component</em>: The target variable <span class="math inline">\(Y|X\)</span> is normally distributed with mean <span class="math inline">\(\mu = \mu(X) = E(Y|X)\)</span></p></li>
+<li><p>A link between the target and the covariates (also known as the systemic component) <span class="math inline">\(\mu(X) = X\beta\)</span></p></li>
+</ol>
+<p>This says that each observation follows a normal distribution that has a mean that is equal to the linear predictor. Another way of saying this is that “after we adjust for the data, the error is normally distributed and the variance is constant.” If <span class="math inline">\(I\)</span> is an n-by-in identity matrix, and <span class="math inline">\(\sigma^2 I\)</span> is the covariance matrix, then</p>
+<p><span class="math display">\[
+\mathbf{Y|X} \sim N( \mathbf{X \beta}, \mathbf{\sigma^2} I)
+\]</span></p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="introduction-to-modeling.html#cb154-1" tabindex="-1"></a>lm_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age <span class="sc">+</span> bmi <span class="sc">+</span> smoker <span class="sc">+</span> region <span class="sc">+</span> children, <span class="at">data =</span> df)</span>
+<span id="cb154-2"><a href="introduction-to-modeling.html#cb154-2" tabindex="-1"></a><span class="fu">summary</span>(lm_full)</span></code></pre></div>
+<p>Once you have chosen your model, you should re-train over the entire data set. This is to make the coefficients more stable because <code>n</code> is larger. Below you can see that the standard error is lower after training over the entire data set.</p>
+</div>
+<div id="assumptions-of-glms" class="section level3 hasAnchor" number="8.10.2">
+<h3><span class="header-section-number">8.10.2</span> Assumptions of GLMs<a href="introduction-to-modeling.html#assumptions-of-glms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>GLMs are more general which eludes that they are more flexible. We relax these two assumptions by saying that the model is defined by</p>
+<ol style="list-style-type: decimal">
+<li><p>A random component: <span class="math inline">\(Y|X \sim \text{some exponential family distribution}\)</span></p></li>
+<li><p>A link: between the random component and covariates:</p></li>
+</ol>
+<p><span class="math display">\[g(\mu(X)) = X\beta\]</span>
+where <span class="math inline">\(g\)</span> is called the <em>link function</em> and <span class="math inline">\(\mu = E[Y|X]\)</span>.</p>
+<p>Each observation follows some type of exponential distribution (Gamma, Inverse Gaussian, Poisson, Binomial, etc.), and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a dispersion parameter, but that is more info is needed here.</p>
+<p>Notice that the top three distributions are continuous but the bottom two are discrete.</p>
+<p><img src="images/response_distributions.png" width="250%" style="display: block; margin: auto;" /></p>
+<p>There are five link functions for a continuous <span class="math inline">\(Y\)</span>, , although the choice of distribution family will typically rule out several of these immediately. The linear predictor (a.k.a., the systemic component) is <span class="math inline">\(z\)</span> and the link function is how this connects to the expected value of the response.</p>
+<p><span class="math display">\[z = X\beta = g(\mu)\]</span></p>
+<p><img src="images/link_functions.png" width="200%" style="display: block; margin: auto;" /></p>
+<p>If the target distribution must have a positive mean, such as in the Inverse Gaussian or Gamma, then the Identity or Inverse links are poor choices because they allow for negative values; the mean range is <span class="math inline">\((-\infty, \infty)\)</span>. The other link functions force the mean to be positive.</p>
+</div>
+</div>
+<div id="interpretation-of-coefficients" class="section level2 hasAnchor" number="8.11">
+<h2><span class="header-section-number">8.11</span> Interpretation of coefficients<a href="introduction-to-modeling.html#interpretation-of-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The GLM’s interpretation depends on the choice of link function.</p>
+<div id="identity-link" class="section level3 hasAnchor" number="8.11.1">
+<h3><span class="header-section-number">8.11.1</span> Identity link<a href="introduction-to-modeling.html#identity-link" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This is the easiest to interpret. For each one-unit increase in <span class="math inline">\(X_j\)</span>, the expected value of the target, <span class="math inline">\(E[Y]\)</span>, increases by <span class="math inline">\(\beta_j\)</span>, assuming that all other variables are held constant.</p>
+</div>
+<div id="log-link" class="section level3 hasAnchor" number="8.11.2">
+<h3><span class="header-section-number">8.11.2</span> Log link<a href="introduction-to-modeling.html#log-link" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This is the most popular choice when the results need to be easy to understand. Simply take the exponent of the coefficients and the model turns into a product of numbers being multiplied together.</p>
+<p><span class="math display">\[
+log(\hat{Y}) = X\beta \Rightarrow \hat{Y} = e^{X \beta}
+\]</span></p>
+<p>For a single observation <span class="math inline">\(Y_i\)</span>, this is</p>
+<p><span class="math display">\[
+\text{exp}(\beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + ... + \beta_p X_{ip}) = \\
+e^{\beta_0} e^{\beta_1 X_{i1}}e^{\beta_2 X_{i2}} ...  e^{\beta_p X_{ip}} =
+R_{i0} R_{i2} R_{i3} ... R_{ip}
+\]</span></p>
+<p><span class="math inline">\(R_{ik}\)</span> is known as the <em>relativity</em> is known as the relativity of the kth variable. This terminology is from insurance ratemaking, where actuaries need to explain the impact of each variable to insurance regulators.</p>
+<p>Another advantage to the log link is that the coefficients can be interpreted as having a percentage change on the target. Here is an example for a GLM with variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> and a log link function. This holds any continuous target distribution.</p>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="22%" />
+<col width="51%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th><span class="math inline">\(\beta_j\)</span></th>
+<th><span class="math inline">\(e^{\beta_j} - 1\)</span></th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(intercept)</td>
+<td>0.100</td>
+<td>0.105</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X_1\)</span></td>
+<td>0.400</td>
+<td>0.492</td>
+<td>49% increase in <span class="math inline">\(E[Y]\)</span> for each unit increase in <span class="math inline">\(X_1\)</span>*</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(X_2\)</span></td>
+<td>-0.500</td>
+<td>-0.393</td>
+<td>39% decrease in <span class="math inline">\(E[Y]\)</span> for each unit increase in <span class="math inline">\(X_2\)</span>*</td>
+</tr>
+</tbody>
+</table>
+<p>If categorical predictors are used, then the interpretation is very similar. Say that there is one predictor, <code>COLOR</code>, which takes on values of <code>YELLOW</code> (reference level), <code>RED</code>, and <code>BLUE</code>.</p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="20%" />
+<col width="54%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th><span class="math inline">\(\beta_j\)</span></th>
+<th><span class="math inline">\(e^{\beta_j} - 1\)</span></th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(intercept)</td>
+<td>0.100</td>
+<td>0.105</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Color=RED</td>
+<td>0.400</td>
+<td>0.492</td>
+<td>49% increase in <span class="math inline">\(E[Y]\)</span> for RED cars as opposed to YELLOW cars*</td>
+</tr>
+<tr class="odd">
+<td>Color=BLUE</td>
+<td>-0.500</td>
+<td>-0.393</td>
+<td>39% decrease in <span class="math inline">\(E[Y]\)</span> for BLUE cars rather than YELLOW cars*</td>
+</tr>
+</tbody>
+</table>
+<p>* Assuming all other variables are held constant.</p>
+<div class="studytip">
+<p>
+<strong>Warning:</strong> Never take the log of Y with a GLM! This is
+a common mistake because we handled skewness for multiple linear
+regression models, but that was before we had the GLM in our toolbox. Do
+not move on until you understand the difference between these two
+models:
+</p>
+<p>
+<code>glm(y ~ x, family = gaussian(link = “log”), data = data)</code>
+</p>
+<p>
+<code>glm(log(y) ~ x, family = gaussian(link = “identity”), data = data)</code>
+</p>
+<p>
+The first says that the target has a Gaussian distribution which has
+a mean equal to the log of the linear predictor. The second says that
+the target’s log has a Guassian distribution that is exactly equal to
+the linear predictor. You will remember from Exam P that when you apply
+a transform to a random variable, the distribution changes completely.
+Try running the above examples on real data and see if you can spot the
+differences in the results.
+</p>
+</div>
+</div>
+</div>
+<div id="advantages-and-disadvantages" class="section level2 hasAnchor" number="8.12">
+<h2><span class="header-section-number">8.12</span> Advantages and disadvantages<a href="introduction-to-modeling.html#advantages-and-disadvantages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There is usually at least one question on the PA exam which asks you to “list some of the advantages and disadvantages of using this particular model,” and so here is one such list. It is unlikely that the grader will take off points for including too many comments and so a good strategy is to include everything that comes to mind.</p>
+<p><strong>GLM Advantages</strong></p>
+<ul>
+<li>Easy to interpret</li>
+<li>Can easily be deployed in spreadsheet format</li>
+<li>Handles different response/target distributions</li>
+<li>Is commonly used in insurance ratemaking</li>
+</ul>
+<p><strong>GLM Disadvantages</strong></p>
+<ul>
+<li>Does not select features (without stepwise selection)</li>
+<li>Strict assumptions around distribution shape and randomness of error terms</li>
+<li>Predictor variables need to be uncorrelated</li>
+<li>Unable to detect non-linearity directly (although this can manually be addressed through feature engineering)</li>
+<li>Sensitive to outliers</li>
+<li>Low predictive power</li>
+</ul>
+</div>
+<div id="glms-for-regression" class="section level2 hasAnchor" number="8.13">
+<h2><span class="header-section-number">8.13</span> GLMs for regression<a href="introduction-to-modeling.html#glms-for-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For regression problems, we try to match the actual distribution to the distribution of the model being used in the GLM. These are the most likely distributions.</p>
+<p>The choice of target distribution should be similar to the actual distribution of <span class="math inline">\(Y\)</span>. For instance, if <span class="math inline">\(Y\)</span> is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values. If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewed.</p>
+</div>
+<div id="other-links" class="section level2 hasAnchor" number="8.14">
+<h2><span class="header-section-number">8.14</span> Other links<a href="introduction-to-modeling.html#other-links" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The other link functions are not straightforward to interpret using math. One solution is to use the <strong>model-demo-method</strong>. See the example at the end of this next chapter.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-exploration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="glms-for-classification.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/04-linear-models.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Exam-PA-Study-Manual.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

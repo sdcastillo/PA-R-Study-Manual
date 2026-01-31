@@ -2,22 +2,48 @@
 output:
   html_document: default
   pdf_document: default
-description: "Linear models, GLMs, and penalized regression for Exam PA."
-keywords: ["linear regression","GLM","logistic regression","glmnet","ridge","lasso"]
+description: "Linear models, GLMs, and penalized regression – Predictive Insights 2026"
+keywords: ["linear regression","GLM","logistic regression","glmnet","ridge","lasso","predictive modeling"]
 ---
 
-```{r echo = F, message = F}
-set.seed(1)
+
+```{r setup-linear-models, include=FALSE}
+reticulate::use_python("C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe", required = TRUE)
+library(reticulate)
+Sys.setenv(RETICULATE_UV_ENABLED = "0")
+
+library(dplyr)
 library(ggplot2)
-theme_set(theme_bw())
+library(glmnet)
+library(broom)
+library(caret)
+
+knitr::opts_chunk$set(fig.width=7, fig.height=5, echo=TRUE, message=FALSE, warning=FALSE)
+theme_set(theme_minimal(base_size = 14) + 
+            theme(plot.title = element_text(color = "#00d4ff")))
+
+reticulate::use_python("C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe", required = TRUE)
+library(reticulate)
+Sys.setenv(RETICULATE_UV_ENABLED = "0")
+datasets <- import("datasets")
+# Load the dataset
+ds <- datasets$load_dataset("supersam7/health_insurance")
+df_pd <- ds["train"]$to_pandas()          # or ds$train$to_pandas()
+health_insurance <- as_tibble(df_pd)
+
+
+datasets <- import("datasets")
+# Load the dataset
+ds <- datasets$load_dataset("supersam7/readmission")
+df_pd <- ds["train"]$to_pandas()          # or ds$train$to_pandas()
+readmission <- as_tibble(df_pd)
 ```
+
 
 
 # Introduction to modeling
 
-About 40-50\% of the exam grade is based on modeling. The goal is to be able to predict an unknown quantity. In actuarial applications, this tends to claim that occur in the future, death, injury, accidents, policy lapse, hurricanes, or some other insurable event. For model walkthroughs and updates, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
-
-## Motivating example: Stock Analytics Dashboard
+About 40-50\% of the exam grade was, when this was first written, based on modeling. The goal is to be able to predict an unknown quantity. Reality can never be predicted with perfect certainty. Here is a motivating example of what you will be able to build after acquiring these skills.  This Stock Analytics Dashboard is made with the tech stack of all open-source code.
 
 This Shiny app demonstrates how models support anomaly detection and dividend analysis in real-world stock analytics.
 
@@ -200,34 +226,6 @@ These are the regression metrics that are most likely to appear on Exam PA. Memo
 knitr::include_graphics("images/regression_metrics.png")
 ```
 
-</br>
-
-```{block, type='studytip'}
-Do not forget the most important metric: “usefulness!”. A model with high predictive accuracy but does not meet the needs of the business problem has low usefulness. A model which is easy to explain to the PA exam graders has high usefulness.
-
->"Some candidates did not consider both predictive power and applicability to the business problem and others gave justifications based on one of these but then chose a model based on the other.” - SOA PA 6/18/20, Task 12 Solution
-
-> "Which of the three models would you recommend for this analysis? Do not base your recommendation solely on the mean squared errors (RMSE) from each model.” - SOA PA 6/13/19, Task 9 Project Statement
-
-```
-
-</br>
-
-
-### Example: SOA PA 6/18/20, Task 4
-
-> Three points of Investigate correlations.
-
->1) Create a correlation coefficient matrix for all the numeric variables in the dataset.
-
->2) Among these pairwise correlations, determine which correlations concern you in building GLM and tree models. The response may differ by model.
-
->3) State a method other than principal components analysis (PCA) that can be used to handle the correlated variables. Do not implement this method.
- 
- 
-
-## Example: Health Costs
-
 In our health insurance data, we can predict the health costs of a person based on their age, body mass index and gender. Intuitively, we expect that these costs would increase with the increase in the age of the person, be different for men than for women, and be higher for those who have a less healthy BMI. We create a linear model using `bmi`, `age`, and `sex` as an inputs.
 
 The `formula` controls which variables are included.  There are a few shortcuts for using R formulas.  
@@ -241,144 +239,41 @@ The `formula` controls which variables are included.  There are a few shortcuts 
 | `charges` ~ . | Use all variables to predict `charges`|
 
 
+
 While you can use formulas to create new variables, the exam questions tend to have you do this in the data itself.  For example, if taking the log transform of a `bmi`, you would add a column `log_bmi` to the data and remove the original `bmi` column.
 
-Below we fit a simple linear model to predict charges.
 
-```{r message = F}
-library(ExamPAData)
-library(tidyverse)
-
-model <- lm(data = health_insurance, formula = charges ~ bmi + age + sex)
-```
 
 The `summary` function gives details about the model.  First, the `Estimate`, gives you the coefficients.  The `Std. Error` is the error of the estimate for the coefficient.  Higher standard error means greater uncertainty.  This is relative to the average value of that variable.  The `p value` tells you how "big" this error really is based on standard deviations.  A small p-value (`Pr (>|t|))`) means that we can safely reject the null hypothesis that says the coefficient is equal to zero.
 
 The little `*`, `**`, `***` tell you the significance level.  A variable with a `***` means that the probability of getting a coefficient of that size given that the data was randomly generated is less than 0.001.  The `**` has a significance level of 0.01, and `*` of 0.05.
 
-```{r}
-summary(model)
+## Load Dataset
+
+```r
+datasets <- import("datasets")
+ds <- datasets$load_dataset("supersam7/health_insurance")
+df <- as_tibble(ds$train)
+
+glimpse(df)
 ```
 
->For this exam, variable selection tends to be based on the 0.05 significance level (single star *).
+## Simple Linear Model
 
-When evaluating model performance, you should not rely on the  `summary` alone, based on the training data. To look at performance, test the model on validation data. This can be done by either using a hold-out set or cross-validation, which is even better.
-
-Let us create an 80% training set and 20% testing set. You do not need to worry about understanding this code as the exam will always give this to you.
-
-
-```{r message = F}
-set.seed(1)
-library(caret)
-#create a train/test split
-index <- createDataPartition(y = health_insurance$charges, 
-                             p = 0.8, list = F) %>% as.numeric()
-train <-  health_insurance %>% slice(index)
-test <- health_insurance %>% slice(-index)
+```r
+lm_age <- lm(charges ~ age, data = df)
+summary(lm_age)
 ```
 
-Train the model on the `train` and test on `test`.  
-
-```{r}
-model <- lm(data = train, formula = charges ~ bmi + age)
-pred = predict(model, test)
+```r
+tidy(lm_age) %>% 
+  mutate(term = ifelse(term == "(Intercept)", "Intercept", term)) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = "striped", full_width = FALSE)
 ```
 
-Let's look at the Root Mean Squared Error (RMSE).  
+## Multiple Linear Regression
 
-```{r}
-get_rmse <- function(y, y_hat){
-  sqrt(mean((y - y_hat)^2))
-}
-
-get_rmse(pred, test$charges)
-```
-
-And the Mean Absolute Error as well.
-
-```{r}
-get_mae <- function(y, y_hat){
-  sqrt(mean(abs(y - y_hat)))
-}
-
-get_mae(pred, test$charges)
-```
-
-The above metrics do not tell us if this is a good model or not by itself. We need a comparison. The fastest check is to compare against a prediction of the mean. In other words, all values of the `y_hat` are the average of `charges`, which is about \$13,000.
-
-```{r}
-get_rmse(mean(test$charges), test$charges)
-get_mae(mean(test$charges), test$charges)
-```
-
-The RMSE and MAE are both higher (worse) when using just the mean, which we expect. If you ever fit a model and get an error that is worse than the average prediction, something must be wrong.
-
-The next test is to see if any assumptions have been violated.
-
-First, is there a pattern in the residuals? If there is, this means that the model is missing key information. 
-
-For the model below, this is a yes, which means that this is a bad model. Because this is just for illustration, we are going to continue using it.
-  
-
-```{r fig.cap="Residuals vs. Fitted"}
-plot(model, which = 1)
-```
-The normal QQ shows how well the quantiles of the predictions fit a theoretical normal distribution. If this is true, then the graph is a straight 45-degree line. In this model, you can see that this is not the case. If this were a good model, this distribution would be closer to normal.
-
-```{r fig.cap="Normal Q-Q"}
-plot(model, which = 2)
-```
-
-Once you have chosen your model, you should re-train over the entire data set. This is to make the coefficients more stable because `n` is larger. Below you can see that the standard error is lower after training over the entire data set.
-
-```{r }
-all_data <- lm(data = health_insurance, 
-               formula = charges ~ bmi + age)
-testing <- lm(data = test, 
-              formula = charges ~ bmi + age)
-```
-
-```{r fig.cap="Coefficient Standard Error on Test vs. All Data", echo = F, message=F}
-library(broom)
-library(kableExtra)
-all_data %>% 
-  tidy() %>% 
-  select(term, std.error) %>% 
-  left_join(testing %>% tidy() %>% select(term, std.error), by = "term") %>% 
-  rename(full_data_std_error = std.error.x, test_data_std_error = std.error.y) %>% 
-  mutate(across(where(is.numeric), ~round(.x, 1))) %>% 
-  kableExtra::kable("markdown")
-```
-
-All interpretations should be based on the model which was trained on the entire data set. This only makes a difference if you are interpreting the precise values of the coefficients. If you are just looking at which variables are included or at the size and sign of the coefficients, then this would probably not make a difference.
-
-```{r}
-coefficients(model)
-```
-
-Translating the above into an equation we have
-
-$$\hat{y_i} = -4,526 + 287 \space\text{bmi} + 228\space \text{age}$$
-
-For example, if a patient has `bmi = 27.9` and `age = 19` then predicted value is 
-
-$$\hat{y_1} = 4,526 + (287)(27.9) + (228)(19) = 16,865$$
-
-This model structure implies that each of the variables $x_1, ..., x_p$ each change the predicted $\hat{y}$.  If $x_{ij}$ increases by one unit, then $y_i$ increases by $\beta_j$ units, regardless of what happens to all of the other variables.  This is one of the main assumptions of linear models: *variable independence*.  If the variables are correlated, say, then this assumption will be violated.  
-
-| Readings |  | 
-|-------|---------|
-| ISLR 2.1 What is statistical learning?|  |
-| ISLR 2.2 Assessing model accuracy|  |
-
-
-# Generalized linear Models (GLMs)
-
-[![Lecture](images/glms lesson.png)](https://PredictiveInsightsAI.com/)
-
-Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=136">Practice Exams + Lessons</a>
-
-GLMs are a broad category of models. Ordinary Least Squares and Logistic Regression are both examples of GLMs.
 
 ### Assumptions of OLS
 
@@ -394,6 +289,15 @@ $$
 \mathbf{Y|X} \sim N( \mathbf{X \beta}, \mathbf{\sigma^2} I)
 $$
 
+
+```r
+lm_full <- lm(charges ~ age + bmi + smoker + region + children, data = df)
+summary(lm_full)
+```
+
+Once you have chosen your model, you should re-train over the entire data set. This is to make the coefficients more stable because `n` is larger. Below you can see that the standard error is lower after training over the entire data set.
+
+
 ### Assumptions of GLMs
 
 GLMs are more general which eludes that they are more flexible. We relax these two assumptions by saying that the model is defined by
@@ -405,65 +309,15 @@ GLMs are more general which eludes that they are more flexible. We relax these t
 $$g(\mu(X)) = X\beta$$
 where $g$ is called the *link function* and $\mu = E[Y|X]$.
 
-Each observation follows some type of exponential distribution (Gamma, Inverse Gaussian, Poisson, Binomial, etc.), and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a dispersion parameter, but that is more info is needed here. For an explanation, see [Ch. 2.2 of CAS Monograph 5](https://contentpreview.s3.us-east-2.amazonaws.com/CAS+Monograph+5+-+Generalized+Linear+Models+for+Insurance+Ratemaking.pdf).
+Each observation follows some type of exponential distribution (Gamma, Inverse Gaussian, Poisson, Binomial, etc.), and that distribution has a mean which is related to the linear predictor through the link function. Additionally, there is a dispersion parameter, but that is more info is needed here. 
 
-## Advantages and disadvantages
-
-There is usually at least one question on the PA exam which asks you to “list some of the advantages and disadvantages of using this particular model,” and so here is one such list. It is unlikely that the grader will take off points for including too many comments and so a good strategy is to include everything that comes to mind.
-
-**GLM Advantages**
-
-- Easy to interpret
-- Can easily be deployed in spreadsheet format
-- Handles different response/target distributions
-- Is commonly used in insurance ratemaking
-
-**GLM Disadvantages**
-
-- Does not select features (without stepwise selection)
-- Strict assumptions around distribution shape and randomness of error terms
-- Predictor variables need to be uncorrelated
-- Unable to detect non-linearity directly (although this can manually be addressed through feature engineering)
-- Sensitive to outliers
-- Low predictive power
-
-## GLMs for regression
-
-For regression problems, we try to match the actual distribution to the distribution of the model being used in the GLM. These are the most likely distributions.
-
-The choice of target distribution should be similar to the actual distribution of $Y$.  For instance, if $Y$ is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values. If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewed. 
-
-```{r fig.height = 4, message = F, echo = F, warning = F, fig.align="center"}
-library(mgcv)
-library(ggpubr)
-sample_size = 3000
-p1 <- tibble(gaussian = rnorm(sample_size),
-       gamma = rgamma(sample_size, 1, 1/2),
-       inverse_gaussian = rig(sample_size, 1, 2)) %>% 
-  pivot_longer(cols = everything(), names_to = "distribution", values_to = "values") %>% 
-  ggplot(aes(values)) + 
-  geom_density(fill = "blue", alpha = 0.2) + 
-  facet_wrap(vars(distribution), scales = "free") + 
-  ggtitle("Continuous Target Distributions") + 
-  xlab("")
-
-p2 <- tibble(poisson = rpois(sample_size, 1),
-       binomial = rbinom(sample_size, 10, 0.5)) %>% 
-  pivot_longer(cols = everything(), names_to = "distribution", values_to = "values") %>% 
-  ggplot(aes(values)) + 
-  geom_histogram(fill = "blue", alpha = 0.2) + 
-  facet_wrap(vars(distribution), scales = "free") + 
-  ggtitle("Discrete Target Distributions") + 
-  xlab("")
-
-ggarrange(p1,p2,nrow=2)
-```
 
 Notice that the top three distributions are continuous but the bottom two are discrete.  
 
 ```{r echo = F, fig.align="center", warning=F, out.width="250%"}
 knitr::include_graphics("images/response_distributions.png")
 ```
+
 
 There are five link functions for a continuous $Y$, , although the choice of distribution family will typically rule out several of these immediately. The linear predictor (a.k.a., the systemic component) is $z$ and the link function is how this connects to the expected value of the response.
 
@@ -521,9 +375,6 @@ If categorical predictors are used, then the interpretation is very similar.  Sa
 
 \* Assuming all other variables are held constant.
 
-
-</br>
-
 ```{block, type='studytip'}
 **Warning:** Never take the log of Y with a GLM! This is a common mistake because we handled skewness for multiple linear regression models, but that was before we had the GLM in our toolbox. Do not move on until you understand the difference between these two models: 
 
@@ -534,7 +385,35 @@ If categorical predictors are used, then the interpretation is very similar.  Sa
 The first says that the target has a Gaussian distribution which has a mean equal to the log of the linear predictor. The second says that the target's log has a Guassian distribution that is exactly equal to the linear predictor. You will remember from Exam P that when you apply a transform to a random variable, the distribution changes completely. Try running the above examples on real data and see if you can spot the differences in the results.
 ```
 
-</br>
+
+## Advantages and disadvantages
+
+There is usually at least one question on the PA exam which asks you to “list some of the advantages and disadvantages of using this particular model,” and so here is one such list. It is unlikely that the grader will take off points for including too many comments and so a good strategy is to include everything that comes to mind.
+
+**GLM Advantages**
+
+- Easy to interpret
+- Can easily be deployed in spreadsheet format
+- Handles different response/target distributions
+- Is commonly used in insurance ratemaking
+
+**GLM Disadvantages**
+
+- Does not select features (without stepwise selection)
+- Strict assumptions around distribution shape and randomness of error terms
+- Predictor variables need to be uncorrelated
+- Unable to detect non-linearity directly (although this can manually be addressed through feature engineering)
+- Sensitive to outliers
+- Low predictive power
+
+
+
+## GLMs for regression
+
+For regression problems, we try to match the actual distribution to the distribution of the model being used in the GLM. These are the most likely distributions.
+
+The choice of target distribution should be similar to the actual distribution of $Y$.  For instance, if $Y$ is never less than zero, then using the Gaussian distribution is not ideal because this can allow for negative values. If the distribution is right-skewed, then the Gamma or Inverse Gaussian may be appropriate because they are also right-skewed. 
+
 
 
 ## Other links
@@ -545,11 +424,6 @@ The other link functions are not straightforward to interpret using math. One so
 # GLMs for classification
 
 For classification, the predicted values need to be a category instead of a number. Using a discrete target distribution ensures that this will be the case. The probability of an event occurring is $E[Y] = p$. Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability.
-
-These StatQuest videos explain the most common type of GLM classification model: Logistic regression.
-
-
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/PaFPbb66DxQ?rel=0&modestbranding=1&playsinline=1" frameborder="0" allowfullscreen></iframe>
 
 
 ## Binary target
@@ -577,32 +451,49 @@ There are four link functions. The most common are the Logit and Probit, but the
 knitr::include_graphics("images/discrete_link_functions.png")
 ```
 
-> The *logit* is also known as the *standard logistic function* or *sigmoid* and is also used in deep learning.
+## GLM – Poisson / Gamma for Claims
 
-Below we see how the linear predictor (x-axis) gets converted to a probability (y-axis).  
-
-```{r warning = F, message = F, echo = F, fig.align="center"}
-library(purrr)
-tibble(z = seq(-9, 9, 0.01)) %>% 
-  mutate(
-    logit = exp(z)/(1 + exp(z)),
-    probit = map_dbl(z, ~pnorm(.x)),
-    cauchit = 1/3.14*atan(z) + 1/2,
-    cloglog = 1 - exp(-exp(z))
-         ) %>% 
-  pivot_longer(cols = -z, names_to = "link_function", values_to = "mean_target") %>% 
-  ggplot(aes(z, mean_target, color = link_function)) +
-  geom_line() + 
-  theme_bw() + 
-  xlab("Z = Linear Predictor") + 
-  ylab("Predicted Probability") + 
-  theme(legend.position = "top")
+```r
+# Example: assume claims count ~ Poisson
+glm_poisson <- glm(charges ~ age + bmi + smoker, 
+                   family = Gamma(link = "log"), 
+                   data = df)
+summary(glm_poisson)
 ```
 
-- <span style="color:#85C1E9 ">Logit: </span> Most commonly used; default in R; canonical link for the binomial distribution.
-- <span style="color:purple ">Probit: </span> Sharper curves than the other links which may have best performance for certain data; Inverse CDF of a standard normal distribution makes it easy to explain.
-- <span style="color:red ">Cauchit: </span> Very gradual curves may be best for certain data;  CDF for the standard Cauchy distribution which is a t distribution with one degree of freedom.
-- <span style="color:green">Complimentary Log-Log (cloglog)</span> Asymmetric; Important in survival analysis (not on this exam).
+```r
+# Logistic for binary outcome (high claims = charges > median)
+df <- df %>% mutate(high_claim = as.integer(charges > median(charges)))
+
+glm_logit <- glm(high_claim ~ age + bmi + smoker + children, 
+                 family = binomial, 
+                 data = df)
+summary(glm_logit)
+```
+
+## Penalized Regression – Ridge / Lasso
+
+```r
+# Prepare matrix
+X <- model.matrix(charges ~ age + bmi + smoker + region + children - 1, data = df)
+y <- df$charges
+
+# Lasso (alpha=1)
+lasso_fit <- cv.glmnet(X, y, alpha = 1, family = "gaussian")
+plot(lasso_fit)
+title("Lasso CV – Predictive Insights 2026", col.main = "#00d4ff")
+
+# Best lambda
+best_lambda <- lasso_fit$lambda.min
+coef(lasso_fit, s = best_lambda)
+```
+
+```r
+# Ridge (alpha=0)
+ridge_fit <- cv.glmnet(X, y, alpha = 0, family = "gaussian")
+plot(ridge_fit)
+title("Ridge CV – Predictive Insights 2026", col.main = "#00d4ff")
+```
 
 
 ## Interpretation of coefficients
@@ -617,134 +508,6 @@ The transformation from probability to odds is monotonic.  This is a fancy way o
 
 The net result is that when a variable increases the linear predictor, this increases the log odds, increasing the log of the odds, and vice versa if the linear predictor decreases. In other words, the signs of the coefficients indicate whether the variable increases or decreases the probability of the event.
 
-### Probit, Cauchit, Cloglog
-
-These link functions are still monotonic, so the sign of the coefficients can be interpreted to mean that the variable has a positive or negative impact on the target.
-
-More extensive interpretation is not straightforward. In the case of the Probit, instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1). There is no way of taking this inverse directly.
-
-
-## Demo the model for interpretation
-
-For uglier link functions, we can rely on trial-and-error to interpret the result. We will call this the **“model-demo method**, " which, as the name implies, involves running example cases and seeing how the results change.
-
-This method works not only for categorical GLMs, but any other type of models such as a continuous GLM, GBM, or random forest.
-
-See the example from **SOA PA 12/12/19** below to learn how this works.
-
-
-
-## Example - Auto Claims
-
-Using the `auto_claim` data, we predict whether or not a policy has a claim.  This is also known as the *claim frequency*.
-
-```{r}
-auto_claim %>% count(CLM_FLAG)
-```
-
-About 40% do not have a claim while 60% have at least one claim.
-
-```{r}
-set.seed(42)
-index <- createDataPartition(y = auto_claim$CLM_FLAG, 
-                             p = 0.8, list = F) %>% as.numeric()
-auto_claim <- auto_claim %>% 
-  mutate(target = as.factor(ifelse(CLM_FLAG == "Yes", 1,0)))
-train <-  auto_claim %>% slice(index)
-test <- auto_claim %>% slice(-index)
-
-frequency <- glm(target ~ AGE + GENDER + MARRIED + CAR_USE + 
-                   BLUEBOOK + CAR_TYPE + AREA, 
-                 data=train, 
-                 family = binomial(link="logit"))
-```
-
-All of the variables except for the `CAR_TYPE` and `GENDERM` are highly significant.  The car types `SPORTS CAR` and `SUV` appear to be significant, and so if we wanted to make the model simpler we could create indicator variables for `CAR_TYPE == SPORTS CAR` and `CAR_TYPE == SUV`.
-
-```{r}
-frequency %>% summary()
-```
-
-The signs of the coefficients tell if the probability of having a claim is either increasing or decreasing by each variable. For example, the likelihood of an accident
-
-* Decreases as the age of the car increases
-* Is lower for men 
-* Is higher for sports cars and SUVs
-
-The p-values tell us if the variable is significant.
-
-- `Age`, `MarriedYes`, `CAR_USEPrivate`, `BLUEBOOK`, and `AreaUrban` are significant.
-- Certain values of `CAR_TYPE` are significant but others are not.
-
-The output is a predicted probability.  We can see that this is centered around a probability of about 0.3.  
-
-```{r fig.cap="Distribution of Predicted Probability", fig.width=5, fig.height=3, message = F}
-preds <- predict(frequency, newdat=test,type="response")
-ggplot(tibble(preds = preds), aes(preds)) +
-  geom_histogram(bins = 30) 
-```
-
-In order to convert these values to predicted 0's and 1's, we assign a *cutoff* value so that if $\hat{y}$ is above this threshold we use a 1 and 0 otherwise. The default cutoff is 0.5. We change this to 0.3 and see that there are 763 policies predicted to have claims.
-
-```{r}
-test <- test %>% mutate(pred_zero_one = as.factor(1*(preds>.3)))
-summary(test$pred_zero_one)
-```
-
-How do we decide on this cutoff value? We need to compare cutoff values based on some evaluation metrics. For example, we can use *accuracy*.
-
-$$\text{Accuracy} = \frac{\text{Correct Guesses}}{\text{Total Guesses}}$$
-
-This results in an accuracy of 70%.  But is this good?
-
-```{r}
-test %>% summarise(accuracy = mean(pred_zero_one == target))
-```
-
-Consider what would happen if we just predicted all 0's.  The accuracy is 74%.
-
-```{r}
-test %>% summarise(accuracy = mean(0 == target))
-```
-
-For policies which experience claims the accuracy is 63%.
-
-```{r}
-test %>% 
-  filter(target == 1) %>% 
-  summarise(accuracy = mean(pred_zero_one == target))
-```
-
-But for policies that don't actually experience claims this is 72%.  
-
-```{r}
-test %>% 
-  filter(target == 0) %>% 
-  summarise(accuracy = mean(pred_zero_one == target))
-```
-
-How do we know if this is a good model? We can repeat this process with a different cutoff value and get different accuracy metrics for these groups. Let us use a cutoff of 0.6.
-
-75%
-
-```{r}
-test <- test %>% mutate(pred_zero_one = as.factor(1*(preds>.6)))
-test %>% summarise(accuracy = mean(pred_zero_one == target))
-```
-
-10% for policies with claims and 98% for policies without claims.  
-
-```{r}
-test %>% 
-  filter(target == 1) %>% 
-  summarise(accuracy = mean(pred_zero_one == target))
-
-test %>% 
-  filter(target == 0) %>% 
-  summarise(accuracy = mean(pred_zero_one == target))
-```
-
-The punchline is that the accuracy depends on the cutoff value, and changing the cutoff value changes whether the model is accurate for the “true = 1” classes (policies with actual claims) vs. the “false = 0” classes (policies without claims).
 
 # Classification metrics
 
@@ -757,9 +520,13 @@ A *confusion matrix* shows is a table that summarizes how the model classifies e
 - No claims but predicted to have claims - **False Positives (FP) = 22**
 - Had claims but predicted not to - **False Negatives (FN) = 489**
 
-```{r}
-confusionMatrix(test$pred_zero_one,factor(test$target))$table
-```
+
+### Probit, Cauchit, Cloglog
+
+These link functions are still monotonic, so the sign of the coefficients can be interpreted to mean that the variable has a positive or negative impact on the target.
+
+More extensive interpretation is not straightforward. In the case of the Probit, instead of dealing with the log-odds function, we have the inverse CDF of a standard Normal distribution (a.k.a., a Gaussian distribution with mean 0 and variance 1). There is no way of taking this inverse directly.
+
 
 These definitions allow us to measure performance on the different groups.
 
@@ -788,9 +555,6 @@ The cutoff value can be tuned in order to find the minimum cost.
 
 Fortunately, all of this is handled in a single function called `confusionMatrix`.
 
-```{r}
-confusionMatrix(test$pred_zero_one,factor(test$target))
-```
 
 ## Area Under the ROC Curve (AUC)
 
@@ -847,15 +611,6 @@ Any model having an AUC less than 0.5 means providing predictions that are worse
 2)	There is an error in the AUC calculation or model prediction.
 
 
-## Example - Auto Claims
-
-Let's create an ROC curve and find the AUC for our logit.  
-
-```{r message=F, fig.cap="AUC for auto_claim"}
-library(pROC)
-roc(test$target, preds, plot = T)
-```
-
 If we just randomly guess, the AUC would be 0.5, represented by the 45-degree line. A perfect model would maximize the curve to the upper-left corner.
 
 The AUC of 0.76 is decent. If we had multiple models, we could compare them based on the AUC.  
@@ -863,69 +618,44 @@ The AUC of 0.76 is decent. If we had multiple models, we could compare them base
 In general, AUC is preferred over Accuracy when there are many more “true” classes than “false” classes, which is known as having *class imbalance*. An example is bank fraud detection: 99.99% of bank transactions are “false” or “0” classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
 
 
-## Example: SOA HR, Task 5
+## Demo the model for interpretation
 
-The following question is from a Hospital Readmissions sample project.
+For uglier link functions, we can rely on trial-and-error to interpret the result. We will call this the **“model-demo method**, " which, as the name implies, involves running example cases and seeing how the results change.
 
-<iframe src="https://player.vimeo.com/video/467845050?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+This method works not only for categorical GLMs, but any other type of models such as a continuous GLM, GBM, or random forest.
 
-Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=202
-">Practice Exams</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=153
-">Practice Exams + Lessons</a>
+The signs of the coefficients tell if the probability of having a claim is either increasing or decreasing by each variable. For example, the likelihood of an accident
 
->"With the target variable being only 0 or 1, the binomial distribution is the only reasonable choice. Your assistant has done some research and learned that for the glm package in R, five link functions could be used with the binomial distribution. They are shown below (the inverse of the link function is presented here as it represents how the linear predictor is transformed into the actual response), where $\nu$ is the linear predictor and $\p$ is the response.
+* Decreases as the age of the car increases
+* Is lower for men 
+* Is higher for sports cars and SUVs
+## Bias-Variance Tradeoff Visualization
 
-```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
-knitr::include_graphics("images/hospital_readmissions_link.png")
+```r
+# Simulated example (conceptual)
+set.seed(42)
+n <- 200
+x <- runif(n, 0, 10)
+y <- 3 + 2*x + sin(x) + rnorm(n, 0, 1.5)
+
+df_sim <- tibble(x, y)
+
+ggplot(df_sim, aes(x, y)) +
+  geom_point(alpha = 0.6, color = "#7dd3fc") +
+  geom_smooth(method = "lm", color = "#ff6b6b", se = FALSE) +
+  geom_smooth(method = "loess", span = 0.3, color = "#00d4ff", se = FALSE) +
+  labs(title = "Bias vs Variance – Linear vs Flexible Fit",
+       subtitle = "Predictive Insights 2026",
+       x = "Predictor", y = "Response") +
+  theme(plot.subtitle = element_text(color = "#a3bffa"))
+  
+  
 ```
+All interpretations should be based on the model which was trained on the entire data set. This only makes a difference if you are interpreting the precise values of the coefficients. If you are just looking at which variables are included or at the size and sign of the coefficients, then this would probably not make a difference.
 
-## Example: SOA PA 12/12/19, Task 11
 
-<iframe src="https://player.vimeo.com/video/467848221?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-Already enrolled?  Watch the full video: <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=206
-">Practice Exams</a> | <a target="_parent" href="https://course.exampa.net/mod/page/view.php?id=157
-">Practice Exams + Lessons</a>
-
->Marketing has asked to demonstrate how your model is to be used with examples of cases that predict high value and cases that predict low value. Your assistant has prepared some sample cases that can be run through your model. You may need to adjust some of them to obtain illustrative examples of interest in marketing.
-
->Write, in language appropriate for marketing, the illustration and demonstration they are looking for. This demonstration should be more detailed than what will go into your executive summary (including an example).
-
->The sample cases are provided here and in your report template if you wish to include them in your report.
-
-probability of each case. You need to create the column **Prob of high** using your GLM. Then you assign each case as being “High” or “Low” depending on if this value is above the cutoff.
-
-The values that change are in bold.
-
-|age|education num|marital status    |occupation|cap_ga in|hours_per week|score|**Prob of high**|**Value**|
-|---|-------------|------------------|----------|---------|--------------|-----|------------|-----|
-|39 |10           |Married-spouse    |Group 3   |0        |40            |60   |0.32     |High |
-|39 |10           |**Never-married**    |Group 3   |0        |40            |60   |0.24      |**Low** |
-|39 |**5**           |Married-spouse    |Group 3   |0        |40            |60   |0.39       |High |
-|39 |10           |Married-spouse    |**Group 5**   |0        |40            |60   |0.80     |High |
-|39 |10           |Married-spouse    |Group 3   |0        |**30**            |60   |0.18        |**Low**  |
-
-You can interpret this as:
-
-- The typical profitable customer is middle aged (39 years old), has 10 years of education, is married, and in group 3
-- Having never been married decreases profitability
-- Being less educated does not decreases profitability.  You can see this because the customer with `education_num = 5` has the same characteristics as the first customer
-- Being in Group 5 increases profitability.  You can see this because `Prob of high` increases to 0.8.
-- Working fewer than 40 hours per week decreases profitability
-
-This was a difficult question. “Do not be afraid to be assertive and think creatively or to change the values that they give you,” the solution of SOA say.
-
->Many candidates struggled with this task. Candidates needed to include sample cases that resulted in low and high-value predictions and clearly describe the analysis for the marketing team.
-
->Candidates were encouraged to modify the supplied cases. Few elected to test changes in both directions from the base case.
-
-## Additional reading
-
-| Title | Source           |
-|---------|-----------------|
-| An Overview of Classification   | ISL 4.1 |
-| [Understanding AUC - ROC Curv](https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5#:~:targetText=What%20is%20AUC%20%2D%20ROC%20Curve%3F,capable%20of%20distinguishing%20between%20classes.)| Sarang Narkhede, Towards Data Science   |
-| [Precision vs. Recall](https://towardsdatascience.com/precision-vs-recall-386cf9f89488#:~:targetText=Precision%20and%20recall%20are%20two,correctly%20classified%20by%20your%20algorithm.)     | Shruti Saxena, Towards Data Science    |
+## Video Walkthrough
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0wnjnxuNJ5c?si=01ef5787FUE0ob3T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 # Additional GLM topics
@@ -936,7 +666,6 @@ As you can tell, PA has a lot of small topics related to GLMs.  This chapter com
 
 Learning from mistakes is the path to improvement. For GLMs, the residual analysis looks for patterns in the errors to find ways of improving the model.
 
-<iframe width="563" height="383" src="https://www.youtube-nocookie.com/embed/9T0wlKdew6I?rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Raw residuals
 
@@ -961,6 +690,7 @@ $$D = 2[l(b_{sat},y) - l(b,y)]$$
 The deviance residual uses the deviance of the ith observation $d_i$ and then takes the square root and applies the same sign (aka, the + or - part) of the raw residual.
 
 $$\text{Deviance Residual} = \text{sign}(y_i - \hat{y_i})\sqrt{d_i}$$
+
 
 ## Example
 
@@ -1096,16 +826,6 @@ $$
 (\beta_0 + \beta_1) + (\beta_2 + \beta_3 ) x_2 \\
  = \beta_0^* + \beta_1^* x_2
 $$
-Here is an example from the `auto_claim` data. The lines show the slope of a linear model, assuming that only `BLUEBOOK` and `CAR_TYPE` were predictors in the model.  You can see that the slope for Sedans and Sports Cars is higher than for Vans and Panel Trucks.  
-
-```{r fig.cap="Example of strong interaction" ,warning = F}
-auto_claim %>% 
-  sample_frac(0.2) %>% 
-  ggplot(aes(log(CLM_AMT), log(BLUEBOOK), color = CAR_TYPE)) + 
-  geom_point(alpha = 0.3) + 
-  geom_smooth(method = "lm", se = F) + 
-  labs(title = "Kelly Bluebook Value vs Claim Amount")
-```
 
 Any time that effect of one variable on the response is different depending on the value of other variables, we say that there is an interaction. We can also use a hypothesis test with a GLM to check this. Simply include an interaction term and see if the coefficient is zero at the desired significance level.
 

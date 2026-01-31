@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 7 Data exploration | Data exploration</title>
+  <meta name="description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 7 Data exploration | Data exploration" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/pitch-deck-cover.jpg" />
+  <meta property="og:description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="github-repo" content="sdcastillo/PA-R-Study-Manual" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 7 Data exploration | Data exploration" />
+  
+  <meta name="twitter:description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="twitter:image" content="/images/pitch-deck-cover.jpg" />
+
+<meta name="author" content="Samuel Castillo" />
+
+
+<meta name="date" content="2026-01-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-programming.html"/>
+<link rel="next" href="introduction-to-modeling.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="assets/css/space-vibe.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Exam PA Study Manual</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#faq-frequently-asked-questions"><i class="fa fa-check"></i><b>0.1</b> FAQ: Frequently Asked Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>1</b> The exam</a></li>
+<li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
+<li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
+<li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#extract-transform-load-etl"><i class="fa fa-check"></i><b>4.1</b> Extract Transform Load (ETL)</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.2</b> Installing R</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.3</b> Installing RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="learning-to-code.html"><a href="learning-to-code.html"><i class="fa fa-check"></i><b>5</b> Learning to Code</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="learning-to-code.html"><a href="learning-to-code.html#how-to-use-the-pa-r-cheat-sheets"><i class="fa fa-check"></i><b>5.1</b> How to use the PA R cheat sheets?</a></li>
+<li class="chapter" data-level="5.2" data-path="learning-to-code.html"><a href="learning-to-code.html#example-soa-pa-task-8"><i class="fa fa-check"></i><b>5.2</b> Example: SOA PA Task 8</a></li>
+<li class="chapter" data-level="5.3" data-path="learning-to-code.html"><a href="learning-to-code.html#example-2---data-exploration"><i class="fa fa-check"></i><b>5.3</b> Example 2 - Data exploration</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>6</b> R programming</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-programming.html"><a href="r-programming.html#notebook-chunks"><i class="fa fa-check"></i><b>6.1</b> Notebook chunks</a></li>
+<li class="chapter" data-level="6.2" data-path="r-programming.html"><a href="r-programming.html#basic-operations"><i class="fa fa-check"></i><b>6.2</b> Basic operations</a></li>
+<li class="chapter" data-level="6.3" data-path="r-programming.html"><a href="r-programming.html#lists"><i class="fa fa-check"></i><b>6.3</b> Lists</a></li>
+<li class="chapter" data-level="6.4" data-path="r-programming.html"><a href="r-programming.html#functions"><i class="fa fa-check"></i><b>6.4</b> Functions</a></li>
+<li class="chapter" data-level="6.5" data-path="r-programming.html"><a href="r-programming.html#data-frames"><i class="fa fa-check"></i><b>6.5</b> Data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>7</b> Data exploration</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-exploration.html"><a href="data-exploration.html#how-to-make-graphs-in-r"><i class="fa fa-check"></i><b>7.1</b> How to make graphs in R?</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="data-exploration.html"><a href="data-exploration.html#add-a-plot"><i class="fa fa-check"></i><b>7.1.1</b> Add a plot</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="data-exploration.html"><a href="data-exploration.html#the-different-graph-types"><i class="fa fa-check"></i><b>7.2</b> The different graph types</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="data-exploration.html"><a href="data-exploration.html#histogram"><i class="fa fa-check"></i><b>7.2.1</b> Histogram</a></li>
+<li class="chapter" data-level="7.2.2" data-path="data-exploration.html"><a href="data-exploration.html#box-plot"><i class="fa fa-check"></i><b>7.2.2</b> Box plot</a></li>
+<li class="chapter" data-level="7.2.3" data-path="data-exploration.html"><a href="data-exploration.html#scatterplot"><i class="fa fa-check"></i><b>7.2.3</b> Scatterplot</a></li>
+<li class="chapter" data-level="7.2.4" data-path="data-exploration.html"><a href="data-exploration.html#bar-charts"><i class="fa fa-check"></i><b>7.2.4</b> Bar charts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="data-exploration.html"><a href="data-exploration.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>7.3</b> How to save time with dplyr?</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="data-exploration.html"><a href="data-exploration.html#data-manipulation-chaining"><i class="fa fa-check"></i><b>7.3.1</b> Data manipulation chaining</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-exploration.html"><a href="data-exploration.html#types-of-missing-values"><i class="fa fa-check"></i><b>7.3.2</b> Types of Missing Values</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-exploration.html"><a href="data-exploration.html#missing-value-resolutions"><i class="fa fa-check"></i><b>7.3.3</b> Missing Value Resolutions:</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.3.4</b> Garbage in; garbage out 🗑</a></li>
+<li class="chapter" data-level="7.3.5" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.3.5</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="7.3.6" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.3.6</b> A picture is worth a thousand words 📷</a></li>
+<li class="chapter" data-level="7.3.7" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.3.7</b> Factor or numeric ❓</a></li>
+<li class="chapter" data-level="7.3.8" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.3.8</b> 73.6% of statistics are false 😨</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html"><i class="fa fa-check"></i><b>8</b> Introduction to modeling</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-vocabulary"><i class="fa fa-check"></i><b>8.1</b> Modeling vocabulary</a></li>
+<li class="chapter" data-level="8.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-notation"><i class="fa fa-check"></i><b>8.2</b> Modeling notation</a></li>
+<li class="chapter" data-level="8.3" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#ordinary-least-squares-ols"><i class="fa fa-check"></i><b>8.3</b> Ordinary Least Squares (OLS)</a></li>
+<li class="chapter" data-level="8.4" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#r2-statistic"><i class="fa fa-check"></i><b>8.4</b> R^2 Statistic</a></li>
+<li class="chapter" data-level="8.5" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#correlation"><i class="fa fa-check"></i><b>8.5</b> Correlation</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#pearsons-correlation"><i class="fa fa-check"></i><b>8.5.1</b> Pearson’s correlation</a></li>
+<li class="chapter" data-level="8.5.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#spearman-rank-correlation"><i class="fa fa-check"></i><b>8.5.2</b> Spearman (rank) correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-vs.-classification"><i class="fa fa-check"></i><b>8.6</b> Regression vs. classification</a></li>
+<li class="chapter" data-level="8.7" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-metrics"><i class="fa fa-check"></i><b>8.7</b> Regression metrics</a></li>
+<li class="chapter" data-level="8.8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#load-dataset"><i class="fa fa-check"></i><b>8.8</b> Load Dataset</a></li>
+<li class="chapter" data-level="8.9" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#simple-linear-model"><i class="fa fa-check"></i><b>8.9</b> Simple Linear Model</a></li>
+<li class="chapter" data-level="8.10" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.10</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.10.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#assumptions-of-ols"><i class="fa fa-check"></i><b>8.10.1</b> Assumptions of OLS</a></li>
+<li class="chapter" data-level="8.10.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#assumptions-of-glms"><i class="fa fa-check"></i><b>8.10.2</b> Assumptions of GLMs</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>8.11</b> Interpretation of coefficients</a>
+<ul>
+<li class="chapter" data-level="8.11.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#identity-link"><i class="fa fa-check"></i><b>8.11.1</b> Identity link</a></li>
+<li class="chapter" data-level="8.11.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#log-link"><i class="fa fa-check"></i><b>8.11.2</b> Log link</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>8.12</b> Advantages and disadvantages</a></li>
+<li class="chapter" data-level="8.13" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#glms-for-regression"><i class="fa fa-check"></i><b>8.13</b> GLMs for regression</a></li>
+<li class="chapter" data-level="8.14" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#other-links"><i class="fa fa-check"></i><b>8.14</b> Other links</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="glms-for-classification.html"><a href="glms-for-classification.html"><i class="fa fa-check"></i><b>9</b> GLMs for classification</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#binary-target"><i class="fa fa-check"></i><b>9.1</b> Binary target</a></li>
+<li class="chapter" data-level="9.2" data-path="glms-for-classification.html"><a href="glms-for-classification.html#count-target"><i class="fa fa-check"></i><b>9.2</b> Count target</a></li>
+<li class="chapter" data-level="9.3" data-path="glms-for-classification.html"><a href="glms-for-classification.html#link-functions"><i class="fa fa-check"></i><b>9.3</b> Link functions</a></li>
+<li class="chapter" data-level="9.4" data-path="glms-for-classification.html"><a href="glms-for-classification.html#glm-poisson-gamma-for-claims"><i class="fa fa-check"></i><b>9.4</b> GLM – Poisson / Gamma for Claims</a></li>
+<li class="chapter" data-level="9.5" data-path="glms-for-classification.html"><a href="glms-for-classification.html#penalized-regression-ridge-lasso"><i class="fa fa-check"></i><b>9.5</b> Penalized Regression – Ridge / Lasso</a></li>
+<li class="chapter" data-level="9.6" data-path="glms-for-classification.html"><a href="glms-for-classification.html#interpretation-of-coefficients-1"><i class="fa fa-check"></i><b>9.6</b> Interpretation of coefficients</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#logit"><i class="fa fa-check"></i><b>9.6.1</b> Logit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="classification-metrics.html"><a href="classification-metrics.html"><i class="fa fa-check"></i><b>10</b> Classification metrics</a>
+<ul>
+<li class="chapter" data-level="10.0.1" data-path="classification-metrics.html"><a href="classification-metrics.html#probit-cauchit-cloglog"><i class="fa fa-check"></i><b>10.0.1</b> Probit, Cauchit, Cloglog</a></li>
+<li class="chapter" data-level="10.1" data-path="classification-metrics.html"><a href="classification-metrics.html#area-under-the-roc-curve-auc"><i class="fa fa-check"></i><b>10.1</b> Area Under the ROC Curve (AUC)</a></li>
+<li class="chapter" data-level="10.2" data-path="classification-metrics.html"><a href="classification-metrics.html#demo-the-model-for-interpretation"><i class="fa fa-check"></i><b>10.2</b> Demo the model for interpretation</a></li>
+<li class="chapter" data-level="10.3" data-path="classification-metrics.html"><a href="classification-metrics.html#video-walkthrough"><i class="fa fa-check"></i><b>10.3</b> Video Walkthrough</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html"><i class="fa fa-check"></i><b>11</b> Additional GLM topics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#residuals"><i class="fa fa-check"></i><b>11.1</b> Residuals</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#raw-residuals"><i class="fa fa-check"></i><b>11.1.1</b> Raw residuals</a></li>
+<li class="chapter" data-level="11.1.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#deviance-residuals"><i class="fa fa-check"></i><b>11.1.2</b> Deviance residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#example"><i class="fa fa-check"></i><b>11.2</b> Example</a></li>
+<li class="chapter" data-level="11.3" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#log-transforms-of-predictors"><i class="fa fa-check"></i><b>11.3</b> Log transforms of predictors</a></li>
+<li class="chapter" data-level="11.4" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#example-1"><i class="fa fa-check"></i><b>11.4</b> Example</a></li>
+<li class="chapter" data-level="11.5" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#reference-levels"><i class="fa fa-check"></i><b>11.5</b> Reference levels</a></li>
+<li class="chapter" data-level="11.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#interactions"><i class="fa fa-check"></i><b>11.6</b> Interactions</a></li>
+<li class="chapter" data-level="11.7" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#offsets"><i class="fa fa-check"></i><b>11.7</b> Offsets</a></li>
+<li class="chapter" data-level="11.8" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#tweedie-regression"><i class="fa fa-check"></i><b>11.8</b> Tweedie regression</a></li>
+<li class="chapter" data-level="11.9" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#combinations-of-link-functions-and-target-distributions"><i class="fa fa-check"></i><b>11.9</b> Combinations of Link Functions and Target Distributions</a>
+<ul>
+<li class="chapter" data-level="11.9.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-log-link"><i class="fa fa-check"></i><b>11.9.1</b> Gaussian Response with Log Link</a></li>
+<li class="chapter" data-level="11.9.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-inverse-link"><i class="fa fa-check"></i><b>11.9.2</b> Gaussian Response with Inverse Link</a></li>
+<li class="chapter" data-level="11.9.3" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-identity-link"><i class="fa fa-check"></i><b>11.9.3</b> Gaussian Response with Identity Link</a></li>
+<li class="chapter" data-level="11.9.4" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-log-link-and-negative-values"><i class="fa fa-check"></i><b>11.9.4</b> Gaussian Response with Log Link and Negative Values</a></li>
+<li class="chapter" data-level="11.9.5" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gamma-response-with-log-link"><i class="fa fa-check"></i><b>11.9.5</b> Gamma Response with Log Link</a></li>
+<li class="chapter" data-level="11.9.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gamma-with-inverse-link"><i class="fa fa-check"></i><b>11.9.6</b> Gamma with Inverse Link</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html"><i class="fa fa-check"></i><b>12</b> GLM variable selection</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#stepwise-subset-selection"><i class="fa fa-check"></i><b>12.1</b> Stepwise subset selection</a></li>
+<li class="chapter" data-level="12.2" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-soa-pa-61219-task-6"><i class="fa fa-check"></i><b>12.2</b> Example: SOA PA 6/12/19, Task 6</a></li>
+<li class="chapter" data-level="12.3" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#penalized-linear-models"><i class="fa fa-check"></i><b>12.3</b> Penalized Linear Models</a></li>
+<li class="chapter" data-level="12.4" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#ridge-regression"><i class="fa fa-check"></i><b>12.4</b> Ridge Regression</a></li>
+<li class="chapter" data-level="12.5" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#lasso"><i class="fa fa-check"></i><b>12.5</b> Lasso</a></li>
+<li class="chapter" data-level="12.6" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#elastic-net"><i class="fa fa-check"></i><b>12.6</b> Elastic Net</a></li>
+<li class="chapter" data-level="12.7" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#advantages-and-disadvantages-1"><i class="fa fa-check"></i><b>12.7</b> Advantages and disadvantages</a></li>
+<li class="chapter" data-level="12.8" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-ridge-regression"><i class="fa fa-check"></i><b>12.8</b> Example: Ridge Regression</a></li>
+<li class="chapter" data-level="12.9" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-the-lasso"><i class="fa fa-check"></i><b>12.9</b> Example: The Lasso</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="bias-variance-trade-off.html"><a href="bias-variance-trade-off.html"><i class="fa fa-check"></i><b>13</b> Bias-variance trade-off</a></li>
+<li class="chapter" data-level="14" data-path="tree-based-models.html"><a href="tree-based-models.html"><i class="fa fa-check"></i><b>14</b> Tree-Based Models</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tree-based-models.html"><a href="tree-based-models.html#overview-of-models-on-exam-pa"><i class="fa fa-check"></i><b>14.1</b> Overview of Models on Exam PA</a></li>
+<li class="chapter" data-level="14.2" data-path="tree-based-models.html"><a href="tree-based-models.html#bootstrap-cross-validation-for-hyperparameter-tuning"><i class="fa fa-check"></i><b>14.2</b> Bootstrap &amp; Cross-Validation for Hyperparameter Tuning</a></li>
+<li class="chapter" data-level="14.3" data-path="tree-based-models.html"><a href="tree-based-models.html#decision-trees-core-idea"><i class="fa fa-check"></i><b>14.3</b> Decision Trees – Core Idea</a></li>
+<li class="chapter" data-level="14.4" data-path="tree-based-models.html"><a href="tree-based-models.html#how-trees-choose-splits"><i class="fa fa-check"></i><b>14.4</b> How Trees Choose Splits</a></li>
+<li class="chapter" data-level="14.5" data-path="tree-based-models.html"><a href="tree-based-models.html#complexity-parameter-pruning"><i class="fa fa-check"></i><b>14.5</b> Complexity Parameter &amp; Pruning</a></li>
+<li class="chapter" data-level="14.6" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-disadvantages-of-single-trees"><i class="fa fa-check"></i><b>14.6</b> Advantages &amp; Disadvantages of Single Trees</a></li>
+<li class="chapter" data-level="14.7" data-path="tree-based-models.html"><a href="tree-based-models.html#bagging-random-forests"><i class="fa fa-check"></i><b>14.7</b> Bagging &amp; Random Forests</a></li>
+<li class="chapter" data-level="14.8" data-path="tree-based-models.html"><a href="tree-based-models.html#boosted-trees-gbm"><i class="fa fa-check"></i><b>14.8</b> Boosted Trees (GBM)</a></li>
+<li class="chapter" data-level="14.9" data-path="tree-based-models.html"><a href="tree-based-models.html#partial-dependence-plots"><i class="fa fa-check"></i><b>14.9</b> Partial Dependence Plots</a></li>
+<li class="chapter" data-level="14.10" data-path="tree-based-models.html"><a href="tree-based-models.html#final-exam-tips"><i class="fa fa-check"></i><b>14.10</b> Final Exam Tips</a></li>
+<li class="chapter" data-level="14.11" data-path="tree-based-models.html"><a href="tree-based-models.html#load-dataset-1"><i class="fa fa-check"></i><b>14.11</b> Load Dataset</a></li>
+<li class="chapter" data-level="14.12" data-path="tree-based-models.html"><a href="tree-based-models.html#single-decision-tree"><i class="fa fa-check"></i><b>14.12</b> Single Decision Tree</a></li>
+<li class="chapter" data-level="14.13" data-path="tree-based-models.html"><a href="tree-based-models.html#random-forest"><i class="fa fa-check"></i><b>14.13</b> Random Forest</a></li>
+<li class="chapter" data-level="14.14" data-path="tree-based-models.html"><a href="tree-based-models.html#gradient-boosting-gbm"><i class="fa fa-check"></i><b>14.14</b> Gradient Boosting (gbm)</a></li>
+<li class="chapter" data-level="14.15" data-path="tree-based-models.html"><a href="tree-based-models.html#xgboost"><i class="fa fa-check"></i><b>14.15</b> XGBoost</a></li>
+<li class="chapter" data-level="14.16" data-path="tree-based-models.html"><a href="tree-based-models.html#direct-lightgbm"><i class="fa fa-check"></i><b>14.16</b> Direct lightgbm</a></li>
+<li class="chapter" data-level="14.17" data-path="tree-based-models.html"><a href="tree-based-models.html#variable-importance-from-direct-lightgbm"><i class="fa fa-check"></i><b>14.17</b> Variable Importance (from direct LightGBM)</a></li>
+<li class="chapter" data-level="14.18" data-path="tree-based-models.html"><a href="tree-based-models.html#video-walkthrough-1"><i class="fa fa-check"></i><b>14.18</b> Video Walkthrough</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>15</b> Writing and Communication</a></li>
+<li class="chapter" data-level="16" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html"><i class="fa fa-check"></i><b>16</b> Bank Loans Case Study</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-1---examine-the-target-variable"><i class="fa fa-check"></i><b>16.1</b> Task 1 - Examine the Target Variable</a></li>
+<li class="chapter" data-level="16.2" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-2---decide-on-which-variables-to-discard"><i class="fa fa-check"></i><b>16.2</b> Task 2 - Decide on which variables to discard</a></li>
+<li class="chapter" data-level="16.3" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-3---examine-the-numeric-variables"><i class="fa fa-check"></i><b>16.3</b> Task 3 - Examine the numeric variables</a></li>
+<li class="chapter" data-level="16.4" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-4---examine-the-factor-variables"><i class="fa fa-check"></i><b>16.4</b> Task 4 - Examine the factor variables</a></li>
+<li class="chapter" data-level="16.5" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-5---fit-a-glm"><i class="fa fa-check"></i><b>16.5</b> Task 5 - Fit a GLM</a></li>
+<li class="chapter" data-level="16.6" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-6---use-aic-to-select-features"><i class="fa fa-check"></i><b>16.6</b> Task 6 - Use AIC to select features</a></li>
+<li class="chapter" data-level="16.7" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-8---create-a-bagged-tree-model"><i class="fa fa-check"></i><b>16.7</b> Task 8 - Create a bagged tree model</a></li>
+<li class="chapter" data-level="16.8" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-9---measure-the-variable-importance-with-a-random-forest"><i class="fa fa-check"></i><b>16.8</b> Task 9 - Measure the variable importance with a Random Forest</a></li>
+<li class="chapter" data-level="16.9" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#save-final-model"><i class="fa fa-check"></i><b>16.9</b> Save Final Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html"><i class="fa fa-check"></i><b>17</b> Loan Risk Modeling</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#data-load"><i class="fa fa-check"></i><b>17.1</b> Data Load</a></li>
+<li class="chapter" data-level="17.2" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-1-explore-variables"><i class="fa fa-check"></i><b>17.2</b> Task 1: Explore Variables</a></li>
+<li class="chapter" data-level="17.3" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-2-reduce-factor-levels"><i class="fa fa-check"></i><b>17.3</b> Task 2: Reduce Factor Levels</a></li>
+<li class="chapter" data-level="17.4" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-3-modify-hour-temperature"><i class="fa fa-check"></i><b>17.4</b> Task 3: Modify Hour &amp; Temperature</a></li>
+<li class="chapter" data-level="17.5" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-4-target-transformation"><i class="fa fa-check"></i><b>17.5</b> Task 4: Target Transformation</a></li>
+<li class="chapter" data-level="17.6" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-5-trees-original-transformed"><i class="fa fa-check"></i><b>17.6</b> Task 5: Trees (Original &amp; Transformed)</a></li>
+<li class="chapter" data-level="17.7" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-7-glm-poisson-gamma"><i class="fa fa-check"></i><b>17.7</b> Task 7: GLM (Poisson &amp; Gamma)</a></li>
+<li class="chapter" data-level="17.8" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-8-interaction-hour_dist-weather"><i class="fa fa-check"></i><b>17.8</b> Task 8: Interaction (hour_dist * weather)</a></li>
+<li class="chapter" data-level="17.9" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-9-feature-selection-bic-backward"><i class="fa fa-check"></i><b>17.9</b> Task 9: Feature Selection (BIC backward)</a></li>
+<li class="chapter" data-level="17.10" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-10-11-final-model-validation"><i class="fa fa-check"></i><b>17.10</b> Task 10-11: Final Model &amp; Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html"><i class="fa fa-check"></i><b>18</b> Robocalls Consumer Protections</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html#gdpr-section"><i class="fa fa-check"></i><b>18.1</b> GDPR Section</a></li>
+<li class="chapter" data-level="18.2" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html#deepfake-concerns"><i class="fa fa-check"></i><b>18.2</b> Deepfake Concerns</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>19</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data exploration</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-exploration" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number"> 7</span> Data exploration<a href="data-exploration.html#data-exploration" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<pre><code>## python:         C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe
+## libpython:      C:/Users/casti/AppData/Local/Programs/Python/Python313/python313.dll
+## pythonhome:     C:/Users/casti/AppData/Local/Programs/Python/Python313
+## version:        3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+## Architecture:   64bit
+## numpy:          C:/Users/casti/AppData/Local/Programs/Python/Python313/Lib/site-packages/numpy
+## numpy_version:  2.2.3
+## 
+## NOTE: Python version was forced by use_python() function</code></pre>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4AkNdEVMwpY?si=Lgwtlam53xTAOPcv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
+<p>Exploration is about making discoveries and you should have a curious mind and strong technical skills to make sense of the data. This chapter will give you the tools to take dirty, unprocessed data, clean it up, discover interesting trends using graphs and summary statistics, and communicate your results to a business audience.</p>
+<p>About 10 - 15% of your grade will be based on data exploration. Recent Exam PA administrations have included questions about data exploration. Putting in extra practice in this area is guaranteed to give you a better score because it will free up time that you can use elsewhere. For curated practice sets, visit <a href="https://www.PredictiveInsightsAI.com">PredictiveInsightsAI.com</a>.</p>
+<p>The syllabus divides this into three learning objectives, which can make the topic intimidating. Data Visualization, Data Types and Exploration, and Data Issues and Resolutions, but you will always be doing these things together, and so this chapter will cover all three at once.</p>
+<p><img src="images/learning_obj3.PNG" width="400%" style="display: block; margin: auto;" /></p>
+<p><img src="images/learning_obj4.PNG" width="400%" style="display: block; margin: auto;" /></p>
+<p><img src="images/learning_obj5.PNG" width="400%" style="display: block; margin: auto;" /></p>
+<p>Exploratory Data Analysis (EDA) is usually the first phase of an analytics project. This is as much of an art as it is a science because everyone has their style. If you ask two actuaries to perform EDA on the same data set, they will likely use different methods. These can be broken down into phases.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-47"></span>
+<img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-47-1.png" alt="Data Exploration Phases - From *R for Data Science*" width="700" />
+<p class="caption">
+Figure 7.1: Data Exploration Phases - From <em>R for Data Science</em>
+</p>
+</div>
+<p>From the current syllabus language, these are</p>
+<p><strong>Import:</strong></p>
+<ul>
+<li>Evaluate the quality of appropriate data sources for a problem.</li>
+<li>Identify the regulations, standards, and ethics surrounding predictive modeling and data</li>
+</ul>
+<p><strong>Tidy:</strong></p>
+<ul>
+<li>Identify structured, unstructured, and semi-structured data.</li>
+<li>Identify the types of variables and terminology used in predictive modeling.</li>
+<li>Understand basic methods of handling missing data.</li>
+<li>Implement effective data design with respect to time frame, sampling, and granularity.</li>
+</ul>
+<p><strong>Transform:</strong></p>
+<ul>
+<li>Identify opportunities to create features from the primary data that may add value.</li>
+<li>Identify outliers and other data issues.</li>
+<li>Handle non-linear relationships via transformations.</li>
+</ul>
+<p><strong>Visualize:</strong></p>
+<ul>
+<li>Apply univariate and bivariate data exploration techniques.</li>
+<li>Understand the fundamental principles of constructing graphs.</li>
+<li>Create a variety of graphs using the ggplot2 package.</li>
+</ul>
+<p><strong>Model:</strong></p>
+<ul>
+<li>Fit and interpret models</li>
+</ul>
+<p><strong>Communicate:</strong></p>
+<ul>
+<li>Write the report</li>
+</ul>
+<div id="how-to-make-graphs-in-r" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> How to make graphs in R?<a href="data-exploration.html#how-to-make-graphs-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let us create a histogram of the claims. The first step is to create a blank canvas that holds the columns that are needed. The library to make this is called <a href="https://ggplot2.tidyverse.org/">ggplot2</a>.</p>
+<p>The <code>aesthetic</code> argument, <code>aes</code>, means that the variable shown will the the claims.</p>
+<p>The <code>sample_frac</code> means that only 20% of the data is used. This makes the visuzlization less cluttered.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="data-exploration.html#cb111-1" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">use_python</span>(<span class="st">&quot;C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe&quot;</span>, <span class="at">required =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb111-2"><a href="data-exploration.html#cb111-2" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb111-3"><a href="data-exploration.html#cb111-3" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_UV_ENABLED =</span> <span class="st">&quot;0&quot;</span>)</span>
+<span id="cb111-4"><a href="data-exploration.html#cb111-4" tabindex="-1"></a></span>
+<span id="cb111-5"><a href="data-exploration.html#cb111-5" tabindex="-1"></a><span class="fu">py_config</span>()</span></code></pre></div>
+<pre><code>## python:         C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe
+## libpython:      C:/Users/casti/AppData/Local/Programs/Python/Python313/python313.dll
+## pythonhome:     C:/Users/casti/AppData/Local/Programs/Python/Python313
+## version:        3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+## Architecture:   64bit
+## numpy:          C:/Users/casti/AppData/Local/Programs/Python/Python313/Lib/site-packages/numpy
+## numpy_version:  2.2.3
+## 
+## NOTE: Python version was forced by use_python() function</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="data-exploration.html#cb113-1" tabindex="-1"></a>datasets <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">&quot;datasets&quot;</span>)</span>
+<span id="cb113-2"><a href="data-exploration.html#cb113-2" tabindex="-1"></a>ds <span class="ot">&lt;-</span> datasets<span class="sc">$</span><span class="fu">load_dataset</span>(<span class="st">&quot;supersam7/readmission&quot;</span>)</span>
+<span id="cb113-3"><a href="data-exploration.html#cb113-3" tabindex="-1"></a></span>
+<span id="cb113-4"><a href="data-exploration.html#cb113-4" tabindex="-1"></a><span class="co"># Fix: convert the Arrow table / Dataset to pandas DataFrame first</span></span>
+<span id="cb113-5"><a href="data-exploration.html#cb113-5" tabindex="-1"></a>df_pd <span class="ot">&lt;-</span> ds[<span class="st">&quot;train&quot;</span>]<span class="sc">$</span><span class="fu">to_pandas</span>()          <span class="co"># or ds$train$to_pandas()</span></span>
+<span id="cb113-6"><a href="data-exploration.html#cb113-6" tabindex="-1"></a></span>
+<span id="cb113-7"><a href="data-exploration.html#cb113-7" tabindex="-1"></a><span class="co"># Then sample in R with dplyr (now it&#39;s a real data.frame / tibble)</span></span>
+<span id="cb113-8"><a href="data-exploration.html#cb113-8" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_pd <span class="sc">%&gt;%</span> <span class="fu">sample_frac</span>(<span class="fl">0.05</span>)</span>
+<span id="cb113-9"><a href="data-exploration.html#cb113-9" tabindex="-1"></a>p <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb113-10"><a href="data-exploration.html#cb113-10" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(HCC.Riskscore))</span></code></pre></div>
+<p>If we look at <code>p</code>, we see that it is nothing but white space with axis for <code>count</code> and <code>income</code>.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="data-exploration.html#cb114-1" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-50-1.png" width="576" /></p>
+<div id="add-a-plot" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Add a plot<a href="data-exploration.html#add-a-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We add a histogram</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="data-exploration.html#cb115-1" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-51-1.png" width="576" /></p>
+<p>Different plots are called “geoms” for “geometric objects.” Geometry = Geo (space) + meter (measure), and graphs measure data. For instance, instead of creating a histogram, we can draw a gamma distribution with <code>stat_density</code>.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="data-exploration.html#cb116-1" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_density</span>()</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-52-1.png" width="576" /></p>
+<p>Create an xy plot by adding and <code>x</code> and a <code>y</code> argument to <code>aesthetic</code>.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="data-exploration.html#cb117-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb117-2"><a href="data-exploration.html#cb117-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> HCC.Riskscore, <span class="at">y =</span> Age)) <span class="sc">+</span> </span>
+<span id="cb117-3"><a href="data-exploration.html#cb117-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-53-1.png" width="576" /></p>
+</div>
+</div>
+<div id="the-different-graph-types" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> The different graph types<a href="data-exploration.html#the-different-graph-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Only four types of graphs are used for data exploration. You will only need to understand how to interpret them. The SOA will provide you with the code needed to create them. There will not be enough time for you to make your graphs.</p>
+<div id="histogram" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Histogram<a href="data-exploration.html#histogram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">histogram</a> is used when you want to look at the probability distribution of a continuous variable.</p>
+<p>The template code in your .Rmd file will look like this. Just change “variable” to the name without quotes of the variable and then copy and paste.</p>
+</div>
+<div id="box-plot" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Box plot<a href="data-exploration.html#box-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">boxplot</a> compactly displays the distribution of a continuous variable. It visualizes five summary statistics (the median, two hinges, and two whiskers) and all “outlying” observations individually.</p>
+</div>
+<div id="scatterplot" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Scatterplot<a href="data-exploration.html#scatterplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <a href="https://ggplot2.tidyverse.org/reference/geom_point.html">point geom</a> is used to create scatterplots. The scatterplot is most useful for displaying the relationship between two continuous variables. It can be used to compare one continuous and one categorical variable or two categorical variables.</p>
+</div>
+<div id="bar-charts" class="section level3 hasAnchor" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Bar charts<a href="data-exploration.html#bar-charts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are two types of <a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">bar charts</a>: geom_bar() (Univariate) and geom_col() (Bivatiate). geom_bar() makes the height of the bar proportional to the number of cases in each group (or if the weight aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use geom_col() instead. geom_bar() uses stat_count() by default: it counts the number of cases at each x position.</p>
+</div>
+</div>
+<div id="how-to-save-time-with-dplyr" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> How to save time with dplyr?<a href="data-exploration.html#how-to-save-time-with-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You may have noticed that writing code for data manipulation can be slow. Fortunately, there is a faster, 100%-legal way of doing data manipulation that has worked for hundreds of exam candidates (the author included) who have taken Exam PA.</p>
+<p>Up to this point, we have been using old R libraries. By making use of newer R libraries, we can save ourselves time. These will all be provided for you at the exam center within the <a href="https://www.tidyverse.org/">tidyverse</a> library.</p>
+<div id="data-manipulation-chaining" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Data manipulation chaining<a href="data-exploration.html#data-manipulation-chaining" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pipes allow for data manipulations to be chained with visualizations. The possibilities are nearly limitless.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="data-exploration.html#cb118-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb118-2"><a href="data-exploration.html#cb118-2" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb118-3"><a href="data-exploration.html#cb118-3" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb118-4"><a href="data-exploration.html#cb118-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;feature&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb118-5"><a href="data-exploration.html#cb118-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value)) <span class="sc">+</span></span>
+<span id="cb118-6"><a href="data-exploration.html#cb118-6" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb118-7"><a href="data-exploration.html#cb118-7" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(feature))</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-54-1.png" width="576" /></p>
+<p>Suggested reading of <em>R for Data Science</em> (<a href="https://r4ds.had.co.nz/index.html" class="uri">https://r4ds.had.co.nz/index.html</a>):</p>
+<table>
+<thead>
+<tr class="header">
+<th>Chapter</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9</td>
+<td>Introduction</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Tibbles</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>Tidy data</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>Factors</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>Introduction</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>Pipes</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>Functions</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>Vectors</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="types-of-missing-values" class="section level3 hasAnchor" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> Types of Missing Values<a href="data-exploration.html#types-of-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Read the Data Dictionary from the Project Statement and check for these three types of missingness.</p>
+<ul>
+<li><strong>Missing at random (MAR):</strong> There is no pattern between the missingness and the value of missing variable.</li>
+<li><strong>Missing not at random (MNAR):</strong> The value of the missing variable is related to the reason it is missing. Example: A survey concerning illegal drug use where respondents are reluctant to admit that they have broken the law.</li>
+<li><strong>Hidden missingness:</strong> When a value is coded incorrectly, such as when a numeric variable with “999” or “0” or a factor does not match the Data Dictionary.</li>
+</ul>
+</div>
+<div id="missing-value-resolutions" class="section level3 hasAnchor" number="7.3.3">
+<h3><span class="header-section-number">7.3.3</span> Missing Value Resolutions:<a href="data-exploration.html#missing-value-resolutions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You can use any of these methods but make sure that you describe your reasoning in the report.</p>
+<ul>
+<li><strong>Remove observations:</strong> Use when there are only a few missing values or when they are MAR.</li>
+<li><strong>Create new level “missing:”</strong> Use when there are more values or when they are MNAR.<br />
+</li>
+<li><strong>Impute with the mean:</strong> Use when there are numeric values MAR.</li>
+<li><strong>Remove variable altogether:</strong> Use when most observations are missing (≥ 50% of observations), and there is no way to repair the data.</li>
+</ul>
+<p>While you are reviewing the data for missingness, you may also decide to remove some variables altogether. This could be because of racial or ethical concerns, limitations of future availability, instability of the data over time, or inexplicability.</p>
+<p><strong>TASK 1 (12 points)</strong></p>
+<blockquote>
+<p>Examine each variable and make appropriate adjustments.</p>
+</blockquote>
+<blockquote>
+<p>Examine each predictor variable other than cap_gain both on its own and for value_flag. Make appropriate adjustments. Do not make any adjustments to the cap_gain variable at this time.</p>
+</blockquote>
+<blockquote>
+<p>There should be no further variable adjustments unless specifically requested.</p>
+</blockquote>
+<p>Because the data is already loaded, use the below code to access the data.</p>
+<p>To save keystrokes, give the data a short name such as <code>df</code> for “data frame”.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="data-exploration.html#cb119-1" tabindex="-1"></a><span class="co"># Convert character columns to factors</span></span>
+<span id="cb119-2"><a href="data-exploration.html#cb119-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span>
+<span id="cb119-3"><a href="data-exploration.html#cb119-3" tabindex="-1"></a></span>
+<span id="cb119-4"><a href="data-exploration.html#cb119-4" tabindex="-1"></a><span class="fu">glimpse</span>(df)   <span class="co"># verify it worked</span></span></code></pre></div>
+<pre><code>## Rows: 48,842
+## Columns: 8
+## $ age            &lt;dbl&gt; 39, 50, 38, 53, 28, 37, 49, 52, 31, 42, 37, 30, 23, 32,…
+## $ education_num  &lt;dbl&gt; 13, 13, 9, 7, 13, 14, 5, 9, 14, 13, 10, 13, 13, 12, 11,…
+## $ marital_status &lt;fct&gt; Never-married, Married-civ-spouse, Divorced, Married-ci…
+## $ occupation     &lt;fct&gt; Group 2, Group 5, Group 1, Group 1, Group 5, Group 5, G…
+## $ cap_gain       &lt;dbl&gt; 2174, 0, 0, 0, 0, 0, 0, 0, 14084, 5178, 0, 0, 0, 0, 0, …
+## $ hours_per_week &lt;dbl&gt; 40, 13, 40, 40, 40, 40, 16, 45, 50, 40, 80, 40, 30, 50,…
+## $ score          &lt;dbl&gt; 58.99, 55.78, 62.75, 60.10, 53.31, 54.07, 61.72, 61.41,…
+## $ value_flag     &lt;fct&gt; Low, Low, Low, Low, Low, Low, Low, High, High, High, Hi…</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="data-exploration.html#cb121-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre><code>##       age        education_num                 marital_status     occupation   
+##  Min.   :17.00   Min.   : 1.00   Divorced             : 6633   Group 1 : 7237  
+##  1st Qu.:28.00   1st Qu.: 9.00   Married-AF-spouse    :   37   Group 2 :10123  
+##  Median :37.00   Median :10.00   Married-civ-spouse   :22379   Group 3 :13971  
+##  Mean   :38.64   Mean   :10.08   Married-spouse-absent:  628   Group 4 : 2444  
+##  3rd Qu.:48.00   3rd Qu.:12.00   Never-married        :16117   Group 5 :12258  
+##  Max.   :90.00   Max.   :16.00   Separated            : 1530   Group NA: 2809  
+##                                  Widowed              : 1518                   
+##     cap_gain     hours_per_week      score       value_flag  
+##  Min.   :    0   Min.   : 1.00   Min.   :43.94   High:11687  
+##  1st Qu.:    0   1st Qu.:40.00   1st Qu.:57.50   Low :37155  
+##  Median :    0   Median :40.00   Median :60.24               
+##  Mean   : 1079   Mean   :40.42   Mean   :60.23               
+##  3rd Qu.:    0   3rd Qu.:45.00   3rd Qu.:62.95               
+##  Max.   :99999   Max.   :99.00   Max.   :76.53               
+## </code></pre>
+</div>
+<div id="garbage-in-garbage-out" class="section level3 hasAnchor" number="7.3.4">
+<h3><span class="header-section-number">7.3.4</span> Garbage in; garbage out 🗑<a href="#garbage-in-garbage-out" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This is a common saying when working with predictive models. No matter how complex the model, the actual result will be wrong if the data is terrible. For this exam, master the art of data manipulation, and everything becomes easier!</p>
+<p>Begin by looking at a summary.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="data-exploration.html#cb123-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre><code>##       age        education_num                 marital_status     occupation   
+##  Min.   :17.00   Min.   : 1.00   Divorced             : 6633   Group 1 : 7237  
+##  1st Qu.:28.00   1st Qu.: 9.00   Married-AF-spouse    :   37   Group 2 :10123  
+##  Median :37.00   Median :10.00   Married-civ-spouse   :22379   Group 3 :13971  
+##  Mean   :38.64   Mean   :10.08   Married-spouse-absent:  628   Group 4 : 2444  
+##  3rd Qu.:48.00   3rd Qu.:12.00   Never-married        :16117   Group 5 :12258  
+##  Max.   :90.00   Max.   :16.00   Separated            : 1530   Group NA: 2809  
+##                                  Widowed              : 1518                   
+##     cap_gain     hours_per_week      score       value_flag  
+##  Min.   :    0   Min.   : 1.00   Min.   :43.94   High:11687  
+##  1st Qu.:    0   1st Qu.:40.00   1st Qu.:57.50   Low :37155  
+##  Median :    0   Median :40.00   Median :60.24               
+##  Mean   : 1079   Mean   :40.42   Mean   :60.23               
+##  3rd Qu.:    0   3rd Qu.:45.00   3rd Qu.:62.95               
+##  Max.   :99999   Max.   :99.00   Max.   :76.53               
+## </code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="data-exploration.html#cb125-1" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre><code>## tibble [48,842 × 8] (S3: tbl_df/tbl/data.frame)
+##  $ age           : num [1:48842] 39 50 38 53 28 37 49 52 31 42 ...
+##  $ education_num : num [1:48842] 13 13 9 7 13 14 5 9 14 13 ...
+##  $ marital_status: Factor w/ 7 levels &quot;Divorced&quot;,&quot;Married-AF-spouse&quot;,..: 5 3 1 3 3 3 4 3 5 3 ...
+##  $ occupation    : Factor w/ 6 levels &quot;Group 1&quot;,&quot;Group 2&quot;,..: 2 5 1 1 5 5 1 5 5 5 ...
+##  $ cap_gain      : num [1:48842] 2174 0 0 0 0 ...
+##  $ hours_per_week: num [1:48842] 40 13 40 40 40 40 16 45 50 40 ...
+##  $ score         : num [1:48842] 59 55.8 62.8 60.1 53.3 ...
+##  $ value_flag    : Factor w/ 2 levels &quot;High&quot;,&quot;Low&quot;: 2 2 2 2 2 2 2 1 1 1 ...
+##  - attr(*, &quot;pandas.index&quot;)=RangeIndex(start=0, stop=48842, step=1)</code></pre>
+</div>
+<div id="be-a-detective" class="section level3 hasAnchor" number="7.3.5">
+<h3><span class="header-section-number">7.3.5</span> Be a detective 🔍<a href="#be-a-detective" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Sherlock Holmes is famous for saying, “You see, Watson, but you do not observe!”</p>
+<p>Just like detectives, actuaries need to collect data and make observations. Each exam has a few “anomalies” in the data, which they expect candidates to mention. These could be</p>
+<ul>
+<li>Any value that does not match the Data Dictionary in the Project Statement</li>
+<li>Variables that have <code>NA</code> values</li>
+<li>Variables that have many factor levels</li>
+<li>Incorrect data types
+<ul>
+<li>Factors that are read as characters or vice versa</li>
+<li>Numeric variables that are factor/character</li>
+</ul></li>
+<li>Extreme values (Numeric values are too high or low)</li>
+</ul>
+<p>You will get very good at spotting these with practice. Just from looking at the above <code>summary</code>, we can observe the following:</p>
+<p><strong>Observations</strong></p>
+<ul>
+<li>The data consists of 48,842 obs. of 8 variables.</li>
+<li>The lowest <code>age</code> is 17 but the Project Statement says to only include observations with <code>age</code> &gt;= 25.</li>
+<li>The <code>cap_gain</code> distribution is right-skewed because the median (0) is less than the mean (1079), but the Project Statement said not to transform this. Otherwise, I would apply a log transform.</li>
+<li><code>education_num</code> takes integer values between 1 and 16. There are many values that are low.</li>
+<li>There are missing values when <code>occupation</code> is <code>group NA</code>, which means that the occupation of the person is unknown.</li>
+<li>The amount that people work per work, <code>hours_per_week</code>, varies by a lot. The lowest is 1 hour, and the highest is 99. Most people work 40 hours per week.</li>
+</ul>
+<p></br></p>
+<div class="studytip">
+<p>
+<strong>Study Tip:</strong> Never apply a log transform to the target
+variable. Only the predictor variables get logs taken. At this stage, we
+note if it is right-skewed or not.
+</p>
+</div>
+<p></br></p>
+<p>The solution of SOA recommends leaving comments in your .Rmd file. This helps to give you partial credit on questions that you may answer incorrectly.</p>
+<p><strong>Good comments</strong></p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="data-exploration.html#cb127-1" tabindex="-1"></a><span class="co">#I observe that there are no missing values other than those indicated by Group NA for occupation.</span></span>
+<span id="cb127-2"><a href="data-exploration.html#cb127-2" tabindex="-1"></a></span>
+<span id="cb127-3"><a href="data-exploration.html#cb127-3" tabindex="-1"></a><span class="co">#I removed the code provided by my assistant. It is embedded in later chunks as needed.</span></span>
+<span id="cb127-4"><a href="data-exploration.html#cb127-4" tabindex="-1"></a></span>
+<span id="cb127-5"><a href="data-exploration.html#cb127-5" tabindex="-1"></a><span class="co">#I excluded people under the age of 25</span></span>
+<span id="cb127-6"><a href="data-exploration.html#cb127-6" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>age <span class="sc">&gt;=</span> <span class="dv">25</span>,]</span>
+<span id="cb127-7"><a href="data-exploration.html#cb127-7" tabindex="-1"></a></span>
+<span id="cb127-8"><a href="data-exploration.html#cb127-8" tabindex="-1"></a><span class="co">#I convert the target to 0-1.</span></span>
+<span id="cb127-9"><a href="data-exploration.html#cb127-9" tabindex="-1"></a>df<span class="sc">$</span>value_flag <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>value_flag <span class="sc">==</span> <span class="st">&quot;High&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div>
+<p><strong>Useless comments</strong></p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="data-exploration.html#cb128-1" tabindex="-1"></a><span class="co">#this is a comment</span></span>
+<span id="cb128-2"><a href="data-exploration.html#cb128-2" tabindex="-1"></a></span>
+<span id="cb128-3"><a href="data-exploration.html#cb128-3" tabindex="-1"></a><span class="co">#this loads a library called ggplot2</span></span>
+<span id="cb128-4"><a href="data-exploration.html#cb128-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+</div>
+<div id="a-picture-is-worth-a-thousand-words" class="section level3 hasAnchor" number="7.3.6">
+<h3><span class="header-section-number">7.3.6</span> A picture is worth a thousand words 📷<a href="#a-picture-is-worth-a-thousand-words" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What is your favorite type of graph? Mine is a radar chart. This is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point.</p>
+<p>That is pretty, right?</p>
+<p><img src="images/radar_graph.png" width="1300%" style="display: block; margin: auto;" /></p>
+<p><strong>Do not waste time trying to make the graphs perfect!</strong></p>
+<p>Only change code that you <strong>need</strong> to change. If you need assistance to do it faster then SOA can help you save time by giving you templates.</p>
+<p>This is the code template that they give you. You only need to change the “variable” names.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="data-exploration.html#cb129-1" tabindex="-1"></a><span class="co"># This code makes a histogram for a continuous variable.</span></span>
+<span id="cb129-2"><a href="data-exploration.html#cb129-2" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> variable)) <span class="sc">+</span> </span>
+<span id="cb129-3"><a href="data-exploration.html#cb129-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb129-4"><a href="data-exploration.html#cb129-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;variable&quot;</span>) <span class="sc">+</span></span>
+<span id="cb129-5"><a href="data-exploration.html#cb129-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb129-6"><a href="data-exploration.html#cb129-6" tabindex="-1"></a></span>
+<span id="cb129-7"><a href="data-exploration.html#cb129-7" tabindex="-1"></a><span class="co"># This code makes a bar chart for a factor variable.</span></span>
+<span id="cb129-8"><a href="data-exploration.html#cb129-8" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> variable)) <span class="sc">+</span></span>
+<span id="cb129-9"><a href="data-exploration.html#cb129-9" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb129-10"><a href="data-exploration.html#cb129-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;variable&quot;</span>) <span class="sc">+</span></span>
+<span id="cb129-11"><a href="data-exploration.html#cb129-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+<p>Okay, that was not 100% true. It is common for the code to require <strong>small</strong> changes. changes. For instance, the histogram that they give you has bins that are too narrow for <code>age</code>, which causes these spikes to show up in the graph.</p>
+<blockquote>
+<p>The best candidates altered the code to create more appropriate plots and summary tables.</p>
+</blockquote>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="data-exploration.html#cb130-1" tabindex="-1"></a><span class="co"># This code makes a histogram for a continuous variable.</span></span>
+<span id="cb130-2"><a href="data-exploration.html#cb130-2" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span> </span>
+<span id="cb130-3"><a href="data-exploration.html#cb130-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span> <span class="co">#not the right number of bins</span></span>
+<span id="cb130-4"><a href="data-exploration.html#cb130-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;age&quot;</span>) <span class="sc">+</span></span>
+<span id="cb130-5"><a href="data-exploration.html#cb130-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb130-6"><a href="data-exploration.html#cb130-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Bad: Default histogram with spikes&quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-63-1.png" width="576" /></p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="data-exploration.html#cb131-1" tabindex="-1"></a><span class="co">#Histograms of continuous variables</span></span>
+<span id="cb131-2"><a href="data-exploration.html#cb131-2" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb131-3"><a href="data-exploration.html#cb131-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">24.5</span>,<span class="fl">99.5</span>, <span class="at">by =</span> <span class="dv">5</span>)) <span class="sc">+</span>  <span class="co">#make bins wider and set range </span></span>
+<span id="cb131-4"><a href="data-exploration.html#cb131-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>) <span class="sc">+</span></span>
+<span id="cb131-5"><a href="data-exploration.html#cb131-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb131-6"><a href="data-exploration.html#cb131-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Good: After adjusting the breaks&quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-63-2.png" width="576" /></p>
+<p>How do you know when a variable should a factor and when it should be numeric?</p>
+</div>
+<div id="factor-or-numeric" class="section level3 hasAnchor" number="7.3.7">
+<h3><span class="header-section-number">7.3.7</span> Factor or numeric ❓<a href="data-exploration.html#factor-or-numeric" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Which variables should be converted to factors and which should be numeric?</p>
+<p>Questions of this sort have come up twice. On Hospital Readmissions, a Length of Stay variable was numeric but had only a few values, so some candidates treated it as a factor. The <code>education_num</code> variable here is also numeric but only has 16 unique values. So should this be a numeric or a factor?</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="data-exploration.html#cb132-1" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>education_num)</span></code></pre></div>
+<pre><code>## 
+##     1     2     3     4     5     6     7     8     9    10    11    12    13 
+##    68   231   446   877   618   995  1042   382 13320  7812  1862  1411  7298 
+##    14    15    16 
+##  2621   834   593</code></pre>
+<p>Ask yourself this question: is there a way of comparing two values of the variable together?</p>
+<ul>
+<li>If yes, then use numeric<br />
+</li>
+<li>If no, then use a factor</li>
+</ul>
+<p>For exmaple, we can say that <code>education_num = 2</code> is less than <code>education_num = 4</code>, which means there is a natural order. This is also known as an <strong>ordinal</strong>.</p>
+<p>If the factor is say, <code>color</code>, which can be <code>red</code>, <code>blue</code>, or <code>green</code>, then there is no way of comparing values together. Is <code>red</code> greater than <code>blue</code>? This question has no meaning.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="data-exploration.html#cb134-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> education_num)) <span class="sc">+</span></span>
+<span id="cb134-2"><a href="data-exploration.html#cb134-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb134-3"><a href="data-exploration.html#cb134-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="sc">+</span></span>
+<span id="cb134-4"><a href="data-exploration.html#cb134-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb134-5"><a href="data-exploration.html#cb134-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Default number of bins (30)&quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-65-1.png" width="576" /></p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="data-exploration.html#cb135-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> education_num)) <span class="sc">+</span></span>
+<span id="cb135-2"><a href="data-exploration.html#cb135-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb135-3"><a href="data-exploration.html#cb135-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Education&quot;</span>) <span class="sc">+</span></span>
+<span id="cb135-4"><a href="data-exploration.html#cb135-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb135-5"><a href="data-exploration.html#cb135-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Set number of bins to number of factor levels (16) &quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-65-2.png" width="576" /></p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="data-exploration.html#cb136-1" tabindex="-1"></a><span class="co"># Set bins equal to number of levels, could have made bar chart.</span></span></code></pre></div>
+<p>We could also use a bar plot.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="data-exploration.html#cb137-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> education_num)) <span class="sc">+</span> </span>
+<span id="cb137-2"><a href="data-exploration.html#cb137-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb137-3"><a href="data-exploration.html#cb137-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Bar plot&quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-66-1.png" width="576" /></p>
+<p>Lastly, read the Project Statement carefully and only do what it tells you to do.</p>
+<blockquote>
+<p>Candidates were not required to make a plot for cap_gain. This solution has the plot made here rather than in Task 6.</p>
+</blockquote>
+</div>
+<div id="of-statistics-are-false" class="section level3 hasAnchor" number="7.3.8">
+<h3><span class="header-section-number">7.3.8</span> 73.6% of statistics are false 😨<a href="#of-statistics-are-false" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Really? No, but statistics can help you see patterns that data visualization by itself can miss. Along with the ggplot codes, there will be code to look at summary statistics. Here is a refresher on what these statistics mean (no pun intended).</p>
+<ul>
+<li><strong>Mean</strong>: The average. This gets skewed by outliers easily. If the mean is greater than the median, then the distribution is right-skewed.</li>
+<li><strong>Median</strong>: The “middle” value. This is an average that reduces the impact of outliers.</li>
+<li><strong>Variance</strong>: The amount by which each observation differs from the mean.<br />
+</li>
+<li><strong>Standard Deviation</strong>: The square root of the variance.</li>
+<li><strong>n()</strong>: The number of observations. Always take note of groups that do not have many observations.</li>
+</ul>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="data-exploration.html#cb138-1" tabindex="-1"></a><span class="co"># This code provides, for each level of a factor variable, the number for which value_flag is zero, the number for which it is one, the total number of observations, and the proportion of ones.</span></span>
+<span id="cb138-2"><a href="data-exploration.html#cb138-2" tabindex="-1"></a><span class="co"># Note that the variable name should not be enclosed in quotation marks.</span></span>
+<span id="cb138-3"><a href="data-exploration.html#cb138-3" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb138-4"><a href="data-exploration.html#cb138-4" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span></span>
+<span id="cb138-5"><a href="data-exploration.html#cb138-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb138-6"><a href="data-exploration.html#cb138-6" tabindex="-1"></a>    <span class="at">zeros =</span> <span class="fu">sum</span>(value_flag <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb138-7"><a href="data-exploration.html#cb138-7" tabindex="-1"></a>    <span class="at">ones =</span> <span class="fu">sum</span>(value_flag <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb138-8"><a href="data-exploration.html#cb138-8" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb138-9"><a href="data-exploration.html#cb138-9" tabindex="-1"></a>    <span class="at">proportion =</span> <span class="fu">mean</span>(value_flag)</span>
+<span id="cb138-10"><a href="data-exploration.html#cb138-10" tabindex="-1"></a>  )</span></code></pre></div>
+<p>Factors levels should be simplified. If a group has only a few observations, then there will be problems with the model. In our data, take a look at the <code>marital_status</code> column. Do you observe anything unusual?</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="data-exploration.html#cb139-1" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
+<pre><code>## 
+##              Divorced     Married-AF-spouse    Married-civ-spouse 
+##                  6498                    31                 21661 
+## Married-spouse-absent         Never-married             Separated 
+##                   573                  8697                  1438 
+##               Widowed 
+##                  1512</code></pre>
+<p>Only 31 observations have <code>Married-AF-spouse</code>. This is because the sample size <code>n = 31</code> is too small. In modeling jargon, this is “statistical insignificant” and will cause the p-value on <code>marital_status</code> to be large. You can fix this in a few different ways</p>
+<ul>
+<li>Delete these observations (Not recommended)</li>
+<li>Group these observations together with <code>Married-spouse</code> (Simplest method)</li>
+</ul>
+<p>Let us use the second method.</p>
+<p>First, look at the levels of the factor variable.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="data-exploration.html#cb141-1" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
+<pre><code>## [1] &quot;Divorced&quot;              &quot;Married-AF-spouse&quot;     &quot;Married-civ-spouse&quot;   
+## [4] &quot;Married-spouse-absent&quot; &quot;Never-married&quot;         &quot;Separated&quot;            
+## [7] &quot;Widowed&quot;</code></pre>
+<p>Now look at the profitability across marital status. For <code>Married-AF-spouse</code> and <code>Married-civ-spouse</code> the proportion of high profit customers is <strong>high</strong>, but for <code>Married-spouse-absent</code> it is <strong>low.</strong> Even though these are all “married”, it would be a bad idea to combine them because the profitability is so different.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="data-exploration.html#cb143-1" tabindex="-1"></a><span class="co">#Proportion of ones by category of factor variable</span></span>
+<span id="cb143-2"><a href="data-exploration.html#cb143-2" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb143-3"><a href="data-exploration.html#cb143-3" tabindex="-1"></a>  <span class="fu">group_by</span>(marital_status) <span class="sc">%&gt;%</span></span>
+<span id="cb143-4"><a href="data-exploration.html#cb143-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb143-5"><a href="data-exploration.html#cb143-5" tabindex="-1"></a>    <span class="at">zeros =</span> <span class="fu">sum</span>(value_flag <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb143-6"><a href="data-exploration.html#cb143-6" tabindex="-1"></a>    <span class="at">ones =</span> <span class="fu">sum</span>(value_flag <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb143-7"><a href="data-exploration.html#cb143-7" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb143-8"><a href="data-exploration.html#cb143-8" tabindex="-1"></a>    <span class="at">proportion =</span> <span class="fu">mean</span>(value_flag)</span>
+<span id="cb143-9"><a href="data-exploration.html#cb143-9" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 5
+##   marital_status        zeros  ones     n proportion
+##   &lt;fct&gt;                 &lt;int&gt; &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;
+## 1 Divorced               5829   669  6498     0.103 
+## 2 Married-AF-spouse        19    12    31     0.387 
+## 3 Married-civ-spouse    11727  9934 21661     0.459 
+## 4 Married-spouse-absent   515    58   573     0.101 
+## 5 Never-married          8000   697  8697     0.0801
+## 6 Separated              1342    96  1438     0.0668
+## 7 Widowed                1384   128  1512     0.0847</code></pre>
+<p>Then create a vector that has the simpler levels that you want. The order needs to be the same.</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="data-exploration.html#cb145-1" tabindex="-1"></a>simple_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Divorced&quot;</span>, <span class="st">&quot;Married-spouse&quot;</span>, <span class="st">&quot;Married-spouse&quot;</span>, <span class="st">&quot;Married-spuouse-absent&quot;</span>, <span class="st">&quot;Neber-married&quot;</span>, <span class="st">&quot;Separated&quot;</span>, <span class="st">&quot;Widowed&quot;</span>)</span></code></pre></div>
+<p>The function <code>mapvalues</code> takes in three arguments. You can read about this by typing <code>?mapvalues</code> into the console.</p>
+<p><code>x</code> : the factor or vector to modify</p>
+<p><code>from</code> : a vector of the items to replace</p>
+<p><code>to</code> : a vector of replacement values</p>
+<p>Then map the old values to the simpler values.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="data-exploration.html#cb146-1" tabindex="-1"></a><span class="co">#Combine the two marital status levels</span></span>
+<span id="cb146-2"><a href="data-exploration.html#cb146-2" tabindex="-1"></a>var.levels <span class="ot">&lt;-</span> <span class="fu">levels</span>(df<span class="sc">$</span>marital_status)</span>
+<span id="cb146-3"><a href="data-exploration.html#cb146-3" tabindex="-1"></a>df<span class="sc">$</span>marital_status <span class="ot">&lt;-</span> <span class="fu">mapvalues</span>(<span class="at">x =</span> df<span class="sc">$</span>marital_status,</span>
+<span id="cb146-4"><a href="data-exploration.html#cb146-4" tabindex="-1"></a>                               <span class="at">from =</span> var.levels, </span>
+<span id="cb146-5"><a href="data-exploration.html#cb146-5" tabindex="-1"></a>                               <span class="at">to =</span> simple_levels) </span></code></pre></div>
+<p>Now, when you look at the <code>marital_status</code> levels, you will see the simpler levels.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="data-exploration.html#cb147-1" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
+<pre><code>## [1] &quot;Divorced&quot;               &quot;Married-spouse&quot;         &quot;Married-spuouse-absent&quot;
+## [4] &quot;Neber-married&quot;          &quot;Separated&quot;              &quot;Widowed&quot;</code></pre>
+<p>You can also check that the number of observations is what you expect.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="data-exploration.html#cb149-1" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>marital_status)</span></code></pre></div>
+<pre><code>## 
+##               Divorced         Married-spouse Married-spuouse-absent 
+##                   6498                  21692                    573 
+##          Neber-married              Separated                Widowed 
+##                   8697                   1438                   1512</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-programming.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-to-modeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/03-data-exploration.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Exam-PA-Study-Manual.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

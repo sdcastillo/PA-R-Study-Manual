@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 16 Bank Loans Case Study | Data exploration</title>
+  <meta name="description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 16 Bank Loans Case Study | Data exploration" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/pitch-deck-cover.jpg" />
+  <meta property="og:description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="github-repo" content="sdcastillo/PA-R-Study-Manual" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 16 Bank Loans Case Study | Data exploration" />
+  
+  <meta name="twitter:description" content="References for predictive analytics, machine learning, and Exam PA." />
+  <meta name="twitter:image" content="/images/pitch-deck-cover.jpg" />
+
+<meta name="author" content="Samuel Castillo" />
+
+
+<meta name="date" content="2026-01-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="writing-and-communication.html"/>
+<link rel="next" href="loan-risk-modeling.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="assets/css/space-vibe.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Exam PA Study Manual</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#faq-frequently-asked-questions"><i class="fa fa-check"></i><b>0.1</b> FAQ: Frequently Asked Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="the-exam.html"><a href="the-exam.html"><i class="fa fa-check"></i><b>1</b> The exam</a></li>
+<li class="chapter" data-level="2" data-path="prometric-demo.html"><a href="prometric-demo.html"><i class="fa fa-check"></i><b>2</b> Prometric Demo</a></li>
+<li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
+<li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="getting-started.html"><a href="getting-started.html#extract-transform-load-etl"><i class="fa fa-check"></i><b>4.1</b> Extract Transform Load (ETL)</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-started.html"><a href="getting-started.html#installing-r"><i class="fa fa-check"></i><b>4.2</b> Installing R</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-started.html"><a href="getting-started.html#installing-rstudio"><i class="fa fa-check"></i><b>4.3</b> Installing RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="learning-to-code.html"><a href="learning-to-code.html"><i class="fa fa-check"></i><b>5</b> Learning to Code</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="learning-to-code.html"><a href="learning-to-code.html#how-to-use-the-pa-r-cheat-sheets"><i class="fa fa-check"></i><b>5.1</b> How to use the PA R cheat sheets?</a></li>
+<li class="chapter" data-level="5.2" data-path="learning-to-code.html"><a href="learning-to-code.html#example-soa-pa-task-8"><i class="fa fa-check"></i><b>5.2</b> Example: SOA PA Task 8</a></li>
+<li class="chapter" data-level="5.3" data-path="learning-to-code.html"><a href="learning-to-code.html#example-2---data-exploration"><i class="fa fa-check"></i><b>5.3</b> Example 2 - Data exploration</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>6</b> R programming</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-programming.html"><a href="r-programming.html#notebook-chunks"><i class="fa fa-check"></i><b>6.1</b> Notebook chunks</a></li>
+<li class="chapter" data-level="6.2" data-path="r-programming.html"><a href="r-programming.html#basic-operations"><i class="fa fa-check"></i><b>6.2</b> Basic operations</a></li>
+<li class="chapter" data-level="6.3" data-path="r-programming.html"><a href="r-programming.html#lists"><i class="fa fa-check"></i><b>6.3</b> Lists</a></li>
+<li class="chapter" data-level="6.4" data-path="r-programming.html"><a href="r-programming.html#functions"><i class="fa fa-check"></i><b>6.4</b> Functions</a></li>
+<li class="chapter" data-level="6.5" data-path="r-programming.html"><a href="r-programming.html#data-frames"><i class="fa fa-check"></i><b>6.5</b> Data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>7</b> Data exploration</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-exploration.html"><a href="data-exploration.html#how-to-make-graphs-in-r"><i class="fa fa-check"></i><b>7.1</b> How to make graphs in R?</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="data-exploration.html"><a href="data-exploration.html#add-a-plot"><i class="fa fa-check"></i><b>7.1.1</b> Add a plot</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="data-exploration.html"><a href="data-exploration.html#the-different-graph-types"><i class="fa fa-check"></i><b>7.2</b> The different graph types</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="data-exploration.html"><a href="data-exploration.html#histogram"><i class="fa fa-check"></i><b>7.2.1</b> Histogram</a></li>
+<li class="chapter" data-level="7.2.2" data-path="data-exploration.html"><a href="data-exploration.html#box-plot"><i class="fa fa-check"></i><b>7.2.2</b> Box plot</a></li>
+<li class="chapter" data-level="7.2.3" data-path="data-exploration.html"><a href="data-exploration.html#scatterplot"><i class="fa fa-check"></i><b>7.2.3</b> Scatterplot</a></li>
+<li class="chapter" data-level="7.2.4" data-path="data-exploration.html"><a href="data-exploration.html#bar-charts"><i class="fa fa-check"></i><b>7.2.4</b> Bar charts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="data-exploration.html"><a href="data-exploration.html#how-to-save-time-with-dplyr"><i class="fa fa-check"></i><b>7.3</b> How to save time with dplyr?</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="data-exploration.html"><a href="data-exploration.html#data-manipulation-chaining"><i class="fa fa-check"></i><b>7.3.1</b> Data manipulation chaining</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-exploration.html"><a href="data-exploration.html#types-of-missing-values"><i class="fa fa-check"></i><b>7.3.2</b> Types of Missing Values</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-exploration.html"><a href="data-exploration.html#missing-value-resolutions"><i class="fa fa-check"></i><b>7.3.3</b> Missing Value Resolutions:</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-exploration.html"><a href="data-exploration.html#garbage-in-garbage-out"><i class="fa fa-check"></i><b>7.3.4</b> Garbage in; garbage out 🗑</a></li>
+<li class="chapter" data-level="7.3.5" data-path="data-exploration.html"><a href="data-exploration.html#be-a-detective"><i class="fa fa-check"></i><b>7.3.5</b> Be a detective 🔍</a></li>
+<li class="chapter" data-level="7.3.6" data-path="data-exploration.html"><a href="data-exploration.html#a-picture-is-worth-a-thousand-words"><i class="fa fa-check"></i><b>7.3.6</b> A picture is worth a thousand words 📷</a></li>
+<li class="chapter" data-level="7.3.7" data-path="data-exploration.html"><a href="data-exploration.html#factor-or-numeric"><i class="fa fa-check"></i><b>7.3.7</b> Factor or numeric ❓</a></li>
+<li class="chapter" data-level="7.3.8" data-path="data-exploration.html"><a href="data-exploration.html#of-statistics-are-false"><i class="fa fa-check"></i><b>7.3.8</b> 73.6% of statistics are false 😨</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html"><i class="fa fa-check"></i><b>8</b> Introduction to modeling</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-vocabulary"><i class="fa fa-check"></i><b>8.1</b> Modeling vocabulary</a></li>
+<li class="chapter" data-level="8.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#modeling-notation"><i class="fa fa-check"></i><b>8.2</b> Modeling notation</a></li>
+<li class="chapter" data-level="8.3" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#ordinary-least-squares-ols"><i class="fa fa-check"></i><b>8.3</b> Ordinary Least Squares (OLS)</a></li>
+<li class="chapter" data-level="8.4" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#r2-statistic"><i class="fa fa-check"></i><b>8.4</b> R^2 Statistic</a></li>
+<li class="chapter" data-level="8.5" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#correlation"><i class="fa fa-check"></i><b>8.5</b> Correlation</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#pearsons-correlation"><i class="fa fa-check"></i><b>8.5.1</b> Pearson’s correlation</a></li>
+<li class="chapter" data-level="8.5.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#spearman-rank-correlation"><i class="fa fa-check"></i><b>8.5.2</b> Spearman (rank) correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-vs.-classification"><i class="fa fa-check"></i><b>8.6</b> Regression vs. classification</a></li>
+<li class="chapter" data-level="8.7" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#regression-metrics"><i class="fa fa-check"></i><b>8.7</b> Regression metrics</a></li>
+<li class="chapter" data-level="8.8" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#load-dataset"><i class="fa fa-check"></i><b>8.8</b> Load Dataset</a></li>
+<li class="chapter" data-level="8.9" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#simple-linear-model"><i class="fa fa-check"></i><b>8.9</b> Simple Linear Model</a></li>
+<li class="chapter" data-level="8.10" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.10</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.10.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#assumptions-of-ols"><i class="fa fa-check"></i><b>8.10.1</b> Assumptions of OLS</a></li>
+<li class="chapter" data-level="8.10.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#assumptions-of-glms"><i class="fa fa-check"></i><b>8.10.2</b> Assumptions of GLMs</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>8.11</b> Interpretation of coefficients</a>
+<ul>
+<li class="chapter" data-level="8.11.1" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#identity-link"><i class="fa fa-check"></i><b>8.11.1</b> Identity link</a></li>
+<li class="chapter" data-level="8.11.2" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#log-link"><i class="fa fa-check"></i><b>8.11.2</b> Log link</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#advantages-and-disadvantages"><i class="fa fa-check"></i><b>8.12</b> Advantages and disadvantages</a></li>
+<li class="chapter" data-level="8.13" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#glms-for-regression"><i class="fa fa-check"></i><b>8.13</b> GLMs for regression</a></li>
+<li class="chapter" data-level="8.14" data-path="introduction-to-modeling.html"><a href="introduction-to-modeling.html#other-links"><i class="fa fa-check"></i><b>8.14</b> Other links</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="glms-for-classification.html"><a href="glms-for-classification.html"><i class="fa fa-check"></i><b>9</b> GLMs for classification</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#binary-target"><i class="fa fa-check"></i><b>9.1</b> Binary target</a></li>
+<li class="chapter" data-level="9.2" data-path="glms-for-classification.html"><a href="glms-for-classification.html#count-target"><i class="fa fa-check"></i><b>9.2</b> Count target</a></li>
+<li class="chapter" data-level="9.3" data-path="glms-for-classification.html"><a href="glms-for-classification.html#link-functions"><i class="fa fa-check"></i><b>9.3</b> Link functions</a></li>
+<li class="chapter" data-level="9.4" data-path="glms-for-classification.html"><a href="glms-for-classification.html#glm-poisson-gamma-for-claims"><i class="fa fa-check"></i><b>9.4</b> GLM – Poisson / Gamma for Claims</a></li>
+<li class="chapter" data-level="9.5" data-path="glms-for-classification.html"><a href="glms-for-classification.html#penalized-regression-ridge-lasso"><i class="fa fa-check"></i><b>9.5</b> Penalized Regression – Ridge / Lasso</a></li>
+<li class="chapter" data-level="9.6" data-path="glms-for-classification.html"><a href="glms-for-classification.html#interpretation-of-coefficients-1"><i class="fa fa-check"></i><b>9.6</b> Interpretation of coefficients</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="glms-for-classification.html"><a href="glms-for-classification.html#logit"><i class="fa fa-check"></i><b>9.6.1</b> Logit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="classification-metrics.html"><a href="classification-metrics.html"><i class="fa fa-check"></i><b>10</b> Classification metrics</a>
+<ul>
+<li class="chapter" data-level="10.0.1" data-path="classification-metrics.html"><a href="classification-metrics.html#probit-cauchit-cloglog"><i class="fa fa-check"></i><b>10.0.1</b> Probit, Cauchit, Cloglog</a></li>
+<li class="chapter" data-level="10.1" data-path="classification-metrics.html"><a href="classification-metrics.html#area-under-the-roc-curve-auc"><i class="fa fa-check"></i><b>10.1</b> Area Under the ROC Curve (AUC)</a></li>
+<li class="chapter" data-level="10.2" data-path="classification-metrics.html"><a href="classification-metrics.html#demo-the-model-for-interpretation"><i class="fa fa-check"></i><b>10.2</b> Demo the model for interpretation</a></li>
+<li class="chapter" data-level="10.3" data-path="classification-metrics.html"><a href="classification-metrics.html#video-walkthrough"><i class="fa fa-check"></i><b>10.3</b> Video Walkthrough</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html"><i class="fa fa-check"></i><b>11</b> Additional GLM topics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#residuals"><i class="fa fa-check"></i><b>11.1</b> Residuals</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#raw-residuals"><i class="fa fa-check"></i><b>11.1.1</b> Raw residuals</a></li>
+<li class="chapter" data-level="11.1.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#deviance-residuals"><i class="fa fa-check"></i><b>11.1.2</b> Deviance residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#example"><i class="fa fa-check"></i><b>11.2</b> Example</a></li>
+<li class="chapter" data-level="11.3" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#log-transforms-of-predictors"><i class="fa fa-check"></i><b>11.3</b> Log transforms of predictors</a></li>
+<li class="chapter" data-level="11.4" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#example-1"><i class="fa fa-check"></i><b>11.4</b> Example</a></li>
+<li class="chapter" data-level="11.5" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#reference-levels"><i class="fa fa-check"></i><b>11.5</b> Reference levels</a></li>
+<li class="chapter" data-level="11.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#interactions"><i class="fa fa-check"></i><b>11.6</b> Interactions</a></li>
+<li class="chapter" data-level="11.7" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#offsets"><i class="fa fa-check"></i><b>11.7</b> Offsets</a></li>
+<li class="chapter" data-level="11.8" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#tweedie-regression"><i class="fa fa-check"></i><b>11.8</b> Tweedie regression</a></li>
+<li class="chapter" data-level="11.9" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#combinations-of-link-functions-and-target-distributions"><i class="fa fa-check"></i><b>11.9</b> Combinations of Link Functions and Target Distributions</a>
+<ul>
+<li class="chapter" data-level="11.9.1" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-log-link"><i class="fa fa-check"></i><b>11.9.1</b> Gaussian Response with Log Link</a></li>
+<li class="chapter" data-level="11.9.2" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-inverse-link"><i class="fa fa-check"></i><b>11.9.2</b> Gaussian Response with Inverse Link</a></li>
+<li class="chapter" data-level="11.9.3" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-identity-link"><i class="fa fa-check"></i><b>11.9.3</b> Gaussian Response with Identity Link</a></li>
+<li class="chapter" data-level="11.9.4" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gaussian-response-with-log-link-and-negative-values"><i class="fa fa-check"></i><b>11.9.4</b> Gaussian Response with Log Link and Negative Values</a></li>
+<li class="chapter" data-level="11.9.5" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gamma-response-with-log-link"><i class="fa fa-check"></i><b>11.9.5</b> Gamma Response with Log Link</a></li>
+<li class="chapter" data-level="11.9.6" data-path="additional-glm-topics.html"><a href="additional-glm-topics.html#gamma-with-inverse-link"><i class="fa fa-check"></i><b>11.9.6</b> Gamma with Inverse Link</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html"><i class="fa fa-check"></i><b>12</b> GLM variable selection</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#stepwise-subset-selection"><i class="fa fa-check"></i><b>12.1</b> Stepwise subset selection</a></li>
+<li class="chapter" data-level="12.2" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-soa-pa-61219-task-6"><i class="fa fa-check"></i><b>12.2</b> Example: SOA PA 6/12/19, Task 6</a></li>
+<li class="chapter" data-level="12.3" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#penalized-linear-models"><i class="fa fa-check"></i><b>12.3</b> Penalized Linear Models</a></li>
+<li class="chapter" data-level="12.4" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#ridge-regression"><i class="fa fa-check"></i><b>12.4</b> Ridge Regression</a></li>
+<li class="chapter" data-level="12.5" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#lasso"><i class="fa fa-check"></i><b>12.5</b> Lasso</a></li>
+<li class="chapter" data-level="12.6" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#elastic-net"><i class="fa fa-check"></i><b>12.6</b> Elastic Net</a></li>
+<li class="chapter" data-level="12.7" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#advantages-and-disadvantages-1"><i class="fa fa-check"></i><b>12.7</b> Advantages and disadvantages</a></li>
+<li class="chapter" data-level="12.8" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-ridge-regression"><i class="fa fa-check"></i><b>12.8</b> Example: Ridge Regression</a></li>
+<li class="chapter" data-level="12.9" data-path="glm-variable-selection.html"><a href="glm-variable-selection.html#example-the-lasso"><i class="fa fa-check"></i><b>12.9</b> Example: The Lasso</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="bias-variance-trade-off.html"><a href="bias-variance-trade-off.html"><i class="fa fa-check"></i><b>13</b> Bias-variance trade-off</a></li>
+<li class="chapter" data-level="14" data-path="tree-based-models.html"><a href="tree-based-models.html"><i class="fa fa-check"></i><b>14</b> Tree-Based Models</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tree-based-models.html"><a href="tree-based-models.html#overview-of-models-on-exam-pa"><i class="fa fa-check"></i><b>14.1</b> Overview of Models on Exam PA</a></li>
+<li class="chapter" data-level="14.2" data-path="tree-based-models.html"><a href="tree-based-models.html#bootstrap-cross-validation-for-hyperparameter-tuning"><i class="fa fa-check"></i><b>14.2</b> Bootstrap &amp; Cross-Validation for Hyperparameter Tuning</a></li>
+<li class="chapter" data-level="14.3" data-path="tree-based-models.html"><a href="tree-based-models.html#decision-trees-core-idea"><i class="fa fa-check"></i><b>14.3</b> Decision Trees – Core Idea</a></li>
+<li class="chapter" data-level="14.4" data-path="tree-based-models.html"><a href="tree-based-models.html#how-trees-choose-splits"><i class="fa fa-check"></i><b>14.4</b> How Trees Choose Splits</a></li>
+<li class="chapter" data-level="14.5" data-path="tree-based-models.html"><a href="tree-based-models.html#complexity-parameter-pruning"><i class="fa fa-check"></i><b>14.5</b> Complexity Parameter &amp; Pruning</a></li>
+<li class="chapter" data-level="14.6" data-path="tree-based-models.html"><a href="tree-based-models.html#advantages-disadvantages-of-single-trees"><i class="fa fa-check"></i><b>14.6</b> Advantages &amp; Disadvantages of Single Trees</a></li>
+<li class="chapter" data-level="14.7" data-path="tree-based-models.html"><a href="tree-based-models.html#bagging-random-forests"><i class="fa fa-check"></i><b>14.7</b> Bagging &amp; Random Forests</a></li>
+<li class="chapter" data-level="14.8" data-path="tree-based-models.html"><a href="tree-based-models.html#boosted-trees-gbm"><i class="fa fa-check"></i><b>14.8</b> Boosted Trees (GBM)</a></li>
+<li class="chapter" data-level="14.9" data-path="tree-based-models.html"><a href="tree-based-models.html#partial-dependence-plots"><i class="fa fa-check"></i><b>14.9</b> Partial Dependence Plots</a></li>
+<li class="chapter" data-level="14.10" data-path="tree-based-models.html"><a href="tree-based-models.html#final-exam-tips"><i class="fa fa-check"></i><b>14.10</b> Final Exam Tips</a></li>
+<li class="chapter" data-level="14.11" data-path="tree-based-models.html"><a href="tree-based-models.html#load-dataset-1"><i class="fa fa-check"></i><b>14.11</b> Load Dataset</a></li>
+<li class="chapter" data-level="14.12" data-path="tree-based-models.html"><a href="tree-based-models.html#single-decision-tree"><i class="fa fa-check"></i><b>14.12</b> Single Decision Tree</a></li>
+<li class="chapter" data-level="14.13" data-path="tree-based-models.html"><a href="tree-based-models.html#random-forest"><i class="fa fa-check"></i><b>14.13</b> Random Forest</a></li>
+<li class="chapter" data-level="14.14" data-path="tree-based-models.html"><a href="tree-based-models.html#gradient-boosting-gbm"><i class="fa fa-check"></i><b>14.14</b> Gradient Boosting (gbm)</a></li>
+<li class="chapter" data-level="14.15" data-path="tree-based-models.html"><a href="tree-based-models.html#xgboost"><i class="fa fa-check"></i><b>14.15</b> XGBoost</a></li>
+<li class="chapter" data-level="14.16" data-path="tree-based-models.html"><a href="tree-based-models.html#direct-lightgbm"><i class="fa fa-check"></i><b>14.16</b> Direct lightgbm</a></li>
+<li class="chapter" data-level="14.17" data-path="tree-based-models.html"><a href="tree-based-models.html#variable-importance-from-direct-lightgbm"><i class="fa fa-check"></i><b>14.17</b> Variable Importance (from direct LightGBM)</a></li>
+<li class="chapter" data-level="14.18" data-path="tree-based-models.html"><a href="tree-based-models.html#video-walkthrough-1"><i class="fa fa-check"></i><b>14.18</b> Video Walkthrough</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="writing-and-communication.html"><a href="writing-and-communication.html"><i class="fa fa-check"></i><b>15</b> Writing and Communication</a></li>
+<li class="chapter" data-level="16" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html"><i class="fa fa-check"></i><b>16</b> Bank Loans Case Study</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-1---examine-the-target-variable"><i class="fa fa-check"></i><b>16.1</b> Task 1 - Examine the Target Variable</a></li>
+<li class="chapter" data-level="16.2" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-2---decide-on-which-variables-to-discard"><i class="fa fa-check"></i><b>16.2</b> Task 2 - Decide on which variables to discard</a></li>
+<li class="chapter" data-level="16.3" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-3---examine-the-numeric-variables"><i class="fa fa-check"></i><b>16.3</b> Task 3 - Examine the numeric variables</a></li>
+<li class="chapter" data-level="16.4" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-4---examine-the-factor-variables"><i class="fa fa-check"></i><b>16.4</b> Task 4 - Examine the factor variables</a></li>
+<li class="chapter" data-level="16.5" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-5---fit-a-glm"><i class="fa fa-check"></i><b>16.5</b> Task 5 - Fit a GLM</a></li>
+<li class="chapter" data-level="16.6" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-6---use-aic-to-select-features"><i class="fa fa-check"></i><b>16.6</b> Task 6 - Use AIC to select features</a></li>
+<li class="chapter" data-level="16.7" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-8---create-a-bagged-tree-model"><i class="fa fa-check"></i><b>16.7</b> Task 8 - Create a bagged tree model</a></li>
+<li class="chapter" data-level="16.8" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#task-9---measure-the-variable-importance-with-a-random-forest"><i class="fa fa-check"></i><b>16.8</b> Task 9 - Measure the variable importance with a Random Forest</a></li>
+<li class="chapter" data-level="16.9" data-path="bank-loans-case-study.html"><a href="bank-loans-case-study.html#save-final-model"><i class="fa fa-check"></i><b>16.9</b> Save Final Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html"><i class="fa fa-check"></i><b>17</b> Loan Risk Modeling</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#data-load"><i class="fa fa-check"></i><b>17.1</b> Data Load</a></li>
+<li class="chapter" data-level="17.2" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-1-explore-variables"><i class="fa fa-check"></i><b>17.2</b> Task 1: Explore Variables</a></li>
+<li class="chapter" data-level="17.3" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-2-reduce-factor-levels"><i class="fa fa-check"></i><b>17.3</b> Task 2: Reduce Factor Levels</a></li>
+<li class="chapter" data-level="17.4" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-3-modify-hour-temperature"><i class="fa fa-check"></i><b>17.4</b> Task 3: Modify Hour &amp; Temperature</a></li>
+<li class="chapter" data-level="17.5" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-4-target-transformation"><i class="fa fa-check"></i><b>17.5</b> Task 4: Target Transformation</a></li>
+<li class="chapter" data-level="17.6" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-5-trees-original-transformed"><i class="fa fa-check"></i><b>17.6</b> Task 5: Trees (Original &amp; Transformed)</a></li>
+<li class="chapter" data-level="17.7" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-7-glm-poisson-gamma"><i class="fa fa-check"></i><b>17.7</b> Task 7: GLM (Poisson &amp; Gamma)</a></li>
+<li class="chapter" data-level="17.8" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-8-interaction-hour_dist-weather"><i class="fa fa-check"></i><b>17.8</b> Task 8: Interaction (hour_dist * weather)</a></li>
+<li class="chapter" data-level="17.9" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-9-feature-selection-bic-backward"><i class="fa fa-check"></i><b>17.9</b> Task 9: Feature Selection (BIC backward)</a></li>
+<li class="chapter" data-level="17.10" data-path="loan-risk-modeling.html"><a href="loan-risk-modeling.html#task-10-11-final-model-validation"><i class="fa fa-check"></i><b>17.10</b> Task 10-11: Final Model &amp; Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html"><i class="fa fa-check"></i><b>18</b> Robocalls Consumer Protections</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html#gdpr-section"><i class="fa fa-check"></i><b>18.1</b> GDPR Section</a></li>
+<li class="chapter" data-level="18.2" data-path="robocalls-consumer-protections.html"><a href="robocalls-consumer-protections.html#deepfake-concerns"><i class="fa fa-check"></i><b>18.2</b> Deepfake Concerns</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>19</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data exploration</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bank-loans-case-study" class="section level1 hasAnchor" number="16">
+<h1><span class="header-section-number"> 16</span> Bank Loans Case Study<a href="bank-loans-case-study.html#bank-loans-case-study" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="bank-loans-case-study.html#cb272-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb272-2"><a href="bank-loans-case-study.html#cb272-2" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb272-3"><a href="bank-loans-case-study.html#cb272-3" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb272-4"><a href="bank-loans-case-study.html#cb272-4" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb272-5"><a href="bank-loans-case-study.html#cb272-5" tabindex="-1"></a><span class="fu">library</span>(ranger)</span>
+<span id="cb272-6"><a href="bank-loans-case-study.html#cb272-6" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb272-7"><a href="bank-loans-case-study.html#cb272-7" tabindex="-1"></a><span class="fu">library</span>(xgboost)</span>
+<span id="cb272-8"><a href="bank-loans-case-study.html#cb272-8" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb272-9"><a href="bank-loans-case-study.html#cb272-9" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb272-10"><a href="bank-loans-case-study.html#cb272-10" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb272-11"><a href="bank-loans-case-study.html#cb272-11" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span>
+<span id="cb272-12"><a href="bank-loans-case-study.html#cb272-12" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb272-13"><a href="bank-loans-case-study.html#cb272-13" tabindex="-1"></a><span class="co">#df &lt;- read_csv(&#39;simulated_bank_data_2012_2026.csv&#39;)</span></span>
+<span id="cb272-14"><a href="bank-loans-case-study.html#cb272-14" tabindex="-1"></a></span>
+<span id="cb272-15"><a href="bank-loans-case-study.html#cb272-15" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">use_python</span>(<span class="st">&quot;C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe&quot;</span>, <span class="at">required =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb272-16"><a href="bank-loans-case-study.html#cb272-16" tabindex="-1"></a><span class="co"># 3. Restart R session inside RStudio</span></span>
+<span id="cb272-17"><a href="bank-loans-case-study.html#cb272-17" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_UV_ENABLED =</span> <span class="st">&quot;0&quot;</span>)</span>
+<span id="cb272-18"><a href="bank-loans-case-study.html#cb272-18" tabindex="-1"></a></span>
+<span id="cb272-19"><a href="bank-loans-case-study.html#cb272-19" tabindex="-1"></a><span class="co">#.rs.restartR()</span></span>
+<span id="cb272-20"><a href="bank-loans-case-study.html#cb272-20" tabindex="-1"></a></span>
+<span id="cb272-21"><a href="bank-loans-case-study.html#cb272-21" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb272-22"><a href="bank-loans-case-study.html#cb272-22" tabindex="-1"></a>datasets <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">&quot;datasets&quot;</span>)</span>
+<span id="cb272-23"><a href="bank-loans-case-study.html#cb272-23" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb272-24"><a href="bank-loans-case-study.html#cb272-24" tabindex="-1"></a>ds <span class="ot">&lt;-</span> datasets<span class="sc">$</span><span class="fu">load_dataset</span>(<span class="st">&quot;supersam7/simulated_bank_data_2012_2026&quot;</span>)</span>
+<span id="cb272-25"><a href="bank-loans-case-study.html#cb272-25" tabindex="-1"></a>df_pd <span class="ot">&lt;-</span> ds[<span class="st">&quot;train&quot;</span>]<span class="sc">$</span><span class="fu">to_pandas</span>()          <span class="co"># or ds$train$to_pandas()</span></span>
+<span id="cb272-26"><a href="bank-loans-case-study.html#cb272-26" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(df_pd)</span>
+<span id="cb272-27"><a href="bank-loans-case-study.html#cb272-27" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 22
+##     age job    marital education default housing loan  contact month day_of_week
+##   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      
+## 1    34 manag… married basic.4y  no      no      no    teleph… may   mon        
+## 2    45 servi… married basic.9y  unknown no      no    cellul… jul   mon        
+## 3    38 retir… divorc… high.sch… no      yes     no    cellul… jun   fri        
+## 4    52 blue-… married universi… unknown yes     no    teleph… jul   fri        
+## 5    44 servi… married universi… unknown no      no    cellul… may   tue        
+## 6    35 admin. married universi… unknown no      yes   cellul… sep   fri        
+## # ℹ 12 more variables: duration &lt;dbl&gt;, campaign &lt;dbl&gt;, pdays &lt;dbl&gt;,
+## #   previous &lt;dbl&gt;, poutcome &lt;chr&gt;, emp.var.rate &lt;dbl&gt;, cons.price.idx &lt;dbl&gt;,
+## #   cons.conf.idx &lt;dbl&gt;, euribor3m &lt;dbl&gt;, nr.employed &lt;dbl&gt;, y &lt;chr&gt;,
+## #   year &lt;dbl&gt;</code></pre>
+<div id="task-1---examine-the-target-variable" class="section level2 hasAnchor" number="16.1">
+<h2><span class="header-section-number">16.1</span> Task 1 - Examine the Target Variable<a href="bank-loans-case-study.html#task-1---examine-the-target-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following can be used</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="bank-loans-case-study.html#cb274-1" tabindex="-1"></a><span class="co"># Remove column</span></span>
+<span id="cb274-2"><a href="bank-loans-case-study.html#cb274-2" tabindex="-1"></a>df<span class="sc">$</span>varname <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb274-3"><a href="bank-loans-case-study.html#cb274-3" tabindex="-1"></a><span class="co"># I convert character VARIABLE to a factor.</span></span>
+<span id="cb274-4"><a href="bank-loans-case-study.html#cb274-4" tabindex="-1"></a>df<span class="sc">$</span>admit_type_id <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>admit_type_id)</span>
+<span id="cb274-5"><a href="bank-loans-case-study.html#cb274-5" tabindex="-1"></a><span class="co"># Exclude certain values</span></span>
+<span id="cb274-6"><a href="bank-loans-case-study.html#cb274-6" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, VARIABLE <span class="sc">!=</span> <span class="st">&quot;VALUE&quot;</span>) <span class="co"># Replace VARIABLE and VALUE</span></span>
+<span id="cb274-7"><a href="bank-loans-case-study.html#cb274-7" tabindex="-1"></a><span class="co"># Value is in quotation marks for factor variables. No quotation marks for numeric variables.</span></span></code></pre></div>
+<p>Combine variable levels</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="bank-loans-case-study.html#cb275-1" tabindex="-1"></a><span class="co">#Using the tidyverse (fastest method)</span></span>
+<span id="cb275-2"><a href="bank-loans-case-study.html#cb275-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">VARIABLE =</span> <span class="fu">ifelse</span>(VARIABLE <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;VALUE1&quot;</span>, <span class="st">&quot;VALUE2&quot;</span>, <span class="st">&quot;VALUE3&quot;</span>), <span class="st">&quot;other&quot;</span>, VARIABLE))</span>
+<span id="cb275-3"><a href="bank-loans-case-study.html#cb275-3" tabindex="-1"></a><span class="co"># Replace VARIABLE with the variable name to have reduced number of levels.</span></span>
+<span id="cb275-4"><a href="bank-loans-case-study.html#cb275-4" tabindex="-1"></a><span class="co"># Replace LEVELs with new level names.</span></span>
+<span id="cb275-5"><a href="bank-loans-case-study.html#cb275-5" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Data Before Combine Levels&quot;</span>)</span>
+<span id="cb275-6"><a href="bank-loans-case-study.html#cb275-6" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>VARIABLE) <span class="co"># Replace VARIABLE</span></span>
+<span id="cb275-7"><a href="bank-loans-case-study.html#cb275-7" tabindex="-1"></a><span class="co"># Combine levels of VARIABLE by mapping one level to another level</span></span>
+<span id="cb275-8"><a href="bank-loans-case-study.html#cb275-8" tabindex="-1"></a>var.levels <span class="ot">&lt;-</span> <span class="fu">levels</span>(<span class="fu">as.factor</span>(df<span class="sc">$</span>VARIABLE)) <span class="co"># Replace VARIABLE</span></span>
+<span id="cb275-9"><a href="bank-loans-case-study.html#cb275-9" tabindex="-1"></a>df<span class="sc">$</span>VARIABLE <span class="ot">&lt;-</span> <span class="fu">mapvalues</span>(df<span class="sc">$</span>VARIABLE, var.levels,</span>
+<span id="cb275-10"><a href="bank-loans-case-study.html#cb275-10" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;basic.4y&quot;</span>, <span class="st">&quot;basic.6y&quot;</span>, <span class="st">&quot;basic.9y&quot;</span>, <span class="st">&quot;high.school&quot;</span>, <span class="st">&quot;other&quot;</span>, <span class="st">&quot;professional.course&quot;</span>, <span class="st">&quot;university.degree&quot;</span>, <span class="st">&quot;other&quot;</span>)) <span class="co"># Replace VARIABLE twice and replace LEVELs with the new names.</span></span>
+<span id="cb275-11"><a href="bank-loans-case-study.html#cb275-11" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Data After Combine Levels&quot;</span>)</span>
+<span id="cb275-12"><a href="bank-loans-case-study.html#cb275-12" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>VARIABLE) <span class="co"># Replace VARIABLE</span></span>
+<span id="cb275-13"><a href="bank-loans-case-study.html#cb275-13" tabindex="-1"></a><span class="co"># rm(var.levels)</span></span></code></pre></div>
+<p>Remove records</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="bank-loans-case-study.html#cb276-1" tabindex="-1"></a><span class="co">#Remove outliers</span></span>
+<span id="cb276-2"><a href="bank-loans-case-study.html#cb276-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(VARIABLE <span class="sc">&gt;=</span> VALUE)</span>
+<span id="cb276-3"><a href="bank-loans-case-study.html#cb276-3" tabindex="-1"></a><span class="co">#in Base R</span></span>
+<span id="cb276-4"><a href="bank-loans-case-study.html#cb276-4" tabindex="-1"></a><span class="co">#df &lt;- subset(df, VARIABLE &gt;= 40)</span></span>
+<span id="cb276-5"><a href="bank-loans-case-study.html#cb276-5" tabindex="-1"></a><span class="co">#Can also use != or &lt;=</span></span></code></pre></div>
+<p>This code will show the percentage of <code>y</code> and number of records across different levels of a categorical VARIABLE.</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="bank-loans-case-study.html#cb277-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(VARIABLE) <span class="sc">%&gt;%</span></span>
+<span id="cb277-2"><a href="bank-loans-case-study.html#cb277-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent_subscribed =</span> <span class="fu">percent</span>(<span class="fu">mean</span>(y<span class="sc">==</span><span class="st">&quot;yes&quot;</span>), <span class="at">accuracy =</span> <span class="fl">0.01</span>),</span>
+<span id="cb277-3"><a href="bank-loans-case-study.html#cb277-3" tabindex="-1"></a>            <span class="at">number_of_policies =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb277-4"><a href="bank-loans-case-study.html#cb277-4" tabindex="-1"></a>  <span class="fu">arrange</span>(number_of_policies)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="bank-loans-case-study.html#cb278-1" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code></pre></div>
+<pre><code>## Rows: 205,935
+## Columns: 22
+## $ age            &lt;dbl&gt; 34, 45, 38, 52, 44, 35, 31, 32, 32, 42, 44, 29, 45, 32,…
+## $ job            &lt;chr&gt; &quot;management&quot;, &quot;services&quot;, &quot;retired&quot;, &quot;blue-collar&quot;, &quot;se…
+## $ marital        &lt;chr&gt; &quot;married&quot;, &quot;married&quot;, &quot;divorced&quot;, &quot;married&quot;, &quot;married&quot;,…
+## $ education      &lt;chr&gt; &quot;basic.4y&quot;, &quot;basic.9y&quot;, &quot;high.school&quot;, &quot;university.degr…
+## $ default        &lt;chr&gt; &quot;no&quot;, &quot;unknown&quot;, &quot;no&quot;, &quot;unknown&quot;, &quot;unknown&quot;, &quot;unknown&quot;,…
+## $ housing        &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;,…
+## $ loan           &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;,…
+## $ contact        &lt;chr&gt; &quot;telephone&quot;, &quot;cellular&quot;, &quot;cellular&quot;, &quot;telephone&quot;, &quot;cell…
+## $ month          &lt;chr&gt; &quot;may&quot;, &quot;jul&quot;, &quot;jun&quot;, &quot;jul&quot;, &quot;may&quot;, &quot;sep&quot;, &quot;may&quot;, &quot;jul&quot;,…
+## $ day_of_week    &lt;chr&gt; &quot;mon&quot;, &quot;mon&quot;, &quot;fri&quot;, &quot;fri&quot;, &quot;tue&quot;, &quot;fri&quot;, &quot;fri&quot;, &quot;tue&quot;,…
+## $ duration       &lt;dbl&gt; 162, 197, 403, 331, 31, 185, 162, 140, 26, 305, 278, 47…
+## $ campaign       &lt;dbl&gt; 3, 1, 1, 3, 1, 3, 1, 1, 2, 3, 1, 3, 4, 5, 3, 3, 2, 5, 1…
+## $ pdays          &lt;dbl&gt; 962, 962, 962, 962, 962, 962, 962, 962, 962, 962, 962, …
+## $ previous       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ poutcome       &lt;chr&gt; &quot;nonexistent&quot;, &quot;nonexistent&quot;, &quot;nonexistent&quot;, &quot;failure&quot;,…
+## $ emp.var.rate   &lt;dbl&gt; -0.09476169, -2.38139778, 0.17236509, 0.30427391, 1.341…
+## $ cons.price.idx &lt;dbl&gt; 95.58019, 102.27885, 92.29964, 103.17973, 97.45343, 93.…
+## $ cons.conf.idx  &lt;dbl&gt; -43.07132, -35.87196, -43.27577, -33.56074, -43.53403, …
+## $ euribor3m      &lt;dbl&gt; 3.0390048, 5.3383017, 3.6664988, 2.4472836, 2.9963267, …
+## $ nr.employed    &lt;dbl&gt; 5055.863, 5210.407, 5181.041, 5275.290, 5003.088, 5379.…
+## $ y              &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;…
+## $ year           &lt;dbl&gt; 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2…</code></pre>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="bank-loans-case-study.html#cb280-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb280-2"><a href="bank-loans-case-study.html#cb280-2" tabindex="-1"></a>  <span class="fu">group_by</span>(housing) <span class="sc">%&gt;%</span></span>
+<span id="cb280-3"><a href="bank-loans-case-study.html#cb280-3" tabindex="-1"></a>  <span class="fu">count</span>(y) <span class="sc">%&gt;%</span></span>
+<span id="cb280-4"><a href="bank-loans-case-study.html#cb280-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb280-5"><a href="bank-loans-case-study.html#cb280-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> housing, <span class="at">y =</span> percentage, <span class="at">fill =</span> <span class="fu">factor</span>(y))) <span class="sc">+</span></span>
+<span id="cb280-6"><a href="bank-loans-case-study.html#cb280-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb280-7"><a href="bank-loans-case-study.html#cb280-7" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(percentage, <span class="st">&quot;%&quot;</span>)), </span>
+<span id="cb280-8"><a href="bank-loans-case-study.html#cb280-8" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), </span>
+<span id="cb280-9"><a href="bank-loans-case-study.html#cb280-9" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb280-10"><a href="bank-loans-case-study.html#cb280-10" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;no&quot;</span> <span class="ot">=</span> <span class="st">&quot;#6c757d&quot;</span>, <span class="st">&quot;yes&quot;</span> <span class="ot">=</span> <span class="st">&quot;#007bff&quot;</span>),</span>
+<span id="cb280-11"><a href="bank-loans-case-study.html#cb280-11" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No Purchase&quot;</span>, <span class="st">&quot;Purchase&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb280-12"><a href="bank-loans-case-study.html#cb280-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Purchase Rate by Housing Loan Status&quot;</span>,</span>
+<span id="cb280-13"><a href="bank-loans-case-study.html#cb280-13" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Has Housing Loan&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Percentage (%)&quot;</span>,</span>
+<span id="cb280-14"><a href="bank-loans-case-study.html#cb280-14" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Outcome&quot;</span>) <span class="sc">+</span></span>
+<span id="cb280-15"><a href="bank-loans-case-study.html#cb280-15" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb280-16"><a href="bank-loans-case-study.html#cb280-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb280-17"><a href="bank-loans-case-study.html#cb280-17" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>))</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="bank-loans-case-study.html#cb281-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre><code>##       age            job              marital           education        
+##  Min.   :17.00   Length:205935      Length:205935      Length:205935     
+##  1st Qu.:33.00   Class :character   Class :character   Class :character  
+##  Median :40.00   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :40.03                                                           
+##  3rd Qu.:47.00                                                           
+##  Max.   :89.00                                                           
+##    default            housing              loan             contact         
+##  Length:205935      Length:205935      Length:205935      Length:205935     
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##     month           day_of_week           duration        campaign     
+##  Length:205935      Length:205935      Min.   :  0.0   Min.   : 1.000  
+##  Class :character   Class :character   1st Qu.:170.0   1st Qu.: 2.000  
+##  Mode  :character   Mode  :character   Median :269.0   Median : 2.000  
+##                                        Mean   :276.3   Mean   : 2.479  
+##                                        3rd Qu.:373.0   3rd Qu.: 3.000  
+##                                        Max.   :959.0   Max.   :10.000  
+##      pdays        previous   poutcome          emp.var.rate    
+##  Min.   :962   Min.   :0   Length:205935      Min.   :-3.3999  
+##  1st Qu.:962   1st Qu.:0   Class :character   1st Qu.:-1.6952  
+##  Median :962   Median :0   Mode  :character   Median :-0.6050  
+##  Mean   :962   Mean   :0                      Mean   :-0.7047  
+##  3rd Qu.:962   3rd Qu.:0                      3rd Qu.: 0.3617  
+##  Max.   :962   Max.   :0                      Max.   : 1.4000  
+##  cons.price.idx   cons.conf.idx      euribor3m      nr.employed  
+##  Min.   : 92.20   Min.   :-50.80   Min.   :0.100   Min.   :4764  
+##  1st Qu.: 95.09   1st Qu.:-43.51   1st Qu.:1.967   1st Qu.:4995  
+##  Median : 97.88   Median :-40.26   Median :3.246   Median :5131  
+##  Mean   : 98.05   Mean   :-40.15   Mean   :3.202   Mean   :5123  
+##  3rd Qu.:100.88   3rd Qu.:-36.92   3rd Qu.:4.478   3rd Qu.:5258  
+##  Max.   :104.77   Max.   :-26.90   Max.   :6.000   Max.   :5428  
+##       y                  year     
+##  Length:205935      Min.   :2012  
+##  Class :character   1st Qu.:2015  
+##  Mode  :character   Median :2019  
+##                     Mean   :2019  
+##                     3rd Qu.:2023  
+##                     Max.   :2026</code></pre>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="bank-loans-case-study.html#cb283-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(job) <span class="sc">%&gt;%</span></span>
+<span id="cb283-2"><a href="bank-loans-case-study.html#cb283-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent_subscribed =</span> <span class="fu">percent</span>(<span class="fu">mean</span>(y<span class="sc">==</span><span class="st">&quot;yes&quot;</span>), <span class="at">accuracy =</span> <span class="fl">0.01</span>),</span>
+<span id="cb283-3"><a href="bank-loans-case-study.html#cb283-3" tabindex="-1"></a>            <span class="at">number_of_policies =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb283-4"><a href="bank-loans-case-study.html#cb283-4" tabindex="-1"></a>  <span class="fu">arrange</span>(number_of_policies)</span></code></pre></div>
+<pre><code>## # A tibble: 12 × 3
+##    job           percent_subscribed number_of_policies
+##    &lt;chr&gt;         &lt;chr&gt;                           &lt;int&gt;
+##  1 unknown       15.50%                           1690
+##  2 student       28.82%                           4406
+##  3 unemployed    16.66%                           5060
+##  4 housemaid     16.12%                           5392
+##  5 self-employed 16.62%                           7147
+##  6 entrepreneur  16.22%                           7300
+##  7 retired       15.99%                           8497
+##  8 management    16.06%                          14606
+##  9 services      16.23%                          19881
+## 10 technician    16.01%                          33900
+## 11 blue-collar   16.10%                          46104
+## 12 admin.        16.36%                          51952</code></pre>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="bank-loans-case-study.html#cb285-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(marital) <span class="sc">%&gt;%</span></span>
+<span id="cb285-2"><a href="bank-loans-case-study.html#cb285-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent_subscribed =</span> <span class="fu">percent</span>(<span class="fu">mean</span>(y<span class="sc">==</span><span class="st">&quot;yes&quot;</span>), <span class="at">accuracy =</span> <span class="fl">0.01</span>),</span>
+<span id="cb285-3"><a href="bank-loans-case-study.html#cb285-3" tabindex="-1"></a>            <span class="at">number_of_policies =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb285-4"><a href="bank-loans-case-study.html#cb285-4" tabindex="-1"></a>  <span class="fu">arrange</span>(number_of_policies)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   marital  percent_subscribed number_of_policies
+##   &lt;chr&gt;    &lt;chr&gt;                           &lt;int&gt;
+## 1 unknown  15.37%                            423
+## 2 divorced 16.37%                          23152
+## 3 single   16.48%                          57513
+## 4 married  16.47%                         124847</code></pre>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="bank-loans-case-study.html#cb287-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(education) <span class="sc">%&gt;%</span></span>
+<span id="cb287-2"><a href="bank-loans-case-study.html#cb287-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent_subscribed =</span> <span class="fu">percent</span>(<span class="fu">mean</span>(y<span class="sc">==</span><span class="st">&quot;yes&quot;</span>), <span class="at">accuracy =</span> <span class="fl">0.01</span>),</span>
+<span id="cb287-3"><a href="bank-loans-case-study.html#cb287-3" tabindex="-1"></a>            <span class="at">number_of_policies =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb287-4"><a href="bank-loans-case-study.html#cb287-4" tabindex="-1"></a>  <span class="fu">arrange</span>(number_of_policies)</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 3
+##   education           percent_subscribed number_of_policies
+##   &lt;chr&gt;               &lt;chr&gt;                           &lt;int&gt;
+## 1 illiterate          20.00%                             90
+## 2 unknown             16.05%                           8711
+## 3 basic.6y            16.67%                          11335
+## 4 basic.4y            16.74%                          21220
+## 5 professional.course 16.44%                          26247
+## 6 basic.9y            16.13%                          30169
+## 7 high.school         16.38%                          47527
+## 8 university.degree   16.61%                          60636</code></pre>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="bank-loans-case-study.html#cb289-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(housing) <span class="sc">%&gt;%</span></span>
+<span id="cb289-2"><a href="bank-loans-case-study.html#cb289-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent_subscribed =</span> <span class="fu">percent</span>(<span class="fu">mean</span>(y<span class="sc">==</span><span class="st">&quot;yes&quot;</span>), <span class="at">accuracy =</span> <span class="fl">0.01</span>),</span>
+<span id="cb289-3"><a href="bank-loans-case-study.html#cb289-3" tabindex="-1"></a>            <span class="at">number_of_policies =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb289-4"><a href="bank-loans-case-study.html#cb289-4" tabindex="-1"></a>  <span class="fu">arrange</span>(number_of_policies)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   housing percent_subscribed number_of_policies
+##   &lt;chr&gt;   &lt;chr&gt;                           &lt;int&gt;
+## 1 unknown 16.60%                           4947
+## 2 no      16.51%                          93182
+## 3 yes     16.41%                         107806</code></pre>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="bank-loans-case-study.html#cb291-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(loan) <span class="sc">%&gt;%</span></span>
+<span id="cb291-2"><a href="bank-loans-case-study.html#cb291-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent_subscribed =</span> <span class="fu">percent</span>(<span class="fu">mean</span>(y<span class="sc">==</span><span class="st">&quot;yes&quot;</span>), <span class="at">accuracy =</span> <span class="fl">0.01</span>),</span>
+<span id="cb291-3"><a href="bank-loans-case-study.html#cb291-3" tabindex="-1"></a>            <span class="at">number_of_policies =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb291-4"><a href="bank-loans-case-study.html#cb291-4" tabindex="-1"></a>  <span class="fu">arrange</span>(number_of_policies)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   loan    percent_subscribed number_of_policies
+##   &lt;chr&gt;   &lt;chr&gt;                           &lt;int&gt;
+## 1 unknown 15.87%                           5003
+## 2 yes     16.81%                          31012
+## 3 no      16.41%                         169920</code></pre>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="bank-loans-case-study.html#cb293-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(contact) <span class="sc">%&gt;%</span></span>
+<span id="cb293-2"><a href="bank-loans-case-study.html#cb293-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent_subscribed =</span> <span class="fu">percent</span>(<span class="fu">mean</span>(y<span class="sc">==</span><span class="st">&quot;yes&quot;</span>), <span class="at">accuracy =</span> <span class="fl">0.01</span>),</span>
+<span id="cb293-3"><a href="bank-loans-case-study.html#cb293-3" tabindex="-1"></a>            <span class="at">number_of_policies =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb293-4"><a href="bank-loans-case-study.html#cb293-4" tabindex="-1"></a>  <span class="fu">arrange</span>(number_of_policies)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   contact   percent_subscribed number_of_policies
+##   &lt;chr&gt;     &lt;chr&gt;                           &lt;int&gt;
+## 1 telephone 12.53%                          75398
+## 2 cellular  18.73%                         130537</code></pre>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="bank-loans-case-study.html#cb295-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(day_of_week) <span class="sc">%&gt;%</span></span>
+<span id="cb295-2"><a href="bank-loans-case-study.html#cb295-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent_subscribed =</span> <span class="fu">percent</span>(<span class="fu">mean</span>(y<span class="sc">==</span><span class="st">&quot;yes&quot;</span>), <span class="at">accuracy =</span> <span class="fl">0.01</span>),</span>
+<span id="cb295-3"><a href="bank-loans-case-study.html#cb295-3" tabindex="-1"></a>            <span class="at">number_of_policies =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb295-4"><a href="bank-loans-case-study.html#cb295-4" tabindex="-1"></a>  <span class="fu">arrange</span>(number_of_policies)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##   day_of_week percent_subscribed number_of_policies
+##   &lt;chr&gt;       &lt;chr&gt;                           &lt;int&gt;
+## 1 fri         16.50%                          39112
+## 2 tue         16.20%                          40535
+## 3 wed         16.37%                          40648
+## 4 mon         16.66%                          42804
+## 5 thu         16.55%                          42836</code></pre>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="bank-loans-case-study.html#cb297-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(poutcome) <span class="sc">%&gt;%</span></span>
+<span id="cb297-2"><a href="bank-loans-case-study.html#cb297-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent_subscribed =</span> <span class="fu">percent</span>(<span class="fu">mean</span>(y<span class="sc">==</span><span class="st">&quot;yes&quot;</span>), <span class="at">accuracy =</span> <span class="fl">0.01</span>),</span>
+<span id="cb297-3"><a href="bank-loans-case-study.html#cb297-3" tabindex="-1"></a>            <span class="at">number_of_policies =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb297-4"><a href="bank-loans-case-study.html#cb297-4" tabindex="-1"></a>  <span class="fu">arrange</span>(number_of_policies)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   poutcome    percent_subscribed number_of_policies
+##   &lt;chr&gt;       &lt;chr&gt;                           &lt;int&gt;
+## 1 success     42.93%                           6923
+## 2 failure     15.67%                          21419
+## 3 nonexistent 15.52%                         177593</code></pre>
+<p>Combine levels for education</p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="bank-loans-case-study.html#cb299-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">ifelse</span>(education <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;illiterate&quot;</span>, <span class="st">&quot;unknown&quot;</span>), <span class="st">&quot;other&quot;</span>, education))</span>
+<span id="cb299-2"><a href="bank-loans-case-study.html#cb299-2" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(education)</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 2
+##   education               n
+##   &lt;chr&gt;               &lt;int&gt;
+## 1 basic.4y            21220
+## 2 basic.6y            11335
+## 3 basic.9y            30169
+## 4 high.school         47527
+## 5 other                8801
+## 6 professional.course 26247
+## 7 university.degree   60636</code></pre>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="bank-loans-case-study.html#cb301-1" tabindex="-1"></a><span class="co">#using base R</span></span>
+<span id="cb301-2"><a href="bank-loans-case-study.html#cb301-2" tabindex="-1"></a><span class="co"># Replace VARIABLE with the variable name to have reduced number of levels.</span></span>
+<span id="cb301-3"><a href="bank-loans-case-study.html#cb301-3" tabindex="-1"></a><span class="co"># Replace LEVELs with new level names.</span></span>
+<span id="cb301-4"><a href="bank-loans-case-study.html#cb301-4" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb301-5"><a href="bank-loans-case-study.html#cb301-5" tabindex="-1"></a><span class="co"># print(&quot;Data Before Combine Levels&quot;)</span></span>
+<span id="cb301-6"><a href="bank-loans-case-study.html#cb301-6" tabindex="-1"></a><span class="co">#table(df$education) # Replace VARIABLE</span></span>
+<span id="cb301-7"><a href="bank-loans-case-study.html#cb301-7" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb301-8"><a href="bank-loans-case-study.html#cb301-8" tabindex="-1"></a><span class="co"># # Combine levels of VARIABLE by mapping one level to another level</span></span>
+<span id="cb301-9"><a href="bank-loans-case-study.html#cb301-9" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb301-10"><a href="bank-loans-case-study.html#cb301-10" tabindex="-1"></a><span class="co">#var.levels &lt;- levels(as.factor(df$education)) # Replace VARIABLE</span></span>
+<span id="cb301-11"><a href="bank-loans-case-study.html#cb301-11" tabindex="-1"></a><span class="co">#df$education &lt;- mapvalues(df$education, var.levels,</span></span>
+<span id="cb301-12"><a href="bank-loans-case-study.html#cb301-12" tabindex="-1"></a><span class="co"># c(&quot;basic.4y&quot;, &quot;basic.6y&quot;, &quot;basic.9y&quot;, &quot;high.school&quot;, &quot;other&quot;, &quot;professional.course&quot;, &quot;university.degree&quot;, &quot;other&quot;)) # Replace VARIABLE twice and replace LEVELs with the new names.</span></span>
+<span id="cb301-13"><a href="bank-loans-case-study.html#cb301-13" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb301-14"><a href="bank-loans-case-study.html#cb301-14" tabindex="-1"></a><span class="co"># print(&quot;Data After Combine Levels&quot;)</span></span>
+<span id="cb301-15"><a href="bank-loans-case-study.html#cb301-15" tabindex="-1"></a><span class="co"># table(df$education) # Replace VARIABLE</span></span>
+<span id="cb301-16"><a href="bank-loans-case-study.html#cb301-16" tabindex="-1"></a><span class="co"># rm(var.levels)</span></span></code></pre></div>
+</div>
+<div id="task-2---decide-on-which-variables-to-discard" class="section level2 hasAnchor" number="16.2">
+<h2><span class="header-section-number">16.2</span> Task 2 - Decide on which variables to discard<a href="bank-loans-case-study.html#task-2---decide-on-which-variables-to-discard" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="bank-loans-case-study.html#cb302-1" tabindex="-1"></a><span class="co">#the data dictionary says to not use duration in predictive modeling</span></span>
+<span id="cb302-2"><a href="bank-loans-case-study.html#cb302-2" tabindex="-1"></a><span class="co">#df &lt;- df %&gt;% select(-duration)</span></span>
+<span id="cb302-3"><a href="bank-loans-case-study.html#cb302-3" tabindex="-1"></a><span class="co">#base R</span></span>
+<span id="cb302-4"><a href="bank-loans-case-study.html#cb302-4" tabindex="-1"></a><span class="co">#df$duration &lt;- NULL</span></span></code></pre></div>
+</div>
+<div id="task-3---examine-the-numeric-variables" class="section level2 hasAnchor" number="16.3">
+<h2><span class="header-section-number">16.3</span> Task 3 - Examine the numeric variables<a href="bank-loans-case-study.html#task-3---examine-the-numeric-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="bank-loans-case-study.html#cb303-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##       age           duration        campaign          pdays        previous
+##  Min.   :17.00   Min.   :  0.0   Min.   : 1.000   Min.   :962   Min.   :0  
+##  1st Qu.:33.00   1st Qu.:170.0   1st Qu.: 2.000   1st Qu.:962   1st Qu.:0  
+##  Median :40.00   Median :269.0   Median : 2.000   Median :962   Median :0  
+##  Mean   :40.03   Mean   :276.3   Mean   : 2.479   Mean   :962   Mean   :0  
+##  3rd Qu.:47.00   3rd Qu.:373.0   3rd Qu.: 3.000   3rd Qu.:962   3rd Qu.:0  
+##  Max.   :89.00   Max.   :959.0   Max.   :10.000   Max.   :962   Max.   :0  
+##   emp.var.rate     cons.price.idx   cons.conf.idx      euribor3m    
+##  Min.   :-3.3999   Min.   : 92.20   Min.   :-50.80   Min.   :0.100  
+##  1st Qu.:-1.6952   1st Qu.: 95.09   1st Qu.:-43.51   1st Qu.:1.967  
+##  Median :-0.6050   Median : 97.88   Median :-40.26   Median :3.246  
+##  Mean   :-0.7047   Mean   : 98.05   Mean   :-40.15   Mean   :3.202  
+##  3rd Qu.: 0.3617   3rd Qu.:100.88   3rd Qu.:-36.92   3rd Qu.:4.478  
+##  Max.   : 1.4000   Max.   :104.77   Max.   :-26.90   Max.   :6.000  
+##   nr.employed        year     
+##  Min.   :4764   Min.   :2012  
+##  1st Qu.:4995   1st Qu.:2015  
+##  Median :5131   Median :2019  
+##  Mean   :5123   Mean   :2019  
+##  3rd Qu.:5258   3rd Qu.:2023  
+##  Max.   :5428   Max.   :2026</code></pre>
+<p>The following creates histograms of the numeric variables</p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="bank-loans-case-study.html#cb305-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb305-2"><a href="bank-loans-case-study.html#cb305-2" tabindex="-1"></a>  <span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span></span>
+<span id="cb305-3"><a href="bank-loans-case-study.html#cb305-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb305-4"><a href="bank-loans-case-study.html#cb305-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value)) <span class="sc">+</span></span>
+<span id="cb305-5"><a href="bank-loans-case-study.html#cb305-5" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb305-6"><a href="bank-loans-case-study.html#cb305-6" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable), <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="bank-loans-case-study.html#cb306-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##       age           duration        campaign          pdays        previous
+##  Min.   :17.00   Min.   :  0.0   Min.   : 1.000   Min.   :962   Min.   :0  
+##  1st Qu.:33.00   1st Qu.:170.0   1st Qu.: 2.000   1st Qu.:962   1st Qu.:0  
+##  Median :40.00   Median :269.0   Median : 2.000   Median :962   Median :0  
+##  Mean   :40.03   Mean   :276.3   Mean   : 2.479   Mean   :962   Mean   :0  
+##  3rd Qu.:47.00   3rd Qu.:373.0   3rd Qu.: 3.000   3rd Qu.:962   3rd Qu.:0  
+##  Max.   :89.00   Max.   :959.0   Max.   :10.000   Max.   :962   Max.   :0  
+##   emp.var.rate     cons.price.idx   cons.conf.idx      euribor3m    
+##  Min.   :-3.3999   Min.   : 92.20   Min.   :-50.80   Min.   :0.100  
+##  1st Qu.:-1.6952   1st Qu.: 95.09   1st Qu.:-43.51   1st Qu.:1.967  
+##  Median :-0.6050   Median : 97.88   Median :-40.26   Median :3.246  
+##  Mean   :-0.7047   Mean   : 98.05   Mean   :-40.15   Mean   :3.202  
+##  3rd Qu.: 0.3617   3rd Qu.:100.88   3rd Qu.:-36.92   3rd Qu.:4.478  
+##  Max.   : 1.4000   Max.   :104.77   Max.   :-26.90   Max.   :6.000  
+##   nr.employed        year     
+##  Min.   :4764   Min.   :2012  
+##  1st Qu.:4995   1st Qu.:2015  
+##  Median :5131   Median :2019  
+##  Mean   :5123   Mean   :2019  
+##  3rd Qu.:5258   3rd Qu.:2023  
+##  Max.   :5428   Max.   :2026</code></pre>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="bank-loans-case-study.html#cb308-1" tabindex="-1"></a><span class="co">#there are several records above the max of 40 in the data dictionary. These were removed.</span></span>
+<span id="cb308-2"><a href="bank-loans-case-study.html#cb308-2" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(campaign)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 2
+##    campaign     n
+##       &lt;dbl&gt; &lt;int&gt;
+##  1        1 49574
+##  2        2 63504
+##  3        3 52614
+##  4        4 28077
+##  5        5  9643
+##  6        6  2176
+##  7        7   319
+##  8        8    25
+##  9        9     2
+## 10       10     1</code></pre>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="bank-loans-case-study.html#cb310-1" tabindex="-1"></a><span class="co">#Remove outliers</span></span>
+<span id="cb310-2"><a href="bank-loans-case-study.html#cb310-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(campaign <span class="sc">&lt;=</span> <span class="dv">40</span>)</span>
+<span id="cb310-3"><a href="bank-loans-case-study.html#cb310-3" tabindex="-1"></a><span class="co">#in Base R</span></span>
+<span id="cb310-4"><a href="bank-loans-case-study.html#cb310-4" tabindex="-1"></a><span class="co">#df &lt;- subset(df, campaign &lt;= 40)</span></span>
+<span id="cb310-5"><a href="bank-loans-case-study.html#cb310-5" tabindex="-1"></a><span class="co">#example creating a histogram</span></span>
+<span id="cb310-6"><a href="bank-loans-case-study.html#cb310-6" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(cons.price.idx)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-152-1.png" width="672" /></p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="bank-loans-case-study.html#cb311-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(emp.var.rate)</span></code></pre></div>
+<pre><code>## # A tibble: 205,935 × 2
+##    emp.var.rate     n
+##           &lt;dbl&gt; &lt;int&gt;
+##  1        -3.40     1
+##  2        -3.40     1
+##  3        -3.40     1
+##  4        -3.40     1
+##  5        -3.40     1
+##  6        -3.40     1
+##  7        -3.40     1
+##  8        -3.40     1
+##  9        -3.40     1
+## 10        -3.40     1
+## # ℹ 205,925 more rows</code></pre>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="bank-loans-case-study.html#cb313-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(pdays)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##   pdays      n
+##   &lt;dbl&gt;  &lt;int&gt;
+## 1   962 205935</code></pre>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="bank-loans-case-study.html#cb315-1" tabindex="-1"></a><span class="co">#example of how to create bins</span></span>
+<span id="cb315-2"><a href="bank-loans-case-study.html#cb315-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb315-3"><a href="bank-loans-case-study.html#cb315-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pdays_bin =</span> <span class="fu">case_when</span>(pdays <span class="sc">&lt;=</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">&quot;0-5&quot;</span>,</span>
+<span id="cb315-4"><a href="bank-loans-case-study.html#cb315-4" tabindex="-1"></a>                               pdays <span class="sc">&lt;=</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">&quot;0-10&quot;</span>,</span>
+<span id="cb315-5"><a href="bank-loans-case-study.html#cb315-5" tabindex="-1"></a>                               pdays <span class="sc">&lt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">&quot;10-30&quot;</span>,</span>
+<span id="cb315-6"><a href="bank-loans-case-study.html#cb315-6" tabindex="-1"></a>                               pdays <span class="sc">==</span> <span class="dv">999</span> <span class="sc">~</span> <span class="st">&quot;None&quot;</span>))</span>
+<span id="cb315-7"><a href="bank-loans-case-study.html#cb315-7" tabindex="-1"></a></span>
+<span id="cb315-8"><a href="bank-loans-case-study.html#cb315-8" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(pdays_bin)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##   pdays_bin      n
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 &lt;NA&gt;      205935</code></pre>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="bank-loans-case-study.html#cb317-1" tabindex="-1"></a><span class="co"># Releveling factor variables</span></span>
+<span id="cb317-2"><a href="bank-loans-case-study.html#cb317-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">mutate_if</span>(df, is.character, fct_infreq)</span>
+<span id="cb317-3"><a href="bank-loans-case-study.html#cb317-3" tabindex="-1"></a><span class="co"># Note: the SOA template code has a section for releveling factors, however, this frequently has errors if you have used any tidyverse functions on factor variable previously. We recommend that you just remember the above lines of code so that you will not encounter these technical difficulties during the exam</span></span>
+<span id="cb317-4"><a href="bank-loans-case-study.html#cb317-4" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code></pre></div>
+<pre><code>## Rows: 205,935
+## Columns: 23
+## $ age            &lt;dbl&gt; 34, 45, 38, 52, 44, 35, 31, 32, 32, 42, 44, 29, 45, 32,…
+## $ job            &lt;fct&gt; management, services, retired, blue-collar, services, a…
+## $ marital        &lt;fct&gt; married, married, divorced, married, married, married, …
+## $ education      &lt;fct&gt; basic.4y, basic.9y, high.school, university.degree, uni…
+## $ default        &lt;fct&gt; no, unknown, no, unknown, unknown, unknown, no, no, no,…
+## $ housing        &lt;fct&gt; no, no, yes, yes, no, no, no, no, no, no, yes, yes, no,…
+## $ loan           &lt;fct&gt; no, no, no, no, no, yes, no, yes, no, no, no, no, unkno…
+## $ contact        &lt;fct&gt; telephone, cellular, cellular, telephone, cellular, cel…
+## $ month          &lt;fct&gt; may, jul, jun, jul, may, sep, may, jul, jun, may, apr, …
+## $ day_of_week    &lt;fct&gt; mon, mon, fri, fri, tue, fri, fri, tue, wed, mon, thu, …
+## $ duration       &lt;dbl&gt; 162, 197, 403, 331, 31, 185, 162, 140, 26, 305, 278, 47…
+## $ campaign       &lt;dbl&gt; 3, 1, 1, 3, 1, 3, 1, 1, 2, 3, 1, 3, 4, 5, 3, 3, 2, 5, 1…
+## $ pdays          &lt;dbl&gt; 962, 962, 962, 962, 962, 962, 962, 962, 962, 962, 962, …
+## $ previous       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ poutcome       &lt;fct&gt; nonexistent, nonexistent, nonexistent, failure, nonexis…
+## $ emp.var.rate   &lt;dbl&gt; -0.09476169, -2.38139778, 0.17236509, 0.30427391, 1.341…
+## $ cons.price.idx &lt;dbl&gt; 95.58019, 102.27885, 92.29964, 103.17973, 97.45343, 93.…
+## $ cons.conf.idx  &lt;dbl&gt; -43.07132, -35.87196, -43.27577, -33.56074, -43.53403, …
+## $ euribor3m      &lt;dbl&gt; 3.0390048, 5.3383017, 3.6664988, 2.4472836, 2.9963267, …
+## $ nr.employed    &lt;dbl&gt; 5055.863, 5210.407, 5181.041, 5275.290, 5003.088, 5379.…
+## $ y              &lt;fct&gt; no, no, no, no, no, no, no, no, no, no, no, no, no, no,…
+## $ year           &lt;dbl&gt; 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2…
+## $ pdays_bin      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</code></pre>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="bank-loans-case-study.html#cb319-1" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<pre><code>##  [1] &quot;age&quot;            &quot;job&quot;            &quot;marital&quot;        &quot;education&quot;     
+##  [5] &quot;default&quot;        &quot;housing&quot;        &quot;loan&quot;           &quot;contact&quot;       
+##  [9] &quot;month&quot;          &quot;day_of_week&quot;    &quot;duration&quot;       &quot;campaign&quot;      
+## [13] &quot;pdays&quot;          &quot;previous&quot;       &quot;poutcome&quot;       &quot;emp.var.rate&quot;  
+## [17] &quot;cons.price.idx&quot; &quot;cons.conf.idx&quot;  &quot;euribor3m&quot;      &quot;nr.employed&quot;   
+## [21] &quot;y&quot;              &quot;year&quot;           &quot;pdays_bin&quot;</code></pre>
+</div>
+<div id="task-4---examine-the-factor-variables" class="section level2 hasAnchor" number="16.4">
+<h2><span class="header-section-number">16.4</span> Task 4 - Examine the factor variables<a href="bank-loans-case-study.html#task-4---examine-the-factor-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following will create bar charts for you.</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="bank-loans-case-study.html#cb321-1" tabindex="-1"></a><span class="co">#specify the categorical variables (factors) that you want to graph</span></span>
+<span id="cb321-2"><a href="bank-loans-case-study.html#cb321-2" tabindex="-1"></a><span class="co">#If you created any new variables, add them to this list</span></span>
+<span id="cb321-3"><a href="bank-loans-case-study.html#cb321-3" tabindex="-1"></a>categorical_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;job&quot;</span>, <span class="st">&quot;marital&quot;</span>, <span class="st">&quot;education&quot;</span>, <span class="st">&quot;housing&quot;</span>, <span class="st">&quot;loan&quot;</span>, <span class="st">&quot;contact&quot;</span>, <span class="st">&quot;day_of_week&quot;</span>, <span class="st">&quot;poutcome&quot;</span>,<span class="st">&quot;pdays_bin&quot;</span>)</span>
+<span id="cb321-4"><a href="bank-loans-case-study.html#cb321-4" tabindex="-1"></a><span class="co">#No changes are needed to this code chunk</span></span>
+<span id="cb321-5"><a href="bank-loans-case-study.html#cb321-5" tabindex="-1"></a><span class="co">#No changes are needed to this code chunk</span></span>
+<span id="cb321-6"><a href="bank-loans-case-study.html#cb321-6" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb321-7"><a href="bank-loans-case-study.html#cb321-7" tabindex="-1"></a>make_graphs <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">i =</span> <span class="st">&quot;job&quot;</span>){</span>
+<span id="cb321-8"><a href="bank-loans-case-study.html#cb321-8" tabindex="-1"></a>  temp_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">all_of</span>(i), <span class="st">&quot;y&quot;</span>)</span>
+<span id="cb321-9"><a href="bank-loans-case-study.html#cb321-9" tabindex="-1"></a>  <span class="fu">names</span>(temp_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>)</span>
+<span id="cb321-10"><a href="bank-loans-case-study.html#cb321-10" tabindex="-1"></a> </span>
+<span id="cb321-11"><a href="bank-loans-case-study.html#cb321-11" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(<span class="fu">unique</span>(temp_df<span class="sc">$</span>x[<span class="sc">!</span><span class="fu">is.na</span>(temp_df<span class="sc">$</span>x)])) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
+<span id="cb321-12"><a href="bank-loans-case-study.html#cb321-12" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Skipping&quot;</span>, i, <span class="st">&quot;- only one level or all NA&quot;</span>))</span>
+<span id="cb321-13"><a href="bank-loans-case-study.html#cb321-13" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb321-14"><a href="bank-loans-case-study.html#cb321-14" tabindex="-1"></a>  }</span>
+<span id="cb321-15"><a href="bank-loans-case-study.html#cb321-15" tabindex="-1"></a> </span>
+<span id="cb321-16"><a href="bank-loans-case-study.html#cb321-16" tabindex="-1"></a>  fct_order <span class="ot">&lt;-</span> temp_df <span class="sc">%&gt;%</span></span>
+<span id="cb321-17"><a href="bank-loans-case-study.html#cb321-17" tabindex="-1"></a>  <span class="fu">count</span>(x) <span class="sc">%&gt;%</span></span>
+<span id="cb321-18"><a href="bank-loans-case-study.html#cb321-18" tabindex="-1"></a>  <span class="fu">arrange</span>(n) <span class="sc">%&gt;%</span></span>
+<span id="cb321-19"><a href="bank-loans-case-study.html#cb321-19" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(x) <span class="sc">%&gt;%</span></span>
+<span id="cb321-20"><a href="bank-loans-case-study.html#cb321-20" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb321-21"><a href="bank-loans-case-study.html#cb321-21" tabindex="-1"></a>  <span class="fu">as.character</span>()</span>
+<span id="cb321-22"><a href="bank-loans-case-study.html#cb321-22" tabindex="-1"></a>  p1 <span class="ot">&lt;-</span> temp_df <span class="sc">%&gt;%</span></span>
+<span id="cb321-23"><a href="bank-loans-case-study.html#cb321-23" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">x =</span> <span class="fu">fct_relevel</span>(x, fct_order)) <span class="sc">%&gt;%</span></span>
+<span id="cb321-24"><a href="bank-loans-case-study.html#cb321-24" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, <span class="at">fill =</span> y)) <span class="sc">+</span></span>
+<span id="cb321-25"><a href="bank-loans-case-study.html#cb321-25" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb321-26"><a href="bank-loans-case-study.html#cb321-26" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb321-27"><a href="bank-loans-case-study.html#cb321-27" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>) <span class="sc">+</span></span>
+<span id="cb321-28"><a href="bank-loans-case-study.html#cb321-28" tabindex="-1"></a>    <span class="fu">xlab</span>(i) <span class="sc">+</span></span>
+<span id="cb321-29"><a href="bank-loans-case-study.html#cb321-29" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Total Number of People&quot;</span>)</span>
+<span id="cb321-30"><a href="bank-loans-case-study.html#cb321-30" tabindex="-1"></a> </span>
+<span id="cb321-31"><a href="bank-loans-case-study.html#cb321-31" tabindex="-1"></a>  p2 <span class="ot">&lt;-</span> temp_df <span class="sc">%&gt;%</span></span>
+<span id="cb321-32"><a href="bank-loans-case-study.html#cb321-32" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">x =</span> <span class="fu">fct_relevel</span>(x, fct_order)) <span class="sc">%&gt;%</span></span>
+<span id="cb321-33"><a href="bank-loans-case-study.html#cb321-33" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, <span class="at">fill =</span> y)) <span class="sc">+</span></span>
+<span id="cb321-34"><a href="bank-loans-case-study.html#cb321-34" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>, <span class="at">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="sc">+</span></span>
+<span id="cb321-35"><a href="bank-loans-case-study.html#cb321-35" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb321-36"><a href="bank-loans-case-study.html#cb321-36" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>) <span class="sc">+</span></span>
+<span id="cb321-37"><a href="bank-loans-case-study.html#cb321-37" tabindex="-1"></a>    <span class="fu">xlab</span>(i) <span class="sc">+</span></span>
+<span id="cb321-38"><a href="bank-loans-case-study.html#cb321-38" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Percent of People&quot;</span>)</span>
+<span id="cb321-39"><a href="bank-loans-case-study.html#cb321-39" tabindex="-1"></a> </span>
+<span id="cb321-40"><a href="bank-loans-case-study.html#cb321-40" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">ggarrange</span>(p2, p1))</span>
+<span id="cb321-41"><a href="bank-loans-case-study.html#cb321-41" tabindex="-1"></a>}</span>
+<span id="cb321-42"><a href="bank-loans-case-study.html#cb321-42" tabindex="-1"></a><span class="cf">for</span>(var <span class="cf">in</span> categorical_vars){</span>
+<span id="cb321-43"><a href="bank-loans-case-study.html#cb321-43" tabindex="-1"></a>  <span class="fu">make_graphs</span>(var)</span>
+<span id="cb321-44"><a href="bank-loans-case-study.html#cb321-44" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-153-1.png" width="672" /><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-153-2.png" width="672" /><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-153-3.png" width="672" /><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-153-4.png" width="672" /><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-153-5.png" width="672" /><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-153-6.png" width="672" /><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-153-7.png" width="672" /><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-153-8.png" width="672" /></p>
+<pre><code>## [1] &quot;Skipping pdays_bin - only one level or all NA&quot;</code></pre>
+</div>
+<div id="task-5---fit-a-glm" class="section level2 hasAnchor" number="16.5">
+<h2><span class="header-section-number">16.5</span> Task 5 - Fit a GLM<a href="bank-loans-case-study.html#task-5---fit-a-glm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="bank-loans-case-study.html#cb323-1" tabindex="-1"></a><span class="co">#Create training and test sets</span></span>
+<span id="cb323-2"><a href="bank-loans-case-study.html#cb323-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb323-3"><a href="bank-loans-case-study.html#cb323-3" tabindex="-1"></a>splitIndex <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(df<span class="sc">$</span>y, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb323-4"><a href="bank-loans-case-study.html#cb323-4" tabindex="-1"></a>train <span class="ot">&lt;-</span> df[splitIndex, ]</span>
+<span id="cb323-5"><a href="bank-loans-case-study.html#cb323-5" tabindex="-1"></a>test <span class="ot">&lt;-</span> df[<span class="sc">-</span>splitIndex, ]</span>
+<span id="cb323-6"><a href="bank-loans-case-study.html#cb323-6" tabindex="-1"></a>cat_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;job&quot;</span>, <span class="st">&quot;marital&quot;</span>, <span class="st">&quot;education&quot;</span>, <span class="st">&quot;default&quot;</span>, <span class="st">&quot;housing&quot;</span>, <span class="st">&quot;loan&quot;</span>, <span class="st">&quot;contact&quot;</span>, <span class="st">&quot;poutcome&quot;</span>, <span class="st">&quot;pdays_bin&quot;</span>)</span>
+<span id="cb323-7"><a href="bank-loans-case-study.html#cb323-7" tabindex="-1"></a><span class="cf">for</span> (v <span class="cf">in</span> cat_vars) {</span>
+<span id="cb323-8"><a href="bank-loans-case-study.html#cb323-8" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nlevels</span>(train[[v]]) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
+<span id="cb323-9"><a href="bank-loans-case-study.html#cb323-9" tabindex="-1"></a>    train[[v]] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb323-10"><a href="bank-loans-case-study.html#cb323-10" tabindex="-1"></a>    test[[v]] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb323-11"><a href="bank-loans-case-study.html#cb323-11" tabindex="-1"></a>  }</span>
+<span id="cb323-12"><a href="bank-loans-case-study.html#cb323-12" tabindex="-1"></a>}</span>
+<span id="cb323-13"><a href="bank-loans-case-study.html#cb323-13" tabindex="-1"></a>train_y <span class="ot">&lt;-</span> train<span class="sc">$</span>y</span>
+<span id="cb323-14"><a href="bank-loans-case-study.html#cb323-14" tabindex="-1"></a>test_y <span class="ot">&lt;-</span> test<span class="sc">$</span>y</span>
+<span id="cb323-15"><a href="bank-loans-case-study.html#cb323-15" tabindex="-1"></a>glm_formula <span class="ot">&lt;-</span> y <span class="sc">~</span> . <span class="sc">-</span> month <span class="sc">-</span> day_of_week</span>
+<span id="cb323-16"><a href="bank-loans-case-study.html#cb323-16" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb323-17"><a href="bank-loans-case-study.html#cb323-17" tabindex="-1"></a>  glm_formula,</span>
+<span id="cb323-18"><a href="bank-loans-case-study.html#cb323-18" tabindex="-1"></a>  <span class="at">data =</span> train,</span>
+<span id="cb323-19"><a href="bank-loans-case-study.html#cb323-19" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)</span>
+<span id="cb323-20"><a href="bank-loans-case-study.html#cb323-20" tabindex="-1"></a>)</span>
+<span id="cb323-21"><a href="bank-loans-case-study.html#cb323-21" tabindex="-1"></a><span class="fu">AIC</span>(glm)</span></code></pre></div>
+<pre><code>## [1] 138123.9</code></pre>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="bank-loans-case-study.html#cb325-1" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = glm_formula, family = binomial(link = &quot;logit&quot;), 
+##     data = train)
+## 
+## Coefficients: (2 not defined because of singularities)
+##                                Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)                  -9.766e-01  3.267e+00  -0.299   0.7650    
+## age                          -1.209e-02  6.586e-04 -18.354   &lt;2e-16 ***
+## jobblue-collar               -3.121e-02  1.999e-02  -1.561   0.1185    
+## jobtechnician                -3.248e-02  2.183e-02  -1.487   0.1369    
+## jobservices                  -3.061e-02  2.614e-02  -1.171   0.2416    
+## jobmanagement                -2.198e-02  2.932e-02  -0.750   0.4534    
+## jobretired                   -4.067e-02  3.677e-02  -1.106   0.2688    
+## jobentrepreneur              -4.176e-03  3.898e-02  -0.107   0.9147    
+## jobself-employed             -2.371e-02  3.927e-02  -0.604   0.5460    
+## jobhousemaid                 -3.965e-02  4.480e-02  -0.885   0.3761    
+## jobunemployed                -3.489e-02  4.623e-02  -0.755   0.4504    
+## jobstudent                    8.023e-01  4.068e-02  19.720   &lt;2e-16 ***
+## jobunknown                   -5.136e-02  8.002e-02  -0.642   0.5210    
+## maritalsingle                -9.069e-04  1.569e-02  -0.058   0.9539    
+## maritaldivorced              -1.632e-02  2.237e-02  -0.729   0.4658    
+## maritalunknown               -2.331e-01  1.663e-01  -1.401   0.1611    
+## educationhigh.school         -2.921e-02  1.908e-02  -1.531   0.1259    
+## educationbasic.9y            -3.905e-02  2.199e-02  -1.776   0.0758 .  
+## educationprofessional.course -3.033e-02  2.300e-02  -1.319   0.1872    
+## educationbasic.4y             4.836e-03  2.470e-02   0.196   0.8448    
+## educationbasic.6y            -8.464e-03  3.172e-02  -0.267   0.7896    
+## educationother               -4.550e-02  3.576e-02  -1.272   0.2033    
+## defaultunknown                2.170e-02  1.679e-02   1.292   0.1962    
+## defaultyes                   -5.721e-01  1.053e+00  -0.543   0.5870    
+## housingno                     1.682e-02  1.393e-02   1.208   0.2271    
+## housingunknown                4.515e-02  4.486e-02   1.006   0.3142    
+## loanyes                       3.223e-02  1.906e-02   1.691   0.0909 .  
+## loanunknown                  -3.984e-02  4.571e-02  -0.872   0.3834    
+## contacttelephone             -5.098e-01  1.507e-02 -33.832   &lt;2e-16 ***
+## duration                      2.134e-03  4.704e-05  45.353   &lt;2e-16 ***
+## campaign                      1.715e-03  5.705e-03   0.301   0.7637    
+## pdays                                NA         NA      NA       NA    
+## previous                             NA         NA      NA       NA    
+## poutcomefailure               3.293e-03  2.282e-02   0.144   0.8853    
+## poutcomesuccess               1.496e+00  2.933e-02  51.024   &lt;2e-16 ***
+## emp.var.rate                 -3.011e-01  5.373e-03 -56.047   &lt;2e-16 ***
+## cons.price.idx               -5.702e-04  1.980e-03  -0.288   0.7734    
+## cons.conf.idx                 8.689e-04  1.480e-03   0.587   0.5571    
+## euribor3m                    -1.394e-03  4.409e-03  -0.316   0.7519    
+## nr.employed                  -2.923e-05  4.083e-05  -0.716   0.4740    
+## year                         -3.511e-04  1.611e-03  -0.218   0.8275    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 147352  on 164748  degrees of freedom
+## Residual deviance: 138046  on 164710  degrees of freedom
+## AIC: 138124
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div id="task-6---use-aic-to-select-features" class="section level2 hasAnchor" number="16.6">
+<h2><span class="header-section-number">16.6</span> Task 6 - Use AIC to select features<a href="bank-loans-case-study.html#task-6---use-aic-to-select-features" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="bank-loans-case-study.html#cb327-1" tabindex="-1"></a>stepwise_result <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(glm)</span></code></pre></div>
+<pre><code>## Start:  AIC=138123.9
+## y ~ (age + job + marital + education + default + housing + loan + 
+##     contact + month + day_of_week + duration + campaign + pdays + 
+##     previous + poutcome + emp.var.rate + cons.price.idx + cons.conf.idx + 
+##     euribor3m + nr.employed + year) - month - day_of_week
+## 
+## 
+## Step:  AIC=138123.9
+## y ~ age + job + marital + education + default + housing + loan + 
+##     contact + duration + campaign + pdays + poutcome + emp.var.rate + 
+##     cons.price.idx + cons.conf.idx + euribor3m + nr.employed + 
+##     year
+## 
+## 
+## Step:  AIC=138123.9
+## y ~ age + job + marital + education + default + housing + loan + 
+##     contact + duration + campaign + poutcome + emp.var.rate + 
+##     cons.price.idx + cons.conf.idx + euribor3m + nr.employed + 
+##     year
+## 
+##                  Df Deviance    AIC
+## - education       6   138052 138118
+## - marital         3   138048 138120
+## - default         2   138048 138122
+## - year            1   138046 138122
+## - cons.price.idx  1   138046 138122
+## - campaign        1   138046 138122
+## - euribor3m       1   138046 138122
+## - housing         2   138048 138122
+## - cons.conf.idx   1   138046 138122
+## - nr.employed     1   138046 138122
+## - loan            2   138050 138124
+## &lt;none&gt;                138046 138124
+## - age             1   138386 138462
+## - job            11   138453 138509
+## - contact         1   139245 139321
+## - duration        1   140108 140184
+## - poutcome        2   140401 140475
+## - emp.var.rate    1   141244 141320
+## 
+## Step:  AIC=138118.2
+## y ~ age + job + marital + default + housing + loan + contact + 
+##     duration + campaign + poutcome + emp.var.rate + cons.price.idx + 
+##     cons.conf.idx + euribor3m + nr.employed + year
+## 
+##                  Df Deviance    AIC
+## - marital         3   138055 138115
+## - default         2   138054 138116
+## - year            1   138052 138116
+## - cons.price.idx  1   138052 138116
+## - campaign        1   138052 138116
+## - euribor3m       1   138052 138116
+## - housing         2   138054 138116
+## - cons.conf.idx   1   138053 138117
+## - nr.employed     1   138053 138117
+## - loan            2   138056 138118
+## &lt;none&gt;                138052 138118
+## - age             1   138392 138456
+## - job            11   138459 138503
+## - contact         1   139251 139315
+## - duration        1   140113 140177
+## - poutcome        2   140408 140470
+## - emp.var.rate    1   141250 141314
+## 
+## Step:  AIC=138114.8
+## y ~ age + job + default + housing + loan + contact + duration + 
+##     campaign + poutcome + emp.var.rate + cons.price.idx + cons.conf.idx + 
+##     euribor3m + nr.employed + year
+## 
+##                  Df Deviance    AIC
+## - default         2   138057 138113
+## - year            1   138055 138113
+## - cons.price.idx  1   138055 138113
+## - campaign        1   138055 138113
+## - euribor3m       1   138055 138113
+## - housing         2   138057 138113
+## - cons.conf.idx   1   138055 138113
+## - nr.employed     1   138055 138113
+## - loan            2   138059 138115
+## &lt;none&gt;                138055 138115
+## - age             1   138394 138452
+## - job            11   138462 138500
+## - contact         1   139253 139311
+## - duration        1   140116 140174
+## - poutcome        2   140410 140466
+## - emp.var.rate    1   141252 141310
+## 
+## Step:  AIC=138112.8
+## y ~ age + job + housing + loan + contact + duration + campaign + 
+##     poutcome + emp.var.rate + cons.price.idx + cons.conf.idx + 
+##     euribor3m + nr.employed + year
+## 
+##                  Df Deviance    AIC
+## - year            1   138057 138111
+## - cons.price.idx  1   138057 138111
+## - campaign        1   138057 138111
+## - euribor3m       1   138057 138111
+## - housing         2   138059 138111
+## - cons.conf.idx   1   138057 138111
+## - nr.employed     1   138057 138111
+## - loan            2   138061 138113
+## &lt;none&gt;                138057 138113
+## - age             1   138396 138450
+## - job            11   138464 138498
+## - contact         1   139255 139309
+## - duration        1   140118 140172
+## - poutcome        2   140413 140465
+## - emp.var.rate    1   141255 141309
+## 
+## Step:  AIC=138110.8
+## y ~ age + job + housing + loan + contact + duration + campaign + 
+##     poutcome + emp.var.rate + cons.price.idx + cons.conf.idx + 
+##     euribor3m + nr.employed
+## 
+##                  Df Deviance    AIC
+## - cons.price.idx  1   138057 138109
+## - campaign        1   138057 138109
+## - euribor3m       1   138057 138109
+## - housing         2   138059 138109
+## - cons.conf.idx   1   138057 138109
+## - nr.employed     1   138057 138109
+## - loan            2   138061 138111
+## &lt;none&gt;                138057 138111
+## - age             1   138396 138448
+## - job            11   138464 138496
+## - contact         1   139255 139307
+## - duration        1   140118 140170
+## - poutcome        2   140413 140463
+## - emp.var.rate    1   141255 141307
+## 
+## Step:  AIC=138108.9
+## y ~ age + job + housing + loan + contact + duration + campaign + 
+##     poutcome + emp.var.rate + cons.conf.idx + euribor3m + nr.employed
+## 
+##                 Df Deviance    AIC
+## - campaign       1   138057 138107
+## - euribor3m      1   138057 138107
+## - housing        2   138059 138107
+## - cons.conf.idx  1   138057 138107
+## - nr.employed    1   138057 138107
+## - loan           2   138061 138109
+## &lt;none&gt;               138057 138109
+## - age            1   138396 138446
+## - job           11   138464 138494
+## - contact        1   139256 139306
+## - duration       1   140118 140168
+## - poutcome       2   140413 140461
+## - emp.var.rate   1   141255 141305
+## 
+## Step:  AIC=138107
+## y ~ age + job + housing + loan + contact + duration + poutcome + 
+##     emp.var.rate + cons.conf.idx + euribor3m + nr.employed
+## 
+##                 Df Deviance    AIC
+## - euribor3m      1   138057 138105
+## - housing        2   138059 138105
+## - cons.conf.idx  1   138057 138105
+## - nr.employed    1   138058 138106
+## - loan           2   138061 138107
+## &lt;none&gt;               138057 138107
+## - age            1   138396 138444
+## - job           11   138464 138492
+## - contact        1   139256 139304
+## - duration       1   140118 140166
+## - poutcome       2   140413 140459
+## - emp.var.rate   1   141255 141303
+## 
+## Step:  AIC=138105.1
+## y ~ age + job + housing + loan + contact + duration + poutcome + 
+##     emp.var.rate + cons.conf.idx + nr.employed
+## 
+##                 Df Deviance    AIC
+## - housing        2   138059 138103
+## - cons.conf.idx  1   138057 138103
+## - nr.employed    1   138058 138104
+## - loan           2   138061 138105
+## &lt;none&gt;               138057 138105
+## - age            1   138397 138443
+## - job           11   138464 138490
+## - contact        1   139256 139302
+## - duration       1   140118 140164
+## - poutcome       2   140413 140457
+## - emp.var.rate   1   141255 141301
+## 
+## Step:  AIC=138103.3
+## y ~ age + job + loan + contact + duration + poutcome + emp.var.rate + 
+##     cons.conf.idx + nr.employed
+## 
+##                 Df Deviance    AIC
+## - cons.conf.idx  1   138060 138102
+## - nr.employed    1   138060 138102
+## - loan           2   138063 138103
+## &lt;none&gt;               138059 138103
+## - age            1   138399 138441
+## - job           11   138467 138489
+## - contact        1   139258 139300
+## - duration       1   140120 140162
+## - poutcome       2   140415 140455
+## - emp.var.rate   1   141257 141299
+## 
+## Step:  AIC=138101.6
+## y ~ age + job + loan + contact + duration + poutcome + emp.var.rate + 
+##     nr.employed
+## 
+##                Df Deviance    AIC
+## - nr.employed   1   138060 138100
+## - loan          2   138063 138101
+## &lt;none&gt;              138060 138102
+## - age           1   138399 138439
+## - job          11   138467 138487
+## - contact       1   139258 139298
+## - duration      1   140121 140161
+## - poutcome      2   140415 140453
+## - emp.var.rate  1   141258 141298
+## 
+## Step:  AIC=138100.1
+## y ~ age + job + loan + contact + duration + poutcome + emp.var.rate
+## 
+##                Df Deviance    AIC
+## - loan          2   138064 138100
+## &lt;none&gt;              138060 138100
+## - age           1   138400 138438
+## - job          11   138468 138486
+## - contact       1   139259 139297
+## - duration      1   140121 140159
+## - poutcome      2   140416 140452
+## - emp.var.rate  1   141258 141296
+## 
+## Step:  AIC=138099.9
+## y ~ age + job + contact + duration + poutcome + emp.var.rate
+## 
+##                Df Deviance    AIC
+## &lt;none&gt;              138064 138100
+## - age           1   138403 138437
+## - job          11   138471 138485
+## - contact       1   139263 139297
+## - duration      1   140125 140159
+## - poutcome      2   140420 140452
+## - emp.var.rate  1   141262 141296</code></pre>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="bank-loans-case-study.html#cb329-1" tabindex="-1"></a>final_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb329-2"><a href="bank-loans-case-study.html#cb329-2" tabindex="-1"></a>  stepwise_result<span class="sc">$</span>formula,</span>
+<span id="cb329-3"><a href="bank-loans-case-study.html#cb329-3" tabindex="-1"></a>  <span class="at">data =</span> train,</span>
+<span id="cb329-4"><a href="bank-loans-case-study.html#cb329-4" tabindex="-1"></a>  <span class="at">family =</span> glm<span class="sc">$</span>family</span>
+<span id="cb329-5"><a href="bank-loans-case-study.html#cb329-5" tabindex="-1"></a>)</span>
+<span id="cb329-6"><a href="bank-loans-case-study.html#cb329-6" tabindex="-1"></a><span class="fu">AIC</span>(final_glm)</span></code></pre></div>
+<pre><code>## [1] 138099.9</code></pre>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="bank-loans-case-study.html#cb331-1" tabindex="-1"></a><span class="fu">summary</span>(final_glm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = stepwise_result$formula, family = glm$family, data = train)
+## 
+## Coefficients:
+##                    Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)      -1.930e+00  3.331e-02 -57.928   &lt;2e-16 ***
+## age              -1.208e-02  6.586e-04 -18.347   &lt;2e-16 ***
+## jobblue-collar   -3.122e-02  1.999e-02  -1.562    0.118    
+## jobtechnician    -3.238e-02  2.183e-02  -1.483    0.138    
+## jobservices      -3.057e-02  2.614e-02  -1.170    0.242    
+## jobmanagement    -2.186e-02  2.931e-02  -0.746    0.456    
+## jobretired       -4.080e-02  3.677e-02  -1.110    0.267    
+## jobentrepreneur  -4.590e-03  3.898e-02  -0.118    0.906    
+## jobself-employed -2.400e-02  3.927e-02  -0.611    0.541    
+## jobhousemaid     -3.980e-02  4.479e-02  -0.889    0.374    
+## jobunemployed    -3.469e-02  4.622e-02  -0.751    0.453    
+## jobstudent        8.025e-01  4.068e-02  19.730   &lt;2e-16 ***
+## jobunknown       -5.163e-02  8.001e-02  -0.645    0.519    
+## contacttelephone -5.098e-01  1.507e-02 -33.834   &lt;2e-16 ***
+## duration          2.133e-03  4.704e-05  45.349   &lt;2e-16 ***
+## poutcomefailure   3.493e-03  2.282e-02   0.153    0.878    
+## poutcomesuccess   1.496e+00  2.932e-02  51.035   &lt;2e-16 ***
+## emp.var.rate     -3.010e-01  5.371e-03 -56.046   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 147352  on 164748  degrees of freedom
+## Residual deviance: 138064  on 164731  degrees of freedom
+## AIC: 138100
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="bank-loans-case-study.html#cb333-1" tabindex="-1"></a><span class="fu">plot</span>(final_glm)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-155-1.png" width="672" /><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-155-2.png" width="672" /><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-155-3.png" width="672" /><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-155-4.png" width="672" />
+## Task 7 - Fit a LASSO</p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="bank-loans-case-study.html#cb334-1" tabindex="-1"></a><span class="co">#Create training and test sets</span></span>
+<span id="cb334-2"><a href="bank-loans-case-study.html#cb334-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb334-3"><a href="bank-loans-case-study.html#cb334-3" tabindex="-1"></a>splitIndex <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(df<span class="sc">$</span>y, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb334-4"><a href="bank-loans-case-study.html#cb334-4" tabindex="-1"></a>train <span class="ot">&lt;-</span> df[splitIndex, ]</span>
+<span id="cb334-5"><a href="bank-loans-case-study.html#cb334-5" tabindex="-1"></a>test <span class="ot">&lt;-</span> df[<span class="sc">-</span>splitIndex, ]</span>
+<span id="cb334-6"><a href="bank-loans-case-study.html#cb334-6" tabindex="-1"></a>cat_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;job&quot;</span>, <span class="st">&quot;marital&quot;</span>, <span class="st">&quot;education&quot;</span>, <span class="st">&quot;default&quot;</span>, <span class="st">&quot;housing&quot;</span>, <span class="st">&quot;loan&quot;</span>, <span class="st">&quot;contact&quot;</span>, <span class="st">&quot;poutcome&quot;</span>, <span class="st">&quot;pdays_bin&quot;</span>)</span>
+<span id="cb334-7"><a href="bank-loans-case-study.html#cb334-7" tabindex="-1"></a><span class="cf">for</span> (v <span class="cf">in</span> cat_vars) {</span>
+<span id="cb334-8"><a href="bank-loans-case-study.html#cb334-8" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(<span class="fu">unique</span>(train[[v]][<span class="sc">!</span><span class="fu">is.na</span>(train[[v]])])) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
+<span id="cb334-9"><a href="bank-loans-case-study.html#cb334-9" tabindex="-1"></a>    train[[v]] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb334-10"><a href="bank-loans-case-study.html#cb334-10" tabindex="-1"></a>    test[[v]] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb334-11"><a href="bank-loans-case-study.html#cb334-11" tabindex="-1"></a>  }</span>
+<span id="cb334-12"><a href="bank-loans-case-study.html#cb334-12" tabindex="-1"></a>}</span>
+<span id="cb334-13"><a href="bank-loans-case-study.html#cb334-13" tabindex="-1"></a>train_y <span class="ot">&lt;-</span> train<span class="sc">$</span>y</span>
+<span id="cb334-14"><a href="bank-loans-case-study.html#cb334-14" tabindex="-1"></a>test_y <span class="ot">&lt;-</span> test<span class="sc">$</span>y</span>
+<span id="cb334-15"><a href="bank-loans-case-study.html#cb334-15" tabindex="-1"></a>glm_formula <span class="ot">&lt;-</span> y <span class="sc">~</span> . <span class="sc">-</span> month <span class="sc">-</span> day_of_week</span>
+<span id="cb334-16"><a href="bank-loans-case-study.html#cb334-16" tabindex="-1"></a>glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb334-17"><a href="bank-loans-case-study.html#cb334-17" tabindex="-1"></a>  glm_formula,</span>
+<span id="cb334-18"><a href="bank-loans-case-study.html#cb334-18" tabindex="-1"></a>  <span class="at">data =</span> train,</span>
+<span id="cb334-19"><a href="bank-loans-case-study.html#cb334-19" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)</span>
+<span id="cb334-20"><a href="bank-loans-case-study.html#cb334-20" tabindex="-1"></a>)</span>
+<span id="cb334-21"><a href="bank-loans-case-study.html#cb334-21" tabindex="-1"></a><span class="fu">AIC</span>(glm)</span></code></pre></div>
+<pre><code>## [1] 138123.9</code></pre>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="bank-loans-case-study.html#cb336-1" tabindex="-1"></a><span class="fu">summary</span>(glm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = glm_formula, family = binomial(link = &quot;logit&quot;), 
+##     data = train)
+## 
+## Coefficients: (2 not defined because of singularities)
+##                                Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)                  -9.766e-01  3.267e+00  -0.299   0.7650    
+## age                          -1.209e-02  6.586e-04 -18.354   &lt;2e-16 ***
+## jobblue-collar               -3.121e-02  1.999e-02  -1.561   0.1185    
+## jobtechnician                -3.248e-02  2.183e-02  -1.487   0.1369    
+## jobservices                  -3.061e-02  2.614e-02  -1.171   0.2416    
+## jobmanagement                -2.198e-02  2.932e-02  -0.750   0.4534    
+## jobretired                   -4.067e-02  3.677e-02  -1.106   0.2688    
+## jobentrepreneur              -4.176e-03  3.898e-02  -0.107   0.9147    
+## jobself-employed             -2.371e-02  3.927e-02  -0.604   0.5460    
+## jobhousemaid                 -3.965e-02  4.480e-02  -0.885   0.3761    
+## jobunemployed                -3.489e-02  4.623e-02  -0.755   0.4504    
+## jobstudent                    8.023e-01  4.068e-02  19.720   &lt;2e-16 ***
+## jobunknown                   -5.136e-02  8.002e-02  -0.642   0.5210    
+## maritalsingle                -9.069e-04  1.569e-02  -0.058   0.9539    
+## maritaldivorced              -1.632e-02  2.237e-02  -0.729   0.4658    
+## maritalunknown               -2.331e-01  1.663e-01  -1.401   0.1611    
+## educationhigh.school         -2.921e-02  1.908e-02  -1.531   0.1259    
+## educationbasic.9y            -3.905e-02  2.199e-02  -1.776   0.0758 .  
+## educationprofessional.course -3.033e-02  2.300e-02  -1.319   0.1872    
+## educationbasic.4y             4.836e-03  2.470e-02   0.196   0.8448    
+## educationbasic.6y            -8.464e-03  3.172e-02  -0.267   0.7896    
+## educationother               -4.550e-02  3.576e-02  -1.272   0.2033    
+## defaultunknown                2.170e-02  1.679e-02   1.292   0.1962    
+## defaultyes                   -5.721e-01  1.053e+00  -0.543   0.5870    
+## housingno                     1.682e-02  1.393e-02   1.208   0.2271    
+## housingunknown                4.515e-02  4.486e-02   1.006   0.3142    
+## loanyes                       3.223e-02  1.906e-02   1.691   0.0909 .  
+## loanunknown                  -3.984e-02  4.571e-02  -0.872   0.3834    
+## contacttelephone             -5.098e-01  1.507e-02 -33.832   &lt;2e-16 ***
+## duration                      2.134e-03  4.704e-05  45.353   &lt;2e-16 ***
+## campaign                      1.715e-03  5.705e-03   0.301   0.7637    
+## pdays                                NA         NA      NA       NA    
+## previous                             NA         NA      NA       NA    
+## poutcomefailure               3.293e-03  2.282e-02   0.144   0.8853    
+## poutcomesuccess               1.496e+00  2.933e-02  51.024   &lt;2e-16 ***
+## emp.var.rate                 -3.011e-01  5.373e-03 -56.047   &lt;2e-16 ***
+## cons.price.idx               -5.702e-04  1.980e-03  -0.288   0.7734    
+## cons.conf.idx                 8.689e-04  1.480e-03   0.587   0.5571    
+## euribor3m                    -1.394e-03  4.409e-03  -0.316   0.7519    
+## nr.employed                  -2.923e-05  4.083e-05  -0.716   0.4740    
+## year                         -3.511e-04  1.611e-03  -0.218   0.8275    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 147352  on 164748  degrees of freedom
+## Residual deviance: 138046  on 164710  degrees of freedom
+## AIC: 138124
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="bank-loans-case-study.html#cb338-1" tabindex="-1"></a>x_train <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(y <span class="sc">~</span> . <span class="sc">-</span> month <span class="sc">-</span> day_of_week, <span class="at">data =</span> train)</span>
+<span id="cb338-2"><a href="bank-loans-case-study.html#cb338-2" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(train<span class="sc">$</span>y <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb338-3"><a href="bank-loans-case-study.html#cb338-3" tabindex="-1"></a>lasso_cv <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x_train, y_train, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">nfolds =</span> <span class="dv">15</span>)</span>
+<span id="cb338-4"><a href="bank-loans-case-study.html#cb338-4" tabindex="-1"></a>best_lambda <span class="ot">&lt;-</span> lasso_cv<span class="sc">$</span>lambda.min</span>
+<span id="cb338-5"><a href="bank-loans-case-study.html#cb338-5" tabindex="-1"></a>lasso_model <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x_train, y_train, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> best_lambda)</span>
+<span id="cb338-6"><a href="bank-loans-case-study.html#cb338-6" tabindex="-1"></a>lasso_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(lasso_model)</span>
+<span id="cb338-7"><a href="bank-loans-case-study.html#cb338-7" tabindex="-1"></a>variables_with_zeros <span class="ot">&lt;-</span> <span class="fu">rownames</span>(lasso_coefs)[lasso_coefs[,<span class="dv">1</span>] <span class="sc">==</span> <span class="dv">0</span>]</span>
+<span id="cb338-8"><a href="bank-loans-case-study.html#cb338-8" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Variables with Coefficients of Zero:&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Variables with Coefficients of Zero:&quot;</code></pre>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="bank-loans-case-study.html#cb340-1" tabindex="-1"></a><span class="fu">cat</span>( <span class="fu">paste</span>( variables_with_zeros, <span class="at">collapse=</span><span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span> ) )</span></code></pre></div>
+<pre><code>## (Intercept)
+## jobblue-collar
+## jobtechnician
+## jobservices
+## jobmanagement
+## jobretired
+## jobentrepreneur
+## jobself-employed
+## jobhousemaid
+## jobunemployed
+## jobunknown
+## maritalsingle
+## maritaldivorced
+## educationhigh.school
+## educationbasic.9y
+## educationprofessional.course
+## educationbasic.4y
+## educationbasic.6y
+## educationother
+## defaultyes
+## housingno
+## housingunknown
+## loanunknown
+## campaign
+## pdays
+## previous
+## poutcomefailure
+## cons.price.idx
+## cons.conf.idx
+## euribor3m
+## nr.employed
+## year</code></pre>
+</div>
+<div id="task-8---create-a-bagged-tree-model" class="section level2 hasAnchor" number="16.7">
+<h2><span class="header-section-number">16.7</span> Task 8 - Create a bagged tree model<a href="bank-loans-case-study.html#task-8---create-a-bagged-tree-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="bank-loans-case-study.html#cb342-1" tabindex="-1"></a>sample1 <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="fl">0.2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb342-2"><a href="bank-loans-case-study.html#cb342-2" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="fl">0.2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb342-3"><a href="bank-loans-case-study.html#cb342-3" tabindex="-1"></a>sample3 <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="fl">0.2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb342-4"><a href="bank-loans-case-study.html#cb342-4" tabindex="-1"></a>sample4 <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="fl">0.2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb342-5"><a href="bank-loans-case-study.html#cb342-5" tabindex="-1"></a>sample5 <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="fl">0.2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb342-6"><a href="bank-loans-case-study.html#cb342-6" tabindex="-1"></a>sample6 <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="fl">0.2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb342-7"><a href="bank-loans-case-study.html#cb342-7" tabindex="-1"></a>sample7 <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="fl">0.2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb342-8"><a href="bank-loans-case-study.html#cb342-8" tabindex="-1"></a>sample8 <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="fl">0.2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="bank-loans-case-study.html#cb343-1" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">rpart.control</span>(<span class="at">minbucket =</span> <span class="dv">10</span>, <span class="at">cp =</span> <span class="fl">0.001</span>, <span class="at">maxdepth =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="bank-loans-case-study.html#cb344-1" tabindex="-1"></a>tree_formula <span class="ot">&lt;-</span> y <span class="sc">~</span> . <span class="sc">-</span> month <span class="sc">-</span> day_of_week</span>
+<span id="cb344-2"><a href="bank-loans-case-study.html#cb344-2" tabindex="-1"></a>tree1 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(tree_formula, <span class="at">data =</span> sample1, <span class="at">control =</span> ctrl)</span>
+<span id="cb344-3"><a href="bank-loans-case-study.html#cb344-3" tabindex="-1"></a>tree2 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(tree_formula, <span class="at">data =</span> sample2, <span class="at">control =</span> ctrl)</span>
+<span id="cb344-4"><a href="bank-loans-case-study.html#cb344-4" tabindex="-1"></a>tree3 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(tree_formula, <span class="at">data =</span> sample3, <span class="at">control =</span> ctrl)</span>
+<span id="cb344-5"><a href="bank-loans-case-study.html#cb344-5" tabindex="-1"></a>tree4 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(tree_formula, <span class="at">data =</span> sample4, <span class="at">control =</span> ctrl)</span>
+<span id="cb344-6"><a href="bank-loans-case-study.html#cb344-6" tabindex="-1"></a>tree5 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(tree_formula, <span class="at">data =</span> sample5, <span class="at">control =</span> ctrl)</span>
+<span id="cb344-7"><a href="bank-loans-case-study.html#cb344-7" tabindex="-1"></a>tree6 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(tree_formula, <span class="at">data =</span> sample6, <span class="at">control =</span> ctrl)</span>
+<span id="cb344-8"><a href="bank-loans-case-study.html#cb344-8" tabindex="-1"></a>tree7 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(tree_formula, <span class="at">data =</span> sample7, <span class="at">control =</span> ctrl)</span>
+<span id="cb344-9"><a href="bank-loans-case-study.html#cb344-9" tabindex="-1"></a>tree8 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(tree_formula, <span class="at">data =</span> sample8, <span class="at">control =</span> ctrl)</span>
+<span id="cb344-10"><a href="bank-loans-case-study.html#cb344-10" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree1, <span class="at">cex =</span> .<span class="dv">7</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-159-1.png" width="768" /></p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="bank-loans-case-study.html#cb345-1" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree2, <span class="at">cex =</span> .<span class="dv">7</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-159-2.png" width="768" /></p>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="bank-loans-case-study.html#cb346-1" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree3, <span class="at">cex =</span> .<span class="dv">7</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-159-3.png" width="768" /></p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="bank-loans-case-study.html#cb347-1" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree4, <span class="at">cex =</span> .<span class="dv">7</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-159-4.png" width="768" /></p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="bank-loans-case-study.html#cb348-1" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree5, <span class="at">cex =</span> .<span class="dv">7</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-159-5.png" width="768" /></p>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="bank-loans-case-study.html#cb349-1" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree6, <span class="at">cex =</span> .<span class="dv">7</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-159-6.png" width="768" /></p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="bank-loans-case-study.html#cb350-1" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree7, <span class="at">cex =</span> .<span class="dv">7</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-159-7.png" width="768" /></p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="bank-loans-case-study.html#cb351-1" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree8, <span class="at">cex =</span> .<span class="dv">7</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-159-8.png" width="768" /></p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="bank-loans-case-study.html#cb352-1" tabindex="-1"></a><span class="co">#make predictions</span></span>
+<span id="cb352-2"><a href="bank-loans-case-study.html#cb352-2" tabindex="-1"></a>tree1_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree1, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[, <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb352-3"><a href="bank-loans-case-study.html#cb352-3" tabindex="-1"></a>tree2_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree2, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[, <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb352-4"><a href="bank-loans-case-study.html#cb352-4" tabindex="-1"></a>tree3_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree3, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[, <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb352-5"><a href="bank-loans-case-study.html#cb352-5" tabindex="-1"></a>tree4_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree4, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[, <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb352-6"><a href="bank-loans-case-study.html#cb352-6" tabindex="-1"></a>tree5_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree5, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[, <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb352-7"><a href="bank-loans-case-study.html#cb352-7" tabindex="-1"></a>tree6_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree6, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[, <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb352-8"><a href="bank-loans-case-study.html#cb352-8" tabindex="-1"></a>tree7_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree7, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[, <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb352-9"><a href="bank-loans-case-study.html#cb352-9" tabindex="-1"></a>tree8_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree8, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)[, <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb352-10"><a href="bank-loans-case-study.html#cb352-10" tabindex="-1"></a>trees_pred <span class="ot">&lt;-</span> (tree1_pred <span class="sc">+</span> tree2_pred <span class="sc">+</span> tree3_pred <span class="sc">+</span> tree4_pred <span class="sc">+</span> tree5_pred <span class="sc">+</span> tree6_pred <span class="sc">+</span> tree7_pred <span class="sc">+</span> tree8_pred)<span class="sc">/</span><span class="dv">8</span></span></code></pre></div>
+</div>
+<div id="task-9---measure-the-variable-importance-with-a-random-forest" class="section level2 hasAnchor" number="16.8">
+<h2><span class="header-section-number">16.8</span> Task 9 - Measure the variable importance with a Random Forest<a href="bank-loans-case-study.html#task-9---measure-the-variable-importance-with-a-random-forest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="bank-loans-case-study.html#cb353-1" tabindex="-1"></a>RF <span class="ot">&lt;-</span> <span class="fu">ranger</span>(</span>
+<span id="cb353-2"><a href="bank-loans-case-study.html#cb353-2" tabindex="-1"></a>  y <span class="sc">~</span> . <span class="sc">-</span> month <span class="sc">-</span> day_of_week,</span>
+<span id="cb353-3"><a href="bank-loans-case-study.html#cb353-3" tabindex="-1"></a>  <span class="at">data =</span> train,</span>
+<span id="cb353-4"><a href="bank-loans-case-study.html#cb353-4" tabindex="-1"></a>  <span class="at">num.trees =</span> <span class="dv">400</span>,</span>
+<span id="cb353-5"><a href="bank-loans-case-study.html#cb353-5" tabindex="-1"></a>  <span class="at">importance =</span> <span class="st">&quot;permutation&quot;</span>,</span>
+<span id="cb353-6"><a href="bank-loans-case-study.html#cb353-6" tabindex="-1"></a>  <span class="at">probability =</span> <span class="cn">TRUE</span></span>
+<span id="cb353-7"><a href="bank-loans-case-study.html#cb353-7" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Growing trees.. Progress: 19%. Estimated remaining time: 2 minutes, 14 seconds.
+## Growing trees.. Progress: 39%. Estimated remaining time: 1 minute, 39 seconds.
+## Growing trees.. Progress: 58%. Estimated remaining time: 1 minute, 8 seconds.
+## Growing trees.. Progress: 78%. Estimated remaining time: 35 seconds.
+## Growing trees.. Progress: 98%. Estimated remaining time: 2 seconds.
+## Computing permutation importance.. Progress: 35%. Estimated remaining time: 58 seconds.
+## Computing permutation importance.. Progress: 71%. Estimated remaining time: 25 seconds.</code></pre>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="bank-loans-case-study.html#cb355-1" tabindex="-1"></a>imp_RF <span class="ot">&lt;-</span> <span class="fu">importance</span>(RF)</span>
+<span id="cb355-2"><a href="bank-loans-case-study.html#cb355-2" tabindex="-1"></a>imp_DF <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Variables =</span> <span class="fu">names</span>(imp_RF), <span class="at">MSE =</span> imp_RF) <span class="sc">%&gt;%</span></span>
+<span id="cb355-3"><a href="bank-loans-case-study.html#cb355-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(MSE))</span>
+<span id="cb355-4"><a href="bank-loans-case-study.html#cb355-4" tabindex="-1"></a><span class="fu">ggplot</span>(imp_DF[<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>,], <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Variables, MSE), <span class="at">y=</span>MSE, <span class="at">fill=</span>MSE)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&#39;identity&#39;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Variables&#39;</span>, <span class="at">y=</span> <span class="st">&#39;% increase MSE if variable is randomly permuted&#39;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="Exam-PA-Study-Manual_files/figure-html/unnamed-chunk-161-1.png" width="672" />
+## Task 10 - Compare model performance</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="bank-loans-case-study.html#cb356-1" tabindex="-1"></a><span class="co"># Fit XGBoost</span></span>
+<span id="cb356-2"><a href="bank-loans-case-study.html#cb356-2" tabindex="-1"></a>xgb_formula <span class="ot">&lt;-</span> y <span class="sc">~</span> . <span class="sc">-</span> month <span class="sc">-</span> day_of_week</span>
+<span id="cb356-3"><a href="bank-loans-case-study.html#cb356-3" tabindex="-1"></a>xgb_train <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(xgb_formula, <span class="at">data =</span> train)</span>
+<span id="cb356-4"><a href="bank-loans-case-study.html#cb356-4" tabindex="-1"></a>xgb_test <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(xgb_formula, <span class="at">data =</span> test)</span>
+<span id="cb356-5"><a href="bank-loans-case-study.html#cb356-5" tabindex="-1"></a>xgb_params <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">objective =</span> <span class="st">&quot;binary:logistic&quot;</span>, <span class="at">eta =</span> <span class="fl">0.3</span>, <span class="at">max_depth =</span> <span class="dv">6</span>)</span>
+<span id="cb356-6"><a href="bank-loans-case-study.html#cb356-6" tabindex="-1"></a>xgb_model <span class="ot">&lt;-</span> <span class="fu">xgb.train</span>(<span class="at">params =</span> xgb_params, <span class="at">data =</span> <span class="fu">xgb.DMatrix</span>(xgb_train, <span class="at">label =</span> <span class="fu">as.numeric</span>(train<span class="sc">$</span>y <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)), <span class="at">nrounds =</span> <span class="dv">100</span>)</span>
+<span id="cb356-7"><a href="bank-loans-case-study.html#cb356-7" tabindex="-1"></a>xgb_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(xgb_model, <span class="fu">xgb.DMatrix</span>(xgb_test))</span>
+<span id="cb356-8"><a href="bank-loans-case-study.html#cb356-8" tabindex="-1"></a>glm_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(final_glm, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb356-9"><a href="bank-loans-case-study.html#cb356-9" tabindex="-1"></a>x_test <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(y <span class="sc">~</span> . <span class="sc">-</span> month <span class="sc">-</span> day_of_week, <span class="at">data =</span> test)</span>
+<span id="cb356-10"><a href="bank-loans-case-study.html#cb356-10" tabindex="-1"></a>lasso_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(lasso_model, <span class="at">newx =</span> x_test, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)[,<span class="dv">1</span>]</span>
+<span id="cb356-11"><a href="bank-loans-case-study.html#cb356-11" tabindex="-1"></a>RF_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(RF, <span class="at">data =</span> test)<span class="sc">$</span>predictions[, <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb356-12"><a href="bank-loans-case-study.html#cb356-12" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Model =</span> <span class="fu">c</span>(<span class="st">&quot;GLM&quot;</span>, <span class="st">&quot;LASSO&quot;</span>, <span class="st">&quot;Bagged Trees&quot;</span>, <span class="st">&quot;Random Forest&quot;</span>, <span class="st">&quot;XGBoost&quot;</span>),</span>
+<span id="cb356-13"><a href="bank-loans-case-study.html#cb356-13" tabindex="-1"></a>       <span class="at">ROC_AUC =</span> <span class="fu">c</span>(<span class="fu">as.numeric</span>(<span class="fu">auc</span>(<span class="fu">roc</span>(test<span class="sc">$</span>y <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>, glm_pred))),</span>
+<span id="cb356-14"><a href="bank-loans-case-study.html#cb356-14" tabindex="-1"></a>                   <span class="fu">as.numeric</span>(<span class="fu">auc</span>(<span class="fu">roc</span>(test<span class="sc">$</span>y <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>, lasso_pred))),</span>
+<span id="cb356-15"><a href="bank-loans-case-study.html#cb356-15" tabindex="-1"></a>                   <span class="fu">as.numeric</span>(<span class="fu">auc</span>(<span class="fu">roc</span>(test<span class="sc">$</span>y <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>, trees_pred))),</span>
+<span id="cb356-16"><a href="bank-loans-case-study.html#cb356-16" tabindex="-1"></a>                   <span class="fu">as.numeric</span>(<span class="fu">auc</span>(<span class="fu">roc</span>(test<span class="sc">$</span>y <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>, RF_pred))),</span>
+<span id="cb356-17"><a href="bank-loans-case-study.html#cb356-17" tabindex="-1"></a>                   <span class="fu">as.numeric</span>(<span class="fu">auc</span>(<span class="fu">roc</span>(test<span class="sc">$</span>y <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>, xgb_pred)))))</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##   Model         ROC_AUC
+##   &lt;chr&gt;           &lt;dbl&gt;
+## 1 GLM             0.667
+## 2 LASSO           0.667
+## 3 Bagged Trees    0.603
+## 4 Random Forest   0.650
+## 5 XGBoost         0.651</code></pre>
+</div>
+<div id="save-final-model" class="section level2 hasAnchor" number="16.9">
+<h2><span class="header-section-number">16.9</span> Save Final Model<a href="bank-loans-case-study.html#save-final-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="bank-loans-case-study.html#cb358-1" tabindex="-1"></a><span class="fu">saveRDS</span>(final_glm, <span class="st">&quot;bank_loans_final_model.rds&quot;</span>)</span>
+<span id="cb358-2"><a href="bank-loans-case-study.html#cb358-2" tabindex="-1"></a><span class="fu">saveRDS</span>(lasso_model, <span class="st">&quot;bank_loans_lasso_model.rds&quot;</span>)</span>
+<span id="cb358-3"><a href="bank-loans-case-study.html#cb358-3" tabindex="-1"></a><span class="fu">saveRDS</span>(RF, <span class="st">&quot;bank_loans_final_ranger.rds&quot;</span>)</span>
+<span id="cb358-4"><a href="bank-loans-case-study.html#cb358-4" tabindex="-1"></a><span class="fu">saveRDS</span>(xgb_model, <span class="st">&quot;bank_loans_final_xgb_model.rds&quot;</span>)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="writing-and-communication.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="loan-risk-modeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/sdcastillo/PA-R-Study-Manual/edit/master/08-bank-loans-case-study.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Exam-PA-Study-Manual.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
