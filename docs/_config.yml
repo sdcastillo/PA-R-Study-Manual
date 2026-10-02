@@ -1,0 +1,33 @@
+# SamWiki theme contract
+# Theme setup follows GitHub's Jekyll theme guide:
+# https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
+#
+# Strategy: pages-themes/cayman@v0.2.0, skinned in assets/css/style.scss.
+# Skin files copied from sdcastillo/sdcastillo.github.io main:
+#   assets/css/style.scss       @import "jekyll-theme-cayman" plus SamWiki overrides
+#   _layouts/default.html
+#   _includes/head-custom.html
+#   _includes/samwiki-nav.html
+# The home page sets `samwiki: true` in its front matter.
+#
+# GitHub Pages for this repository already publishes from `/docs` on `master`
+# at https://sdcastillo.github.io/PA-R-Study-Manual/
+# Leave url and baseurl unset so Pages supplies the project-site prefix.
+
+title: Exam PA Study Guide
+description: An R study guide for the SOA Predictive Analytics exam, from data cleaning through models and the written report.
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+show_downloads: false
+markdown: kramdown
+
+# Bookdown sources in this folder open with YAML front matter. Leave them out
+# of the Jekyll build so they are not rendered again beside the HTML chapters.
+optional_front_matter:
+  enabled: false
+
+exclude:
+  - "*.md"
+  - reference-keys.txt
