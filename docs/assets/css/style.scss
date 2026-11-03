@@ -197,6 +197,28 @@ body.samwiki .sw-lede-copy p:last-child {
   margin-bottom: 0;
 }
 
+body.samwiki .sw-feature-figure {
+  margin: 1.75rem 0 2.5rem;
+  overflow: hidden;
+  border: 1px solid var(--sw-line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: var(--sw-shadow);
+}
+
+body.samwiki .sw-feature-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+body.samwiki .sw-feature-figure figcaption {
+  padding: 0.65rem 1rem;
+  color: var(--sw-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 body.samwiki .sw-find {
   background: #fff;
   border: 1px solid var(--sw-line);
