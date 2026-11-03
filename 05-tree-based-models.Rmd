@@ -7,7 +7,7 @@ keywords: ["decision trees","random forest","gbm","boosting","bagging"]
 ---
 
 ```{r include = F}
-library(ExamPAData)
+library(QuantumData)
 library(tidyverse)
 ```
 
@@ -537,7 +537,7 @@ This exam covers the basics of GBMs. There are many variations of GBMs not cover
 ## Exercises
 
 ```{r message = F}
-library(ExamPAData)
+library(QuantumData)
 library(tidyverse)
 ```
 

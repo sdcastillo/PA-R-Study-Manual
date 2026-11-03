@@ -39,71 +39,17 @@ All of the statistical theory is explained, from linear regression to gradient b
 
 ## FAQ: Frequently Asked Questions
 
-**Does this replace the modules?**  No.  You can use this study guide to *supplement* rather than replace the modules of SOA. The online course is comprehensive and completely replaces the modules and textbooks. We strive to make this study guide as thorough as possible, but a passive-learning textbook format is not as efficient as giving hands-on practice questions under exam conditions and video tutorials of how to arrive at each answer. After all, our goal is to reduce study time as much as possible. The online course provides everything that one would need to pass.
+**Does this replace the SOA modules?** No. Use this guide as a supplement, and check the SOA's current syllabus and study materials for the authoritative exam requirements.
 
 **Why is this free when other study manuals cost hundreds of dollars?** We are making this available to everyone to study for PA and try out our study materials. We are so confident of the benefits from our hands-on teaching style that everyone will want to join our online course after getting a taste of this textbook.  
 
-**How many study hours are needed?**  [Here is a study template](https://PredictiveInsightsAI.com/study-schedule/) that allocates 160 hours for this course and the modules of SOA. The exact number of hours needed varies by individual. Is English your native language? Have you taken SRM? Do you have prior R experience? Are you a confident communicator? All of these factors play a role. Planning a study schedule for PA is not different from any of the other exams. Important deadlines, travel plans, or other obligations must be accommodated.  
+**How many study hours are needed?** [This study template](https://PredictiveInsightsAI.com/study-schedule/) offers one 160-hour plan for the course and SOA modules; it is a planning aid, not an SOA requirement. The time needed varies by individual based on prior R experience, exam preparation, communication skills, and other commitments.
 
 # The exam
 
-The main challenge  of this exam is in communication: both understanding what they want you to do as well as telling the grader what it is that you did.
+**Historical-content notice:** Earlier editions of this manual described exam durations, software, task weights, pass rates, and Prometric procedures that may no longer be current. They are not current exam guidance and have been removed here. Check the [SOA Exam PA page](https://www.soa.org/education/exam-req/edu-exam-pa-detail/) and its linked syllabus and candidate materials for current requirements.
 
-You will have 5 hours and 15 minutes to use RStudio and Excel to fill out a report in Word on an exam center computer. The syllabus uses fancy language to describe the topics covered on the exam, making it sound more complicated than it should be. A good analogy is a job description that has many complex-sounding tasks when in reality, the day-to-day operations of the employees are far more straightforward.
-
-
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/F2okL4a2YcM?rel=0&modestbranding=1&playsinline=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-A non-technical translation is as follows:
-
-**Writing in Microsoft Word (30-40\%)**
-
-- Write in professional language
-- Type more than 50 words-per-minute
-
-**Manipulating Data in R (15-25\%)**
-
-- Quickly clean data sets
-- Find data errors planted by the SOA
-- Perform queries (aggregations, summaries, transformations)
-
-**Machine learning and statistics (40-50\%)**
-
-- Interpret results within a business context
-- Change model parameters
-
-Follow the pages of SOA for the latest updates
-
-https://www.soa.org/education/exam-req/edu-exam-pa-detail/
-
-The exam pass rates are about 50%.
-
-http://www.actuarial-lookup.com/exams/pa
-
-Since the most recent sitting, the [SOA released two updates](https://www.soa.org/education/exam-req/syllabus-study-materials/edu-updates-exam-pa/):
-
-**No more printed Project Statement**: throw those hard copies into the trash can and get used to ALT + Tabbing. Test your knowledge under exam conditions using our 12 practice exams. You can see every keystroke and click on my screen. Is English not your native language? Writing templates save you time.
-
-**One Document Format**: Preview the new format with example questions such as chapter 11.4 of this manual. The update says "While all tasks refer to the same business problem and dataset, each will be answered independently... and allows the tasks to be answered in any order." Also, it says that additional information on the business problem may be included in specific tasks - where additional information is provided, including variations in the target variable, it applies only to that task and not to other tasks." To summarize, you can complete tasks in any order and there won't be those little paragraphs that start with "Additional information for task X and beyond" but rather all of the information you need for a task will be provided within said task.
-
-# Prometric Demo
-
-The test is conducted on Prometric computers, and it is unclear what the setup will look like. You will have 9 minutes to complete the tutorial before starting the 5-hours and 15-minute timer and then 5 minutes at the end of the exam to upload your files.
-
-
-In the past, candidates have been given out a printed Project Statement, which they were allowed to read during the 15-minute tutorial before the timer started; however, based on the latest SOA guidance this may no longer be the case, and all files may be given to you on the computer. This announcement by the SOA may be referring to only those exams which used to be on paper but are transferring to computer-based testing, in which case PA candidates would still get the printed statement. It may be best to practice assuming that you will need to work on a single monitor. Check the SOA updates page for the latest details.
-
-</br>
-
-```{block, type='studytip'}
-**Are you a lefty?** Prometric computers will be set up with the mouse on the right side. Arrive a few minutes early and request the change. Many lefties also switch the configuration so that the right button, which is hit with the index finger, is a normal click. The left button, hit with the middle finger, is what you think of as a “right-click.” Unfortunately, if you use this configuration, then you will need to practice with it ahead of time. Just be sure to practice with the same setup which you will use.
-```
-
-</br>
-
-```{block, type='studytip'}
-**Warning:** Be careful to submit the correct version of your RMD file! If you upload the wrong version of the Prometric file, you will be graded unfairly, and there is no way to recover your lost file. The SOA will only confirm that they received your files. You can email them after your exam (before the grading starts) to confirm that they received your files.
-```
+The manual's examples focus on analytical reasoning and communicating model results in a business context. Follow the current SOA instructions for the format, tools, permitted resources, and submission requirements for your sitting.
 
 </br>
 
