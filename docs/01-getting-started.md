@@ -45,7 +45,7 @@ summary(insurance)
 
 This book references the publically-avialable textbook "An Introduction to Statistical Learning", which can be downloaded for free
 
-http://faculty.marshall.usc.edu/gareth-james/ISL/
+https://www.statlearning.com/
 
 If you already have R and RStudio installed then skip to "Download the data". 
 
