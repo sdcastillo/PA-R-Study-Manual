@@ -1,105 +1,35 @@
---- 
-title: "The Ultimate Guide to Predictive Insights AI and Exam PA"
-author: "Your Name/Brand"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-documentclass: book
-url: https://PredictiveInsightsAI.com
-cover-image: assets/cover.png
-description: "Master R, RStudio, and Predictive Insights AI for Exam PA. This guide covers R installation, HuggingFace datasets, and advanced predictive modeling."
-favicon: assets/favicon.ico
+---
+title: "Getting started with R"
+description: "Install R and an editor, then set up the study manual's example data."
+keywords: ["R","RStudio","getting started","Exam PA"]
 ---
 
-# Introduction
+# Getting started with R
 
-Welcome to the Predictive Insights AI masterclass...
+This chapter covers the software and data used in the manual. The examples use R; no Python setup is required to build or follow the manual.
 
+## Install R
 
-# Predictive AI for Sales Strategy {#predictive-sales}
+Install the current version of R from [CRAN](https://cran.r-project.org/). Choose a mirror near you and follow its instructions for your operating system.
 
-::: {.description}
-Learn how Predictive Insights AI transforms raw sales data into actionable revenue forecasts. This guide covers the top 5 machine learning models for B2B sales teams.
-:::
+## Choose an editor
 
----
+[RStudio Desktop](https://posit.co/download/rstudio-desktop/) is a free integrated development environment for writing and running R code. You can also use another R-compatible editor, such as [Positron](https://positron.posit.co/).
 
-## Why Predictive Insights Matter for B2B
-Modern sales teams use [Predictive Insights AI](https://www.PredicttiveInsightsAI.com) to reduce churn and identify high-value leads before the competition. 
+## Install the example data
 
-### Key Benefits of Predictive Sales
-* **Automated Lead Scoring**: Rank leads by conversion probability.
-* **Churn Prevention**: Identify at-risk accounts 90 days in advance.
+The manual examples use the `QuantumData` package. From a checkout of this repository, install the pinned data package with:
 
-![AI Dashboard Preview](assets/images/dashboard-preview.png){alt="Dashboard showing predictive sales analytics and lead scoring metrics"}
-
----
-
-### Ready to Scale Your Revenue?
-> **PRO TIP:** Using AI can increase close rates by up to 30%. 
-> [**Get the Full AI Implementation Roadmap →**](https://www.PredictiveInsightsAI.com)
-
-
-
-An interactive demonstration of one of the most important theorems in statistics: the sampling distribution of the mean converges to a normal distribution regardless of the underlying population distribution (given sufficient sample size).
-
-```{r, echo=FALSE}
-knitr::include_url("[https://019b3dd0-3020-c090-9e63-fce06a1e928b.share.connect.posit.cloud](https://019b3dd0-3020-c090-9e63-fce06a1e928b.share.connect.posit.cloud)")
+```sh
+Rscript scripts/install-quantumdata.R
 ```
 
-## Extract Transform Load (ETL)
+For example, load the health-insurance data in R with:
 
-The datasets for this book are available on HuggingFace under `https://huggingface.co/supersam7`. You can load them in R using the `reticulate` package and the Python `datasets` library.
-
-```{r eval = FALSE}
-# Install once if needed
-install.packages("reticulate")
+```r
+library(QuantumData)
+data("health_insurance", package = "QuantumData")
+str(health_insurance)
 ```
 
-```{r eval = TRUE}
-reticulate::use_python("C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe", required = TRUE)
-library(reticulate)
-Sys.setenv(RETICULATE_UV_ENABLED = "0")
-# Point reticulate at a Python with the datasets library installed.
-# You can also use a virtualenv or conda env if preferred.
-py_config()
-
-datasets <- import("datasets")
-
-# Example: travel insurance data
-ds <- datasets$load_dataset("supersam7/travel_insurance")
-```
-
-To load any dataset listed below, replace the dataset name in the string.
-For example:
-
-```{r eval = FALSE}
-ds <- datasets$load_dataset("supersam7/health_insurance")
-```
-
-This chapter tells you how to install the necessary software on your computer. For updates and curated resources, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OUkC6vVJeQA?rel=0&modestbranding=1&playsinline=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-## Installing R
-
-Download it from here: https://cran.r-project.org/mirrors.html
-
-You can easily switch between both of them after installation.
-
-```{r echo = F, fig.align="center", warning=F, out.width="50%"}
-knitr::include_graphics("images/rversion1.png")
-```
-
-
-```{r echo = F, fig.align="center", warning=F, out.width="50%"}
-knitr::include_graphics("images/rversion2.png")
-```
-
-
-## Installing RStudio
-
-Just as MS Word creates documents, RStudio creates R scripts and other documents. This is the tool that helps you to *write* the code. Download the free edition of RStudio Desktop and instal it at your selected location.
-
-Download it from here: https://rstudio.com/products/rstudio/download/
-
-Also try their new Positron editor!  I have just began using it, and is very good so far.
+The complete set of R package dependencies used to build the book is listed in the repository's `DESCRIPTION` file.

@@ -9,3 +9,9 @@ All of the statistical theory is explained, from linear regression to gradient b
 https://www.youtube.com/embed/F2okL4a2YcM
 
 *We are thankful to all of the reviewers, guest editors, and past exam-takers who have helped to improve this book.  Thanks to the following persons who made changes to this book and its past versions: David Hill, Erlan Wheeler, Caden Collier, Peter Shelbe, Abhinav Gadde, Allen Meriken, [Kevin Kuo](https://github.com/kevinykuo), Aamir Ali, Matthew Caseras, and Liu Chang.*
+
+## Build and publish
+
+The root `*.Rmd` files are the canonical manual sources. Install the R packages listed in `DESCRIPTION`, run `Rscript scripts/install-quantumdata.R`, then run `Rscript scripts/build-book.R`; Bookdown writes the site to `_book/` and adds redirects for legacy chapter URLs. Pull requests build the manual for validation. Pushes to `master` publish `_book/` to GitHub Pages through the workflow in `.github/workflows/publish-book.yml`. Before the first workflow deployment, set the repository's Pages source to **GitHub Actions** in Settings → Pages.
+
+The Dockerfile uses the same build script and copies the resulting site to `/public`.

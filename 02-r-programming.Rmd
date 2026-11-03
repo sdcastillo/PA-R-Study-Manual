@@ -6,7 +6,7 @@ keywords: ["R programming","Exam PA","R Markdown","dplyr","ggplot2"]
 
 # How much R do I need to know to pass?
 
-<span style="color: blue;">**This is a communication exam **</span>  because 30-40\% of the points are based on your writing and data storytelling quality. For supplemental examples, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
+Clear explanations of analytical work are important in Exam PA. The exact exam format, weighting, and permitted tools can change, so check the [current SOA Exam PA materials](https://www.soa.org/education/exam-req/edu-exam-pa-detail/). For supplemental examples, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
 You do not need to become an R expert for this exam. While you are expected to develop a basic familiarity with R, the .Rmd template will provide you with the vast majority of the R commands needed. You will need to practice taking code templates and adjusting them to the specific variables and formulas you need. The most difficult coding questions will be during data exploration. These will ask you to
 
@@ -39,7 +39,7 @@ In other words, the results of your report must be consistent with what the grad
 
 ## Example: SOA PA Task 8
 
-This question is from a recent exam. You can see that significantly only minor code changes need to be made. The remainder of this question consists of a short-answer response. This is very typical of Exam PA.  
+This is a historical Exam PA example. It illustrates how a supplied code template may need to be adapted, followed by a short written response; do not treat it as a description of the current exam format.
 
 <iframe src="https://player.vimeo.com/video/467866045?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
@@ -249,9 +249,7 @@ factor_vector <- as.factor(character_vector)
 levels(factor_vector)
 ```
 
-**In building linear models, the order of the factors matters.**  In GLMs, the 
-"reference level" or "base level" should always be the level which has the most
-observations.  This will be covered in the section on linear models.
+**In building linear models, the factor contrast and reference level matter for interpreting coefficients.** With R's default treatment contrasts, the first factor level is the reference (often alphabetical unless levels are reordered). Choose a reference that makes the comparison meaningful; it does not have to be the most frequent level.
 
 Booleans are just `TRUE` and `FALSE` values.  R understands `T` or `TRUE` in the 
 same way, but the latter is preferred.  When doing math, bools are converted to 
@@ -343,9 +341,7 @@ summary(everything)
 
 ## Functions
 
-You only need to understand the very basics of functions. The big picture is that understanding functions help you to understand  *everything* in R, since R is a 
-functional [programming language](http://adv-r.had.co.nz/Functional-programming.html), 
-unlike Python, C, VBA, Java, all object-oriented, or SQL, which is not a language but a series of set-operations.
+You only need to understand the basics of functions. R supports functional programming as well as other programming styles. Python and Java also support multiple programming paradigms, while C is primarily procedural. SQL is a declarative language for working with relational data.
 
 Functions do things.  The convention is to name a function as a verb.  The function `make_rainbows()` would create a rainbow.  The function `summarise_vectors()` would summarise vectors.  Functions may or may not have an input and output.  
 
@@ -392,7 +388,7 @@ Many functions in R actually return lists!  This is why R objects can be indexed
 with dollar sign.
 
 ```{r}
-library(ExamPAData)
+library(QuantumData)
 model <- lm(charges ~ age, data = health_insurance)
 model$coefficients
 ```

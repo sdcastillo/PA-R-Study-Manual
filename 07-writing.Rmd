@@ -8,7 +8,7 @@ keywords: ["writing","communication","Executive Summary","Exam PA","reporting"]
 
 # Writing and Communication
 
-30-40\% of the points on this exam are from communication. In all prior sittings of this exam, candidates did most of their writing at the end of the report. This was called an Executive Summary. Under the current guidance, the writing questions were moved into the specific tasks with instructions to write “for a general audience.” In these cases, we will teach you how to use non-technical language and other communication techniques previously used in the executive summary. For writing templates and examples, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
+Clear, audience-appropriate communication is an important part of analytical work. Exam weighting and task format can change, so use the [current SOA Exam PA materials](https://www.soa.org/education/exam-req/edu-exam-pa-detail/) for exam-specific requirements. This chapter provides general guidance on explaining analytical results. For writing templates and examples, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
 ## Spelling and Grammar
 
@@ -24,6 +24,6 @@ In this water-cooler-style discussion, you can bring all of your awkward or "stu
 
 **Review the core concepts**
 
-You will get a double-dose of PA material as I review the most critical topics, talk about the topics and questions which are most likely to appear in the upcoming sitting, and offer a collection of strategies and advice for succeeding on this exam. You will be able to take a break, gather your thoughts, and gear up for the days leading up to PA. So start now! This is your "checkpoint" before the exam, so don't worry about being too aggressive with your study schedule. In fact, try to be. Learn faster than you ever have. And when you have gaps in your knowledge, then ask them in this webinar and review them the days leading up to your exam.
+This recorded discussion reviews selected PA concepts and study strategies. It is supplemental material, not a prediction of what will appear on a future exam; check the current SOA syllabus and candidate materials for exam requirements.
 
 [![Taking your exam webinar](images/take_your_exam_webinar.png)](https://PredictiveInsightsAI.com/#enrollment)

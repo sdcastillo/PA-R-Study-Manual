@@ -1,5 +1,5 @@
 bookdown::gitbook:
-  css: ["style.css", "assets/css/space-vibe.css"]
+  css: "style.css"
   highlight: tango
   config:
     sharing:
@@ -9,12 +9,12 @@ bookdown::gitbook:
       linkedin: yes
     toc:
       collapse: subsection
-            before: |
+      before: |
         <li><a href="https://www.PredictiveInsightsAI.com"><b>Predictive Insights AI</b></a></li>
         <center><li><a href="https://www.PredictiveInsightsAI.com" class="btn btn-primary" style="margin:10px; color:white; background-color:#007bff; padding:5px 10px; border-radius:5px; text-decoration:none;">Contact Sales</a></li></center>
       after: |
         <li><a href="https://www.PredictiveInsightsAI.com">Visit My Main Site</a></li>
-      bookdown::pdf_book:
+bookdown::pdf_book:
   dev: "cairo_pdf"
   toc_unnumbered: yes
   toc_depth: 2
@@ -24,4 +24,3 @@ bookdown::gitbook:
   citation_package: natbib
   keep_tex: yes
 bookdown::epub_book: default
-output_dir: "docs"

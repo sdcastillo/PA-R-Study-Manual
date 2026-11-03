@@ -8,35 +8,19 @@ keywords: ["linear regression","GLM","logistic regression","glmnet","ridge","las
 
 
 ```{r setup-linear-models, include=FALSE}
-reticulate::use_python("C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe", required = TRUE)
-library(reticulate)
-Sys.setenv(RETICULATE_UV_ENABLED = "0")
-
 library(dplyr)
 library(ggplot2)
 library(glmnet)
 library(broom)
 library(caret)
+library(QuantumData)
 
 knitr::opts_chunk$set(fig.width=7, fig.height=5, echo=TRUE, message=FALSE, warning=FALSE)
 theme_set(theme_minimal(base_size = 14) + 
             theme(plot.title = element_text(color = "#00d4ff")))
 
-reticulate::use_python("C:/Users/casti/AppData/Local/Programs/Python/Python313/python.exe", required = TRUE)
-library(reticulate)
-Sys.setenv(RETICULATE_UV_ENABLED = "0")
-datasets <- import("datasets")
-# Load the dataset
-ds <- datasets$load_dataset("supersam7/health_insurance")
-df_pd <- ds["train"]$to_pandas()          # or ds$train$to_pandas()
-health_insurance <- as_tibble(df_pd)
-
-
-datasets <- import("datasets")
-# Load the dataset
-ds <- datasets$load_dataset("supersam7/readmission")
-df_pd <- ds["train"]$to_pandas()          # or ds$train$to_pandas()
-readmission <- as_tibble(df_pd)
+data("health_insurance", package = "QuantumData")
+data("readmission", package = "QuantumData")
 ```
 
 
@@ -61,11 +45,11 @@ knitr::include_graphics("images/learning_obj6.png")
 ## Modeling vocabulary
 Modeling notation is sloppy because many words mean the same thing.
 
-The number of observations will be denoted by  $n$.  When we refer to the size of a data set, we are referring to $n$.  Each row of the data is called an observation or record. Observations tend to be people, cars, buildings, or other insurable things. These are always independent in that they do not influence one another. Because the exam center computers have limited power, $n$ tends to be less than 100,000.
+The number of observations will be denoted by $n$. Each row of the data is called an observation or record. Observations tend to be people, cars, buildings, or other insurable things. Many standard models assume that observations are independent, but this assumption may fail for repeated measurements, related people or policies, or time series. Such data may require a model that accounts for their dependence.
 
 Each observation has known attributes called *variables*, *features*, or *predictors*.  We use $p$ to refer the number of input variables that are used in the model.  
 
-The *target*, *response*, *label*, *dependent variable*, or *outcome* variable is the unknown quantity that is being predicted.  We use $Y$ for this.  This can be either a whole number, in which case we are performing regression, or a category, in which case we perform classification.
+The *target*, *response*, *label*, *dependent variable*, or *outcome* variable is the unknown quantity that is being predicted. We use $Y$ for this. A numeric target is generally a regression problem; a categorical target is a classification problem.
 
 For example, say that you are a health insurance company that wants to set the premiums for a group of people. The premiums for people who are likely to incur high health costs need to be higher than those likely to be low-cost. 
 
@@ -96,15 +80,9 @@ Modeling is about using $X$ to predict $Y$. We call this "y-hat", or simply the 
 
 $$\hat{Y} = f(X)$$
 
-This is almost never going to happen perfectly, and so there is always an error term, $\epsilon$.  This can be made smaller, but is never exactly zero.  
+For a statistical model, we can write the response as $Y = f(X) + \epsilon$, where $\epsilon$ is an unobserved error term. In observed data, the residual is $e_i = y_i - \hat{y}_i$, the difference between an observed response and its fitted value.
 
-$$
-\hat{Y} + \epsilon = f(X) + \epsilon
-$$
-
-In other words, $\epsilon = y - \hat{y}$.  We call this the *residual*.  When we predict the health care costs of a person, this is the difference between the predicted costs (which we had created the year before) and the actual costs that the patient experienced (of that current year).
-
-Another way of saying this is in terms of expected value: the model $f(X)$ estimates the expected value of the target $E[Y|X]$.  That is, once we condition on the data $X$, we can make a guess as to what we expect $Y$ to be "close to". We will see that there are many ways of measuring "closeness." 
+In a model for health care costs, for example, the residual is the difference between a patient's observed costs and the model's fitted costs. The model may estimate the conditional mean $E[Y \mid X]$; the exact quantity being estimated depends on the model and its loss function.
 
 ## Ordinary Least Squares (OLS)
 
@@ -145,11 +123,11 @@ The question then is **how can we choose the best values of** $\beta?$  First of
 
 To solve for $\mathbf{\beta}$, we first need to define a **loss function**. This would let us compare how well a model fits the data. The most commonly used loss function is the residual sum of squares (RSS), also called the **squared error loss or the L2 norm**. When RSS is small, then the predictions are close to the actual values, and the model is a good fit. When RSS is large, the model is a poor fit.
 
-$$\text{RSS} = \sum_i(y_i - \hat{y})^2$$
+$$\text{RSS} = \sum_i(y_i - \hat{y}_i)^2$$
 
 When you replace $\hat{y_i}$ in the above equation with $\beta_0 + \beta_1 x_1 + ... + \beta_p x_p$, take the derivative with respect to $\beta$, set equal to zero, and solve, we can find the optimal values.  This turns the problem of statistics into a problem of numeric optimization, which computers can do quickly.  
 
-You will also see the term **Root Mean Squared Error** (RMSE) which is just the average of the square root of the $\text{RSS}$, or just **Mean Squared Error** (MSE).
+The **Mean Squared Error** (MSE) is the average squared residual, $\frac{1}{n}\sum_i(y_i-\hat{y}_i)^2$. The **Root Mean Squared Error** (RMSE) is the square root of the MSE and is in the same units as the response.
 
 You might be wondering: why does this need to be the squared error? Why not the absolute error or the cubed error? Technically, these could be used, but the betas would not be the maximum likelihood parameters. Using the absolute error results in the model predicting the median as opposed to the mean. Two reasons behind the popularity of RSS are:  
 
@@ -166,19 +144,19 @@ Transforming the target means that instead of the model predicting $E[Y]$, it pr
 
 
 ## R^2 Statistic
-One of the most common ways of measuring model fit is the “R-Squared” statistic. The RSS provides an absolute measure of fit because it can be any positive value, but it is not always clear what a “good” RSS is because it is measured in units of $Y$.  
+One of the most common ways of measuring model fit is the “R-Squared” statistic. The RSS provides an absolute measure of fit because it can be any nonnegative value, but it is not always clear what a “good” RSS is because it is measured in units of $Y$.
 
-The $R^2$ statistic provides an alternative measure of fit. It takes the proportion of variance explained - so that it is always a value between 0 and 1 and is independent of the scale of $Y$.
+The $R^2$ statistic provides a scale-free comparison with a baseline that predicts the response mean. For ordinary least squares with an intercept, measured on the training data, it is between 0 and 1. On test data, or for models without an intercept, it can be negative.
 
 $$R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}}$$
 
-Where $\text{TSS} = \sum(y_i - \hat{y})^2$ is the total sum of squares. TSS measures the total variance in the response YY and can be considered the amount of variability inherent in the response before the regression is performed. In contrast, RSS measures the amount of variability that is left unexplained after performing the regression. 
+Here $\text{TSS} = \sum_i(y_i - \bar{y})^2$ is the total sum of squares, where $\bar{y}$ is the sample mean of the responses. TSS measures variation around that mean; RSS measures squared prediction error.
 
-Hench, $\text{TSS} - \text{RSS}$ measures the amount of variability in the response that is explained (or removed) by performing the regression, and R^2 measures the proportion of variability in $Y$ that can be explained using $X$. 
+For ordinary least squares with an intercept on its training data, $\text{TSS} - \text{RSS}$ is the reduction in squared error relative to predicting the mean. Outside those conditions, interpret $R^2$ as a comparison with that baseline rather than a literal proportion of variance explained.
 
-A value near 1 indicates that the regression has explained a large proportion of the variability in the response, whereas, a number near 0 indicates that the regression did not explain much of the variability in the response. This might occur because the linear model is wrong.
+A value near 1 indicates smaller squared prediction error than the mean-only baseline; a value near 0 indicates performance close to that baseline. A negative value means the predictions have greater squared error than the baseline.
 
-The $R^2$ sstatistic has an interpretational advantage over the RSE. In actuarial applications, it is useful to use an absolute measure of model fit, such as RSS, to train the model, and then use $R^2$ when explaining it to your clients so that it is easier to communicate.
+The $R^2$ statistic can be easier to compare across responses measured on different scales than an absolute error measure such as RSS.
 
 This chapter was based on Chapter 3, *Linear Regression*, of *An Introduction to Statistical Learning.*
 
@@ -194,9 +172,9 @@ This is a common saying. Just because two things are correlated does not necessa
 
 The *correlation* is defined by $r$,
 
-$$r = Cor(X,Y) = \frac{\sum(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum(x_i - \bar{x})^2}\sqrt{(y_i - \bar{y})^2}}$$
+$$r = Cor(X,Y) = \frac{\sum_i(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_i(x_i - \bar{x})^2}\sqrt{\sum_i(y_i - \bar{y})^2}}$$
 
-and this is also a measure of the linear relationship between two vectors, $X$ and $Y$.  This suggests that we might be able to use $r = Cor(X,Y)$ instead of $R^2$ to assess the model fit.  In the case of simple linear regression, where there is only one predictor variable, it is tree that $R^2 = r^2$; however, this relationship does not extend automatically when there are more than one predictor variable.  This is because $X$ becomes a *matrix* instead of a single *vector.*
+and this is also a measure of the linear relationship between two variables, $X$ and $Y$. In simple linear regression with an intercept, the training $R^2$ equals the squared Pearson correlation between the predictor and response. This identity does not generally extend to multiple regression.
 
 ### Spearman (rank) correlation
 
@@ -209,7 +187,7 @@ Most questions on Exam PA will ask you about Pearson’s correlation. One advant
 
 ## Regression vs. classification
 
-Regression modeling is when a target is a number. Binary classification is when there are two outcomes, such as “Yes/No,” “True/False,” or “0/1”. Multi-class regression is when there are more than two categories such as “Red, Yellow, Green” or “A, B, C, D, E.” There are many other types of regression that are not covered on this exam, such as ordinal regression, where the outcome is an ordered category, or time-series regression, where the data is time-dependent.
+Regression models a numeric response. Binary classification models two categories, such as “Yes/No,” “True/False,” or “0/1”; multiclass classification models more than two categories. Ordinal models handle ordered categories, while time-series models account for temporal structure.
 
 ## Regression metrics
 
@@ -251,9 +229,8 @@ The little `*`, `**`, `***` tell you the significance level.  A variable with a 
 ## Load Dataset
 
 ```r
-datasets <- import("datasets")
-ds <- datasets$load_dataset("supersam7/health_insurance")
-df <- as_tibble(ds$train)
+library(QuantumData)
+df <- health_insurance
 
 glimpse(df)
 ```
@@ -388,7 +365,7 @@ The first says that the target has a Gaussian distribution which has a mean equa
 
 ## Advantages and disadvantages
 
-There is usually at least one question on the PA exam which asks you to “list some of the advantages and disadvantages of using this particular model,” and so here is one such list. It is unlikely that the grader will take off points for including too many comments and so a good strategy is to include everything that comes to mind.
+When comparing models, consider their assumptions, interpretability, flexibility, and suitability for the task. The following are common strengths and limitations of generalized linear models (GLMs).
 
 **GLM Advantages**
 
@@ -399,12 +376,11 @@ There is usually at least one question on the PA exam which asks you to “list 
 
 **GLM Disadvantages**
 
-- Does not select features (without stepwise selection)
-- Strict assumptions around distribution shape and randomness of error terms
-- Predictor variables need to be uncorrelated
-- Unable to detect non-linearity directly (although this can manually be addressed through feature engineering)
-- Sensitive to outliers
-- Low predictive power
+- Ordinary GLMs do not perform feature selection; penalized GLM methods are available.
+- The conditional response distribution, mean structure, and link must be reasonably specified.
+- Strong predictor collinearity can make coefficient estimates unstable.
+- Nonlinear effects and interactions need to be represented in the model.
+- Influential observations can affect estimates and should be assessed.
 
 
 
@@ -423,16 +399,16 @@ The other link functions are not straightforward to interpret using math. One so
 
 # GLMs for classification
 
-For classification, the predicted values need to be a category instead of a number. Using a discrete target distribution ensures that this will be the case. The probability of an event occurring is $E[Y] = p$. Unlike the continuous case, all of the link functions have the same range between 0 and 1 because this is a probability.
+For classification, a model commonly estimates class probabilities; a decision rule such as a cutoff converts those probabilities into predicted categories. For a binary response coded 0/1, the conditional mean is the event probability, $E[Y \mid X] = p(X)$.
 
 
 ## Binary target
 
-When $Y$ is binary, then the Binomial distribution is the only choice. If there are multiple categories, then the Multinomial should be used.
+For a binary response, a binomial model is common. For nominal responses with more than two categories, a multinomial model is one option.
 
 ## Count target 
 
-When $Y$ is a count, the Poisson distribution is the only choice. Two examples are counting the number of claims a policy has in a given year or counting the number of people visiting the ER in a given month. The key ingredients are 1) some events and 2) some fixed periods.
+For counts, a Poisson model is a common starting point. Examples include claims per policy period or the number of people visiting an emergency room in a month.
 
 Statistically, the name for this is a Poisson Process, which describes a series of discrete events where the average time between events is known, called the "rate" $\lambda$, but the exact timing of events is unknown. For a time interval of length $m$, the expected number of events is $\lambda m$.  
 
@@ -441,11 +417,11 @@ By using a GLM, we can fit a different rate for each observation. In the ER exam
 $$Y_i|X_i \sim \text{Poisson}(\lambda_i m_i)$$
 
 
-When all observations have the same exposure, $m = 1$.  When the mean of the data is far from the variance, an additional parameter known as the dispersion parameter is used. A classic example is when modeling insurance claim counts, which have a lot of zero claims. Then the model is said to be an “over-dispersed Poisson” or “zero-inflated” model.  
+When all observations have the same exposure, it can be absorbed into the intercept. If the count variance exceeds its mean, a basic Poisson model may be overdispersed; alternatives include quasi-Poisson or negative-binomial models. Zero-inflated models are a separate mixture-model approach for data with more zeros than the standard count model predicts.
 
 ## Link functions
 
-There are four link functions. The most common are the Logit and Probit, but the Cauchit and Cloglog have appeared on the Hospital Readmissions practice exam. The identity link does not make sense for classification because it would result in predictions being outside of $(0,1)$
+Common binomial links include logit, probit, complementary log-log, and cauchit. The link relates the conditional mean to the linear predictor. An identity link can produce fitted probabilities outside $(0,1)$, so it is generally unsuitable unless constraints are imposed.
 
 ```{r echo = F, fig.align="center", warning=F, message = F, out.width="1200%"}
 knitr::include_graphics("images/discrete_link_functions.png")
@@ -511,7 +487,7 @@ The net result is that when a variable increases the linear predictor, this incr
 
 # Classification metrics
 
-For regression problems, when the output is a whole number, we can use the sum of squares $\text{RSS}$, the r-squared $R^2$, the mean absolute error $\text{MAE}$, and the likelihood.  For classification problems we need to a new set of metrics.  
+For regression problems with a numeric response, we can use measures such as the residual sum of squares $\text{RSS}$, $R^2$, mean absolute error $\text{MAE}$, and likelihood. For classification problems, we use metrics suited to class labels or predicted probabilities.
   
 A *confusion matrix* shows is a table that summarizes how the model classifies each group.
 
@@ -558,21 +534,21 @@ Fortunately, all of this is handled in a single function called `confusionMatrix
 
 ## Area Under the ROC Curve (AUC)
 
-What if we look at both the true-positive rate (TPR) and false-positive rate (FPR) simultaneously? That is, for each value of the cutoff, we can calculate the TPR and TNR. 
+What if we look at both the true-positive rate (TPR) and false-positive rate (FPR) simultaneously? For each cutoff, we can calculate both rates.
 
 For example, say that we have 10 cutoff values, $\{k_1, k_2, ..., k_{10}\}$.  Then for each value of $k$ we calculate both the true positive rates
 
 $$\text{TPR} = \{\text{TPR}(k_1), \text{TPR}(k_2), .., \text{TPR}(k_{10})\} $$ 
 
-and the true negative rates
+and the false-positive rates
 
-$$\{\text{FNR} = \{\text{FNR}(k_1), \text{FNR}(k_2), .., \text{FNR}(k_{10})\}$$
+$$\text{FPR} = \{\text{FPR}(k_1), \text{FPR}(k_2), \ldots, \text{FPR}(k_{10})\}$$
 
-Then we set `x = TPR` and `y = FNR` and graph x against y. The resulting plot is called the **Receiver Operator Curve (ROC)** and the the Area Under the Curve is called the AUC.
+Then we plot `x = FPR` and `y = TPR` for the different cutoff values. The resulting plot is called the **Receiver Operating Characteristic (ROC) curve**, and the area under it is the AUC.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4jRBRDbJemM?rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-You can also think of AUC as being a **probability.**  Unlike a conventional probability, this ranges between 0.5 and 1 instead of 0 and 1. In the Logit example, we were predicting whether or not an auto policy would file a claim. Then you can interpret the AUC as
+You can also interpret AUC as a **probability**: it is the probability that a randomly selected positive case receives a higher score than a randomly selected negative case (with ties handled according to the calculation). AUC ranges from 0 to 1; 0.5 corresponds to chance ranking, and a value below 0.5 can indicate that reversing the score direction would rank cases better.
 
 - The expected proportion of positives ranked before a uniformly drawn random negative
 
@@ -593,7 +569,7 @@ knitr::include_graphics("images/auc_one.png")
 ```
 
 
-This is a perfect model that predicts the correct class for new data each time. It will have a ROC plot showing the curve approaching the top left corner so that the square area is 1.0.
+An AUC of 1 indicates perfect ranking of the positive cases above the negative cases in the evaluated sample.
 
 $$ \text{AUC} = 0.5 $$*
 
@@ -604,18 +580,13 @@ knitr::include_graphics("images/auc_point_five.png")
 When the ROC curve runs along the diagonal, then the area is 0.5. This performance is no better than randomly selecting the class for new data such that the proportions of each class match that of the data.
 
 $$ \text{AUC} < 0.5 $$
-Any model having an AUC less than 0.5 means providing predictions that are worse than random selection, with a near 0 AUC indicating that the model makes the wrong classification almost every time. This can occur in two ways
+An AUC below 0.5 means the score ranks positive cases below negative cases more often than not; reversing the score direction would produce an AUC above 0.5.
 
-1)	The model is overfitting. For example, the AUC on the train data set may be higher than 0.8 but only 0.2 on the test data set. This indicates that you need to adjust the parameters of your model. See the chapter on the Bias-Variance Tradeoff.
-
-2)	There is an error in the AUC calculation or model prediction.
-
-
-If we just randomly guess, the AUC would be 0.5, represented by the 45-degree line. A perfect model would maximize the curve to the upper-left corner.
+If the AUC is unexpected, check the class labels, score direction, and calculation. A diagonal ROC curve has an AUC of 0.5.
 
 The AUC of 0.76 is decent. If we had multiple models, we could compare them based on the AUC.  
 
-In general, AUC is preferred over Accuracy when there are many more “true” classes than “false” classes, which is known as having *class imbalance*. An example is bank fraud detection: 99.99% of bank transactions are “false” or “0” classes, and so optimizing for accuracy alone will result in a low sensitivity for detecting actual fraud.
+Accuracy can be misleading with imbalanced classes, but AUC is not a substitute for choosing an operating threshold or considering the costs of false positives and false negatives. Select metrics that match the decision being made.
 
 
 ## Demo the model for interpretation
@@ -836,24 +807,11 @@ In certain situations, it is convenient to include a constant term in the linear
 
 
 $$g(\mu) = \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \text{offset}$$
-On Exam PA, offsets will only be used for one special case:
+For example, suppose the expected claim count is proportional to the policy exposure and the claim rate follows a log-linear model:
 
-1) With Poisson regression
-2) With a log link function
-3) As a measure of exposure (usually length of policy period)
+$$\log(E[\text{Claims}_i \mid X_i]) = \log(\text{Months}_i) + \beta_0 + \beta_1 \text{Year}_i$$
 
-While it is technically possible to use offsets in other ways, this is not likely to appear on PA.
-
-If modeling the spread of COVID, the exposure would be the number of people exposed to the virus and the response would be the number of people infected.
-
-In auto insurance, the exposure might be the number of months of coverage, and the response would be the claims incurred. Consider a very simple model which only uses the year that the car was manufactured as a predictor. This expected value of the claims, the target variable, would be
-
-
-$$log(E[\frac{\text{Claims}}{\text{Months}}]) = \beta_0 + \beta_1  \text{Year}$$
-Then you can use the property of the log where $log(\frac{A}{B}) = log(A) - log(B)$ to move things around.  Because $\text{Months}$ is known, you can remove the expected value.  This is the offset term.
-
-
-$$log(E[\text{Claims}]) = \beta_0 + \beta_1  \text{Year} + \text{Months}$$
+The known exposure contributes $\log(\text{Months}_i)$ with coefficient fixed at 1; this is the offset. In R, use `offset(log(months))`. Exposure must be positive.
 
 ## Tweedie regression
 
@@ -1184,7 +1142,7 @@ $$
 
 In ISLR, Hastie et al show that this results in coefficients being forced to be exactly 0.  This is extremely useful because it means that by changing $\lambda$, we can select how many variables to use in the model.
 
-**Note**: While any response family is possible with penalized regression, in R, only the Gaussian family is possible in the library `glmnet`, and so this is the only type of question that the SOA can ask.
+**Note:** `glmnet` supports several response families, including Gaussian, binomial, Poisson, multinomial, and Cox models. Which families and features are relevant depends on the task; consult the package documentation and supplied exam materials rather than assuming it is limited to Gaussian responses.
 
 ## Elastic Net
 
@@ -1377,7 +1335,7 @@ predict(ridge_mod, s = 0, x = x_train, y = y_train, exact = T, type="coefficient
 IIt looks like we are indeed improving over regular least-squares! Side note: in general, if we want to fit a (unpenalized) least squares model, then we should use the 'lm()' function, since that function provides more useful outputs, such as standard errors and $p$-values for the coefficients.
 
 Instead of arbitrarily choosing $\lambda = 4$, it would be better to use cross-validation to choose the tuning parameter $\lambda$. We can do this using the built-in cross-validation function, `cv.glmnet()`. By default, the function
-performs 10-fold cross-validation, though this can be changed using the argument `folds`. Note that we set a random seed first so our results will be
+performs 10-fold cross-validation, controlled by the `nfolds` argument. Each call evaluates lambda values for the supplied `alpha`; `cv.glmnet()` does not search for an optimal `alpha`. Note that we set a random seed first so our results will be
 reproducible, since the choice of the cross-validation folds is random.
 
 ```{r}
