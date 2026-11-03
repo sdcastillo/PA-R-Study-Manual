@@ -78,8 +78,6 @@ ds <- datasets$load_dataset("supersam7/health_insurance")
 
 This chapter tells you how to install the necessary software on your computer. For updates and curated resources, visit [PredictiveInsightsAI.com](https://www.PredictiveInsightsAI.com).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OUkC6vVJeQA?rel=0&modestbranding=1&playsinline=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Installing R
 
 Download it from here: https://cran.r-project.org/mirrors.html
