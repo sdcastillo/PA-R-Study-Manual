@@ -1,0 +1,30 @@
+/* Shared GitBook improvements; preserve legacy section IDs and theme controls. */
+.book { --pa-blue: #1d4ed8; --pa-teal: #0f766e; --pa-violet: #6d28d9; --pa-border: #cbd5e1; }
+.book.font-family-1 { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.book .book-body .page-wrapper .page-inner { max-width: 980px; padding: 24px clamp(16px, 4vw, 44px) 48px; }
+.book .book-body .page-wrapper .page-inner section.normal { line-height: 1.8; }
+.book .book-body h1 { line-height: 1.2; letter-spacing: -0.025em; }
+.book .book-body h2 { border-bottom: 2px solid var(--pa-border); padding-bottom: 0.4em; }
+.book .book-body h2, .book .book-body h3, .book .book-body h4 { scroll-margin-top: 72px; }
+.book .book-body a { text-underline-offset: 0.2em; }
+.book .book-body a:focus-visible, .book a:focus-visible, .book button:focus-visible, .book summary:focus-visible { outline: 3px solid var(--pa-violet); outline-offset: 3px; }
+.book .book-body pre { white-space: pre; overflow-x: auto; max-width: 100%; border-radius: 12px; padding: 18px; border: 1px solid var(--pa-border); }
+.book .book-body pre code { white-space: pre; padding: 0; background: transparent; }
+.book .book-body p code, .book .book-body li code { overflow-wrap: anywhere; }
+.book .book-body .studytip, .book .book-body .rmdcomment, .book .book-body .rcorners { box-sizing: border-box; max-width: 100%; border-radius: 12px; }
+.book .book-body .studytip { background: #ecfdf5; color: #134e4a; border: 1px solid #99f6e4; border-left: 5px solid var(--pa-teal); padding: 18px 20px; }
+.book .book-body .rmdcomment { background: #fffbeb; color: #78350f; border-left-color: #b45309; }
+.book .book-body img { max-width: 100%; height: auto; }
+.book .book-body iframe[src*='youtube.com'], .book .book-body iframe[src*='player.vimeo.com'] { width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; border-radius: 12px; }
+.book .book-body table { display: block; max-width: 100%; overflow-x: auto; }
+.book .book-summary ul.summary li.active > a { font-weight: 700; border-left: 3px solid var(--pa-blue); }
+.book .book-summary .pa-brand { font-weight: 700; }
+.pa-author-footer { margin-top: 48px; padding: 24px 0; border-top: 2px solid var(--pa-border); font-size: 0.95em; }
+.pa-author-footer p { margin: 0 0 10px; }
+.pa-author-footer nav { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.book.color-theme-1 .book-body .studytip { background: #e8efe2; color: #173f36; }
+.book.color-theme-2 .book-body .studytip { background: #133831; color: #d1fae5; border-color: #5eead4; }
+.book.color-theme-2 .book-body .rmdcomment { background: #422b10; color: #fef3c7; }
+.book.color-theme-2 { --pa-border: #64748b; --pa-blue: #93c5fd; --pa-violet: #c4b5fd; }
+@media (max-width: 600px) { .book .book-body .page-wrapper .page-inner { padding: 18px 16px 36px; } .book .book-body h1 { font-size: 1.8em; } .pa-author-footer nav { flex-direction: column; gap: 12px; } }
+@media print { .pa-author-footer { break-inside: avoid; } .book .book-body pre { white-space: pre-wrap; } .book .book-body pre code { white-space: pre-wrap; } }

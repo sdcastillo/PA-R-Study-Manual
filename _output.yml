@@ -1,6 +1,8 @@
 bookdown::gitbook:
-  css: "style.css"
+  css: ["style.css", "modern.css"]
   highlight: tango
+  includes:
+    after_body: includes/author-footer.html
   config:
     sharing:
       github: yes
@@ -10,10 +12,10 @@ bookdown::gitbook:
     toc:
       collapse: subsection
       before: |
-        <li><a href="https://www.PredictiveInsightsAI.com"><b>Predictive Insights AI</b></a></li>
-        <center><li><a href="https://www.PredictiveInsightsAI.com" class="btn btn-primary" style="margin:10px; color:white; background-color:#007bff; padding:5px 10px; border-radius:5px; text-decoration:none;">Contact Sales</a></li></center>
+        <li><a class="pa-brand" href="https://www.predictiveInsightsAI.com">Predictive Insights AI</a></li>
       after: |
-        <li><a href="https://www.PredictiveInsightsAI.com">Visit My Main Site</a></li>
+        <li><a href="https://www.predictiveInsightsAI.com">More learning resources</a></li>
+        <li><a href="https://www.linkedin.com/in/samdcastillo/">Connect with Sam Castillo</a></li>
 bookdown::pdf_book:
   dev: "cairo_pdf"
   toc_unnumbered: yes
